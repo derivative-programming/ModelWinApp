@@ -1,0 +1,36 @@
+﻿using JsonManipulator.Models;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace JsonManipulator
+{
+    public partial class frmAddObjProp : Form
+    {
+        string name;
+        public frmAddObjProp(string name)
+        {
+            InitializeComponent();
+            this.name = name;
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == name).FirstOrDefault().property.Add(new property { name =txtName.Text});
+            ((Form1)Application.OpenForms["Form1"]).showMessage("Property created successfully");
+            ((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]).setPropertieList();
+                this.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+    }
+}

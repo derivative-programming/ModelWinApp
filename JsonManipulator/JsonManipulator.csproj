@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{ACA119BC-48D9-45A9-8B0B-6A683849B40D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>JsonManipulator</RootNamespace>
+    <AssemblyName>JsonManipulator</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DotLiquid, Version=2.0.385.0, Culture=neutral, PublicKeyToken=82e46016ecf9f07c, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotLiquid.2.0.385\lib\net45\DotLiquid.dll</HintPath>
+    </Reference>
+    <Reference Include="Namotion.Reflection, Version=1.0.23.0, Culture=neutral, PublicKeyToken=c2f9c3bdfae56102, processorArchitecture=MSIL">
+      <HintPath>..\packages\Namotion.Reflection.1.0.23\lib\net45\Namotion.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.Schema, Version=3.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.Schema.3.0.14\lib\net45\Newtonsoft.Json.Schema.dll</HintPath>
+    </Reference>
+    <Reference Include="NJsonSchema, Version=10.4.4.0, Culture=neutral, PublicKeyToken=c2f9c3bdfae56102, processorArchitecture=MSIL">
+      <HintPath>..\packages\NJsonSchema.10.4.4\lib\net45\NJsonSchema.dll</HintPath>
+    </Reference>
+    <Reference Include="NJsonSchema.CodeGeneration, Version=10.4.4.0, Culture=neutral, PublicKeyToken=c2f9c3bdfae56102, processorArchitecture=MSIL">
+      <HintPath>..\packages\NJsonSchema.CodeGeneration.10.4.4\lib\net451\NJsonSchema.CodeGeneration.dll</HintPath>
+    </Reference>
+    <Reference Include="NJsonSchema.CodeGeneration.CSharp, Version=10.4.4.0, Culture=neutral, PublicKeyToken=c2f9c3bdfae56102, processorArchitecture=MSIL">
+      <HintPath>..\packages\NJsonSchema.CodeGeneration.CSharp.10.4.4\lib\net451\NJsonSchema.CodeGeneration.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Enums\Enums.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAddButton.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAddButton.Designer.cs">
+      <DependentUpon>FrmAddButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAddColumn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAddColumn.Designer.cs">
+      <DependentUpon>FrmAddColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAddFilter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAddFilter.Designer.cs">
+      <DependentUpon>FrmAddFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAddObjProp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddObjProp.Designer.cs">
+      <DependentUpon>frmAddObjProp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmControl.Designer.cs">
+      <DependentUpon>FrmControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDbObject.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDbObject.Designer.cs">
+      <DependentUpon>frmDbObject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDbObjSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDbObjSettings.Designer.cs">
+      <DependentUpon>frmDbObjSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmFormSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFormSettings.Designer.cs">
+      <DependentUpon>frmFormSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmHelp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmHelp.Designer.cs">
+      <DependentUpon>FrmHelp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReportDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReportDetail.Designer.cs">
+      <DependentUpon>frmReportDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReportGrid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReportGrid.Designer.cs">
+      <DependentUpon>frmReportGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmForm.Designer.cs">
+      <DependentUpon>frmForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReportSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReportSettings.Designer.cs">
+      <DependentUpon>frmReportSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSettings.Designer.cs">
+      <DependentUpon>frmSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Models.cs" />
+    <Compile Include="Models\PropertyValue.cs" />
+    <Compile Include="FormsList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsList.Designer.cs">
+      <DependentUpon>FormsList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RoleList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RoleList.Designer.cs">
+      <DependentUpon>RoleList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ObjectsList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ObjectsList.Designer.cs">
+      <DependentUpon>ObjectsList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAddButton.resx">
+      <DependentUpon>FrmAddButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAddColumn.resx">
+      <DependentUpon>FrmAddColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAddFilter.resx">
+      <DependentUpon>FrmAddFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAddObjProp.resx">
+      <DependentUpon>frmAddObjProp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmControl.resx">
+      <DependentUpon>FrmControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDbObject.resx">
+      <DependentUpon>frmDbObject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDbObjSettings.resx">
+      <DependentUpon>frmDbObjSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFormSettings.resx">
+      <DependentUpon>frmFormSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmHelp.resx">
+      <DependentUpon>FrmHelp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReportDetail.resx">
+      <DependentUpon>frmReportDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReportGrid.resx">
+      <DependentUpon>frmReportGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmForm.resx">
+      <DependentUpon>frmForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReportSettings.resx">
+      <DependentUpon>frmReportSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSettings.resx">
+      <DependentUpon>frmSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsList.resx">
+      <DependentUpon>FormsList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RoleList.resx">
+      <DependentUpon>RoleList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ObjectsList.resx">
+      <DependentUpon>ObjectsList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
