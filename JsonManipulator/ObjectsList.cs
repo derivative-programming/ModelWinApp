@@ -13,16 +13,16 @@ namespace JsonManipulator
 {
     public partial class ObjectsList : Form
     {
-        FormObjects frmObj;
-        int row, col;
-        string currentvalue;
+        FormObjects _frmObj;
+        int _row, _col;
+        string _currentvalue;
         public ObjectsList(FormObjects formObjects, int row = 0, int column = 0,string currentValue = "")
         {
             InitializeComponent();
-            this.frmObj = formObjects;
-            this.row = row;
-            this.col = column;
-            this.currentvalue = currentValue;
+            this._frmObj = formObjects;
+            this._row = row;
+            this._col = column;
+            this._currentvalue = currentValue;
         }
 
         private void ObjectsList_Load(object sender, EventArgs e)
@@ -56,7 +56,7 @@ namespace JsonManipulator
         {
             if(listObjects.SelectedItem!=null)
             {
-                switch(frmObj)
+                switch(_frmObj)
                 {
                     case FormObjects.FORM:
                         ((frmForm)Application.OpenForms["frmForm"]).setOwner(listObjects.SelectedItem.ToString());
@@ -74,22 +74,22 @@ namespace JsonManipulator
                         ((frmReportDetail)Application.OpenForms["frmReportDetail"]).setOwner(listObjects.SelectedItem.ToString());
                         break;
                     case FormObjects.DBBJECT_EDIT:
-                        ((frmFormSettings)Application.OpenForms["frmFormSettings"]).setData(listObjects.SelectedItem.ToString(),row,col);
+                        ((frmFormSettings)Application.OpenForms["frmFormSettings"]).setData(listObjects.SelectedItem.ToString(),_row,_col);
                         break;
                     case FormObjects.DBBJECT_ADD:
                         ((frmDbObject)Application.OpenForms["frmDbObject"]).setParent(listObjects.SelectedItem.ToString());
                         break;
                     case FormObjects.REPORT_SETT:
-                        ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setData(listObjects.SelectedItem.ToString(),row,col);
+                        ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setData(listObjects.SelectedItem.ToString(),_row,_col);
                         break;
                     case FormObjects.REPORT_BUTTON:
-                        ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setButtonData(listObjects.SelectedItem.ToString(), row, col);
+                        ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setButtonData(listObjects.SelectedItem.ToString(), _row, _col);
                         break;
                     case FormObjects.REPORT_COLUMNS:
-                        ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setColumnData(listObjects.SelectedItem.ToString(), row, col);
+                        ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setColumnData(listObjects.SelectedItem.ToString(), _row, _col);
                         break;
                     case FormObjects.OBJECT_EDIT:
-                        ((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]).setData(listObjects.SelectedItem.ToString(), row, col);
+                        ((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]).setData(listObjects.SelectedItem.ToString(), _row, _col);
                         break;
                 }
             }

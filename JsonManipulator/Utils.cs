@@ -111,7 +111,7 @@ namespace JsonManipulator
         {
             List<string> result = new List<string>();
 
-            NameSpaceObject nameSpaceObject = Form1.model.root.NameSpaceObjects.FirstOrDefault();
+            NameSpaceObject nameSpaceObject = Form1._model.root.NameSpaceObjects.FirstOrDefault();
             foreach (var dbObject in nameSpaceObject.ObjectMap)
             {
                 if (includeDBObjects)
@@ -178,7 +178,7 @@ namespace JsonManipulator
         {
             List<string> result = new List<string>();
 
-            NameSpaceObject nameSpaceObject = Form1.model.root.NameSpaceObjects.FirstOrDefault();
+            NameSpaceObject nameSpaceObject = Form1._model.root.NameSpaceObjects.FirstOrDefault();
             foreach (var dbObject in nameSpaceObject.ObjectMap)
             {
                 if (dbObject.objectWorkflow != null)
@@ -247,20 +247,20 @@ namespace JsonManipulator
             return result;
         }
 
-        public static string GetDestinationOwnerObjectName(string name)
+        public static Models.ObjectMap GetDestinationOwnerObject(string destinationName)
         {
-            string result = string.Empty;
+            Models.ObjectMap result = null;
 
-            NameSpaceObject nameSpaceObject = Form1.model.root.NameSpaceObjects.FirstOrDefault();
+            NameSpaceObject nameSpaceObject = Form1._model.root.NameSpaceObjects.FirstOrDefault();
             foreach (var dbObject in nameSpaceObject.ObjectMap)
             { 
                 if (dbObject.objectWorkflow != null)
                 {
                     foreach (var objWF in dbObject.objectWorkflow)
                     {
-                        if (objWF.Name.ToLower().Trim() == name.ToLower().Trim())
+                        if (objWF.Name.ToLower().Trim() == destinationName.ToLower().Trim())
                         {
-                            result = dbObject.name;
+                            result = dbObject;
                         }
                     }
                 }
@@ -269,9 +269,9 @@ namespace JsonManipulator
                 {
                     foreach (var rpt in dbObject.report)
                     { 
-                        if (rpt.name.ToLower().Trim() == name.ToLower().Trim())
+                        if (rpt.name.ToLower().Trim() == destinationName.ToLower().Trim())
                         {
-                            result = dbObject.name;
+                            result = dbObject;
                         }
                     }
                 }
@@ -279,6 +279,67 @@ namespace JsonManipulator
             }
 
 
+            return result;
+        }
+
+        public static Models.Report GetReportModelItem(string name)
+        {
+            Models.Report result = null;
+
+            NameSpaceObject nameSpaceObject = Form1._model.root.NameSpaceObjects.FirstOrDefault();
+            foreach (var dbObject in nameSpaceObject.ObjectMap)
+            { 
+                if (dbObject.report != null)
+                {
+                    foreach (var rpt in dbObject.report)
+                    {
+                        if (rpt.name.ToLower().Trim() == name.ToLower().Trim())
+                        {
+                            result = rpt;
+                        }
+                    }
+                }
+
+            }
+            return result;
+        }
+
+
+        public static Models.objectWorkflow GetObjWFModelItem(string name)
+        {
+            Models.objectWorkflow result = null;
+
+            NameSpaceObject nameSpaceObject = Form1._model.root.NameSpaceObjects.FirstOrDefault();
+            foreach (var dbObject in nameSpaceObject.ObjectMap)
+            {
+                if (dbObject.report != null)
+                {
+                    foreach (var objWF in dbObject.objectWorkflow)
+                    {
+                        if (objWF.Name.ToLower().Trim() == name.ToLower().Trim())
+                        {
+                            result = objWF;
+                        }
+                    }
+                }
+
+            }
+            return result;
+        }
+
+
+        public static Models.ObjectMap GetObjectModelItem(string name)
+        {
+            Models.ObjectMap result = null;
+
+            NameSpaceObject nameSpaceObject = Form1._model.root.NameSpaceObjects.FirstOrDefault();
+            foreach (var dbObject in nameSpaceObject.ObjectMap)
+            {
+                if (dbObject.name.ToLower().Trim() == name.ToLower().Trim())
+                {
+                    result = dbObject;
+                }
+            }
             return result;
         }
     }

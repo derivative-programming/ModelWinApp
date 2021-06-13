@@ -14,21 +14,21 @@ namespace JsonManipulator
 {
     public partial class frmFormSettings : Form
     {
-        objectWorkflow form;
-        List<objectWorkflowParam> controls;
-        List<objectWorkflowButton> buttons;
+        objectWorkflow _form;
+        List<objectWorkflowParam> _controls;
+        List<objectWorkflowButton> _buttons;
         public frmFormSettings(objectWorkflow frm)
         {
             InitializeComponent();
-            this.form = frm;
+            this._form = frm;
         }
 
         private void frmFormSettings_Load(object sender, EventArgs e)
         {
-            controls = new List<objectWorkflowParam>();
-            buttons = new List<objectWorkflowButton>();
+            _controls = new List<objectWorkflowParam>();
+            _buttons = new List<objectWorkflowButton>();
             setSetting();
-            grpMain.Text = form.Name;
+            grpMain.Text = _form.Name;
             setControlsList();
             setButtonsList();
         }
@@ -36,13 +36,13 @@ namespace JsonManipulator
         {
             List<PropertyValue> propertyValues = new List<PropertyValue>();
             List<string> ignoreList = Utils.GetFormPropertiesToIgnore();
-            foreach (var prop in form.GetType().GetProperties())
+            foreach (var prop in _form.GetType().GetProperties())
             {
                 if (ignoreList.Contains(prop.Name))
                     continue;
                 // Console.WriteLine("{0}={1}", prop.Name, prop.GetValue(foo, null));
                 if (!prop.PropertyType.IsGenericType)
-                    propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(form) ?? "").ToString() }); ;
+                    propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(_form) ?? "").ToString() }); ;
             }
             gridProperties.Columns.Clear();
             gridProperties.DataSource = propertyValues;
@@ -54,12 +54,12 @@ namespace JsonManipulator
         public void setControlsList()
         {
             lstControl.Items.Clear();
-            if(form.objectWorkflowParam!=null)
+            if(_form.objectWorkflowParam!=null)
             {
-                foreach (var param in form.objectWorkflowParam)
+                foreach (var param in _form.objectWorkflowParam)
                 {
                     lstControl.Items.Add(param.name);
-                    controls.Add(param);
+                    _controls.Add(param);
                 }
                 if (lstControl.Items.Count > 0)
                     lstControl.SelectedIndex = lstControl.Items.Count - 1;
@@ -69,12 +69,12 @@ namespace JsonManipulator
         public void setButtonsList()
         {
             lstButtons.Items.Clear();
-            if(form.objectWorkflowButton!=null)
+            if(_form.objectWorkflowButton!=null)
             {
-                foreach (var param in form.objectWorkflowButton)
+                foreach (var param in _form.objectWorkflowButton)
                 {
                     lstButtons.Items.Add(param.buttonText);
-                    buttons.Add(param);
+                    _buttons.Add(param);
                 }
                 if (lstButtons.Items.Count > 0)
                     lstButtons.SelectedIndex = lstButtons.Items.Count - 1;
@@ -89,7 +89,7 @@ namespace JsonManipulator
                 List<PropertyValue> propertyValues = new List<PropertyValue>();
                 String controlName = lstControl.SelectedItem.ToString();
                 List<string> ignoreList = Utils.GetFormPropertiesToIgnore();
-                objectWorkflowParam frmControl = form.objectWorkflowParam.Where(x => x.name == controlName).FirstOrDefault();
+                objectWorkflowParam frmControl = _form.objectWorkflowParam.Where(x => x.name == controlName).FirstOrDefault();
                 foreach (var prop in frmControl.GetType().GetProperties())
                 {
                     if (ignoreList.Contains(prop.Name))
@@ -114,7 +114,7 @@ namespace JsonManipulator
                 List<PropertyValue> propertyValues = new List<PropertyValue>();
                 String buttonName = lstButtons.SelectedItem.ToString();
                 List<string> ignoreList = Utils.GetFormPropertiesToIgnore();
-                objectWorkflowButton frmControl = form.objectWorkflowButton.Where(x => x.buttonText == buttonName).FirstOrDefault();
+                objectWorkflowButton frmControl = _form.objectWorkflowButton.Where(x => x.buttonText == buttonName).FirstOrDefault();
                 foreach (var prop in frmControl.GetType().GetProperties())
                 {
                     if (ignoreList.Contains(prop.Name))
@@ -133,7 +133,7 @@ namespace JsonManipulator
 
         private void btnControls_Click(object sender, EventArgs e)
         {
-            FrmControl frmControl = new FrmControl(form.Name, form.OwnerObject);
+            FrmControl frmControl = new FrmControl(_form.Name, _form.OwnerObject);
             frmControl.ShowDialog();
         }
 
@@ -142,18 +142,18 @@ namespace JsonManipulator
             if(lstControl.SelectedItem!=null)
             {
                 int selectedIndex = lstControl.SelectedIndex;
-                objectWorkflowParam item = Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == form.OwnerObject).FirstOrDefault().objectWorkflow.Where(x => x.Name == form.Name).FirstOrDefault().objectWorkflowParam.ElementAt(selectedIndex);
+                objectWorkflowParam item = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _form.OwnerObject).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowParam.ElementAt(selectedIndex);
                 int newIndex = 0;
                 if (selectedIndex == 0)
                 {
-                    newIndex = Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == form.OwnerObject).FirstOrDefault().objectWorkflow.Where(x => x.Name == form.Name).FirstOrDefault().objectWorkflowParam.Count - 1;
+                    newIndex = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _form.OwnerObject).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowParam.Count - 1;
                 }
                 else
                 {
                     newIndex = selectedIndex - 1;
                 }
-                Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == form.OwnerObject).FirstOrDefault().objectWorkflow.Where(x => x.Name == form.Name).FirstOrDefault().objectWorkflowParam.RemoveAt(selectedIndex);
-                Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == form.OwnerObject).FirstOrDefault().objectWorkflow.Where(x => x.Name == form.Name).FirstOrDefault().objectWorkflowParam.Insert(newIndex, item);
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _form.OwnerObject).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowParam.RemoveAt(selectedIndex);
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _form.OwnerObject).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowParam.Insert(newIndex, item);
                 setControlsList();
                 lstControl.SetSelected(newIndex, true);
             }
@@ -165,8 +165,8 @@ namespace JsonManipulator
             if (lstControl.SelectedItem != null)
             {
                 int selectedIndex = lstControl.SelectedIndex;
-                int count = Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == form.OwnerObject).FirstOrDefault().objectWorkflow.Where(x => x.Name == form.Name).FirstOrDefault().objectWorkflowParam.Count;
-                objectWorkflowParam item = Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == form.OwnerObject).FirstOrDefault().objectWorkflow.Where(x => x.Name == form.Name).FirstOrDefault().objectWorkflowParam.ElementAt(selectedIndex);
+                int count = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _form.OwnerObject).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowParam.Count;
+                objectWorkflowParam item = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _form.OwnerObject).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowParam.ElementAt(selectedIndex);
                 int newIndex = 0;
                 if (selectedIndex == count - 1)
                 {
@@ -176,8 +176,8 @@ namespace JsonManipulator
                 {
                     newIndex = selectedIndex + 1;
                 }
-                Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == form.OwnerObject).FirstOrDefault().objectWorkflow.Where(x => x.Name == form.Name).FirstOrDefault().objectWorkflowParam.RemoveAt(selectedIndex);
-                Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == form.OwnerObject).FirstOrDefault().objectWorkflow.Where(x => x.Name == form.Name).FirstOrDefault().objectWorkflowParam.Insert(newIndex, item);
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _form.OwnerObject).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowParam.RemoveAt(selectedIndex);
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _form.OwnerObject).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowParam.Insert(newIndex, item);
                 setControlsList();
                 lstControl.SetSelected(newIndex,true);
             }
@@ -186,7 +186,7 @@ namespace JsonManipulator
 
         private void btnAddButton_Click(object sender, EventArgs e)
         {
-            FrmAddButton frmAddButton = new FrmAddButton(form.Name, form.OwnerObject, ButtonType.FORM);
+            FrmAddButton frmAddButton = new FrmAddButton(_form.Name, _form.OwnerObject, ButtonType.FORM);
             frmAddButton.ShowDialog();
         }
 
@@ -200,12 +200,12 @@ namespace JsonManipulator
                 {
                     value = gridProperties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 }
-                objectWorkflow temp = Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == form.OwnerObject).FirstOrDefault().objectWorkflow.Where(x => x.Name == form.Name).FirstOrDefault();
-                Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == temp.OwnerObject).FirstOrDefault().objectWorkflow.RemoveAll(x => x.Name == form.Name);
+                objectWorkflow temp = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _form.OwnerObject).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault();
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == temp.OwnerObject).FirstOrDefault().objectWorkflow.RemoveAll(x => x.Name == _form.Name);
                 typeof(objectWorkflow).GetProperty(property).SetValue(temp, value);
-                if (Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == temp.OwnerObject).FirstOrDefault().objectWorkflow == null)
-                    Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == temp.OwnerObject).FirstOrDefault().objectWorkflow = new List<objectWorkflow>();
-                Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == temp.OwnerObject).FirstOrDefault().objectWorkflow.Add(temp);
+                if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == temp.OwnerObject).FirstOrDefault().objectWorkflow == null)
+                    Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == temp.OwnerObject).FirstOrDefault().objectWorkflow = new List<objectWorkflow>();
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == temp.OwnerObject).FirstOrDefault().objectWorkflow.Add(temp);
                 if (property.Equals("name", StringComparison.OrdinalIgnoreCase))
                 {
                     ((Form1)Application.OpenForms["Form1"]).updateTree(value, 1);
@@ -224,7 +224,7 @@ namespace JsonManipulator
                     value = gridControls.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 }
                 int index = lstControl.SelectedIndex;
-                typeof(objectWorkflowParam).GetProperty(property).SetValue(Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == form.OwnerObject).FirstOrDefault().objectWorkflow.Where(x => x.Name == form.Name).FirstOrDefault().objectWorkflowParam.ElementAt(lstControl.SelectedIndex), value); ;
+                typeof(objectWorkflowParam).GetProperty(property).SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _form.OwnerObject).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowParam.ElementAt(lstControl.SelectedIndex), value); ;
                 setControlsList();
                 lstControl.SetSelected(index, true);
             }
@@ -241,7 +241,7 @@ namespace JsonManipulator
                     value = gridButtons.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 }
                 int index = lstButtons.SelectedIndex;
-                typeof(objectWorkflowButton).GetProperty(property).SetValue(Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == form.OwnerObject).FirstOrDefault().objectWorkflow.Where(x => x.Name == form.Name).FirstOrDefault().objectWorkflowButton.ElementAt(lstButtons.SelectedIndex), value); ;
+                typeof(objectWorkflowButton).GetProperty(property).SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _form.OwnerObject).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowButton.ElementAt(lstButtons.SelectedIndex), value); ;
                 setButtonsList();
                 lstButtons.SetSelected(index, true);
             }

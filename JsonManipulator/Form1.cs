@@ -16,10 +16,10 @@ namespace JsonManipulator
 {
     public partial class Form1 : Form
     {
-     public static  RootObject model;
-        List<objectWorkflow> forms;
-        List<Report> reports;
-        public static string path;
+     public static  RootObject _model;
+        List<objectWorkflow> _forms;
+        List<Report> _reports;
+        public static string _path;
         public Form1()
         {
             InitializeComponent();
@@ -27,8 +27,8 @@ namespace JsonManipulator
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            forms = new List<objectWorkflow>();
-            reports = new List<Report>();
+            _forms = new List<objectWorkflow>();
+            _reports = new List<Report>();
             nodeMenus.TabStop = false;
             nodeMenus.Enabled = false;
             addToolStripMenuItem.Enabled = false;
@@ -46,7 +46,7 @@ namespace JsonManipulator
         private void populateDbObjects(string filter)
         {
             nodeMenus.Nodes["dbObjects"].Nodes.Clear();
-            NameSpaceObject nameSpaceObject = model.root.NameSpaceObjects.FirstOrDefault();
+            NameSpaceObject nameSpaceObject = _model.root.NameSpaceObjects.FirstOrDefault();
             foreach (var _object in nameSpaceObject.ObjectMap.Where(x => x.name.Contains(filter)))
             {
                 TreeNode node = new TreeNode();
@@ -61,7 +61,7 @@ namespace JsonManipulator
         {
             nodeMenus.Nodes["pages"].Nodes["Forms"].Nodes.Clear();
             nodeMenus.Nodes["pages"].Nodes["Reports"].Nodes.Clear();
-            NameSpaceObject nameSpaceObject = model.root.NameSpaceObjects.FirstOrDefault();
+            NameSpaceObject nameSpaceObject = _model.root.NameSpaceObjects.FirstOrDefault();
             foreach (var _dbObject in nameSpaceObject.ObjectMap)
             {
                 if(_dbObject.objectWorkflow !=null)
@@ -69,7 +69,7 @@ namespace JsonManipulator
                     foreach (var _object in _dbObject.objectWorkflow.Where(x=>x.Name.Contains(filter)))
                     {
                         _object.OwnerObject = _dbObject.name;
-                        forms.Add(_object);
+                        _forms.Add(_object);
                         TreeNode node = new TreeNode();
                         node.Text = _object.Name;
                         node.Name = _object.Name;
@@ -81,9 +81,8 @@ namespace JsonManipulator
                 if(_dbObject.report != null)
                 {
                     foreach (var _object in _dbObject.report.Where(x => x.name.Contains(filter)))
-                    {
-                        _object.OwnerObject = _dbObject.name;
-                        reports.Add(_object);
+                    { 
+                        _reports.Add(_object);
                         TreeNode node = new TreeNode();
                         node.Text = _object.name;
                         node.Name = _object.name;
@@ -99,7 +98,7 @@ namespace JsonManipulator
         protected void populateReports(object sender, EventArgs e)
         {
             Button button = (Button)sender;
-            NameSpaceObject nameSpaceObject = model.root.NameSpaceObjects.FirstOrDefault();
+            NameSpaceObject nameSpaceObject = _model.root.NameSpaceObjects.FirstOrDefault();
             ObjectMap map = nameSpaceObject.ObjectMap.Where(x => x.name == button.Text).FirstOrDefault();
             if(map!=null && map.report!=null)
             {
@@ -126,13 +125,13 @@ namespace JsonManipulator
         {
             this.mainPanel.Controls.Clear();
             int level = e.Node.Level;
-            NameSpaceObject nameSpaceObject = model.root.NameSpaceObjects.FirstOrDefault();
+            NameSpaceObject nameSpaceObject = _model.root.NameSpaceObjects.FirstOrDefault();
             switch (level)
             {
                 case 0:
                     if (e.Node.Name == "MyCompanyApp")
                     {
-                        frmSettings frmSettings = new frmSettings(model.root);
+                        frmSettings frmSettings = new frmSettings(_model.root);
                         frmSettings.TopLevel = false;
                         frmSettings.AutoScroll = true;
                         frmSettings.Height = this.mainPanel.Height;
@@ -162,8 +161,8 @@ namespace JsonManipulator
                         case "Reports":
                             if (((frmReportSettings)Application.OpenForms["frmReportSettings"]) != null)
                                 ((frmReportSettings)Application.OpenForms["frmReportSettings"]).Close();
-                            Report rpt = reports.Where(x => x.name == e.Node.Name).FirstOrDefault();
-                            frmReportSettings frmReportSettings = new frmReportSettings(rpt);
+                            Report rpt = _reports.Where(x => x.name == e.Node.Name).FirstOrDefault();
+                            frmReportSettings frmReportSettings = new frmReportSettings(rpt.name);
                             frmReportSettings.TopLevel = false;
                             frmReportSettings.AutoScroll = true;
                             frmReportSettings.Height = this.mainPanel.Height;
@@ -174,7 +173,7 @@ namespace JsonManipulator
                         case "Forms":
                             if (((frmFormSettings)Application.OpenForms["frmFormSettings"]) != null)
                                 ((frmFormSettings)Application.OpenForms["frmFormSettings"]).Close();
-                            objectWorkflow form = forms.Where(x => x.Name == e.Node.Name).FirstOrDefault();
+                            objectWorkflow form = _forms.Where(x => x.Name == e.Node.Name).FirstOrDefault();
                             frmFormSettings frmFormSettings = new frmFormSettings(form);
                             frmFormSettings.TopLevel = false;
                             frmFormSettings.AutoScroll = true;
@@ -191,11 +190,11 @@ namespace JsonManipulator
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string json = JsonConvert.SerializeObject(Form1.model, Formatting.Indented, new JsonSerializerSettings
+            string json = JsonConvert.SerializeObject(Form1._model, Formatting.Indented, new JsonSerializerSettings
             {
                 NullValueHandling = NullValueHandling.Ignore
             });
-            File.WriteAllText(path, json);
+            File.WriteAllText(_path, json);
             showMessage("File Updated Successfully");
         }
 
@@ -232,8 +231,8 @@ namespace JsonManipulator
                 using (StreamReader r = new StreamReader(OpenFileDialog.FileName))
                 {
                     string json = r.ReadToEnd();
-                    model = JsonConvert.DeserializeObject<RootObject>(json);
-                    this.Text = model.root.DatabaseName;
+                    _model = JsonConvert.DeserializeObject<RootObject>(json);
+                    this.Text = _model.root.DatabaseName;
 
                 }
                 populateDbObjects("");
@@ -242,7 +241,7 @@ namespace JsonManipulator
                 addToolStripMenuItem.Enabled = true;
                 saveToolStripMenuItem.Enabled = true;
                 saveAsToolStripMenuItem.Enabled = true;
-                path = OpenFileDialog.FileName;
+                _path = OpenFileDialog.FileName;
             }
         }
 
@@ -269,7 +268,7 @@ namespace JsonManipulator
             saveFileDialog1.RestoreDirectory = true;
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                string json = JsonConvert.SerializeObject(Form1.model, Formatting.Indented, new JsonSerializerSettings
+                string json = JsonConvert.SerializeObject(Form1._model, Formatting.Indented, new JsonSerializerSettings
                 {
                     NullValueHandling = NullValueHandling.Ignore
                 });
@@ -336,7 +335,7 @@ namespace JsonManipulator
         {
             if(((frmFormSettings)Application.OpenForms["frmFormSettings"])!=null)
             ((frmFormSettings)Application.OpenForms["frmFormSettings"]).Close();
-            forms.Add(objectWorkflow);
+            _forms.Add(objectWorkflow);
             TreeNode node = new TreeNode();
             node.Text = objectWorkflow.Name;
             node.Name = objectWorkflow.Name;
@@ -361,7 +360,7 @@ namespace JsonManipulator
         {
             if (((frmReportSettings)Application.OpenForms["frmReportSettings"]) != null)
                 ((frmReportSettings)Application.OpenForms["frmReportSettings"]).Close();
-            reports.Add(report);
+            _reports.Add(report);
             TreeNode node = new TreeNode();
             node.Text = report.name;
             node.Name = report.name;

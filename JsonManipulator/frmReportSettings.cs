@@ -14,13 +14,14 @@ namespace JsonManipulator
 {
     public partial class frmReportSettings : Form
     {
-        Report rpt = new Report();
-        String ownerObject;
-        public frmReportSettings(Report report)
+        Report _rpt = new Report();
+        ObjectMap _ownerObject; 
+        public frmReportSettings(string reportName)
         {
             InitializeComponent();
-            this.rpt = report;
-            this.ownerObject = rpt.OwnerObject;
+            this._rpt = Utils.GetReportModelItem(reportName);
+            this._ownerObject = Utils.GetDestinationOwnerObject(_rpt.name);
+             
         }
 
         private void frmReportSettings_Load(object sender, EventArgs e)
@@ -35,13 +36,13 @@ namespace JsonManipulator
             List<PropertyValue> propertyValues = new List<PropertyValue>();
             dataProperties.Columns.Clear();
             List<string> ignoreList = Utils.GetReportPropertiesToIgnore();
-            foreach (var prop in rpt.GetType().GetProperties())
+            foreach (var prop in _rpt.GetType().GetProperties())
             {
                 if (ignoreList.Contains(prop.Name))
                     continue;
                 // Console.WriteLine("{0}={1}", prop.Name, prop.GetValue(foo, null));
                 if (!prop.PropertyType.IsGenericType)
-                    propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(rpt) ?? "").ToString() }); ;
+                    propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(_rpt) ?? "").ToString() }); ;
             }
             dataProperties.DataSource = propertyValues;
             if (dataProperties.Columns.Count > 0)
@@ -52,11 +53,11 @@ namespace JsonManipulator
         public void setFiltersList()
         {
             lstFilters.Items.Clear();
-            if(rpt.reportParam==null)
+            if(_rpt.reportParam==null)
             {
-                rpt.reportParam = new List<reportParam>();
+                _rpt.reportParam = new List<reportParam>();
             }
-            foreach (var param in rpt.reportParam)
+            foreach (var param in _rpt.reportParam)
             {
                 lstFilters.Items.Add(param.name);
             }
@@ -66,11 +67,11 @@ namespace JsonManipulator
         public void setColumnsList()
         {
             lstColumns.Items.Clear();
-            if (rpt.reportColumn == null)
+            if (_rpt.reportColumn == null)
             {
-                rpt.reportColumn = new List<reportColumn>();
+                _rpt.reportColumn = new List<reportColumn>();
             }
-            foreach (var column in rpt.reportColumn)
+            foreach (var column in _rpt.reportColumn)
             {
                 lstColumns.Items.Add(column.name);
             }
@@ -80,11 +81,11 @@ namespace JsonManipulator
         public void setButtonsList()
         {
             lstButtons.Items.Clear();
-            if (rpt.reportButton == null)
+            if (_rpt.reportButton == null)
             {
-                rpt.reportButton = new List<reportButton>();
+                _rpt.reportButton = new List<reportButton>();
             }
-            foreach (var button in rpt.reportButton)
+            foreach (var button in _rpt.reportButton)
             {
                 if (button.buttonName == null)
                     button.buttonName = "";
@@ -100,7 +101,7 @@ namespace JsonManipulator
                 List<PropertyValue> propertyValues = new List<PropertyValue>();
                 String filterName = lstFilters.SelectedItem.ToString();
                 List<string> ignoreList = Utils.GetReportPropertiesToIgnore();
-                reportParam rptParam = rpt.reportParam.Where(x => x.name == filterName).FirstOrDefault();
+                reportParam rptParam = _rpt.reportParam.Where(x => x.name == filterName).FirstOrDefault();
                 foreach (var prop in rptParam.GetType().GetProperties())
                 {
                     if (ignoreList.Contains(prop.Name))
@@ -123,7 +124,7 @@ namespace JsonManipulator
             List<PropertyValue> propertyValues = new List<PropertyValue>();
             String columnMane = lstColumns.SelectedItem.ToString();
             List<string> ignoreList = Utils.GetReportPropertiesToIgnore();
-            reportColumn rptColumn = rpt.reportColumn.Where(x => x.name == columnMane).FirstOrDefault();
+            reportColumn rptColumn = _rpt.reportColumn.Where(x => x.name == columnMane).FirstOrDefault();
             foreach (var prop in rptColumn.GetType().GetProperties())
             {
                 if (ignoreList.Contains(prop.Name))
@@ -144,7 +145,7 @@ namespace JsonManipulator
             List<PropertyValue> propertyValues = new List<PropertyValue>();
             String buttonName = lstButtons.SelectedItem.ToString();
             List<string> ignoreList = Utils.GetReportPropertiesToIgnore();
-            reportButton rptButton = rpt.reportButton.Where(x => x.buttonName == buttonName).FirstOrDefault();
+            reportButton rptButton = _rpt.reportButton.Where(x => x.buttonName == buttonName).FirstOrDefault();
             foreach (var prop in rptButton.GetType().GetProperties())
             {
                 if (ignoreList.Contains(prop.Name))
@@ -161,19 +162,19 @@ namespace JsonManipulator
 
         private void btnButtonAdd_Click(object sender, EventArgs e)
         {
-            FrmAddButton frmAddButton = new FrmAddButton(rpt.name,rpt.OwnerObject, ButtonType.REPORT);
+            FrmAddButton frmAddButton = new FrmAddButton(_rpt.name, _ownerObject.name, ButtonType.REPORT);
             frmAddButton.ShowDialog();
         }
 
         private void btnAddFilter_Click(object sender, EventArgs e)
         {
-            FrmAddFilter frmAddFilter = new FrmAddFilter(rpt.name, rpt.OwnerObject);
+            FrmAddFilter frmAddFilter = new FrmAddFilter(_rpt.name, _ownerObject.name);
             frmAddFilter.ShowDialog();
         }
 
         private void btnColumnsAdd_Click(object sender, EventArgs e)
         {
-            FrmAddColumn frmAddColumn = new FrmAddColumn(rpt.name, rpt.OwnerObject);
+            FrmAddColumn frmAddColumn = new FrmAddColumn(_rpt.name, _ownerObject.name);
             frmAddColumn.ShowDialog();
         }
 
@@ -182,18 +183,18 @@ namespace JsonManipulator
             if (lstColumns.SelectedItem != null)
             {
                 int selectedIndex = lstColumns.SelectedIndex;
-                reportColumn item = Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == rpt.OwnerObject).FirstOrDefault().report.Where(x => x.name == rpt.name).FirstOrDefault().reportColumn.ElementAt(selectedIndex);
+                reportColumn item = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportColumn.ElementAt(selectedIndex);
                 int newIndex = 0;
                 if (selectedIndex == 0)
                 {
-                    newIndex = Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == rpt.OwnerObject).FirstOrDefault().report.Where(x => x.name == rpt.name).FirstOrDefault().reportColumn.Count - 1;
+                    newIndex = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportColumn.Count - 1;
                 }
                 else
                 {
                     newIndex = selectedIndex - 1;
                 }
-                Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == rpt.OwnerObject).FirstOrDefault().report.Where(x => x.name == rpt.name).FirstOrDefault().reportColumn.RemoveAt(selectedIndex);
-                Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == rpt.OwnerObject).FirstOrDefault().report.Where(x => x.name == rpt.name).FirstOrDefault().reportColumn.Insert(newIndex, item);
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportColumn.RemoveAt(selectedIndex);
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportColumn.Insert(newIndex, item);
                 setColumnsList();
                 lstColumns.SetSelected(newIndex, true);
             }
@@ -204,8 +205,8 @@ namespace JsonManipulator
             if (lstColumns.SelectedItem != null)
             {
                 int selectedIndex = lstColumns.SelectedIndex;
-                int count = Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == rpt.OwnerObject).FirstOrDefault().report.Where(x => x.name == rpt.name).FirstOrDefault().reportColumn.Count;
-                reportColumn item = Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == rpt.OwnerObject).FirstOrDefault().report.Where(x => x.name == rpt.name).FirstOrDefault().reportColumn.ElementAt(selectedIndex);
+                int count = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportColumn.Count;
+                reportColumn item = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportColumn.ElementAt(selectedIndex);
                 int newIndex = 0;
                 if (selectedIndex == count - 1)
                 {
@@ -215,8 +216,8 @@ namespace JsonManipulator
                 {
                     newIndex = selectedIndex + 1;
                 }
-                Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == rpt.OwnerObject).FirstOrDefault().report.Where(x => x.name == rpt.name).FirstOrDefault().reportColumn.RemoveAt(selectedIndex);
-                Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == rpt.OwnerObject).FirstOrDefault().report.Where(x => x.name == rpt.name).FirstOrDefault().reportColumn.Insert(newIndex, item);
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportColumn.RemoveAt(selectedIndex);
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportColumn.Insert(newIndex, item);
                 setColumnsList();
                 lstColumns.SetSelected(newIndex,true);
             }
@@ -227,18 +228,18 @@ namespace JsonManipulator
             if (lstFilters.SelectedItem != null)
             {
                 int selectedIndex = lstFilters.SelectedIndex;
-                reportParam item = Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == rpt.OwnerObject).FirstOrDefault().report.Where(x => x.name == rpt.name).FirstOrDefault().reportParam.ElementAt(selectedIndex);
+                reportParam item = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportParam.ElementAt(selectedIndex);
                 int newIndex = 0;
                 if (selectedIndex == 0)
                 {
-                    newIndex = Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == rpt.OwnerObject).FirstOrDefault().report.Where(x => x.name == rpt.name).FirstOrDefault().reportParam.Count - 1;
+                    newIndex = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportParam.Count - 1;
                 }
                 else
                 {
                     newIndex = selectedIndex - 1;
                 }
-                Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == rpt.OwnerObject).FirstOrDefault().report.Where(x => x.name == rpt.name).FirstOrDefault().reportParam.RemoveAt(selectedIndex);
-                Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == rpt.OwnerObject).FirstOrDefault().report.Where(x => x.name == rpt.name).FirstOrDefault().reportParam.Insert(newIndex, item);
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportParam.RemoveAt(selectedIndex);
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportParam.Insert(newIndex, item);
                 setFiltersList();
                 lstFilters.SetSelected(newIndex, true);
             }
@@ -249,8 +250,8 @@ namespace JsonManipulator
             if (lstFilters.SelectedItem != null)
             {
                 int selectedIndex = lstFilters.SelectedIndex;
-                int count = Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == rpt.OwnerObject).FirstOrDefault().report.Where(x => x.name == rpt.name).FirstOrDefault().reportParam.Count;
-                reportParam item = Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == rpt.OwnerObject).FirstOrDefault().report.Where(x => x.name == rpt.name).FirstOrDefault().reportParam.ElementAt(selectedIndex);
+                int count = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportParam.Count;
+                reportParam item = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportParam.ElementAt(selectedIndex);
                 int newIndex = 0;
                 if (selectedIndex == count - 1)
                 {
@@ -260,8 +261,8 @@ namespace JsonManipulator
                 {
                     newIndex = selectedIndex + 1;
                 }
-                Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == rpt.OwnerObject).FirstOrDefault().report.Where(x => x.name == rpt.name).FirstOrDefault().reportParam.RemoveAt(selectedIndex);
-                Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == rpt.OwnerObject).FirstOrDefault().report.Where(x => x.name == rpt.name).FirstOrDefault().reportParam.Insert(newIndex, item);
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportParam.RemoveAt(selectedIndex);
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportParam.Insert(newIndex, item);
                 setFiltersList();
                 lstFilters.SetSelected(newIndex, true);
             }
@@ -278,12 +279,12 @@ namespace JsonManipulator
                 {
                     value = dataProperties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 }
-                Report temp = Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == rpt.OwnerObject).FirstOrDefault().report.Where(x => x.name == rpt.name).FirstOrDefault();
-                Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == rpt.OwnerObject).FirstOrDefault().report.RemoveAll(x => x.name == rpt.name);
+                Report temp = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault();
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.RemoveAll(x => x.name == _rpt.name);
                 typeof(Report).GetProperty(property).SetValue(temp, value);
-                if (Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == temp.OwnerObject).FirstOrDefault().report == null)
-                    Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == temp.OwnerObject).FirstOrDefault().report = new List<Report>();
-                Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == temp.OwnerObject).FirstOrDefault().report.Add(temp);
+                //if (Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == temp.OwnerObject).FirstOrDefault().report == null)
+                //    Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == temp.OwnerObject).FirstOrDefault().report = new List<Report>();
+                //Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == temp.OwnerObject).FirstOrDefault().report.Add(temp);
                 
                 if (property.Equals("name", StringComparison.OrdinalIgnoreCase))
                 {
@@ -305,7 +306,7 @@ namespace JsonManipulator
                     value = gridFilters.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 }
                 int index = lstFilters.SelectedIndex;
-                typeof(reportParam).GetProperty(property).SetValue(Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == rpt.OwnerObject).FirstOrDefault().report.Where(x => x.name == rpt.name).FirstOrDefault().reportParam.ElementAt(lstFilters.SelectedIndex), value); ;
+                typeof(reportParam).GetProperty(property).SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportParam.ElementAt(lstFilters.SelectedIndex), value); ;
                 setFiltersList();
                 lstFilters.SetSelected(index, true);
             }
@@ -323,7 +324,7 @@ namespace JsonManipulator
                 }
                 int index = lstColumns.SelectedIndex;
               
-                typeof(reportColumn).GetProperty(property).SetValue(Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == rpt.OwnerObject).FirstOrDefault().report.Where(x => x.name == rpt.name).FirstOrDefault().reportColumn.ElementAt(lstColumns.SelectedIndex), value); 
+                typeof(reportColumn).GetProperty(property).SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportColumn.ElementAt(lstColumns.SelectedIndex), value); 
                 setColumnsList();
                 lstColumns.SetSelected(index, true);
             }
@@ -503,7 +504,7 @@ namespace JsonManipulator
                     value = gridButtons.Rows[gridButtons.CurrentCell.RowIndex].Cells[gridButtons.CurrentCell.ColumnIndex].Value.ToString();
                 }
                 int index = lstButtons.SelectedIndex;
-                typeof(reportButton).GetProperty(property).SetValue(Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == rpt.OwnerObject).FirstOrDefault().report.Where(x => x.name == rpt.name).FirstOrDefault().reportButton.ElementAt(lstButtons.SelectedIndex), value);
+                typeof(reportButton).GetProperty(property).SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportButton.ElementAt(lstButtons.SelectedIndex), value);
                 setButtonsList();
                 lstButtons.SetSelected(index, true);
             }

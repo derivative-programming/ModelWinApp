@@ -235,8 +235,8 @@ namespace JsonManipulator.Models
         public string name { get; set; }
         [JsonProperty("codeDescription")]
         public string codeDescription { get; set; }
-        [JsonProperty("ownerObject")]
-        public string OwnerObject { get; set; }
+        //[JsonProperty("ownerObject")]
+        //public string OwnerObject { get; set; }
         [JsonProperty("visualizationType")]
         public string visualizationType { get; set; }
         [JsonProperty("titleText")]

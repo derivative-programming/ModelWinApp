@@ -14,14 +14,14 @@ namespace JsonManipulator
 {
     public partial class RoleList : Form
     {
-        FormObjects frmObj;
-        int row, column;
+        FormObjects _frmObj;
+        int _row, _column;
         public RoleList(FormObjects formObjects,int row=0,int column=0)
         {
             InitializeComponent();
-            this.frmObj = formObjects;
-            this.row = row;
-            this.column = column;
+            this._frmObj = formObjects;
+            this._row = row;
+            this._column = column;
         }
 
         private void ObjectsList_Load(object sender, EventArgs e)
@@ -54,7 +54,7 @@ namespace JsonManipulator
         {
             if(listObjects.SelectedItem!=null)
             {
-                switch(frmObj)
+                switch(_frmObj)
                 {
                     case FormObjects.FORM:
                         ((frmForm)Application.OpenForms["frmForm"]).setRole(listObjects.SelectedItem.ToString());
@@ -66,10 +66,10 @@ namespace JsonManipulator
                         ((frmReportDetail)Application.OpenForms["frmReportDetail"]).setRole(listObjects.SelectedItem.ToString());
                         break;
                     case FormObjects.DBBJECT_EDIT:
-                        ((frmFormSettings)Application.OpenForms["frmFormSettings"]).setData(listObjects.SelectedItem.ToString(),row,column);
+                        ((frmFormSettings)Application.OpenForms["frmFormSettings"]).setData(listObjects.SelectedItem.ToString(),_row,_column);
                         break;
                     case FormObjects.REPORT_ROLE:
-                        ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setData(listObjects.SelectedItem.ToString(), row, column);
+                        ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setData(listObjects.SelectedItem.ToString(), _row, _column);
                         break;
                 }
             }

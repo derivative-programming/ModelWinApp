@@ -13,16 +13,16 @@ namespace JsonManipulator
 {
     public partial class frmAddObjProp : Form
     {
-        string name;
+        string _name;
         public frmAddObjProp(string name)
         {
             InitializeComponent();
-            this.name = name;
+            this._name = name;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == name).FirstOrDefault().property.Add(new property { name =txtName.Text});
+            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().property.Add(new property { name =txtName.Text});
             ((Form1)Application.OpenForms["Form1"]).showMessage("Property created successfully");
             ((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]).setPropertieList();
                 this.Close();

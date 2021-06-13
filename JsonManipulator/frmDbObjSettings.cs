@@ -15,31 +15,31 @@ namespace JsonManipulator
 {
     public partial class frmDbObjSettings : Form
     {
-        ObjectMap map;
+        ObjectMap _map;
         public frmDbObjSettings(ObjectMap mapObject)
         {
             InitializeComponent();
-            this.map = mapObject;
+            this._map = mapObject;
         }
 
         private void frmDbObjSettings_Load(object sender, EventArgs e)
         {
             setSetting();
             setPropertieList();
-            grpBoxMain.Text = map.name;
+            grpBoxMain.Text = _map.name;
         }
         private void setSetting()
         {
             List<PropertyValue> propertyValues = new List<PropertyValue>();
             dataProperties.Columns.Clear();
             List<string> ignoreList = Utils.GetFormPropertiesToIgnore();
-            foreach (var prop in map.GetType().GetProperties())
+            foreach (var prop in _map.GetType().GetProperties())
             {
                 if (ignoreList.Contains(prop.Name))
                     continue;
                 // Console.WriteLine("{0}={1}", prop.Name, prop.GetValue(foo, null));
                 if (!prop.PropertyType.IsGenericType)
-                    propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(map) ?? "").ToString() }); ;
+                    propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(_map) ?? "").ToString() }); ;
             }
             dataProperties.DataSource = propertyValues;
             if(dataProperties.Columns.Count > 0)
@@ -49,12 +49,12 @@ namespace JsonManipulator
         }
         public void setPropertieList()
         {
-            if(map!=null)
+            if(_map!=null)
             {
-                if (map.property == null)
-                    map.property = new List<property>();
+                if (_map.property == null)
+                    _map.property = new List<property>();
                 lstProperties.Items.Clear();
-                foreach (var prop in map.property)
+                foreach (var prop in _map.property)
                 {
                     lstProperties.Items.Add(prop.name);
                 }
@@ -70,7 +70,7 @@ namespace JsonManipulator
                 gridPropertiesProp.Columns.Clear();
                 List<PropertyValue> propertyValues = new List<PropertyValue>();
                 String propname = lstProperties.SelectedItem.ToString();
-                property prpty = map.property.Where(x => x.name == propname).FirstOrDefault();
+                property prpty = _map.property.Where(x => x.name == propname).FirstOrDefault();
                 List<string> ignoreList = Utils.GetDBObjPropertiesToIgnore();
                 foreach (var prop in prpty.GetType().GetProperties())
                 {
@@ -92,7 +92,7 @@ namespace JsonManipulator
 
         private void btnProperties_Click(object sender, EventArgs e)
         {
-            string objectname = map.name;
+            string objectname = _map.name;
             frmAddObjProp frmProp = new frmAddObjProp(objectname);
             frmProp.ShowDialog();
         }
@@ -108,7 +108,7 @@ namespace JsonManipulator
                     value = dataProperties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 }
                 
-                typeof(ObjectMap).GetProperty(property).SetValue(Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x=>x.name == map.name).FirstOrDefault(), value);
+                typeof(ObjectMap).GetProperty(property).SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x=>x.name == _map.name).FirstOrDefault(), value);
                 if(property.Equals("name",StringComparison.OrdinalIgnoreCase))
                 {
                     ((Form1)Application.OpenForms["Form1"]).updateTree(value, 0);
@@ -188,7 +188,7 @@ namespace JsonManipulator
                 }
                 string property = gridPropertiesProp.Rows[e.RowIndex].Cells[0].Value.ToString();
                 int index = lstProperties.SelectedIndex;
-                    typeof(property).GetProperty(property).SetValue(Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == map.name).FirstOrDefault().property.ElementAt(lstProperties.SelectedIndex), value) ;
+                    typeof(property).GetProperty(property).SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _map.name).FirstOrDefault().property.ElementAt(lstProperties.SelectedIndex), value) ;
                 setPropertieList();
                 lstProperties.SetSelected(index, true);
                 gridPropertiesProp.CurrentCell.Selected = false;

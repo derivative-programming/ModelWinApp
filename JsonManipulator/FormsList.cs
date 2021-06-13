@@ -14,15 +14,15 @@ namespace JsonManipulator
 {
     public partial class FormsList : Form
     {
-        FormObjects frmObj;
-        ParentType type;
-        int row, col;
+        FormObjects _frmObj;
+        ParentType _type;
+        int _row, _col;
         public FormsList(ParentType type = ParentType.ADD,int row=0,int col=0)
         {
             InitializeComponent();
-            this.type = type;
-            this.row = row;
-            this.col = col;
+            this._type = type;
+            this._row = row;
+            this._col = col;
         }
         private void populateForms(string filter)
         {
@@ -55,16 +55,16 @@ namespace JsonManipulator
         {
             if(listObjects.SelectedItem!=null)
             {
-                switch(type)
+                switch(_type)
                 {
                     case ParentType.ADD:
                         ((frmDbObject)Application.OpenForms["frmDbObject"]).setParent(listObjects.SelectedItem.ToString());
                         break;
                     case ParentType.EDIT:
-                        ((frmFormSettings)Application.OpenForms["frmFormSettings"]).setButtonData(listObjects.SelectedItem.ToString(),row,col);
+                        ((frmFormSettings)Application.OpenForms["frmFormSettings"]).setButtonData(listObjects.SelectedItem.ToString(),_row,_col);
                         break;
                     case ParentType.REPORT_BUTTON:
-                        ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setButtonData(listObjects.SelectedItem.ToString(), row, col);
+                        ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setButtonData(listObjects.SelectedItem.ToString(), _row, _col);
                         break;
                 }
                   

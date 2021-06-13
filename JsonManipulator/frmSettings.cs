@@ -22,8 +22,8 @@ namespace JsonManipulator
 
         private void frmSettings_Load(object sender, EventArgs e)
         {
-            _root.CodeNameSpaceRootName = Form1.model.root.Name;
-            _root.CodeNameSpaceSecondaryName = Form1.model.root.NameSpaceObjects.FirstOrDefault().name;
+            _root.CodeNameSpaceRootName = Form1._model.root.Name;
+            _root.CodeNameSpaceSecondaryName = Form1._model.root.NameSpaceObjects.FirstOrDefault().name;
             setSetting();
 
         }
@@ -57,14 +57,14 @@ namespace JsonManipulator
                 }
                 if (property == "CodeNameSpaceRootName" || property == "Name")
                 {
-                    Form1.model.root.Name = value;
-                    Form1.model.root.CodeNameSpaceRootName = value;
+                    Form1._model.root.Name = value;
+                    Form1._model.root.CodeNameSpaceRootName = value;
                     setSetting();
                 }
                 else
                 {
                     
-                    typeof(root).GetProperty(property).SetValue(Form1.model.root, value);
+                    typeof(root).GetProperty(property).SetValue(Form1._model.root, value);
                 }
                 
             }

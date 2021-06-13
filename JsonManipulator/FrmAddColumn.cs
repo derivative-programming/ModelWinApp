@@ -13,12 +13,12 @@ namespace JsonManipulator
 {
     public partial class FrmAddColumn : Form
     {
-        string name, parent;
+        string _name, _parent;
         public FrmAddColumn(string name, string parent)
         {
             InitializeComponent();
-            this.name = name;
-            this.parent = parent;
+            this._name = name;
+            this._parent = parent;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -28,11 +28,11 @@ namespace JsonManipulator
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == parent).FirstOrDefault().report.Where(x => x.name == name).FirstOrDefault().reportColumn == null)
+            if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportColumn == null)
             {
-                Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == parent).FirstOrDefault().report.Where(x => x.name == name).FirstOrDefault().reportColumn = new List<reportColumn>();
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportColumn = new List<reportColumn>();
             }
-            Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == parent).FirstOrDefault().report.Where(x => x.name == name).FirstOrDefault().reportColumn.Add(new reportColumn { name = txtName.Text });
+            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportColumn.Add(new reportColumn { name = txtName.Text });
              ((Form1)Application.OpenForms["Form1"]).showMessage("Column created successfully");
             ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setColumnsList();
             this.Close();
