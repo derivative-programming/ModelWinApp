@@ -42,14 +42,14 @@ namespace JsonManipulator
             this.listObjects.FormattingEnabled = true;
             this.listObjects.Location = new System.Drawing.Point(0, 55);
             this.listObjects.Name = "listObjects";
-            this.listObjects.Size = new System.Drawing.Size(206, 311);
+            this.listObjects.Size = new System.Drawing.Size(225, 311);
             this.listObjects.TabIndex = 0;
             this.listObjects.SelectedIndexChanged += new System.EventHandler(this.listObjects_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 24);
+            this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 13);
             this.label1.TabIndex = 1;
@@ -57,9 +57,9 @@ namespace JsonManipulator
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(59, 21);
+            this.textBox1.Location = new System.Drawing.Point(12, 25);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.Size = new System.Drawing.Size(200, 20);
             this.textBox1.TabIndex = 2;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -70,18 +70,18 @@ namespace JsonManipulator
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(206, 55);
+            this.panel1.Size = new System.Drawing.Size(225, 55);
             this.panel1.TabIndex = 3;
             // 
             // RoleList
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(206, 366);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.ClientSize = new System.Drawing.Size(225, 366);
             this.Controls.Add(this.listObjects);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "RoleList";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Roles List";
             this.Load += new System.EventHandler(this.ObjectsList_Load);

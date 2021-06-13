@@ -41,6 +41,10 @@ namespace JsonManipulator
                     propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(rpt) ?? "").ToString() }); ;
             }
             dataProperties.DataSource = propertyValues;
+            if (dataProperties.Columns.Count > 0)
+            {
+                dataProperties.Columns[0].ReadOnly = true;
+            }
         }
         public void setFiltersList()
         {
@@ -100,6 +104,10 @@ namespace JsonManipulator
                 }
                 gridFilters.Columns.Clear();
                 gridFilters.DataSource = propertyValues;
+                if (gridFilters.Columns.Count > 0)
+                {
+                    gridFilters.Columns[0].ReadOnly = true;
+                }
             }
           
         }
@@ -116,6 +124,10 @@ namespace JsonManipulator
             }
             gridColumns.Columns.Clear();
             gridColumns.DataSource = propertyValues;
+            if (gridColumns.Columns.Count > 0)
+            {
+                gridColumns.Columns[0].ReadOnly = true;
+            }
         }
 
         private void lstButtons_SelectedIndexChanged(object sender, EventArgs e)
@@ -129,6 +141,10 @@ namespace JsonManipulator
             }
             gridButtons.Columns.Clear();
             gridButtons.DataSource = propertyValues;
+            if (gridButtons.Columns.Count > 0)
+            {
+                gridButtons.Columns[0].ReadOnly = true;
+            }
         }
 
         private void btnButtonAdd_Click(object sender, EventArgs e)

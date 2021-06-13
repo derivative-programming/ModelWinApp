@@ -39,6 +39,10 @@ namespace JsonManipulator
                 propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(_root) ?? "").ToString() }); ;
             }
             dataProperties.DataSource = propertyValues;
+            if (dataProperties.Columns.Count > 0)
+            {
+                dataProperties.Columns[0].ReadOnly = true;
+            }
         }
 
         private void dataProperties_CellValueChanged(object sender, DataGridViewCellEventArgs e)

@@ -39,6 +39,10 @@ namespace JsonManipulator
                     propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(map) ?? "").ToString() }); ;
             }
             dataProperties.DataSource = propertyValues;
+            if(dataProperties.Columns.Count > 0)
+            {
+                dataProperties.Columns[0].ReadOnly = true;
+            }
         }
         public void setPropertieList()
         {
@@ -71,6 +75,11 @@ namespace JsonManipulator
                 }
                 
                 gridPropertiesProp.DataSource = propertyValues;
+
+                if (gridPropertiesProp.Columns.Count > 0)
+                {
+                    gridPropertiesProp.Columns[0].ReadOnly = true;
+                }
             }
            
         }

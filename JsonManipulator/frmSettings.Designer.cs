@@ -79,6 +79,7 @@ namespace JsonManipulator
             // 
             this.Property.HeaderText = "Property";
             this.Property.Name = "Property";
+            this.Property.ReadOnly = true;
             // 
             // Value
             // 
@@ -87,12 +88,12 @@ namespace JsonManipulator
             // 
             // frmSettings
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmSettings";
+            this.ShowInTaskbar = false;
             this.Text = "frmSettings";
             this.Load += new System.EventHandler(this.frmSettings_Load);
             this.tabControl1.ResumeLayout(false);

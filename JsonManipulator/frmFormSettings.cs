@@ -45,6 +45,10 @@ namespace JsonManipulator
             }
             gridProperties.Columns.Clear();
             gridProperties.DataSource = propertyValues;
+            if (gridProperties.Columns.Count > 0)
+            {
+                gridProperties.Columns[0].ReadOnly = true;
+            }
         }
         public void setControlsList()
         {
@@ -91,6 +95,10 @@ namespace JsonManipulator
                 }
                 gridControls.Columns.Clear();
                 gridControls.DataSource = propertyValues;
+                if (gridControls.Columns.Count > 0)
+                {
+                    gridControls.Columns[0].ReadOnly = true;
+                }
             }
             
         }
@@ -108,6 +116,10 @@ namespace JsonManipulator
                 }
                 gridButtons.Columns.Clear();
                 gridButtons.DataSource = propertyValues;
+                if (gridButtons.Columns.Count > 0)
+                {
+                    gridButtons.Columns[0].ReadOnly = true;
+                }
             }
             
         }

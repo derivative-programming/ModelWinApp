@@ -31,59 +31,65 @@ namespace JsonManipulator
         {
             this.lblName = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnAccept = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(42, 30);
+            this.lblName.Location = new System.Drawing.Point(12, 9);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(35, 13);
             this.lblName.TabIndex = 0;
-            this.lblName.Text = "Name";
+            this.lblName.Text = "&Name";
+            this.lblName.Click += new System.EventHandler(this.lblName_Click);
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(45, 61);
+            this.txtName.Location = new System.Drawing.Point(12, 25);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(114, 20);
+            this.txtName.Size = new System.Drawing.Size(200, 20);
             this.txtName.TabIndex = 1;
             // 
-            // btnAdd
+            // btnAccept
             // 
-            this.btnAdd.Location = new System.Drawing.Point(112, 115);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnAdd.TabIndex = 2;
-            this.btnAdd.Text = "OK";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.btnAccept.Location = new System.Drawing.Point(56, 51);
+            this.btnAccept.Name = "btnAccept";
+            this.btnAccept.Size = new System.Drawing.Size(75, 23);
+            this.btnAccept.TabIndex = 2;
+            this.btnAccept.Text = "&OK";
+            this.btnAccept.UseVisualStyleBackColor = true;
+            this.btnAccept.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // button2
+            // btnCancel
             // 
-            this.button2.Location = new System.Drawing.Point(210, 115);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Cancel";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Location = new System.Drawing.Point(137, 51);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 3;
+            this.btnCancel.Text = "&Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.button2_Click);
             // 
             // frmAddObjProp
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(414, 177);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.btnAdd);
+            this.AcceptButton = this.btnAccept;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.CancelButton = this.btnCancel;
+            this.ClientSize = new System.Drawing.Size(224, 86);
+            this.ControlBox = false;
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnAccept);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.lblName);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "frmAddObjProp";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Add Project Prop";
+            this.Text = "Add Object Prop";
+            this.Load += new System.EventHandler(this.frmAddObjProp_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -93,7 +99,7 @@ namespace JsonManipulator
 
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnAccept;
+        private System.Windows.Forms.Button btnCancel;
     }
 }

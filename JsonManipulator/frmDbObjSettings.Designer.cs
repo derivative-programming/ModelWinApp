@@ -188,13 +188,13 @@ namespace JsonManipulator
             // 
             // frmDbObjSettings
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(854, 667);
             this.Controls.Add(this.grpBoxMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmDbObjSettings";
+            this.ShowInTaskbar = false;
             this.Text = "frmDbObjSettings";
             this.Load += new System.EventHandler(this.frmDbObjSettings_Load);
             this.tabControl1.ResumeLayout(false);

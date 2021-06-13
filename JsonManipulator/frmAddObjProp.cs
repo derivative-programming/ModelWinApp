@@ -32,5 +32,15 @@ namespace JsonManipulator
         {
             this.Close();
         }
+
+        private void lblName_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frmAddObjProp_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

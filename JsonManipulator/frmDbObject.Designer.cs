@@ -31,8 +31,8 @@ namespace JsonManipulator
         {
             this.label1 = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnAccept = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.txtOwner = new System.Windows.Forms.TextBox();
             this.btnOwner = new System.Windows.Forms.Button();
@@ -41,79 +41,83 @@ namespace JsonManipulator
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(26, 19);
+            this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Name";
+            this.label1.Text = "&Name";
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(28, 46);
+            this.txtName.Location = new System.Drawing.Point(12, 25);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(156, 20);
-            this.txtName.TabIndex = 2;
+            this.txtName.Size = new System.Drawing.Size(200, 20);
+            this.txtName.TabIndex = 1;
             // 
-            // btnAdd
+            // btnAccept
             // 
-            this.btnAdd.Location = new System.Drawing.Point(193, 167);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnAdd.TabIndex = 4;
-            this.btnAdd.Text = "OK";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.btnAccept.Location = new System.Drawing.Point(92, 93);
+            this.btnAccept.Name = "btnAccept";
+            this.btnAccept.Size = new System.Drawing.Size(75, 23);
+            this.btnAccept.TabIndex = 5;
+            this.btnAccept.Text = "&OK";
+            this.btnAccept.UseVisualStyleBackColor = true;
+            this.btnAccept.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // button2
+            // btnCancel
             // 
-            this.button2.Location = new System.Drawing.Point(294, 167);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Cancel";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Location = new System.Drawing.Point(173, 93);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 6;
+            this.btnCancel.Text = "&Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.button2_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(26, 86);
+            this.label2.Location = new System.Drawing.Point(12, 48);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(103, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Parent Object Name";
+            this.label2.TabIndex = 2;
+            this.label2.Text = "&Parent Object Name";
             // 
             // txtOwner
             // 
-            this.txtOwner.Location = new System.Drawing.Point(29, 117);
+            this.txtOwner.Location = new System.Drawing.Point(12, 64);
             this.txtOwner.Name = "txtOwner";
-            this.txtOwner.Size = new System.Drawing.Size(194, 20);
-            this.txtOwner.TabIndex = 17;
+            this.txtOwner.Size = new System.Drawing.Size(200, 20);
+            this.txtOwner.TabIndex = 3;
             // 
             // btnOwner
             // 
-            this.btnOwner.Location = new System.Drawing.Point(238, 115);
+            this.btnOwner.Location = new System.Drawing.Point(218, 64);
             this.btnOwner.Name = "btnOwner";
             this.btnOwner.Size = new System.Drawing.Size(30, 23);
-            this.btnOwner.TabIndex = 16;
+            this.btnOwner.TabIndex = 4;
             this.btnOwner.Text = "...";
             this.btnOwner.UseVisualStyleBackColor = true;
             this.btnOwner.Click += new System.EventHandler(this.btnOwner_Click);
             // 
             // frmDbObject
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(398, 212);
+            this.AcceptButton = this.btnAccept;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.CancelButton = this.btnCancel;
+            this.ClientSize = new System.Drawing.Size(261, 129);
+            this.ControlBox = false;
             this.Controls.Add(this.txtOwner);
             this.Controls.Add(this.btnOwner);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.btnAdd);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnAccept);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "frmDbObject";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add DB Object";
             this.ResumeLayout(false);
@@ -125,8 +129,8 @@ namespace JsonManipulator
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnAccept;
+        private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtOwner;
         private System.Windows.Forms.Button btnOwner;
