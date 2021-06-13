@@ -40,7 +40,7 @@ namespace JsonManipulator.Models
     {
         [JsonProperty("isDynaFlowAvailable")]
         public string isDynaFlowAvailable { get; set; }
-        [JsonRequired]
+        [JsonRequired] 
         [JsonProperty("name")]
         public string name { get; set; }
         [JsonProperty("favoriteListContextObjectName")]
@@ -321,7 +321,9 @@ namespace JsonManipulator.Models
         [JsonProperty("titleText")]
         public string TitleText { get; set; }
         [JsonProperty("introText")]
-        public String IntroText { get; set; }
+        public String IntroText { get; set; } 
+        [JsonProperty("isPage")]
+        public String IsPage { get; set; }
         [JsonProperty("roleRequired")]
         public String RoleRequired { get; set; }
         [JsonProperty("objectWorkflowParam")]

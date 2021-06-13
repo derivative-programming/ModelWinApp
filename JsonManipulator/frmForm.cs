@@ -23,6 +23,25 @@ namespace JsonManipulator
 
         private void frmAdd_Click(object sender, EventArgs e)
         {
+            if (txtName.Text.Trim().Length == 0)
+            {
+                ShowValidationError("Name Required.");
+                return;
+            }
+
+            if (txtOwner.Text.Trim().Length == 0)
+            {
+                ShowValidationError("Owner Object Name Required.");
+                return;
+            }
+
+            List<string> existingNames = Utils.GetNameList(false,true,true,true);
+            if (existingNames.Where(x => x.ToLower().Contains(txtName.Text.Trim().ToLower())).ToList().Count > 0)
+            {
+                ShowValidationError("Name already exists.");
+                return;
+            }
+
             objectWorkflow form = new objectWorkflow();
             form.Name = txtName.Text;
             form.RoleRequired = txtRole.Text;
@@ -37,8 +56,14 @@ namespace JsonManipulator
             this.Close();
         }
 
+        private void ShowValidationError(string errorText)
+        {
+            lblValidationError.Text = errorText;
+        }
+
         private void frmForm_Load(object sender, EventArgs e)
         {
+            ShowValidationError("");
         }
         public void setOwner(string Owner)
         {

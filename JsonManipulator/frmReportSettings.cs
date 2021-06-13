@@ -34,8 +34,11 @@ namespace JsonManipulator
         {
             List<PropertyValue> propertyValues = new List<PropertyValue>();
             dataProperties.Columns.Clear();
+            List<string> ignoreList = Utils.GetReportPropertiesToIgnore();
             foreach (var prop in rpt.GetType().GetProperties())
             {
+                if (ignoreList.Contains(prop.Name))
+                    continue;
                 // Console.WriteLine("{0}={1}", prop.Name, prop.GetValue(foo, null));
                 if (!prop.PropertyType.IsGenericType)
                     propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(rpt) ?? "").ToString() }); ;
@@ -96,11 +99,14 @@ namespace JsonManipulator
             {
                 List<PropertyValue> propertyValues = new List<PropertyValue>();
                 String filterName = lstFilters.SelectedItem.ToString();
+                List<string> ignoreList = Utils.GetReportPropertiesToIgnore();
                 reportParam rptParam = rpt.reportParam.Where(x => x.name == filterName).FirstOrDefault();
                 foreach (var prop in rptParam.GetType().GetProperties())
                 {
-                    if(!prop.PropertyType.IsGenericType)
-                    propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(rptParam) ?? "").ToString() });
+                    if (ignoreList.Contains(prop.Name))
+                        continue;
+                    if (!prop.PropertyType.IsGenericType)
+                        propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(rptParam) ?? "").ToString() });
                 }
                 gridFilters.Columns.Clear();
                 gridFilters.DataSource = propertyValues;
@@ -116,9 +122,12 @@ namespace JsonManipulator
         {
             List<PropertyValue> propertyValues = new List<PropertyValue>();
             String columnMane = lstColumns.SelectedItem.ToString();
+            List<string> ignoreList = Utils.GetReportPropertiesToIgnore();
             reportColumn rptColumn = rpt.reportColumn.Where(x => x.name == columnMane).FirstOrDefault();
             foreach (var prop in rptColumn.GetType().GetProperties())
             {
+                if (ignoreList.Contains(prop.Name))
+                    continue;
                 if (!prop.PropertyType.IsGenericType)
                     propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(rptColumn) ?? "").ToString() });
             }
@@ -134,9 +143,12 @@ namespace JsonManipulator
         {
             List<PropertyValue> propertyValues = new List<PropertyValue>();
             String buttonName = lstButtons.SelectedItem.ToString();
+            List<string> ignoreList = Utils.GetReportPropertiesToIgnore();
             reportButton rptButton = rpt.reportButton.Where(x => x.buttonName == buttonName).FirstOrDefault();
             foreach (var prop in rptButton.GetType().GetProperties())
             {
+                if (ignoreList.Contains(prop.Name))
+                    continue;
                 propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(rptButton) ?? "").ToString() });
             }
             gridButtons.Columns.Clear();
@@ -260,7 +272,12 @@ namespace JsonManipulator
             if (dataProperties.DataSource != null)
             {
                 string property = dataProperties.Rows[e.RowIndex].Cells[0].Value.ToString();
-                string value = dataProperties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+
+                string value = string.Empty;
+                if (dataProperties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                {
+                    value = dataProperties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                }
                 Report temp = Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == rpt.OwnerObject).FirstOrDefault().report.Where(x => x.name == rpt.name).FirstOrDefault();
                 Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == rpt.OwnerObject).FirstOrDefault().report.RemoveAll(x => x.name == rpt.name);
                 typeof(Report).GetProperty(property).SetValue(temp, value);
@@ -282,7 +299,11 @@ namespace JsonManipulator
             if (gridFilters.DataSource != null && lstFilters.SelectedItem!=null)
             {
                 string property = gridFilters.Rows[e.RowIndex].Cells[0].Value.ToString();
-                string value = gridFilters.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                string value = string.Empty;
+                if (gridFilters.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                {
+                    value = gridFilters.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                }
                 int index = lstFilters.SelectedIndex;
                 typeof(reportParam).GetProperty(property).SetValue(Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == rpt.OwnerObject).FirstOrDefault().report.Where(x => x.name == rpt.name).FirstOrDefault().reportParam.ElementAt(lstFilters.SelectedIndex), value); ;
                 setFiltersList();
@@ -295,7 +316,11 @@ namespace JsonManipulator
             if (gridColumns.DataSource != null && lstColumns.SelectedItem!=null)
             {
                 string property = gridColumns.Rows[e.RowIndex].Cells[0].Value.ToString();
-                string value = gridColumns.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                string value = string.Empty;
+                if (gridColumns.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                {
+                    value = gridColumns.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                }
                 int index = lstColumns.SelectedIndex;
               
                 typeof(reportColumn).GetProperty(property).SetValue(Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == rpt.OwnerObject).FirstOrDefault().report.Where(x => x.name == rpt.name).FirstOrDefault().reportColumn.ElementAt(lstColumns.SelectedIndex), value); 
@@ -472,7 +497,11 @@ namespace JsonManipulator
             if (gridButtons.DataSource != null && lstButtons.SelectedItem != null)
             {
                 string property = gridButtons.Rows[gridButtons.CurrentCell.RowIndex].Cells[0].Value.ToString();
-                string value = gridButtons.Rows[gridButtons.CurrentCell.RowIndex].Cells[gridButtons.CurrentCell.ColumnIndex].Value.ToString();
+                string value = string.Empty;
+                if (gridButtons.Rows[gridButtons.CurrentCell.RowIndex].Cells[gridButtons.CurrentCell.ColumnIndex].Value != null)
+                {
+                    value = gridButtons.Rows[gridButtons.CurrentCell.RowIndex].Cells[gridButtons.CurrentCell.ColumnIndex].Value.ToString();
+                }
                 int index = lstButtons.SelectedIndex;
                 typeof(reportButton).GetProperty(property).SetValue(Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == rpt.OwnerObject).FirstOrDefault().report.Where(x => x.name == rpt.name).FirstOrDefault().reportButton.ElementAt(lstButtons.SelectedIndex), value);
                 setButtonsList();

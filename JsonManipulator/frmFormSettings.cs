@@ -35,10 +35,11 @@ namespace JsonManipulator
         private void setSetting()
         {
             List<PropertyValue> propertyValues = new List<PropertyValue>();
-            
+            List<string> ignoreList = Utils.GetFormPropertiesToIgnore();
             foreach (var prop in form.GetType().GetProperties())
             {
-
+                if (ignoreList.Contains(prop.Name))
+                    continue;
                 // Console.WriteLine("{0}={1}", prop.Name, prop.GetValue(foo, null));
                 if (!prop.PropertyType.IsGenericType)
                     propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(form) ?? "").ToString() }); ;
@@ -87,9 +88,12 @@ namespace JsonManipulator
             {
                 List<PropertyValue> propertyValues = new List<PropertyValue>();
                 String controlName = lstControl.SelectedItem.ToString();
+                List<string> ignoreList = Utils.GetFormPropertiesToIgnore();
                 objectWorkflowParam frmControl = form.objectWorkflowParam.Where(x => x.name == controlName).FirstOrDefault();
                 foreach (var prop in frmControl.GetType().GetProperties())
                 {
+                    if (ignoreList.Contains(prop.Name))
+                        continue;
                     if (!prop.PropertyType.IsGenericType)
                         propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(frmControl) ?? "").ToString() });
                 }
@@ -109,9 +113,12 @@ namespace JsonManipulator
             {
                 List<PropertyValue> propertyValues = new List<PropertyValue>();
                 String buttonName = lstButtons.SelectedItem.ToString();
+                List<string> ignoreList = Utils.GetFormPropertiesToIgnore();
                 objectWorkflowButton frmControl = form.objectWorkflowButton.Where(x => x.buttonText == buttonName).FirstOrDefault();
                 foreach (var prop in frmControl.GetType().GetProperties())
                 {
+                    if (ignoreList.Contains(prop.Name))
+                        continue;
                     propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(frmControl) ?? "").ToString() });
                 }
                 gridButtons.Columns.Clear();
@@ -188,7 +195,11 @@ namespace JsonManipulator
             if (gridProperties.DataSource != null)
             {
                 string property = gridProperties.Rows[e.RowIndex].Cells[0].Value.ToString();
-                string value = gridProperties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                string value = string.Empty;
+                if (gridProperties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                {
+                    value = gridProperties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                }
                 objectWorkflow temp = Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == form.OwnerObject).FirstOrDefault().objectWorkflow.Where(x => x.Name == form.Name).FirstOrDefault();
                 Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == temp.OwnerObject).FirstOrDefault().objectWorkflow.RemoveAll(x => x.Name == form.Name);
                 typeof(objectWorkflow).GetProperty(property).SetValue(temp, value);
@@ -207,7 +218,11 @@ namespace JsonManipulator
             if (gridControls.DataSource != null && lstControl.SelectedItem!=null)
             {
                 string property = gridControls.Rows[e.RowIndex].Cells[0].Value.ToString();
-                string value = gridControls.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                string value = string.Empty;
+                if (gridControls.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                {
+                    value = gridControls.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                }
                 int index = lstControl.SelectedIndex;
                 typeof(objectWorkflowParam).GetProperty(property).SetValue(Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == form.OwnerObject).FirstOrDefault().objectWorkflow.Where(x => x.Name == form.Name).FirstOrDefault().objectWorkflowParam.ElementAt(lstControl.SelectedIndex), value); ;
                 setControlsList();
@@ -220,7 +235,11 @@ namespace JsonManipulator
             if (gridButtons.DataSource != null && lstButtons.SelectedItem!=null)
             {
                 string property = gridButtons.Rows[e.RowIndex].Cells[0].Value.ToString();
-                string value = gridButtons.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                string value = string.Empty;
+                if (gridButtons.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                {
+                    value = gridButtons.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                }
                 int index = lstButtons.SelectedIndex;
                 typeof(objectWorkflowButton).GetProperty(property).SetValue(Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == form.OwnerObject).FirstOrDefault().objectWorkflow.Where(x => x.Name == form.Name).FirstOrDefault().objectWorkflowButton.ElementAt(lstButtons.SelectedIndex), value); ;
                 setButtonsList();

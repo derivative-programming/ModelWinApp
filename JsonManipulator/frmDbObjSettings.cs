@@ -32,8 +32,11 @@ namespace JsonManipulator
         {
             List<PropertyValue> propertyValues = new List<PropertyValue>();
             dataProperties.Columns.Clear();
+            List<string> ignoreList = Utils.GetFormPropertiesToIgnore();
             foreach (var prop in map.GetType().GetProperties())
             {
+                if (ignoreList.Contains(prop.Name))
+                    continue;
                 // Console.WriteLine("{0}={1}", prop.Name, prop.GetValue(foo, null));
                 if (!prop.PropertyType.IsGenericType)
                     propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(map) ?? "").ToString() }); ;
@@ -68,8 +71,11 @@ namespace JsonManipulator
                 List<PropertyValue> propertyValues = new List<PropertyValue>();
                 String propname = lstProperties.SelectedItem.ToString();
                 property prpty = map.property.Where(x => x.name == propname).FirstOrDefault();
+                List<string> ignoreList = Utils.GetDBObjPropertiesToIgnore();
                 foreach (var prop in prpty.GetType().GetProperties())
                 {
+                    if (ignoreList.Contains(prop.Name))
+                        continue;
                     if (!prop.PropertyType.IsGenericType)
                         propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(prpty) ?? "").ToString() });
                 }
@@ -96,7 +102,11 @@ namespace JsonManipulator
             if (dataProperties.DataSource != null)
             {
                 string property = dataProperties.Rows[e.RowIndex].Cells[0].Value.ToString();
-                string value = dataProperties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                string value = string.Empty;
+                if (dataProperties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                {
+                    value = dataProperties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                }
                 
                 typeof(ObjectMap).GetProperty(property).SetValue(Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x=>x.name == map.name).FirstOrDefault(), value);
                 if(property.Equals("name",StringComparison.OrdinalIgnoreCase))
@@ -171,7 +181,11 @@ namespace JsonManipulator
         {
             if (gridPropertiesProp.DataSource != null)
             {
-                string value = gridPropertiesProp.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                string value = string.Empty;
+                if(gridPropertiesProp.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                {
+                    value = gridPropertiesProp.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                }
                 string property = gridPropertiesProp.Rows[e.RowIndex].Cells[0].Value.ToString();
                 int index = lstProperties.SelectedIndex;
                     typeof(property).GetProperty(property).SetValue(Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == map.name).FirstOrDefault().property.ElementAt(lstProperties.SelectedIndex), value) ;

@@ -27,55 +27,27 @@ namespace JsonManipulator
         private void ObjectsList_Load(object sender, EventArgs e)
         {
             listObjects.Items.Clear();
-            NameSpaceObject nameSpaceObject = Form1.model.root.NameSpaceObjects.Where(x => x.name == "Core").FirstOrDefault();
-            foreach (var _dbObject in nameSpaceObject.ObjectMap)
+            List<string> roleList = Utils.GetRoleList();
+            foreach(string name in roleList)
             {
-                if (_dbObject.objectWorkflow != null)
-                {
-                    foreach (var _object in _dbObject.objectWorkflow)
-                    {
-                        if(_object.RoleRequired!=null && !listObjects.Items.Contains(_object.RoleRequired))
-                        listObjects.Items.Add(_object.RoleRequired);
-                        
-                    }
-                }
-                if (_dbObject.report != null)
-                {
-                    foreach (var _object in _dbObject.report)
-                    {
-                        if (_object.RoleRequired != null && !listObjects.Items.Contains(_object.RoleRequired))
-                        listObjects.Items.Add(_object.RoleRequired);
-                    }
-                }
-
-            }
+                listObjects.Items.Add(name);
+            } 
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             listObjects.Items.Clear();
-            NameSpaceObject nameSpaceObject = Form1.model.root.NameSpaceObjects.Where(x => x.name == "Core").FirstOrDefault();
-            foreach (var _dbObject in nameSpaceObject.ObjectMap)
+
+            List<string> roleList = Utils.GetRoleList();
+            if(txtFilter.Text.Trim().Length > 0)
             {
-                if (_dbObject.objectWorkflow != null)
-                {
-                    foreach (var _object in _dbObject.objectWorkflow)
-                    {
-                        if (_object.RoleRequired != null && !listObjects.Items.Contains(_object.RoleRequired) &&_object.RoleRequired.Contains(textBox1.Text))
-                            listObjects.Items.Add(_object.RoleRequired);
-
-                    }
-                }
-                if (_dbObject.report != null)
-                {
-                    foreach (var _object in _dbObject.report)
-                    {
-                        if (_object.RoleRequired != null && !listObjects.Items.Contains(_object.RoleRequired) && _object.RoleRequired.Contains(textBox1.Text))
-                            listObjects.Items.Add(_object.RoleRequired);
-                    }
-                }
-
+                string filter = txtFilter.Text.Trim().ToLower();
+                roleList = roleList.Where(x => x.ToLower().Contains(filter)).ToList();
             }
+            foreach (string name in roleList)
+            {
+                listObjects.Items.Add(name);
+            } 
         }
 
         private void listObjects_SelectedIndexChanged(object sender, EventArgs e)

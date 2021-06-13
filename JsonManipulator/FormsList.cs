@@ -27,25 +27,16 @@ namespace JsonManipulator
         private void populateForms(string filter)
         {
             listObjects.Items.Clear();
-            NameSpaceObject nameSpaceObject = Form1.model.root.NameSpaceObjects.FirstOrDefault();
-            foreach (var _dbObject in nameSpaceObject.ObjectMap)
-            {
-                if (_dbObject.objectWorkflow != null)
-                {
-                    foreach (var _object in _dbObject.objectWorkflow.Where(x => x.Name.Contains(filter)))
-                    {
-                        listObjects.Items.Add(_object.Name);
-                    }
-                }
-                if (_dbObject.report != null)
-                {
-                    foreach (var _object in _dbObject.report.Where(x => x.name.Contains(filter)))
-                    {
-                        listObjects.Items.Add(_object.name);
-                    }
-                }
 
+            List<string> fullList = Utils.GetNameList(false, true, true, false);
+            if (filter.Trim().Length > 0)
+            {
+                fullList = fullList.Where(x => x.ToLower().Contains(filter.ToLower().Trim())).ToList();
             }
+            foreach (string name in fullList)
+            {
+                listObjects.Items.Add(name);
+            } 
             listObjects.Sorted = true;
 
         }
@@ -57,7 +48,7 @@ namespace JsonManipulator
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-                populateForms(textBox1.Text);
+                populateForms(txtFilter.Text);
         }
 
         private void listObjects_SelectedIndexChanged(object sender, EventArgs e)

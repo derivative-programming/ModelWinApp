@@ -29,21 +29,27 @@ namespace JsonManipulator
         {
             listObjects.Items.Clear();
 
-            foreach (var objects in Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap)
+            List<string> nameList = Utils.GetDBObjectNameList(); 
+            foreach (string name in nameList)
             {
-                listObjects.Items.Add(objects.name);
-                //items.Add(new SelectListItem { Text = objects.name, Value = objects.name });
+                listObjects.Items.Add(name);
             }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             listObjects.Items.Clear();
-            foreach (var objects in Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x=>x.name.Contains(textBox1.Text)))
+
+            List<string> nameList = Utils.GetDBObjectNameList();
+            if (txtFilter.Text.Trim().Length > 0)
             {
-                listObjects.Items.Add(objects.name);
-                //items.Add(new SelectListItem { Text = objects.name, Value = objects.name });
+                string filter = txtFilter.Text.Trim().ToLower();
+                nameList = nameList.Where(x => x.ToLower().Contains(filter)).ToList();
             }
+            foreach (string name in nameList)
+            {
+                listObjects.Items.Add(name);
+            } 
         }
 
         private void listObjects_SelectedIndexChanged(object sender, EventArgs e)

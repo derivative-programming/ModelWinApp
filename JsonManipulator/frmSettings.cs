@@ -50,7 +50,11 @@ namespace JsonManipulator
             if(dataProperties.DataSource!=null)
             {
                 string property = dataProperties.Rows[e.RowIndex].Cells[0].Value.ToString();
-                string value = dataProperties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                string value = string.Empty;
+                if (dataProperties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                {
+                    value = dataProperties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                }
                 if (property == "CodeNameSpaceRootName" || property == "Name")
                 {
                     Form1.model.root.Name = value;

@@ -43,6 +43,7 @@ namespace JsonManipulator
             this.btnChild = new System.Windows.Forms.Button();
             this.txtChild = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.lblValidationError = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblName
@@ -79,7 +80,7 @@ namespace JsonManipulator
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(137, 171);
+            this.btnAccept.Location = new System.Drawing.Point(137, 191);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
             this.btnAccept.TabIndex = 12;
@@ -90,7 +91,7 @@ namespace JsonManipulator
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(218, 171);
+            this.btnCancel.Location = new System.Drawing.Point(218, 191);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 13;
@@ -102,6 +103,7 @@ namespace JsonManipulator
             // 
             this.txtOwner.Location = new System.Drawing.Point(12, 103);
             this.txtOwner.Name = "txtOwner";
+            this.txtOwner.ReadOnly = true;
             this.txtOwner.Size = new System.Drawing.Size(200, 20);
             this.txtOwner.TabIndex = 6;
             // 
@@ -116,7 +118,7 @@ namespace JsonManipulator
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(19, 171);
+            this.button3.Location = new System.Drawing.Point(19, 191);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(112, 23);
             this.button3.TabIndex = 11;
@@ -169,13 +171,24 @@ namespace JsonManipulator
             this.label3.TabIndex = 8;
             this.label3.Text = "&Target Child Name";
             // 
+            // lblValidationError
+            // 
+            this.lblValidationError.AutoSize = true;
+            this.lblValidationError.ForeColor = System.Drawing.Color.Red;
+            this.lblValidationError.Location = new System.Drawing.Point(12, 165);
+            this.lblValidationError.Name = "lblValidationError";
+            this.lblValidationError.Size = new System.Drawing.Size(133, 13);
+            this.lblValidationError.TabIndex = 14;
+            this.lblValidationError.Text = "Test Valiation Error Display";
+            // 
             // frmReportGrid
             // 
             this.AcceptButton = this.btnAccept;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(304, 205);
+            this.ClientSize = new System.Drawing.Size(304, 228);
             this.ControlBox = false;
+            this.Controls.Add(this.lblValidationError);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnChild);
             this.Controls.Add(this.txtChild);
@@ -217,5 +230,6 @@ namespace JsonManipulator
         private System.Windows.Forms.Button btnChild;
         private System.Windows.Forms.TextBox txtChild;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblValidationError;
     }
 }

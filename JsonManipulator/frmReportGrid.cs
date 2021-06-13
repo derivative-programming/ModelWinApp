@@ -23,6 +23,25 @@ namespace JsonManipulator
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            if (txtName.Text.Trim().Length == 0)
+            {
+                ShowValidationError("Name Required.");
+                return;
+            }
+
+            if (txtOwner.Text.Trim().Length == 0)
+            {
+                ShowValidationError("Owner Object Name Required.");
+                return;
+            }
+
+            List<string> existingNames = Utils.GetNameList(false, true, true, true);
+            if (existingNames.Where(x => x.ToLower().Contains(txtName.Text.Trim().ToLower())).ToList().Count > 0)
+            {
+                ShowValidationError("Name already exists.");
+                return;
+            }
+
             if (Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text).FirstOrDefault().report == null)
                 Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text).FirstOrDefault().report = new List<Models.Report>();
             Report rpt = new Report { name = txtName.Text, RoleRequired = txtRole.Text, TargetChildObject = txtChild.Text, visualizationType = "Grid",OwnerObject=txtOwner.Text };
@@ -38,9 +57,13 @@ namespace JsonManipulator
             objectsList.ShowDialog();
         }
 
+        private void ShowValidationError(string errorText)
+        {
+            lblValidationError.Text = errorText;
+        }
         private void frmReportGrid_Load(object sender, EventArgs e)
         {
-           
+            ShowValidationError("");
         }
         public void setOwner(string Owner)
         {

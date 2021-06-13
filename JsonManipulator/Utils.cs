@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JsonManipulator.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -94,6 +95,191 @@ namespace JsonManipulator
             _booleans.Rows.Add("grid", "grid");
             _booleans.Rows.Add("detail", "detail");
             return _booleans;
+        }
+
+        public static List<string> GetDBObjectNameList()
+        {
+            return GetNameList(true, false, false, false);
+        }
+        public static List<string> GetDestinationNameList()
+        { 
+            return GetNameList(false,true,true,false);
+        }
+
+
+        public static List<string> GetNameList(bool includeDBObjects, bool includeReports, bool includePageForms, bool includeNonPageObjFlows)
+        {
+            List<string> result = new List<string>();
+
+            NameSpaceObject nameSpaceObject = Form1.model.root.NameSpaceObjects.FirstOrDefault();
+            foreach (var dbObject in nameSpaceObject.ObjectMap)
+            {
+                if (includeDBObjects)
+                {
+                    result.Add(dbObject.name);
+                }
+
+                if (dbObject.objectWorkflow != null)
+                {
+                    foreach (var objWF in dbObject.objectWorkflow)
+                    {
+                        if (objWF.IsPage != null)
+                        {
+                            if (includePageForms && 
+                                !objWF.Name.Trim().ToLower().EndsWith("initreport") &&
+                                !objWF.Name.Trim().ToLower().EndsWith("initobjwf"))
+                            {
+                                result.Add(objWF.Name);
+                            }
+
+                            if (includeNonPageObjFlows &&
+                                !(
+                                    !objWF.Name.Trim().ToLower().EndsWith("initreport") &&
+                                    !objWF.Name.Trim().ToLower().EndsWith("initobjwf")
+                                ))
+                            {
+                                result.Add(objWF.Name);
+                            }
+                        }
+                        else
+                        {
+
+                            if (includePageForms &&
+                                !objWF.Name.Trim().ToLower().EndsWith("initreport") &&
+                                !objWF.Name.Trim().ToLower().EndsWith("initobjwf") && 
+                                objWF.IsPage.Trim().ToLower() == "true")
+                            {
+                                result.Add(objWF.Name);
+                            }
+
+                            if (includeNonPageObjFlows && 
+                                objWF.IsPage.Trim().ToLower() == "false")
+                            {
+                                result.Add(objWF.Name);
+                            }
+                        }
+                    }
+                }
+
+                if (includeReports & dbObject.report != null)
+                {
+                    foreach (var rpt in dbObject.report)
+                    {
+                        result.Add(rpt.name);
+                    }
+                }
+
+            } 
+
+            return result;
+        }
+
+        public static List<string> GetRoleList()
+        {
+            List<string> result = new List<string>();
+
+            NameSpaceObject nameSpaceObject = Form1.model.root.NameSpaceObjects.FirstOrDefault();
+            foreach (var dbObject in nameSpaceObject.ObjectMap)
+            {
+                if (dbObject.objectWorkflow != null)
+                {
+                    foreach (var objWF in dbObject.objectWorkflow)
+                    {
+                        if (objWF.RoleRequired != null && objWF.RoleRequired.Trim().Length > 0 && !result.Contains(objWF.RoleRequired))
+                            result.Add(objWF.RoleRequired.Trim());
+
+                    }
+                }
+                if (dbObject.report != null)
+                {
+                    foreach (var report in dbObject.report)
+                    {
+                        if (report.RoleRequired != null && report.RoleRequired.Trim().Length > 0 && !result.Contains(report.RoleRequired))
+                            result.Add(report.RoleRequired.Trim());
+                    }
+                }
+
+            }
+
+            return result;
+        }
+
+        public static List<string> GetFormPropertiesToIgnore()
+        {
+            List<string> result = new List<string>();
+            result.Add("IsPage");
+
+            return result;
+        }
+        public static List<string> GetFormButtonPropertiesToIgnore()
+        {
+            List<string> result = new List<string>();
+            //result.Add("IsPage");
+
+            return result;
+        }
+        public static List<string> GetDBObjPropertiesToIgnore()
+        {
+            List<string> result = new List<string>();
+            //result.Add("IsPage");
+
+            return result;
+        }
+        public static List<string> GetReportPropertiesToIgnore()
+        {
+            List<string> result = new List<string>();
+            //result.Add("IsPage");
+
+            return result;
+        }
+        public static List<string> GetReportButtonPropertiesToIgnore()
+        {
+            List<string> result = new List<string>();
+            //result.Add("IsPage");
+
+            return result;
+        }
+        public static List<string> GetReportColumnPropertiesToIgnore()
+        {
+            List<string> result = new List<string>();
+            //result.Add("IsPage");
+
+            return result;
+        }
+
+        public static string GetDestinationOwnerObjectName(string name)
+        {
+            string result = string.Empty;
+
+            NameSpaceObject nameSpaceObject = Form1.model.root.NameSpaceObjects.FirstOrDefault();
+            foreach (var dbObject in nameSpaceObject.ObjectMap)
+            { 
+                if (dbObject.objectWorkflow != null)
+                {
+                    foreach (var objWF in dbObject.objectWorkflow)
+                    {
+                        if (objWF.Name.ToLower().Trim() == name.ToLower().Trim())
+                        {
+                            result = dbObject.name;
+                        }
+                    }
+                }
+
+                if (dbObject.report != null)
+                {
+                    foreach (var rpt in dbObject.report)
+                    { 
+                        if (rpt.name.ToLower().Trim() == name.ToLower().Trim())
+                        {
+                            result = dbObject.name;
+                        }
+                    }
+                }
+
+            }
+
+
+            return result;
         }
     }
 }

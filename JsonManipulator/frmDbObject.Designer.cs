@@ -36,6 +36,7 @@ namespace JsonManipulator
             this.label2 = new System.Windows.Forms.Label();
             this.txtOwner = new System.Windows.Forms.TextBox();
             this.btnOwner = new System.Windows.Forms.Button();
+            this.lblValidationError = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -56,7 +57,7 @@ namespace JsonManipulator
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(92, 93);
+            this.btnAccept.Location = new System.Drawing.Point(92, 123);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
             this.btnAccept.TabIndex = 5;
@@ -67,7 +68,7 @@ namespace JsonManipulator
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(173, 93);
+            this.btnCancel.Location = new System.Drawing.Point(173, 123);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 6;
@@ -88,6 +89,7 @@ namespace JsonManipulator
             // 
             this.txtOwner.Location = new System.Drawing.Point(12, 64);
             this.txtOwner.Name = "txtOwner";
+            this.txtOwner.ReadOnly = true;
             this.txtOwner.Size = new System.Drawing.Size(200, 20);
             this.txtOwner.TabIndex = 3;
             // 
@@ -101,13 +103,24 @@ namespace JsonManipulator
             this.btnOwner.UseVisualStyleBackColor = true;
             this.btnOwner.Click += new System.EventHandler(this.btnOwner_Click);
             // 
+            // lblValidationError
+            // 
+            this.lblValidationError.AutoSize = true;
+            this.lblValidationError.ForeColor = System.Drawing.Color.Red;
+            this.lblValidationError.Location = new System.Drawing.Point(12, 87);
+            this.lblValidationError.Name = "lblValidationError";
+            this.lblValidationError.Size = new System.Drawing.Size(133, 13);
+            this.lblValidationError.TabIndex = 7;
+            this.lblValidationError.Text = "Test Valiation Error Display";
+            // 
             // frmDbObject
             // 
             this.AcceptButton = this.btnAccept;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(261, 129);
+            this.ClientSize = new System.Drawing.Size(261, 159);
             this.ControlBox = false;
+            this.Controls.Add(this.lblValidationError);
             this.Controls.Add(this.txtOwner);
             this.Controls.Add(this.btnOwner);
             this.Controls.Add(this.btnCancel);
@@ -120,6 +133,7 @@ namespace JsonManipulator
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add DB Object";
+            this.Load += new System.EventHandler(this.frmDbObject_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -134,5 +148,6 @@ namespace JsonManipulator
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtOwner;
         private System.Windows.Forms.Button btnOwner;
+        private System.Windows.Forms.Label lblValidationError;
     }
 }
