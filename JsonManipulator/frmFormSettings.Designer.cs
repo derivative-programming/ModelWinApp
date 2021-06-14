@@ -101,6 +101,7 @@ namespace JsonManipulator
             this.gridProperties.Size = new System.Drawing.Size(780, 399);
             this.gridProperties.TabIndex = 1;
             this.gridProperties.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridProperties_CellClick);
+            this.gridProperties.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridProperties_CellEnter);
             this.gridProperties.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridProperties_CellValueChanged);
             // 
             // dataGridViewTextBoxColumn1
@@ -134,7 +135,7 @@ namespace JsonManipulator
             this.btnControlDown.Name = "btnControlDown";
             this.btnControlDown.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnControlDown.Size = new System.Drawing.Size(75, 23);
-            this.btnControlDown.TabIndex = 17;
+            this.btnControlDown.TabIndex = 4;
             this.btnControlDown.Text = "Move Down";
             this.btnControlDown.UseVisualStyleBackColor = true;
             this.btnControlDown.Click += new System.EventHandler(this.btnControlDown_Click);
@@ -145,7 +146,7 @@ namespace JsonManipulator
             this.btnControlUp.Name = "btnControlUp";
             this.btnControlUp.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnControlUp.Size = new System.Drawing.Size(75, 23);
-            this.btnControlUp.TabIndex = 16;
+            this.btnControlUp.TabIndex = 3;
             this.btnControlUp.Text = "Move Up";
             this.btnControlUp.UseVisualStyleBackColor = true;
             this.btnControlUp.Click += new System.EventHandler(this.btnControlUp_Click);
@@ -174,8 +175,10 @@ namespace JsonManipulator
             this.gridControls.Name = "gridControls";
             this.gridControls.RowHeadersVisible = false;
             this.gridControls.Size = new System.Drawing.Size(634, 389);
-            this.gridControls.TabIndex = 0;
+            this.gridControls.TabIndex = 5;
             this.gridControls.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridControls_CellClick);
+            this.gridControls.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridControls_CellContentClick);
+            this.gridControls.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridControls_CellEnter);
             this.gridControls.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridControls_CellValueChanged);
             // 
             // dataGridViewTextBoxColumn3
@@ -194,7 +197,7 @@ namespace JsonManipulator
             this.btnControls.Name = "btnControls";
             this.btnControls.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnControls.Size = new System.Drawing.Size(75, 23);
-            this.btnControls.TabIndex = 14;
+            this.btnControls.TabIndex = 2;
             this.btnControls.Text = "Add Control";
             this.btnControls.UseVisualStyleBackColor = true;
             this.btnControls.Click += new System.EventHandler(this.btnControls_Click);
@@ -206,7 +209,7 @@ namespace JsonManipulator
             this.lstControl.Name = "lstControl";
             this.lstControl.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lstControl.Size = new System.Drawing.Size(120, 303);
-            this.lstControl.TabIndex = 13;
+            this.lstControl.TabIndex = 1;
             this.lstControl.SelectedIndexChanged += new System.EventHandler(this.lstControl_SelectedIndexChanged);
             // 
             // tabButtons
@@ -246,8 +249,10 @@ namespace JsonManipulator
             this.gridButtons.Name = "gridButtons";
             this.gridButtons.RowHeadersVisible = false;
             this.gridButtons.Size = new System.Drawing.Size(634, 389);
-            this.gridButtons.TabIndex = 0;
+            this.gridButtons.TabIndex = 3;
             this.gridButtons.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridButtons_CellClick);
+            this.gridButtons.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridButtons_CellContentClick);
+            this.gridButtons.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridButtons_CellEnter);
             this.gridButtons.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridButtons_CellValueChanged);
             // 
             // Property
@@ -266,7 +271,7 @@ namespace JsonManipulator
             this.btnAddButton.Name = "btnAddButton";
             this.btnAddButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnAddButton.Size = new System.Drawing.Size(75, 23);
-            this.btnAddButton.TabIndex = 4;
+            this.btnAddButton.TabIndex = 2;
             this.btnAddButton.Text = "Add Button";
             this.btnAddButton.UseVisualStyleBackColor = true;
             this.btnAddButton.Click += new System.EventHandler(this.btnAddButton_Click);
@@ -278,7 +283,7 @@ namespace JsonManipulator
             this.lstButtons.Name = "lstButtons";
             this.lstButtons.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lstButtons.Size = new System.Drawing.Size(120, 368);
-            this.lstButtons.TabIndex = 3;
+            this.lstButtons.TabIndex = 1;
             this.lstButtons.SelectedIndexChanged += new System.EventHandler(this.lstButtons_SelectedIndexChanged);
             // 
             // grpMain

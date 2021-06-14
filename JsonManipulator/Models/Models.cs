@@ -17,21 +17,24 @@ namespace JsonManipulator.Models
     }
     public class root
     {
-        //[JsonRequired]
-        //[JsonProperty("apiVersion")]
-        //public string apiVersion { get; set; }
+        [JsonProperty("projectName")]
+        public string ProjectName { get; set; }
+       // [JsonProperty("apiVersion")]
+        public string apiVersion { get; set; }
         [JsonRequired]
         [JsonProperty("name")]
-        public string Name { get; set; }
-        [JsonRequired]
-        [JsonProperty("databaseName")]
-        public string DatabaseName { get; set; }
-        [JsonIgnore]
         public string CodeNameSpaceRootName { get; set; }
         [JsonIgnore]
         public string CodeNameSpaceSecondaryName { get; set; }
-        //[JsonProperty("isValidationMissesLogged")]
-        //public string isValidationMissesLogged { get; set; }
+        [JsonRequired]
+        [JsonProperty("databaseName")]
+        public string DatabaseName { get; set; }
+        [JsonProperty("databaseTableNamePrefix")]
+        public string DatabaseTableNamePrefix { get; set; }
+        [JsonProperty("isValidationMissesLogged")]
+        public string isValidationMissesLogged { get; set; }
+        [JsonProperty("suppressFillObjLookupTableScripts")]
+        public string suppressFillObjLookupTableScripts { get; set; }
         [JsonRequired]
         [JsonProperty("namespace")]
         public List<NameSpaceObject> NameSpaceObjects { get; set; }
@@ -70,12 +73,18 @@ namespace JsonManipulator.Models
         public string parentObjectName { get; set; }
         [JsonProperty("prop")]
         public List<property> property { get; set; }
-        //[JsonProperty("calculatedProp")]
-        //public List<calculatedProp> calculatedProp { get; set; }
-        //[JsonProperty("fetch")]
-        //public List<fetch> fetch { get; set; }
-        //[JsonProperty("query")]
-        //public List<query> query { get; set; }
+        [JsonProperty("propSubscription")]
+        public List<propSubscription> propSubscription { get; set; }
+        [JsonProperty("calculatedProp")]
+        public List<calculatedProp> calculatedProp { get; set; }
+        [JsonProperty("fetch")]
+        public List<fetch> fetch { get; set; }
+        [JsonProperty("query")]
+        public List<query> query { get; set; }
+        [JsonProperty("modelPkg")]
+        public List<modelPkg> modelPkg { get; set; }
+        [JsonProperty("childObject")]
+        public List<childObject> childObject { get; set; }
         //[JsonProperty("objectDocument")]
         //public List<objectDocument> objectDocument { get; set; }
         //[JsonProperty("isImmutable")]
@@ -123,6 +132,11 @@ namespace JsonManipulator.Models
        
         [JsonProperty("objectWorkflow")]
         public List<objectWorkflow> objectWorkflow { get; set; }
+
+
+        public string isSoftDeleteUsed { get; set; }
+        public string cacheAllRecs { get; set; }
+        public string cacheIndividualRecs { get; set; } 
     }
     public class property
     {
@@ -140,15 +154,21 @@ namespace JsonManipulator.Models
         public string isEncrypted { get; set; }
         [JsonProperty("forceDBColumnIndex")]
         public string forceDBColumnIndex { get; set; }
-       
-        //[JsonProperty("isFKLookup")]
-        //public string isFKLookup { get; set; }
+
+        [JsonProperty("isFKLookup")]
+        public string isFKLookup { get; set; }
+        [JsonProperty("isNotPublishedToSubscriptions")]
+        public string isNotPublishedToSubscriptions { get; set; }
         //[JsonProperty("isFKNonLookupIncludedInXMLFunction")]
         //public string isFKNonLookupIncludedInXMLFunction { get; set; }
-        //[JsonProperty("fKObjectName")]
-        //public string fKObjectName { get; set; }
-        //[JsonProperty("fKObjectPropertyName")]
-        //public string fKObjectPropertyName { get; set; }
+        [JsonProperty("fKObjectName")]
+        public string fKObjectName { get; set; }
+        [JsonProperty("fKObjectPropertyName")]
+        public string fKObjectPropertyName { get; set; }
+
+        [JsonProperty("isQueryByAvailable")]
+        public string isQueryByAvailable { get; set; }
+        public string defaultValue { get; set; }
         //[JsonProperty("placeholderText")]
         //public string placeholderText { get; set; }
         //[JsonProperty("isVisible")]
@@ -179,55 +199,31 @@ namespace JsonManipulator.Models
         //public string isIndexedInDB { get; set; }
         //[JsonProperty("isDirtyReadAllowed")]
         //public string isDirtyReadAllowed { get; set; }
-    
-        
+
+
+    }
+
+    public class propSubscription
+    {
+        [JsonProperty("destinationContextObjectName")]
+        public string destinationContextObjectName { get; set; }
+        [JsonProperty("destinationTargetName")]
+        public string destinationTargetName { get; set; }
+        [JsonProperty("isIgnored")]
+        public string isIgnored { get; set; }
+         
     }
     public class calculatedProp
     {
         [JsonProperty("name")]
         public string name { get; set; }
-        [JsonProperty("placeholderText")]
-        public string placeholderText { get; set; }
+        
         [JsonProperty("sqlServerDBDataType")]
         public string sqlServerDBDataType { get; set; }
         [JsonProperty("sqlServerDBDataTypeSize")]
-        public string sqlServerDBDataTypeSize { get; set; }
-        [JsonProperty("angularDispalyFilter")]
-        public string angularDispalyFilter { get; set; }
-        [JsonProperty("angularInputMask")]
-        public string angularInputMask { get; set; }
+        public string sqlServerDBDataTypeSize { get; set; } 
         [JsonProperty("codeDescription")]
-        public string codeDescription { get; set; }
-        [JsonProperty("defaultValue")]
-        public string defaultValue { get; set; }
-        [JsonProperty("fKObjectName")]
-        public string fKObjectName { get; set; }
-        [JsonProperty("fKObjectPropertyName")]
-        public string fKObjectPropertyName { get; set; }
-        [JsonProperty("isDirtyReadAllowed")]
-        public string isDirtyReadAllowed { get; set; }
-        [JsonProperty("isEditAllowed")]
-        public string isEditAllowed { get; set; }
-        [JsonProperty("isExposedInObjectSearch")]
-        public string isExposedInObjectSearch { get; set; }
-        [JsonProperty("isFK")]
-        public string isFK { get; set; }
-        [JsonProperty("isFKLookup")]
-        public string isFKLookup { get; set; }
-        [JsonProperty("isIndexedInDB")]
-        public string isIndexedInDB { get; set; }
-        [JsonProperty("isVisible")]
-        public string isVisible { get; set; }
-        [JsonProperty("labelText")]
-        public String labelText { get; set; }
-        [JsonProperty("maxValue")]
-        public String maxValue { get; set; }
-        [JsonProperty("minValue")]
-        public String minValue { get; set; }
-        [JsonProperty("conditionalVisiblePropertyName")]
-        public String conditionalVisiblePropertyName { get; set; }
-        [JsonProperty("conditionalVisiblePropertyValue")]
-        public String conditionalVisiblePropertyValue { get; set; }
+        public string codeDescription { get; set; } 
     }
     public class Report
     {
@@ -239,6 +235,21 @@ namespace JsonManipulator.Models
         //public string OwnerObject { get; set; }
         [JsonProperty("visualizationType")]
         public string visualizationType { get; set; }
+        [JsonProperty("initObjectWorkflowName")]
+        public string initObjectWorkflowName { get; set; }
+
+
+        [JsonProperty("defaultOrderByColumnName")]
+        public string defaultOrderByColumnName { get; set; }
+
+        [JsonProperty("defaultOrderByDescending")]
+        public string defaultOrderByDescending { get; set; }
+
+
+        [JsonProperty("layoutName")]
+        public string layoutName { get; set; }
+
+
         [JsonProperty("titleText")]
         public string TitleText { get; set; }
         [JsonProperty("introText")]
@@ -249,10 +260,106 @@ namespace JsonManipulator.Models
         public string IsCustomSqlUsed { get; set; }
         [JsonProperty("targetChildObject")]
         public string TargetChildObject { get; set; }
+
+        [JsonProperty("isAutoRefresh")]
+        public string isAutoRefresh { get; set; }
+
+        [JsonProperty("isAutoRefreshVisible")]
+        public string isAutoRefreshVisible { get; set; }
+
+        [JsonProperty("isAutoRefreshFrequencyVisible")]
+        public string isAutoRefreshFrequencyVisible { get; set; }
+
+        [JsonProperty("isAutoRefreshDegraded")]
+        public string isAutoRefreshDegraded { get; set; }
+
+        [JsonProperty("autoRefreshFrequencyInMinutes")]
+        public string autoRefreshFrequencyInMinutes { get; set; }
+
+        [JsonProperty("isRefreshButtonHidden")]
+        public string isRefreshButtonHidden { get; set; }
+
+
         [JsonProperty("isPagingAvailable")]
         public string IsPagingAvailable { get; set; }
-        [JsonProperty("isExportButtonHidden")]
-        public string IsExportButtonHidden { get; set; }
+        [JsonProperty("isExportButtonsHidden")]
+        public string IsExportButtonsHidden { get; set; }
+        [JsonProperty("isFilterSectionHidden")]
+        public string isFilterSectionHidden { get; set; }
+        [JsonProperty("isFilterSectionCollapsable")]
+        public string isFilterSectionCollapsable { get; set; }
+        [JsonProperty("isBreadcrumbSectionHidden")]
+        public string isBreadcrumbSectionHidden { get; set; } 
+
+        [JsonProperty("isCachingAllowed")]
+        public string isCachingAllowed { get; set; }
+        [JsonProperty("cacheExpirationInMinutes")]
+        public string cacheExpirationInMinutes { get; set; }
+        [JsonProperty("isButtonDropDownAllowed")]
+        public string isButtonDropDownAllowed { get; set; }
+        [JsonProperty("ratingLevelColumnName")]
+        public string ratingLevelColumnName { get; set; }
+        [JsonProperty("isRatingLevelChangingRowBackgroundColor")]
+        public string isRatingLevelChangingRowBackgroundColor { get; set; }
+        [JsonProperty("isSchedulingAllowed")]
+        public string isSchedulingAllowed { get; set; }
+        [JsonProperty("isFavoriteCreationAllowed")]
+        public string isFavoriteCreationAllowed { get; set; }
+        [JsonProperty("badgeCountPropertyName")]
+        public string badgeCountPropertyName { get; set; }
+
+
+        public string isHeaderLabelsVisible { get; set; }
+        public string isHeaderVisible { get; set; }
+        public string isReportDetailLabelColumnVisible { get; set; }    
+        public string noRowsReturnedText { get; set; }
+        public string formIntroText { get; set; }
+        public string isIgnoredInDocumentation { get; set; }
+        public string isAzureBlobStorageUsed { get; set; }
+        public string isAzureTableUsed { get; set; }
+        public string azureTableNameOverride { get; set; }
+        public string azureTablePrimaryKeyColumn { get; set; }
+        public string isAzureTablePrimaryKeyColumnDateTime { get; set; } 
+        public string visualizationGridGroupByColumnName { get; set; }
+        public string visualizationGridGroupByInfoTextColumnName { get; set; }
+        public string visualizationPieChartSliceValueColumnName { get; set; }
+        public string visualizationPieChartSliceDescriptionColumnName { get; set; }
+        public string visualizationLineChartUTCDateTimeColumnName { get; set; }
+        public string visualizationLineChartValueColumnName { get; set; }
+        public string visualizationLineChartDescriptionColumnName { get; set; }
+        public string isVisualizationLineChartGridHorizLineHidden { get; set; }
+        public string isVisualizationLineChartGridVerticalLineHidden { get; set; }
+        public string isVisualizationLineChartLegendHidden { get; set; }
+        public string isVisualizationLineChartStairLines { get; set; }
+        public string visualizationLineChartGridVerticalMaxValue { get; set; }
+        public string visualizationLineChartGridVerticalMinValue { get; set; }
+        public string visualizationLineChartGridVerticalStepValue { get; set; }
+        public string isVisualizationLineChartVerticalLabelsHidden { get; set; }
+        public string visualizationLineChartGridVerticalTitle { get; set; }
+        public string visualizationLineChartGridHorizTitle { get; set; }
+        public string visualizationLineChartGridVerticalMaxValLabel { get; set; }
+        public string visualizationLineChartGridVerticalMinValLabel { get; set; }
+        public string isVisualizationLineChartGridVerticalMaxDynamic { get; set; }
+        public string visualizationFlowChartSourceNodeCodeColumnName { get; set; }
+        public string visualizationFlowChartSourceNodeDescriptionColumnName { get; set; }
+        public string visualizationFlowChartSourceNodeColorColumnName { get; set; }
+        public string visualizationFlowChartFlowDescriptionColumnName { get; set; }
+        public string visualizationFlowChartDestinationNodeCodeColumnName { get; set; }
+        public string visualizationCardViewTitleColumn { get; set; }
+        public string visualizationCardViewDescriptionColumn { get; set; }
+        public string visualizationCardViewIsImageAvailable { get; set; }
+        public string visualizationCardViewImageColumn { get; set; }
+        public string visualizationCardViewGroupByColumnName { get; set; }
+        public string visualizationCardViewGroupByInfoTextColumnName { get; set; }
+        public string visualizationFolderIDColumnName { get; set; }
+        public string visualizationFolderNameColumnName { get; set; }
+        public string visualizationFolderParentIDColumnName { get; set; }
+        public string visualizationFolderIsFolderColumnName { get; set; }
+        public string visualizationFolderIsDragDropAllowed { get; set; }
+        public string visualizationFolderDragDropEventContextObjectName { get; set; }
+        public string visualizationFolderDragDropEventTargetName { get; set; }
+        public string isPage { get; set; }
+
         [JsonProperty("reportButton")]
         public List<reportButton> reportButton { get; set; }
         [JsonProperty("reportParam")]
@@ -262,18 +369,24 @@ namespace JsonManipulator.Models
     }
     public class reportButton
     {
-        [JsonProperty("buttonName")]
-        public string buttonName { get; set; }
         [JsonProperty("buttonType")]
         public string buttonType { get; set; }
+        [JsonProperty("buttonName")]
+        public string buttonName { get; set; }
         [JsonProperty("buttonText")]
         public string buttonText { get; set; }
+        [JsonProperty("destinationContextObjectName")]
+        public String destinationContextObjectName { get; set; }
         [JsonProperty("destinationTargetName")]
         public string destinationTargetName { get; set; }
         [JsonProperty("isVisible")]
         public string isVisible { get; set; }
         [JsonProperty("isButtonCallToAction")]
         public string isButtonCallToAction { get; set; }
+
+
+        public string isEnabled { get; set; }
+        public string conditionalVisiblePropertyName { get; set; } 
     }
     public class reportParam
     {
@@ -290,6 +403,20 @@ namespace JsonManipulator.Models
         public string sqlServerDBDataTypeSize { get; set; }
         [JsonProperty("isVisible")]
         public string isVisible { get; set; }
+        [JsonProperty("isFKList")]
+        public string isFKList { get; set; }
+        [JsonProperty("isFKListInactiveIncluded")]
+        public string isFKListInactiveIncluded { get; set; }
+        [JsonProperty("targetColumnName")]
+        public string targetColumnName { get; set; }
+
+        public string fKObjectName { get; set; } 
+        public string isFK { get; set; }
+        public string isFKLookup { get; set; }
+        public string fKListOrderBy { get; set; }
+        public string isFKListSearchable { get; set; }
+        public string isUnknownLookupAllowed { get; set; }
+        public string defaultValue { get; set; }
     }
     public class reportColumn
     {
@@ -297,8 +424,8 @@ namespace JsonManipulator.Models
         public string name { get; set; }
         [JsonProperty("codeDescription")]
         public string codeDescription { get; set; }
-        [JsonProperty("labelText")]
-        public string LabelText { get; set; }
+        [JsonProperty("headerText")]
+        public string headerText { get; set; }
         [JsonProperty("sourceObjectName")]
         public string sourceObjectName { get; set; }
         [JsonProperty("sourcePropertyName")]
@@ -310,14 +437,51 @@ namespace JsonManipulator.Models
        
         [JsonProperty("isVisible")]
         public string isVisible { get; set; }
-       
+        [JsonProperty("isButton")]
+        public string isButton { get; set; }
+        [JsonProperty("buttonText")]
+        public string buttonText { get; set; }
+        [JsonProperty("destinationTargetName")]
+        public String destinationTargetName { get; set; }
+        [JsonProperty("destinationContextObjectName")]
+        public String destinationContextObjectName { get; set; }
+        [JsonProperty("minWidth")]
+        public String minWidth { get; set; }
+
+        public String maxWidth { get; set; }
+        public String dateTimeDisplayFormat { get; set; }
+        public String infoToolTipText { get; set; }
+        public String isButtonCallToAction { get; set; }
+        public String isHtml { get; set; }
+        public String isColumnSumMetricAvailable { get; set; }
+        public String isSummaryDisplayed { get; set; }
+        public String isConditionallyDisplayed { get; set; }
+        public String conditionalSqlLogic { get; set; }
+        public String isUnixEpochDateTime { get; set; }
+        public String isNavURL { get; set; }
+        public String NavURLLinkText { get; set; }
+        public String isButtonClickedOnRowClick { get; set; }
+        public String isMultiSelectColumn { get; set; }
+        public String isForcedIntoExport { get; set; }
+        public String isButtonAsyncObjWF { get; set; }
+        public String isAsyncObjWFResultFileStreamedOut { get; set; }
+        public String asyncObjWFResultFilePathParamName { get; set; }
+        public String isJoinedToLeftColumn { get; set; }
+        public String isJoinedToRightColumn { get; set; }
+        public String conditionalVisiblePropertyName { get; set; }
+        public String buttonBadgeCountPropertyName { get; set; }
+        public String isFormFooter { get; set; }
+        public String isImageURL { get; set; }
+        public String isEncrypted { get; set; }
+        public String isIgnored { get; set; }
+
     }
     public class objectWorkflow
     {
         [JsonProperty("name")]
         public string Name { get; set; }
-        [JsonProperty("ownerObject")]
-        public string OwnerObject { get; set; }
+        //[JsonProperty("ownerObject")]
+        //public string OwnerObject { get; set; }
         [JsonProperty("titleText")]
         public string TitleText { get; set; }
         [JsonProperty("introText")]
@@ -334,7 +498,32 @@ namespace JsonManipulator.Models
         public List<objectWorkflowButton> objectWorkflowButton { get; set; }
         [JsonProperty("dynaFlowTask")]
         public List<dynaFlowTask> dynaFlowTask { get; set; }
-      
+
+        public String initObjectWorkflowName { get; set; }
+        public String isInitObjWFSubscribedToParams { get; set; }
+        public String isExposedInBusinessObject { get; set; }
+        public String isObjectDelete { get; set; }
+        public String layoutName { get; set; }
+        public String isWFSWorkflowCreated { get; set; }
+        public String formTitleText { get; set; }
+        public String formIntroText { get; set; }
+        public String formFooterText { get; set; }
+        public String formFooterImageURL { get; set; }
+        public String isAutoSubmit { get; set; }
+        public String isHeaderVisible { get; set; }
+        public String isLoginPage { get; set; }
+        public String isLogoutPage { get; set; }
+        public String isImpersonationPage { get; set; }
+        public String isCaptchaVisible { get; set; }
+        public String isCreditCardEntryUsed { get; set; }
+        public String headerImageURL { get; set; }
+        public String footerImageURL { get; set; }
+        public String isDynaFlow { get; set; }
+        public String isDynaFlowTask { get; set; }
+        public String isCustomPageViewUsed { get; set; }
+        public String isIgnoredInDocumentation { get; set; }
+        public String targetChildObject { get; set; }
+        public String isAuthorizationRequired { get; set; }
     }
     public class objectWorkflowParam
     {
@@ -352,6 +541,29 @@ namespace JsonManipulator.Models
         public string sqlServerDBDataTypeSize { get; set; }
         [JsonProperty("isVisible")]
         public string isVisible { get; set; }
+        public string isRequired { get; set; }
+        public string requiredErrorText { get; set; }
+        public string isSecured { get; set; }
+        public string isFK { get; set; }
+        public string fKObjectName { get; set; }
+        public string fKObjectQueryName { get; set; }
+        public string isFKLookup { get; set; }
+        public string isFKList { get; set; }
+        public string isFKListInactiveIncluded { get; set; }
+        public string isFKListUnknownOptionRemoved { get; set; }
+        public string fKListOrderBy { get; set; }
+        public string isFKListOptionRecommended { get; set; }
+        public string isFKListSearchable { get; set; }
+        public string FKListRecommendedOption { get; set; }
+        public string isRadioButtonList { get; set; }
+        public string isFileUpload { get; set; }
+        public string isCreditCardEntry { get; set; }
+        public string isTimeZoneDetermined { get; set; }
+        public string detailsText { get; set; }
+        public string validationRuleRegExMatchRequired { get; set; }
+        public string validationRuleRegExMatchRequiredErrorText { get; set; }
+        public string isIgnored { get; set; }
+        public string defaultValue { get; set; }
 
     }
     public class objectWorkflowOutputVar
@@ -377,9 +589,7 @@ namespace JsonManipulator.Models
         [JsonProperty("isAutoRedirectURL")]
         public string isAutoRedirectURL { get; set; }
         [JsonProperty("buttonObjectWFName")]
-        public String buttonObjectWFName { get; set; }
-        [JsonProperty("angularDispalyFilter")]
-        public String angularDispalyFilter { get; set; }
+        public String buttonObjectWFName { get; set; } 
         [JsonProperty("conditionalVisiblePropertyName")]
         public String conditionalVisiblePropertyName { get; set; }
         [JsonProperty("isVisible")]
@@ -392,6 +602,7 @@ namespace JsonManipulator.Models
         public string isFKLookup { get; set; }
         [JsonProperty("isHeaderText")]
         public string isHeaderText { get; set; }
+        public string isIgnored { get; set; }
 
     }
     public class objectWorkflowButton
@@ -402,8 +613,12 @@ namespace JsonManipulator.Models
         public string buttonText { get; set; }
         [JsonProperty("destinationTargetName")]
         public String destinationTargetName { get; set; }
+        [JsonProperty("destinationContextObjectName")]
+        public String destinationContextObjectName { get; set; }
         [JsonProperty("isVisible")]
         public string isVisible { get; set; }
+        public string introText { get; set; }
+        public string conditionalVisiblePropertyName { get; set; }
     }
     public class dynaFlowTask
     {
@@ -427,6 +642,32 @@ namespace JsonManipulator.Models
         [JsonProperty("includeInByObjectNameXMLFunction")]
         public string includeInByObjectNameXMLFunction { get; set; }
     }
+
+
+    public class modelPkg
+    {
+        [JsonProperty("name")]
+        public string name { get; set; }
+        [JsonProperty("pkgType")]
+        public string pkgType { get; set; }
+        [JsonProperty("role")]
+        public string role { get; set; }
+        [JsonProperty("isImported")]
+        public string isImported { get; set; }
+        [JsonProperty("isSubscriptionAllowed")]
+        public string isSubscriptionAllowed { get; set; }
+        [JsonProperty("isSubscribed")]
+        public string isSubscribed { get; set; }
+    }
+
+
+    public class childObject
+    {
+        [JsonProperty("name")]
+        public string name { get; set; }
+         
+    }
+
     public class query
     {
         [JsonProperty("name")]
@@ -504,6 +745,7 @@ namespace JsonManipulator.Models
         public string isGetWithIdAvailable { get; set; }
         [JsonProperty("isPostAvailable")]
         public string isPostAvailable { get; set; }
+        public string isPublic { get; set; }
         [JsonProperty("isLazyPost")]
         public string isLazyPost { get; set; }
         [JsonProperty("isPutAvailable")]

@@ -42,16 +42,26 @@ namespace JsonManipulator
 
             return FileMenu;
         }
-       
+        
+        public void populateProjectDetails()
+        {
+
+            this.Text = "Project: " + _model.root.ProjectName;
+            nodeMenus.Nodes["Project"].Text = _model.root.ProjectName;
+            if(nodeMenus.Nodes["Project"].Text.Trim().Length == 0)
+            {
+                nodeMenus.Nodes["Project"].Text = "Project";
+            }
+        }
         private void populateDbObjects(string filter)
         {
             nodeMenus.Nodes["dbObjects"].Nodes.Clear();
             NameSpaceObject nameSpaceObject = _model.root.NameSpaceObjects.FirstOrDefault();
-            foreach (var _object in nameSpaceObject.ObjectMap.Where(x => x.name.Contains(filter)))
+            foreach (var dbObj in nameSpaceObject.ObjectMap.Where(x => x.name.Contains(filter)))
             {
                 TreeNode node = new TreeNode();
-                node.Text = _object.name;
-                node.Name = _object.name;
+                node.Text = dbObj.name;
+                node.Name = dbObj.name;
                 node.ImageIndex = 1;
                 node.SelectedImageIndex = 1;
                 nodeMenus.Nodes["dbObjects"].Nodes.Add(node);
@@ -62,30 +72,29 @@ namespace JsonManipulator
             nodeMenus.Nodes["pages"].Nodes["Forms"].Nodes.Clear();
             nodeMenus.Nodes["pages"].Nodes["Reports"].Nodes.Clear();
             NameSpaceObject nameSpaceObject = _model.root.NameSpaceObjects.FirstOrDefault();
-            foreach (var _dbObject in nameSpaceObject.ObjectMap)
+            foreach (var dbObj in nameSpaceObject.ObjectMap)
             {
-                if(_dbObject.objectWorkflow !=null)
+                if(dbObj.objectWorkflow !=null)
                 {
-                    foreach (var _object in _dbObject.objectWorkflow.Where(x=>x.Name.Contains(filter)))
-                    {
-                        _object.OwnerObject = _dbObject.name;
-                        _forms.Add(_object);
+                    foreach (var objWF in dbObj.objectWorkflow.Where(x=>x.Name.Contains(filter)))
+                    { 
+                        _forms.Add(objWF);
                         TreeNode node = new TreeNode();
-                        node.Text = _object.Name;
-                        node.Name = _object.Name;
+                        node.Text = objWF.Name;
+                        node.Name = objWF.Name;
                         node.ImageIndex = 1;
                         node.SelectedImageIndex = 1;
                         nodeMenus.Nodes["pages"].Nodes["Forms"].Nodes.Add(node);
                     }
                 }
-                if(_dbObject.report != null)
+                if(dbObj.report != null)
                 {
-                    foreach (var _object in _dbObject.report.Where(x => x.name.Contains(filter)))
+                    foreach (var rpt in dbObj.report.Where(x => x.name.Contains(filter)))
                     { 
-                        _reports.Add(_object);
+                        _reports.Add(rpt);
                         TreeNode node = new TreeNode();
-                        node.Text = _object.name;
-                        node.Name = _object.name;
+                        node.Text = rpt.name;
+                        node.Name = rpt.name;
                         node.ImageIndex = 1;
                         node.SelectedImageIndex = 1;
                         nodeMenus.Nodes["pages"].Nodes["Reports"].Nodes.Add(node);
@@ -102,10 +111,10 @@ namespace JsonManipulator
             ObjectMap map = nameSpaceObject.ObjectMap.Where(x => x.name == button.Text).FirstOrDefault();
             if(map!=null && map.report!=null)
             {
-                foreach (var _object in map.report)
+                foreach (var rpt in map.report)
                 {
                     Button btn = new Button();
-                    btn.Text = _object.name;
+                    btn.Text = rpt.name;
                     btn.Dock = DockStyle.Top;
                     btn.TextAlign = ContentAlignment.MiddleLeft;
                    // pnlReports.Padding = new Padding(20, 0, 0, 0);
@@ -129,7 +138,7 @@ namespace JsonManipulator
             switch (level)
             {
                 case 0:
-                    if (e.Node.Name == "MyCompanyApp")
+                    if (e.Node.Name == "Project")
                     {
                         frmSettings frmSettings = new frmSettings(_model.root);
                         frmSettings.TopLevel = false;
@@ -174,7 +183,7 @@ namespace JsonManipulator
                             if (((frmFormSettings)Application.OpenForms["frmFormSettings"]) != null)
                                 ((frmFormSettings)Application.OpenForms["frmFormSettings"]).Close();
                             objectWorkflow form = _forms.Where(x => x.Name == e.Node.Name).FirstOrDefault();
-                            frmFormSettings frmFormSettings = new frmFormSettings(form);
+                            frmFormSettings frmFormSettings = new frmFormSettings(form.Name);
                             frmFormSettings.TopLevel = false;
                             frmFormSettings.AutoScroll = true;
                             frmFormSettings.Height = this.mainPanel.Height;
@@ -195,6 +204,7 @@ namespace JsonManipulator
                 NullValueHandling = NullValueHandling.Ignore
             });
             File.WriteAllText(_path, json);
+            Utils.SortJsonFile(_path);
             showMessage("File Updated Successfully");
         }
 
@@ -235,6 +245,7 @@ namespace JsonManipulator
                     this.Text = _model.root.DatabaseName;
 
                 }
+                populateProjectDetails();
                 populateDbObjects("");
                 populateForms("");
                 nodeMenus.Enabled = true;
@@ -273,6 +284,7 @@ namespace JsonManipulator
                     NullValueHandling = NullValueHandling.Ignore
                 });
                 File.WriteAllText(saveFileDialog1.FileName, json);
+                Utils.SortJsonFile(saveFileDialog1.FileName);
             }
         }
 
@@ -306,6 +318,7 @@ namespace JsonManipulator
         }
         public void updateTree(string name,int itemtype)
         {
+            populateProjectDetails();
             populateDbObjects("");
             populateForms("");
             switch (itemtype)
@@ -327,6 +340,7 @@ namespace JsonManipulator
             nodeMenus.Nodes["pages"].Nodes["Forms"].Nodes.Clear();
             nodeMenus.Nodes["pages"].Nodes["Reports"].Nodes.Clear();
             nodeMenus.Nodes["dbObjects"].Nodes.Clear();
+            populateProjectDetails();
             populateDbObjects(txtSearch.Text);
             populateForms(txtSearch.Text);
            // nodeMenus.Sort();

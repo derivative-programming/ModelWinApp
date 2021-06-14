@@ -32,10 +32,10 @@ namespace JsonManipulator
         {
             List<PropertyValue> propertyValues = new List<PropertyValue>();
             dataProperties.Columns.Clear();
-            List<string> ignoreList = Utils.GetFormPropertiesToIgnore();
+            List<string> ignoreList = Utils.GetDBObjPropertiesToIgnore();
             foreach (var prop in _map.GetType().GetProperties())
             {
-                if (ignoreList.Contains(prop.Name))
+                if (ignoreList.Contains(prop.Name.ToLower()))
                     continue;
                 // Console.WriteLine("{0}={1}", prop.Name, prop.GetValue(foo, null));
                 if (!prop.PropertyType.IsGenericType)
@@ -71,10 +71,10 @@ namespace JsonManipulator
                 List<PropertyValue> propertyValues = new List<PropertyValue>();
                 String propname = lstProperties.SelectedItem.ToString();
                 property prpty = _map.property.Where(x => x.name == propname).FirstOrDefault();
-                List<string> ignoreList = Utils.GetDBObjPropertiesToIgnore();
+                List<string> ignoreList = Utils.GetDBObjPropPropertiesToIgnore();
                 foreach (var prop in prpty.GetType().GetProperties())
                 {
-                    if (ignoreList.Contains(prop.Name))
+                    if (ignoreList.Contains(prop.Name.ToLower()))
                         continue;
                     if (!prop.PropertyType.IsGenericType)
                         propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(prpty) ?? "").ToString() });
@@ -201,6 +201,27 @@ namespace JsonManipulator
             dataProperties.RefreshEdit();
         }
 
-      
+        private void dataProperties_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.ColumnIndex == 0)
+            {
+                SendKeys.Send("{TAB}");
+            }
+        }
+
+        private void gridPropertiesProp_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.ColumnIndex == 0)
+            {
+                SendKeys.Send("{TAB}");
+            }
+        }
+
+        private void gridPropertiesProp_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

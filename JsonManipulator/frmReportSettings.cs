@@ -21,7 +21,7 @@ namespace JsonManipulator
             InitializeComponent();
             this._rpt = Utils.GetReportModelItem(reportName);
             this._ownerObject = Utils.GetDestinationOwnerObject(_rpt.name);
-             
+            this.grpMain.Text = _rpt.name;
         }
 
         private void frmReportSettings_Load(object sender, EventArgs e)
@@ -38,7 +38,7 @@ namespace JsonManipulator
             List<string> ignoreList = Utils.GetReportPropertiesToIgnore();
             foreach (var prop in _rpt.GetType().GetProperties())
             {
-                if (ignoreList.Contains(prop.Name))
+                if (ignoreList.Contains(prop.Name.ToLower()))
                     continue;
                 // Console.WriteLine("{0}={1}", prop.Name, prop.GetValue(foo, null));
                 if (!prop.PropertyType.IsGenericType)
@@ -47,7 +47,7 @@ namespace JsonManipulator
             dataProperties.DataSource = propertyValues;
             if (dataProperties.Columns.Count > 0)
             {
-                dataProperties.Columns[0].ReadOnly = true;
+                dataProperties.Columns[0].ReadOnly = true; 
             }
         }
         public void setFiltersList()
@@ -100,11 +100,11 @@ namespace JsonManipulator
             {
                 List<PropertyValue> propertyValues = new List<PropertyValue>();
                 String filterName = lstFilters.SelectedItem.ToString();
-                List<string> ignoreList = Utils.GetReportPropertiesToIgnore();
+                List<string> ignoreList = Utils.GetReportFilterPropertiesToIgnore();
                 reportParam rptParam = _rpt.reportParam.Where(x => x.name == filterName).FirstOrDefault();
                 foreach (var prop in rptParam.GetType().GetProperties())
                 {
-                    if (ignoreList.Contains(prop.Name))
+                    if (ignoreList.Contains(prop.Name.ToLower()))
                         continue;
                     if (!prop.PropertyType.IsGenericType)
                         propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(rptParam) ?? "").ToString() });
@@ -123,11 +123,11 @@ namespace JsonManipulator
         {
             List<PropertyValue> propertyValues = new List<PropertyValue>();
             String columnMane = lstColumns.SelectedItem.ToString();
-            List<string> ignoreList = Utils.GetReportPropertiesToIgnore();
+            List<string> ignoreList = Utils.GetReportColumnPropertiesToIgnore();
             reportColumn rptColumn = _rpt.reportColumn.Where(x => x.name == columnMane).FirstOrDefault();
             foreach (var prop in rptColumn.GetType().GetProperties())
             {
-                if (ignoreList.Contains(prop.Name))
+                if (ignoreList.Contains(prop.Name.ToLower()))
                     continue;
                 if (!prop.PropertyType.IsGenericType)
                     propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(rptColumn) ?? "").ToString() });
@@ -144,11 +144,11 @@ namespace JsonManipulator
         {
             List<PropertyValue> propertyValues = new List<PropertyValue>();
             String buttonName = lstButtons.SelectedItem.ToString();
-            List<string> ignoreList = Utils.GetReportPropertiesToIgnore();
+            List<string> ignoreList = Utils.GetReportButtonPropertiesToIgnore();
             reportButton rptButton = _rpt.reportButton.Where(x => x.buttonName == buttonName).FirstOrDefault();
             foreach (var prop in rptButton.GetType().GetProperties())
             {
-                if (ignoreList.Contains(prop.Name))
+                if (ignoreList.Contains(prop.Name.ToLower()))
                     continue;
                 propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(rptButton) ?? "").ToString() });
             }
@@ -473,6 +473,15 @@ namespace JsonManipulator
                     l_objGridDropbox.DisplayMember = "Display";
                     l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
                 }
+                if (propertyName.Equals("IsButton", StringComparison.OrdinalIgnoreCase))
+                {
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
+                    gridColumns[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
+                    l_objGridDropbox.DataSource = Utils.getBooleans(); // Bind combobox with datasource.  
+                    l_objGridDropbox.ValueMember = "Value";
+                    l_objGridDropbox.DisplayMember = "Display";
+                    l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+                }
                 if (propertyName.Equals("sqlServerDBDataType", StringComparison.OrdinalIgnoreCase))
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview  
@@ -503,10 +512,75 @@ namespace JsonManipulator
                 {
                     value = gridButtons.Rows[gridButtons.CurrentCell.RowIndex].Cells[gridButtons.CurrentCell.ColumnIndex].Value.ToString();
                 }
+
+                if (property.ToLower() == "destinationTargetName".ToLower())
+                {
+                    Models.ObjectMap destinationOwnerObject = Utils.GetDestinationOwnerObject(value);
+                    if (destinationOwnerObject == null)
+                    {
+                        return;
+                    } 
+                    typeof(reportButton).GetProperty("destinationContextObjectName").SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportButton.ElementAt(lstButtons.SelectedIndex), destinationOwnerObject.name);
+
+                }
                 int index = lstButtons.SelectedIndex;
                 typeof(reportButton).GetProperty(property).SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportButton.ElementAt(lstButtons.SelectedIndex), value);
                 setButtonsList();
                 lstButtons.SetSelected(index, true);
+            }
+        }
+
+        private void dataProperties_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.ColumnIndex == 0)
+            {
+                SendKeys.Send("{TAB}");
+            }
+        }
+
+        private void gridFilters_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.ColumnIndex == 0)
+            {
+                SendKeys.Send("{TAB}");
+            }
+        }
+
+        private void gridColumns_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.ColumnIndex == 0)
+            {
+                SendKeys.Send("{TAB}");
+            }
+        }
+
+        private void gridButtons_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.ColumnIndex == 0)
+            {
+                SendKeys.Send("{TAB}");
+            }
+        }
+
+        private void gridColumns_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.ColumnIndex == 0)
+            {
+                SendKeys.Send("{TAB}");
+            }
+        }
+
+        private void gridButtons_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.ColumnIndex == 0)
+            {
+                SendKeys.Send("{TAB}");
             }
         }
     }

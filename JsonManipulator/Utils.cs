@@ -1,4 +1,5 @@
 ﻿using JsonManipulator.Models;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -204,48 +205,258 @@ namespace JsonManipulator
             return result;
         }
 
+        public static List<string> GetRootPropertiesToIgnore()
+        {
+            List<string> result = new List<string>();
+            result.Add("apiVersion".ToLower());
+            result.Add("isValidationMissesLogged".ToLower());
+            result.Add("suppressFillObjLookupTableScripts".ToLower());
+
+            return result;
+        }
         public static List<string> GetFormPropertiesToIgnore()
         {
             List<string> result = new List<string>();
-            result.Add("IsPage");
+            result.Add("ispage");
+            result.Add("name");
+
+            result.Add("initObjectWorkflowName");
+            result.Add("isInitObjWFSubscribedToParams");
+            result.Add("isExposedInBusinessObject");
+            result.Add("isObjectDelete");
+            result.Add("layoutName");
+            result.Add("isWFSWorkflowCreated");
+            result.Add("formTitleText");
+            result.Add("formIntroText");
+            result.Add("formFooterText");
+            result.Add("formFooterImageURL");
+            result.Add("isAutoSubmit");
+            result.Add("isHeaderVisible");
+            result.Add("isLoginPage");
+            result.Add("isLogoutPage");
+            result.Add("isImpersonationPage");
+            result.Add("isCaptchaVisible");
+            result.Add("isCreditCardEntryUsed");
+            result.Add("headerImageURL");
+            result.Add("footerImageURL");
+            result.Add("isDynaFlow");
+            result.Add("isDynaFlowTask");
+            result.Add("isCustomPageViewUsed");
+            result.Add("isIgnoredInDocumentation");
+            result.Add("targetChildObject");
+            result.Add("isAuthorizationRequired");
 
             return result;
         }
         public static List<string> GetFormButtonPropertiesToIgnore()
         {
             List<string> result = new List<string>();
-            //result.Add("IsPage");
+            result.Add("destinationContextObjectName".ToLower());
 
+            return result;
+        }
+
+
+        public static List<string> GetFormParamPropertiesToIgnore()
+        {
+            List<string> result = new List<string>();
+            result.Add("isRequired".ToLower());
+            result.Add("requiredErrorText".ToLower());
+            result.Add("isSecured".ToLower());
+            result.Add("isFK".ToLower());
+            result.Add("fKObjectName".ToLower());
+            result.Add("fKObjectQueryName".ToLower());
+            result.Add("isFKLookup".ToLower());
+            result.Add("isFKList".ToLower());
+            result.Add("isFKListInactiveIncluded".ToLower());
+            result.Add("isFKListUnknownOptionRemoved".ToLower());
+            result.Add("fKListOrderBy".ToLower());
+            result.Add("isFKListOptionRecommended".ToLower());
+            result.Add("isFKListSearchable".ToLower());
+            result.Add("FKListRecommendedOption".ToLower());
+            result.Add("isRadioButtonList".ToLower());
+            result.Add("isFileUpload".ToLower());
+            result.Add("isCreditCardEntry".ToLower());
+            result.Add("isTimeZoneDetermined".ToLower());
+            result.Add("detailsText".ToLower());
+            result.Add("validationRuleRegExMatchRequired".ToLower());
+            result.Add("validationRuleRegExMatchRequiredErrorText".ToLower());
+            result.Add("isIgnored".ToLower());
+            result.Add("defaultValue".ToLower());
             return result;
         }
         public static List<string> GetDBObjPropertiesToIgnore()
         {
             List<string> result = new List<string>();
-            //result.Add("IsPage");
+            result.Add("name");
+            result.Add("calculatedProp".ToLower());
+            result.Add("propSubscription".ToLower());
+            result.Add("fetch".ToLower());
+            result.Add("query".ToLower());
+            result.Add("modelPkg".ToLower());
+            result.Add("childObject".ToLower());
+            result.Add("isSoftDeleteUsed".ToLower());
+            result.Add("cacheAllRecs".ToLower());
+            result.Add("cacheIndividualRecs".ToLower());
+
+            return result;
+        }
+        public static List<string> GetDBObjPropPropertiesToIgnore()
+        {
+            List<string> result = new List<string>();
+            result.Add("isFKLookup".ToLower());
+            result.Add("isNotPublishedToSubscriptions".ToLower());
+            result.Add("fKObjectName".ToLower());
+            result.Add("fKObjectPropertyName".ToLower());
+            result.Add("isQueryByAvailable".ToLower());
+            result.Add("defaultValue".ToLower());
 
             return result;
         }
         public static List<string> GetReportPropertiesToIgnore()
         {
             List<string> result = new List<string>();
-            //result.Add("IsPage");
+            result.Add("name");
+            result.Add("initObjectWorkflowName".ToLower());
+            result.Add("isAutoRefresh".ToLower());
+            result.Add("isAutoRefreshVisible".ToLower());
+            result.Add("isAutoRefreshFrequencyVisible".ToLower());
+            result.Add("isAutoRefreshDegraded".ToLower());
+            result.Add("isRefreshButtonHidden".ToLower());
+            result.Add("autoRefreshFrequencyInMinutes".ToLower()); 
+            result.Add("defaultOrderByDescending".ToLower());
+            result.Add("layoutName".ToLower());
+            result.Add("isExportButtonsHidden".ToLower());
+            result.Add("isFilterSectionHidden".ToLower());
+            result.Add("isCachingAllowed".ToLower());
+            result.Add("isButtonDropDownAllowed".ToLower());
+            result.Add("ratingLevelColumnName".ToLower());
+            result.Add("isRatingLevelChangingRowBackgroundColor".ToLower());
+            result.Add("cacheExpirationInMinutes".ToLower());
+            result.Add("isFilterSectionCollapsable".ToLower());
+            result.Add("isBreadcrumbSectionHidden".ToLower());
+            result.Add("isSchedulingAllowed".ToLower());
+            result.Add("isFavoriteCreationAllowed".ToLower());
+            result.Add("badgeCountPropertyName".ToLower());
+
+            result.Add("isHeaderLabelsVisible".ToLower());
+            result.Add("isHeaderVisible".ToLower());
+            result.Add("isReportDetailLabelColumnVisible".ToLower());
+            result.Add("noRowsReturnedText".ToLower());
+            result.Add("formIntroText".ToLower());
+            result.Add("isIgnoredInDocumentation".ToLower());
+            result.Add("isAzureBlobStorageUsed".ToLower());
+            result.Add("isAzureTableUsed".ToLower());
+            result.Add("azureTableNameOverride".ToLower());
+            result.Add("azureTablePrimaryKeyColumn".ToLower());
+            result.Add("isAzureTablePrimaryKeyColumnDateTime".ToLower());
+            result.Add("visualizationGridGroupByColumnName".ToLower());
+            result.Add("visualizationGridGroupByInfoTextColumnName".ToLower());
+            result.Add("visualizationPieChartSliceValueColumnName".ToLower());
+            result.Add("visualizationPieChartSliceDescriptionColumnName".ToLower());
+            result.Add("visualizationLineChartUTCDateTimeColumnName".ToLower());
+            result.Add("visualizationLineChartValueColumnName".ToLower());
+            result.Add("visualizationLineChartDescriptionColumnName".ToLower());
+            result.Add("isVisualizationLineChartGridHorizLineHidden".ToLower());
+            result.Add("isVisualizationLineChartGridVerticalLineHidden".ToLower());
+            result.Add("isVisualizationLineChartLegendHidden".ToLower());
+            result.Add("isVisualizationLineChartStairLines".ToLower());
+            result.Add("visualizationLineChartGridVerticalMaxValue".ToLower());
+            result.Add("visualizationLineChartGridVerticalMinValue".ToLower());
+            result.Add("visualizationLineChartGridVerticalStepValue".ToLower());
+            result.Add("isVisualizationLineChartVerticalLabelsHidden".ToLower());
+            result.Add("visualizationLineChartGridVerticalTitle".ToLower());
+            result.Add("visualizationLineChartGridHorizTitle".ToLower());
+            result.Add("visualizationLineChartGridVerticalMaxValLabel".ToLower());
+            result.Add("visualizationLineChartGridVerticalMinValLabel".ToLower());
+            result.Add("isVisualizationLineChartGridVerticalMaxDynamic".ToLower());
+            result.Add("visualizationFlowChartSourceNodeCodeColumnName".ToLower());
+            result.Add("visualizationFlowChartSourceNodeDescriptionColumnName".ToLower());
+            result.Add("visualizationFlowChartSourceNodeColorColumnName".ToLower());
+            result.Add("visualizationFlowChartFlowDescriptionColumnName".ToLower());
+            result.Add("visualizationFlowChartDestinationNodeCodeColumnName".ToLower());
+            result.Add("visualizationCardViewTitleColumn".ToLower());
+            result.Add("visualizationCardViewDescriptionColumn".ToLower());
+            result.Add("visualizationCardViewIsImageAvailable".ToLower());
+            result.Add("visualizationCardViewImageColumn".ToLower());
+            result.Add("visualizationCardViewGroupByColumnName".ToLower());
+            result.Add("visualizationCardViewGroupByInfoTextColumnName".ToLower());
+            result.Add("visualizationFolderIDColumnName".ToLower());
+            result.Add("visualizationFolderNameColumnName".ToLower());
+            result.Add("visualizationFolderParentIDColumnName".ToLower());
+            result.Add("visualizationFolderIsFolderColumnName".ToLower());
+            result.Add("visualizationFolderIsDragDropAllowed".ToLower());
+            result.Add("visualizationFolderDragDropEventContextObjectName".ToLower());
+            result.Add("visualizationFolderDragDropEventTargetName".ToLower());
+            result.Add("isPage".ToLower());
 
             return result;
         }
         public static List<string> GetReportButtonPropertiesToIgnore()
         {
             List<string> result = new List<string>();
-            //result.Add("IsPage");
+            result.Add("destinationContextObjectName".ToLower());
+            result.Add("isEnabled".ToLower());
+            result.Add("conditionalVisiblePropertyName".ToLower());
+
+            return result;
+        }
+        public static List<string> GetReportFilterPropertiesToIgnore()
+        {
+            List<string> result = new List<string>();
+            result.Add("isFKList".ToLower());
+            result.Add("isFKListInactiveIncluded".ToLower());
+            result.Add("fKObjectName".ToLower());
+            result.Add("isFK".ToLower());
+            result.Add("isFKLookup".ToLower());
+            result.Add("fKListOrderBy".ToLower());
+            result.Add("isFKListSearchable".ToLower());
+            result.Add("isUnknownLookupAllowed".ToLower());
+            result.Add("defaultValue".ToLower());
 
             return result;
         }
         public static List<string> GetReportColumnPropertiesToIgnore()
         {
             List<string> result = new List<string>();
-            //result.Add("IsPage");
+            result.Add("destinationContextObjectName".ToLower());
+            result.Add("minWidth".ToLower());
+            result.Add("isButton".ToLower());
+            result.Add("buttonText".ToLower());
+            result.Add("destinationTargetName".ToLower());
+
+            result.Add("minWidth".ToLower());
+            result.Add("maxWidth".ToLower());
+            result.Add("dateTimeDisplayFormat".ToLower());
+            result.Add("infoToolTipText".ToLower());
+            result.Add("isButtonCallToAction".ToLower());
+            result.Add("isHtml".ToLower());
+            result.Add("isColumnSumMetricAvailable".ToLower());
+            result.Add("isSummaryDisplayed".ToLower());
+            result.Add("isConditionallyDisplayed".ToLower());
+            result.Add("conditionalSqlLogic".ToLower());
+            result.Add("isUnixEpochDateTime".ToLower());
+            result.Add("isNavURL".ToLower());
+            result.Add("NavURLLinkText".ToLower());
+            result.Add("isButtonClickedOnRowClick".ToLower());
+            result.Add("isMultiSelectColumn".ToLower());
+            result.Add("isForcedIntoExport".ToLower());
+            result.Add("isButtonAsyncObjWF".ToLower());
+
+            result.Add("isAsyncObjWFResultFileStreamedOut".ToLower());
+            result.Add("asyncObjWFResultFilePathParamName".ToLower());
+            result.Add("isJoinedToLeftColumn".ToLower());
+            result.Add("isJoinedToRightColumn".ToLower());
+            result.Add("conditionalVisiblePropertyName".ToLower());
+            result.Add("buttonBadgeCountPropertyName".ToLower());
+            result.Add("isFormFooter".ToLower());
+            result.Add("isImageURL".ToLower());
+            result.Add("isEncrypted".ToLower());
+            result.Add("isIgnored".ToLower());
 
             return result;
         }
+
 
         public static Models.ObjectMap GetDestinationOwnerObject(string destinationName)
         {
@@ -342,5 +553,55 @@ namespace JsonManipulator
             }
             return result;
         }
+
+
+        public static void SortJsonFile(string sourceFile)
+        {
+            // string sourceFile = soureFolder + @"codegenerator.model.json"; 
+            string initialModel = System.IO.File.ReadAllText(sourceFile);
+            var model = JObject.Parse(initialModel);
+            JObject fullModel = JObject.Parse(model.ToString());
+            SortJsonFile(ref fullModel);
+             
+            System.IO.File.WriteAllText(sourceFile, fullModel.ToString());
+
+        }
+
+
+        private static void SortJsonFile(ref JObject fullModel)
+        {
+            var objArray = fullModel.SelectTokens("$.root.namespace[*].object[*]");
+            var sortedJson = fullModel.SelectTokens("$.root.namespace[*].object[*]").OrderBy(x => ((JObject)x).Property("name").Value.ToString()).ToList();
+
+            for (var i = 0; i < objArray.Count(); i++)
+            { 
+                fullModel.SelectToken("$.root.namespace[*].object[" + i.ToString() + "]").Replace(sortedJson[i]);
+                 
+
+                var prop = fullModel.SelectTokens("$.root.namespace[*].object[" + i.ToString() + "].prop[*]").OrderBy(x => ((JObject)x).Property("name").Value.ToString()).ToList();
+                for (var p = 0; p < prop.Count(); p++)
+                {
+                    fullModel.SelectToken("$.root.namespace[*].object[" + i.ToString() + "].prop[" + p.ToString() + "]").Replace(prop[p]);
+                }
+
+
+
+                var reports = fullModel.SelectTokens("$.root.namespace[*].object[" + i.ToString() + "].report[*]").OrderBy(x => ((JObject)x).Property("name").Value.ToString()).ToList();
+                for (var r = 0; r < reports.Count(); r++)
+                {
+                    fullModel.SelectToken("$.root.namespace[*].object[" + i.ToString() + "].report[" + r.ToString() + "]").Replace(reports[r]);
+                }
+
+                var objectWorkflow = fullModel.SelectTokens("$.root.namespace[*].object[" + i.ToString() + "].objectWorkflow[*]").OrderBy(x => ((JObject)x).Property("name").Value.ToString()).ToList();
+                for (var o = 0; o < objectWorkflow.Count(); o++)
+                {
+                    fullModel.SelectToken("$.root.namespace[*].object[" + i.ToString() + "].objectWorkflow[" + o.ToString() + "]").Replace(objectWorkflow[o]);
+                }
+
+            }
+
+
+        }
+
     }
 }

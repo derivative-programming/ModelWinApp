@@ -44,12 +44,10 @@ namespace JsonManipulator
 
             objectWorkflow form = new objectWorkflow();
             form.Name = txtName.Text;
-            form.RoleRequired = txtRole.Text;
-            form.OwnerObject = txtOwner.Text;
+            form.RoleRequired = txtRole.Text; 
             if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text).FirstOrDefault().objectWorkflow == null)
                 Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text).FirstOrDefault().objectWorkflow = new List<objectWorkflow>();
-            else
-                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Add(new ObjectMap { name = txtOwner.Text});
+            
             Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x=>x.name== txtOwner.Text).FirstOrDefault().objectWorkflow.Add(form);
             ((Form1)Application.OpenForms["Form1"]).AddToTree(form);
             ((Form1)Application.OpenForms["Form1"]).showMessage("Form was added successfully");

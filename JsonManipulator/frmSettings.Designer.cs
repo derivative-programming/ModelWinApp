@@ -72,7 +72,8 @@ namespace JsonManipulator
             this.dataProperties.Name = "dataProperties";
             this.dataProperties.RowHeadersVisible = false;
             this.dataProperties.Size = new System.Drawing.Size(786, 418);
-            this.dataProperties.TabIndex = 0;
+            this.dataProperties.TabIndex = 1;
+            this.dataProperties.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataProperties_CellEnter);
             this.dataProperties.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataProperties_CellValueChanged);
             // 
             // Property

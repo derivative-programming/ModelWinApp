@@ -30,7 +30,7 @@ namespace JsonManipulator
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("MyCompanyApp");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Project");
             System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Db Objects");
             System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Forms");
             System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Reports");
@@ -102,14 +102,14 @@ namespace JsonManipulator
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.newToolStripMenuItem.Text = "New";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -118,7 +118,7 @@ namespace JsonManipulator
             this.saveToolStripMenuItem.Enabled = false;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
@@ -128,14 +128,14 @@ namespace JsonManipulator
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
             this.saveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.S)));
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.saveAsToolStripMenuItem.Text = "Save As";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -206,8 +206,8 @@ namespace JsonManipulator
             this.nodeMenus.ImageList = this.imgIcons;
             this.nodeMenus.Location = new System.Drawing.Point(0, 43);
             this.nodeMenus.Name = "nodeMenus";
-            treeNode1.Name = "MyCompanyApp";
-            treeNode1.Text = "MyCompanyApp";
+            treeNode1.Name = "Project";
+            treeNode1.Text = "Project";
             treeNode2.Name = "dbObjects";
             treeNode2.Text = "Db Objects";
             treeNode3.Name = "Forms";
@@ -326,7 +326,7 @@ namespace JsonManipulator
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Poject: MyCompanyApp";
+            this.Text = "Project: MyCompanyApp";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);

@@ -88,8 +88,9 @@ namespace JsonManipulator
             this.dataProperties.Name = "dataProperties";
             this.dataProperties.RowHeadersVisible = false;
             this.dataProperties.Size = new System.Drawing.Size(834, 616);
-            this.dataProperties.TabIndex = 2;
+            this.dataProperties.TabIndex = 1;
             this.dataProperties.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataProperties_CellClick);
+            this.dataProperties.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataProperties_CellEnter);
             this.dataProperties.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataProperties_CellValueChanged);
             // 
             // dataGridViewTextBoxColumn1
@@ -139,8 +140,10 @@ namespace JsonManipulator
             this.gridPropertiesProp.Name = "gridPropertiesProp";
             this.gridPropertiesProp.RowHeadersVisible = false;
             this.gridPropertiesProp.Size = new System.Drawing.Size(634, 389);
-            this.gridPropertiesProp.TabIndex = 0;
+            this.gridPropertiesProp.TabIndex = 3;
             this.gridPropertiesProp.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridPropertiesProp_CellClick);
+            this.gridPropertiesProp.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridPropertiesProp_CellContentClick);
+            this.gridPropertiesProp.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridPropertiesProp_CellEnter);
             this.gridPropertiesProp.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridPropertiesProp_CellValueChanged);
             // 
             // Property
@@ -159,7 +162,7 @@ namespace JsonManipulator
             this.btnProperties.Name = "btnProperties";
             this.btnProperties.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnProperties.Size = new System.Drawing.Size(75, 23);
-            this.btnProperties.TabIndex = 7;
+            this.btnProperties.TabIndex = 2;
             this.btnProperties.Text = "Add Prop";
             this.btnProperties.UseVisualStyleBackColor = true;
             this.btnProperties.Click += new System.EventHandler(this.btnProperties_Click);
@@ -171,7 +174,7 @@ namespace JsonManipulator
             this.lstProperties.Name = "lstProperties";
             this.lstProperties.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lstProperties.Size = new System.Drawing.Size(120, 368);
-            this.lstProperties.TabIndex = 6;
+            this.lstProperties.TabIndex = 1;
             this.lstProperties.SelectedIndexChanged += new System.EventHandler(this.lstProperties_SelectedIndexChanged);
             // 
             // grpBoxMain

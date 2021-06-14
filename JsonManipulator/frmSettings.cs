@@ -21,8 +21,7 @@ namespace JsonManipulator
         }
 
         private void frmSettings_Load(object sender, EventArgs e)
-        {
-            _root.CodeNameSpaceRootName = Form1._model.root.Name;
+        { 
             _root.CodeNameSpaceSecondaryName = Form1._model.root.NameSpaceObjects.FirstOrDefault().name;
             setSetting();
 
@@ -31,18 +30,21 @@ namespace JsonManipulator
         {
             List<PropertyValue> propertyValues = new List<PropertyValue>();
             dataProperties.Columns.Clear();
-            foreach (var prop in _root.GetType().GetProperties())
+            List<string> ignoreList = Utils.GetRootPropertiesToIgnore();
+            foreach (var prop   in _root.GetType().GetProperties())
             {
                 // Console.WriteLine("{0}={1}", prop.Name, prop.GetValue(foo, null));
+                if (ignoreList.Contains(prop.Name.ToLower()))
+                    continue;
 
-                if(!prop.PropertyType.IsGenericType)
+                if (!prop.PropertyType.IsGenericType)
                 propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(_root) ?? "").ToString() }); ;
             }
             dataProperties.DataSource = propertyValues;
             if (dataProperties.Columns.Count > 0)
             {
                 dataProperties.Columns[0].ReadOnly = true;
-            }
+            } 
         }
 
         private void dataProperties_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -55,10 +57,10 @@ namespace JsonManipulator
                 {
                     value = dataProperties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 }
-                if (property == "CodeNameSpaceRootName" || property == "Name")
-                {
-                    Form1._model.root.Name = value;
-                    Form1._model.root.CodeNameSpaceRootName = value;
+                if (property == "CodeNameSpaceSecondaryName")
+                { 
+                    Form1._model.root.NameSpaceObjects.FirstOrDefault().name = value;
+                    _root.CodeNameSpaceSecondaryName = Form1._model.root.NameSpaceObjects.FirstOrDefault().name;
                     setSetting();
                 }
                 else
@@ -66,9 +68,19 @@ namespace JsonManipulator
                     
                     typeof(root).GetProperty(property).SetValue(Form1._model.root, value);
                 }
-                
+
+                ((Form1)Application.OpenForms["Form1"]).populateProjectDetails();
             }
            
+        }
+
+        private void dataProperties_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.ColumnIndex == 0)
+            {
+                SendKeys.Send("{TAB}");
+            }
         }
     }
 }
