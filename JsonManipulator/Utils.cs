@@ -124,13 +124,14 @@ namespace JsonManipulator
                 {
                     foreach (var objWF in dbObject.objectWorkflow)
                     {
-                        if (objWF.IsPage != null)
+                        if (objWF.IsPage == null)
                         {
                             if (includePageForms && 
                                 !objWF.Name.Trim().ToLower().EndsWith("initreport") &&
                                 !objWF.Name.Trim().ToLower().EndsWith("initobjwf"))
                             {
                                 result.Add(objWF.Name);
+                                continue;
                             }
 
                             if (includeNonPageObjFlows &&
@@ -140,6 +141,7 @@ namespace JsonManipulator
                                 ))
                             {
                                 result.Add(objWF.Name);
+                                continue;
                             }
                         }
                         else
@@ -151,12 +153,14 @@ namespace JsonManipulator
                                 objWF.IsPage.Trim().ToLower() == "true")
                             {
                                 result.Add(objWF.Name);
+                                continue;
                             }
 
                             if (includeNonPageObjFlows && 
                                 objWF.IsPage.Trim().ToLower() == "false")
                             {
                                 result.Add(objWF.Name);
+                                continue;
                             }
                         }
                     }
@@ -212,6 +216,11 @@ namespace JsonManipulator
             result.Add("isValidationMissesLogged".ToLower());
             result.Add("suppressFillObjLookupTableScripts".ToLower());
 
+            for (int i = 0; i < result.Count; i++)
+            {
+                result[i] = result[i].ToLower();
+            }
+
             return result;
         }
         public static List<string> GetFormPropertiesToIgnore()
@@ -226,9 +235,9 @@ namespace JsonManipulator
             result.Add("isObjectDelete");
             result.Add("layoutName");
             result.Add("isWFSWorkflowCreated");
-            result.Add("formTitleText");
-            result.Add("formIntroText");
-            result.Add("formFooterText");
+            //result.Add("formTitleText");
+            //result.Add("formIntroText");
+            //result.Add("formFooterText");
             result.Add("formFooterImageURL");
             result.Add("isAutoSubmit");
             result.Add("isHeaderVisible");
@@ -246,12 +255,22 @@ namespace JsonManipulator
             result.Add("targetChildObject");
             result.Add("isAuthorizationRequired");
 
+            for(int i = 0;i < result.Count;i++)
+            {
+                result[i] = result[i].ToLower();
+            }
+
             return result;
         }
         public static List<string> GetFormButtonPropertiesToIgnore()
         {
             List<string> result = new List<string>();
             result.Add("destinationContextObjectName".ToLower());
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                result[i] = result[i].ToLower();
+            }
 
             return result;
         }
@@ -260,29 +279,35 @@ namespace JsonManipulator
         public static List<string> GetFormParamPropertiesToIgnore()
         {
             List<string> result = new List<string>();
-            result.Add("isRequired".ToLower());
-            result.Add("requiredErrorText".ToLower());
-            result.Add("isSecured".ToLower());
-            result.Add("isFK".ToLower());
+            //result.Add("isRequired".ToLower());
+            //result.Add("requiredErrorText".ToLower());
+            //result.Add("isSecured".ToLower());
+            //result.Add("isFK".ToLower());
             result.Add("fKObjectName".ToLower());
             result.Add("fKObjectQueryName".ToLower());
-            result.Add("isFKLookup".ToLower());
-            result.Add("isFKList".ToLower());
-            result.Add("isFKListInactiveIncluded".ToLower());
+            //result.Add("isFKLookup".ToLower());
+            //result.Add("isFKList".ToLower());
+            //result.Add("isFKListInactiveIncluded".ToLower());
             result.Add("isFKListUnknownOptionRemoved".ToLower());
-            result.Add("fKListOrderBy".ToLower());
+            //result.Add("fKListOrderBy".ToLower());
             result.Add("isFKListOptionRecommended".ToLower());
-            result.Add("isFKListSearchable".ToLower());
+            //.Add("isFKListSearchable".ToLower());
             result.Add("FKListRecommendedOption".ToLower());
-            result.Add("isRadioButtonList".ToLower());
-            result.Add("isFileUpload".ToLower());
+            //result.Add("isRadioButtonList".ToLower());
+            //result.Add("isFileUpload".ToLower());
             result.Add("isCreditCardEntry".ToLower());
             result.Add("isTimeZoneDetermined".ToLower());
-            result.Add("detailsText".ToLower());
-            result.Add("validationRuleRegExMatchRequired".ToLower());
-            result.Add("validationRuleRegExMatchRequiredErrorText".ToLower());
+            //result.Add("detailsText".ToLower());
+            //result.Add("validationRuleRegExMatchRequired".ToLower());
+            //result.Add("validationRuleRegExMatchRequiredErrorText".ToLower());
             result.Add("isIgnored".ToLower());
             result.Add("defaultValue".ToLower());
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                result[i] = result[i].ToLower();
+            }
+
             return result;
         }
         public static List<string> GetDBObjPropertiesToIgnore()
@@ -295,9 +320,14 @@ namespace JsonManipulator
             result.Add("query".ToLower());
             result.Add("modelPkg".ToLower());
             result.Add("childObject".ToLower());
-            result.Add("isSoftDeleteUsed".ToLower());
-            result.Add("cacheAllRecs".ToLower());
-            result.Add("cacheIndividualRecs".ToLower());
+            //result.Add("isSoftDeleteUsed".ToLower());
+            //result.Add("cacheAllRecs".ToLower());
+            //result.Add("cacheIndividualRecs".ToLower());
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                result[i] = result[i].ToLower();
+            }
 
             return result;
         }
@@ -311,6 +341,11 @@ namespace JsonManipulator
             result.Add("isQueryByAvailable".ToLower());
             result.Add("defaultValue".ToLower());
 
+            for (int i = 0; i < result.Count; i++)
+            {
+                result[i] = result[i].ToLower();
+            }
+
             return result;
         }
         public static List<string> GetReportPropertiesToIgnore()
@@ -318,23 +353,23 @@ namespace JsonManipulator
             List<string> result = new List<string>();
             result.Add("name");
             result.Add("initObjectWorkflowName".ToLower());
-            result.Add("isAutoRefresh".ToLower());
-            result.Add("isAutoRefreshVisible".ToLower());
-            result.Add("isAutoRefreshFrequencyVisible".ToLower());
-            result.Add("isAutoRefreshDegraded".ToLower());
-            result.Add("isRefreshButtonHidden".ToLower());
-            result.Add("autoRefreshFrequencyInMinutes".ToLower()); 
-            result.Add("defaultOrderByDescending".ToLower());
+            //result.Add("isAutoRefresh".ToLower());
+            //result.Add("isAutoRefreshVisible".ToLower());
+            //result.Add("isAutoRefreshFrequencyVisible".ToLower());
+            //result.Add("isAutoRefreshDegraded".ToLower());
+            //result.Add("isRefreshButtonHidden".ToLower());
+            //result.Add("autoRefreshFrequencyInMinutes".ToLower()); 
+            //result.Add("defaultOrderByDescending".ToLower());
             result.Add("layoutName".ToLower());
-            result.Add("isExportButtonsHidden".ToLower());
-            result.Add("isFilterSectionHidden".ToLower());
+            //result.Add("isExportButtonsHidden".ToLower());
+            //result.Add("isFilterSectionHidden".ToLower());
             result.Add("isCachingAllowed".ToLower());
             result.Add("isButtonDropDownAllowed".ToLower());
             result.Add("ratingLevelColumnName".ToLower());
             result.Add("isRatingLevelChangingRowBackgroundColor".ToLower());
             result.Add("cacheExpirationInMinutes".ToLower());
-            result.Add("isFilterSectionCollapsable".ToLower());
-            result.Add("isBreadcrumbSectionHidden".ToLower());
+            //result.Add("isFilterSectionCollapsable".ToLower());
+            //result.Add("isBreadcrumbSectionHidden".ToLower());
             result.Add("isSchedulingAllowed".ToLower());
             result.Add("isFavoriteCreationAllowed".ToLower());
             result.Add("badgeCountPropertyName".ToLower());
@@ -342,7 +377,7 @@ namespace JsonManipulator
             result.Add("isHeaderLabelsVisible".ToLower());
             result.Add("isHeaderVisible".ToLower());
             result.Add("isReportDetailLabelColumnVisible".ToLower());
-            result.Add("noRowsReturnedText".ToLower());
+            //.Add("noRowsReturnedText".ToLower());
             result.Add("formIntroText".ToLower());
             result.Add("isIgnoredInDocumentation".ToLower());
             result.Add("isAzureBlobStorageUsed".ToLower());
@@ -390,29 +425,44 @@ namespace JsonManipulator
             result.Add("visualizationFolderDragDropEventTargetName".ToLower());
             result.Add("isPage".ToLower());
 
+            for (int i = 0; i < result.Count; i++)
+            {
+                result[i] = result[i].ToLower();
+            }
+
             return result;
         }
         public static List<string> GetReportButtonPropertiesToIgnore()
         {
             List<string> result = new List<string>();
             result.Add("destinationContextObjectName".ToLower());
-            result.Add("isEnabled".ToLower());
+            //result.Add("isEnabled".ToLower());
             result.Add("conditionalVisiblePropertyName".ToLower());
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                result[i] = result[i].ToLower();
+            }
 
             return result;
         }
         public static List<string> GetReportFilterPropertiesToIgnore()
         {
             List<string> result = new List<string>();
-            result.Add("isFKList".ToLower());
-            result.Add("isFKListInactiveIncluded".ToLower());
+            //result.Add("isFKList".ToLower());
+            //result.Add("isFKListInactiveIncluded".ToLower());
             result.Add("fKObjectName".ToLower());
             result.Add("isFK".ToLower());
             result.Add("isFKLookup".ToLower());
             result.Add("fKListOrderBy".ToLower());
-            result.Add("isFKListSearchable".ToLower());
+            //result.Add("isFKListSearchable".ToLower());
             result.Add("isUnknownLookupAllowed".ToLower());
             result.Add("defaultValue".ToLower());
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                result[i] = result[i].ToLower();
+            }
 
             return result;
         }
@@ -421,38 +471,42 @@ namespace JsonManipulator
             List<string> result = new List<string>();
             result.Add("destinationContextObjectName".ToLower());
             result.Add("minWidth".ToLower());
-            result.Add("isButton".ToLower());
-            result.Add("buttonText".ToLower());
+            //result.Add("isButton".ToLower());
+            //result.Add("buttonText".ToLower());
             result.Add("destinationTargetName".ToLower());
-
-            result.Add("minWidth".ToLower());
+             
             result.Add("maxWidth".ToLower());
             result.Add("dateTimeDisplayFormat".ToLower());
-            result.Add("infoToolTipText".ToLower());
+            //result.Add("infoToolTipText".ToLower());
             result.Add("isButtonCallToAction".ToLower());
             result.Add("isHtml".ToLower());
             result.Add("isColumnSumMetricAvailable".ToLower());
             result.Add("isSummaryDisplayed".ToLower());
-            result.Add("isConditionallyDisplayed".ToLower());
-            result.Add("conditionalSqlLogic".ToLower());
-            result.Add("isUnixEpochDateTime".ToLower());
+            //result.Add("isConditionallyDisplayed".ToLower());
+            //result.Add("conditionalSqlLogic".ToLower());
+            //result.Add("isUnixEpochDateTime".ToLower());
             result.Add("isNavURL".ToLower());
             result.Add("NavURLLinkText".ToLower());
             result.Add("isButtonClickedOnRowClick".ToLower());
-            result.Add("isMultiSelectColumn".ToLower());
+            //result.Add("isMultiSelectColumn".ToLower());
             result.Add("isForcedIntoExport".ToLower());
             result.Add("isButtonAsyncObjWF".ToLower());
 
             result.Add("isAsyncObjWFResultFileStreamedOut".ToLower());
             result.Add("asyncObjWFResultFilePathParamName".ToLower());
-            result.Add("isJoinedToLeftColumn".ToLower());
-            result.Add("isJoinedToRightColumn".ToLower());
-            result.Add("conditionalVisiblePropertyName".ToLower());
+            //result.Add("isJoinedToLeftColumn".ToLower());
+            //result.Add("isJoinedToRightColumn".ToLower());
+            //result.Add("conditionalVisiblePropertyName".ToLower());
             result.Add("buttonBadgeCountPropertyName".ToLower());
             result.Add("isFormFooter".ToLower());
             result.Add("isImageURL".ToLower());
             result.Add("isEncrypted".ToLower());
             result.Add("isIgnored".ToLower());
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                result[i] = result[i].ToLower();
+            }
 
             return result;
         }
@@ -601,6 +655,32 @@ namespace JsonManipulator
             }
 
 
+        }
+
+        public static string Capitalize(string value)
+        {
+            char[] array = value.ToCharArray();
+            // Handle the first letter in the string.
+            if (array.Length >= 1)
+            {
+                if (char.IsLower(array[0]))
+                {
+                    array[0] = char.ToUpper(array[0]);
+                }
+            }
+            // Scan through the letters, checking for spaces.
+            // ... Uppercase the lowercase letters following spaces.
+            for (int i = 1; i < array.Length; i++)
+            {
+                if (array[i - 1] == ' ')
+                {
+                    if (char.IsLower(array[i]))
+                    {
+                        array[i] = char.ToUpper(array[i]);
+                    }
+                }
+            }
+            return new string(array);
         }
 
     }

@@ -38,7 +38,7 @@ namespace JsonManipulator
         {
             List<PropertyValue> propertyValues = new List<PropertyValue>();
             List<string> ignoreList = Utils.GetFormPropertiesToIgnore();
-            foreach (var prop in _form.GetType().GetProperties())
+            foreach (var prop in _form.GetType().GetProperties().OrderBy(x => x.Name).ToList())
             {
                 if (ignoreList.Contains(prop.Name.ToLower()))
                     continue;
@@ -92,7 +92,7 @@ namespace JsonManipulator
                 String controlName = lstControl.SelectedItem.ToString();
                 List<string> ignoreList = Utils.GetFormParamPropertiesToIgnore();
                 objectWorkflowParam frmControl = _form.objectWorkflowParam.Where(x => x.name == controlName).FirstOrDefault();
-                foreach (var prop in frmControl.GetType().GetProperties())
+                foreach (var prop in frmControl.GetType().GetProperties().OrderBy(x => x.Name).ToList())
                 {
                     if (ignoreList.Contains(prop.Name.ToLower()))
                         continue;
@@ -117,7 +117,7 @@ namespace JsonManipulator
                 String buttonName = lstButtons.SelectedItem.ToString();
                 List<string> ignoreList = Utils.GetFormButtonPropertiesToIgnore();
                 objectWorkflowButton frmControl = _form.objectWorkflowButton.Where(x => x.buttonText == buttonName).FirstOrDefault();
-                foreach (var prop in frmControl.GetType().GetProperties())
+                foreach (var prop in frmControl.GetType().GetProperties().OrderBy(x => x.Name).ToList())
                 {
                     if (ignoreList.Contains(prop.Name.ToLower()))
                         continue;
@@ -247,6 +247,7 @@ namespace JsonManipulator
                     Models.ObjectMap destinationOwnerObject = Utils.GetDestinationOwnerObject(value);
                     if (destinationOwnerObject == null)
                     {
+                        gridButtons.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "";
                         return;
                     }
                     typeof(objectWorkflowButton).GetProperty("destinationContextObjectName").SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowButton.ElementAt(lstButtons.SelectedIndex), destinationOwnerObject.name); ;
@@ -263,6 +264,7 @@ namespace JsonManipulator
         {
             if (e.ColumnIndex > 0)
             {
+                DataGridViewComboBoxCell l_objGridDropbox = new DataGridViewComboBoxCell(); 
                 string propertyName = gridProperties.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value.ToString();
                 
                 if (propertyName.Equals("RoleRequired", StringComparison.OrdinalIgnoreCase))
@@ -274,6 +276,15 @@ namespace JsonManipulator
                 {
                     ObjectsList roleList = new ObjectsList(FormObjects.DBBJECT_EDIT, e.RowIndex, e.ColumnIndex);
                     roleList.ShowDialog();
+                }
+                if (propertyName.StartsWith("is"))
+                {
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
+                    gridProperties[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
+                    l_objGridDropbox.DataSource = Utils.getBooleans(); // Bind combobox with datasource.  
+                    l_objGridDropbox.ValueMember = "Value";
+                    l_objGridDropbox.DisplayMember = "Display";
+                    l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
                 }
             }
         }
@@ -293,7 +304,16 @@ namespace JsonManipulator
                 DataGridViewComboBoxCell l_objGridDropbox = new DataGridViewComboBoxCell();
                 string propertyName = gridControls.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value.ToString();
                 // Check the column  cell, in which it click.  
-                if (propertyName.Equals("IsVisible", StringComparison.OrdinalIgnoreCase) || propertyName.Equals("forceDBColumnIndex", StringComparison.OrdinalIgnoreCase) || propertyName.Equals("IsEncrypted", StringComparison.OrdinalIgnoreCase))
+                if (propertyName.Equals("forceDBColumnIndex", StringComparison.OrdinalIgnoreCase))
+                {
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
+                    gridControls[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
+                    l_objGridDropbox.DataSource = Utils.getBooleans(); // Bind combobox with datasource.  
+                    l_objGridDropbox.ValueMember = "Value";
+                    l_objGridDropbox.DisplayMember = "Display";
+                    l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+                }
+                if (propertyName.StartsWith("is"))
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview  
                     gridControls[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
@@ -333,7 +353,7 @@ namespace JsonManipulator
                     l_objGridDropbox.DisplayMember = "Display";
                     l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
                 }
-                if (propertyName.Equals("IsVisible", StringComparison.OrdinalIgnoreCase))
+                if (propertyName.StartsWith("is"))
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview  
                     gridButtons[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;

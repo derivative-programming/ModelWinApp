@@ -21,8 +21,10 @@ namespace JsonManipulator
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
-        { 
-            if(txtName.Text.Trim().Length == 0)
+        {
+            txtName.Text = Utils.Capitalize(txtName.Text).Replace(" ", "");
+            
+            if (txtName.Text.Trim().Length == 0)
             {
                 ShowValidationError("Name Required.");
                 return;

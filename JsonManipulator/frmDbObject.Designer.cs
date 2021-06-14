@@ -67,6 +67,7 @@ namespace JsonManipulator
             // 
             // btnCancel
             // 
+            this.btnCancel.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(173, 123);
             this.btnCancel.Name = "btnCancel";
@@ -87,11 +88,13 @@ namespace JsonManipulator
             // 
             // txtOwner
             // 
+            this.txtOwner.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtOwner.Location = new System.Drawing.Point(12, 64);
             this.txtOwner.Name = "txtOwner";
             this.txtOwner.ReadOnly = true;
             this.txtOwner.Size = new System.Drawing.Size(200, 20);
             this.txtOwner.TabIndex = 3;
+            this.txtOwner.TabStop = false;
             // 
             // btnOwner
             // 

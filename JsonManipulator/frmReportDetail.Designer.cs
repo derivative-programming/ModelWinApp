@@ -103,6 +103,7 @@ namespace JsonManipulator
             this.txtOwner.ReadOnly = true;
             this.txtOwner.Size = new System.Drawing.Size(200, 20);
             this.txtOwner.TabIndex = 6;
+            this.txtOwner.TabStop = false;
             // 
             // label1
             // 

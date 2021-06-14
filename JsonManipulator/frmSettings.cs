@@ -31,7 +31,7 @@ namespace JsonManipulator
             List<PropertyValue> propertyValues = new List<PropertyValue>();
             dataProperties.Columns.Clear();
             List<string> ignoreList = Utils.GetRootPropertiesToIgnore();
-            foreach (var prop   in _root.GetType().GetProperties())
+            foreach (var prop   in _root.GetType().GetProperties().OrderBy(x => x.Name).ToList())
             {
                 // Console.WriteLine("{0}={1}", prop.Name, prop.GetValue(foo, null));
                 if (ignoreList.Contains(prop.Name.ToLower()))

@@ -57,7 +57,7 @@ namespace JsonManipulator
         {
             nodeMenus.Nodes["dbObjects"].Nodes.Clear();
             NameSpaceObject nameSpaceObject = _model.root.NameSpaceObjects.FirstOrDefault();
-            foreach (var dbObj in nameSpaceObject.ObjectMap.Where(x => x.name.Contains(filter)))
+            foreach (var dbObj in nameSpaceObject.ObjectMap.Where(x => x.name.ToLower().Contains(filter.Trim().ToLower())))
             {
                 TreeNode node = new TreeNode();
                 node.Text = dbObj.name;
@@ -76,7 +76,7 @@ namespace JsonManipulator
             {
                 if(dbObj.objectWorkflow !=null)
                 {
-                    foreach (var objWF in dbObj.objectWorkflow.Where(x=>x.Name.Contains(filter)))
+                    foreach (var objWF in dbObj.objectWorkflow.Where(x=>x.Name.Trim().ToLower().Contains(filter.Trim().ToLower())))
                     { 
                         _forms.Add(objWF);
                         TreeNode node = new TreeNode();
@@ -143,8 +143,9 @@ namespace JsonManipulator
                         frmSettings frmSettings = new frmSettings(_model.root);
                         frmSettings.TopLevel = false;
                         frmSettings.AutoScroll = true;
-                        frmSettings.Height = this.mainPanel.Height;
-                        frmSettings.Width = this.mainPanel.Width;
+                        frmSettings.Dock = DockStyle.Fill;
+                        //frmSettings.Height = this.mainPanel.Height;
+                        //frmSettings.Width = this.mainPanel.Width;
                         this.mainPanel.Controls.Add(frmSettings);
                         frmSettings.Show();
                     }
@@ -158,8 +159,9 @@ namespace JsonManipulator
                         frmDbObjSettings frmDbObjSettings = new frmDbObjSettings(objectMap);
                         frmDbObjSettings.TopLevel = false;
                         frmDbObjSettings.AutoScroll = true;
-                        frmDbObjSettings.Height = this.mainPanel.Height;
-                        frmDbObjSettings.Width = this.mainPanel.Width;
+                        frmDbObjSettings.Dock = DockStyle.Fill;
+                        //frmDbObjSettings.Height = this.mainPanel.Height;
+                        //frmDbObjSettings.Width = this.mainPanel.Width;
                         this.mainPanel.Controls.Add(frmDbObjSettings);
                         frmDbObjSettings.Show();
                     }
@@ -174,8 +176,9 @@ namespace JsonManipulator
                             frmReportSettings frmReportSettings = new frmReportSettings(rpt.name);
                             frmReportSettings.TopLevel = false;
                             frmReportSettings.AutoScroll = true;
-                            frmReportSettings.Height = this.mainPanel.Height;
-                            frmReportSettings.Width = this.mainPanel.Width;
+                            frmReportSettings.Dock = DockStyle.Fill;
+                            //frmReportSettings.Height = this.mainPanel.Height;
+                            //frmReportSettings.Width = this.mainPanel.Width;
                             this.mainPanel.Controls.Add(frmReportSettings);
                             frmReportSettings.Show();
                             break;
@@ -186,8 +189,9 @@ namespace JsonManipulator
                             frmFormSettings frmFormSettings = new frmFormSettings(form.Name);
                             frmFormSettings.TopLevel = false;
                             frmFormSettings.AutoScroll = true;
-                            frmFormSettings.Height = this.mainPanel.Height;
-                            frmFormSettings.Width = this.mainPanel.Width;
+                            frmFormSettings.Dock = DockStyle.Fill;
+                            //frmFormSettings.Height = this.mainPanel.Height;
+                            //frmFormSettings.Width = this.mainPanel.Width;
                             this.mainPanel.Controls.Add(frmFormSettings);
                             frmFormSettings.Show();
                             break;
@@ -260,8 +264,9 @@ namespace JsonManipulator
         {
             FrmHelp frmHelp = new FrmHelp();
             frmHelp.TopLevel = false;
-            frmHelp.Height = this.mainPanel.Height;
-            frmHelp.Width = this.mainPanel.Width;
+            frmHelp.Dock = DockStyle.Fill;
+            //frmHelp.Height = this.mainPanel.Height;
+            //frmHelp.Width = this.mainPanel.Width;
             this.mainPanel.Controls.Add(frmHelp);
             frmHelp.Show();
         }

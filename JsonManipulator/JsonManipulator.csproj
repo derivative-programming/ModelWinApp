@@ -163,6 +163,7 @@
     <Compile Include="frmSettings.Designer.cs">
       <DependentUpon>frmSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="LocalStorage.cs" />
     <Compile Include="Models\Models.cs" />
     <Compile Include="Models\PropertyValue.cs" />
     <Compile Include="FormsList.cs">

@@ -56,6 +56,11 @@ namespace JsonManipulator
             this.Close();
         }
 
+        private void txtName_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
         private void FrmAddButton_Load(object sender, EventArgs e)
         {
             

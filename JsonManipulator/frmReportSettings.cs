@@ -36,7 +36,7 @@ namespace JsonManipulator
             List<PropertyValue> propertyValues = new List<PropertyValue>();
             dataProperties.Columns.Clear();
             List<string> ignoreList = Utils.GetReportPropertiesToIgnore();
-            foreach (var prop in _rpt.GetType().GetProperties())
+            foreach (var prop in _rpt.GetType().GetProperties().OrderBy(x => x.Name).ToList())
             {
                 if (ignoreList.Contains(prop.Name.ToLower()))
                     continue;
@@ -102,7 +102,7 @@ namespace JsonManipulator
                 String filterName = lstFilters.SelectedItem.ToString();
                 List<string> ignoreList = Utils.GetReportFilterPropertiesToIgnore();
                 reportParam rptParam = _rpt.reportParam.Where(x => x.name == filterName).FirstOrDefault();
-                foreach (var prop in rptParam.GetType().GetProperties())
+                foreach (var prop in rptParam.GetType().GetProperties().OrderBy(x => x.Name).ToList())
                 {
                     if (ignoreList.Contains(prop.Name.ToLower()))
                         continue;
@@ -125,7 +125,7 @@ namespace JsonManipulator
             String columnMane = lstColumns.SelectedItem.ToString();
             List<string> ignoreList = Utils.GetReportColumnPropertiesToIgnore();
             reportColumn rptColumn = _rpt.reportColumn.Where(x => x.name == columnMane).FirstOrDefault();
-            foreach (var prop in rptColumn.GetType().GetProperties())
+            foreach (var prop in rptColumn.GetType().GetProperties().OrderBy(x => x.Name).ToList())
             {
                 if (ignoreList.Contains(prop.Name.ToLower()))
                     continue;
@@ -146,7 +146,7 @@ namespace JsonManipulator
             String buttonName = lstButtons.SelectedItem.ToString();
             List<string> ignoreList = Utils.GetReportButtonPropertiesToIgnore();
             reportButton rptButton = _rpt.reportButton.Where(x => x.buttonName == buttonName).FirstOrDefault();
-            foreach (var prop in rptButton.GetType().GetProperties())
+            foreach (var prop in rptButton.GetType().GetProperties().OrderBy(x => x.Name).ToList())
             {
                 if (ignoreList.Contains(prop.Name.ToLower()))
                     continue;
@@ -340,7 +340,7 @@ namespace JsonManipulator
                 DataGridViewComboBoxCell l_objGridDropbox = new DataGridViewComboBoxCell();
                 string propertyName = dataProperties.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value.ToString();
                 // Check the column  cell, in which it click.  
-                if (propertyName.Equals("isCustomSQlUsed",StringComparison.OrdinalIgnoreCase) || propertyName.Equals("IsPagingAvailable", StringComparison.OrdinalIgnoreCase)|| propertyName.Equals("IsExportButtonHidden", StringComparison.OrdinalIgnoreCase))
+                if (propertyName.StartsWith("is"))
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview  
                     dataProperties[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
@@ -382,7 +382,7 @@ namespace JsonManipulator
                 DataGridViewComboBoxCell l_objGridDropbox = new DataGridViewComboBoxCell();
                 string propertyName = gridFilters.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value.ToString();
                 // Check the column  cell, in which it click.  
-                if (propertyName.Equals("IsVisible", StringComparison.OrdinalIgnoreCase))
+                if (propertyName.StartsWith("is"))
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview  
                     gridFilters[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
@@ -437,7 +437,7 @@ namespace JsonManipulator
                 l_objGridDropbox.DisplayMember = "Display";
                 l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
             }
-            if (propertyName.Equals("IsVisible", StringComparison.OrdinalIgnoreCase)|| propertyName.Equals("IsButtonCallToAction", StringComparison.OrdinalIgnoreCase))
+            if (propertyName.StartsWith("IsVisible"))
             {
                 // On click of datagridview cell, attched combobox with this click cell of datagridview  
                 gridButtons[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
@@ -464,7 +464,7 @@ namespace JsonManipulator
                 DataGridViewComboBoxCell l_objGridDropbox = new DataGridViewComboBoxCell();
                 string propertyName = gridColumns.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value.ToString();
                 // Check the column  cell, in which it click.  
-                if (propertyName.Equals("IsVisible", StringComparison.OrdinalIgnoreCase))
+                if (propertyName.StartsWith("is"))
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview  
                     gridColumns[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
@@ -472,16 +472,7 @@ namespace JsonManipulator
                     l_objGridDropbox.ValueMember = "Value";
                     l_objGridDropbox.DisplayMember = "Display";
                     l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
-                }
-                if (propertyName.Equals("IsButton", StringComparison.OrdinalIgnoreCase))
-                {
-                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
-                    gridColumns[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
-                    l_objGridDropbox.DataSource = Utils.getBooleans(); // Bind combobox with datasource.  
-                    l_objGridDropbox.ValueMember = "Value";
-                    l_objGridDropbox.DisplayMember = "Display";
-                    l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
-                }
+                } 
                 if (propertyName.Equals("sqlServerDBDataType", StringComparison.OrdinalIgnoreCase))
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview  
@@ -518,6 +509,7 @@ namespace JsonManipulator
                     Models.ObjectMap destinationOwnerObject = Utils.GetDestinationOwnerObject(value);
                     if (destinationOwnerObject == null)
                     {
+                        gridButtons.Rows[gridButtons.CurrentCell.RowIndex].Cells[gridButtons.CurrentCell.ColumnIndex].Value = "";
                         return;
                     } 
                     typeof(reportButton).GetProperty("destinationContextObjectName").SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportButton.ElementAt(lstButtons.SelectedIndex), destinationOwnerObject.name);
@@ -582,6 +574,11 @@ namespace JsonManipulator
             {
                 SendKeys.Send("{TAB}");
             }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

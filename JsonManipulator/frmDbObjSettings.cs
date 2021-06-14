@@ -33,7 +33,7 @@ namespace JsonManipulator
             List<PropertyValue> propertyValues = new List<PropertyValue>();
             dataProperties.Columns.Clear();
             List<string> ignoreList = Utils.GetDBObjPropertiesToIgnore();
-            foreach (var prop in _map.GetType().GetProperties())
+            foreach (var prop in _map.GetType().GetProperties().OrderBy(x => x.Name).ToList())
             {
                 if (ignoreList.Contains(prop.Name.ToLower()))
                     continue;
@@ -72,7 +72,7 @@ namespace JsonManipulator
                 String propname = lstProperties.SelectedItem.ToString();
                 property prpty = _map.property.Where(x => x.name == propname).FirstOrDefault();
                 List<string> ignoreList = Utils.GetDBObjPropPropertiesToIgnore();
-                foreach (var prop in prpty.GetType().GetProperties())
+                foreach (var prop in prpty.GetType().GetProperties().OrderBy(x => x.Name).ToList())
                 {
                     if (ignoreList.Contains(prop.Name.ToLower()))
                         continue;
@@ -125,7 +125,9 @@ namespace JsonManipulator
                 DataGridViewComboBoxCell l_objGridDropbox = new DataGridViewComboBoxCell();
                 string propertyName = dataProperties.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value.ToString();
                 // Check the column  cell, in which it click.  
-                if (propertyName.Equals("isLookup") )
+                if (propertyName.StartsWith("is") ||
+                    propertyName.Equals("cacheAllRecs", StringComparison.OrdinalIgnoreCase) ||
+                    propertyName.Equals("cacheIndividualRecs", StringComparison.OrdinalIgnoreCase)) //isLookup
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview  
                     dataProperties[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
@@ -155,7 +157,16 @@ namespace JsonManipulator
                 DataGridViewComboBoxCell l_objGridDropbox = new DataGridViewComboBoxCell();
                 string propertyName = gridPropertiesProp.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value.ToString();
                 // Check the column  cell, in which it click.  
-                if (propertyName.Equals("IsFK",StringComparison.OrdinalIgnoreCase)|| propertyName.Equals("forceDBColumnIndex", StringComparison.OrdinalIgnoreCase) || propertyName.Equals("IsEncrypted", StringComparison.OrdinalIgnoreCase))
+                if (propertyName.Equals("forceDBColumnIndex", StringComparison.OrdinalIgnoreCase))
+                {
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
+                    gridPropertiesProp[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
+                    l_objGridDropbox.DataSource = Utils.getBooleans(); // Bind combobox with datasource.  
+                    l_objGridDropbox.ValueMember = "Value";
+                    l_objGridDropbox.DisplayMember = "Display";
+                    l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+                }
+                if (propertyName.StartsWith("is"))
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview  
                     gridPropertiesProp[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;

@@ -87,7 +87,7 @@ namespace JsonManipulator
             this.Name = "FrmAddFilter";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Add Filter";
+            this.Text = "Add Report Filter";
             this.ResumeLayout(false);
             this.PerformLayout();
 

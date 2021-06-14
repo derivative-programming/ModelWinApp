@@ -23,6 +23,8 @@ namespace JsonManipulator
 
         private void frmAdd_Click(object sender, EventArgs e)
         {
+            txtName.Text = Utils.Capitalize(txtName.Text).Replace(" ", "");
+
             if (txtName.Text.Trim().Length == 0)
             {
                 ShowValidationError("Name Required.");
@@ -42,12 +44,43 @@ namespace JsonManipulator
                 return;
             }
 
+            List<string> existingDBObjects = Utils.GetNameList(true, false, false, false);
+            if (existingDBObjects.Where(x => x.ToLower().Contains(txtOwner.Text.Trim().ToLower())).ToList().Count == 0)
+            {
+                ShowValidationError("Owner Object Not Found.");
+                return;
+            }
+
+            if (!txtName.Text.Trim().ToLower().StartsWith(txtOwner.Text.Trim().ToLower() + txtRole.Text.Trim().ToLower()))
+            {
+                ShowValidationError("Please modify the name to use the format " + Environment.NewLine + "[Owner Object Name][Role Name][Functional Name].");
+                return;
+            }
+
+
             objectWorkflow form = new objectWorkflow();
             form.Name = txtName.Text;
             form.RoleRequired = txtRole.Text; 
             if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text).FirstOrDefault().objectWorkflow == null)
                 Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text).FirstOrDefault().objectWorkflow = new List<objectWorkflow>();
-            
+
+            Models.objectWorkflowButton formButtonSubmit = new objectWorkflowButton();
+            formButtonSubmit.buttonText = "OK";
+            formButtonSubmit.buttonType = "submit";
+            formButtonSubmit.isVisible = "true";
+
+
+            Models.objectWorkflowButton formButtonCancel = new objectWorkflowButton();
+            formButtonCancel.buttonText = "Cancel";
+            formButtonCancel.buttonType = "cancel";
+            formButtonCancel.isVisible = "true";
+
+            form.objectWorkflowButton = new List<objectWorkflowButton>();
+            form.objectWorkflowButton.Add(formButtonSubmit);
+            form.objectWorkflowButton.Add(formButtonCancel);
+
+
+
             Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x=>x.name== txtOwner.Text).FirstOrDefault().objectWorkflow.Add(form);
             ((Form1)Application.OpenForms["Form1"]).AddToTree(form);
             ((Form1)Application.OpenForms["Form1"]).showMessage("Form was added successfully");

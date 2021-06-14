@@ -51,6 +51,16 @@ namespace JsonManipulator
             this.btnAddButton = new System.Windows.Forms.Button();
             this.lstButtons = new System.Windows.Forms.ListBox();
             this.grpMain = new System.Windows.Forms.GroupBox();
+            this.pnlControlsLeft = new System.Windows.Forms.Panel();
+            this.pnlControlsRight = new System.Windows.Forms.Panel();
+            this.pnlControlsLeftBottom = new System.Windows.Forms.Panel();
+            this.pnlControlsLeftTop = new System.Windows.Forms.Panel();
+            this.splitter1 = new System.Windows.Forms.Splitter();
+            this.pnlButtonsLeftTop = new System.Windows.Forms.Panel();
+            this.pnlButtonsLeft = new System.Windows.Forms.Panel();
+            this.pnlButtonsLeftBottom = new System.Windows.Forms.Panel();
+            this.pnlButtonsRight = new System.Windows.Forms.Panel();
+            this.splitter2 = new System.Windows.Forms.Splitter();
             this.tabControl1.SuspendLayout();
             this.tabSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridProperties)).BeginInit();
@@ -61,6 +71,14 @@ namespace JsonManipulator
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridButtons)).BeginInit();
             this.grpMain.SuspendLayout();
+            this.pnlControlsLeft.SuspendLayout();
+            this.pnlControlsRight.SuspendLayout();
+            this.pnlControlsLeftBottom.SuspendLayout();
+            this.pnlControlsLeftTop.SuspendLayout();
+            this.pnlButtonsLeftTop.SuspendLayout();
+            this.pnlButtonsLeft.SuspendLayout();
+            this.pnlButtonsLeftBottom.SuspendLayout();
+            this.pnlButtonsRight.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -72,7 +90,7 @@ namespace JsonManipulator
             this.tabControl1.Location = new System.Drawing.Point(3, 16);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(794, 431);
+            this.tabControl1.Size = new System.Drawing.Size(794, 506);
             this.tabControl1.TabIndex = 0;
             // 
             // tabSettings
@@ -116,11 +134,9 @@ namespace JsonManipulator
             // 
             // tabControls
             // 
-            this.tabControls.Controls.Add(this.btnControlDown);
-            this.tabControls.Controls.Add(this.btnControlUp);
-            this.tabControls.Controls.Add(this.groupBox3);
-            this.tabControls.Controls.Add(this.btnControls);
-            this.tabControls.Controls.Add(this.lstControl);
+            this.tabControls.Controls.Add(this.splitter1);
+            this.tabControls.Controls.Add(this.pnlControlsRight);
+            this.tabControls.Controls.Add(this.pnlControlsLeft);
             this.tabControls.Location = new System.Drawing.Point(4, 22);
             this.tabControls.Name = "tabControls";
             this.tabControls.Padding = new System.Windows.Forms.Padding(3);
@@ -131,7 +147,7 @@ namespace JsonManipulator
             // 
             // btnControlDown
             // 
-            this.btnControlDown.Location = new System.Drawing.Point(8, 375);
+            this.btnControlDown.Location = new System.Drawing.Point(3, 61);
             this.btnControlDown.Name = "btnControlDown";
             this.btnControlDown.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnControlDown.Size = new System.Drawing.Size(75, 23);
@@ -142,7 +158,7 @@ namespace JsonManipulator
             // 
             // btnControlUp
             // 
-            this.btnControlUp.Location = new System.Drawing.Point(8, 346);
+            this.btnControlUp.Location = new System.Drawing.Point(3, 32);
             this.btnControlUp.Name = "btnControlUp";
             this.btnControlUp.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnControlUp.Size = new System.Drawing.Size(75, 23);
@@ -154,10 +170,11 @@ namespace JsonManipulator
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.gridControls);
-            this.groupBox3.Location = new System.Drawing.Point(144, 8);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Location = new System.Drawing.Point(0, 0);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox3.Size = new System.Drawing.Size(640, 408);
+            this.groupBox3.Size = new System.Drawing.Size(592, 399);
             this.groupBox3.TabIndex = 15;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Control Properties";
@@ -174,7 +191,7 @@ namespace JsonManipulator
             this.gridControls.MultiSelect = false;
             this.gridControls.Name = "gridControls";
             this.gridControls.RowHeadersVisible = false;
-            this.gridControls.Size = new System.Drawing.Size(634, 389);
+            this.gridControls.Size = new System.Drawing.Size(586, 380);
             this.gridControls.TabIndex = 5;
             this.gridControls.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridControls_CellClick);
             this.gridControls.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridControls_CellContentClick);
@@ -193,7 +210,7 @@ namespace JsonManipulator
             // 
             // btnControls
             // 
-            this.btnControls.Location = new System.Drawing.Point(8, 317);
+            this.btnControls.Location = new System.Drawing.Point(3, 3);
             this.btnControls.Name = "btnControls";
             this.btnControls.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnControls.Size = new System.Drawing.Size(75, 23);
@@ -204,23 +221,24 @@ namespace JsonManipulator
             // 
             // lstControl
             // 
+            this.lstControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstControl.FormattingEnabled = true;
-            this.lstControl.Location = new System.Drawing.Point(8, 8);
+            this.lstControl.Location = new System.Drawing.Point(0, 0);
             this.lstControl.Name = "lstControl";
             this.lstControl.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lstControl.Size = new System.Drawing.Size(120, 303);
+            this.lstControl.Size = new System.Drawing.Size(188, 293);
             this.lstControl.TabIndex = 1;
             this.lstControl.SelectedIndexChanged += new System.EventHandler(this.lstControl_SelectedIndexChanged);
             // 
             // tabButtons
             // 
-            this.tabButtons.Controls.Add(this.groupBox1);
-            this.tabButtons.Controls.Add(this.btnAddButton);
-            this.tabButtons.Controls.Add(this.lstButtons);
+            this.tabButtons.Controls.Add(this.splitter2);
+            this.tabButtons.Controls.Add(this.pnlButtonsRight);
+            this.tabButtons.Controls.Add(this.pnlButtonsLeft);
             this.tabButtons.Location = new System.Drawing.Point(4, 22);
             this.tabButtons.Name = "tabButtons";
             this.tabButtons.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.tabButtons.Size = new System.Drawing.Size(786, 405);
+            this.tabButtons.Size = new System.Drawing.Size(786, 480);
             this.tabButtons.TabIndex = 2;
             this.tabButtons.Text = "Buttons";
             this.tabButtons.UseVisualStyleBackColor = true;
@@ -228,10 +246,11 @@ namespace JsonManipulator
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.gridButtons);
-            this.groupBox1.Location = new System.Drawing.Point(144, 8);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox1.Size = new System.Drawing.Size(640, 408);
+            this.groupBox1.Size = new System.Drawing.Size(609, 480);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Button Properties";
@@ -248,7 +267,7 @@ namespace JsonManipulator
             this.gridButtons.MultiSelect = false;
             this.gridButtons.Name = "gridButtons";
             this.gridButtons.RowHeadersVisible = false;
-            this.gridButtons.Size = new System.Drawing.Size(634, 389);
+            this.gridButtons.Size = new System.Drawing.Size(603, 461);
             this.gridButtons.TabIndex = 3;
             this.gridButtons.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridButtons_CellClick);
             this.gridButtons.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridButtons_CellContentClick);
@@ -267,7 +286,7 @@ namespace JsonManipulator
             // 
             // btnAddButton
             // 
-            this.btnAddButton.Location = new System.Drawing.Point(8, 382);
+            this.btnAddButton.Location = new System.Drawing.Point(3, 3);
             this.btnAddButton.Name = "btnAddButton";
             this.btnAddButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnAddButton.Size = new System.Drawing.Size(75, 23);
@@ -278,11 +297,12 @@ namespace JsonManipulator
             // 
             // lstButtons
             // 
+            this.lstButtons.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstButtons.FormattingEnabled = true;
-            this.lstButtons.Location = new System.Drawing.Point(8, 8);
+            this.lstButtons.Location = new System.Drawing.Point(0, 0);
             this.lstButtons.Name = "lstButtons";
             this.lstButtons.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lstButtons.Size = new System.Drawing.Size(120, 368);
+            this.lstButtons.Size = new System.Drawing.Size(177, 480);
             this.lstButtons.TabIndex = 1;
             this.lstButtons.SelectedIndexChanged += new System.EventHandler(this.lstButtons_SelectedIndexChanged);
             // 
@@ -292,15 +312,107 @@ namespace JsonManipulator
             this.grpMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpMain.Location = new System.Drawing.Point(0, 0);
             this.grpMain.Name = "grpMain";
-            this.grpMain.Size = new System.Drawing.Size(800, 450);
+            this.grpMain.Size = new System.Drawing.Size(800, 525);
             this.grpMain.TabIndex = 1;
             this.grpMain.TabStop = false;
             this.grpMain.Text = "groupBox2";
             // 
+            // pnlControlsLeft
+            // 
+            this.pnlControlsLeft.Controls.Add(this.pnlControlsLeftTop);
+            this.pnlControlsLeft.Controls.Add(this.pnlControlsLeftBottom);
+            this.pnlControlsLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlControlsLeft.Location = new System.Drawing.Point(3, 3);
+            this.pnlControlsLeft.Name = "pnlControlsLeft";
+            this.pnlControlsLeft.Size = new System.Drawing.Size(188, 399);
+            this.pnlControlsLeft.TabIndex = 16;
+            // 
+            // pnlControlsRight
+            // 
+            this.pnlControlsRight.Controls.Add(this.groupBox3);
+            this.pnlControlsRight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlControlsRight.Location = new System.Drawing.Point(191, 3);
+            this.pnlControlsRight.Name = "pnlControlsRight";
+            this.pnlControlsRight.Size = new System.Drawing.Size(592, 399);
+            this.pnlControlsRight.TabIndex = 17;
+            // 
+            // pnlControlsLeftBottom
+            // 
+            this.pnlControlsLeftBottom.Controls.Add(this.btnControls);
+            this.pnlControlsLeftBottom.Controls.Add(this.btnControlUp);
+            this.pnlControlsLeftBottom.Controls.Add(this.btnControlDown);
+            this.pnlControlsLeftBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlControlsLeftBottom.Location = new System.Drawing.Point(0, 293);
+            this.pnlControlsLeftBottom.Name = "pnlControlsLeftBottom";
+            this.pnlControlsLeftBottom.Size = new System.Drawing.Size(188, 106);
+            this.pnlControlsLeftBottom.TabIndex = 17;
+            // 
+            // pnlControlsLeftTop
+            // 
+            this.pnlControlsLeftTop.Controls.Add(this.lstControl);
+            this.pnlControlsLeftTop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlControlsLeftTop.Location = new System.Drawing.Point(0, 0);
+            this.pnlControlsLeftTop.Name = "pnlControlsLeftTop";
+            this.pnlControlsLeftTop.Size = new System.Drawing.Size(188, 293);
+            this.pnlControlsLeftTop.TabIndex = 18;
+            // 
+            // splitter1
+            // 
+            this.splitter1.Location = new System.Drawing.Point(191, 3);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(3, 399);
+            this.splitter1.TabIndex = 18;
+            this.splitter1.TabStop = false;
+            // 
+            // pnlButtonsLeftTop
+            // 
+            this.pnlButtonsLeftTop.Controls.Add(this.lstButtons);
+            this.pnlButtonsLeftTop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlButtonsLeftTop.Location = new System.Drawing.Point(0, 0);
+            this.pnlButtonsLeftTop.Name = "pnlButtonsLeftTop";
+            this.pnlButtonsLeftTop.Size = new System.Drawing.Size(177, 480);
+            this.pnlButtonsLeftTop.TabIndex = 6;
+            // 
+            // pnlButtonsLeft
+            // 
+            this.pnlButtonsLeft.Controls.Add(this.pnlButtonsLeftBottom);
+            this.pnlButtonsLeft.Controls.Add(this.pnlButtonsLeftTop);
+            this.pnlButtonsLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlButtonsLeft.Location = new System.Drawing.Point(0, 0);
+            this.pnlButtonsLeft.Name = "pnlButtonsLeft";
+            this.pnlButtonsLeft.Size = new System.Drawing.Size(177, 480);
+            this.pnlButtonsLeft.TabIndex = 7;
+            // 
+            // pnlButtonsLeftBottom
+            // 
+            this.pnlButtonsLeftBottom.Controls.Add(this.btnAddButton);
+            this.pnlButtonsLeftBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlButtonsLeftBottom.Location = new System.Drawing.Point(0, 411);
+            this.pnlButtonsLeftBottom.Name = "pnlButtonsLeftBottom";
+            this.pnlButtonsLeftBottom.Size = new System.Drawing.Size(177, 69);
+            this.pnlButtonsLeftBottom.TabIndex = 7;
+            // 
+            // pnlButtonsRight
+            // 
+            this.pnlButtonsRight.Controls.Add(this.groupBox1);
+            this.pnlButtonsRight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlButtonsRight.Location = new System.Drawing.Point(177, 0);
+            this.pnlButtonsRight.Name = "pnlButtonsRight";
+            this.pnlButtonsRight.Size = new System.Drawing.Size(609, 480);
+            this.pnlButtonsRight.TabIndex = 7;
+            // 
+            // splitter2
+            // 
+            this.splitter2.Location = new System.Drawing.Point(177, 0);
+            this.splitter2.Name = "splitter2";
+            this.splitter2.Size = new System.Drawing.Size(3, 480);
+            this.splitter2.TabIndex = 8;
+            this.splitter2.TabStop = false;
+            // 
             // frmFormSettings
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 525);
             this.Controls.Add(this.grpMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmFormSettings";
@@ -317,6 +429,14 @@ namespace JsonManipulator
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridButtons)).EndInit();
             this.grpMain.ResumeLayout(false);
+            this.pnlControlsLeft.ResumeLayout(false);
+            this.pnlControlsRight.ResumeLayout(false);
+            this.pnlControlsLeftBottom.ResumeLayout(false);
+            this.pnlControlsLeftTop.ResumeLayout(false);
+            this.pnlButtonsLeftTop.ResumeLayout(false);
+            this.pnlButtonsLeft.ResumeLayout(false);
+            this.pnlButtonsLeftBottom.ResumeLayout(false);
+            this.pnlButtonsRight.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -345,5 +465,15 @@ namespace JsonManipulator
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.GroupBox grpMain;
+        private System.Windows.Forms.Splitter splitter1;
+        private System.Windows.Forms.Panel pnlControlsRight;
+        private System.Windows.Forms.Panel pnlControlsLeft;
+        private System.Windows.Forms.Panel pnlControlsLeftTop;
+        private System.Windows.Forms.Panel pnlControlsLeftBottom;
+        private System.Windows.Forms.Splitter splitter2;
+        private System.Windows.Forms.Panel pnlButtonsRight;
+        private System.Windows.Forms.Panel pnlButtonsLeft;
+        private System.Windows.Forms.Panel pnlButtonsLeftBottom;
+        private System.Windows.Forms.Panel pnlButtonsLeftTop;
     }
 }

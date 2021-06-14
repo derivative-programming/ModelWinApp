@@ -23,6 +23,8 @@ namespace JsonManipulator
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            txtName.Text = Utils.Capitalize(txtName.Text).Replace(" ","");
+
             if (txtName.Text.Trim().Length == 0)
             {
                 ShowValidationError("Name Required.");
@@ -39,6 +41,19 @@ namespace JsonManipulator
             if (existingNames.Where(x => x.ToLower().Contains(txtName.Text.Trim().ToLower())).ToList().Count > 0)
             {
                 ShowValidationError("Name already exists.");
+                return;
+            }
+
+            List<string> existingDBObjects = Utils.GetNameList(true, false, false, false);
+            if (existingDBObjects.Where(x => x.ToLower().Contains(txtOwner.Text.Trim().ToLower())).ToList().Count == 0)
+            {
+                ShowValidationError("Owner Object Not Found.");
+                return;
+            }
+
+            if (!txtName.Text.Trim().ToLower().StartsWith(txtOwner.Text.Trim().ToLower() + txtRole.Text.Trim().ToLower()))
+            {
+                ShowValidationError("Please modify the name to use the format " + Environment.NewLine + "[Owner Object Name][Role Name][Functional Name].");
                 return;
             }
 
