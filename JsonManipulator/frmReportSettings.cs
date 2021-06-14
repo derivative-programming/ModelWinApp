@@ -30,6 +30,11 @@ namespace JsonManipulator
             setFiltersList();
             setColumnsList();
             setButtonsList();
+            splitter1.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmReportSettings.splitter1.SplitPosition", "200"));
+            splitter2.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmReportSettings.splitter2.SplitPosition", "200"));
+            splitter3.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmReportSettings.splitter3.SplitPosition", "200"));
+
+            tabControl1.SelectedIndex = System.Convert.ToInt32(LocalStorage.GetValue("frmReportSettings.tabControl1.SelectedIndex", "0")); 
         }
         private void setSetting()
         {
@@ -580,5 +585,19 @@ namespace JsonManipulator
         {
 
         }
+
+        private void frmReportSettings_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+            LocalStorage.SetValue("frmReportSettings.splitter1.SplitPosition", splitter1.SplitPosition.ToString());
+
+            LocalStorage.SetValue("frmReportSettings.splitter2.SplitPosition", splitter2.SplitPosition.ToString());
+
+            LocalStorage.SetValue("frmReportSettings.splitter3.SplitPosition", splitter3.SplitPosition.ToString());
+             
+            LocalStorage.SetValue("frmReportSettings.tabControl1.SelectedIndex", tabControl1.SelectedIndex.ToString());
+
+            LocalStorage.Save();
+            }
     }
 }

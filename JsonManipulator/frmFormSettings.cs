@@ -33,6 +33,10 @@ namespace JsonManipulator
             grpMain.Text = _form.Name;
             setControlsList();
             setButtonsList();
+            splitter1.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmFormSettings.splitter1.SplitPosition", "200"));
+            splitter2.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmFormSettings.splitter2.SplitPosition", "200"));
+
+            tabControl1.SelectedIndex = System.Convert.ToInt32(LocalStorage.GetValue("frmFormSettings.tabControl1.SelectedIndex", "0"));
         }
         private void setSetting()
         {
@@ -75,7 +79,12 @@ namespace JsonManipulator
             {
                 foreach (var param in _form.objectWorkflowButton)
                 {
-                    lstButtons.Items.Add(param.buttonText);
+                    string buttonText = string.Empty;
+                    if(param.buttonText != null)
+                    {
+                        buttonText = param.buttonText;
+                    }
+                    lstButtons.Items.Add(buttonText);
                     _buttons.Add(param);
                 }
                 if (lstButtons.Items.Count > 0)
@@ -411,6 +420,18 @@ namespace JsonManipulator
 
         private void gridButtons_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
+        }
+
+        private void frmFormSettings_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            LocalStorage.SetValue("frmFormSettings.splitter1.SplitPosition", splitter1.SplitPosition.ToString());
+
+            LocalStorage.SetValue("frmFormSettings.splitter2.SplitPosition", splitter2.SplitPosition.ToString());
+
+            LocalStorage.SetValue("frmFormSettings.tabControl1.SelectedIndex", tabControl1.SelectedIndex.ToString());
+
+            LocalStorage.Save();
 
         }
     }

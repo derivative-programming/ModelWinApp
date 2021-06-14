@@ -79,7 +79,7 @@ namespace JsonManipulator
             this.tabSettings.Name = "tabSettings";
             this.tabSettings.Padding = new System.Windows.Forms.Padding(3);
             this.tabSettings.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tabSettings.Size = new System.Drawing.Size(386, 355);
+            this.tabSettings.Size = new System.Drawing.Size(830, 414);
             this.tabSettings.TabIndex = 0;
             this.tabSettings.Text = "Settings";
             this.tabSettings.UseVisualStyleBackColor = true;
@@ -96,7 +96,7 @@ namespace JsonManipulator
             this.dataProperties.Location = new System.Drawing.Point(3, 3);
             this.dataProperties.Name = "dataProperties";
             this.dataProperties.RowHeadersVisible = false;
-            this.dataProperties.Size = new System.Drawing.Size(380, 349);
+            this.dataProperties.Size = new System.Drawing.Size(824, 408);
             this.dataProperties.TabIndex = 1;
             this.dataProperties.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataProperties_CellClick);
             this.dataProperties.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataProperties_CellEnter);
@@ -255,6 +255,7 @@ namespace JsonManipulator
             this.Name = "frmDbObjSettings";
             this.ShowInTaskbar = false;
             this.Text = "frmDbObjSettings";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmDbObjSettings_FormClosing);
             this.Load += new System.EventHandler(this.frmDbObjSettings_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabSettings.ResumeLayout(false);

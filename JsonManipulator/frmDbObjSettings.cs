@@ -25,8 +25,11 @@ namespace JsonManipulator
         private void frmDbObjSettings_Load(object sender, EventArgs e)
         {
             setSetting();
-            setPropertieList();
+            setPropertieList(); 
             grpBoxMain.Text = _map.name;
+            splitter1.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmDbObjSettings.splitter1.SplitPosition", "200")); 
+
+            tabControl1.SelectedIndex = System.Convert.ToInt32(LocalStorage.GetValue("frmDbObjSettings.tabControl1.SelectedIndex", "0"));
         }
         private void setSetting()
         {
@@ -233,6 +236,14 @@ namespace JsonManipulator
         private void gridPropertiesProp_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void frmDbObjSettings_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+            LocalStorage.SetValue("frmDbObjSettings.splitter1.SplitPosition", splitter1.SplitPosition.ToString());
+            LocalStorage.SetValue("frmDbObjSettings.tabControl1.SelectedIndex", tabControl1.SelectedIndex.ToString());
+            LocalStorage.Save();
         }
     }
 }

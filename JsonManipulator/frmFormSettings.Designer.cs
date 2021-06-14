@@ -418,6 +418,7 @@ namespace JsonManipulator
             this.Name = "frmFormSettings";
             this.ShowInTaskbar = false;
             this.Text = "frmFormSettings";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmFormSettings_FormClosing);
             this.Load += new System.EventHandler(this.frmFormSettings_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabSettings.ResumeLayout(false);

@@ -32,6 +32,8 @@ namespace JsonManipulator
             nodeMenus.TabStop = false;
             nodeMenus.Enabled = false;
             addToolStripMenuItem.Enabled = false;
+
+            splitContainer1.SplitterDistance = System.Convert.ToInt32(LocalStorage.GetValue("Form1.splitContainer1.SplitterDistance", "200"));
         }
         private ToolStripMenuItem AddMenu (string Name)
         {
@@ -392,6 +394,12 @@ namespace JsonManipulator
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            LocalStorage.SetValue("Form1.splitContainer1.SplitterDistance", splitContainer1.SplitterDistance.ToString());
+            LocalStorage.Save();
         }
     }
 }

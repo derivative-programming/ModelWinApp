@@ -30,13 +30,13 @@ namespace JsonManipulator
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Project");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Db Objects");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Forms");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Reports");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Pages", new System.Windows.Forms.TreeNode[] {
-            treeNode3,
-            treeNode4});
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Project");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Db Objects");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Forms");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Reports");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Pages", new System.Windows.Forms.TreeNode[] {
+            treeNode8,
+            treeNode9});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -206,20 +206,20 @@ namespace JsonManipulator
             this.nodeMenus.ImageList = this.imgIcons;
             this.nodeMenus.Location = new System.Drawing.Point(0, 43);
             this.nodeMenus.Name = "nodeMenus";
-            treeNode1.Name = "Project";
-            treeNode1.Text = "Project";
-            treeNode2.Name = "dbObjects";
-            treeNode2.Text = "Db Objects";
-            treeNode3.Name = "Forms";
-            treeNode3.Text = "Forms";
-            treeNode4.Name = "Reports";
-            treeNode4.Text = "Reports";
-            treeNode5.Name = "pages";
-            treeNode5.Text = "Pages";
+            treeNode6.Name = "Project";
+            treeNode6.Text = "Project";
+            treeNode7.Name = "dbObjects";
+            treeNode7.Text = "Db Objects";
+            treeNode8.Name = "Forms";
+            treeNode8.Text = "Forms";
+            treeNode9.Name = "Reports";
+            treeNode9.Text = "Reports";
+            treeNode10.Name = "pages";
+            treeNode10.Text = "Pages";
             this.nodeMenus.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode5});
+            treeNode6,
+            treeNode7,
+            treeNode10});
             this.nodeMenus.SelectedImageIndex = 0;
             this.nodeMenus.Size = new System.Drawing.Size(185, 545);
             this.nodeMenus.TabIndex = 1;
@@ -328,6 +328,7 @@ namespace JsonManipulator
             this.Name = "Form1";
             this.Text = "Project: MyCompanyApp";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.menuStrip1.ResumeLayout(false);

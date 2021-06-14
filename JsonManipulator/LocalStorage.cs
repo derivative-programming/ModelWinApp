@@ -55,7 +55,7 @@ namespace JsonManipulator
             }
         }
 
-        private static void Save()
+        public static void Save()
         {
             string jsonData = JsonConvert.SerializeObject(_data, Formatting.Indented);
             System.IO.File.WriteAllText("settings.json", jsonData);
