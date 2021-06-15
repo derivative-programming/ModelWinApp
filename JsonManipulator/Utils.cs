@@ -124,45 +124,61 @@ namespace JsonManipulator
                 {
                     foreach (var objWF in dbObject.objectWorkflow)
                     {
-                        if (objWF.IsPage == null)
+                        if(includePageForms)
                         {
-                            if (includePageForms && 
-                                !objWF.Name.Trim().ToLower().EndsWith("initreport") &&
-                                !objWF.Name.Trim().ToLower().EndsWith("initobjwf"))
+                            if (Utils.IsObjectWorkflowAForm(objWF))
                             {
                                 result.Add(objWF.Name);
                                 continue;
-                            }
-
-                            if (includeNonPageObjFlows &&
-                                !(
-                                    !objWF.Name.Trim().ToLower().EndsWith("initreport") &&
-                                    !objWF.Name.Trim().ToLower().EndsWith("initobjwf")
-                                ))
-                            {
-                                result.Add(objWF.Name);
-                                continue;
-                            }
+                            } 
                         }
-                        else
+                        else if (includeNonPageObjFlows)
                         {
-
-                            if (includePageForms &&
-                                !objWF.Name.Trim().ToLower().EndsWith("initreport") &&
-                                !objWF.Name.Trim().ToLower().EndsWith("initobjwf") && 
-                                objWF.IsPage.Trim().ToLower() == "true")
+                            if (Utils.IsObjectWorkflowAFlow(objWF))
                             {
                                 result.Add(objWF.Name);
                                 continue;
-                            }
-
-                            if (includeNonPageObjFlows && 
-                                objWF.IsPage.Trim().ToLower() == "false")
-                            {
-                                result.Add(objWF.Name);
-                                continue;
-                            }
+                            } 
                         }
+                        //if (objWF.IsPage == null)
+                        //{
+                        //    if (includePageForms && 
+                        //        !objWF.Name.Trim().ToLower().EndsWith("initreport") &&
+                        //        !objWF.Name.Trim().ToLower().EndsWith("initobjwf"))
+                        //    {
+                        //        result.Add(objWF.Name);
+                        //        continue;
+                        //    }
+
+                        //    if (includeNonPageObjFlows &&
+                        //        !(
+                        //            !objWF.Name.Trim().ToLower().EndsWith("initreport") &&
+                        //            !objWF.Name.Trim().ToLower().EndsWith("initobjwf")
+                        //        ))
+                        //    {
+                        //        result.Add(objWF.Name);
+                        //        continue;
+                        //    }
+                        //}
+                        //else
+                        //{
+
+                        //    if (includePageForms &&
+                        //        !objWF.Name.Trim().ToLower().EndsWith("initreport") &&
+                        //        !objWF.Name.Trim().ToLower().EndsWith("initobjwf") && 
+                        //        objWF.IsPage.Trim().ToLower() == "true")
+                        //    {
+                        //        result.Add(objWF.Name);
+                        //        continue;
+                        //    }
+
+                        //    if (includeNonPageObjFlows && 
+                        //        objWF.IsPage.Trim().ToLower() == "false")
+                        //    {
+                        //        result.Add(objWF.Name);
+                        //        continue;
+                        //    }
+                        //}
                     }
                 }
 
@@ -262,10 +278,64 @@ namespace JsonManipulator
 
             return result;
         }
+
+        public static List<string> GetFlowPropertiesToIgnore()
+        {
+            List<string> result = new List<string>();
+            result.Add("ispage");
+            result.Add("name");
+
+            result.Add("IntroText");
+            result.Add("TitleText");
+            result.Add("initObjectWorkflowName");
+            result.Add("isInitObjWFSubscribedToParams");
+            result.Add("isExposedInBusinessObject");
+            result.Add("isObjectDelete");
+            result.Add("layoutName");
+            result.Add("isWFSWorkflowCreated");
+            result.Add("formTitleText");
+            result.Add("formIntroText");
+            result.Add("formFooterText");
+            result.Add("formFooterImageURL");
+            result.Add("isAutoSubmit");
+            result.Add("isHeaderVisible");
+            result.Add("isLoginPage");
+            result.Add("isLogoutPage");
+            result.Add("isImpersonationPage");
+            result.Add("isCaptchaVisible");
+            result.Add("isCreditCardEntryUsed");
+            result.Add("headerImageURL");
+            result.Add("footerImageURL");
+            result.Add("isDynaFlow");
+            result.Add("isDynaFlowTask");
+            result.Add("isCustomPageViewUsed");
+            result.Add("isIgnoredInDocumentation");
+            result.Add("targetChildObject");
+            result.Add("isAuthorizationRequired");
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                result[i] = result[i].ToLower();
+            }
+
+            return result;
+        }
         public static List<string> GetFormButtonPropertiesToIgnore()
         {
             List<string> result = new List<string>();
             result.Add("destinationContextObjectName".ToLower());
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                result[i] = result[i].ToLower();
+            }
+
+            return result;
+        }
+        public static List<string> GetFormOutputVarPropertiesToIgnore()
+        {
+            List<string> result = new List<string>();
+            //result.Add("destinationContextObjectName".ToLower());
 
             for (int i = 0; i < result.Count; i++)
             {
@@ -608,6 +678,32 @@ namespace JsonManipulator
             return result;
         }
 
+        public static bool IsObjectWorkflowAForm(Models.objectWorkflow objWF)
+        {
+            bool result = false;
+            if (objWF.IsPage == null)
+            {
+                if (!objWF.Name.Trim().ToLower().EndsWith("initreport") &&
+                    !objWF.Name.Trim().ToLower().EndsWith("initobjwf"))
+                {
+                    result = true;
+                } 
+            }
+            else
+            {
+
+                if (objWF.IsPage.Trim().ToLower() == "true")
+                {
+                    result = true;
+                } 
+            }
+            return result;
+        }
+
+        public static bool IsObjectWorkflowAFlow(Models.objectWorkflow objWF)
+        { 
+            return !IsObjectWorkflowAForm(objWF);
+        }
 
         public static void SortJsonFile(string sourceFile)
         {

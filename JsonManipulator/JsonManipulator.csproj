@@ -103,6 +103,12 @@
     <Compile Include="frmAddObjProp.Designer.cs">
       <DependentUpon>frmAddObjProp.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmAddOutputVar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAddOutputVar.Designer.cs">
+      <DependentUpon>FrmAddOutputVar.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmControl.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -201,6 +207,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmAddObjProp.resx">
       <DependentUpon>frmAddObjProp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAddOutputVar.resx">
+      <DependentUpon>FrmAddOutputVar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmControl.resx">
       <DependentUpon>FrmControl.cs</DependentUpon>

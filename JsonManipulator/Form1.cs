@@ -79,7 +79,9 @@ namespace JsonManipulator
                 if(dbObj.objectWorkflow !=null)
                 {
                     foreach (var objWF in dbObj.objectWorkflow.Where(x=>x.Name.Trim().ToLower().Contains(filter.Trim().ToLower())))
-                    { 
+                    {
+                        if (!Utils.IsObjectWorkflowAForm(objWF))
+                            continue;
                         _forms.Add(objWF);
                         TreeNode node = new TreeNode();
                         node.Text = objWF.Name;
@@ -124,7 +126,34 @@ namespace JsonManipulator
                 }
             }
             
-}
+        }
+
+
+        private void populateFlows(string filter)
+        {
+            nodeMenus.Nodes["nodeFlows"].Nodes.Clear(); 
+            NameSpaceObject nameSpaceObject = _model.root.NameSpaceObjects.FirstOrDefault();
+            foreach (var dbObj in nameSpaceObject.ObjectMap)
+            {
+                if (dbObj.objectWorkflow != null)
+                {
+                    foreach (var objWF in dbObj.objectWorkflow.Where(x => x.Name.Trim().ToLower().Contains(filter.Trim().ToLower())))
+                    {
+                        if (!Utils.IsObjectWorkflowAFlow(objWF))
+                            continue;
+                        _forms.Add(objWF);
+                        TreeNode node = new TreeNode();
+                        node.Text = objWF.Name;
+                        node.Name = objWF.Name;
+                        node.ImageIndex = 1;
+                        node.SelectedImageIndex = 1;
+                        nodeMenus.Nodes["nodeFlows"].Nodes.Add(node);
+                    }
+                } 
+
+            }
+
+        }
 
         private void dBObjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -152,7 +181,7 @@ namespace JsonManipulator
                         frmSettings.Show();
                     }
                     break;
-                case 1: //Db Objects
+                case 1: //Db Objects,Flows
                     if(e.Node.Parent.Name == "dbObjects")
                     {
                         if (((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]) != null)
@@ -166,6 +195,21 @@ namespace JsonManipulator
                         //frmDbObjSettings.Width = this.mainPanel.Width;
                         this.mainPanel.Controls.Add(frmDbObjSettings);
                         frmDbObjSettings.Show();
+                    }
+                    if (e.Node.Parent.Name == "nodeFlows")
+                    {
+                        if (((frmFormSettings)Application.OpenForms["frmFormSettings"]) != null)
+                            ((frmFormSettings)Application.OpenForms["frmFormSettings"]).Close();
+                        objectWorkflow form = _forms.Where(x => x.Name == e.Node.Name).FirstOrDefault();
+                        frmFormSettings frmFormSettings = new frmFormSettings(form.Name);
+                        frmFormSettings.TopLevel = false;
+                        frmFormSettings.AutoScroll = true;
+                        frmFormSettings.Dock = DockStyle.Fill;
+                        //frmFormSettings.Height = this.mainPanel.Height;
+                        //frmFormSettings.Width = this.mainPanel.Width;
+                        this.mainPanel.Controls.Add(frmFormSettings);
+                        frmFormSettings.Show();
+                        break;
                     }
                     break;
                 case 2:
@@ -199,6 +243,7 @@ namespace JsonManipulator
                             break;
                     }
                     break;
+                     
             }
            
         }
@@ -254,6 +299,7 @@ namespace JsonManipulator
                 populateProjectDetails();
                 populateDbObjects("");
                 populateForms("");
+                populateFlows("");
                 nodeMenus.Enabled = true;
                 addToolStripMenuItem.Enabled = true;
                 saveToolStripMenuItem.Enabled = true;
@@ -328,17 +374,25 @@ namespace JsonManipulator
             populateProjectDetails();
             populateDbObjects("");
             populateForms("");
+            populateFlows("");
             switch (itemtype)
             {
                 case 0://object
                     nodeMenus.SelectedNode = nodeMenus.Nodes["dbObjects"].Nodes[name];
                     break;
-                case 1://form
-                    nodeMenus.SelectedNode = nodeMenus.Nodes["pages"].Nodes["Forms"].Nodes[name];
+                case 1://form,flows
+                    if(nodeMenus.Nodes["pages"].Nodes["Forms"].Nodes.ContainsKey(name))
+                    {
+                        nodeMenus.SelectedNode = nodeMenus.Nodes["pages"].Nodes["Forms"].Nodes[name];
+                    }
+                    if (nodeMenus.Nodes["nodeFlows"].Nodes.ContainsKey(name))
+                    {
+                        nodeMenus.SelectedNode = nodeMenus.Nodes["nodeFlows"].Nodes[name];
+                    }
                     break;
                 case 2://report
                     nodeMenus.SelectedNode = nodeMenus.Nodes["pages"].Nodes["Reports"].Nodes[name];
-                    break;
+                    break; 
             }
             nodeMenus.Focus();
         }
@@ -347,10 +401,12 @@ namespace JsonManipulator
             nodeMenus.Nodes["pages"].Nodes["Forms"].Nodes.Clear();
             nodeMenus.Nodes["pages"].Nodes["Reports"].Nodes.Clear();
             nodeMenus.Nodes["dbObjects"].Nodes.Clear();
+            nodeMenus.Nodes["nodeFlows"].Nodes.Clear();
             populateProjectDetails();
             populateDbObjects(txtSearch.Text);
             populateForms(txtSearch.Text);
-           // nodeMenus.Sort();
+            populateFlows(txtSearch.Text);
+            // nodeMenus.Sort();
         }
         public void AddToTree(objectWorkflow objectWorkflow,int action=0) //0=add 1=update
         {
@@ -362,8 +418,16 @@ namespace JsonManipulator
             node.Name = objectWorkflow.Name;
             node.ImageIndex = 1;
             node.SelectedImageIndex = 1;
-            nodeMenus.Nodes["pages"].Nodes["Forms"].Nodes.Add(node);
-            nodeMenus.SelectedNode = nodeMenus.Nodes["pages"].Nodes["Forms"].Nodes[objectWorkflow.Name];
+            if (Utils.IsObjectWorkflowAForm(objectWorkflow))
+            {
+                nodeMenus.Nodes["pages"].Nodes["Forms"].Nodes.Add(node);
+                nodeMenus.SelectedNode = nodeMenus.Nodes["pages"].Nodes["Forms"].Nodes[objectWorkflow.Name];
+            }
+            else
+            {
+                nodeMenus.Nodes["nodeFlows"].Nodes.Add(node);
+                nodeMenus.SelectedNode = nodeMenus.Nodes["nodeFlows"].Nodes[objectWorkflow.Name];
+            }
         }
         public void AddToTree(ObjectMap objectMap)
         {

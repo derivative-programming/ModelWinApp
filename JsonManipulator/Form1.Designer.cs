@@ -30,13 +30,14 @@ namespace JsonManipulator
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Project");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Db Objects");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Forms");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Reports");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Pages", new System.Windows.Forms.TreeNode[] {
-            treeNode8,
-            treeNode9});
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Project");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Db Objects");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Forms");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Reports");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Pages", new System.Windows.Forms.TreeNode[] {
+            treeNode3,
+            treeNode4});
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Flows");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,7 +83,7 @@ namespace JsonManipulator
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1232, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1232, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -96,20 +97,20 @@ namespace JsonManipulator
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F)));
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(222, 26);
             this.newToolStripMenuItem.Text = "New";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(222, 26);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -118,7 +119,7 @@ namespace JsonManipulator
             this.saveToolStripMenuItem.Enabled = false;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(222, 26);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
@@ -128,14 +129,14 @@ namespace JsonManipulator
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
             this.saveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.S)));
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(222, 26);
             this.saveAsToolStripMenuItem.Text = "Save As";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(222, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -146,14 +147,14 @@ namespace JsonManipulator
             this.formPageToolStripMenuItem,
             this.reportPageToolStripMenuItem});
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(51, 24);
             this.addToolStripMenuItem.Text = "&Add";
             // 
             // dBObjectToolStripMenuItem
             // 
             this.dBObjectToolStripMenuItem.Name = "dBObjectToolStripMenuItem";
             this.dBObjectToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.dBObjectToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.dBObjectToolStripMenuItem.Size = new System.Drawing.Size(213, 26);
             this.dBObjectToolStripMenuItem.Text = "DB Object";
             this.dBObjectToolStripMenuItem.Click += new System.EventHandler(this.dBObjectToolStripMenuItem_Click);
             // 
@@ -161,7 +162,7 @@ namespace JsonManipulator
             // 
             this.formPageToolStripMenuItem.Name = "formPageToolStripMenuItem";
             this.formPageToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.formPageToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.formPageToolStripMenuItem.Size = new System.Drawing.Size(213, 26);
             this.formPageToolStripMenuItem.Text = "Form Page";
             this.formPageToolStripMenuItem.Click += new System.EventHandler(this.formPageToolStripMenuItem_Click);
             // 
@@ -171,7 +172,7 @@ namespace JsonManipulator
             this.gridToolStripMenuItem,
             this.detailToolStripMenuItem});
             this.reportPageToolStripMenuItem.Name = "reportPageToolStripMenuItem";
-            this.reportPageToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.reportPageToolStripMenuItem.Size = new System.Drawing.Size(213, 26);
             this.reportPageToolStripMenuItem.Text = "Report Page";
             // 
             // gridToolStripMenuItem
@@ -179,7 +180,7 @@ namespace JsonManipulator
             this.gridToolStripMenuItem.Name = "gridToolStripMenuItem";
             this.gridToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.G)));
-            this.gridToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.gridToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
             this.gridToolStripMenuItem.Text = "Grid";
             this.gridToolStripMenuItem.Click += new System.EventHandler(this.gridToolStripMenuItem_Click);
             // 
@@ -188,14 +189,14 @@ namespace JsonManipulator
             this.detailToolStripMenuItem.Name = "detailToolStripMenuItem";
             this.detailToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.D)));
-            this.detailToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.detailToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
             this.detailToolStripMenuItem.Text = "Detail";
             this.detailToolStripMenuItem.Click += new System.EventHandler(this.detailToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.helpToolStripMenuItem.Text = "Help";
             this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
@@ -206,22 +207,25 @@ namespace JsonManipulator
             this.nodeMenus.ImageList = this.imgIcons;
             this.nodeMenus.Location = new System.Drawing.Point(0, 43);
             this.nodeMenus.Name = "nodeMenus";
-            treeNode6.Name = "Project";
-            treeNode6.Text = "Project";
-            treeNode7.Name = "dbObjects";
-            treeNode7.Text = "Db Objects";
-            treeNode8.Name = "Forms";
-            treeNode8.Text = "Forms";
-            treeNode9.Name = "Reports";
-            treeNode9.Text = "Reports";
-            treeNode10.Name = "pages";
-            treeNode10.Text = "Pages";
+            treeNode1.Name = "Project";
+            treeNode1.Text = "Project";
+            treeNode2.Name = "dbObjects";
+            treeNode2.Text = "Db Objects";
+            treeNode3.Name = "Forms";
+            treeNode3.Text = "Forms";
+            treeNode4.Name = "Reports";
+            treeNode4.Text = "Reports";
+            treeNode5.Name = "pages";
+            treeNode5.Text = "Pages";
+            treeNode6.Name = "nodeFlows";
+            treeNode6.Text = "Flows";
             this.nodeMenus.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode6,
-            treeNode7,
-            treeNode10});
+            treeNode1,
+            treeNode2,
+            treeNode5,
+            treeNode6});
             this.nodeMenus.SelectedImageIndex = 0;
-            this.nodeMenus.Size = new System.Drawing.Size(185, 545);
+            this.nodeMenus.Size = new System.Drawing.Size(185, 541);
             this.nodeMenus.TabIndex = 1;
             this.nodeMenus.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.nodeMenus_AfterSelect);
             // 
@@ -238,7 +242,7 @@ namespace JsonManipulator
             this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainPanel.Location = new System.Drawing.Point(0, 0);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(1043, 588);
+            this.mainPanel.Size = new System.Drawing.Size(1043, 584);
             this.mainPanel.TabIndex = 2;
             // 
             // panel1
@@ -246,9 +250,9 @@ namespace JsonManipulator
             this.panel1.Controls.Add(this.splitContainer1);
             this.panel1.Controls.Add(this.statusStrip1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 24);
+            this.panel1.Location = new System.Drawing.Point(0, 28);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1232, 610);
+            this.panel1.Size = new System.Drawing.Size(1232, 606);
             this.panel1.TabIndex = 3;
             // 
             // splitContainer1
@@ -265,7 +269,7 @@ namespace JsonManipulator
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.mainPanel);
-            this.splitContainer1.Size = new System.Drawing.Size(1232, 588);
+            this.splitContainer1.Size = new System.Drawing.Size(1232, 584);
             this.splitContainer1.SplitterDistance = 185;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -283,9 +287,9 @@ namespace JsonManipulator
             // txtSearch
             // 
             this.txtSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSearch.Location = new System.Drawing.Point(51, 10);
+            this.txtSearch.Location = new System.Drawing.Point(63, 10);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(124, 20);
+            this.txtSearch.Size = new System.Drawing.Size(112, 22);
             this.txtSearch.TabIndex = 1;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
@@ -295,7 +299,7 @@ namespace JsonManipulator
             this.label1.Dock = System.Windows.Forms.DockStyle.Left;
             this.label1.Location = new System.Drawing.Point(10, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 13);
+            this.label1.Size = new System.Drawing.Size(53, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Search";
             // 
@@ -304,7 +308,7 @@ namespace JsonManipulator
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusText});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 588);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 584);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1232, 22);
             this.statusStrip1.TabIndex = 3;
@@ -313,7 +317,7 @@ namespace JsonManipulator
             // statusText
             // 
             this.statusText.Name = "statusText";
-            this.statusText.Size = new System.Drawing.Size(0, 17);
+            this.statusText.Size = new System.Drawing.Size(0, 16);
             // 
             // Form1
             // 

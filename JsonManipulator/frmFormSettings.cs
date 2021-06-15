@@ -18,6 +18,7 @@ namespace JsonManipulator
         ObjectMap _ownerObject;
         List<objectWorkflowParam> _controls;
         List<objectWorkflowButton> _buttons;
+        List<objectWorkflowOutputVar> _outputVars;
         public frmFormSettings(string objWFName)
         {
             InitializeComponent();
@@ -29,19 +30,48 @@ namespace JsonManipulator
         {
             _controls = new List<objectWorkflowParam>();
             _buttons = new List<objectWorkflowButton>();
+            _outputVars = new List<objectWorkflowOutputVar>();
+            if(Utils.IsObjectWorkflowAForm(this._form))
+            {
+                tabControl1.TabPages.RemoveByKey("tabOutput");
+                tabControl1.TabPages["tabControls"].Text = "Controls";
+            }
+            if (Utils.IsObjectWorkflowAFlow(this._form))
+            {
+                tabControl1.TabPages.RemoveByKey("tabButtons");
+                tabControl1.TabPages["tabControls"].Text = "Input";
+            }
             setSetting();
             grpMain.Text = _form.Name;
             setControlsList();
-            setButtonsList();
-            splitter1.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmFormSettings.splitter1.SplitPosition", "200"));
-            splitter2.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmFormSettings.splitter2.SplitPosition", "200"));
 
-            tabControl1.SelectedIndex = System.Convert.ToInt32(LocalStorage.GetValue("frmFormSettings.tabControl1.SelectedIndex", "0"));
+            splitter1.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmFormSettings.splitter1.SplitPosition", "200"));
+            if (Utils.IsObjectWorkflowAForm(this._form))
+            {
+                setButtonsList();
+                splitter2.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmFormSettings.splitter2.SplitPosition", "200"));
+            }
+            if (Utils.IsObjectWorkflowAFlow(this._form))
+            {
+                setOutputVarList();
+                splitter3.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmFormSettings.splitter3.SplitPosition", "200"));
+            }
+
+            if(System.Convert.ToInt32(LocalStorage.GetValue("frmFormSettings.tabControl1.SelectedIndex", "0")) <= tabControl1.TabPages.Count)
+                tabControl1.SelectedIndex = System.Convert.ToInt32(LocalStorage.GetValue("frmFormSettings.tabControl1.SelectedIndex", "0"));
         }
         private void setSetting()
         {
             List<PropertyValue> propertyValues = new List<PropertyValue>();
-            List<string> ignoreList = Utils.GetFormPropertiesToIgnore();
+            List<string> ignoreList = new List<string>();
+            if (Utils.IsObjectWorkflowAForm(this._form))
+            {
+                ignoreList = Utils.GetFormPropertiesToIgnore();
+            }
+            if (Utils.IsObjectWorkflowAFlow(this._form))
+            {
+                ignoreList = Utils.GetFlowPropertiesToIgnore();
+            }
             foreach (var prop in _form.GetType().GetProperties().OrderBy(x => x.Name).ToList())
             {
                 if (ignoreList.Contains(prop.Name.ToLower()))
@@ -93,6 +123,21 @@ namespace JsonManipulator
             
         }
 
+        public void setOutputVarList()
+        { 
+            lstOutputVars.Items.Clear();
+            if (_form.objectWorkflowOutputVar != null)
+            {
+                foreach (var param in _form.objectWorkflowOutputVar)
+                {
+                    lstOutputVars.Items.Add(param.name);
+                    _outputVars.Add(param);
+                }
+                if (lstOutputVars.Items.Count > 0)
+                    lstOutputVars.SelectedIndex = lstOutputVars.Items.Count - 1;
+            }
+        }
+
         private void lstControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(lstControl.SelectedItem!=null)
@@ -139,7 +184,30 @@ namespace JsonManipulator
                     gridButtons.Columns[0].ReadOnly = true;
                 }
             }
-            
+
+        }
+        private void lstOutputVars_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (lstOutputVars.SelectedItem != null)
+            {
+                List<PropertyValue> propertyValues = new List<PropertyValue>();
+                String itemName = lstOutputVars.SelectedItem.ToString();
+                List<string> ignoreList = Utils.GetFormOutputVarPropertiesToIgnore();
+                objectWorkflowOutputVar frmControl = _form.objectWorkflowOutputVar.Where(x => x.name == itemName).FirstOrDefault();
+                foreach (var prop in frmControl.GetType().GetProperties().OrderBy(x => x.Name).ToList())
+                {
+                    if (ignoreList.Contains(prop.Name.ToLower()))
+                        continue;
+                    propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(frmControl) ?? "").ToString() });
+                }
+                gridOutput.Columns.Clear();
+                gridOutput.DataSource = propertyValues;
+                if (gridOutput.Columns.Count > 0)
+                {
+                    gridOutput.Columns[0].ReadOnly = true;
+                }
+            }
         }
 
         private void btnControls_Click(object sender, EventArgs e)
@@ -199,6 +267,61 @@ namespace JsonManipulator
         {
             FrmAddButton frmAddButton = new FrmAddButton(_form.Name, _ownerObject.name, ButtonType.FORM);
             frmAddButton.ShowDialog();
+        }
+
+
+        private void btnOutputVar_Click(object sender, EventArgs e)
+        {
+            FrmAddOutputVar frmControl = new FrmAddOutputVar(_form.Name, _ownerObject.name);
+            frmControl.ShowDialog();
+
+        }
+
+        private void btnOutputVarUp_Click(object sender, EventArgs e)
+        {
+
+            if (lstOutputVars.SelectedItem != null)
+            {
+                int selectedIndex = lstOutputVars.SelectedIndex;
+                objectWorkflowOutputVar item = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowOutputVar.ElementAt(selectedIndex);
+                int newIndex = 0;
+                if (selectedIndex == 0)
+                {
+                    newIndex = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowOutputVar.Count - 1;
+                }
+                else
+                {
+                    newIndex = selectedIndex - 1;
+                }
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowOutputVar.RemoveAt(selectedIndex);
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowOutputVar.Insert(newIndex, item);
+                setControlsList();
+                lstOutputVars.SetSelected(newIndex, true);
+            }
+        }
+
+        private void btnOutputVarDown_Click(object sender, EventArgs e)
+        {
+
+            if (lstOutputVars.SelectedItem != null)
+            {
+                int selectedIndex = lstOutputVars.SelectedIndex;
+                int count = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowOutputVar.Count;
+                objectWorkflowOutputVar item = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowOutputVar.ElementAt(selectedIndex);
+                int newIndex = 0;
+                if (selectedIndex == count - 1)
+                {
+                    newIndex = 0;
+                }
+                else
+                {
+                    newIndex = selectedIndex + 1;
+                }
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowOutputVar.RemoveAt(selectedIndex);
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowOutputVar.Insert(newIndex, item);
+                setOutputVarList();
+                lstOutputVars.SetSelected(newIndex, true);
+            }
         }
 
         private void gridProperties_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -266,6 +389,24 @@ namespace JsonManipulator
                 typeof(objectWorkflowButton).GetProperty(property).SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowButton.ElementAt(lstButtons.SelectedIndex), value); ;
                 setButtonsList();
                 lstButtons.SetSelected(index, true);
+            }
+        }
+         
+        private void gridOutput_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (gridOutput.DataSource != null && lstOutputVars.SelectedItem != null)
+            {
+                string property = gridOutput.Rows[e.RowIndex].Cells[0].Value.ToString();
+                string value = string.Empty;
+                if (gridOutput.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                {
+                    value = gridOutput.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                }
+                int index = lstOutputVars.SelectedIndex;
+                typeof(objectWorkflowParam).GetProperty(property).SetValue(
+                    Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowOutputVar.ElementAt(lstOutputVars.SelectedIndex), value); ;
+                setOutputVarList();
+                lstOutputVars.SetSelected(index, true);
             }
         }
 
@@ -386,6 +527,34 @@ namespace JsonManipulator
             gridButtons.RefreshEdit();
         }
 
+
+        private void gridOutput_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.ColumnIndex > 0)
+            {
+
+                // Bind grid cell with combobox and than bind combobox with datasource.  
+                DataGridViewComboBoxCell l_objGridDropbox = new DataGridViewComboBoxCell();
+                string propertyName = gridOutput.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value.ToString();
+                // Check the column  cell, in which it click.   
+                if (propertyName.StartsWith("is"))
+                {
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
+                    gridOutput[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
+                    l_objGridDropbox.DataSource = Utils.getBooleans(); // Bind combobox with datasource.  
+                    l_objGridDropbox.ValueMember = "Value";
+                    l_objGridDropbox.DisplayMember = "Display";
+                    l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+                } 
+            }
+        }
+        public void setOutputData(string value, int row, int column)
+        {
+            gridOutput.Rows[row].Cells[column].Value = value;
+            gridOutput.RefreshEdit();
+        }
+
         private void gridProperties_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -412,6 +581,14 @@ namespace JsonManipulator
                 SendKeys.Send("{TAB}");
             }
         }
+        private void gridOutput_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.ColumnIndex == 0)
+            {
+                SendKeys.Send("{TAB}");
+            }
+        }
 
         private void gridControls_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -427,12 +604,21 @@ namespace JsonManipulator
         {
             LocalStorage.SetValue("frmFormSettings.splitter1.SplitPosition", splitter1.SplitPosition.ToString());
 
-            LocalStorage.SetValue("frmFormSettings.splitter2.SplitPosition", splitter2.SplitPosition.ToString());
+
 
             LocalStorage.SetValue("frmFormSettings.tabControl1.SelectedIndex", tabControl1.SelectedIndex.ToString());
 
+            if (Utils.IsObjectWorkflowAForm(this._form))
+            {
+                LocalStorage.SetValue("frmFormSettings.splitter2.SplitPosition", splitter2.SplitPosition.ToString());
+            }
+            if (Utils.IsObjectWorkflowAFlow(this._form))
+            {
+                LocalStorage.SetValue("frmFormSettings.splitter3.SplitPosition", splitter3.SplitPosition.ToString());
+            }
             LocalStorage.Save();
 
         }
+
     }
 }
