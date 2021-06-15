@@ -91,6 +91,9 @@ namespace JsonManipulator
                     case FormObjects.OBJECT_EDIT:
                         ((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]).setData(listObjects.SelectedItem.ToString(), _row, _col);
                         break;
+                    case FormObjects.ADD_FLOW:
+                        ((frmAddFlow)Application.OpenForms["frmAddFlow"]).setOwner(listObjects.SelectedItem.ToString());
+                        break;
                 }
             }
             this.Close();

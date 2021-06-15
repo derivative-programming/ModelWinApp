@@ -71,6 +71,9 @@ namespace JsonManipulator
                     case FormObjects.REPORT_ROLE:
                         ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setData(listObjects.SelectedItem.ToString(), _row, _column);
                         break;
+                    case FormObjects.ADD_FLOW:
+                        ((frmAddFlow)Application.OpenForms["frmAddFlow"]).setRole(listObjects.SelectedItem.ToString());
+                        break;
                 }
             }
             this.Close();

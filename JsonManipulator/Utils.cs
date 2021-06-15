@@ -98,6 +98,18 @@ namespace JsonManipulator
             return _booleans;
         }
 
+        public static List<string> GetApiSiteNameList()
+        {
+            List<string> result = new List<string>();
+
+            NameSpaceObject nameSpaceObject = Form1._model.root.NameSpaceObjects.FirstOrDefault();
+            foreach (var apiSite in nameSpaceObject.apiSite)
+            {
+                result.Add(apiSite.name); 
+            }
+
+            return result;
+        }
         public static List<string> GetDBObjectNameList()
         {
             return GetNameList(true, false, false, false);
@@ -582,6 +594,43 @@ namespace JsonManipulator
         }
 
 
+        public static List<string> GetApiSitePropertiesToIgnore()
+        {
+            List<string> result = new List<string>();
+            result.Add("name");
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                result[i] = result[i].ToLower();
+            }
+
+            return result;
+        }
+        public static List<string> GetApiSiteEnvironmentPropertiesToIgnore()
+        {
+            List<string> result = new List<string>();
+            result.Add("name");
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                result[i] = result[i].ToLower();
+            }
+
+            return result;
+        }
+
+        public static List<string> GetApiSiteEndPointPropertiesToIgnore()
+        {
+            List<string> result = new List<string>();
+            result.Add("name");
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                result[i] = result[i].ToLower();
+            }
+
+            return result;
+        }
         public static Models.ObjectMap GetDestinationOwnerObject(string destinationName)
         {
             Models.ObjectMap result = null;
@@ -635,6 +684,21 @@ namespace JsonManipulator
                     }
                 }
 
+            }
+            return result;
+        }
+
+        public static Models.apiSite GetApiSiteModelItem(string name)
+        {
+            Models.apiSite result = null;
+
+            NameSpaceObject nameSpaceObject = Form1._model.root.NameSpaceObjects.FirstOrDefault();
+            foreach (var apiSite in nameSpaceObject.apiSite)
+            { 
+                if (apiSite.name.ToLower().Trim() == name.ToLower().Trim())
+                {
+                    result = apiSite;
+                } 
             }
             return result;
         }

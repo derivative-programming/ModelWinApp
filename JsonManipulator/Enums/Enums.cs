@@ -26,7 +26,8 @@ namespace JsonManipulator.Enums
        REPORT_ROLE,
        REPORT_BUTTON,
        REPORT_COLUMNS,
-        OBJECT_EDIT
+       OBJECT_EDIT,
+       ADD_FLOW
     }
     public enum Booleans
     {

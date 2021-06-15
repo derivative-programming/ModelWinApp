@@ -79,6 +79,18 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmAddApiSiteEndPoint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddApiSiteEndPoint.Designer.cs">
+      <DependentUpon>frmAddApiSiteEndPoint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAddApiSiteEnvironment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddApiSiteEnvironment.Designer.cs">
+      <DependentUpon>frmAddApiSiteEnvironment.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmAddButton.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +127,12 @@
     <Compile Include="FrmControl.Designer.cs">
       <DependentUpon>FrmControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmAddApiSite.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddApiSite.Designer.cs">
+      <DependentUpon>frmAddApiSite.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmDbObject.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,6 +144,12 @@
     </Compile>
     <Compile Include="frmDbObjSettings.Designer.cs">
       <DependentUpon>frmDbObjSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAddFlow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddFlow.Designer.cs">
+      <DependentUpon>frmAddFlow.cs</DependentUpon>
     </Compile>
     <Compile Include="frmFormSettings.cs">
       <SubType>Form</SubType>
@@ -156,6 +180,12 @@
     </Compile>
     <Compile Include="frmForm.Designer.cs">
       <DependentUpon>frmForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAPISettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAPISettings.Designer.cs">
+      <DependentUpon>frmAPISettings.cs</DependentUpon>
     </Compile>
     <Compile Include="frmReportSettings.cs">
       <SubType>Form</SubType>
@@ -196,6 +226,12 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmAddApiSiteEndPoint.resx">
+      <DependentUpon>frmAddApiSiteEndPoint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAddApiSiteEnvironment.resx">
+      <DependentUpon>frmAddApiSiteEnvironment.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmAddButton.resx">
       <DependentUpon>FrmAddButton.cs</DependentUpon>
     </EmbeddedResource>
@@ -214,11 +250,17 @@
     <EmbeddedResource Include="FrmControl.resx">
       <DependentUpon>FrmControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmAddApiSite.resx">
+      <DependentUpon>frmAddApiSite.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmDbObject.resx">
       <DependentUpon>frmDbObject.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDbObjSettings.resx">
       <DependentUpon>frmDbObjSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAddFlow.resx">
+      <DependentUpon>frmAddFlow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmFormSettings.resx">
       <DependentUpon>frmFormSettings.cs</DependentUpon>
@@ -234,6 +276,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmForm.resx">
       <DependentUpon>frmForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAPISettings.resx">
+      <DependentUpon>frmAPISettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmReportSettings.resx">
       <DependentUpon>frmReportSettings.cs</DependentUpon>

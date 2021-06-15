@@ -16,9 +16,7 @@ namespace JsonManipulator
 {
     public partial class Form1 : Form
     {
-     public static  RootObject _model;
-        List<objectWorkflow> _forms;
-        List<Report> _reports;
+     public static  RootObject _model;   
         public static string _path;
         public Form1()
         {
@@ -26,9 +24,7 @@ namespace JsonManipulator
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {
-            _forms = new List<objectWorkflow>();
-            _reports = new List<Report>();
+        {  
             nodeMenus.TabStop = false;
             nodeMenus.Enabled = false;
             addToolStripMenuItem.Enabled = false;
@@ -81,8 +77,7 @@ namespace JsonManipulator
                     foreach (var objWF in dbObj.objectWorkflow.Where(x=>x.Name.Trim().ToLower().Contains(filter.Trim().ToLower())))
                     {
                         if (!Utils.IsObjectWorkflowAForm(objWF))
-                            continue;
-                        _forms.Add(objWF);
+                            continue; 
                         TreeNode node = new TreeNode();
                         node.Text = objWF.Name;
                         node.Name = objWF.Name;
@@ -94,8 +89,7 @@ namespace JsonManipulator
                 if(dbObj.report != null)
                 {
                     foreach (var rpt in dbObj.report.Where(x => x.name.Contains(filter)))
-                    { 
-                        _reports.Add(rpt);
+                    {  
                         TreeNode node = new TreeNode();
                         node.Text = rpt.name;
                         node.Name = rpt.name;
@@ -140,8 +134,7 @@ namespace JsonManipulator
                     foreach (var objWF in dbObj.objectWorkflow.Where(x => x.Name.Trim().ToLower().Contains(filter.Trim().ToLower())))
                     {
                         if (!Utils.IsObjectWorkflowAFlow(objWF))
-                            continue;
-                        _forms.Add(objWF);
+                            continue; 
                         TreeNode node = new TreeNode();
                         node.Text = objWF.Name;
                         node.Name = objWF.Name;
@@ -151,6 +144,24 @@ namespace JsonManipulator
                     }
                 } 
 
+            }
+
+        }
+
+
+
+        private void populateAPIs(string filter)
+        {
+            nodeMenus.Nodes["nodeApis"].Nodes.Clear();
+            NameSpaceObject nameSpaceObject = _model.root.NameSpaceObjects.FirstOrDefault();
+            foreach (var api in nameSpaceObject.apiSite)
+            {    
+                TreeNode node = new TreeNode();
+                node.Text = api.name;
+                node.Name = api.name;
+                node.ImageIndex = 1;
+                node.SelectedImageIndex = 1;
+                nodeMenus.Nodes["nodeApis"].Nodes.Add(node); 
             }
 
         }
@@ -199,9 +210,8 @@ namespace JsonManipulator
                     if (e.Node.Parent.Name == "nodeFlows")
                     {
                         if (((frmFormSettings)Application.OpenForms["frmFormSettings"]) != null)
-                            ((frmFormSettings)Application.OpenForms["frmFormSettings"]).Close();
-                        objectWorkflow form = _forms.Where(x => x.Name == e.Node.Name).FirstOrDefault();
-                        frmFormSettings frmFormSettings = new frmFormSettings(form.Name);
+                            ((frmFormSettings)Application.OpenForms["frmFormSettings"]).Close(); 
+                        frmFormSettings frmFormSettings = new frmFormSettings(e.Node.Name);
                         frmFormSettings.TopLevel = false;
                         frmFormSettings.AutoScroll = true;
                         frmFormSettings.Dock = DockStyle.Fill;
@@ -211,15 +221,28 @@ namespace JsonManipulator
                         frmFormSettings.Show();
                         break;
                     }
+                    if (e.Node.Parent.Name == "nodeApis")
+                    {
+                        if (((frmAPISettings)Application.OpenForms["frmAPISettings"]) != null)
+                            ((frmAPISettings)Application.OpenForms["frmAPISettings"]).Close();
+                        frmAPISettings frmAPISettings = new frmAPISettings(e.Node.Name);
+                        frmAPISettings.TopLevel = false;
+                        frmAPISettings.AutoScroll = true;
+                        frmAPISettings.Dock = DockStyle.Fill;
+                        //frmFormSettings.Height = this.mainPanel.Height;
+                        //frmFormSettings.Width = this.mainPanel.Width;
+                        this.mainPanel.Controls.Add(frmAPISettings);
+                        frmAPISettings.Show();
+                        break;
+                    }
                     break;
                 case 2:
                     switch(e.Node.Parent.Name)
                     {
                         case "Reports":
                             if (((frmReportSettings)Application.OpenForms["frmReportSettings"]) != null)
-                                ((frmReportSettings)Application.OpenForms["frmReportSettings"]).Close();
-                            Report rpt = _reports.Where(x => x.name == e.Node.Name).FirstOrDefault();
-                            frmReportSettings frmReportSettings = new frmReportSettings(rpt.name);
+                                ((frmReportSettings)Application.OpenForms["frmReportSettings"]).Close(); 
+                            frmReportSettings frmReportSettings = new frmReportSettings(e.Node.Name);
                             frmReportSettings.TopLevel = false;
                             frmReportSettings.AutoScroll = true;
                             frmReportSettings.Dock = DockStyle.Fill;
@@ -230,9 +253,8 @@ namespace JsonManipulator
                             break;
                         case "Forms":
                             if (((frmFormSettings)Application.OpenForms["frmFormSettings"]) != null)
-                                ((frmFormSettings)Application.OpenForms["frmFormSettings"]).Close();
-                            objectWorkflow form = _forms.Where(x => x.Name == e.Node.Name).FirstOrDefault();
-                            frmFormSettings frmFormSettings = new frmFormSettings(form.Name);
+                                ((frmFormSettings)Application.OpenForms["frmFormSettings"]).Close(); 
+                            frmFormSettings frmFormSettings = new frmFormSettings(e.Node.Name);
                             frmFormSettings.TopLevel = false;
                             frmFormSettings.AutoScroll = true;
                             frmFormSettings.Dock = DockStyle.Fill;
@@ -300,6 +322,7 @@ namespace JsonManipulator
                 populateDbObjects("");
                 populateForms("");
                 populateFlows("");
+                populateAPIs("");
                 nodeMenus.Enabled = true;
                 addToolStripMenuItem.Enabled = true;
                 saveToolStripMenuItem.Enabled = true;
@@ -375,6 +398,7 @@ namespace JsonManipulator
             populateDbObjects("");
             populateForms("");
             populateFlows("");
+            populateAPIs("");
             switch (itemtype)
             {
                 case 0://object
@@ -392,7 +416,10 @@ namespace JsonManipulator
                     break;
                 case 2://report
                     nodeMenus.SelectedNode = nodeMenus.Nodes["pages"].Nodes["Reports"].Nodes[name];
-                    break; 
+                    break;
+                case 3://api
+                    nodeMenus.SelectedNode = nodeMenus.Nodes["nodeApis"].Nodes[name];
+                    break;
             }
             nodeMenus.Focus();
         }
@@ -402,17 +429,18 @@ namespace JsonManipulator
             nodeMenus.Nodes["pages"].Nodes["Reports"].Nodes.Clear();
             nodeMenus.Nodes["dbObjects"].Nodes.Clear();
             nodeMenus.Nodes["nodeFlows"].Nodes.Clear();
+            nodeMenus.Nodes["nodeApis"].Nodes.Clear();
             populateProjectDetails();
             populateDbObjects(txtSearch.Text);
             populateForms(txtSearch.Text);
             populateFlows(txtSearch.Text);
+            populateAPIs(txtSearch.Text);
             // nodeMenus.Sort();
         }
         public void AddToTree(objectWorkflow objectWorkflow,int action=0) //0=add 1=update
         {
             if(((frmFormSettings)Application.OpenForms["frmFormSettings"])!=null)
-            ((frmFormSettings)Application.OpenForms["frmFormSettings"]).Close();
-            _forms.Add(objectWorkflow);
+            ((frmFormSettings)Application.OpenForms["frmFormSettings"]).Close(); 
             TreeNode node = new TreeNode();
             node.Text = objectWorkflow.Name;
             node.Name = objectWorkflow.Name;
@@ -444,8 +472,7 @@ namespace JsonManipulator
         public void AddToTree(Report report)
         {
             if (((frmReportSettings)Application.OpenForms["frmReportSettings"]) != null)
-                ((frmReportSettings)Application.OpenForms["frmReportSettings"]).Close();
-            _reports.Add(report);
+                ((frmReportSettings)Application.OpenForms["frmReportSettings"]).Close(); 
             TreeNode node = new TreeNode();
             node.Text = report.name;
             node.Name = report.name;
@@ -454,7 +481,18 @@ namespace JsonManipulator
             nodeMenus.Nodes["pages"].Nodes["Reports"].Nodes.Add(node);
             nodeMenus.SelectedNode = nodeMenus.Nodes["pages"].Nodes["Reports"].Nodes[report.name];
         }
-
+        public void AddToTree(Models.apiSite apiSite)
+        {
+            if (((frmAPISettings)Application.OpenForms["frmAPISettings"]) != null)
+                ((frmAPISettings)Application.OpenForms["frmAPISettings"]).Close();
+            TreeNode node = new TreeNode();
+            node.Text = apiSite.name;
+            node.Name = apiSite.name;
+            node.ImageIndex = 1;
+            node.SelectedImageIndex = 1;
+            nodeMenus.Nodes["nodeApis"].Nodes.Add(node);
+            nodeMenus.SelectedNode = nodeMenus.Nodes["nodeApis"].Nodes[apiSite.name];
+        }
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -464,6 +502,20 @@ namespace JsonManipulator
         {
             LocalStorage.SetValue("Form1.splitContainer1.SplitterDistance", splitContainer1.SplitterDistance.ToString());
             LocalStorage.Save();
+        }
+
+        private void flowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            frmAddFlow form = new frmAddFlow();
+            form.ShowDialog();
+        }
+
+        private void aPISiteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAddApiSite form = new frmAddApiSite();
+            form.ShowDialog();
+
         }
     }
 }

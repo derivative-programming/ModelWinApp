@@ -1,0 +1,424 @@
+﻿using JsonManipulator.Enums;
+using JsonManipulator.Models;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace JsonManipulator
+{
+    public partial class frmAPISettings : Form
+    {
+        Models.apiSite _apiSite = new Models.apiSite(); 
+        public frmAPISettings(string apiSiteName)
+        {
+            InitializeComponent();
+            this._apiSite = Utils.GetApiSiteModelItem(apiSiteName); 
+            this.grpMain.Text = _apiSite.name;
+        }
+
+        private void frmReportSettings_Load(object sender, EventArgs e)
+        {
+            setSetting();
+            setEnvironmentsList();
+            setEndPointsList(); 
+            splitter1.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmAPISettings.splitter1.SplitPosition", "200"));
+            splitter2.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmAPISettings.splitter2.SplitPosition", "200"));
+             
+            tabControl1.SelectedIndex = System.Convert.ToInt32(LocalStorage.GetValue("frmAPISettings.tabControl1.SelectedIndex", "0")); 
+        }
+        private void setSetting()
+        {
+            List<PropertyValue> propertyValues = new List<PropertyValue>();
+            dataProperties.Columns.Clear();
+            List<string> ignoreList = Utils.GetApiSitePropertiesToIgnore();
+            foreach (var prop in _apiSite.GetType().GetProperties().OrderBy(x => x.Name).ToList())
+            {
+                if (ignoreList.Contains(prop.Name.ToLower()))
+                    continue;
+                // Console.WriteLine("{0}={1}", prop.Name, prop.GetValue(foo, null));
+                if (!prop.PropertyType.IsGenericType)
+                    propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(_apiSite) ?? "").ToString() }); ;
+            }
+            dataProperties.DataSource = propertyValues;
+            if (dataProperties.Columns.Count > 0)
+            {
+                dataProperties.Columns[0].ReadOnly = true; 
+            }
+        }
+        public void setEnvironmentsList()
+        {
+            lstEnvironments.Items.Clear();
+            if(_apiSite.apiEnvironment==null)
+            {
+                _apiSite.apiEnvironment = new List<apiEnvironment>();
+            }
+            foreach (var param in _apiSite.apiEnvironment)
+            {
+                lstEnvironments.Items.Add(param.name);
+            }
+            if (lstEnvironments.Items.Count > 0)
+                lstEnvironments.SelectedIndex = lstEnvironments.Items.Count - 1;
+        }
+        public void setEndPointsList()
+        {
+            lstEndPoints.Items.Clear();
+            if (_apiSite.apiEndPoint == null)
+            {
+                _apiSite.apiEndPoint = new List<apiEndPoint>();
+            }
+            foreach (var item in _apiSite.apiEndPoint)
+            {
+                lstEndPoints.Items.Add(item.name);
+            }
+            if (lstEndPoints.Items.Count > 0)
+                lstEndPoints.SelectedIndex = lstEndPoints.Items.Count - 1;
+        } 
+        private void lstEnvironments_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(lstEnvironments.SelectedItem!=null)
+            {
+                List<PropertyValue> propertyValues = new List<PropertyValue>();
+                String filterName = lstEnvironments.SelectedItem.ToString();
+                List<string> ignoreList = Utils.GetApiSiteEnvironmentPropertiesToIgnore();
+                Models.apiEnvironment rptParam = _apiSite.apiEnvironment.Where(x => x.name == filterName).FirstOrDefault();
+                foreach (var prop in rptParam.GetType().GetProperties().OrderBy(x => x.Name).ToList())
+                {
+                    if (ignoreList.Contains(prop.Name.ToLower()))
+                        continue;
+                    if (!prop.PropertyType.IsGenericType)
+                        propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(rptParam) ?? "").ToString() });
+                }
+                gridEnvironments.Columns.Clear();
+                gridEnvironments.DataSource = propertyValues;
+                if (gridEnvironments.Columns.Count > 0)
+                {
+                    gridEnvironments.Columns[0].ReadOnly = true;
+                }
+            }
+          
+        }
+
+        private void lstEndPoints_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            List<PropertyValue> propertyValues = new List<PropertyValue>();
+            String filterName = lstEndPoints.SelectedItem.ToString();
+            List<string> ignoreList = Utils.GetApiSiteEndPointPropertiesToIgnore();
+            Models.apiEndPoint apiEndPoint = _apiSite.apiEndPoint.Where(x => x.name == filterName).FirstOrDefault();
+            foreach (var prop in apiEndPoint.GetType().GetProperties().OrderBy(x => x.Name).ToList())
+            {
+                if (ignoreList.Contains(prop.Name.ToLower()))
+                    continue;
+                if (!prop.PropertyType.IsGenericType)
+                    propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(apiEndPoint) ?? "").ToString() });
+            }
+            gridEndPoints.Columns.Clear();
+            gridEndPoints.DataSource = propertyValues;
+            if (gridEndPoints.Columns.Count > 0)
+            {
+                gridEndPoints.Columns[0].ReadOnly = true;
+            }
+        }
+          
+        private void btnAddEnvironment_Click(object sender, EventArgs e)
+        {
+            frmAddApiSiteEnvironment form = new frmAddApiSiteEnvironment(_apiSite.name);
+            form.ShowDialog();
+        }
+
+        private void btnColumnsAdd_Click(object sender, EventArgs e)
+        {
+            frmAddApiSiteEndPoint form = new frmAddApiSiteEndPoint(_apiSite.name);
+            form.ShowDialog();
+        }
+
+        private void btnColumnsMoveUp_Click(object sender, EventArgs e)
+        {
+            if (lstEndPoints.SelectedItem != null)
+            {
+                int selectedIndex = lstEndPoints.SelectedIndex;
+                apiEndPoint item = Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault().apiEndPoint.ElementAt(selectedIndex);
+                int newIndex = 0;
+                if (selectedIndex == 0)
+                {
+                    newIndex = Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault().apiEndPoint.Count - 1;
+                }
+                else
+                {
+                    newIndex = selectedIndex - 1;
+                }
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault().apiEndPoint.RemoveAt(selectedIndex);
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault().apiEndPoint.Insert(newIndex, item);
+                setEndPointsList();
+                lstEndPoints.SetSelected(newIndex, true);
+            }
+        }
+
+        private void btnColumnsMoveDown_Click(object sender, EventArgs e)
+        {
+            if (lstEndPoints.SelectedItem != null)
+            {
+                int selectedIndex = lstEndPoints.SelectedIndex;
+                int count = Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault().apiEndPoint.Count;
+                apiEndPoint item = Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault().apiEndPoint.ElementAt(selectedIndex);
+                int newIndex = 0;
+                if (selectedIndex == count - 1)
+                {
+                    newIndex = 0;
+                }
+                else
+                {
+                    newIndex = selectedIndex + 1;
+                }
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault().apiEndPoint.RemoveAt(selectedIndex);
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault().apiEndPoint.Insert(newIndex, item);
+                setEndPointsList();
+                lstEndPoints.SetSelected(newIndex,true);
+            }
+        }
+
+        private void btnEnvironmentMoveUp_Click(object sender, EventArgs e)
+        {
+            if (lstEnvironments.SelectedItem != null)
+            {
+                int selectedIndex = lstEnvironments.SelectedIndex;
+                apiEnvironment item = Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault().apiEnvironment.ElementAt(selectedIndex);
+                int newIndex = 0;
+                if (selectedIndex == 0)
+                {
+                    newIndex = Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault().apiEnvironment.Count - 1;
+                }
+                else
+                {
+                    newIndex = selectedIndex - 1;
+                }
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault().apiEnvironment.RemoveAt(selectedIndex);
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault().apiEnvironment.Insert(newIndex, item);
+                setEnvironmentsList();
+                lstEnvironments.SetSelected(newIndex, true);
+            }
+        }
+
+        private void btnEnvironmentMoveDown_Click(object sender, EventArgs e)
+        {
+            if (lstEnvironments.SelectedItem != null)
+            {
+                int selectedIndex = lstEnvironments.SelectedIndex;
+                int count = Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault().apiEnvironment.Count;
+                apiEnvironment item = Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault().apiEnvironment.ElementAt(selectedIndex);
+                int newIndex = 0;
+                if (selectedIndex == count - 1)
+                {
+                    newIndex = 0;
+                }
+                else
+                {
+                    newIndex = selectedIndex + 1;
+                }
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault().apiEnvironment.RemoveAt(selectedIndex);
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault().apiEnvironment.Insert(newIndex, item);
+                setEnvironmentsList();
+                lstEnvironments.SetSelected(newIndex, true);
+            }
+        }
+
+        private void dataProperties_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataProperties.DataSource != null)
+            {
+                string property = dataProperties.Rows[e.RowIndex].Cells[0].Value.ToString();
+
+                string value = string.Empty;
+                if (dataProperties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                {
+                    value = dataProperties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                }
+                apiSite temp = Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault();
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.RemoveAll(x => x.name == _apiSite.name);
+                typeof(Report).GetProperty(property).SetValue(temp, value); 
+
+                if (property.Equals("name", StringComparison.OrdinalIgnoreCase))
+                {
+                    ((Form1)Application.OpenForms["Form1"]).updateTree(value, 2);
+                }
+            }
+           
+        }
+
+        private void gridEnvironments_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (gridEnvironments.DataSource != null && lstEnvironments.SelectedItem!=null)
+            {
+                string property = gridEnvironments.Rows[e.RowIndex].Cells[0].Value.ToString();
+                string value = string.Empty;
+                if (gridEnvironments.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                {
+                    value = gridEnvironments.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                }
+                int index = lstEnvironments.SelectedIndex;
+                typeof(reportParam).GetProperty(property).SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault().apiEnvironment.ElementAt(lstEnvironments.SelectedIndex), value); ;
+                setEnvironmentsList();
+                lstEnvironments.SetSelected(index, true);
+            }
+        }
+
+        private void gridEndPoints_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (gridEndPoints.DataSource != null && lstEndPoints.SelectedItem!=null)
+            {
+                string property = gridEndPoints.Rows[e.RowIndex].Cells[0].Value.ToString();
+                string value = string.Empty;
+                if (gridEndPoints.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                {
+                    value = gridEndPoints.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                }
+                int index = lstEndPoints.SelectedIndex;
+              
+                typeof(reportColumn).GetProperty(property).SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault().apiEndPoint.ElementAt(lstEndPoints.SelectedIndex), value); 
+                setEndPointsList();
+                lstEndPoints.SetSelected(index, true);
+            }
+        }
+
+       
+
+        private void dataProperties_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex > 0)
+            {
+                // Bind grid cell with combobox and than bind combobox with datasource.  
+                DataGridViewComboBoxCell l_objGridDropbox = new DataGridViewComboBoxCell();
+                string propertyName = dataProperties.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value.ToString();
+                // Check the column  cell, in which it click.  
+                if (propertyName.StartsWith("is"))
+                {
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
+                    dataProperties[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
+                    l_objGridDropbox.DataSource = Utils.getBooleans(); // Bind combobox with datasource.  
+                    l_objGridDropbox.ValueMember = "Value";
+                    l_objGridDropbox.DisplayMember = "Display";
+                    l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+                } 
+
+            }
+        }
+
+        private void gridEnvironments_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex > 0)
+            {
+
+                // Bind grid cell with combobox and than bind combobox with datasource.  
+                DataGridViewComboBoxCell l_objGridDropbox = new DataGridViewComboBoxCell();
+                string propertyName = gridEnvironments.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value.ToString();
+                // Check the column  cell, in which it click.  
+                if (propertyName.StartsWith("is"))
+                {
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
+                    gridEnvironments[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
+                    l_objGridDropbox.DataSource = Utils.getBooleans(); // Bind combobox with datasource.  
+                    l_objGridDropbox.ValueMember = "Value";
+                    l_objGridDropbox.DisplayMember = "Display";
+                    l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+                } 
+
+            }
+        }
+        public void setData(string value, int row, int column, string previous = "")
+        {
+            //check if ownerobject name
+            dataProperties.Rows[row].Cells[column].Value = value;
+            dataProperties.RefreshEdit();
+        } 
+        public void setColumnData(string value, int row, int column)
+        {
+            gridEndPoints.Rows[row].Cells[column].Value = value;
+            gridEndPoints.RefreshEdit();
+        }
+         
+
+        private void gridEndPoints_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex > 0)
+            {
+
+                // Bind grid cell with combobox and than bind combobox with datasource.  
+                DataGridViewComboBoxCell l_objGridDropbox = new DataGridViewComboBoxCell();
+                string propertyName = gridEndPoints.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value.ToString();
+                // Check the column  cell, in which it click.  
+                if (propertyName.StartsWith("is"))
+                {
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
+                    gridEndPoints[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
+                    l_objGridDropbox.DataSource = Utils.getBooleans(); // Bind combobox with datasource.  
+                    l_objGridDropbox.ValueMember = "Value";
+                    l_objGridDropbox.DisplayMember = "Display";
+                    l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+                }  
+            }
+        }
+
+        
+         
+
+        private void dataProperties_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.ColumnIndex == 0)
+            {
+                SendKeys.Send("{TAB}");
+            }
+        }
+
+        private void gridEnvironments_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.ColumnIndex == 0)
+            {
+                SendKeys.Send("{TAB}");
+            }
+        }
+
+        private void gridEndPoints_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.ColumnIndex == 0)
+            {
+                SendKeys.Send("{TAB}");
+            }
+        }
+         
+        private void gridEndPoints_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.ColumnIndex == 0)
+            {
+                SendKeys.Send("{TAB}");
+            }
+        }
+         
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+         
+        private void frmAPISettings_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+            LocalStorage.SetValue("frmAPISettings.splitter1.SplitPosition", splitter1.SplitPosition.ToString());
+
+            LocalStorage.SetValue("frmAPISettings.splitter2.SplitPosition", splitter2.SplitPosition.ToString());
+
+            LocalStorage.SetValue("frmAPISettings.tabControl1.SelectedIndex", tabControl1.SelectedIndex.ToString());
+
+            LocalStorage.Save();
+        }
+    }
+}

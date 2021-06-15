@@ -295,7 +295,7 @@ namespace JsonManipulator
                 }
                 Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowOutputVar.RemoveAt(selectedIndex);
                 Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowOutputVar.Insert(newIndex, item);
-                setControlsList();
+                setOutputVarList();
                 lstOutputVars.SetSelected(newIndex, true);
             }
         }
