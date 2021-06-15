@@ -327,6 +327,18 @@ namespace JsonManipulator
                 {
                     value = gridColumns.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 }
+
+                if (property.ToLower() == "buttonDestinationTargetName".ToLower())
+                {
+                    Models.ObjectMap destinationOwnerObject = Utils.GetDestinationOwnerObject(value);
+                    if (destinationOwnerObject == null)
+                    {
+                        gridColumns.Rows[gridButtons.CurrentCell.RowIndex].Cells[gridButtons.CurrentCell.ColumnIndex].Value = "";
+                        return;
+                    }
+                    typeof(reportColumn).GetProperty("buttonDestinationContextObjectName").SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportColumn.ElementAt(lstColumns.SelectedIndex), destinationOwnerObject.name);
+
+                }
                 int index = lstColumns.SelectedIndex;
               
                 typeof(reportColumn).GetProperty(property).SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportColumn.ElementAt(lstColumns.SelectedIndex), value); 
@@ -491,6 +503,12 @@ namespace JsonManipulator
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview  
                     ObjectsList formsList = new ObjectsList(FormObjects.REPORT_COLUMNS, e.RowIndex, e.ColumnIndex);
+                    formsList.ShowDialog();
+                }
+                if (propertyName.Equals("buttonDestinationTargetName", StringComparison.OrdinalIgnoreCase))
+                {
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
+                    FormsList formsList = new FormsList(ParentType.REPORT_COLUMN, e.RowIndex, e.ColumnIndex);
                     formsList.ShowDialog();
                 }
             }

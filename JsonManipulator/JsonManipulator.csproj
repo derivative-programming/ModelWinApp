@@ -208,6 +208,12 @@
     <Compile Include="FormsList.Designer.cs">
       <DependentUpon>FormsList.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReportList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportList.Designer.cs">
+      <DependentUpon>ReportList.cs</DependentUpon>
+    </Compile>
     <Compile Include="RoleList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -288,6 +294,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormsList.resx">
       <DependentUpon>FormsList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportList.resx">
+      <DependentUpon>ReportList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RoleList.resx">
       <DependentUpon>RoleList.cs</DependentUpon>

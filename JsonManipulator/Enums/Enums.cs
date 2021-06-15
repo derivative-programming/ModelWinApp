@@ -27,7 +27,8 @@ namespace JsonManipulator.Enums
        REPORT_BUTTON,
        REPORT_COLUMNS,
        OBJECT_EDIT,
-       ADD_FLOW
+       ADD_FLOW,
+        API_ENDPOINT
     }
     public enum Booleans
     {
@@ -38,7 +39,8 @@ namespace JsonManipulator.Enums
     {
         ADD,
         EDIT,
-        REPORT_BUTTON
+        REPORT_BUTTON,
+        REPORT_COLUMN
     }
     public enum NodeType
     {

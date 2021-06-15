@@ -403,7 +403,7 @@ namespace JsonManipulator
                     value = gridOutput.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 }
                 int index = lstOutputVars.SelectedIndex;
-                typeof(objectWorkflowParam).GetProperty(property).SetValue(
+                typeof(objectWorkflowOutputVar).GetProperty(property).SetValue(
                     Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowOutputVar.ElementAt(lstOutputVars.SelectedIndex), value); ;
                 setOutputVarList();
                 lstOutputVars.SetSelected(index, true);

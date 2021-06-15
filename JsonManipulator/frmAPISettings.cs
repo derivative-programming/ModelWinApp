@@ -2,23 +2,19 @@
 using JsonManipulator.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace JsonManipulator
 {
     public partial class frmAPISettings : Form
     {
-        Models.apiSite _apiSite = new Models.apiSite(); 
+        Models.apiSite _apiSite = new Models.apiSite();
         public frmAPISettings(string apiSiteName)
         {
             InitializeComponent();
-            this._apiSite = Utils.GetApiSiteModelItem(apiSiteName); 
+            this._apiSite = Utils.GetApiSiteModelItem(apiSiteName);
             this.grpMain.Text = _apiSite.name;
         }
 
@@ -26,11 +22,11 @@ namespace JsonManipulator
         {
             setSetting();
             setEnvironmentsList();
-            setEndPointsList(); 
+            setEndPointsList();
             splitter1.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmAPISettings.splitter1.SplitPosition", "200"));
             splitter2.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmAPISettings.splitter2.SplitPosition", "200"));
-             
-            tabControl1.SelectedIndex = System.Convert.ToInt32(LocalStorage.GetValue("frmAPISettings.tabControl1.SelectedIndex", "0")); 
+
+            tabControl1.SelectedIndex = System.Convert.ToInt32(LocalStorage.GetValue("frmAPISettings.tabControl1.SelectedIndex", "0"));
         }
         private void setSetting()
         {
@@ -48,13 +44,13 @@ namespace JsonManipulator
             dataProperties.DataSource = propertyValues;
             if (dataProperties.Columns.Count > 0)
             {
-                dataProperties.Columns[0].ReadOnly = true; 
+                dataProperties.Columns[0].ReadOnly = true;
             }
         }
         public void setEnvironmentsList()
         {
             lstEnvironments.Items.Clear();
-            if(_apiSite.apiEnvironment==null)
+            if (_apiSite.apiEnvironment == null)
             {
                 _apiSite.apiEnvironment = new List<apiEnvironment>();
             }
@@ -78,10 +74,10 @@ namespace JsonManipulator
             }
             if (lstEndPoints.Items.Count > 0)
                 lstEndPoints.SelectedIndex = lstEndPoints.Items.Count - 1;
-        } 
+        }
         private void lstEnvironments_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(lstEnvironments.SelectedItem!=null)
+            if (lstEnvironments.SelectedItem != null)
             {
                 List<PropertyValue> propertyValues = new List<PropertyValue>();
                 String filterName = lstEnvironments.SelectedItem.ToString();
@@ -101,7 +97,7 @@ namespace JsonManipulator
                     gridEnvironments.Columns[0].ReadOnly = true;
                 }
             }
-          
+
         }
 
         private void lstEndPoints_SelectedIndexChanged(object sender, EventArgs e)
@@ -124,7 +120,7 @@ namespace JsonManipulator
                 gridEndPoints.Columns[0].ReadOnly = true;
             }
         }
-          
+
         private void btnAddEnvironment_Click(object sender, EventArgs e)
         {
             frmAddApiSiteEnvironment form = new frmAddApiSiteEnvironment(_apiSite.name);
@@ -178,7 +174,7 @@ namespace JsonManipulator
                 Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault().apiEndPoint.RemoveAt(selectedIndex);
                 Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault().apiEndPoint.Insert(newIndex, item);
                 setEndPointsList();
-                lstEndPoints.SetSelected(newIndex,true);
+                lstEndPoints.SetSelected(newIndex, true);
             }
         }
 
@@ -240,20 +236,20 @@ namespace JsonManipulator
                 }
                 apiSite temp = Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault();
                 Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.RemoveAll(x => x.name == _apiSite.name);
-                typeof(Report).GetProperty(property).SetValue(temp, value); 
+                typeof(objectWorkflow).GetProperty(property).SetValue(temp, value);
 
                 if (property.Equals("name", StringComparison.OrdinalIgnoreCase))
                 {
                     ((Form1)Application.OpenForms["Form1"]).updateTree(value, 2);
                 }
             }
-           
+
         }
 
         private void gridEnvironments_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
 
-            if (gridEnvironments.DataSource != null && lstEnvironments.SelectedItem!=null)
+            if (gridEnvironments.DataSource != null && lstEnvironments.SelectedItem != null)
             {
                 string property = gridEnvironments.Rows[e.RowIndex].Cells[0].Value.ToString();
                 string value = string.Empty;
@@ -262,7 +258,7 @@ namespace JsonManipulator
                     value = gridEnvironments.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 }
                 int index = lstEnvironments.SelectedIndex;
-                typeof(reportParam).GetProperty(property).SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault().apiEnvironment.ElementAt(lstEnvironments.SelectedIndex), value); ;
+                typeof(apiEnvironment).GetProperty(property).SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault().apiEnvironment.ElementAt(lstEnvironments.SelectedIndex), value); ;
                 setEnvironmentsList();
                 lstEnvironments.SetSelected(index, true);
             }
@@ -270,7 +266,7 @@ namespace JsonManipulator
 
         private void gridEndPoints_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (gridEndPoints.DataSource != null && lstEndPoints.SelectedItem!=null)
+            if (gridEndPoints.DataSource != null && lstEndPoints.SelectedItem != null)
             {
                 string property = gridEndPoints.Rows[e.RowIndex].Cells[0].Value.ToString();
                 string value = string.Empty;
@@ -278,15 +274,65 @@ namespace JsonManipulator
                 {
                     value = gridEndPoints.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 }
+
+                if (property.ToLower() == "apiContextTargetName".ToLower())
+                {
+                    Models.ObjectMap destinationOwnerObject = Utils.GetDestinationOwnerObject(value);
+                    if (destinationOwnerObject == null)
+                    {
+                        gridEndPoints.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "";
+                        return;
+                    }
+                    typeof(apiEndPoint).GetProperty("apiContextObjectName").SetValue(
+                        Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault().apiEndPoint.ElementAt(lstEndPoints.SelectedIndex), destinationOwnerObject.name);
+                }
+
+                if (property.ToLower() == "apiPostContextTargetName".ToLower())
+                {
+                    Models.ObjectMap destinationOwnerObject = Utils.GetDestinationOwnerObject(value);
+                    if (destinationOwnerObject == null)
+                    {
+                        gridEndPoints.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "";
+                        return;
+                    }
+                    typeof(apiEndPoint).GetProperty("apiPostContextObjectName").SetValue(
+                        Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault().apiEndPoint.ElementAt(lstEndPoints.SelectedIndex), destinationOwnerObject.name);
+                }
+
+                if (property.ToLower() == "apiPutContextTargetName".ToLower())
+                {
+                    Models.ObjectMap destinationOwnerObject = Utils.GetDestinationOwnerObject(value);
+                    if (destinationOwnerObject == null)
+                    {
+                        gridEndPoints.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "";
+                        return;
+                    }
+                    typeof(apiEndPoint).GetProperty("apiPutContextObjectName").SetValue(
+                        Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault().apiEndPoint.ElementAt(lstEndPoints.SelectedIndex), destinationOwnerObject.name);
+                }
+
+                if (property.ToLower() == "apiDeleteContextTargetName".ToLower())
+                {
+                    Models.ObjectMap destinationOwnerObject = Utils.GetDestinationOwnerObject(value);
+                    if (destinationOwnerObject == null)
+                    {
+                        gridEndPoints.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "";
+                        return;
+                    }
+                    typeof(apiEndPoint).GetProperty("apiDeleteContextObjectName").SetValue(
+                        Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault().apiEndPoint.ElementAt(lstEndPoints.SelectedIndex), destinationOwnerObject.name);
+                }
+
+
                 int index = lstEndPoints.SelectedIndex;
-              
-                typeof(reportColumn).GetProperty(property).SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault().apiEndPoint.ElementAt(lstEndPoints.SelectedIndex), value); 
+
+                typeof(apiEndPoint).GetProperty(property).SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault().apiEndPoint.ElementAt(lstEndPoints.SelectedIndex), value);
                 setEndPointsList();
                 lstEndPoints.SetSelected(index, true);
             }
         }
 
-       
+
 
         private void dataProperties_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -304,7 +350,7 @@ namespace JsonManipulator
                     l_objGridDropbox.ValueMember = "Value";
                     l_objGridDropbox.DisplayMember = "Display";
                     l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
-                } 
+                }
 
             }
         }
@@ -326,7 +372,7 @@ namespace JsonManipulator
                     l_objGridDropbox.ValueMember = "Value";
                     l_objGridDropbox.DisplayMember = "Display";
                     l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
-                } 
+                }
 
             }
         }
@@ -335,13 +381,13 @@ namespace JsonManipulator
             //check if ownerobject name
             dataProperties.Rows[row].Cells[column].Value = value;
             dataProperties.RefreshEdit();
-        } 
-        public void setColumnData(string value, int row, int column)
+        }
+        public void setEndPointData(string value, int row, int column)
         {
             gridEndPoints.Rows[row].Cells[column].Value = value;
             gridEndPoints.RefreshEdit();
         }
-         
+
 
         private void gridEndPoints_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -360,12 +406,36 @@ namespace JsonManipulator
                     l_objGridDropbox.ValueMember = "Value";
                     l_objGridDropbox.DisplayMember = "Display";
                     l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
-                }  
+                }
+                if (propertyName.Equals("apiContextTargetName", StringComparison.OrdinalIgnoreCase))
+                {
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
+                    ReportList formsList = new ReportList(FormObjects.API_ENDPOINT, e.RowIndex, e.ColumnIndex);
+                    formsList.ShowDialog();
+                }
+                if (propertyName.Equals("apiPostContextTargetName", StringComparison.OrdinalIgnoreCase))
+                {
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
+                    ReportList formsList = new ReportList(FormObjects.API_ENDPOINT, e.RowIndex, e.ColumnIndex);
+                    formsList.ShowDialog();
+                }
+                if (propertyName.Equals("apiPutContextTargetName", StringComparison.OrdinalIgnoreCase))
+                {
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
+                    ReportList formsList = new ReportList(FormObjects.API_ENDPOINT, e.RowIndex, e.ColumnIndex);
+                    formsList.ShowDialog();
+                }
+                if (propertyName.Equals("apiDeleteContextTargetName", StringComparison.OrdinalIgnoreCase))
+                {
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
+                    ReportList formsList = new ReportList(FormObjects.API_ENDPOINT, e.RowIndex, e.ColumnIndex);
+                    formsList.ShowDialog();
+                }
             }
         }
 
-        
-         
+
+
 
         private void dataProperties_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
@@ -393,7 +463,7 @@ namespace JsonManipulator
                 SendKeys.Send("{TAB}");
             }
         }
-         
+
         private void gridEndPoints_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -402,13 +472,13 @@ namespace JsonManipulator
                 SendKeys.Send("{TAB}");
             }
         }
-         
+
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }
-         
+
         private void frmAPISettings_FormClosing(object sender, FormClosingEventArgs e)
         {
 

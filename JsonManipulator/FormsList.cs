@@ -66,6 +66,9 @@ namespace JsonManipulator
                     case ParentType.REPORT_BUTTON:
                         ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setButtonData(listObjects.SelectedItem.ToString(), _row, _col);
                         break;
+                    case ParentType.REPORT_COLUMN:
+                        ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setColumnData(listObjects.SelectedItem.ToString(), _row, _col);
+                        break;
                 }
                   
             }

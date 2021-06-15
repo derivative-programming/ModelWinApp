@@ -258,7 +258,7 @@ namespace JsonManipulator
             result.Add("name");
 
             result.Add("initObjectWorkflowName");
-            result.Add("isInitObjWFSubscribedToParams");
+            //result.Add("isInitObjWFSubscribedToParams");
             result.Add("isExposedInBusinessObject");
             result.Add("isObjectDelete");
             result.Add("layoutName");
@@ -268,7 +268,7 @@ namespace JsonManipulator
             //result.Add("formFooterText");
             result.Add("formFooterImageURL");
             result.Add("isAutoSubmit");
-            result.Add("isHeaderVisible");
+            //result.Add("isHeaderVisible");
             result.Add("isLoginPage");
             result.Add("isLogoutPage");
             result.Add("isImpersonationPage");
@@ -301,7 +301,7 @@ namespace JsonManipulator
             result.Add("TitleText");
             result.Add("initObjectWorkflowName");
             result.Add("isInitObjWFSubscribedToParams");
-            result.Add("isExposedInBusinessObject");
+            //result.Add("isExposedInBusinessObject");
             result.Add("isObjectDelete");
             result.Add("layoutName");
             result.Add("isWFSWorkflowCreated");
@@ -347,6 +347,7 @@ namespace JsonManipulator
         public static List<string> GetFormOutputVarPropertiesToIgnore()
         {
             List<string> result = new List<string>();
+            result.Add("name");
             //result.Add("destinationContextObjectName".ToLower());
 
             for (int i = 0; i < result.Count; i++)
@@ -361,6 +362,7 @@ namespace JsonManipulator
         public static List<string> GetFormParamPropertiesToIgnore()
         {
             List<string> result = new List<string>();
+            result.Add("name");
             //result.Add("isRequired".ToLower());
             //result.Add("requiredErrorText".ToLower());
             //result.Add("isSecured".ToLower());
@@ -422,6 +424,7 @@ namespace JsonManipulator
             result.Add("fKObjectPropertyName".ToLower());
             result.Add("isQueryByAvailable".ToLower());
             result.Add("defaultValue".ToLower());
+            result.Add("name");
 
             for (int i = 0; i < result.Count; i++)
             {
@@ -531,6 +534,7 @@ namespace JsonManipulator
         public static List<string> GetReportFilterPropertiesToIgnore()
         {
             List<string> result = new List<string>();
+            result.Add("name");
             //result.Add("isFKList".ToLower());
             //result.Add("isFKListInactiveIncluded".ToLower());
             result.Add("fKObjectName".ToLower());
@@ -551,16 +555,17 @@ namespace JsonManipulator
         public static List<string> GetReportColumnPropertiesToIgnore()
         {
             List<string> result = new List<string>();
-            result.Add("destinationContextObjectName".ToLower());
+            result.Add("buttonDestinationContextObjectName".ToLower());
             result.Add("minWidth".ToLower());
+            result.Add("name");
             //result.Add("isButton".ToLower());
             //result.Add("buttonText".ToLower());
-            result.Add("destinationTargetName".ToLower());
-             
+            //result.Add("buttonDestinationTargetName".ToLower());
+
             result.Add("maxWidth".ToLower());
             result.Add("dateTimeDisplayFormat".ToLower());
             //result.Add("infoToolTipText".ToLower());
-            result.Add("isButtonCallToAction".ToLower());
+            //result.Add("isButtonCallToAction".ToLower());
             result.Add("isHtml".ToLower());
             result.Add("isColumnSumMetricAvailable".ToLower());
             result.Add("isSummaryDisplayed".ToLower());
@@ -572,10 +577,10 @@ namespace JsonManipulator
             result.Add("isButtonClickedOnRowClick".ToLower());
             //result.Add("isMultiSelectColumn".ToLower());
             result.Add("isForcedIntoExport".ToLower());
-            result.Add("isButtonAsyncObjWF".ToLower());
+            //result.Add("isButtonAsyncObjWF".ToLower());
 
-            result.Add("isAsyncObjWFResultFileStreamedOut".ToLower());
-            result.Add("asyncObjWFResultFilePathParamName".ToLower());
+            //result.Add("isAsyncObjWFResultFileStreamedOut".ToLower());
+            //result.Add("asyncObjWFResultFilePathParamName".ToLower());
             //result.Add("isJoinedToLeftColumn".ToLower());
             //result.Add("isJoinedToRightColumn".ToLower());
             //result.Add("conditionalVisiblePropertyName".ToLower());
@@ -622,7 +627,11 @@ namespace JsonManipulator
         public static List<string> GetApiSiteEndPointPropertiesToIgnore()
         {
             List<string> result = new List<string>();
-            result.Add("name");
+            result.Add("name"); 
+            result.Add("apiContextObjectName");
+            result.Add("apiPostContextObjectName");
+            result.Add("apiPutContextObjectName");
+            result.Add("apiDeleteContextObjectName");
 
             for (int i = 0; i < result.Count; i++)
             {
@@ -631,6 +640,39 @@ namespace JsonManipulator
 
             return result;
         }
+
+
+        public static List<string> GetDBObjModelServiceSubPropertiesToIgnore()
+        {
+            List<string> result = new List<string>();
+            result.Add("name");
+            result.Add("isImported");
+            result.Add("isSubscriptionAllowed");
+            result.Add("role");
+            result.Add("pkgType"); 
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                result[i] = result[i].ToLower();
+            }
+
+            return result;
+        }
+
+        public static List<string> GetDBObjPropSubPropertiesToIgnore()
+        {
+            List<string> result = new List<string>();
+            result.Add("destinationTargetName");
+            result.Add("destinationContextObjectName");
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                result[i] = result[i].ToLower();
+            }
+
+            return result;
+        }
+
         public static Models.ObjectMap GetDestinationOwnerObject(string destinationName)
         {
             Models.ObjectMap result = null;

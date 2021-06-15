@@ -25,9 +25,15 @@ namespace JsonManipulator
         private void frmDbObjSettings_Load(object sender, EventArgs e)
         {
             setSetting();
-            setPropertieList(); 
+            setPropertieList();
+            setPropSubList();
+            setModelServiceSubList();
             grpBoxMain.Text = _map.name;
-            splitter1.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmDbObjSettings.splitter1.SplitPosition", "200")); 
+            splitter1.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmDbObjSettings.splitter1.SplitPosition", "200"));
+
+            splitter2.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmDbObjSettings.splitter2.SplitPosition", "200"));
+
+            splitter3.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmDbObjSettings.splitter3.SplitPosition", "200"));
 
             tabControl1.SelectedIndex = System.Convert.ToInt32(LocalStorage.GetValue("frmDbObjSettings.tabControl1.SelectedIndex", "0"));
         }
@@ -66,6 +72,41 @@ namespace JsonManipulator
             
         }
 
+
+        public void setPropSubList()
+        {
+            if (_map != null)
+            {
+                if (_map.propSubscription == null)
+                    _map.propSubscription = new List<propSubscription>();
+                lstPropSubs.Items.Clear();
+                foreach (var prop in _map.propSubscription)
+                {
+                    lstPropSubs.Items.Add(prop.destinationTargetName);
+                }
+                lstPropSubs.SelectedIndex = lstPropSubs.Items.Count - 1;
+            }
+
+        }
+
+
+        public void setModelServiceSubList()
+        {
+            if (_map != null)
+            {
+                if (_map.modelPkg == null)
+                    _map.modelPkg = new List<modelPkg>();
+                lstModelServiceSubs.Items.Clear();
+                foreach (var prop in _map.modelPkg)
+                {
+                    if (prop.isSubscriptionAllowed != "true")
+                        continue;
+                    lstModelServiceSubs.Items.Add(prop.name);
+                }
+                lstModelServiceSubs.SelectedIndex = lstModelServiceSubs.Items.Count - 1;
+            }
+
+        }
         private void lstProperties_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(lstProperties.SelectedItem!=null)
@@ -242,8 +283,165 @@ namespace JsonManipulator
         {
 
             LocalStorage.SetValue("frmDbObjSettings.splitter1.SplitPosition", splitter1.SplitPosition.ToString());
+            LocalStorage.SetValue("frmDbObjSettings.splitter2.SplitPosition", splitter2.SplitPosition.ToString());
+            LocalStorage.SetValue("frmDbObjSettings.splitter3.SplitPosition", splitter3.SplitPosition.ToString());
             LocalStorage.SetValue("frmDbObjSettings.tabControl1.SelectedIndex", tabControl1.SelectedIndex.ToString());
             LocalStorage.Save();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void lstModelServiceSubs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstModelServiceSubs.SelectedItem != null)
+            {
+                gridModelServiceSubProperties.Columns.Clear();
+                List<PropertyValue> propertyValues = new List<PropertyValue>();
+                String propname = lstModelServiceSubs.SelectedItem.ToString();
+                modelPkg prpty = _map.modelPkg.Where(x => x.name == propname).FirstOrDefault();
+                List<string> ignoreList = Utils.GetDBObjModelServiceSubPropertiesToIgnore();
+                foreach (var prop in prpty.GetType().GetProperties().OrderBy(x => x.Name).ToList())
+                {
+                    if (ignoreList.Contains(prop.Name.ToLower()))
+                        continue;
+                    if (!prop.PropertyType.IsGenericType)
+                        propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(prpty) ?? "").ToString() });
+                }
+
+                gridModelServiceSubProperties.DataSource = propertyValues;
+
+                if (gridModelServiceSubProperties.Columns.Count > 0)
+                {
+                    gridModelServiceSubProperties.Columns[0].ReadOnly = true;
+                }
+            }
+        }
+
+        private void lstPropSubs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstPropSubs.SelectedItem != null)
+            {
+                gridPropSubProperties.Columns.Clear();
+                List<PropertyValue> propertyValues = new List<PropertyValue>();
+                String propname = lstPropSubs.SelectedItem.ToString();
+                propSubscription prpty = _map.propSubscription.Where(x => x.destinationTargetName == propname).FirstOrDefault();
+                List<string> ignoreList = Utils.GetDBObjPropSubPropertiesToIgnore();
+                foreach (var prop in prpty.GetType().GetProperties().OrderBy(x => x.Name).ToList())
+                {
+                    if (ignoreList.Contains(prop.Name.ToLower()))
+                        continue;
+                    if (!prop.PropertyType.IsGenericType)
+                        propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(prpty) ?? "").ToString() });
+                }
+
+                gridPropSubProperties.DataSource = propertyValues;
+
+                if (gridPropSubProperties.Columns.Count > 0)
+                {
+                    gridPropertiesProp.Columns[0].ReadOnly = true;
+                }
+            }
+        }
+            
+        private void gridPropSubProperties_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (gridPropSubProperties.DataSource != null)
+            {
+                string value = string.Empty;
+                if (gridPropSubProperties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                {
+                    value = gridPropSubProperties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                }
+                string property = gridPropSubProperties.Rows[e.RowIndex].Cells[0].Value.ToString();
+                int index = lstPropSubs.SelectedIndex;
+                typeof(propSubscription).GetProperty(property).SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _map.name).FirstOrDefault().propSubscription.ElementAt(lstPropSubs.SelectedIndex), value);
+                setPropertieList();
+                lstPropSubs.SetSelected(index, true);
+                gridPropSubProperties.CurrentCell.Selected = false;
+            }
+        }
+
+        private void gridModelServiceSubProperties_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (gridModelServiceSubProperties.DataSource != null)
+            {
+                string value = string.Empty;
+                if (gridModelServiceSubProperties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                {
+                    value = gridModelServiceSubProperties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                }
+                string property = gridModelServiceSubProperties.Rows[e.RowIndex].Cells[0].Value.ToString();
+                int index = lstModelServiceSubs.SelectedIndex;
+                typeof(modelPkg).GetProperty(property).SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _map.name).FirstOrDefault().modelPkg.ElementAt(lstModelServiceSubs.SelectedIndex), value);
+                setPropertieList();
+                lstModelServiceSubs.SetSelected(index, true);
+                gridModelServiceSubProperties.CurrentCell.Selected = false;
+            }
+        }
+
+        private void gridModelServiceSubProperties_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex > 0)
+            {
+
+                // Bind grid cell with combobox and than bind combobox with datasource.  
+                DataGridViewComboBoxCell l_objGridDropbox = new DataGridViewComboBoxCell();
+                string propertyName = gridModelServiceSubProperties.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value.ToString();
+                // Check the column  cell, in which it click.   
+                if (propertyName.StartsWith("is"))
+                {
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
+                    gridModelServiceSubProperties[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
+                    l_objGridDropbox.DataSource = Utils.getBooleans(); // Bind combobox with datasource.  
+                    l_objGridDropbox.ValueMember = "Value";
+                    l_objGridDropbox.DisplayMember = "Display";
+                    l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+                } 
+
+            }
+        }
+
+        private void gridPropSubProperties_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex > 0)
+            {
+
+                // Bind grid cell with combobox and than bind combobox with datasource.  
+                DataGridViewComboBoxCell l_objGridDropbox = new DataGridViewComboBoxCell();
+                string propertyName = gridPropSubProperties.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value.ToString();
+                // Check the column  cell, in which it click.   
+                if (propertyName.StartsWith("is"))
+                {
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
+                    gridPropSubProperties[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
+                    l_objGridDropbox.DataSource = Utils.getBooleans(); // Bind combobox with datasource.  
+                    l_objGridDropbox.ValueMember = "Value";
+                    l_objGridDropbox.DisplayMember = "Display";
+                    l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+                }
+
+            }
+        }
+
+        private void gridPropSubProperties_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.ColumnIndex == 0)
+            {
+                SendKeys.Send("{TAB}");
+            }
+        }
+
+        private void gridModelServiceSubProperties_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.ColumnIndex == 0)
+            {
+                SendKeys.Send("{TAB}");
+            }
         }
     }
 }

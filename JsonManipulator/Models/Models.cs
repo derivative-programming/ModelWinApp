@@ -210,7 +210,7 @@ namespace JsonManipulator.Models
         [JsonProperty("destinationTargetName")]
         public string destinationTargetName { get; set; }
         [JsonProperty("isIgnored")]
-        public string isIgnored { get; set; }
+        public string isDisabled { get; set; }
          
     }
     public class calculatedProp
@@ -442,9 +442,9 @@ namespace JsonManipulator.Models
         [JsonProperty("buttonText")]
         public string buttonText { get; set; }
         [JsonProperty("destinationTargetName")]
-        public String destinationTargetName { get; set; }
+        public String buttonDestinationTargetName { get; set; }
         [JsonProperty("destinationContextObjectName")]
-        public String destinationContextObjectName { get; set; }
+        public String buttonDestinationContextObjectName { get; set; }
         [JsonProperty("minWidth")]
         public String minWidth { get; set; }
 
@@ -575,13 +575,13 @@ namespace JsonManipulator.Models
         [JsonProperty("sqlServerDBDataTypeSize")]
         public string sqlServerDBDataTypeSize { get; set; }
         [JsonProperty("labelText")]
-        public string labelText { get; set; }
+        public string headerLabelText { get; set; }
         [JsonProperty("buttonText")]
         public string buttonText { get; set; }
         [JsonProperty("buttonNavURL")]
         public string buttonNavURL { get; set; }
         [JsonProperty("isLabelVisible")]
-        public string isLabelVisible { get; set; }
+        public string isHeaderLabelVisible { get; set; }
         [JsonProperty("defaultValue")]
         public string defaultValue { get; set; }
         [JsonProperty("isLink")]
