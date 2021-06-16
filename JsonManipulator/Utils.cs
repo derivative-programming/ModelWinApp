@@ -437,6 +437,19 @@ namespace JsonManipulator
 
             return result;
         }
+
+        public static List<string> GetDBObjLookupItemPropertiesToIgnore()
+        {
+            List<string> result = new List<string>();
+            result.Add("enumValue".ToLower()); 
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                result[i] = result[i].ToLower();
+            }
+
+            return result;
+        }
         public static List<string> GetReportPropertiesToIgnore()
         {
             List<string> result = new List<string>();

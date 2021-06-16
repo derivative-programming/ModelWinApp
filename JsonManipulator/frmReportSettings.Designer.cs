@@ -35,72 +35,72 @@ namespace JsonManipulator
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabFilters = new System.Windows.Forms.TabPage();
-            this.btnFilterMoveDown = new System.Windows.Forms.Button();
-            this.btnFilterMoveUp = new System.Windows.Forms.Button();
+            this.splitter1 = new System.Windows.Forms.Splitter();
+            this.pnlFiltersRight = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.gridFilters = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pnlFiltersLeft = new System.Windows.Forms.Panel();
+            this.pnlFiltersLeftBottom = new System.Windows.Forms.Panel();
             this.btnAddFilter = new System.Windows.Forms.Button();
+            this.btnFilterMoveUp = new System.Windows.Forms.Button();
+            this.btnFilterMoveDown = new System.Windows.Forms.Button();
+            this.pnlFitlerLeftTop = new System.Windows.Forms.Panel();
             this.lstFilters = new System.Windows.Forms.ListBox();
             this.tabColumns = new System.Windows.Forms.TabPage();
-            this.btnColumnsMoveDown = new System.Windows.Forms.Button();
-            this.btnColumnsMoveUp = new System.Windows.Forms.Button();
+            this.splitter2 = new System.Windows.Forms.Splitter();
+            this.pnlColumnsRight = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.gridColumns = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnColumnsAdd = new System.Windows.Forms.Button();
+            this.pnlColumnsLeft = new System.Windows.Forms.Panel();
+            this.pnlColumnsLeftTop = new System.Windows.Forms.Panel();
             this.lstColumns = new System.Windows.Forms.ListBox();
+            this.pnlColumnsLeftBottom = new System.Windows.Forms.Panel();
+            this.btnColumnsAdd = new System.Windows.Forms.Button();
+            this.btnColumnsMoveUp = new System.Windows.Forms.Button();
+            this.btnColumnsMoveDown = new System.Windows.Forms.Button();
             this.tabButtons = new System.Windows.Forms.TabPage();
+            this.splitter3 = new System.Windows.Forms.Splitter();
+            this.pnlButtonsRight = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.gridButtons = new System.Windows.Forms.DataGridView();
             this.Property = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pnlButtonsLeft = new System.Windows.Forms.Panel();
+            this.pnlButtonsLeftBottom = new System.Windows.Forms.Panel();
             this.btnButtonAdd = new System.Windows.Forms.Button();
+            this.pnlButtonsLeftTop = new System.Windows.Forms.Panel();
             this.lstButtons = new System.Windows.Forms.ListBox();
             this.grpMain = new System.Windows.Forms.GroupBox();
-            this.pnlFiltersLeft = new System.Windows.Forms.Panel();
-            this.pnlFiltersRight = new System.Windows.Forms.Panel();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gridFilters = new System.Windows.Forms.DataGridView();
-            this.splitter1 = new System.Windows.Forms.Splitter();
-            this.pnlFitlerLeftTop = new System.Windows.Forms.Panel();
-            this.pnlFiltersLeftBottom = new System.Windows.Forms.Panel();
-            this.pnlColumnsLeft = new System.Windows.Forms.Panel();
-            this.pnlColumnsLeftBottom = new System.Windows.Forms.Panel();
-            this.pnlColumnsLeftTop = new System.Windows.Forms.Panel();
-            this.pnlColumnsRight = new System.Windows.Forms.Panel();
-            this.splitter2 = new System.Windows.Forms.Splitter();
-            this.pnlButtonsLeft = new System.Windows.Forms.Panel();
-            this.pnlButtonsRight = new System.Windows.Forms.Panel();
-            this.pnlButtonsLeftTop = new System.Windows.Forms.Panel();
-            this.pnlButtonsLeftBottom = new System.Windows.Forms.Panel();
-            this.splitter3 = new System.Windows.Forms.Splitter();
             tabSettings = new System.Windows.Forms.TabPage();
             tabSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataProperties)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabFilters.SuspendLayout();
+            this.pnlFiltersRight.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridFilters)).BeginInit();
+            this.pnlFiltersLeft.SuspendLayout();
+            this.pnlFiltersLeftBottom.SuspendLayout();
+            this.pnlFitlerLeftTop.SuspendLayout();
             this.tabColumns.SuspendLayout();
+            this.pnlColumnsRight.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridColumns)).BeginInit();
+            this.pnlColumnsLeft.SuspendLayout();
+            this.pnlColumnsLeftTop.SuspendLayout();
+            this.pnlColumnsLeftBottom.SuspendLayout();
             this.tabButtons.SuspendLayout();
+            this.pnlButtonsRight.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridButtons)).BeginInit();
-            this.grpMain.SuspendLayout();
-            this.pnlFiltersLeft.SuspendLayout();
-            this.pnlFiltersRight.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridFilters)).BeginInit();
-            this.pnlFitlerLeftTop.SuspendLayout();
-            this.pnlFiltersLeftBottom.SuspendLayout();
-            this.pnlColumnsLeft.SuspendLayout();
-            this.pnlColumnsLeftBottom.SuspendLayout();
-            this.pnlColumnsLeftTop.SuspendLayout();
-            this.pnlColumnsRight.SuspendLayout();
             this.pnlButtonsLeft.SuspendLayout();
-            this.pnlButtonsRight.SuspendLayout();
-            this.pnlButtonsLeftTop.SuspendLayout();
             this.pnlButtonsLeftBottom.SuspendLayout();
+            this.pnlButtonsLeftTop.SuspendLayout();
+            this.grpMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabSettings
@@ -109,7 +109,7 @@ namespace JsonManipulator
             tabSettings.Location = new System.Drawing.Point(4, 22);
             tabSettings.Name = "tabSettings";
             tabSettings.Padding = new System.Windows.Forms.Padding(3);
-            tabSettings.Size = new System.Drawing.Size(786, 405);
+            tabSettings.Size = new System.Drawing.Size(786, 451);
             tabSettings.TabIndex = 0;
             tabSettings.Text = "Settings";
             tabSettings.UseVisualStyleBackColor = true;
@@ -126,7 +126,7 @@ namespace JsonManipulator
             this.dataProperties.MultiSelect = false;
             this.dataProperties.Name = "dataProperties";
             this.dataProperties.RowHeadersVisible = false;
-            this.dataProperties.Size = new System.Drawing.Size(780, 399);
+            this.dataProperties.Size = new System.Drawing.Size(780, 445);
             this.dataProperties.TabIndex = 1;
             this.dataProperties.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataProperties_CellClick);
             this.dataProperties.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataProperties_CellEnter);
@@ -169,27 +169,22 @@ namespace JsonManipulator
             this.tabFilters.Text = "Filters";
             this.tabFilters.UseVisualStyleBackColor = true;
             // 
-            // btnFilterMoveDown
+            // splitter1
             // 
-            this.btnFilterMoveDown.Location = new System.Drawing.Point(3, 61);
-            this.btnFilterMoveDown.Name = "btnFilterMoveDown";
-            this.btnFilterMoveDown.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnFilterMoveDown.Size = new System.Drawing.Size(75, 23);
-            this.btnFilterMoveDown.TabIndex = 4;
-            this.btnFilterMoveDown.Text = "Move Down";
-            this.btnFilterMoveDown.UseVisualStyleBackColor = true;
-            this.btnFilterMoveDown.Click += new System.EventHandler(this.btnFilterMoveDown_Click);
+            this.splitter1.Location = new System.Drawing.Point(203, 3);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(3, 445);
+            this.splitter1.TabIndex = 13;
+            this.splitter1.TabStop = false;
             // 
-            // btnFilterMoveUp
+            // pnlFiltersRight
             // 
-            this.btnFilterMoveUp.Location = new System.Drawing.Point(3, 32);
-            this.btnFilterMoveUp.Name = "btnFilterMoveUp";
-            this.btnFilterMoveUp.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnFilterMoveUp.Size = new System.Drawing.Size(75, 23);
-            this.btnFilterMoveUp.TabIndex = 3;
-            this.btnFilterMoveUp.Text = "Move Up";
-            this.btnFilterMoveUp.UseVisualStyleBackColor = true;
-            this.btnFilterMoveUp.Click += new System.EventHandler(this.btnFilterMoveUp_Click);
+            this.pnlFiltersRight.Controls.Add(this.groupBox3);
+            this.pnlFiltersRight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlFiltersRight.Location = new System.Drawing.Point(203, 3);
+            this.pnlFiltersRight.Name = "pnlFiltersRight";
+            this.pnlFiltersRight.Size = new System.Drawing.Size(580, 445);
+            this.pnlFiltersRight.TabIndex = 12;
             // 
             // groupBox3
             // 
@@ -203,6 +198,55 @@ namespace JsonManipulator
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Control Properties";
             // 
+            // gridFilters
+            // 
+            this.gridFilters.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.gridFilters.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridFilters.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4});
+            this.gridFilters.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridFilters.Location = new System.Drawing.Point(3, 16);
+            this.gridFilters.MultiSelect = false;
+            this.gridFilters.Name = "gridFilters";
+            this.gridFilters.RowHeadersVisible = false;
+            this.gridFilters.Size = new System.Drawing.Size(574, 426);
+            this.gridFilters.TabIndex = 5;
+            this.gridFilters.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridFilters_CellClick);
+            this.gridFilters.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridFilters_CellEnter);
+            this.gridFilters.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridFilters_CellValueChanged);
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Property";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Value";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // pnlFiltersLeft
+            // 
+            this.pnlFiltersLeft.Controls.Add(this.pnlFiltersLeftBottom);
+            this.pnlFiltersLeft.Controls.Add(this.pnlFitlerLeftTop);
+            this.pnlFiltersLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlFiltersLeft.Location = new System.Drawing.Point(3, 3);
+            this.pnlFiltersLeft.Name = "pnlFiltersLeft";
+            this.pnlFiltersLeft.Size = new System.Drawing.Size(200, 445);
+            this.pnlFiltersLeft.TabIndex = 11;
+            // 
+            // pnlFiltersLeftBottom
+            // 
+            this.pnlFiltersLeftBottom.Controls.Add(this.btnAddFilter);
+            this.pnlFiltersLeftBottom.Controls.Add(this.btnFilterMoveUp);
+            this.pnlFiltersLeftBottom.Controls.Add(this.btnFilterMoveDown);
+            this.pnlFiltersLeftBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlFiltersLeftBottom.Location = new System.Drawing.Point(0, 345);
+            this.pnlFiltersLeftBottom.Name = "pnlFiltersLeftBottom";
+            this.pnlFiltersLeftBottom.Size = new System.Drawing.Size(200, 100);
+            this.pnlFiltersLeftBottom.TabIndex = 6;
+            // 
             // btnAddFilter
             // 
             this.btnAddFilter.Location = new System.Drawing.Point(3, 3);
@@ -210,9 +254,40 @@ namespace JsonManipulator
             this.btnAddFilter.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnAddFilter.Size = new System.Drawing.Size(75, 23);
             this.btnAddFilter.TabIndex = 2;
-            this.btnAddFilter.Text = "Add Filter";
+            this.btnAddFilter.Text = "&Add Filter";
             this.btnAddFilter.UseVisualStyleBackColor = true;
             this.btnAddFilter.Click += new System.EventHandler(this.btnAddFilter_Click);
+            // 
+            // btnFilterMoveUp
+            // 
+            this.btnFilterMoveUp.Location = new System.Drawing.Point(3, 32);
+            this.btnFilterMoveUp.Name = "btnFilterMoveUp";
+            this.btnFilterMoveUp.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnFilterMoveUp.Size = new System.Drawing.Size(75, 23);
+            this.btnFilterMoveUp.TabIndex = 3;
+            this.btnFilterMoveUp.Text = "Move &Up";
+            this.btnFilterMoveUp.UseVisualStyleBackColor = true;
+            this.btnFilterMoveUp.Click += new System.EventHandler(this.btnFilterMoveUp_Click);
+            // 
+            // btnFilterMoveDown
+            // 
+            this.btnFilterMoveDown.Location = new System.Drawing.Point(3, 61);
+            this.btnFilterMoveDown.Name = "btnFilterMoveDown";
+            this.btnFilterMoveDown.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnFilterMoveDown.Size = new System.Drawing.Size(75, 23);
+            this.btnFilterMoveDown.TabIndex = 4;
+            this.btnFilterMoveDown.Text = "Move &Down";
+            this.btnFilterMoveDown.UseVisualStyleBackColor = true;
+            this.btnFilterMoveDown.Click += new System.EventHandler(this.btnFilterMoveDown_Click);
+            // 
+            // pnlFitlerLeftTop
+            // 
+            this.pnlFitlerLeftTop.Controls.Add(this.lstFilters);
+            this.pnlFitlerLeftTop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlFitlerLeftTop.Location = new System.Drawing.Point(0, 0);
+            this.pnlFitlerLeftTop.Name = "pnlFitlerLeftTop";
+            this.pnlFitlerLeftTop.Size = new System.Drawing.Size(200, 445);
+            this.pnlFitlerLeftTop.TabIndex = 5;
             // 
             // lstFilters
             // 
@@ -237,25 +312,22 @@ namespace JsonManipulator
             this.tabColumns.Text = "Columns";
             this.tabColumns.UseVisualStyleBackColor = true;
             // 
-            // btnColumnsMoveDown
+            // splitter2
             // 
-            this.btnColumnsMoveDown.Location = new System.Drawing.Point(3, 61);
-            this.btnColumnsMoveDown.Name = "btnColumnsMoveDown";
-            this.btnColumnsMoveDown.Size = new System.Drawing.Size(75, 23);
-            this.btnColumnsMoveDown.TabIndex = 4;
-            this.btnColumnsMoveDown.Text = "Move Down";
-            this.btnColumnsMoveDown.UseVisualStyleBackColor = true;
-            this.btnColumnsMoveDown.Click += new System.EventHandler(this.btnColumnsMoveDown_Click);
+            this.splitter2.Location = new System.Drawing.Point(219, 0);
+            this.splitter2.Name = "splitter2";
+            this.splitter2.Size = new System.Drawing.Size(3, 451);
+            this.splitter2.TabIndex = 10;
+            this.splitter2.TabStop = false;
             // 
-            // btnColumnsMoveUp
+            // pnlColumnsRight
             // 
-            this.btnColumnsMoveUp.Location = new System.Drawing.Point(3, 32);
-            this.btnColumnsMoveUp.Name = "btnColumnsMoveUp";
-            this.btnColumnsMoveUp.Size = new System.Drawing.Size(75, 23);
-            this.btnColumnsMoveUp.TabIndex = 3;
-            this.btnColumnsMoveUp.Text = "Move Up";
-            this.btnColumnsMoveUp.UseVisualStyleBackColor = true;
-            this.btnColumnsMoveUp.Click += new System.EventHandler(this.btnColumnsMoveUp_Click);
+            this.pnlColumnsRight.Controls.Add(this.groupBox2);
+            this.pnlColumnsRight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlColumnsRight.Location = new System.Drawing.Point(219, 0);
+            this.pnlColumnsRight.Name = "pnlColumnsRight";
+            this.pnlColumnsRight.Size = new System.Drawing.Size(567, 451);
+            this.pnlColumnsRight.TabIndex = 9;
             // 
             // groupBox2
             // 
@@ -297,15 +369,24 @@ namespace JsonManipulator
             this.dataGridViewTextBoxColumn2.HeaderText = "Value";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             // 
-            // btnColumnsAdd
+            // pnlColumnsLeft
             // 
-            this.btnColumnsAdd.Location = new System.Drawing.Point(3, 3);
-            this.btnColumnsAdd.Name = "btnColumnsAdd";
-            this.btnColumnsAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnColumnsAdd.TabIndex = 2;
-            this.btnColumnsAdd.Text = "Add Column";
-            this.btnColumnsAdd.UseVisualStyleBackColor = true;
-            this.btnColumnsAdd.Click += new System.EventHandler(this.btnColumnsAdd_Click);
+            this.pnlColumnsLeft.Controls.Add(this.pnlColumnsLeftTop);
+            this.pnlColumnsLeft.Controls.Add(this.pnlColumnsLeftBottom);
+            this.pnlColumnsLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlColumnsLeft.Location = new System.Drawing.Point(0, 0);
+            this.pnlColumnsLeft.Name = "pnlColumnsLeft";
+            this.pnlColumnsLeft.Size = new System.Drawing.Size(219, 451);
+            this.pnlColumnsLeft.TabIndex = 6;
+            // 
+            // pnlColumnsLeftTop
+            // 
+            this.pnlColumnsLeftTop.Controls.Add(this.lstColumns);
+            this.pnlColumnsLeftTop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlColumnsLeftTop.Location = new System.Drawing.Point(0, 0);
+            this.pnlColumnsLeftTop.Name = "pnlColumnsLeftTop";
+            this.pnlColumnsLeftTop.Size = new System.Drawing.Size(219, 362);
+            this.pnlColumnsLeftTop.TabIndex = 8;
             // 
             // lstColumns
             // 
@@ -316,6 +397,47 @@ namespace JsonManipulator
             this.lstColumns.Size = new System.Drawing.Size(219, 362);
             this.lstColumns.TabIndex = 1;
             this.lstColumns.SelectedIndexChanged += new System.EventHandler(this.lstColumns_SelectedIndexChanged);
+            // 
+            // pnlColumnsLeftBottom
+            // 
+            this.pnlColumnsLeftBottom.Controls.Add(this.btnColumnsAdd);
+            this.pnlColumnsLeftBottom.Controls.Add(this.btnColumnsMoveUp);
+            this.pnlColumnsLeftBottom.Controls.Add(this.btnColumnsMoveDown);
+            this.pnlColumnsLeftBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlColumnsLeftBottom.Location = new System.Drawing.Point(0, 362);
+            this.pnlColumnsLeftBottom.Name = "pnlColumnsLeftBottom";
+            this.pnlColumnsLeftBottom.Size = new System.Drawing.Size(219, 89);
+            this.pnlColumnsLeftBottom.TabIndex = 7;
+            // 
+            // btnColumnsAdd
+            // 
+            this.btnColumnsAdd.Location = new System.Drawing.Point(3, 3);
+            this.btnColumnsAdd.Name = "btnColumnsAdd";
+            this.btnColumnsAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnColumnsAdd.TabIndex = 2;
+            this.btnColumnsAdd.Text = "&Add Column";
+            this.btnColumnsAdd.UseVisualStyleBackColor = true;
+            this.btnColumnsAdd.Click += new System.EventHandler(this.btnColumnsAdd_Click);
+            // 
+            // btnColumnsMoveUp
+            // 
+            this.btnColumnsMoveUp.Location = new System.Drawing.Point(3, 32);
+            this.btnColumnsMoveUp.Name = "btnColumnsMoveUp";
+            this.btnColumnsMoveUp.Size = new System.Drawing.Size(75, 23);
+            this.btnColumnsMoveUp.TabIndex = 3;
+            this.btnColumnsMoveUp.Text = "Move &Up";
+            this.btnColumnsMoveUp.UseVisualStyleBackColor = true;
+            this.btnColumnsMoveUp.Click += new System.EventHandler(this.btnColumnsMoveUp_Click);
+            // 
+            // btnColumnsMoveDown
+            // 
+            this.btnColumnsMoveDown.Location = new System.Drawing.Point(3, 61);
+            this.btnColumnsMoveDown.Name = "btnColumnsMoveDown";
+            this.btnColumnsMoveDown.Size = new System.Drawing.Size(75, 23);
+            this.btnColumnsMoveDown.TabIndex = 4;
+            this.btnColumnsMoveDown.Text = "Move &Down";
+            this.btnColumnsMoveDown.UseVisualStyleBackColor = true;
+            this.btnColumnsMoveDown.Click += new System.EventHandler(this.btnColumnsMoveDown_Click);
             // 
             // tabButtons
             // 
@@ -328,6 +450,24 @@ namespace JsonManipulator
             this.tabButtons.TabIndex = 3;
             this.tabButtons.Text = "Buttons";
             this.tabButtons.UseVisualStyleBackColor = true;
+            // 
+            // splitter3
+            // 
+            this.splitter3.Location = new System.Drawing.Point(180, 0);
+            this.splitter3.Name = "splitter3";
+            this.splitter3.Size = new System.Drawing.Size(3, 451);
+            this.splitter3.TabIndex = 5;
+            this.splitter3.TabStop = false;
+            // 
+            // pnlButtonsRight
+            // 
+            this.pnlButtonsRight.Controls.Add(this.groupBox1);
+            this.pnlButtonsRight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlButtonsRight.Location = new System.Drawing.Point(180, 0);
+            this.pnlButtonsRight.Name = "pnlButtonsRight";
+            this.pnlButtonsRight.Size = new System.Drawing.Size(606, 451);
+            this.pnlButtonsRight.TabIndex = 4;
+            this.pnlButtonsRight.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // groupBox1
             // 
@@ -369,15 +509,43 @@ namespace JsonManipulator
             this.Value.HeaderText = "Value";
             this.Value.Name = "Value";
             // 
+            // pnlButtonsLeft
+            // 
+            this.pnlButtonsLeft.Controls.Add(this.pnlButtonsLeftBottom);
+            this.pnlButtonsLeft.Controls.Add(this.pnlButtonsLeftTop);
+            this.pnlButtonsLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlButtonsLeft.Location = new System.Drawing.Point(0, 0);
+            this.pnlButtonsLeft.Name = "pnlButtonsLeft";
+            this.pnlButtonsLeft.Size = new System.Drawing.Size(180, 451);
+            this.pnlButtonsLeft.TabIndex = 3;
+            // 
+            // pnlButtonsLeftBottom
+            // 
+            this.pnlButtonsLeftBottom.Controls.Add(this.btnButtonAdd);
+            this.pnlButtonsLeftBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlButtonsLeftBottom.Location = new System.Drawing.Point(0, 388);
+            this.pnlButtonsLeftBottom.Name = "pnlButtonsLeftBottom";
+            this.pnlButtonsLeftBottom.Size = new System.Drawing.Size(180, 63);
+            this.pnlButtonsLeftBottom.TabIndex = 5;
+            // 
             // btnButtonAdd
             // 
             this.btnButtonAdd.Location = new System.Drawing.Point(0, 3);
             this.btnButtonAdd.Name = "btnButtonAdd";
             this.btnButtonAdd.Size = new System.Drawing.Size(75, 23);
             this.btnButtonAdd.TabIndex = 2;
-            this.btnButtonAdd.Text = "Add Button";
+            this.btnButtonAdd.Text = "&Add Button";
             this.btnButtonAdd.UseVisualStyleBackColor = true;
             this.btnButtonAdd.Click += new System.EventHandler(this.btnButtonAdd_Click);
+            // 
+            // pnlButtonsLeftTop
+            // 
+            this.pnlButtonsLeftTop.Controls.Add(this.lstButtons);
+            this.pnlButtonsLeftTop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlButtonsLeftTop.Location = new System.Drawing.Point(0, 0);
+            this.pnlButtonsLeftTop.Name = "pnlButtonsLeftTop";
+            this.pnlButtonsLeftTop.Size = new System.Drawing.Size(180, 451);
+            this.pnlButtonsLeftTop.TabIndex = 4;
             // 
             // lstButtons
             // 
@@ -400,174 +568,6 @@ namespace JsonManipulator
             this.grpMain.TabStop = false;
             this.grpMain.Text = "grpMain";
             // 
-            // pnlFiltersLeft
-            // 
-            this.pnlFiltersLeft.Controls.Add(this.pnlFiltersLeftBottom);
-            this.pnlFiltersLeft.Controls.Add(this.pnlFitlerLeftTop);
-            this.pnlFiltersLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlFiltersLeft.Location = new System.Drawing.Point(3, 3);
-            this.pnlFiltersLeft.Name = "pnlFiltersLeft";
-            this.pnlFiltersLeft.Size = new System.Drawing.Size(200, 445);
-            this.pnlFiltersLeft.TabIndex = 11;
-            // 
-            // pnlFiltersRight
-            // 
-            this.pnlFiltersRight.Controls.Add(this.groupBox3);
-            this.pnlFiltersRight.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlFiltersRight.Location = new System.Drawing.Point(203, 3);
-            this.pnlFiltersRight.Name = "pnlFiltersRight";
-            this.pnlFiltersRight.Size = new System.Drawing.Size(580, 445);
-            this.pnlFiltersRight.TabIndex = 12;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Value";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Property";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            // 
-            // gridFilters
-            // 
-            this.gridFilters.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.gridFilters.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridFilters.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4});
-            this.gridFilters.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridFilters.Location = new System.Drawing.Point(3, 16);
-            this.gridFilters.MultiSelect = false;
-            this.gridFilters.Name = "gridFilters";
-            this.gridFilters.RowHeadersVisible = false;
-            this.gridFilters.Size = new System.Drawing.Size(574, 426);
-            this.gridFilters.TabIndex = 5;
-            this.gridFilters.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridFilters_CellClick);
-            this.gridFilters.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridFilters_CellEnter);
-            this.gridFilters.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridFilters_CellValueChanged);
-            // 
-            // splitter1
-            // 
-            this.splitter1.Location = new System.Drawing.Point(203, 3);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 445);
-            this.splitter1.TabIndex = 13;
-            this.splitter1.TabStop = false;
-            // 
-            // pnlFitlerLeftTop
-            // 
-            this.pnlFitlerLeftTop.Controls.Add(this.lstFilters);
-            this.pnlFitlerLeftTop.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlFitlerLeftTop.Location = new System.Drawing.Point(0, 0);
-            this.pnlFitlerLeftTop.Name = "pnlFitlerLeftTop";
-            this.pnlFitlerLeftTop.Size = new System.Drawing.Size(200, 445);
-            this.pnlFitlerLeftTop.TabIndex = 5;
-            // 
-            // pnlFiltersLeftBottom
-            // 
-            this.pnlFiltersLeftBottom.Controls.Add(this.btnAddFilter);
-            this.pnlFiltersLeftBottom.Controls.Add(this.btnFilterMoveUp);
-            this.pnlFiltersLeftBottom.Controls.Add(this.btnFilterMoveDown);
-            this.pnlFiltersLeftBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlFiltersLeftBottom.Location = new System.Drawing.Point(0, 345);
-            this.pnlFiltersLeftBottom.Name = "pnlFiltersLeftBottom";
-            this.pnlFiltersLeftBottom.Size = new System.Drawing.Size(200, 100);
-            this.pnlFiltersLeftBottom.TabIndex = 6;
-            // 
-            // pnlColumnsLeft
-            // 
-            this.pnlColumnsLeft.Controls.Add(this.pnlColumnsLeftTop);
-            this.pnlColumnsLeft.Controls.Add(this.pnlColumnsLeftBottom);
-            this.pnlColumnsLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlColumnsLeft.Location = new System.Drawing.Point(0, 0);
-            this.pnlColumnsLeft.Name = "pnlColumnsLeft";
-            this.pnlColumnsLeft.Size = new System.Drawing.Size(219, 451);
-            this.pnlColumnsLeft.TabIndex = 6;
-            // 
-            // pnlColumnsLeftBottom
-            // 
-            this.pnlColumnsLeftBottom.Controls.Add(this.btnColumnsAdd);
-            this.pnlColumnsLeftBottom.Controls.Add(this.btnColumnsMoveUp);
-            this.pnlColumnsLeftBottom.Controls.Add(this.btnColumnsMoveDown);
-            this.pnlColumnsLeftBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlColumnsLeftBottom.Location = new System.Drawing.Point(0, 362);
-            this.pnlColumnsLeftBottom.Name = "pnlColumnsLeftBottom";
-            this.pnlColumnsLeftBottom.Size = new System.Drawing.Size(219, 89);
-            this.pnlColumnsLeftBottom.TabIndex = 7;
-            // 
-            // pnlColumnsLeftTop
-            // 
-            this.pnlColumnsLeftTop.Controls.Add(this.lstColumns);
-            this.pnlColumnsLeftTop.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlColumnsLeftTop.Location = new System.Drawing.Point(0, 0);
-            this.pnlColumnsLeftTop.Name = "pnlColumnsLeftTop";
-            this.pnlColumnsLeftTop.Size = new System.Drawing.Size(219, 362);
-            this.pnlColumnsLeftTop.TabIndex = 8;
-            // 
-            // pnlColumnsRight
-            // 
-            this.pnlColumnsRight.Controls.Add(this.groupBox2);
-            this.pnlColumnsRight.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlColumnsRight.Location = new System.Drawing.Point(219, 0);
-            this.pnlColumnsRight.Name = "pnlColumnsRight";
-            this.pnlColumnsRight.Size = new System.Drawing.Size(567, 451);
-            this.pnlColumnsRight.TabIndex = 9;
-            // 
-            // splitter2
-            // 
-            this.splitter2.Location = new System.Drawing.Point(219, 0);
-            this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(3, 451);
-            this.splitter2.TabIndex = 10;
-            this.splitter2.TabStop = false;
-            // 
-            // pnlButtonsLeft
-            // 
-            this.pnlButtonsLeft.Controls.Add(this.pnlButtonsLeftBottom);
-            this.pnlButtonsLeft.Controls.Add(this.pnlButtonsLeftTop);
-            this.pnlButtonsLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlButtonsLeft.Location = new System.Drawing.Point(0, 0);
-            this.pnlButtonsLeft.Name = "pnlButtonsLeft";
-            this.pnlButtonsLeft.Size = new System.Drawing.Size(180, 451);
-            this.pnlButtonsLeft.TabIndex = 3;
-            // 
-            // pnlButtonsRight
-            // 
-            this.pnlButtonsRight.Controls.Add(this.groupBox1);
-            this.pnlButtonsRight.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlButtonsRight.Location = new System.Drawing.Point(180, 0);
-            this.pnlButtonsRight.Name = "pnlButtonsRight";
-            this.pnlButtonsRight.Size = new System.Drawing.Size(606, 451);
-            this.pnlButtonsRight.TabIndex = 4;
-            this.pnlButtonsRight.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
-            // 
-            // pnlButtonsLeftTop
-            // 
-            this.pnlButtonsLeftTop.Controls.Add(this.lstButtons);
-            this.pnlButtonsLeftTop.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlButtonsLeftTop.Location = new System.Drawing.Point(0, 0);
-            this.pnlButtonsLeftTop.Name = "pnlButtonsLeftTop";
-            this.pnlButtonsLeftTop.Size = new System.Drawing.Size(180, 451);
-            this.pnlButtonsLeftTop.TabIndex = 4;
-            // 
-            // pnlButtonsLeftBottom
-            // 
-            this.pnlButtonsLeftBottom.Controls.Add(this.btnButtonAdd);
-            this.pnlButtonsLeftBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlButtonsLeftBottom.Location = new System.Drawing.Point(0, 388);
-            this.pnlButtonsLeftBottom.Name = "pnlButtonsLeftBottom";
-            this.pnlButtonsLeftBottom.Size = new System.Drawing.Size(180, 63);
-            this.pnlButtonsLeftBottom.TabIndex = 5;
-            // 
-            // splitter3
-            // 
-            this.splitter3.Location = new System.Drawing.Point(180, 0);
-            this.splitter3.Name = "splitter3";
-            this.splitter3.Size = new System.Drawing.Size(3, 451);
-            this.splitter3.TabIndex = 5;
-            this.splitter3.TabStop = false;
-            // 
             // frmReportSettings
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -583,27 +583,27 @@ namespace JsonManipulator
             ((System.ComponentModel.ISupportInitialize)(this.dataProperties)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabFilters.ResumeLayout(false);
+            this.pnlFiltersRight.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridFilters)).EndInit();
+            this.pnlFiltersLeft.ResumeLayout(false);
+            this.pnlFiltersLeftBottom.ResumeLayout(false);
+            this.pnlFitlerLeftTop.ResumeLayout(false);
             this.tabColumns.ResumeLayout(false);
+            this.pnlColumnsRight.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridColumns)).EndInit();
+            this.pnlColumnsLeft.ResumeLayout(false);
+            this.pnlColumnsLeftTop.ResumeLayout(false);
+            this.pnlColumnsLeftBottom.ResumeLayout(false);
             this.tabButtons.ResumeLayout(false);
+            this.pnlButtonsRight.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridButtons)).EndInit();
-            this.grpMain.ResumeLayout(false);
-            this.pnlFiltersLeft.ResumeLayout(false);
-            this.pnlFiltersRight.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridFilters)).EndInit();
-            this.pnlFitlerLeftTop.ResumeLayout(false);
-            this.pnlFiltersLeftBottom.ResumeLayout(false);
-            this.pnlColumnsLeft.ResumeLayout(false);
-            this.pnlColumnsLeftBottom.ResumeLayout(false);
-            this.pnlColumnsLeftTop.ResumeLayout(false);
-            this.pnlColumnsRight.ResumeLayout(false);
             this.pnlButtonsLeft.ResumeLayout(false);
-            this.pnlButtonsRight.ResumeLayout(false);
-            this.pnlButtonsLeftTop.ResumeLayout(false);
             this.pnlButtonsLeftBottom.ResumeLayout(false);
+            this.pnlButtonsLeftTop.ResumeLayout(false);
+            this.grpMain.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

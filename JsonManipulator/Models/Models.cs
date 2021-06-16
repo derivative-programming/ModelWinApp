@@ -81,6 +81,8 @@ namespace JsonManipulator.Models
         public List<query> query { get; set; }
         [JsonProperty("modelPkg")]
         public List<modelPkg> modelPkg { get; set; }
+        [JsonProperty("lookupItem")]
+        public List<lookupItem> lookupItem { get; set; }
         [JsonProperty("childObject")]
         public List<childObject> childObject { get; set; }
         //[JsonProperty("objectDocument")]
@@ -659,6 +661,17 @@ namespace JsonManipulator.Models
     }
 
 
+    public class lookupItem
+    {
+        [JsonProperty("enumValue")]
+        public string enumValue { get; set; }
+        [JsonProperty("name")]
+        public string name { get; set; }
+        [JsonProperty("description")]
+        public string description { get; set; }
+        [JsonProperty("isActive")]
+        public string isActive { get; set; } 
+    }
     public class childObject
     {
         [JsonProperty("name")]

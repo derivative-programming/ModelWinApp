@@ -240,7 +240,7 @@ namespace JsonManipulator
             this.btnAddEnvironment.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnAddEnvironment.Size = new System.Drawing.Size(75, 23);
             this.btnAddEnvironment.TabIndex = 2;
-            this.btnAddEnvironment.Text = "Add Environment";
+            this.btnAddEnvironment.Text = "&Add Environment";
             this.btnAddEnvironment.UseVisualStyleBackColor = true;
             this.btnAddEnvironment.Click += new System.EventHandler(this.btnAddEnvironment_Click);
             // 
@@ -251,7 +251,7 @@ namespace JsonManipulator
             this.btnEnvironmentMoveUp.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnEnvironmentMoveUp.Size = new System.Drawing.Size(75, 23);
             this.btnEnvironmentMoveUp.TabIndex = 3;
-            this.btnEnvironmentMoveUp.Text = "Move Up";
+            this.btnEnvironmentMoveUp.Text = "Move &Up";
             this.btnEnvironmentMoveUp.UseVisualStyleBackColor = true;
             this.btnEnvironmentMoveUp.Click += new System.EventHandler(this.btnEnvironmentMoveUp_Click);
             // 
@@ -262,7 +262,7 @@ namespace JsonManipulator
             this.btnEnvironmentMoveDown.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnEnvironmentMoveDown.Size = new System.Drawing.Size(75, 23);
             this.btnEnvironmentMoveDown.TabIndex = 4;
-            this.btnEnvironmentMoveDown.Text = "Move Down";
+            this.btnEnvironmentMoveDown.Text = "Move &Down";
             this.btnEnvironmentMoveDown.UseVisualStyleBackColor = true;
             this.btnEnvironmentMoveDown.Click += new System.EventHandler(this.btnEnvironmentMoveDown_Click);
             // 
@@ -404,7 +404,7 @@ namespace JsonManipulator
             this.btnEndPointsAdd.Name = "btnEndPointsAdd";
             this.btnEndPointsAdd.Size = new System.Drawing.Size(75, 23);
             this.btnEndPointsAdd.TabIndex = 2;
-            this.btnEndPointsAdd.Text = "Add EndPoint";
+            this.btnEndPointsAdd.Text = "&Add EndPoint";
             this.btnEndPointsAdd.UseVisualStyleBackColor = true;
             this.btnEndPointsAdd.Click += new System.EventHandler(this.btnColumnsAdd_Click);
             // 
@@ -414,7 +414,7 @@ namespace JsonManipulator
             this.btnColumnsMoveUp.Name = "btnColumnsMoveUp";
             this.btnColumnsMoveUp.Size = new System.Drawing.Size(75, 23);
             this.btnColumnsMoveUp.TabIndex = 3;
-            this.btnColumnsMoveUp.Text = "Move Up";
+            this.btnColumnsMoveUp.Text = "Move &Up";
             this.btnColumnsMoveUp.UseVisualStyleBackColor = true;
             this.btnColumnsMoveUp.Click += new System.EventHandler(this.btnColumnsMoveUp_Click);
             // 
@@ -424,7 +424,7 @@ namespace JsonManipulator
             this.btnColumnsMoveDown.Name = "btnColumnsMoveDown";
             this.btnColumnsMoveDown.Size = new System.Drawing.Size(75, 23);
             this.btnColumnsMoveDown.TabIndex = 4;
-            this.btnColumnsMoveDown.Text = "Move Down";
+            this.btnColumnsMoveDown.Text = "Move &Down";
             this.btnColumnsMoveDown.UseVisualStyleBackColor = true;
             this.btnColumnsMoveDown.Click += new System.EventHandler(this.btnColumnsMoveDown_Click);
             // 

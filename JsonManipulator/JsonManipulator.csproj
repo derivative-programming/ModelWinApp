@@ -109,6 +109,12 @@
     <Compile Include="FrmAddFilter.Designer.cs">
       <DependentUpon>FrmAddFilter.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmAddObjLookupItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddObjLookupItem.Designer.cs">
+      <DependentUpon>frmAddObjLookupItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmAddObjProp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +138,12 @@
     </Compile>
     <Compile Include="frmAddApiSite.Designer.cs">
       <DependentUpon>frmAddApiSite.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAddDBObjectLookup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddDBObjectLookup.Designer.cs">
+      <DependentUpon>frmAddDBObjectLookup.cs</DependentUpon>
     </Compile>
     <Compile Include="frmDbObject.cs">
       <SubType>Form</SubType>
@@ -247,6 +259,9 @@
     <EmbeddedResource Include="FrmAddFilter.resx">
       <DependentUpon>FrmAddFilter.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmAddObjLookupItem.resx">
+      <DependentUpon>frmAddObjLookupItem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmAddObjProp.resx">
       <DependentUpon>frmAddObjProp.cs</DependentUpon>
     </EmbeddedResource>
@@ -258,6 +273,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmAddApiSite.resx">
       <DependentUpon>frmAddApiSite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAddDBObjectLookup.resx">
+      <DependentUpon>frmAddDBObjectLookup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDbObject.resx">
       <DependentUpon>frmDbObject.cs</DependentUpon>

@@ -74,6 +74,8 @@ namespace JsonManipulator
             this.label1 = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusText = new System.Windows.Forms.ToolStripStatusLabel();
+            this.generalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lookupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -165,9 +167,11 @@ namespace JsonManipulator
             // 
             // dBObjectToolStripMenuItem
             // 
+            this.dBObjectToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.generalToolStripMenuItem,
+            this.lookupToolStripMenuItem});
             this.dBObjectToolStripMenuItem.Name = "dBObjectToolStripMenuItem";
-            this.dBObjectToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.dBObjectToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.dBObjectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.dBObjectToolStripMenuItem.Text = "DB Object";
             this.dBObjectToolStripMenuItem.Click += new System.EventHandler(this.dBObjectToolStripMenuItem_Click);
             // 
@@ -175,14 +179,14 @@ namespace JsonManipulator
             // 
             this.formPageToolStripMenuItem.Name = "formPageToolStripMenuItem";
             this.formPageToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.formPageToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.formPageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.formPageToolStripMenuItem.Text = "Form Page";
             this.formPageToolStripMenuItem.Click += new System.EventHandler(this.formPageToolStripMenuItem_Click);
             // 
             // flowToolStripMenuItem
             // 
             this.flowToolStripMenuItem.Name = "flowToolStripMenuItem";
-            this.flowToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.flowToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.flowToolStripMenuItem.Text = "Flow";
             this.flowToolStripMenuItem.Click += new System.EventHandler(this.flowToolStripMenuItem_Click);
             // 
@@ -192,7 +196,7 @@ namespace JsonManipulator
             this.gridToolStripMenuItem,
             this.detailToolStripMenuItem});
             this.reportPageToolStripMenuItem.Name = "reportPageToolStripMenuItem";
-            this.reportPageToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.reportPageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.reportPageToolStripMenuItem.Text = "Report Page";
             // 
             // gridToolStripMenuItem
@@ -216,7 +220,7 @@ namespace JsonManipulator
             // aPISiteToolStripMenuItem
             // 
             this.aPISiteToolStripMenuItem.Name = "aPISiteToolStripMenuItem";
-            this.aPISiteToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.aPISiteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aPISiteToolStripMenuItem.Text = "API";
             this.aPISiteToolStripMenuItem.Click += new System.EventHandler(this.aPISiteToolStripMenuItem_Click);
             // 
@@ -357,6 +361,21 @@ namespace JsonManipulator
             this.statusText.Name = "statusText";
             this.statusText.Size = new System.Drawing.Size(0, 17);
             // 
+            // generalToolStripMenuItem
+            // 
+            this.generalToolStripMenuItem.Name = "generalToolStripMenuItem";
+            this.generalToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.generalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.generalToolStripMenuItem.Text = "General";
+            this.generalToolStripMenuItem.Click += new System.EventHandler(this.generalToolStripMenuItem_Click);
+            // 
+            // lookupToolStripMenuItem
+            // 
+            this.lookupToolStripMenuItem.Name = "lookupToolStripMenuItem";
+            this.lookupToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.lookupToolStripMenuItem.Text = "Lookup";
+            this.lookupToolStripMenuItem.Click += new System.EventHandler(this.lookupToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -418,6 +437,8 @@ namespace JsonManipulator
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripMenuItem flowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aPISiteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem generalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lookupToolStripMenuItem;
     }
 }
 

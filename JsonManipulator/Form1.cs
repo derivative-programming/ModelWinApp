@@ -296,8 +296,7 @@ namespace JsonManipulator
         }
         private void dBObjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmDbObject frm = new frmDbObject();
-            frm.ShowDialog();
+            
         }
 
         private void nodeMenus_AfterSelect(object sender, TreeViewEventArgs e)
@@ -637,6 +636,18 @@ namespace JsonManipulator
             frmAddApiSite form = new frmAddApiSite();
             form.ShowDialog();
 
+        }
+
+        private void generalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmDbObject frm = new frmDbObject();
+            frm.ShowDialog();
+        }
+
+        private void lookupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAddDBObjectLookup frm = new frmAddDBObjectLookup();
+            frm.ShowDialog();
         }
     }
 }

@@ -47,6 +47,7 @@ namespace JsonManipulator
             this.pnlPropLeftTop = new System.Windows.Forms.Panel();
             this.lstProperties = new System.Windows.Forms.ListBox();
             this.tabPropSubscribers = new System.Windows.Forms.TabPage();
+            this.splitter2 = new System.Windows.Forms.Splitter();
             this.pnlPropSubRight = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.gridPropSubProperties = new System.Windows.Forms.DataGridView();
@@ -57,6 +58,7 @@ namespace JsonManipulator
             this.pnlPropSubLeftTop = new System.Windows.Forms.Panel();
             this.lstPropSubs = new System.Windows.Forms.ListBox();
             this.tabModelServiceSubscriptions = new System.Windows.Forms.TabPage();
+            this.splitter3 = new System.Windows.Forms.Splitter();
             this.pnlModelServiceSubRight = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.gridModelServiceSubProperties = new System.Windows.Forms.DataGridView();
@@ -66,9 +68,22 @@ namespace JsonManipulator
             this.pnlModelServiceSubLeftBottom = new System.Windows.Forms.Panel();
             this.pnlModelServiceSubLeftTop = new System.Windows.Forms.Panel();
             this.lstModelServiceSubs = new System.Windows.Forms.ListBox();
+            this.tabLookupItems = new System.Windows.Forms.TabPage();
+            this.pnlLookupItem = new System.Windows.Forms.Panel();
+            this.pnlLookupItemRight = new System.Windows.Forms.Panel();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.gridLookupItem = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.splitter4 = new System.Windows.Forms.Splitter();
+            this.pnlLookupItemLeft = new System.Windows.Forms.Panel();
+            this.pnlLookupItemLeftBottom = new System.Windows.Forms.Panel();
+            this.btnLookupItemUp = new System.Windows.Forms.Button();
+            this.btnLookupItemDown = new System.Windows.Forms.Button();
+            this.btnLookupItem = new System.Windows.Forms.Button();
+            this.pnlLookupItemLeftTop = new System.Windows.Forms.Panel();
+            this.lstLookupItems = new System.Windows.Forms.ListBox();
             this.grpBoxMain = new System.Windows.Forms.GroupBox();
-            this.splitter2 = new System.Windows.Forms.Splitter();
-            this.splitter3 = new System.Windows.Forms.Splitter();
             this.tabControl1.SuspendLayout();
             this.tabSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataProperties)).BeginInit();
@@ -91,6 +106,14 @@ namespace JsonManipulator
             ((System.ComponentModel.ISupportInitialize)(this.gridModelServiceSubProperties)).BeginInit();
             this.pnlModelServiceSubLeft.SuspendLayout();
             this.pnlModelServiceSubLeftTop.SuspendLayout();
+            this.tabLookupItems.SuspendLayout();
+            this.pnlLookupItem.SuspendLayout();
+            this.pnlLookupItemRight.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookupItem)).BeginInit();
+            this.pnlLookupItemLeft.SuspendLayout();
+            this.pnlLookupItemLeftBottom.SuspendLayout();
+            this.pnlLookupItemLeftTop.SuspendLayout();
             this.grpBoxMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -100,6 +123,7 @@ namespace JsonManipulator
             this.tabControl1.Controls.Add(this.tabProp);
             this.tabControl1.Controls.Add(this.tabPropSubscribers);
             this.tabControl1.Controls.Add(this.tabModelServiceSubscriptions);
+            this.tabControl1.Controls.Add(this.tabLookupItems);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(3, 16);
             this.tabControl1.Name = "tabControl1";
@@ -245,7 +269,7 @@ namespace JsonManipulator
             this.btnProperties.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnProperties.Size = new System.Drawing.Size(75, 23);
             this.btnProperties.TabIndex = 2;
-            this.btnProperties.Text = "Add Prop";
+            this.btnProperties.Text = "&Add Prop";
             this.btnProperties.UseVisualStyleBackColor = true;
             this.btnProperties.Click += new System.EventHandler(this.btnProperties_Click);
             // 
@@ -280,6 +304,14 @@ namespace JsonManipulator
             this.tabPropSubscribers.TabIndex = 2;
             this.tabPropSubscribers.Text = "Prop Subscribers";
             this.tabPropSubscribers.UseVisualStyleBackColor = true;
+            // 
+            // splitter2
+            // 
+            this.splitter2.Location = new System.Drawing.Point(200, 0);
+            this.splitter2.Name = "splitter2";
+            this.splitter2.Size = new System.Drawing.Size(3, 414);
+            this.splitter2.TabIndex = 12;
+            this.splitter2.TabStop = false;
             // 
             // pnlPropSubRight
             // 
@@ -380,6 +412,14 @@ namespace JsonManipulator
             this.tabModelServiceSubscriptions.Text = "Model Service Subscriptions";
             this.tabModelServiceSubscriptions.UseVisualStyleBackColor = true;
             // 
+            // splitter3
+            // 
+            this.splitter3.Location = new System.Drawing.Point(200, 0);
+            this.splitter3.Name = "splitter3";
+            this.splitter3.Size = new System.Drawing.Size(3, 414);
+            this.splitter3.TabIndex = 12;
+            this.splitter3.TabStop = false;
+            // 
             // pnlModelServiceSubRight
             // 
             this.pnlModelServiceSubRight.Controls.Add(this.groupBox3);
@@ -466,6 +506,162 @@ namespace JsonManipulator
             this.lstModelServiceSubs.TabIndex = 1;
             this.lstModelServiceSubs.SelectedIndexChanged += new System.EventHandler(this.lstModelServiceSubs_SelectedIndexChanged);
             // 
+            // tabLookupItems
+            // 
+            this.tabLookupItems.Controls.Add(this.pnlLookupItem);
+            this.tabLookupItems.Location = new System.Drawing.Point(4, 22);
+            this.tabLookupItems.Name = "tabLookupItems";
+            this.tabLookupItems.Padding = new System.Windows.Forms.Padding(3);
+            this.tabLookupItems.Size = new System.Drawing.Size(830, 414);
+            this.tabLookupItems.TabIndex = 4;
+            this.tabLookupItems.Text = "Lookup Items";
+            this.tabLookupItems.UseVisualStyleBackColor = true;
+            // 
+            // pnlLookupItem
+            // 
+            this.pnlLookupItem.Controls.Add(this.pnlLookupItemRight);
+            this.pnlLookupItem.Controls.Add(this.splitter4);
+            this.pnlLookupItem.Controls.Add(this.pnlLookupItemLeft);
+            this.pnlLookupItem.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlLookupItem.Location = new System.Drawing.Point(3, 3);
+            this.pnlLookupItem.Name = "pnlLookupItem";
+            this.pnlLookupItem.Size = new System.Drawing.Size(824, 408);
+            this.pnlLookupItem.TabIndex = 1;
+            // 
+            // pnlLookupItemRight
+            // 
+            this.pnlLookupItemRight.Controls.Add(this.groupBox4);
+            this.pnlLookupItemRight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlLookupItemRight.Location = new System.Drawing.Point(180, 0);
+            this.pnlLookupItemRight.Name = "pnlLookupItemRight";
+            this.pnlLookupItemRight.Size = new System.Drawing.Size(644, 408);
+            this.pnlLookupItemRight.TabIndex = 10;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.gridLookupItem);
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox4.Location = new System.Drawing.Point(0, 0);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.groupBox4.Size = new System.Drawing.Size(644, 408);
+            this.groupBox4.TabIndex = 5;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "LookupItem Properties";
+            // 
+            // gridLookupItem
+            // 
+            this.gridLookupItem.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.gridLookupItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridLookupItem.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn7,
+            this.dataGridViewTextBoxColumn8});
+            this.gridLookupItem.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridLookupItem.Location = new System.Drawing.Point(3, 16);
+            this.gridLookupItem.MultiSelect = false;
+            this.gridLookupItem.Name = "gridLookupItem";
+            this.gridLookupItem.RowHeadersVisible = false;
+            this.gridLookupItem.RowHeadersWidth = 51;
+            this.gridLookupItem.Size = new System.Drawing.Size(638, 389);
+            this.gridLookupItem.TabIndex = 3;
+            this.gridLookupItem.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridLookupItem_CellClick);
+            this.gridLookupItem.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridLookupItem_CellEnter);
+            this.gridLookupItem.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridLookupItem_CellValueChanged);
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.HeaderText = "Property";
+            this.dataGridViewTextBoxColumn7.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.HeaderText = "Value";
+            this.dataGridViewTextBoxColumn8.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            // 
+            // splitter4
+            // 
+            this.splitter4.Location = new System.Drawing.Point(177, 0);
+            this.splitter4.Name = "splitter4";
+            this.splitter4.Size = new System.Drawing.Size(3, 408);
+            this.splitter4.TabIndex = 9;
+            this.splitter4.TabStop = false;
+            // 
+            // pnlLookupItemLeft
+            // 
+            this.pnlLookupItemLeft.Controls.Add(this.pnlLookupItemLeftBottom);
+            this.pnlLookupItemLeft.Controls.Add(this.pnlLookupItemLeftTop);
+            this.pnlLookupItemLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlLookupItemLeft.Location = new System.Drawing.Point(0, 0);
+            this.pnlLookupItemLeft.Name = "pnlLookupItemLeft";
+            this.pnlLookupItemLeft.Size = new System.Drawing.Size(177, 408);
+            this.pnlLookupItemLeft.TabIndex = 8;
+            // 
+            // pnlLookupItemLeftBottom
+            // 
+            this.pnlLookupItemLeftBottom.Controls.Add(this.btnLookupItemUp);
+            this.pnlLookupItemLeftBottom.Controls.Add(this.btnLookupItemDown);
+            this.pnlLookupItemLeftBottom.Controls.Add(this.btnLookupItem);
+            this.pnlLookupItemLeftBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlLookupItemLeftBottom.Location = new System.Drawing.Point(0, 306);
+            this.pnlLookupItemLeftBottom.Name = "pnlLookupItemLeftBottom";
+            this.pnlLookupItemLeftBottom.Size = new System.Drawing.Size(177, 102);
+            this.pnlLookupItemLeftBottom.TabIndex = 7;
+            // 
+            // btnLookupItemUp
+            // 
+            this.btnLookupItemUp.Location = new System.Drawing.Point(3, 32);
+            this.btnLookupItemUp.Name = "btnLookupItemUp";
+            this.btnLookupItemUp.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnLookupItemUp.Size = new System.Drawing.Size(75, 23);
+            this.btnLookupItemUp.TabIndex = 5;
+            this.btnLookupItemUp.Text = "Move &Up";
+            this.btnLookupItemUp.UseVisualStyleBackColor = true;
+            this.btnLookupItemUp.Click += new System.EventHandler(this.btnLookupItemUp_Click);
+            // 
+            // btnLookupItemDown
+            // 
+            this.btnLookupItemDown.Location = new System.Drawing.Point(3, 61);
+            this.btnLookupItemDown.Name = "btnLookupItemDown";
+            this.btnLookupItemDown.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnLookupItemDown.Size = new System.Drawing.Size(75, 23);
+            this.btnLookupItemDown.TabIndex = 6;
+            this.btnLookupItemDown.Text = "Move &Down";
+            this.btnLookupItemDown.UseVisualStyleBackColor = true;
+            this.btnLookupItemDown.Click += new System.EventHandler(this.btnLookupItemDown_Click);
+            // 
+            // btnLookupItem
+            // 
+            this.btnLookupItem.Location = new System.Drawing.Point(3, 3);
+            this.btnLookupItem.Name = "btnLookupItem";
+            this.btnLookupItem.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnLookupItem.Size = new System.Drawing.Size(75, 23);
+            this.btnLookupItem.TabIndex = 2;
+            this.btnLookupItem.Text = "&Add";
+            this.btnLookupItem.UseVisualStyleBackColor = true;
+            this.btnLookupItem.Click += new System.EventHandler(this.btnLookupItem_Click);
+            // 
+            // pnlLookupItemLeftTop
+            // 
+            this.pnlLookupItemLeftTop.Controls.Add(this.lstLookupItems);
+            this.pnlLookupItemLeftTop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlLookupItemLeftTop.Location = new System.Drawing.Point(0, 0);
+            this.pnlLookupItemLeftTop.Name = "pnlLookupItemLeftTop";
+            this.pnlLookupItemLeftTop.Size = new System.Drawing.Size(177, 408);
+            this.pnlLookupItemLeftTop.TabIndex = 6;
+            // 
+            // lstLookupItems
+            // 
+            this.lstLookupItems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstLookupItems.FormattingEnabled = true;
+            this.lstLookupItems.Location = new System.Drawing.Point(0, 0);
+            this.lstLookupItems.Name = "lstLookupItems";
+            this.lstLookupItems.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lstLookupItems.Size = new System.Drawing.Size(177, 408);
+            this.lstLookupItems.TabIndex = 1;
+            this.lstLookupItems.SelectedIndexChanged += new System.EventHandler(this.lstLookupItems_SelectedIndexChanged);
+            // 
             // grpBoxMain
             // 
             this.grpBoxMain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -477,22 +673,6 @@ namespace JsonManipulator
             this.grpBoxMain.TabIndex = 1;
             this.grpBoxMain.TabStop = false;
             this.grpBoxMain.Text = "groupBox2";
-            // 
-            // splitter2
-            // 
-            this.splitter2.Location = new System.Drawing.Point(200, 0);
-            this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(3, 414);
-            this.splitter2.TabIndex = 12;
-            this.splitter2.TabStop = false;
-            // 
-            // splitter3
-            // 
-            this.splitter3.Location = new System.Drawing.Point(200, 0);
-            this.splitter3.Name = "splitter3";
-            this.splitter3.Size = new System.Drawing.Size(3, 414);
-            this.splitter3.TabIndex = 12;
-            this.splitter3.TabStop = false;
             // 
             // frmDbObjSettings
             // 
@@ -528,6 +708,14 @@ namespace JsonManipulator
             ((System.ComponentModel.ISupportInitialize)(this.gridModelServiceSubProperties)).EndInit();
             this.pnlModelServiceSubLeft.ResumeLayout(false);
             this.pnlModelServiceSubLeftTop.ResumeLayout(false);
+            this.tabLookupItems.ResumeLayout(false);
+            this.pnlLookupItem.ResumeLayout(false);
+            this.pnlLookupItemRight.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookupItem)).EndInit();
+            this.pnlLookupItemLeft.ResumeLayout(false);
+            this.pnlLookupItemLeftBottom.ResumeLayout(false);
+            this.pnlLookupItemLeftTop.ResumeLayout(false);
             this.grpBoxMain.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -575,5 +763,20 @@ namespace JsonManipulator
         private System.Windows.Forms.ListBox lstModelServiceSubs;
         private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.Splitter splitter3;
+        private System.Windows.Forms.TabPage tabLookupItems;
+        private System.Windows.Forms.Panel pnlLookupItem;
+        private System.Windows.Forms.Panel pnlLookupItemRight;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.DataGridView gridLookupItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.Splitter splitter4;
+        private System.Windows.Forms.Panel pnlLookupItemLeft;
+        private System.Windows.Forms.Panel pnlLookupItemLeftBottom;
+        private System.Windows.Forms.Button btnLookupItemUp;
+        private System.Windows.Forms.Button btnLookupItemDown;
+        private System.Windows.Forms.Button btnLookupItem;
+        private System.Windows.Forms.Panel pnlLookupItemLeftTop;
+        private System.Windows.Forms.ListBox lstLookupItems;
     }
 }

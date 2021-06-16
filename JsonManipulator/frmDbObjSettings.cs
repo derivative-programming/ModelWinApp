@@ -27,6 +27,7 @@ namespace JsonManipulator
             setSetting();
             setPropertieList();
             setPropSubList();
+            setLookupItemList();
             setModelServiceSubList();
             grpBoxMain.Text = _map.name;
             splitter1.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmDbObjSettings.splitter1.SplitPosition", "200"));
@@ -34,6 +35,8 @@ namespace JsonManipulator
             splitter2.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmDbObjSettings.splitter2.SplitPosition", "200"));
 
             splitter3.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmDbObjSettings.splitter3.SplitPosition", "200"));
+            
+            splitter4.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmDbObjSettings.splitter4.SplitPosition", "200"));
 
             tabControl1.SelectedIndex = System.Convert.ToInt32(LocalStorage.GetValue("frmDbObjSettings.tabControl1.SelectedIndex", "0"));
         }
@@ -70,6 +73,23 @@ namespace JsonManipulator
                 lstProperties.SelectedIndex = lstProperties.Items.Count - 1;
             }
             
+        }
+
+
+        public void setLookupItemList()
+        {
+            if (_map != null)
+            {
+                if (_map.lookupItem == null)
+                    _map.lookupItem = new List<lookupItem>();
+                lstLookupItems.Items.Clear();
+                foreach (var prop in _map.lookupItem)
+                {
+                    lstLookupItems.Items.Add(prop.enumValue);
+                }
+                lstLookupItems.SelectedIndex = lstLookupItems.Items.Count - 1;
+            }
+
         }
 
 
@@ -255,6 +275,7 @@ namespace JsonManipulator
             dataProperties.Rows[row].Cells[column].Value = value;
             dataProperties.RefreshEdit();
         }
+         
 
         private void dataProperties_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
@@ -341,7 +362,7 @@ namespace JsonManipulator
 
                 if (gridPropSubProperties.Columns.Count > 0)
                 {
-                    gridPropertiesProp.Columns[0].ReadOnly = true;
+                    gridPropSubProperties.Columns[0].ReadOnly = true;
                 }
             }
         }
@@ -436,6 +457,134 @@ namespace JsonManipulator
         }
 
         private void gridModelServiceSubProperties_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.ColumnIndex == 0)
+            {
+                SendKeys.Send("{TAB}");
+            }
+        }
+
+        private void lstLookupItems_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (lstLookupItems.SelectedItem != null)
+            {
+                gridLookupItem.Columns.Clear();
+                List<PropertyValue> propertyValues = new List<PropertyValue>();
+                String propname = lstLookupItems.SelectedItem.ToString();
+                lookupItem prpty = _map.lookupItem.Where(x => x.enumValue == propname).FirstOrDefault();
+                List<string> ignoreList = Utils.GetDBObjLookupItemPropertiesToIgnore();
+                foreach (var prop in prpty.GetType().GetProperties().OrderBy(x => x.Name).ToList())
+                {
+                    if (ignoreList.Contains(prop.Name.ToLower()))
+                        continue;
+                    if (!prop.PropertyType.IsGenericType)
+                        propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(prpty) ?? "").ToString() });
+                }
+
+                gridLookupItem.DataSource = propertyValues;
+
+                if (gridLookupItem.Columns.Count > 0)
+                {
+                    gridLookupItem.Columns[0].ReadOnly = true;
+                }
+            }
+        }
+
+        private void btnLookupItem_Click(object sender, EventArgs e)
+        {
+
+            string objectname = _map.name;
+            frmAddObjLookupItem frmProp = new frmAddObjLookupItem(objectname);
+            frmProp.ShowDialog();
+        }
+
+        private void btnLookupItemUp_Click(object sender, EventArgs e)
+        {
+            if (lstLookupItems.SelectedItem != null)
+            {
+                int selectedIndex = lstLookupItems.SelectedIndex;
+                lookupItem item = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _map.name).FirstOrDefault().lookupItem.ElementAt(selectedIndex);
+                int newIndex = 0;
+                if (selectedIndex == 0)
+                {
+                    newIndex = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _map.name).FirstOrDefault().lookupItem.Count - 1;
+                }
+                else
+                {
+                    newIndex = selectedIndex - 1;
+                }
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _map.name).FirstOrDefault().lookupItem.RemoveAt(selectedIndex);
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _map.name).FirstOrDefault().lookupItem.Insert(newIndex, item);
+                setLookupItemList();
+                lstLookupItems.SetSelected(newIndex, true);
+            }
+        }
+
+        private void btnLookupItemDown_Click(object sender, EventArgs e)
+        {
+            if (lstLookupItems.SelectedItem != null)
+            {
+                int selectedIndex = lstLookupItems.SelectedIndex;
+                int count = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _map.name).FirstOrDefault().lookupItem.Count;
+                lookupItem item = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _map.name).FirstOrDefault().lookupItem.ElementAt(selectedIndex);
+                int newIndex = 0;
+                if (selectedIndex == count - 1)
+                {
+                    newIndex = 0;
+                }
+                else
+                {
+                    newIndex = selectedIndex + 1;
+                }
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _map.name).FirstOrDefault().lookupItem.RemoveAt(selectedIndex);
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _map.name).FirstOrDefault().lookupItem.Insert(newIndex, item);
+                setLookupItemList();
+                lstLookupItems.SetSelected(newIndex, true);
+            }
+        }
+
+        private void gridLookupItem_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (gridLookupItem.DataSource != null)
+            {
+                string value = string.Empty;
+                if (gridLookupItem.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                {
+                    value = gridLookupItem.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                }
+                string property = gridLookupItem.Rows[e.RowIndex].Cells[0].Value.ToString();
+                int index = lstLookupItems.SelectedIndex;
+                typeof(lookupItem).GetProperty(property).SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _map.name).FirstOrDefault().lookupItem.ElementAt(lstLookupItems.SelectedIndex), value);
+                setLookupItemList();
+                lstLookupItems.SetSelected(index, true);
+                gridLookupItem.CurrentCell.Selected = false;
+            }
+        }
+
+        private void gridLookupItem_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex > 0)
+            {
+
+                // Bind grid cell with combobox and than bind combobox with datasource.  
+                DataGridViewComboBoxCell l_objGridDropbox = new DataGridViewComboBoxCell();
+                string propertyName = gridLookupItem.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value.ToString();
+                // Check the column  cell, in which it click.   
+                if (propertyName.StartsWith("is"))
+                {
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
+                    gridLookupItem[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
+                    l_objGridDropbox.DataSource = Utils.getBooleans(); // Bind combobox with datasource.  
+                    l_objGridDropbox.ValueMember = "Value";
+                    l_objGridDropbox.DisplayMember = "Display";
+                    l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+                } 
+            }
+        }
+
+        private void gridLookupItem_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
 
             if (e.ColumnIndex == 0)
