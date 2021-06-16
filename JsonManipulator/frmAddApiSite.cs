@@ -41,6 +41,8 @@ namespace JsonManipulator
             {
                 name = txtName.Text
             };
+            if (Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite == null)
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite = new List<Models.apiSite>();
             Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Add(apiSite);
             ((Form1)Application.OpenForms["Form1"]).AddToTree(apiSite);
             ((Form1)Application.OpenForms["Form1"]).showMessage("API Site " + apiSite.name + " saved successfully");

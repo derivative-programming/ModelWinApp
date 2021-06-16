@@ -103,6 +103,10 @@ namespace JsonManipulator
             List<string> result = new List<string>();
 
             NameSpaceObject nameSpaceObject = Form1._model.root.NameSpaceObjects.FirstOrDefault();
+
+            if (nameSpaceObject.apiSite == null)
+                return result;
+
             foreach (var apiSite in nameSpaceObject.apiSite)
             {
                 result.Add(apiSite.name); 
@@ -753,7 +757,7 @@ namespace JsonManipulator
             NameSpaceObject nameSpaceObject = Form1._model.root.NameSpaceObjects.FirstOrDefault();
             foreach (var dbObject in nameSpaceObject.ObjectMap)
             {
-                if (dbObject.report != null)
+                if (dbObject.objectWorkflow != null)
                 {
                     foreach (var objWF in dbObject.objectWorkflow)
                     {
@@ -789,7 +793,15 @@ namespace JsonManipulator
             bool result = false;
             if (objWF.IsPage == null)
             {
-                if (!objWF.Name.Trim().ToLower().EndsWith("initreport") &&
+                if (objWF.isDynaFlow != null && objWF.isDynaFlow.Trim().ToLower() == "true")
+                {
+                    result = false;
+                }
+                else if (objWF.isDynaFlowTask != null && objWF.isDynaFlowTask.Trim().ToLower() == "true")
+                {
+                    result = false;
+                }
+                else if (!objWF.Name.Trim().ToLower().EndsWith("initreport") &&
                     !objWF.Name.Trim().ToLower().EndsWith("initobjwf"))
                 {
                     result = true;
@@ -809,6 +821,74 @@ namespace JsonManipulator
         public static bool IsObjectWorkflowAFlow(Models.objectWorkflow objWF)
         { 
             return !IsObjectWorkflowAForm(objWF);
+        }
+
+
+        public static bool IsObjectWorkflowAPageInitFlow(Models.objectWorkflow objWF)
+        {
+            bool result = false;
+
+            if (objWF.IsPage == null)
+            {
+                if (objWF.isDynaFlow != null && objWF.isDynaFlow.Trim().ToLower() == "true")
+                {
+                    result = false;
+                }
+                else if (objWF.isDynaFlowTask != null && objWF.isDynaFlowTask.Trim().ToLower() == "true")
+                {
+                    result = false;
+                }
+                else if (!(!objWF.Name.Trim().ToLower().EndsWith("initreport") &&
+                    !objWF.Name.Trim().ToLower().EndsWith("initobjwf")))
+                {
+                    result = true;
+                }
+            }
+            else
+            {
+
+                if (objWF.isDynaFlow != null && objWF.isDynaFlow.Trim().ToLower() == "true")
+                {
+                    result = false;
+                }
+                else if (objWF.isDynaFlowTask != null && objWF.isDynaFlowTask.Trim().ToLower() == "true")
+                {
+                    result = false;
+                }
+                else if (objWF.IsPage.Trim().ToLower() == "false" &&
+                    (objWF.Name.Trim().ToLower().EndsWith("initreport") ||
+                    objWF.Name.Trim().ToLower().EndsWith("initobjwf")))
+                {
+                    result = true;
+                }
+            }
+
+            return result;
+        }
+
+
+        public static bool IsObjectWorkflowADynaFlow(Models.objectWorkflow objWF)
+        {
+            bool result = false;
+
+            if (objWF.isDynaFlow != null && objWF.isDynaFlow.Trim().ToLower() == "true")
+            {
+                result = true;
+            }
+
+            return result;
+        }
+
+        public static bool IsObjectWorkflowADynaFlowTask(Models.objectWorkflow objWF)
+        {
+            bool result = false;
+
+            if (objWF.isDynaFlowTask != null && objWF.isDynaFlowTask.Trim().ToLower() == "true")
+            {
+                result = true;
+            }
+
+            return result;
         }
 
         public static void SortJsonFile(string sourceFile)

@@ -25,8 +25,7 @@ namespace JsonManipulator.Models
         [JsonProperty("name")]
         public string CodeNameSpaceRootName { get; set; }
         [JsonIgnore]
-        public string CodeNameSpaceSecondaryName { get; set; }
-        [JsonRequired]
+        public string CodeNameSpaceSecondaryName { get; set; } 
         [JsonProperty("databaseName")]
         public string DatabaseName { get; set; }
         [JsonProperty("databaseTableNamePrefix")]
@@ -53,8 +52,7 @@ namespace JsonManipulator.Models
         [JsonProperty("scheduleListContextObjectName")]
         public string scheduleListContextObjectName { get; set; }
         [JsonProperty("scheduleListDestinationTargetName")]
-        public string scheduleListDestinationTargetName { get; set; }
-        [JsonRequired]
+        public string scheduleListDestinationTargetName { get; set; } 
         [JsonProperty("object")]
         public List<ObjectMap> ObjectMap { get; set; }
         [JsonProperty("apiSite")]

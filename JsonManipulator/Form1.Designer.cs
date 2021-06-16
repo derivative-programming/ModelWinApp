@@ -37,8 +37,16 @@ namespace JsonManipulator
             System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Pages", new System.Windows.Forms.TreeNode[] {
             treeNode3,
             treeNode4});
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Flows");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("APIs");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("PageInit");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("General");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("DynaFlow");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("DynaFlowTasks");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Flows", new System.Windows.Forms.TreeNode[] {
+            treeNode6,
+            treeNode7,
+            treeNode8,
+            treeNode9});
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("APIs");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,9 +58,11 @@ namespace JsonManipulator
             this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dBObjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.formPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.flowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.detailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aPISiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nodeMenus = new System.Windows.Forms.TreeView();
             this.imgIcons = new System.Windows.Forms.ImageList(this.components);
@@ -64,8 +74,6 @@ namespace JsonManipulator
             this.label1 = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusText = new System.Windows.Forms.ToolStripStatusLabel();
-            this.flowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aPISiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -159,7 +167,7 @@ namespace JsonManipulator
             // 
             this.dBObjectToolStripMenuItem.Name = "dBObjectToolStripMenuItem";
             this.dBObjectToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.dBObjectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.dBObjectToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.dBObjectToolStripMenuItem.Text = "DB Object";
             this.dBObjectToolStripMenuItem.Click += new System.EventHandler(this.dBObjectToolStripMenuItem_Click);
             // 
@@ -167,9 +175,16 @@ namespace JsonManipulator
             // 
             this.formPageToolStripMenuItem.Name = "formPageToolStripMenuItem";
             this.formPageToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.formPageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.formPageToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.formPageToolStripMenuItem.Text = "Form Page";
             this.formPageToolStripMenuItem.Click += new System.EventHandler(this.formPageToolStripMenuItem_Click);
+            // 
+            // flowToolStripMenuItem
+            // 
+            this.flowToolStripMenuItem.Name = "flowToolStripMenuItem";
+            this.flowToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.flowToolStripMenuItem.Text = "Flow";
+            this.flowToolStripMenuItem.Click += new System.EventHandler(this.flowToolStripMenuItem_Click);
             // 
             // reportPageToolStripMenuItem
             // 
@@ -177,7 +192,7 @@ namespace JsonManipulator
             this.gridToolStripMenuItem,
             this.detailToolStripMenuItem});
             this.reportPageToolStripMenuItem.Name = "reportPageToolStripMenuItem";
-            this.reportPageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.reportPageToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.reportPageToolStripMenuItem.Text = "Report Page";
             // 
             // gridToolStripMenuItem
@@ -197,6 +212,13 @@ namespace JsonManipulator
             this.detailToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.detailToolStripMenuItem.Text = "Detail";
             this.detailToolStripMenuItem.Click += new System.EventHandler(this.detailToolStripMenuItem_Click);
+            // 
+            // aPISiteToolStripMenuItem
+            // 
+            this.aPISiteToolStripMenuItem.Name = "aPISiteToolStripMenuItem";
+            this.aPISiteToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.aPISiteToolStripMenuItem.Text = "API";
+            this.aPISiteToolStripMenuItem.Click += new System.EventHandler(this.aPISiteToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -222,16 +244,24 @@ namespace JsonManipulator
             treeNode4.Text = "Reports";
             treeNode5.Name = "pages";
             treeNode5.Text = "Pages";
-            treeNode6.Name = "nodeFlows";
-            treeNode6.Text = "Flows";
-            treeNode7.Name = "nodeApis";
-            treeNode7.Text = "APIs";
+            treeNode6.Name = "nodeFlowPageInit";
+            treeNode6.Text = "PageInit";
+            treeNode7.Name = "nodeFlowGeneral";
+            treeNode7.Text = "General";
+            treeNode8.Name = "nodeFlowDynaFlow";
+            treeNode8.Text = "DynaFlow";
+            treeNode9.Name = "nodeFlowDynaFlowTask";
+            treeNode9.Text = "DynaFlowTasks";
+            treeNode10.Name = "nodeFlows";
+            treeNode10.Text = "Flows";
+            treeNode11.Name = "nodeApis";
+            treeNode11.Text = "APIs";
             this.nodeMenus.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode1,
             treeNode2,
             treeNode5,
-            treeNode6,
-            treeNode7});
+            treeNode10,
+            treeNode11});
             this.nodeMenus.SelectedImageIndex = 0;
             this.nodeMenus.Size = new System.Drawing.Size(185, 545);
             this.nodeMenus.TabIndex = 1;
@@ -326,20 +356,6 @@ namespace JsonManipulator
             // 
             this.statusText.Name = "statusText";
             this.statusText.Size = new System.Drawing.Size(0, 17);
-            // 
-            // flowToolStripMenuItem
-            // 
-            this.flowToolStripMenuItem.Name = "flowToolStripMenuItem";
-            this.flowToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.flowToolStripMenuItem.Text = "Flow";
-            this.flowToolStripMenuItem.Click += new System.EventHandler(this.flowToolStripMenuItem_Click);
-            // 
-            // aPISiteToolStripMenuItem
-            // 
-            this.aPISiteToolStripMenuItem.Name = "aPISiteToolStripMenuItem";
-            this.aPISiteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.aPISiteToolStripMenuItem.Text = "API";
-            this.aPISiteToolStripMenuItem.Click += new System.EventHandler(this.aPISiteToolStripMenuItem_Click);
             // 
             // Form1
             // 

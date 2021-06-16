@@ -16,11 +16,15 @@ namespace JsonManipulator
 {
     public partial class Form1 : Form
     {
-     public static  RootObject _model;   
+        public static  RootObject _model;   
         public static string _path;
-        public Form1()
+
+        private string _initialModelPath = string.Empty;
+
+        public Form1(string initialModelPath)
         {
             InitializeComponent();
+            _initialModelPath = initialModelPath;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -30,6 +34,12 @@ namespace JsonManipulator
             addToolStripMenuItem.Enabled = false;
 
             splitContainer1.SplitterDistance = System.Convert.ToInt32(LocalStorage.GetValue("Form1.splitContainer1.SplitterDistance", "200"));
+        
+            if(this._initialModelPath.Trim().Length > 0 &&
+                System.IO.File.Exists(this._initialModelPath))
+            {
+                LoadModelFile(this._initialModelPath);
+            }
         }
         private ToolStripMenuItem AddMenu (string Name)
         {
@@ -40,7 +50,20 @@ namespace JsonManipulator
 
             return FileMenu;
         }
-        
+
+        public void PopulateTree()
+        {
+            PopulateTree(""); 
+        }
+        public void PopulateTree(string filter)
+        {
+
+            populateProjectDetails();
+            populateDbObjects(filter);
+            populatePages(filter); 
+            populateFlows(filter);
+            populateAPIs(filter);
+        }
         public void populateProjectDetails()
         {
 
@@ -55,117 +78,222 @@ namespace JsonManipulator
         {
             nodeMenus.Nodes["dbObjects"].Nodes.Clear();
             NameSpaceObject nameSpaceObject = _model.root.NameSpaceObjects.FirstOrDefault();
+
+            if (nameSpaceObject.ObjectMap == null)
+                return;
+
             foreach (var dbObj in nameSpaceObject.ObjectMap.Where(x => x.name.ToLower().Contains(filter.Trim().ToLower())))
             {
-                TreeNode node = new TreeNode();
-                node.Text = dbObj.name;
-                node.Name = dbObj.name;
-                node.ImageIndex = 1;
-                node.SelectedImageIndex = 1;
-                nodeMenus.Nodes["dbObjects"].Nodes.Add(node);
+                PopulateTree(dbObj); 
             }
         }
-        private void populateForms(string filter)
+        private void populatePages(string filter)
         {
             nodeMenus.Nodes["pages"].Nodes["Forms"].Nodes.Clear();
             nodeMenus.Nodes["pages"].Nodes["Reports"].Nodes.Clear();
             NameSpaceObject nameSpaceObject = _model.root.NameSpaceObjects.FirstOrDefault();
+
+            if (nameSpaceObject.ObjectMap == null)
+                return;
+
             foreach (var dbObj in nameSpaceObject.ObjectMap)
             {
                 if(dbObj.objectWorkflow !=null)
                 {
                     foreach (var objWF in dbObj.objectWorkflow.Where(x=>x.Name.Trim().ToLower().Contains(filter.Trim().ToLower())))
                     {
-                        if (!Utils.IsObjectWorkflowAForm(objWF))
-                            continue; 
-                        TreeNode node = new TreeNode();
-                        node.Text = objWF.Name;
-                        node.Name = objWF.Name;
-                        node.ImageIndex = 1;
-                        node.SelectedImageIndex = 1;
-                        nodeMenus.Nodes["pages"].Nodes["Forms"].Nodes.Add(node);
+                        PopulateTree(objWF); 
                     }
                 }
                 if(dbObj.report != null)
                 {
                     foreach (var rpt in dbObj.report.Where(x => x.name.Contains(filter)))
-                    {  
-                        TreeNode node = new TreeNode();
-                        node.Text = rpt.name;
-                        node.Name = rpt.name;
-                        node.ImageIndex = 1;
-                        node.SelectedImageIndex = 1;
-                        nodeMenus.Nodes["pages"].Nodes["Reports"].Nodes.Add(node);
+                    {
+                        PopulateTree(rpt); 
                     }
                 }
                 
             }
            
-        }
-        protected void populateReports(object sender, EventArgs e)
-        {
-            Button button = (Button)sender;
-            NameSpaceObject nameSpaceObject = _model.root.NameSpaceObjects.FirstOrDefault();
-            ObjectMap map = nameSpaceObject.ObjectMap.Where(x => x.name == button.Text).FirstOrDefault();
-            if(map!=null && map.report!=null)
-            {
-                foreach (var rpt in map.report)
-                {
-                    Button btn = new Button();
-                    btn.Text = rpt.name;
-                    btn.Dock = DockStyle.Top;
-                    btn.TextAlign = ContentAlignment.MiddleLeft;
-                   // pnlReports.Padding = new Padding(20, 0, 0, 0);
-                 //   pnlReports.Controls.Add(btn);
-                }
-            }
-            
-        }
+        } 
 
 
         private void populateFlows(string filter)
         {
-            nodeMenus.Nodes["nodeFlows"].Nodes.Clear(); 
+            nodeMenus.Nodes["nodeFlows"].Nodes["nodeFlowPageInit"].Nodes.Clear();
+            nodeMenus.Nodes["nodeFlows"].Nodes["nodeFlowGeneral"].Nodes.Clear();
+            nodeMenus.Nodes["nodeFlows"].Nodes["nodeFlowDynaFlow"].Nodes.Clear();
+            nodeMenus.Nodes["nodeFlows"].Nodes["nodeFlowDynaFlowTask"].Nodes.Clear();
             NameSpaceObject nameSpaceObject = _model.root.NameSpaceObjects.FirstOrDefault();
+
+            if (nameSpaceObject.ObjectMap == null)
+                return;
+
             foreach (var dbObj in nameSpaceObject.ObjectMap)
             {
                 if (dbObj.objectWorkflow != null)
                 {
                     foreach (var objWF in dbObj.objectWorkflow.Where(x => x.Name.Trim().ToLower().Contains(filter.Trim().ToLower())))
                     {
-                        if (!Utils.IsObjectWorkflowAFlow(objWF))
-                            continue; 
-                        TreeNode node = new TreeNode();
-                        node.Text = objWF.Name;
-                        node.Name = objWF.Name;
-                        node.ImageIndex = 1;
-                        node.SelectedImageIndex = 1;
-                        nodeMenus.Nodes["nodeFlows"].Nodes.Add(node);
+                        PopulateTree(objWF);
                     }
                 } 
 
-            }
-
+            } 
         }
-
-
 
         private void populateAPIs(string filter)
         {
             nodeMenus.Nodes["nodeApis"].Nodes.Clear();
+
             NameSpaceObject nameSpaceObject = _model.root.NameSpaceObjects.FirstOrDefault();
+
+            if (nameSpaceObject.apiSite == null)
+                return;
+
             foreach (var api in nameSpaceObject.apiSite)
-            {    
+            {
                 TreeNode node = new TreeNode();
                 node.Text = api.name;
                 node.Name = api.name;
                 node.ImageIndex = 1;
                 node.SelectedImageIndex = 1;
-                nodeMenus.Nodes["nodeApis"].Nodes.Add(node); 
+                nodeMenus.Nodes["nodeApis"].Nodes.Add(node);
             }
 
         }
 
+        private TreeNode PopulateTree(Models.objectWorkflow objWF)
+        {
+            TreeNode result = null;
+
+            if (!Utils.IsObjectWorkflowAFlow(objWF))
+            {
+                TreeNode node = new TreeNode();
+                node.Text = objWF.Name;
+                node.Name = objWF.Name;
+                node.ImageIndex = 1;
+                node.SelectedImageIndex = 1;
+                nodeMenus.Nodes["pages"].Nodes["Forms"].Nodes.Add(node);
+                result = node;
+
+            } 
+            else if (Utils.IsObjectWorkflowAPageInitFlow(objWF))
+            {
+
+                TreeNode node = new TreeNode();
+                node.Text = objWF.Name;
+                node.Name = objWF.Name;
+                node.ImageIndex = 1;
+                node.SelectedImageIndex = 1;
+                nodeMenus.Nodes["nodeFlows"].Nodes["nodeFlowPageInit"].Nodes.Add(node);
+                result = node;
+            }
+            else if (Utils.IsObjectWorkflowADynaFlow(objWF))
+            {
+
+                TreeNode node = new TreeNode();
+                node.Text = objWF.Name;
+                node.Name = objWF.Name;
+                node.ImageIndex = 1;
+                node.SelectedImageIndex = 1;
+                nodeMenus.Nodes["nodeFlows"].Nodes["nodeFlowDynaFlow"].Nodes.Add(node);
+                result = node;
+            }
+            else if (Utils.IsObjectWorkflowADynaFlowTask(objWF))
+            {
+
+                TreeNode node = new TreeNode();
+                node.Text = objWF.Name;
+                node.Name = objWF.Name;
+                node.ImageIndex = 1;
+                node.SelectedImageIndex = 1;
+                nodeMenus.Nodes["nodeFlows"].Nodes["nodeFlowDynaFlowTask"].Nodes.Add(node);
+                result = node;
+            }
+            else
+            {
+
+                TreeNode node = new TreeNode();
+                node.Text = objWF.Name;
+                node.Name = objWF.Name;
+                node.ImageIndex = 1;
+                node.SelectedImageIndex = 1;
+                nodeMenus.Nodes["nodeFlows"].Nodes["nodeFlowGeneral"].Nodes.Add(node);
+                result = node;
+            }
+            return result;
+        }
+
+        public TreeNode PopulateTree(ObjectMap objectMap)
+        {
+            TreeNode result = null;
+
+            TreeNode node = new TreeNode();
+            node.Text = objectMap.name;
+            node.Name = objectMap.name;
+            node.ImageIndex = 1;
+            node.SelectedImageIndex = 1;
+            nodeMenus.Nodes["dbObjects"].Nodes.Add(node);
+            result = node;
+
+            return result;
+        }
+        public TreeNode PopulateTree(Report report)
+        {
+            TreeNode result = null;
+
+            TreeNode node = new TreeNode();
+            node.Text = report.name;
+            node.Name = report.name;
+            node.ImageIndex = 1;
+            node.SelectedImageIndex = 1;
+            nodeMenus.Nodes["pages"].Nodes["Reports"].Nodes.Add(node);
+            result = node;
+
+            return result;
+        }
+        public TreeNode PopulateTree(Models.apiSite apiSite)
+        {
+            TreeNode result = null;
+
+            if (((frmAPISettings)Application.OpenForms["frmAPISettings"]) != null)
+                ((frmAPISettings)Application.OpenForms["frmAPISettings"]).Close();
+            TreeNode node = new TreeNode();
+            node.Text = apiSite.name;
+            node.Name = apiSite.name;
+            node.ImageIndex = 1;
+            node.SelectedImageIndex = 1;
+            nodeMenus.Nodes["nodeApis"].Nodes.Add(node);
+            result = node;
+
+            return result;
+        }
+         
+        public void SetSelectedTreeItem(string name)
+        {
+            nodeMenus.SelectedNode = null;
+             
+            foreach (TreeNode tn in nodeMenus.Nodes)
+            {
+                SetSelectedTreeItem(tn, name);
+            }
+        }
+        public void SetSelectedTreeItem(TreeNode node, string name)
+        {
+            if(node.Text == name)
+            {
+                nodeMenus.SelectedNode = node; 
+            }
+            if(nodeMenus.SelectedNode != null)
+            {
+                return;
+            }
+            foreach (TreeNode tn in node.Nodes)
+            {
+                SetSelectedTreeItem(tn, name);
+            }
+        }
         private void dBObjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmDbObject frm = new frmDbObject();
@@ -209,17 +337,17 @@ namespace JsonManipulator
                     }
                     if (e.Node.Parent.Name == "nodeFlows")
                     {
-                        if (((frmFormSettings)Application.OpenForms["frmFormSettings"]) != null)
-                            ((frmFormSettings)Application.OpenForms["frmFormSettings"]).Close(); 
-                        frmFormSettings frmFormSettings = new frmFormSettings(e.Node.Name);
-                        frmFormSettings.TopLevel = false;
-                        frmFormSettings.AutoScroll = true;
-                        frmFormSettings.Dock = DockStyle.Fill;
-                        //frmFormSettings.Height = this.mainPanel.Height;
-                        //frmFormSettings.Width = this.mainPanel.Width;
-                        this.mainPanel.Controls.Add(frmFormSettings);
-                        frmFormSettings.Show();
-                        break;
+                        //if (((frmFormSettings)Application.OpenForms["frmFormSettings"]) != null)
+                        //    ((frmFormSettings)Application.OpenForms["frmFormSettings"]).Close(); 
+                        //frmFormSettings frmFormSettings = new frmFormSettings(e.Node.Name);
+                        //frmFormSettings.TopLevel = false;
+                        //frmFormSettings.AutoScroll = true;
+                        //frmFormSettings.Dock = DockStyle.Fill;
+                        ////frmFormSettings.Height = this.mainPanel.Height;
+                        ////frmFormSettings.Width = this.mainPanel.Width;
+                        //this.mainPanel.Controls.Add(frmFormSettings);
+                        //frmFormSettings.Show();
+                        //break;
                     }
                     if (e.Node.Parent.Name == "nodeApis")
                     {
@@ -264,6 +392,64 @@ namespace JsonManipulator
                             frmFormSettings.Show();
                             break;
                     }
+                    if (e.Node.Parent.Name == "nodeFlowPageInit")
+                    {
+                        if (((frmFormSettings)Application.OpenForms["frmFormSettings"]) != null)
+                            ((frmFormSettings)Application.OpenForms["frmFormSettings"]).Close();
+                        frmFormSettings frmFormSettings = new frmFormSettings(e.Node.Name);
+                        frmFormSettings.TopLevel = false;
+                        frmFormSettings.AutoScroll = true;
+                        frmFormSettings.Dock = DockStyle.Fill;
+                        //frmFormSettings.Height = this.mainPanel.Height;
+                        //frmFormSettings.Width = this.mainPanel.Width;
+                        this.mainPanel.Controls.Add(frmFormSettings);
+                        frmFormSettings.Show();
+                        break;
+                    }
+                    else if (e.Node.Parent.Name == "nodeFlowGeneral")
+                    {
+                        if (((frmFormSettings)Application.OpenForms["frmFormSettings"]) != null)
+                            ((frmFormSettings)Application.OpenForms["frmFormSettings"]).Close();
+                        frmFormSettings frmFormSettings = new frmFormSettings(e.Node.Name);
+                        frmFormSettings.TopLevel = false;
+                        frmFormSettings.AutoScroll = true;
+                        frmFormSettings.Dock = DockStyle.Fill;
+                        //frmFormSettings.Height = this.mainPanel.Height;
+                        //frmFormSettings.Width = this.mainPanel.Width;
+                        this.mainPanel.Controls.Add(frmFormSettings);
+                        frmFormSettings.Show();
+                        break;
+                    }
+                    else if (e.Node.Parent.Name == "nodeFlowDynaFlow")
+                    {
+                        if (((frmFormSettings)Application.OpenForms["frmFormSettings"]) != null)
+                            ((frmFormSettings)Application.OpenForms["frmFormSettings"]).Close();
+                        frmFormSettings frmFormSettings = new frmFormSettings(e.Node.Name);
+                        frmFormSettings.TopLevel = false;
+                        frmFormSettings.AutoScroll = true;
+                        frmFormSettings.Dock = DockStyle.Fill;
+                        //frmFormSettings.Height = this.mainPanel.Height;
+                        //frmFormSettings.Width = this.mainPanel.Width;
+                        this.mainPanel.Controls.Add(frmFormSettings);
+                        frmFormSettings.Show();
+                        break;
+                    }
+                    else if (e.Node.Parent.Name == "nodeFlowDynaFlowTask")
+                    {
+                        if (((frmFormSettings)Application.OpenForms["frmFormSettings"]) != null)
+                            ((frmFormSettings)Application.OpenForms["frmFormSettings"]).Close();
+                        frmFormSettings frmFormSettings = new frmFormSettings(e.Node.Name);
+                        frmFormSettings.TopLevel = false;
+                        frmFormSettings.AutoScroll = true;
+                        frmFormSettings.Dock = DockStyle.Fill;
+                        //frmFormSettings.Height = this.mainPanel.Height;
+                        //frmFormSettings.Width = this.mainPanel.Width;
+                        this.mainPanel.Controls.Add(frmFormSettings);
+                        frmFormSettings.Show();
+                        break;
+                    }
+
+
                     break;
                      
             }
@@ -311,24 +497,25 @@ namespace JsonManipulator
             OpenFileDialog.RestoreDirectory = true;
             if (OpenFileDialog.ShowDialog() == DialogResult.OK)
             {
-                using (StreamReader r = new StreamReader(OpenFileDialog.FileName))
-                {
-                    string json = r.ReadToEnd();
-                    _model = JsonConvert.DeserializeObject<RootObject>(json);
-                    this.Text = _model.root.DatabaseName;
-
-                }
-                populateProjectDetails();
-                populateDbObjects("");
-                populateForms("");
-                populateFlows("");
-                populateAPIs("");
-                nodeMenus.Enabled = true;
-                addToolStripMenuItem.Enabled = true;
-                saveToolStripMenuItem.Enabled = true;
-                saveAsToolStripMenuItem.Enabled = true;
-                _path = OpenFileDialog.FileName;
+                LoadModelFile(OpenFileDialog.FileName);
             }
+        }
+
+        private void LoadModelFile(string modelFilePath)
+        {
+            using (StreamReader r = new StreamReader(modelFilePath))
+            {
+                string json = r.ReadToEnd();
+                _model = JsonConvert.DeserializeObject<RootObject>(json);
+                this.Text = _model.root.DatabaseName;
+
+            }
+            PopulateTree(); 
+            nodeMenus.Enabled = true;
+            addToolStripMenuItem.Enabled = true;
+            saveToolStripMenuItem.Enabled = true;
+            saveAsToolStripMenuItem.Enabled = true;
+            _path = modelFilePath;
         }
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
@@ -394,104 +581,38 @@ namespace JsonManipulator
         }
         public void updateTree(string name,int itemtype)
         {
-            populateProjectDetails();
-            populateDbObjects("");
-            populateForms("");
-            populateFlows("");
-            populateAPIs("");
-            switch (itemtype)
-            {
-                case 0://object
-                    nodeMenus.SelectedNode = nodeMenus.Nodes["dbObjects"].Nodes[name];
-                    break;
-                case 1://form,flows
-                    if(nodeMenus.Nodes["pages"].Nodes["Forms"].Nodes.ContainsKey(name))
-                    {
-                        nodeMenus.SelectedNode = nodeMenus.Nodes["pages"].Nodes["Forms"].Nodes[name];
-                    }
-                    if (nodeMenus.Nodes["nodeFlows"].Nodes.ContainsKey(name))
-                    {
-                        nodeMenus.SelectedNode = nodeMenus.Nodes["nodeFlows"].Nodes[name];
-                    }
-                    break;
-                case 2://report
-                    nodeMenus.SelectedNode = nodeMenus.Nodes["pages"].Nodes["Reports"].Nodes[name];
-                    break;
-                case 3://api
-                    nodeMenus.SelectedNode = nodeMenus.Nodes["nodeApis"].Nodes[name];
-                    break;
-            }
+            PopulateTree();
+            SetSelectedTreeItem(name); 
             nodeMenus.Focus();
         }
         private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            nodeMenus.Nodes["pages"].Nodes["Forms"].Nodes.Clear();
-            nodeMenus.Nodes["pages"].Nodes["Reports"].Nodes.Clear();
-            nodeMenus.Nodes["dbObjects"].Nodes.Clear();
-            nodeMenus.Nodes["nodeFlows"].Nodes.Clear();
-            nodeMenus.Nodes["nodeApis"].Nodes.Clear();
-            populateProjectDetails();
-            populateDbObjects(txtSearch.Text);
-            populateForms(txtSearch.Text);
-            populateFlows(txtSearch.Text);
-            populateAPIs(txtSearch.Text);
-            // nodeMenus.Sort();
+        { 
+            PopulateTree(txtSearch.Text);  
         }
         public void AddToTree(objectWorkflow objectWorkflow,int action=0) //0=add 1=update
         {
             if(((frmFormSettings)Application.OpenForms["frmFormSettings"])!=null)
-            ((frmFormSettings)Application.OpenForms["frmFormSettings"]).Close(); 
-            TreeNode node = new TreeNode();
-            node.Text = objectWorkflow.Name;
-            node.Name = objectWorkflow.Name;
-            node.ImageIndex = 1;
-            node.SelectedImageIndex = 1;
-            if (Utils.IsObjectWorkflowAForm(objectWorkflow))
-            {
-                nodeMenus.Nodes["pages"].Nodes["Forms"].Nodes.Add(node);
-                nodeMenus.SelectedNode = nodeMenus.Nodes["pages"].Nodes["Forms"].Nodes[objectWorkflow.Name];
-            }
-            else
-            {
-                nodeMenus.Nodes["nodeFlows"].Nodes.Add(node);
-                nodeMenus.SelectedNode = nodeMenus.Nodes["nodeFlows"].Nodes[objectWorkflow.Name];
-            }
+            ((frmFormSettings)Application.OpenForms["frmFormSettings"]).Close();
+            nodeMenus.SelectedNode = PopulateTree(objectWorkflow);
+             
         }
         public void AddToTree(ObjectMap objectMap)
         {
             if (((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]) != null)
                 ((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]).Close();
-            TreeNode node = new TreeNode();
-            node.Text = objectMap.name;
-            node.Name = objectMap.name;
-            node.ImageIndex = 1;
-            node.SelectedImageIndex = 1;
-            nodeMenus.Nodes["dbObjects"].Nodes.Add(node);
-            nodeMenus.SelectedNode = nodeMenus.Nodes["dbObjects"].Nodes[objectMap.name];
+            nodeMenus.SelectedNode = PopulateTree(objectMap); 
         }
         public void AddToTree(Report report)
         {
             if (((frmReportSettings)Application.OpenForms["frmReportSettings"]) != null)
-                ((frmReportSettings)Application.OpenForms["frmReportSettings"]).Close(); 
-            TreeNode node = new TreeNode();
-            node.Text = report.name;
-            node.Name = report.name;
-            node.ImageIndex = 1;
-            node.SelectedImageIndex = 1;
-            nodeMenus.Nodes["pages"].Nodes["Reports"].Nodes.Add(node);
-            nodeMenus.SelectedNode = nodeMenus.Nodes["pages"].Nodes["Reports"].Nodes[report.name];
+                ((frmReportSettings)Application.OpenForms["frmReportSettings"]).Close();
+            nodeMenus.SelectedNode = PopulateTree(report);
         }
         public void AddToTree(Models.apiSite apiSite)
         {
             if (((frmAPISettings)Application.OpenForms["frmAPISettings"]) != null)
                 ((frmAPISettings)Application.OpenForms["frmAPISettings"]).Close();
-            TreeNode node = new TreeNode();
-            node.Text = apiSite.name;
-            node.Name = apiSite.name;
-            node.ImageIndex = 1;
-            node.SelectedImageIndex = 1;
-            nodeMenus.Nodes["nodeApis"].Nodes.Add(node);
-            nodeMenus.SelectedNode = nodeMenus.Nodes["nodeApis"].Nodes[apiSite.name];
+            nodeMenus.SelectedNode = PopulateTree(apiSite);
         }
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
