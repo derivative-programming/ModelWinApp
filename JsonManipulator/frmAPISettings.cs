@@ -1,5 +1,6 @@
 ﻿using JsonManipulator.Enums;
 using JsonManipulator.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -27,7 +28,10 @@ namespace JsonManipulator
             splitter2.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmAPISettings.splitter2.SplitPosition", "200"));
 
             tabControl1.SelectedIndex = System.Convert.ToInt32(LocalStorage.GetValue("frmAPISettings.tabControl1.SelectedIndex", "0"));
+            
         }
+
+
         private void setSetting()
         {
             List<PropertyValue> propertyValues = new List<PropertyValue>();
@@ -510,6 +514,19 @@ namespace JsonManipulator
             LocalStorage.SetValue("frmAPISettings.tabControl1.SelectedIndex", tabControl1.SelectedIndex.ToString());
 
             LocalStorage.Save();
+        }
+
+        private void rtbJSON_TabIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            rtbJSON.Text = JsonConvert.SerializeObject(_apiSite, Formatting.Indented, new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            });
+
         }
     }
 }

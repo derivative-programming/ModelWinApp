@@ -18,9 +18,7 @@ namespace JsonManipulator.Models
     public class root
     {
         [JsonProperty("projectName")]
-        public string ProjectName { get; set; }
-       // [JsonProperty("apiVersion")]
-        public string apiVersion { get; set; }
+        public string ProjectName { get; set; } 
         [JsonRequired]
         [JsonProperty("name")]
         public string CodeNameSpaceRootName { get; set; }

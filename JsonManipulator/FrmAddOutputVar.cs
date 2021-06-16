@@ -24,6 +24,7 @@ namespace JsonManipulator
         private void FrmControl_Load(object sender, EventArgs e)
         {
 
+            ShowValidationError("");
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -35,10 +36,32 @@ namespace JsonManipulator
         {
             if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == _name).FirstOrDefault().objectWorkflowOutputVar == null)
                 Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == _name).FirstOrDefault().objectWorkflowOutputVar = new List<objectWorkflowOutputVar>();
+             
+            txtName.Text = Utils.Capitalize(txtName.Text).Trim();
+            if (ItemExists(txtName.Text))
+            {
+                ShowValidationError("Name already exists.");
+                return;
+            }
+            
             Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == _name).FirstOrDefault().objectWorkflowOutputVar.Add(new objectWorkflowOutputVar { name = txtName.Text });
             ((Form1)Application.OpenForms["Form1"]).showMessage("Output Var created successfully");
             ((frmFormSettings)Application.OpenForms["frmFormSettings"]).setOutputVarList();
                 this.Close();
+        }
+
+        private void ShowValidationError(string errorText)
+        {
+            lblValidationError.Text = errorText;
+        }
+        private bool ItemExists(string name)
+        {
+            bool result = false;
+            if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == _name).FirstOrDefault().objectWorkflowOutputVar.Where(x => x.name == name).ToList().Count > 0)
+            {
+                result = true;
+            }
+            return result;
         }
     }
 }

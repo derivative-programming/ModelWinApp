@@ -22,10 +22,24 @@ namespace JsonManipulator
             this._name = apiSiteName; 
         }
 
+        private void ShowValidationError(string errorText)
+        {
+            lblValidationError.Text = errorText;
+        }
         private void btnAdd_Click(object sender, EventArgs e)
         {
+
             if (Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _name).FirstOrDefault().apiEndPoint == null)
                 Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _name).FirstOrDefault().apiEndPoint = new List<apiEndPoint>();
+
+
+            txtName.Text = Utils.Capitalize(txtName.Text).Trim();
+            if (ItemExists(txtName.Text))
+            {
+                ShowValidationError("Name already exists.");
+                return;
+            }
+
             Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _name).FirstOrDefault().apiEndPoint.Add(new apiEndPoint { name = txtName.Text});
             ((Form1)Application.OpenForms["Form1"]).showMessage("EndPoint created successfully");
             ((frmAPISettings)Application.OpenForms["frmAPISettings"]).setEndPointsList();
@@ -33,6 +47,15 @@ namespace JsonManipulator
              
         }
 
+        private bool ItemExists(string name)
+        {
+            bool result = false;
+            if (Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _name).FirstOrDefault().apiEndPoint.Where(x => x.name == name).ToList().Count > 0)
+            {
+                result = true;
+            }
+            return result;
+        }
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -45,7 +68,8 @@ namespace JsonManipulator
 
         private void FrmAddButton_Load(object sender, EventArgs e)
         {
-            
+
+            ShowValidationError("");
         }
     }
 }

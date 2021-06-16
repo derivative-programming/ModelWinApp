@@ -1,5 +1,6 @@
 ﻿using JsonManipulator.Enums;
 using JsonManipulator.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -696,6 +697,20 @@ namespace JsonManipulator
                 setButtonsList();
                 lstButtons.SetSelected(newIndex, true);
             }
+        }
+
+        private void rtbJSON_TabIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            rtbJSON.Text = JsonConvert.SerializeObject(this._rpt, Formatting.Indented, new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            });
         }
     }
 }

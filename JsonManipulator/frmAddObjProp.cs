@@ -22,10 +22,36 @@ namespace JsonManipulator
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            if(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().property == null)
+            {
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().property = new List<property>();
+            }
+
+            txtName.Text = Utils.Capitalize(txtName.Text).Trim();
+            if (ItemExists(txtName.Text))
+            {
+                ShowValidationError("Name already exists.");
+                return;
+            }
+
             Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().property.Add(new property { name =txtName.Text});
             ((Form1)Application.OpenForms["Form1"]).showMessage("Property created successfully");
             ((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]).setPropertieList();
                 this.Close();
+        }
+
+        private void ShowValidationError(string errorText)
+        {
+            lblValidationError.Text = errorText;
+        }
+        private bool ItemExists(string name)
+        {
+            bool result = false;
+            if(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().property.Where(x => x.name == name).ToList().Count > 0)
+            {
+                result = true;
+            }
+            return result;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -41,6 +67,7 @@ namespace JsonManipulator
         private void frmAddObjProp_Load(object sender, EventArgs e)
         {
 
+            ShowValidationError("");
         }
     }
 }

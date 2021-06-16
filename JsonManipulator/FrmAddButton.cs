@@ -24,6 +24,10 @@ namespace JsonManipulator
             this._type = buttonType;
         }
 
+        private void ShowValidationError(string errorText)
+        {
+            lblValidationError.Text = errorText;
+        }
         private void btnAdd_Click(object sender, EventArgs e)
         {
             switch (_type)
@@ -31,6 +35,15 @@ namespace JsonManipulator
                 case ButtonType.FORM:
                     if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == _name).FirstOrDefault().objectWorkflowButton == null)
                         Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == _name).FirstOrDefault().objectWorkflowButton = new List<objectWorkflowButton>();
+
+
+                    txtName.Text = Utils.Capitalize(txtName.Text).Trim();
+                    if (FormButtonItemExists(txtName.Text))
+                    {
+                        ShowValidationError("Name already exists.");
+                        return;
+                    }
+                    
                     Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == _name).FirstOrDefault().objectWorkflowButton.Add(new objectWorkflowButton { buttonText = txtName.Text, buttonType = "Other"});
                     ((Form1)Application.OpenForms["Form1"]).showMessage("Button created successfully");
                     ((frmFormSettings)Application.OpenForms["frmFormSettings"]).setButtonsList();
@@ -38,10 +51,19 @@ namespace JsonManipulator
                  
                     break;
                 case ButtonType.REPORT:
-                    if(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportButton == null)
+                    
+                    if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportButton == null)
                     {
                         Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportButton = new List<reportButton>();
                     }
+
+                    txtName.Text = Utils.Capitalize(txtName.Text).Trim();
+                    if (ReportButtonItemExists(txtName.Text))
+                    {
+                        ShowValidationError("Name already exists.");
+                        return;
+                    }
+
                     Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportButton.Add(new reportButton { buttonName = txtName.Text, buttonType = "Other"});
                     ((Form1)Application.OpenForms["Form1"]).showMessage("Button created successfully");
                     ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setButtonsList();
@@ -49,6 +71,26 @@ namespace JsonManipulator
                     break;
             }
             
+        }
+
+
+        private bool FormButtonItemExists(string name)
+        {
+            bool result = false;
+            if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == _name).FirstOrDefault().objectWorkflowButton.Where(x => x.buttonText == name).ToList().Count > 0)
+            {
+                result = true;
+            }
+            return result;
+        }
+        private bool ReportButtonItemExists(string name)
+        {
+            bool result = false;
+            if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportButton.Where(x => x.buttonName == name).ToList().Count > 0)
+            {
+                result = true;
+            }
+            return result;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -63,7 +105,8 @@ namespace JsonManipulator
 
         private void FrmAddButton_Load(object sender, EventArgs e)
         {
-            
+
+            ShowValidationError("");
         }
     }
 }

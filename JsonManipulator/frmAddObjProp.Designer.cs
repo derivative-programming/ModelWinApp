@@ -33,6 +33,7 @@ namespace JsonManipulator
             this.txtName = new System.Windows.Forms.TextBox();
             this.btnAccept = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.lblValidationError = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblName
@@ -54,7 +55,7 @@ namespace JsonManipulator
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(56, 51);
+            this.btnAccept.Location = new System.Drawing.Point(56, 82);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
             this.btnAccept.TabIndex = 2;
@@ -65,7 +66,7 @@ namespace JsonManipulator
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(137, 51);
+            this.btnCancel.Location = new System.Drawing.Point(137, 82);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 3;
@@ -73,13 +74,24 @@ namespace JsonManipulator
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.button2_Click);
             // 
+            // lblValidationError
+            // 
+            this.lblValidationError.AutoSize = true;
+            this.lblValidationError.ForeColor = System.Drawing.Color.Red;
+            this.lblValidationError.Location = new System.Drawing.Point(9, 51);
+            this.lblValidationError.Name = "lblValidationError";
+            this.lblValidationError.Size = new System.Drawing.Size(133, 13);
+            this.lblValidationError.TabIndex = 23;
+            this.lblValidationError.Text = "Test Valiation Error Display";
+            // 
             // frmAddObjProp
             // 
             this.AcceptButton = this.btnAccept;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(224, 86);
+            this.ClientSize = new System.Drawing.Size(224, 117);
             this.ControlBox = false;
+            this.Controls.Add(this.lblValidationError);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAccept);
             this.Controls.Add(this.txtName);
@@ -101,5 +113,6 @@ namespace JsonManipulator
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Button btnAccept;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Label lblValidationError;
     }
 }

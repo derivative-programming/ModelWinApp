@@ -77,6 +77,8 @@ namespace JsonManipulator
             this.grpMain = new System.Windows.Forms.GroupBox();
             this.btnButtonMoveUp = new System.Windows.Forms.Button();
             this.btnButtonMoveDown = new System.Windows.Forms.Button();
+            this.tabJSON = new System.Windows.Forms.TabPage();
+            this.rtbJSON = new System.Windows.Forms.RichTextBox();
             tabSettings = new System.Windows.Forms.TabPage();
             tabSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataProperties)).BeginInit();
@@ -103,6 +105,7 @@ namespace JsonManipulator
             this.pnlButtonsLeftBottom.SuspendLayout();
             this.pnlButtonsLeftTop.SuspendLayout();
             this.grpMain.SuspendLayout();
+            this.tabJSON.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabSettings
@@ -150,12 +153,14 @@ namespace JsonManipulator
             this.tabControl1.Controls.Add(this.tabFilters);
             this.tabControl1.Controls.Add(this.tabColumns);
             this.tabControl1.Controls.Add(this.tabButtons);
+            this.tabControl1.Controls.Add(this.tabJSON);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(3, 16);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(794, 477);
             this.tabControl1.TabIndex = 0;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabFilters
             // 
@@ -592,6 +597,27 @@ namespace JsonManipulator
             this.btnButtonMoveDown.UseVisualStyleBackColor = true;
             this.btnButtonMoveDown.Click += new System.EventHandler(this.btnButtonMoveDown_Click);
             // 
+            // tabJSON
+            // 
+            this.tabJSON.Controls.Add(this.rtbJSON);
+            this.tabJSON.Location = new System.Drawing.Point(4, 22);
+            this.tabJSON.Name = "tabJSON";
+            this.tabJSON.Size = new System.Drawing.Size(786, 451);
+            this.tabJSON.TabIndex = 4;
+            this.tabJSON.Text = "JSON";
+            this.tabJSON.UseVisualStyleBackColor = true;
+            // 
+            // rtbJSON
+            // 
+            this.rtbJSON.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbJSON.Location = new System.Drawing.Point(0, 0);
+            this.rtbJSON.Name = "rtbJSON";
+            this.rtbJSON.ReadOnly = true;
+            this.rtbJSON.Size = new System.Drawing.Size(786, 451);
+            this.rtbJSON.TabIndex = 2;
+            this.rtbJSON.Text = "";
+            this.rtbJSON.TabIndexChanged += new System.EventHandler(this.rtbJSON_TabIndexChanged);
+            // 
             // frmReportSettings
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -628,6 +654,7 @@ namespace JsonManipulator
             this.pnlButtonsLeftBottom.ResumeLayout(false);
             this.pnlButtonsLeftTop.ResumeLayout(false);
             this.grpMain.ResumeLayout(false);
+            this.tabJSON.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -681,5 +708,7 @@ namespace JsonManipulator
         private System.Windows.Forms.Panel pnlButtonsLeftTop;
         private System.Windows.Forms.Button btnButtonMoveUp;
         private System.Windows.Forms.Button btnButtonMoveDown;
+        private System.Windows.Forms.TabPage tabJSON;
+        private System.Windows.Forms.RichTextBox rtbJSON;
     }
 }

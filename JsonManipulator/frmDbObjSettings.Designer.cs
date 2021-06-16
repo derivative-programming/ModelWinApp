@@ -84,6 +84,8 @@ namespace JsonManipulator
             this.pnlLookupItemLeftTop = new System.Windows.Forms.Panel();
             this.lstLookupItems = new System.Windows.Forms.ListBox();
             this.grpBoxMain = new System.Windows.Forms.GroupBox();
+            this.tabJSON = new System.Windows.Forms.TabPage();
+            this.rtbJSON = new System.Windows.Forms.RichTextBox();
             this.tabControl1.SuspendLayout();
             this.tabSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataProperties)).BeginInit();
@@ -115,6 +117,7 @@ namespace JsonManipulator
             this.pnlLookupItemLeftBottom.SuspendLayout();
             this.pnlLookupItemLeftTop.SuspendLayout();
             this.grpBoxMain.SuspendLayout();
+            this.tabJSON.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -124,12 +127,14 @@ namespace JsonManipulator
             this.tabControl1.Controls.Add(this.tabPropSubscribers);
             this.tabControl1.Controls.Add(this.tabModelServiceSubscriptions);
             this.tabControl1.Controls.Add(this.tabLookupItems);
+            this.tabControl1.Controls.Add(this.tabJSON);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(3, 16);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(838, 440);
             this.tabControl1.TabIndex = 0;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabSettings
             // 
@@ -674,6 +679,29 @@ namespace JsonManipulator
             this.grpBoxMain.TabStop = false;
             this.grpBoxMain.Text = "groupBox2";
             // 
+            // tabJSON
+            // 
+            this.tabJSON.Controls.Add(this.rtbJSON);
+            this.tabJSON.Location = new System.Drawing.Point(4, 22);
+            this.tabJSON.Name = "tabJSON";
+            this.tabJSON.Padding = new System.Windows.Forms.Padding(3);
+            this.tabJSON.Size = new System.Drawing.Size(830, 414);
+            this.tabJSON.TabIndex = 5;
+            this.tabJSON.Text = "JSON";
+            this.tabJSON.UseVisualStyleBackColor = true;
+            // 
+            // rtbJSON
+            // 
+            this.rtbJSON.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbJSON.Location = new System.Drawing.Point(3, 3);
+            this.rtbJSON.Name = "rtbJSON";
+            this.rtbJSON.ReadOnly = true;
+            this.rtbJSON.Size = new System.Drawing.Size(824, 408);
+            this.rtbJSON.TabIndex = 1;
+            this.rtbJSON.Text = "";
+            this.rtbJSON.TabIndexChanged += new System.EventHandler(this.rtbJSON_TabIndexChanged);
+            this.rtbJSON.TextChanged += new System.EventHandler(this.rtbJSON_TextChanged);
+            // 
             // frmDbObjSettings
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -717,6 +745,7 @@ namespace JsonManipulator
             this.pnlLookupItemLeftBottom.ResumeLayout(false);
             this.pnlLookupItemLeftTop.ResumeLayout(false);
             this.grpBoxMain.ResumeLayout(false);
+            this.tabJSON.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -778,5 +807,7 @@ namespace JsonManipulator
         private System.Windows.Forms.Button btnLookupItem;
         private System.Windows.Forms.Panel pnlLookupItemLeftTop;
         private System.Windows.Forms.ListBox lstLookupItems;
+        private System.Windows.Forms.TabPage tabJSON;
+        private System.Windows.Forms.RichTextBox rtbJSON;
     }
 }

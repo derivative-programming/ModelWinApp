@@ -32,10 +32,37 @@ namespace JsonManipulator
             {
                 Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportColumn = new List<reportColumn>();
             }
+
+            txtName.Text = Utils.Capitalize(txtName.Text).Trim();
+            if (ItemExists(txtName.Text))
+            {
+                ShowValidationError("Name already exists.");
+                return;
+            }
             Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportColumn.Add(new reportColumn { name = txtName.Text });
              ((Form1)Application.OpenForms["Form1"]).showMessage("Column created successfully");
             ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setColumnsList();
             this.Close();
+        }
+        private bool ItemExists(string name)
+        {
+            bool result = false;
+            if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportColumn.Where(x => x.name == name).ToList().Count > 0)
+            {
+                result = true;
+            }
+            return result;
+        }
+
+        private void FrmAddColumn_Load(object sender, EventArgs e)
+        {
+
+            ShowValidationError("");
+        }
+
+        private void ShowValidationError(string errorText)
+        {
+            lblValidationError.Text = errorText;
         }
     }
 }

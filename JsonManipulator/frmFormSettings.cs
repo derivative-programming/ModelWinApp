@@ -1,5 +1,6 @@
 ﻿using JsonManipulator.Enums;
 using JsonManipulator.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -210,7 +211,7 @@ namespace JsonManipulator
 
         private void btnControls_Click(object sender, EventArgs e)
         {
-            FrmControl frmControl = new FrmControl(_form.Name, _ownerObject.name);
+            FrmAddControl frmControl = new FrmAddControl(_form.Name, _ownerObject.name);
             frmControl.ShowDialog();
         }
 
@@ -688,6 +689,20 @@ namespace JsonManipulator
                 setButtonsList();
                 lstButtons.SetSelected(newIndex, true);
             }
+        }
+
+        private void rtbJSON_TabIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            rtbJSON.Text = JsonConvert.SerializeObject(this._form, Formatting.Indented, new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            });
+
         }
     }
 }

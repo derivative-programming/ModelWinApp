@@ -127,11 +127,11 @@
     <Compile Include="FrmAddOutputVar.Designer.cs">
       <DependentUpon>FrmAddOutputVar.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmControl.cs">
+    <Compile Include="FrmAddControl.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmControl.Designer.cs">
-      <DependentUpon>FrmControl.cs</DependentUpon>
+    <Compile Include="FrmAddControl.Designer.cs">
+      <DependentUpon>FrmAddControl.cs</DependentUpon>
     </Compile>
     <Compile Include="frmAddApiSite.cs">
       <SubType>Form</SubType>
@@ -268,8 +268,8 @@
     <EmbeddedResource Include="FrmAddOutputVar.resx">
       <DependentUpon>FrmAddOutputVar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmControl.resx">
-      <DependentUpon>FrmControl.cs</DependentUpon>
+    <EmbeddedResource Include="FrmAddControl.resx">
+      <DependentUpon>FrmAddControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmAddApiSite.resx">
       <DependentUpon>frmAddApiSite.cs</DependentUpon>
