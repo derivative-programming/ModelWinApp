@@ -1,7 +1,7 @@
 ﻿
 namespace JsonManipulator
 {
-    partial class FrmAddColumn
+    partial class FrmBulkAdd
     {
         /// <summary>
         /// Required designer variable.
@@ -31,16 +31,14 @@ namespace JsonManipulator
         {
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAccept = new System.Windows.Forms.Button();
-            this.txtName = new System.Windows.Forms.TextBox();
             this.lblName = new System.Windows.Forms.Label();
-            this.lblValidationError = new System.Windows.Forms.Label();
-            this.btnBulk = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(237, 81);
+            this.btnCancel.Location = new System.Drawing.Point(270, 216);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 19;
@@ -50,7 +48,7 @@ namespace JsonManipulator
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(156, 81);
+            this.btnAccept.Location = new System.Drawing.Point(189, 216);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
             this.btnAccept.TabIndex = 18;
@@ -58,60 +56,38 @@ namespace JsonManipulator
             this.btnAccept.UseVisualStyleBackColor = true;
             this.btnAccept.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // txtName
-            // 
-            this.txtName.Location = new System.Drawing.Point(12, 25);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(300, 20);
-            this.txtName.TabIndex = 17;
-            // 
             // lblName
             // 
             this.lblName.AutoSize = true;
             this.lblName.Location = new System.Drawing.Point(12, 9);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(35, 13);
+            this.lblName.Size = new System.Drawing.Size(223, 13);
             this.lblName.TabIndex = 16;
-            this.lblName.Text = "&Name";
+            this.lblName.Text = "Please enter a csv list or mulitple lines of items";
             // 
-            // lblValidationError
+            // richTextBox1
             // 
-            this.lblValidationError.AutoSize = true;
-            this.lblValidationError.ForeColor = System.Drawing.Color.Red;
-            this.lblValidationError.Location = new System.Drawing.Point(12, 51);
-            this.lblValidationError.Name = "lblValidationError";
-            this.lblValidationError.Size = new System.Drawing.Size(133, 13);
-            this.lblValidationError.TabIndex = 20;
-            this.lblValidationError.Text = "Test Valiation Error Display";
+            this.richTextBox1.Location = new System.Drawing.Point(15, 26);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(330, 184);
+            this.richTextBox1.TabIndex = 20;
+            this.richTextBox1.Text = "";
             // 
-            // btnBulk
+            // FrmBulkAdd
             // 
-            this.btnBulk.Location = new System.Drawing.Point(12, 81);
-            this.btnBulk.Name = "btnBulk";
-            this.btnBulk.Size = new System.Drawing.Size(80, 23);
-            this.btnBulk.TabIndex = 25;
-            this.btnBulk.Text = "Bulk Add";
-            this.btnBulk.UseVisualStyleBackColor = true;
-            this.btnBulk.Click += new System.EventHandler(this.btnBulk_Click);
-            // 
-            // FrmAddColumn
-            // 
-            this.AcceptButton = this.btnAccept;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(329, 116);
+            this.ClientSize = new System.Drawing.Size(357, 251);
             this.ControlBox = false;
-            this.Controls.Add(this.btnBulk);
-            this.Controls.Add(this.lblValidationError);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAccept);
-            this.Controls.Add(this.txtName);
             this.Controls.Add(this.lblName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "FrmAddColumn";
+            this.Name = "FrmBulkAdd";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Add Column";
+            this.Text = "Bulk Insert";
             this.Load += new System.EventHandler(this.FrmAddColumn_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -122,9 +98,7 @@ namespace JsonManipulator
 
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnAccept;
-        private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.Label lblValidationError;
-        private System.Windows.Forms.Button btnBulk;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

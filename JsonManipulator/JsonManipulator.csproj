@@ -97,6 +97,12 @@
     <Compile Include="FrmAddButton.Designer.cs">
       <DependentUpon>FrmAddButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmBulkAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBulkAdd.Designer.cs">
+      <DependentUpon>FrmBulkAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmAddColumn.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -252,6 +258,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAddButton.resx">
       <DependentUpon>FrmAddButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmBulkAdd.resx">
+      <DependentUpon>FrmBulkAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAddColumn.resx">
       <DependentUpon>FrmAddColumn.cs</DependentUpon>

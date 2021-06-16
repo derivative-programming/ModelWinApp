@@ -19,7 +19,10 @@ namespace JsonManipulator
         public frmAddApiSiteEnvironment(string apiSiteName)
         {
             InitializeComponent();
-            this._name = apiSiteName; 
+            this._name = apiSiteName;
+            if (Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _name).FirstOrDefault().apiEnvironment == null)
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _name).FirstOrDefault().apiEnvironment = new List<apiEnvironment>();
+
         }
 
         private void ShowValidationError(string errorText)
@@ -28,9 +31,6 @@ namespace JsonManipulator
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _name).FirstOrDefault().apiEnvironment == null)
-                Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _name).FirstOrDefault().apiEnvironment = new List<apiEnvironment>();
-
 
             txtName.Text = Utils.Capitalize(txtName.Text).Trim();
             if (ItemExists(txtName.Text))

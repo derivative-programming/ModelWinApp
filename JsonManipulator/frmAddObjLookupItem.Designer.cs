@@ -34,6 +34,7 @@ namespace JsonManipulator
             this.btnAccept = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.lblValidationError = new System.Windows.Forms.Label();
+            this.btnBulk = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblName
@@ -50,12 +51,12 @@ namespace JsonManipulator
             // 
             this.txtName.Location = new System.Drawing.Point(12, 25);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(200, 20);
+            this.txtName.Size = new System.Drawing.Size(300, 20);
             this.txtName.TabIndex = 1;
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(56, 85);
+            this.btnAccept.Location = new System.Drawing.Point(156, 87);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
             this.btnAccept.TabIndex = 2;
@@ -66,7 +67,7 @@ namespace JsonManipulator
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(137, 85);
+            this.btnCancel.Location = new System.Drawing.Point(237, 87);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 3;
@@ -84,13 +85,24 @@ namespace JsonManipulator
             this.lblValidationError.TabIndex = 22;
             this.lblValidationError.Text = "Test Valiation Error Display";
             // 
+            // btnBulk
+            // 
+            this.btnBulk.Location = new System.Drawing.Point(15, 87);
+            this.btnBulk.Name = "btnBulk";
+            this.btnBulk.Size = new System.Drawing.Size(80, 23);
+            this.btnBulk.TabIndex = 25;
+            this.btnBulk.Text = "Bulk Add";
+            this.btnBulk.UseVisualStyleBackColor = true;
+            this.btnBulk.Click += new System.EventHandler(this.btnBulk_Click);
+            // 
             // frmAddObjLookupItem
             // 
             this.AcceptButton = this.btnAccept;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(224, 122);
+            this.ClientSize = new System.Drawing.Size(325, 122);
             this.ControlBox = false;
+            this.Controls.Add(this.btnBulk);
             this.Controls.Add(this.lblValidationError);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAccept);
@@ -114,5 +126,6 @@ namespace JsonManipulator
         private System.Windows.Forms.Button btnAccept;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label lblValidationError;
+        private System.Windows.Forms.Button btnBulk;
     }
 }

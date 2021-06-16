@@ -19,6 +19,9 @@ namespace JsonManipulator
             InitializeComponent();
             this._name = name;
             this._parent = parent;
+            if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == _name).FirstOrDefault().objectWorkflowParam == null)
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == _name).FirstOrDefault().objectWorkflowParam = new List<objectWorkflowParam>();
+
         }
 
         private void FrmControl_Load(object sender, EventArgs e)
@@ -34,9 +37,6 @@ namespace JsonManipulator
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == _name).FirstOrDefault().objectWorkflowParam == null)
-                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == _name).FirstOrDefault().objectWorkflowParam = new List<objectWorkflowParam>();
-
 
             txtName.Text = Utils.Capitalize(txtName.Text).Trim();
             if (ItemExists(txtName.Text))
@@ -59,6 +59,32 @@ namespace JsonManipulator
             }
             return result;
         }
+
+        private void btnBulk_Click(object sender, EventArgs e)
+        {
+            using (var form = new FrmBulkAdd())
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string val = form.ReturnValue;
+                    List<string> items = new List<string>();
+                    items.AddRange(val.Split("\n,".ToCharArray()));
+                    for (int i = 0; i < items.Count; i++)
+                    {
+                        string itemName = Utils.Capitalize(items[i]).Trim();
+                        if (itemName.Length > 0 && !ItemExists(itemName))
+                        {
+                            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == _name).FirstOrDefault().objectWorkflowParam.Add(new objectWorkflowParam { name = itemName });
+                        }
+                    }
+                    ((Form1)Application.OpenForms["Form1"]).showMessage("Control created successfully");
+                    ((frmFormSettings)Application.OpenForms["frmFormSettings"]).setControlsList();
+                }
+            }
+            this.Close();
+        }
+
         private void ShowValidationError(string errorText)
         {
             lblValidationError.Text = errorText;

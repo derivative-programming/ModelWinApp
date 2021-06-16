@@ -39,7 +39,7 @@ namespace JsonManipulator
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(137, 83);
+            this.btnCancel.Location = new System.Drawing.Point(237, 81);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 11;
@@ -49,7 +49,7 @@ namespace JsonManipulator
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(56, 83);
+            this.btnAccept.Location = new System.Drawing.Point(156, 81);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
             this.btnAccept.TabIndex = 10;
@@ -61,7 +61,7 @@ namespace JsonManipulator
             // 
             this.txtName.Location = new System.Drawing.Point(12, 25);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(200, 20);
+            this.txtName.Size = new System.Drawing.Size(300, 20);
             this.txtName.TabIndex = 9;
             this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
             // 
@@ -89,7 +89,7 @@ namespace JsonManipulator
             this.AcceptButton = this.btnAccept;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(224, 116);
+            this.ClientSize = new System.Drawing.Size(324, 116);
             this.ControlBox = false;
             this.Controls.Add(this.lblValidationError);
             this.Controls.Add(this.btnCancel);

@@ -19,7 +19,11 @@ namespace JsonManipulator
         public frmAddApiSiteEndPoint(string apiSiteName)
         {
             InitializeComponent();
-            this._name = apiSiteName; 
+            this._name = apiSiteName;
+
+            if (Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _name).FirstOrDefault().apiEndPoint == null)
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _name).FirstOrDefault().apiEndPoint = new List<apiEndPoint>();
+
         }
 
         private void ShowValidationError(string errorText)
@@ -28,9 +32,6 @@ namespace JsonManipulator
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
-
-            if (Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _name).FirstOrDefault().apiEndPoint == null)
-                Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _name).FirstOrDefault().apiEndPoint = new List<apiEndPoint>();
 
 
             txtName.Text = Utils.Capitalize(txtName.Text).Trim();

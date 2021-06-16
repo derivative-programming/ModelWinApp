@@ -19,6 +19,10 @@ namespace JsonManipulator
             InitializeComponent();
             this._name = name;
             this._parent = parent;
+            if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportParam == null)
+            {
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportParam = new List<reportParam>();
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -28,10 +32,6 @@ namespace JsonManipulator
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportParam==null)
-            {
-                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportParam = new List<reportParam>();
-            }
             txtName.Text = Utils.Capitalize(txtName.Text).Trim();
             if (ItemExists(txtName.Text))
             {
@@ -58,6 +58,31 @@ namespace JsonManipulator
         {
 
             ShowValidationError("");
+        }
+
+        private void btnBulk_Click(object sender, EventArgs e)
+        {
+            using (var form = new FrmBulkAdd())
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string val = form.ReturnValue;
+                    List<string> items = new List<string>();
+                    items.AddRange(val.Split("\n,".ToCharArray()));
+                    for (int i = 0; i < items.Count; i++)
+                    {
+                        string itemName = Utils.Capitalize(items[i]).Trim();
+                        if (itemName.Length > 0 && !ItemExists(itemName))
+                        {
+                            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportParam.Add(new reportParam { name = itemName });
+                        }
+                    }
+                    ((Form1)Application.OpenForms["Form1"]).showMessage("Filter created successfully");
+                    ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setFiltersList();
+                }
+            }
+            this.Close();
         }
 
         private void ShowValidationError(string errorText)

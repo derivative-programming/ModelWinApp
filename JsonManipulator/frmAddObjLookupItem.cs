@@ -18,14 +18,14 @@ namespace JsonManipulator
         {
             InitializeComponent();
             this._name = name;
+            if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().lookupItem == null)
+            {
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().lookupItem = new List<lookupItem>();
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().lookupItem == null)
-            {
-                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().lookupItem = new List<lookupItem>();
-            }
 
             txtName.Text = Utils.Capitalize(txtName.Text).Trim();
             if (ItemExists(txtName.Text))
@@ -67,6 +67,31 @@ namespace JsonManipulator
         {
 
             ShowValidationError("");
+        }
+
+        private void btnBulk_Click(object sender, EventArgs e)
+        {
+            using (var form = new FrmBulkAdd())
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string val = form.ReturnValue;
+                    List<string> items = new List<string>();
+                    items.AddRange(val.Split("\n,".ToCharArray()));
+                    for (int i = 0; i < items.Count; i++)
+                    {
+                        string itemName = Utils.Capitalize(items[i]).Trim();
+                        if (itemName.Length > 0 && !ItemExists(itemName))
+                        {
+                            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().lookupItem.Add(new lookupItem { enumValue = itemName, name = itemName, description = itemName, isActive = "true" });
+                        }
+                    }
+                    ((Form1)Application.OpenForms["Form1"]).showMessage("Lookup Item created successfully");
+                    ((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]).setLookupItemList();
+                }
+            }
+            this.Close();
         }
     }
 }

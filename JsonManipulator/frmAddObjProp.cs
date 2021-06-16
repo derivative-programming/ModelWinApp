@@ -18,14 +18,16 @@ namespace JsonManipulator
         {
             InitializeComponent();
             this._name = name;
+
+            if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().property == null)
+            {
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().property = new List<property>();
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().property == null)
-            {
-                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().property = new List<property>();
-            }
+            
 
             txtName.Text = Utils.Capitalize(txtName.Text).Trim();
             if (ItemExists(txtName.Text))
@@ -37,7 +39,7 @@ namespace JsonManipulator
             Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().property.Add(new property { name =txtName.Text});
             ((Form1)Application.OpenForms["Form1"]).showMessage("Property created successfully");
             ((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]).setPropertieList();
-                this.Close();
+            this.Close();
         }
 
         private void ShowValidationError(string errorText)
@@ -68,6 +70,31 @@ namespace JsonManipulator
         {
 
             ShowValidationError("");
+        }
+
+        private void btnBulk_Click(object sender, EventArgs e)
+        {
+            using (var form = new FrmBulkAdd())
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string val = form.ReturnValue;
+                    List<string> items = new List<string>();
+                    items.AddRange(val.Split("\n,".ToCharArray()));
+                    for(int i = 0;i < items.Count;i++)
+                    {
+                        string itemName = Utils.Capitalize(items[i]).Trim();
+                        if (itemName.Length > 0 && !ItemExists(itemName))
+                        {
+                            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().property.Add(new property { name = itemName });
+                        }
+                    }
+                    ((Form1)Application.OpenForms["Form1"]).showMessage("Property created successfully");
+                    ((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]).setPropertieList();
+                }
+            }
+                this.Close();
         }
     }
 }
