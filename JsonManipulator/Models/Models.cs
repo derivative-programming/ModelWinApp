@@ -135,8 +135,10 @@ namespace JsonManipulator.Models
 
 
         public string isSoftDeleteUsed { get; set; }
-        public string cacheAllRecs { get; set; }
-        public string cacheIndividualRecs { get; set; } 
+        [JsonProperty("cacheAllRecs")]
+        public string isAllRecsCached { get; set; }
+        [JsonProperty("cacheIndividualRecs")]
+        public string isIndividualRecsCached { get; set; } 
     }
     public class property
     {
@@ -153,7 +155,7 @@ namespace JsonManipulator.Models
         [JsonProperty("isEncrypted")]
         public string isEncrypted { get; set; }
         [JsonProperty("forceDBColumnIndex")]
-        public string forceDBColumnIndex { get; set; }
+        public string isDBColumnIndexForced { get; set; }
 
         [JsonProperty("isFKLookup")]
         public string isFKLookup { get; set; }
@@ -251,9 +253,9 @@ namespace JsonManipulator.Models
 
 
         [JsonProperty("titleText")]
-        public string TitleText { get; set; }
+        public string pageTitleText { get; set; }
         [JsonProperty("introText")]
-        public string IntroText { get; set; }
+        public string pageIntroText { get; set; }
         [JsonProperty("roleRequired")]
         public string RoleRequired { get; set; }
         [JsonProperty("isCustomSqlUsed")]
@@ -483,9 +485,9 @@ namespace JsonManipulator.Models
         //[JsonProperty("ownerObject")]
         //public string OwnerObject { get; set; }
         [JsonProperty("titleText")]
-        public string TitleText { get; set; }
+        public string pageTitleText { get; set; }
         [JsonProperty("introText")]
-        public String IntroText { get; set; } 
+        public String pageIntroText { get; set; } 
         [JsonProperty("isPage")]
         public String IsPage { get; set; }
         [JsonProperty("roleRequired")]

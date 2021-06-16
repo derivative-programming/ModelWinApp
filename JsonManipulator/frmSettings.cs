@@ -57,6 +57,13 @@ namespace JsonManipulator
                 {
                     value = dataProperties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 }
+                if (property.StartsWith("is"))
+                {
+                    if (value != null && !Utils.getBooleanList().Contains(value))
+                    {
+                        return;
+                    }
+                }
                 if (property == "CodeNameSpaceSecondaryName")
                 { 
                     Form1._model.root.NameSpaceObjects.FirstOrDefault().name = value;

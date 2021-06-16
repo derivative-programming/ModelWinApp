@@ -284,6 +284,13 @@ namespace JsonManipulator
                 {
                     value = dataProperties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 }
+                if (property.StartsWith("is"))
+                {
+                    if (value != null && !Utils.getBooleanList().Contains(value))
+                    {
+                        return;
+                    }
+                }
                 Report temp = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault();
                 Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.RemoveAll(x => x.name == _rpt.name);
                 typeof(Report).GetProperty(property).SetValue(temp, value);
@@ -310,6 +317,13 @@ namespace JsonManipulator
                 {
                     value = gridFilters.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 }
+                if (property.StartsWith("is"))
+                {
+                    if (value != null && !Utils.getBooleanList().Contains(value))
+                    {
+                        return;
+                    }
+                }
                 int index = lstFilters.SelectedIndex;
                 typeof(reportParam).GetProperty(property).SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportParam.ElementAt(lstFilters.SelectedIndex), value); ;
                 setFiltersList();
@@ -328,6 +342,13 @@ namespace JsonManipulator
                     value = gridColumns.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 }
 
+                if (property.StartsWith("is"))
+                {
+                    if (value != null && !Utils.getBooleanList().Contains(value))
+                    {
+                        return;
+                    }
+                }
                 if (property.ToLower() == "buttonDestinationTargetName".ToLower())
                 {
                     Models.ObjectMap destinationOwnerObject = Utils.GetDestinationOwnerObject(value);
@@ -438,38 +459,38 @@ namespace JsonManipulator
         }
         private void gridButtons_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-        if (e.ColumnIndex > 0)
-        {
+            if (e.ColumnIndex > 0)
+            {
 
-            // Bind grid cell with combobox and than bind combobox with datasource.  
-            DataGridViewComboBoxCell l_objGridDropbox = new DataGridViewComboBoxCell();
-            string propertyName = gridButtons.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value.ToString();
-            // Check the column  cell, in which it click.  
-            if (propertyName.Equals("ButtonType", StringComparison.OrdinalIgnoreCase))
-            {
-                // On click of datagridview cell, attched combobox with this click cell of datagridview  
-                gridButtons[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
-                l_objGridDropbox.DataSource = Utils.getReportButtons(); // Bind combobox with datasource.  
-                l_objGridDropbox.ValueMember = "Value";
-                l_objGridDropbox.DisplayMember = "Display";
-                l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
-            }
-            if (propertyName.StartsWith("IsVisible"))
-            {
-                // On click of datagridview cell, attched combobox with this click cell of datagridview  
-                gridButtons[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
-                l_objGridDropbox.DataSource = Utils.getBooleans(); // Bind combobox with datasource.  
-                l_objGridDropbox.ValueMember = "Value";
-                l_objGridDropbox.DisplayMember = "Display";
-                l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
-            }
-            if (propertyName.Equals("destinationTargetName", StringComparison.OrdinalIgnoreCase))
-            {
+                // Bind grid cell with combobox and than bind combobox with datasource.  
+                DataGridViewComboBoxCell l_objGridDropbox = new DataGridViewComboBoxCell();
+                string propertyName = gridButtons.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value.ToString();
+                // Check the column  cell, in which it click.  
+                if (propertyName.Equals("ButtonType", StringComparison.OrdinalIgnoreCase))
+                {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview  
-                    FormsList formsList = new FormsList(ParentType.REPORT_BUTTON, e.RowIndex, e.ColumnIndex);
-                formsList.ShowDialog();
+                    gridButtons[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
+                    l_objGridDropbox.DataSource = Utils.getReportButtons(); // Bind combobox with datasource.  
+                    l_objGridDropbox.ValueMember = "Value";
+                    l_objGridDropbox.DisplayMember = "Display";
+                    l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+                } 
+                if (propertyName.StartsWith("is"))
+                {
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
+                    gridButtons[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
+                    l_objGridDropbox.DataSource = Utils.getBooleans(); // Bind combobox with datasource.  
+                    l_objGridDropbox.ValueMember = "Value";
+                    l_objGridDropbox.DisplayMember = "Display";
+                    l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+                }
+                if (propertyName.Equals("destinationTargetName", StringComparison.OrdinalIgnoreCase))
+                {
+                        // On click of datagridview cell, attched combobox with this click cell of datagridview  
+                        FormsList formsList = new FormsList(ParentType.REPORT_BUTTON, e.RowIndex, e.ColumnIndex);
+                    formsList.ShowDialog();
+                }
             }
-        }
         }
 
         private void gridColumns_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -527,6 +548,13 @@ namespace JsonManipulator
                     value = gridButtons.Rows[gridButtons.CurrentCell.RowIndex].Cells[gridButtons.CurrentCell.ColumnIndex].Value.ToString();
                 }
 
+                if (property.StartsWith("is"))
+                {
+                    if (value != null && !Utils.getBooleanList().Contains(value))
+                    {
+                        return;
+                    }
+                }
                 if (property.ToLower() == "destinationTargetName".ToLower())
                 {
                     Models.ObjectMap destinationOwnerObject = Utils.GetDestinationOwnerObject(value);
@@ -537,6 +565,13 @@ namespace JsonManipulator
                     } 
                     typeof(reportButton).GetProperty("destinationContextObjectName").SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportButton.ElementAt(lstButtons.SelectedIndex), destinationOwnerObject.name);
 
+                }
+                if (property.StartsWith("is"))
+                { 
+                    if (value != null && !Utils.getBooleanList().Contains(value))
+                    {
+                        return;
+                    } 
                 }
                 int index = lstButtons.SelectedIndex;
                 typeof(reportButton).GetProperty(property).SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportButton.ElementAt(lstButtons.SelectedIndex), value);
@@ -617,5 +652,50 @@ namespace JsonManipulator
 
             LocalStorage.Save();
             }
+
+        private void btnButtonMoveUp_Click(object sender, EventArgs e)
+        {
+            if (lstButtons.SelectedItem != null)
+            {
+                int selectedIndex = lstButtons.SelectedIndex;
+                reportButton item = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportButton.ElementAt(selectedIndex);
+                int newIndex = 0;
+                if (selectedIndex == 0)
+                {
+                    newIndex = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportButton.Count - 1;
+                }
+                else
+                {
+                    newIndex = selectedIndex - 1;
+                }
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportButton.RemoveAt(selectedIndex);
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportButton.Insert(newIndex, item);
+                setButtonsList();
+                lstButtons.SetSelected(newIndex, true);
+            }
+        }
+
+        private void btnButtonMoveDown_Click(object sender, EventArgs e)
+        {
+            if (lstButtons.SelectedItem != null)
+            {
+                int selectedIndex = lstButtons.SelectedIndex;
+                int count = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportButton.Count;
+                reportButton item = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportButton.ElementAt(selectedIndex);
+                int newIndex = 0;
+                if (selectedIndex == count - 1)
+                {
+                    newIndex = 0;
+                }
+                else
+                {
+                    newIndex = selectedIndex + 1;
+                }
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportButton.RemoveAt(selectedIndex);
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportButton.Insert(newIndex, item);
+                setButtonsList();
+                lstButtons.SetSelected(newIndex, true);
+            }
+        }
     }
 }

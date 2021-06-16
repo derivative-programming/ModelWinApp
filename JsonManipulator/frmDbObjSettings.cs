@@ -24,6 +24,10 @@ namespace JsonManipulator
 
         private void frmDbObjSettings_Load(object sender, EventArgs e)
         {
+            if(_map.isLookup is null || _map.isLookup == "false")
+            {
+                tabControl1.TabPages.RemoveByKey("tabLookupItems");
+            }
             setSetting();
             setPropertieList();
             setPropSubList();
@@ -170,8 +174,14 @@ namespace JsonManipulator
                 if (dataProperties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
                 {
                     value = dataProperties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                } 
+                if (property.StartsWith("is"))
+                {
+                    if (value != null && !Utils.getBooleanList().Contains(value))
+                    {
+                        return;
+                    }
                 }
-                
                 typeof(ObjectMap).GetProperty(property).SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x=>x.name == _map.name).FirstOrDefault(), value);
                 if(property.Equals("name",StringComparison.OrdinalIgnoreCase))
                 {
@@ -189,9 +199,7 @@ namespace JsonManipulator
                 DataGridViewComboBoxCell l_objGridDropbox = new DataGridViewComboBoxCell();
                 string propertyName = dataProperties.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value.ToString();
                 // Check the column  cell, in which it click.  
-                if (propertyName.StartsWith("is") ||
-                    propertyName.Equals("cacheAllRecs", StringComparison.OrdinalIgnoreCase) ||
-                    propertyName.Equals("cacheIndividualRecs", StringComparison.OrdinalIgnoreCase)) //isLookup
+                if (propertyName.StartsWith("is")) //isLookup
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview  
                     dataProperties[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
@@ -220,16 +228,7 @@ namespace JsonManipulator
                 // Bind grid cell with combobox and than bind combobox with datasource.  
                 DataGridViewComboBoxCell l_objGridDropbox = new DataGridViewComboBoxCell();
                 string propertyName = gridPropertiesProp.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value.ToString();
-                // Check the column  cell, in which it click.  
-                if (propertyName.Equals("forceDBColumnIndex", StringComparison.OrdinalIgnoreCase))
-                {
-                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
-                    gridPropertiesProp[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
-                    l_objGridDropbox.DataSource = Utils.getBooleans(); // Bind combobox with datasource.  
-                    l_objGridDropbox.ValueMember = "Value";
-                    l_objGridDropbox.DisplayMember = "Display";
-                    l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
-                }
+                // Check the column  cell, in which it click.   
                 if (propertyName.StartsWith("is"))
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview  
@@ -262,6 +261,13 @@ namespace JsonManipulator
                     value = gridPropertiesProp.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 }
                 string property = gridPropertiesProp.Rows[e.RowIndex].Cells[0].Value.ToString();
+                if (property.StartsWith("is"))
+                {
+                    if (value != null && !Utils.getBooleanList().Contains(value))
+                    {
+                        return;
+                    }
+                }
                 int index = lstProperties.SelectedIndex;
                     typeof(property).GetProperty(property).SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _map.name).FirstOrDefault().property.ElementAt(lstProperties.SelectedIndex), value) ;
                 setPropertieList();
@@ -377,6 +383,13 @@ namespace JsonManipulator
                     value = gridPropSubProperties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 }
                 string property = gridPropSubProperties.Rows[e.RowIndex].Cells[0].Value.ToString();
+                if (property.StartsWith("is"))
+                {
+                    if (value != null && !Utils.getBooleanList().Contains(value))
+                    {
+                        return;
+                    }
+                }
                 int index = lstPropSubs.SelectedIndex;
                 typeof(propSubscription).GetProperty(property).SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _map.name).FirstOrDefault().propSubscription.ElementAt(lstPropSubs.SelectedIndex), value);
                 setPropertieList();
@@ -395,6 +408,13 @@ namespace JsonManipulator
                     value = gridModelServiceSubProperties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 }
                 string property = gridModelServiceSubProperties.Rows[e.RowIndex].Cells[0].Value.ToString();
+                if (property.StartsWith("is"))
+                {
+                    if (value != null && !Utils.getBooleanList().Contains(value))
+                    {
+                        return;
+                    }
+                }
                 int index = lstModelServiceSubs.SelectedIndex;
                 typeof(modelPkg).GetProperty(property).SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _map.name).FirstOrDefault().modelPkg.ElementAt(lstModelServiceSubs.SelectedIndex), value);
                 setPropertieList();
@@ -555,6 +575,13 @@ namespace JsonManipulator
                     value = gridLookupItem.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 }
                 string property = gridLookupItem.Rows[e.RowIndex].Cells[0].Value.ToString();
+                if (property.StartsWith("is"))
+                {
+                    if (value != null && !Utils.getBooleanList().Contains(value))
+                    {
+                        return;
+                    }
+                }
                 int index = lstLookupItems.SelectedIndex;
                 typeof(lookupItem).GetProperty(property).SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _map.name).FirstOrDefault().lookupItem.ElementAt(lstLookupItems.SelectedIndex), value);
                 setLookupItemList();

@@ -43,17 +43,18 @@ namespace JsonManipulator
             DataTable _booleans = new DataTable();
             _booleans.Columns.Add("Display");
             _booleans.Columns.Add("Value");
-            _booleans.Rows.Add("nvarchar", "nvarchar");
-            _booleans.Rows.Add("bit", "bit");
-            _booleans.Rows.Add("datetime", "datetime");
-            _booleans.Rows.Add("uniqueidentifier", "uniqueidentifier");
-            _booleans.Rows.Add("money", "money");
             _booleans.Rows.Add("bigint", "bigint");
-            _booleans.Rows.Add("float", "float");
-            _booleans.Rows.Add("decimal", "decimal");
+            _booleans.Rows.Add("bit", "bit");
             _booleans.Rows.Add("date", "date");
-            _booleans.Rows.Add("varchar", "varchar");
+            _booleans.Rows.Add("datetime", "datetime");
+            _booleans.Rows.Add("decimal", "decimal");
+            _booleans.Rows.Add("float", "float");
+            _booleans.Rows.Add("int", "int");
+            _booleans.Rows.Add("money", "money");
+            _booleans.Rows.Add("nvarchar", "nvarchar");
             _booleans.Rows.Add("text", "text");
+            _booleans.Rows.Add("uniqueidentifier", "uniqueidentifier");
+            _booleans.Rows.Add("varchar", "varchar");
             return _booleans;
         }
         public static DataTable getBooleans()
@@ -64,6 +65,14 @@ namespace JsonManipulator
             _booleans.Rows.Add("", "");
             _booleans.Rows.Add("true", "true");
             _booleans.Rows.Add("false", "false");
+            return _booleans;
+        }
+        public static List<string> getBooleanList()
+        {
+            List<string> _booleans = new List<string>(); 
+            _booleans.Add("");
+            _booleans.Add("true");
+            _booleans.Add("false");
             return _booleans;
         }
         public static DataTable getButtons()
@@ -93,8 +102,14 @@ namespace JsonManipulator
             DataTable _booleans = new DataTable();
             _booleans.Columns.Add("Display");
             _booleans.Columns.Add("Value");
-            _booleans.Rows.Add("grid", "grid");
-            _booleans.Rows.Add("detail", "detail");
+            _booleans.Rows.Add("BarChart", "BarChart");
+            _booleans.Rows.Add("Cards", "Cards");
+            _booleans.Rows.Add("DetailThreeColumn", "DetailThreeColumn");
+            _booleans.Rows.Add("FlowChart", "FlowChart");
+            _booleans.Rows.Add("FolderWithDetail", "FolderWithDetail");
+            _booleans.Rows.Add("Grid", "Grid");
+            _booleans.Rows.Add("LineChart", "LineChart");
+            _booleans.Rows.Add("PieChart", "PieChart");
             return _booleans;
         }
 
@@ -271,7 +286,7 @@ namespace JsonManipulator
             //result.Add("formIntroText");
             //result.Add("formFooterText");
             result.Add("formFooterImageURL");
-            result.Add("isAutoSubmit");
+            //result.Add("isAutoSubmit");
             //result.Add("isHeaderVisible");
             result.Add("isLoginPage");
             result.Add("isLogoutPage");
@@ -408,6 +423,7 @@ namespace JsonManipulator
             result.Add("query".ToLower());
             result.Add("modelPkg".ToLower());
             result.Add("childObject".ToLower());
+            result.Add("isLookup".ToLower());
             //result.Add("isSoftDeleteUsed".ToLower());
             //result.Add("cacheAllRecs".ToLower());
             //result.Add("cacheIndividualRecs".ToLower());

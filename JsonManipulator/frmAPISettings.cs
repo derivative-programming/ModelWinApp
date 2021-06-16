@@ -234,6 +234,13 @@ namespace JsonManipulator
                 {
                     value = dataProperties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 }
+                if (property.StartsWith("is"))
+                {
+                    if (value != null && !Utils.getBooleanList().Contains(value))
+                    {
+                        return;
+                    }
+                }
                 apiSite temp = Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault();
                 Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.RemoveAll(x => x.name == _apiSite.name);
                 typeof(objectWorkflow).GetProperty(property).SetValue(temp, value);
@@ -257,6 +264,13 @@ namespace JsonManipulator
                 {
                     value = gridEnvironments.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 }
+                if (property.StartsWith("is"))
+                {
+                    if (value != null && !Utils.getBooleanList().Contains(value))
+                    {
+                        return;
+                    }
+                }
                 int index = lstEnvironments.SelectedIndex;
                 typeof(apiEnvironment).GetProperty(property).SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault().apiEnvironment.ElementAt(lstEnvironments.SelectedIndex), value); ;
                 setEnvironmentsList();
@@ -275,6 +289,13 @@ namespace JsonManipulator
                     value = gridEndPoints.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 }
 
+                if (property.StartsWith("is"))
+                {
+                    if (value != null && !Utils.getBooleanList().Contains(value))
+                    {
+                        return;
+                    }
+                }
                 if (property.ToLower() == "apiContextTargetName".ToLower())
                 {
                     Models.ObjectMap destinationOwnerObject = Utils.GetDestinationOwnerObject(value);

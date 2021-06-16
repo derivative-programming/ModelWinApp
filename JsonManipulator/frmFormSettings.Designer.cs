@@ -76,6 +76,8 @@ namespace JsonManipulator
             this.pnlOutputLeftTop = new System.Windows.Forms.Panel();
             this.lstOutputVars = new System.Windows.Forms.ListBox();
             this.grpMain = new System.Windows.Forms.GroupBox();
+            this.btnButtonUp = new System.Windows.Forms.Button();
+            this.btnButtonDown = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridProperties)).BeginInit();
@@ -393,16 +395,18 @@ namespace JsonManipulator
             // 
             // pnlButtonsLeftBottom
             // 
+            this.pnlButtonsLeftBottom.Controls.Add(this.btnButtonUp);
+            this.pnlButtonsLeftBottom.Controls.Add(this.btnButtonDown);
             this.pnlButtonsLeftBottom.Controls.Add(this.btnAddButton);
             this.pnlButtonsLeftBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlButtonsLeftBottom.Location = new System.Drawing.Point(0, 411);
+            this.pnlButtonsLeftBottom.Location = new System.Drawing.Point(0, 379);
             this.pnlButtonsLeftBottom.Name = "pnlButtonsLeftBottom";
-            this.pnlButtonsLeftBottom.Size = new System.Drawing.Size(177, 69);
+            this.pnlButtonsLeftBottom.Size = new System.Drawing.Size(177, 101);
             this.pnlButtonsLeftBottom.TabIndex = 7;
             // 
             // btnAddButton
             // 
-            this.btnAddButton.Location = new System.Drawing.Point(3, 3);
+            this.btnAddButton.Location = new System.Drawing.Point(5, 3);
             this.btnAddButton.Name = "btnAddButton";
             this.btnAddButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnAddButton.Size = new System.Drawing.Size(75, 23);
@@ -599,6 +603,28 @@ namespace JsonManipulator
             this.grpMain.TabStop = false;
             this.grpMain.Text = "groupBox2";
             // 
+            // btnButtonUp
+            // 
+            this.btnButtonUp.Location = new System.Drawing.Point(5, 32);
+            this.btnButtonUp.Name = "btnButtonUp";
+            this.btnButtonUp.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnButtonUp.Size = new System.Drawing.Size(75, 23);
+            this.btnButtonUp.TabIndex = 5;
+            this.btnButtonUp.Text = "Move &Up";
+            this.btnButtonUp.UseVisualStyleBackColor = true;
+            this.btnButtonUp.Click += new System.EventHandler(this.btnButtonUp_Click);
+            // 
+            // btnButtonDown
+            // 
+            this.btnButtonDown.Location = new System.Drawing.Point(5, 61);
+            this.btnButtonDown.Name = "btnButtonDown";
+            this.btnButtonDown.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnButtonDown.Size = new System.Drawing.Size(75, 23);
+            this.btnButtonDown.TabIndex = 6;
+            this.btnButtonDown.Text = "Move &Down";
+            this.btnButtonDown.UseVisualStyleBackColor = true;
+            this.btnButtonDown.Click += new System.EventHandler(this.btnButtonDown_Click);
+            // 
             // frmFormSettings
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -689,5 +715,7 @@ namespace JsonManipulator
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.Button btnOutputVarUp;
         private System.Windows.Forms.Button btnOutputVarDown;
+        private System.Windows.Forms.Button btnButtonUp;
+        private System.Windows.Forms.Button btnButtonDown;
     }
 }

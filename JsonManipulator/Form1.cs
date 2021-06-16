@@ -60,8 +60,7 @@ namespace JsonManipulator
 
             populateProjectDetails();
             populateDbObjects(filter);
-            populatePages(filter); 
-            populateFlows(filter);
+            populatePageAndFlows(filter);  
             populateAPIs(filter);
         }
         public void populateProjectDetails()
@@ -87,10 +86,14 @@ namespace JsonManipulator
                 PopulateTree(dbObj); 
             }
         }
-        private void populatePages(string filter)
+        private void populatePageAndFlows(string filter)
         {
             nodeMenus.Nodes["pages"].Nodes["Forms"].Nodes.Clear();
             nodeMenus.Nodes["pages"].Nodes["Reports"].Nodes.Clear();
+            nodeMenus.Nodes["nodeFlows"].Nodes["nodeFlowPageInit"].Nodes.Clear();
+            nodeMenus.Nodes["nodeFlows"].Nodes["nodeFlowGeneral"].Nodes.Clear();
+            nodeMenus.Nodes["nodeFlows"].Nodes["nodeFlowDynaFlow"].Nodes.Clear();
+            nodeMenus.Nodes["nodeFlows"].Nodes["nodeFlowDynaFlowTask"].Nodes.Clear();
             NameSpaceObject nameSpaceObject = _model.root.NameSpaceObjects.FirstOrDefault();
 
             if (nameSpaceObject.ObjectMap == null)
@@ -107,7 +110,7 @@ namespace JsonManipulator
                 }
                 if(dbObj.report != null)
                 {
-                    foreach (var rpt in dbObj.report.Where(x => x.name.Contains(filter)))
+                    foreach (var rpt in dbObj.report.Where(x => x.name.Trim().ToLower().Contains(filter.Trim().ToLower())))
                     {
                         PopulateTree(rpt); 
                     }
@@ -117,30 +120,7 @@ namespace JsonManipulator
            
         } 
 
-
-        private void populateFlows(string filter)
-        {
-            nodeMenus.Nodes["nodeFlows"].Nodes["nodeFlowPageInit"].Nodes.Clear();
-            nodeMenus.Nodes["nodeFlows"].Nodes["nodeFlowGeneral"].Nodes.Clear();
-            nodeMenus.Nodes["nodeFlows"].Nodes["nodeFlowDynaFlow"].Nodes.Clear();
-            nodeMenus.Nodes["nodeFlows"].Nodes["nodeFlowDynaFlowTask"].Nodes.Clear();
-            NameSpaceObject nameSpaceObject = _model.root.NameSpaceObjects.FirstOrDefault();
-
-            if (nameSpaceObject.ObjectMap == null)
-                return;
-
-            foreach (var dbObj in nameSpaceObject.ObjectMap)
-            {
-                if (dbObj.objectWorkflow != null)
-                {
-                    foreach (var objWF in dbObj.objectWorkflow.Where(x => x.Name.Trim().ToLower().Contains(filter.Trim().ToLower())))
-                    {
-                        PopulateTree(objWF);
-                    }
-                } 
-
-            } 
-        }
+         
 
         private void populateAPIs(string filter)
         {
@@ -487,7 +467,7 @@ namespace JsonManipulator
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog OpenFileDialog = new OpenFileDialog();
-            OpenFileDialog.Title = "Open A JSON File";
+            OpenFileDialog.Title = "Open A Model JSON File";
             OpenFileDialog.CheckFileExists = false;
             OpenFileDialog.CheckPathExists = true;
             OpenFileDialog.DefaultExt = "json";
@@ -532,7 +512,7 @@ namespace JsonManipulator
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.InitialDirectory = @"C:\";
-            saveFileDialog1.Title = "Save text Files";
+            saveFileDialog1.Title = "Save As Model JSON File";
             saveFileDialog1.CheckFileExists = false;
             saveFileDialog1.CheckPathExists = true;
             saveFileDialog1.DefaultExt = "json";
@@ -545,8 +525,10 @@ namespace JsonManipulator
                 {
                     NullValueHandling = NullValueHandling.Ignore
                 });
-                File.WriteAllText(saveFileDialog1.FileName, json);
-                Utils.SortJsonFile(saveFileDialog1.FileName);
+                _path = saveFileDialog1.FileName;
+                File.WriteAllText(_path, json);
+                Utils.SortJsonFile(_path);
+                showMessage("File Updated Successfully");
             }
         }
 

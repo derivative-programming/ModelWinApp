@@ -32,8 +32,7 @@ namespace JsonManipulator
             _buttons = new List<objectWorkflowButton>();
             _outputVars = new List<objectWorkflowOutputVar>();
             if(Utils.IsObjectWorkflowAForm(this._form))
-            {
-                tabControl1.TabPages.RemoveByKey("tabOutput");
+            { 
                 tabControl1.TabPages["tabControls"].Text = "Controls";
             }
             if (Utils.IsObjectWorkflowAFlow(this._form))
@@ -51,11 +50,10 @@ namespace JsonManipulator
                 setButtonsList();
                 splitter2.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmFormSettings.splitter2.SplitPosition", "200"));
             }
-            if (Utils.IsObjectWorkflowAFlow(this._form))
-            {
-                setOutputVarList();
-                splitter3.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmFormSettings.splitter3.SplitPosition", "200"));
-            }
+
+            setOutputVarList();
+            splitter3.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmFormSettings.splitter3.SplitPosition", "200"));
+            
 
             if(System.Convert.ToInt32(LocalStorage.GetValue("frmFormSettings.tabControl1.SelectedIndex", "0")) <= tabControl1.TabPages.Count)
                 tabControl1.SelectedIndex = System.Convert.ToInt32(LocalStorage.GetValue("frmFormSettings.tabControl1.SelectedIndex", "0"));
@@ -334,6 +332,13 @@ namespace JsonManipulator
                 {
                     value = gridProperties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 }
+                if (property.StartsWith("is"))
+                {
+                    if (value != null && !Utils.getBooleanList().Contains(value))
+                    {
+                        return;
+                    }
+                }
                 objectWorkflow temp = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault();
                 //Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == temp.OwnerObject).FirstOrDefault().objectWorkflow.RemoveAll(x => x.Name == _form.Name);
                 typeof(objectWorkflow).GetProperty(property).SetValue(temp, value);
@@ -357,6 +362,13 @@ namespace JsonManipulator
                 {
                     value = gridControls.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 }
+                if (property.StartsWith("is"))
+                {
+                    if (value != null && !Utils.getBooleanList().Contains(value))
+                    {
+                        return;
+                    }
+                }
                 int index = lstControl.SelectedIndex;
                 typeof(objectWorkflowParam).GetProperty(property).SetValue(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowParam.ElementAt(lstControl.SelectedIndex), value); ;
                 setControlsList();
@@ -373,6 +385,13 @@ namespace JsonManipulator
                 if (gridButtons.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
                 {
                     value = gridButtons.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                }
+                if (property.StartsWith("is"))
+                {
+                    if (value != null && !Utils.getBooleanList().Contains(value))
+                    {
+                        return;
+                    }
                 }
                 if (property.ToLower() == "destinationTargetName".ToLower())
                 {
@@ -401,6 +420,13 @@ namespace JsonManipulator
                 if (gridOutput.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
                 {
                     value = gridOutput.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                }
+                if (property.StartsWith("is"))
+                {
+                    if (value != null && !Utils.getBooleanList().Contains(value))
+                    {
+                        return;
+                    }
                 }
                 int index = lstOutputVars.SelectedIndex;
                 typeof(objectWorkflowOutputVar).GetProperty(property).SetValue(
@@ -453,16 +479,7 @@ namespace JsonManipulator
                 // Bind grid cell with combobox and than bind combobox with datasource.  
                 DataGridViewComboBoxCell l_objGridDropbox = new DataGridViewComboBoxCell();
                 string propertyName = gridControls.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value.ToString();
-                // Check the column  cell, in which it click.  
-                if (propertyName.Equals("forceDBColumnIndex", StringComparison.OrdinalIgnoreCase))
-                {
-                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
-                    gridControls[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
-                    l_objGridDropbox.DataSource = Utils.getBooleans(); // Bind combobox with datasource.  
-                    l_objGridDropbox.ValueMember = "Value";
-                    l_objGridDropbox.DisplayMember = "Display";
-                    l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
-                }
+                // Check the column  cell, in which it click.   
                 if (propertyName.StartsWith("is"))
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview  
@@ -547,6 +564,15 @@ namespace JsonManipulator
                     l_objGridDropbox.DisplayMember = "Display";
                     l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
                 } 
+                if (propertyName.Equals("sqlServerDBDataType", StringComparison.OrdinalIgnoreCase))
+                {
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
+                    gridOutput[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
+                    l_objGridDropbox.DataSource = Utils.getDataTypes(); // Bind combobox with datasource.  
+                    l_objGridDropbox.ValueMember = "Value";
+                    l_objGridDropbox.DisplayMember = "Display";
+                    l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+                }
             }
         }
         public void setOutputData(string value, int row, int column)
@@ -612,13 +638,56 @@ namespace JsonManipulator
             {
                 LocalStorage.SetValue("frmFormSettings.splitter2.SplitPosition", splitter2.SplitPosition.ToString());
             }
-            if (Utils.IsObjectWorkflowAFlow(this._form))
-            {
-                LocalStorage.SetValue("frmFormSettings.splitter3.SplitPosition", splitter3.SplitPosition.ToString());
-            }
+             
+            LocalStorage.SetValue("frmFormSettings.splitter3.SplitPosition", splitter3.SplitPosition.ToString());
+            
             LocalStorage.Save();
 
         }
 
+        private void btnButtonUp_Click(object sender, EventArgs e)
+        {
+            if (lstButtons.SelectedItem != null)
+            {
+                int selectedIndex = lstButtons.SelectedIndex;
+                objectWorkflowButton item = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowButton.ElementAt(selectedIndex);
+                int newIndex = 0;
+                if (selectedIndex == 0)
+                {
+                    newIndex = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowButton.Count - 1;
+                }
+                else
+                {
+                    newIndex = selectedIndex - 1;
+                }
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowButton.RemoveAt(selectedIndex);
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowButton.Insert(newIndex, item);
+                setButtonsList();
+                lstButtons.SetSelected(newIndex, true);
+            }
+        }
+
+        private void btnButtonDown_Click(object sender, EventArgs e)
+        {
+            if (lstButtons.SelectedItem != null)
+            {
+                int selectedIndex = lstButtons.SelectedIndex;
+                int count = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowButton.Count;
+                objectWorkflowButton item = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowButton.ElementAt(selectedIndex);
+                int newIndex = 0;
+                if (selectedIndex == count - 1)
+                {
+                    newIndex = 0;
+                }
+                else
+                {
+                    newIndex = selectedIndex + 1;
+                }
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowButton.RemoveAt(selectedIndex);
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowButton.Insert(newIndex, item);
+                setButtonsList();
+                lstButtons.SetSelected(newIndex, true);
+            }
+        }
     }
 }

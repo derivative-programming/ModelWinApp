@@ -59,7 +59,7 @@ namespace JsonManipulator
 
             if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text).FirstOrDefault().report == null)
                 Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text).FirstOrDefault().report = new List<Models.Report>();
-            Report rpt = new Report { name = txtName.Text, RoleRequired = txtRole.Text, visualizationType = "Detail"};
+            Report rpt = new Report { name = txtName.Text, RoleRequired = txtRole.Text, visualizationType = "DetailThreeColumn"};
             rpt.isPage = "true";
             Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text).FirstOrDefault().report.Add(rpt);
             ((Form1)Application.OpenForms["Form1"]).showMessage("Report Detail was added successfully");
