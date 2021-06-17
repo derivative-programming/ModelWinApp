@@ -42,7 +42,7 @@ namespace JsonManipulator
             if(txtFilter.Text.Trim().Length > 0)
             {
                 string filter = txtFilter.Text.Trim().ToLower();
-                roleList = roleList.Where(x => x.ToLower().Equals(filter)).ToList();
+                roleList = roleList.Where(x => x.ToLower().Contains(filter)).ToList();
             }
             foreach (string name in roleList)
             {

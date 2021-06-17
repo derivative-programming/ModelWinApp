@@ -81,7 +81,7 @@ namespace JsonManipulator
             if (nameSpaceObject.ObjectMap == null)
                 return;
 
-            foreach (var dbObj in nameSpaceObject.ObjectMap.Where(x => x.name.ToLower().Equals(filter.Trim().ToLower())))
+            foreach (var dbObj in nameSpaceObject.ObjectMap.Where(x => x.name.ToLower().Contains(filter.Trim().ToLower())))
             {
                 PopulateTree(dbObj); 
             }
@@ -103,14 +103,14 @@ namespace JsonManipulator
             {
                 if(dbObj.objectWorkflow !=null)
                 {
-                    foreach (var objWF in dbObj.objectWorkflow.Where(x=>x.Name.Trim().ToLower().Equals(filter.Trim().ToLower())))
+                    foreach (var objWF in dbObj.objectWorkflow.Where(x=>x.Name.Trim().ToLower().Contains(filter.Trim().ToLower())))
                     {
                         PopulateTree(objWF); 
                     }
                 }
                 if(dbObj.report != null)
                 {
-                    foreach (var rpt in dbObj.report.Where(x => x.name.Trim().ToLower().Equals(filter.Trim().ToLower())))
+                    foreach (var rpt in dbObj.report.Where(x => x.name.Trim().ToLower().Contains(filter.Trim().ToLower())))
                     {
                         PopulateTree(rpt); 
                     }
