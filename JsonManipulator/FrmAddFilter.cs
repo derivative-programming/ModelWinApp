@@ -38,7 +38,7 @@ namespace JsonManipulator
                 ShowValidationError("Name already exists.");
                 return;
             }
-            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportParam.Add(new reportParam {name = txtName.Text });
+            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportParam.Add(new reportParam {name = txtName.Text.Trim() });
             ((Form1)Application.OpenForms["Form1"]).showMessage("Filter created successfully");
             ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setFiltersList();
             this.Close();

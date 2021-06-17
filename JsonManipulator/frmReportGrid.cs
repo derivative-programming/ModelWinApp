@@ -38,14 +38,14 @@ namespace JsonManipulator
             }
 
             List<string> existingNames = Utils.GetNameList(false, true, true, true);
-            if (existingNames.Where(x => x.ToLower().Contains(txtName.Text.Trim().ToLower())).ToList().Count > 0)
+            if (existingNames.Where(x => x.ToLower().Equals(txtName.Text.Trim().ToLower())).ToList().Count > 0)
             {
                 ShowValidationError("Name already exists.");
                 return;
             }
 
             List<string> existingDBObjects = Utils.GetNameList(true, false, false, false);
-            if (existingDBObjects.Where(x => x.ToLower().Contains(txtOwner.Text.Trim().ToLower())).ToList().Count == 0)
+            if (existingDBObjects.Where(x => x.ToLower().Equals(txtOwner.Text.Trim().ToLower())).ToList().Count == 0)
             {
                 ShowValidationError("Owner Object Not Found.");
                 return;
@@ -57,11 +57,24 @@ namespace JsonManipulator
                 return;
             }
 
-            if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text).FirstOrDefault().report == null)
-                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text).FirstOrDefault().report = new List<Models.Report>();
-            Report rpt = new Report { name = txtName.Text, RoleRequired = txtRole.Text, TargetChildObject = txtChild.Text, visualizationType = "Grid"};
+            if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text.Trim()).FirstOrDefault().report == null)
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text.Trim()).FirstOrDefault().report = new List<Models.Report>();
+            Report rpt = new Report { name = txtName.Text.Trim(), RoleRequired = txtRole.Text.Trim(), TargetChildObject = txtChild.Text.Trim(), visualizationType = "Grid"};
             rpt.isPage = "true";
-            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text).FirstOrDefault().report.Add(rpt);
+            if (txtChild.Text.Length > 0)
+            {
+                rpt.pageTitleText = Utils.ConvertPascalToSpaced(txtChild.Text.Trim());
+            }
+
+            Models.reportButton reportButton = new reportButton();
+            reportButton.buttonType = "back";
+            reportButton.buttonText = "Back";
+            reportButton.buttonName = "Back";
+
+            rpt.reportButton = new List<reportButton>();
+            rpt.reportButton.Add(reportButton);
+
+            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text.Trim()).FirstOrDefault().report.Add(rpt);
             ((Form1)Application.OpenForms["Form1"]).showMessage("Report Grid was added successfully");
             ((Form1)Application.OpenForms["Form1"]).AddToTree(rpt);
             this.Close();
@@ -84,17 +97,17 @@ namespace JsonManipulator
         public void setOwner(string Owner)
         {
             txtOwner.Text = Owner;
-            txtName.Text = txtOwner.Text + txtRole.Text + txtChild.Text + "List";
+            txtName.Text = txtOwner.Text.Trim() + txtRole.Text.Trim() + txtChild.Text.Trim() + "List";
         }
         public void setRole(string Role)
         {
             txtRole.Text = Role;
-            txtName.Text = txtOwner.Text + txtRole.Text + txtChild.Text + "List";
+            txtName.Text = txtOwner.Text.Trim() + txtRole.Text.Trim() + txtChild.Text.Trim() + "List";
         }
         public void setChild(string Child)
         {
             txtChild.Text = Child;
-            txtName.Text = txtOwner.Text + txtRole.Text + txtChild.Text + "List";
+            txtName.Text = txtOwner.Text.Trim() + txtRole.Text.Trim() + txtChild.Text.Trim() + "List";
         }
         private void btnRoles_Click(object sender, EventArgs e)
         {
@@ -115,13 +128,13 @@ namespace JsonManipulator
 
         private void txtRole_TextChanged(object sender, EventArgs e)
         {
-            txtName.Text = txtOwner.Text + txtRole.Text + txtChild.Text + "List";
+            txtName.Text = txtOwner.Text.Trim() + txtRole.Text.Trim() + txtChild.Text.Trim() + "List";
         }
 
         private void txtChild_TextChanged(object sender, EventArgs e)
         {
 
-            txtName.Text = txtOwner.Text + txtRole.Text + txtChild.Text + "List";
+            txtName.Text = txtOwner.Text.Trim() + txtRole.Text.Trim() + txtChild.Text.Trim() + "List";
         }
     }
 }

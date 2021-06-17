@@ -41,7 +41,7 @@ namespace JsonManipulator
                 return;
             }
 
-            Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _name).FirstOrDefault().apiEndPoint.Add(new apiEndPoint { name = txtName.Text});
+            Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _name).FirstOrDefault().apiEndPoint.Add(new apiEndPoint { name = txtName.Text.Trim() });
             ((Form1)Application.OpenForms["Form1"]).showMessage("EndPoint created successfully");
             ((frmAPISettings)Application.OpenForms["frmAPISettings"]).setEndPointsList();
             this.Close();

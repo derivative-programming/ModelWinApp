@@ -37,14 +37,14 @@ namespace JsonManipulator
             }
 
             List<string> objectNames = Utils.GetDBObjectNameList();
-            if (objectNames.Where(x => x.ToLower().Contains(txtName.Text.Trim().ToLower())).ToList().Count > 0)
+            if (objectNames.Where(x => x.ToLower().Equals(txtName.Text.Trim().ToLower())).ToList().Count > 0)
             {
                 ShowValidationError("Name already exists.");
                 return;
             }
             ObjectMap objectMap = new ObjectMap {
-                name = txtName.Text,
-                parentObjectName = txtOwner.Text
+                name = txtName.Text.Trim(),
+                parentObjectName = txtOwner.Text.Trim()
             };
 
             objectMap.property = new List<property>();

@@ -1,4 +1,5 @@
-﻿using JsonManipulator.Models;
+﻿using JsonManipulator.Enums;
+using JsonManipulator.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,10 +12,10 @@ using System.Windows.Forms;
 
 namespace JsonManipulator
 {
-    public partial class FrmAddColumn : Form
+    public partial class FrmAddColumnButton : Form
     {
         string _name, _parent;
-        public FrmAddColumn(string name, string parent)
+        public FrmAddColumnButton(string name, string parent)
         {
             InitializeComponent();
             this._name = name;
@@ -39,9 +40,27 @@ namespace JsonManipulator
                 ShowValidationError("Name already exists.");
                 return;
             }
+
+
+            Models.ObjectMap destinationOwnerObject = Utils.GetDestinationOwnerObject(txtButtonDestination.Text);
+
+            if(destinationOwnerObject == null)
+            {
+                ShowValidationError("Please select a destination.");
+                return;
+            }
             Models.reportColumn reportColumn = new reportColumn();
             reportColumn.name = txtName.Text.Trim();
-            reportColumn.isButton = "false";
+            reportColumn.isButton = "true";
+            reportColumn.isVisible = "true";
+            reportColumn.buttonDestinationContextObjectName = destinationOwnerObject.name;
+            reportColumn.buttonDestinationTargetName = txtButtonDestination.Text.Trim();
+            reportColumn.sourceObjectName = destinationOwnerObject.name;
+            reportColumn.sourcePropertyName = "Code";
+            reportColumn.sqlServerDBDataType = "uniqueidentifier";
+            reportColumn.buttonText = txtButtonText.Text.Trim();
+
+
             Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportColumn.Add(reportColumn);
              ((Form1)Application.OpenForms["Form1"]).showMessage("Column created successfully");
             ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setColumnsList();
@@ -62,33 +81,24 @@ namespace JsonManipulator
 
             ShowValidationError("");
         }
+         
 
-        private void btnBulk_Click(object sender, EventArgs e)
+        private void btnDestinationLookup_Click(object sender, EventArgs e)
         {
-            using (var form = new FrmBulkAdd())
-            {
-                var result = form.ShowDialog();
-                if (result == DialogResult.OK)
-                {
-                    string val = form.ReturnValue;
-                    List<string> items = new List<string>();
-                    items.AddRange(val.Split("\n,".ToCharArray()));
-                    for (int i = 0; i < items.Count; i++)
-                    {
-                        string itemName = Utils.Capitalize(items[i]).Trim();
-                        if (itemName.Length > 0 && !ItemExists(itemName))
-                        {
-                            Models.reportColumn reportColumn = new reportColumn();
-                            reportColumn.name = itemName;
-                            reportColumn.isButton = "false";
-                            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportColumn.Add(reportColumn);
-                        }
-                    }
-                     ((Form1)Application.OpenForms["Form1"]).showMessage("Column created successfully");
-                    ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setColumnsList();
-                }
-            }
-            this.Close();
+            FormsList formsList = new FormsList(ParentType.REPORT_COLUMN_BUTTON);
+            formsList.ShowDialog();
+        }
+
+        public void SetDestination(string name)
+        {
+            txtButtonDestination.Text = name;
+            Models.ObjectMap destinationOwnerObject = Utils.GetDestinationOwnerObject(name);
+            txtName.Text = Utils.Capitalize(txtButtonText.Text).Replace(" ", "") + "Link" + destinationOwnerObject.name + "Code";
+        }
+
+        private void txtButtonText_TextChanged(object sender, EventArgs e)
+        {
+            txtName.Text = Utils.Capitalize(txtButtonText.Text).Replace(" ","") + "Link";
         }
 
         private void ShowValidationError(string errorText)

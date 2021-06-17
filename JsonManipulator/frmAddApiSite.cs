@@ -32,14 +32,14 @@ namespace JsonManipulator
              
 
             List<string> objectNames = Utils.GetApiSiteNameList();
-            if (objectNames.Where(x => x.ToLower().Contains(txtName.Text.Trim().ToLower())).ToList().Count > 0)
+            if (objectNames.Where(x => x.ToLower().Equals(txtName.Text.Trim().ToLower())).ToList().Count > 0)
             {
                 ShowValidationError("Name already exists.");
                 return;
             }
             Models.apiSite apiSite = new apiSite
             {
-                name = txtName.Text
+                name = txtName.Text.Trim()
             };
             if (Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite == null)
                 Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite = new List<Models.apiSite>();

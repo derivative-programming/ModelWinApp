@@ -40,7 +40,8 @@ namespace JsonManipulator.Enums
         ADD,
         EDIT,
         REPORT_BUTTON,
-        REPORT_COLUMN
+        REPORT_COLUMN,
+        REPORT_COLUMN_BUTTON
     }
     public enum NodeType
     {

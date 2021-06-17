@@ -79,6 +79,7 @@ namespace JsonManipulator
             this.btnButtonMoveDown = new System.Windows.Forms.Button();
             this.tabJSON = new System.Windows.Forms.TabPage();
             this.rtbJSON = new System.Windows.Forms.RichTextBox();
+            this.btnAddColumnButton = new System.Windows.Forms.Button();
             tabSettings = new System.Windows.Forms.TabPage();
             tabSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataProperties)).BeginInit();
@@ -392,7 +393,7 @@ namespace JsonManipulator
             this.pnlColumnsLeftTop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlColumnsLeftTop.Location = new System.Drawing.Point(0, 0);
             this.pnlColumnsLeftTop.Name = "pnlColumnsLeftTop";
-            this.pnlColumnsLeftTop.Size = new System.Drawing.Size(219, 362);
+            this.pnlColumnsLeftTop.Size = new System.Drawing.Size(219, 290);
             this.pnlColumnsLeftTop.TabIndex = 8;
             // 
             // lstColumns
@@ -401,26 +402,27 @@ namespace JsonManipulator
             this.lstColumns.FormattingEnabled = true;
             this.lstColumns.Location = new System.Drawing.Point(0, 0);
             this.lstColumns.Name = "lstColumns";
-            this.lstColumns.Size = new System.Drawing.Size(219, 362);
+            this.lstColumns.Size = new System.Drawing.Size(219, 290);
             this.lstColumns.TabIndex = 1;
             this.lstColumns.SelectedIndexChanged += new System.EventHandler(this.lstColumns_SelectedIndexChanged);
             // 
             // pnlColumnsLeftBottom
             // 
+            this.pnlColumnsLeftBottom.Controls.Add(this.btnAddColumnButton);
             this.pnlColumnsLeftBottom.Controls.Add(this.btnColumnsAdd);
             this.pnlColumnsLeftBottom.Controls.Add(this.btnColumnsMoveUp);
             this.pnlColumnsLeftBottom.Controls.Add(this.btnColumnsMoveDown);
             this.pnlColumnsLeftBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlColumnsLeftBottom.Location = new System.Drawing.Point(0, 362);
+            this.pnlColumnsLeftBottom.Location = new System.Drawing.Point(0, 290);
             this.pnlColumnsLeftBottom.Name = "pnlColumnsLeftBottom";
-            this.pnlColumnsLeftBottom.Size = new System.Drawing.Size(219, 89);
+            this.pnlColumnsLeftBottom.Size = new System.Drawing.Size(219, 161);
             this.pnlColumnsLeftBottom.TabIndex = 7;
             // 
             // btnColumnsAdd
             // 
             this.btnColumnsAdd.Location = new System.Drawing.Point(3, 3);
             this.btnColumnsAdd.Name = "btnColumnsAdd";
-            this.btnColumnsAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnColumnsAdd.Size = new System.Drawing.Size(111, 23);
             this.btnColumnsAdd.TabIndex = 2;
             this.btnColumnsAdd.Text = "&Add Column";
             this.btnColumnsAdd.UseVisualStyleBackColor = true;
@@ -428,9 +430,9 @@ namespace JsonManipulator
             // 
             // btnColumnsMoveUp
             // 
-            this.btnColumnsMoveUp.Location = new System.Drawing.Point(3, 32);
+            this.btnColumnsMoveUp.Location = new System.Drawing.Point(3, 61);
             this.btnColumnsMoveUp.Name = "btnColumnsMoveUp";
-            this.btnColumnsMoveUp.Size = new System.Drawing.Size(75, 23);
+            this.btnColumnsMoveUp.Size = new System.Drawing.Size(111, 23);
             this.btnColumnsMoveUp.TabIndex = 3;
             this.btnColumnsMoveUp.Text = "Move &Up";
             this.btnColumnsMoveUp.UseVisualStyleBackColor = true;
@@ -438,9 +440,9 @@ namespace JsonManipulator
             // 
             // btnColumnsMoveDown
             // 
-            this.btnColumnsMoveDown.Location = new System.Drawing.Point(3, 61);
+            this.btnColumnsMoveDown.Location = new System.Drawing.Point(3, 90);
             this.btnColumnsMoveDown.Name = "btnColumnsMoveDown";
-            this.btnColumnsMoveDown.Size = new System.Drawing.Size(75, 23);
+            this.btnColumnsMoveDown.Size = new System.Drawing.Size(111, 23);
             this.btnColumnsMoveDown.TabIndex = 4;
             this.btnColumnsMoveDown.Text = "Move &Down";
             this.btnColumnsMoveDown.UseVisualStyleBackColor = true;
@@ -618,6 +620,16 @@ namespace JsonManipulator
             this.rtbJSON.Text = "";
             this.rtbJSON.TabIndexChanged += new System.EventHandler(this.rtbJSON_TabIndexChanged);
             // 
+            // btnAddColumnButton
+            // 
+            this.btnAddColumnButton.Location = new System.Drawing.Point(3, 32);
+            this.btnAddColumnButton.Name = "btnAddColumnButton";
+            this.btnAddColumnButton.Size = new System.Drawing.Size(111, 23);
+            this.btnAddColumnButton.TabIndex = 5;
+            this.btnAddColumnButton.Text = "&Add Column Button";
+            this.btnAddColumnButton.UseVisualStyleBackColor = true;
+            this.btnAddColumnButton.Click += new System.EventHandler(this.btnAddColumnButton_Click);
+            // 
             // frmReportSettings
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -710,5 +722,6 @@ namespace JsonManipulator
         private System.Windows.Forms.Button btnButtonMoveDown;
         private System.Windows.Forms.TabPage tabJSON;
         private System.Windows.Forms.RichTextBox rtbJSON;
+        private System.Windows.Forms.Button btnAddColumnButton;
     }
 }

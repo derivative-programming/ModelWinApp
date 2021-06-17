@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace JsonManipulator
@@ -602,7 +603,7 @@ namespace JsonManipulator
             result.Add("isHtml".ToLower());
             result.Add("isColumnSumMetricAvailable".ToLower());
             result.Add("isSummaryDisplayed".ToLower());
-            //result.Add("isConditionallyDisplayed".ToLower());
+            result.Add("isConditionallyDisplayed".ToLower());
             //result.Add("conditionalSqlLogic".ToLower());
             //result.Add("isUnixEpochDateTime".ToLower());
             result.Add("isNavURL".ToLower());
@@ -970,6 +971,7 @@ namespace JsonManipulator
 
         public static string Capitalize(string value)
         {
+            //Regex.Replace("ThisIsMyCapsDelimitedString", "(\\B[A-Z])", " $1")
             char[] array = value.ToCharArray();
             // Handle the first letter in the string.
             if (array.Length >= 1)
@@ -994,5 +996,9 @@ namespace JsonManipulator
             return new string(array);
         }
 
+        public static string ConvertPascalToSpaced(string value)
+        {
+            return Regex.Replace(value, "(\\B[A-Z])", " $1"); 
+        }
     }
 }

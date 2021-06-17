@@ -292,8 +292,7 @@ namespace JsonManipulator
                         return;
                     }
                 }
-                Report temp = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault();
-                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.RemoveAll(x => x.name == _rpt.name);
+                Report temp = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault(); 
                 typeof(Report).GetProperty(property).SetValue(temp, value);
                 //if (Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == temp.OwnerObject).FirstOrDefault().report == null)
                 //    Form1.model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == temp.OwnerObject).FirstOrDefault().report = new List<Report>();
@@ -711,6 +710,13 @@ namespace JsonManipulator
             {
                 NullValueHandling = NullValueHandling.Ignore
             });
+        }
+
+        private void btnAddColumnButton_Click(object sender, EventArgs e)
+        {
+
+            FrmAddColumnButton frmAddColumnButton = new FrmAddColumnButton(_rpt.name, _ownerObject.name);
+            frmAddColumnButton.ShowDialog();
         }
     }
 }

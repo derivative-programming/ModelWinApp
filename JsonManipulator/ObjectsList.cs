@@ -44,7 +44,7 @@ namespace JsonManipulator
             if (txtFilter.Text.Trim().Length > 0)
             {
                 string filter = txtFilter.Text.Trim().ToLower();
-                nameList = nameList.Where(x => x.ToLower().Contains(filter)).ToList();
+                nameList = nameList.Where(x => x.ToLower().Equals(filter)).ToList();
             }
             foreach (string name in nameList)
             {

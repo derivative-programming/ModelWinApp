@@ -151,8 +151,10 @@ namespace JsonManipulator
             // 
             this.txtChild.Location = new System.Drawing.Point(12, 103);
             this.txtChild.Name = "txtChild";
+            this.txtChild.ReadOnly = true;
             this.txtChild.Size = new System.Drawing.Size(200, 20);
             this.txtChild.TabIndex = 3;
+            this.txtChild.TabStop = false;
             this.txtChild.TextChanged += new System.EventHandler(this.txtChild_TextChanged);
             // 
             // label3

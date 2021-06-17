@@ -38,14 +38,14 @@ namespace JsonManipulator
             }
 
             List<string> existingNames = Utils.GetNameList(false,true,true,true);
-            if (existingNames.Where(x => x.ToLower().Contains(txtName.Text.Trim().ToLower())).ToList().Count > 0)
+            if (existingNames.Where(x => x.ToLower().Equals(txtName.Text.Trim().ToLower())).ToList().Count > 0)
             {
                 ShowValidationError("Name already exists.");
                 return;
             }
 
             List<string> existingDBObjects = Utils.GetNameList(true, false, false, false);
-            if (existingDBObjects.Where(x => x.ToLower().Contains(txtOwner.Text.Trim().ToLower())).ToList().Count == 0)
+            if (existingDBObjects.Where(x => x.ToLower().Equals(txtOwner.Text.Trim().ToLower())).ToList().Count == 0)
             {
                 ShowValidationError("Owner Object Not Found.");
                 return;
@@ -59,10 +59,10 @@ namespace JsonManipulator
 
 
             objectWorkflow form = new objectWorkflow();
-            form.Name = txtName.Text;
-            form.RoleRequired = txtRole.Text; 
-            if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text).FirstOrDefault().objectWorkflow == null)
-                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text).FirstOrDefault().objectWorkflow = new List<objectWorkflow>();
+            form.Name = txtName.Text.Trim();
+            form.RoleRequired = txtRole.Text.Trim(); 
+            if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text.Trim()).FirstOrDefault().objectWorkflow == null)
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text.Trim()).FirstOrDefault().objectWorkflow = new List<objectWorkflow>();
 
             Models.objectWorkflowButton formButtonSubmit = new objectWorkflowButton();
             formButtonSubmit.buttonText = "OK";
@@ -82,7 +82,7 @@ namespace JsonManipulator
 
 
 
-            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x=>x.name== txtOwner.Text).FirstOrDefault().objectWorkflow.Add(form);
+            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x=>x.name== txtOwner.Text.Trim()).FirstOrDefault().objectWorkflow.Add(form);
             ((Form1)Application.OpenForms["Form1"]).AddToTree(form);
             ((Form1)Application.OpenForms["Form1"]).showMessage("Form was added successfully");
             this.Close();
@@ -100,7 +100,7 @@ namespace JsonManipulator
         public void setOwner(string Owner)
         {
             txtOwner.Text =Owner;
-            txtName.Text = txtOwner.Text + txtRole.Text;
+            txtName.Text = txtOwner.Text.Trim() + txtRole.Text.Trim();
         }
         private void btnOwner_Click(object sender, EventArgs e)
         {
@@ -117,7 +117,7 @@ namespace JsonManipulator
         public void setRole(string Role)
         {
             txtRole.Text = Role;
-            txtName.Text = txtOwner.Text + txtRole.Text;
+            txtName.Text = txtOwner.Text.Trim() + txtRole.Text.Trim();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -128,7 +128,7 @@ namespace JsonManipulator
         private void txtRole_TextChanged(object sender, EventArgs e)
         {
 
-            txtName.Text = txtOwner.Text + txtRole.Text;
+            txtName.Text = txtOwner.Text.Trim() + txtRole.Text.Trim();
         }
     }
 

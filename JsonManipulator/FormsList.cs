@@ -31,7 +31,7 @@ namespace JsonManipulator
             List<string> fullList = Utils.GetNameList(false, true, true, false);
             if (filter.Trim().Length > 0)
             {
-                fullList = fullList.Where(x => x.ToLower().Contains(filter.ToLower().Trim())).ToList();
+                fullList = fullList.Where(x => x.ToLower().Equals(filter.ToLower().Trim())).ToList();
             }
             foreach (string name in fullList)
             {
@@ -68,6 +68,9 @@ namespace JsonManipulator
                         break;
                     case ParentType.REPORT_COLUMN:
                         ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setColumnData(listObjects.SelectedItem.ToString(), _row, _col);
+                        break;
+                    case ParentType.REPORT_COLUMN_BUTTON:
+                        ((FrmAddColumnButton)Application.OpenForms["FrmAddColumnButton"]).SetDestination(listObjects.SelectedItem.ToString());
                         break;
                 }
                   

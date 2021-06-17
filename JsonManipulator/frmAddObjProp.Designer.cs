@@ -91,7 +91,7 @@ namespace JsonManipulator
             this.btnBulk.Name = "btnBulk";
             this.btnBulk.Size = new System.Drawing.Size(80, 23);
             this.btnBulk.TabIndex = 24;
-            this.btnBulk.Text = "Bulk Add";
+            this.btnBulk.Text = "&Bulk Add";
             this.btnBulk.UseVisualStyleBackColor = true;
             this.btnBulk.Click += new System.EventHandler(this.btnBulk_Click);
             // 
