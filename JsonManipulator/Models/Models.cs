@@ -145,9 +145,9 @@ namespace JsonManipulator.Models
         [JsonProperty("codeDescription")]
         public string CodeDescription { get; set; }
         [JsonProperty("sqlServerDBDataType")]
-        public string sqlServerDBDataType { get; set; }
+        public string dataType { get; set; }
         [JsonProperty("sqlServerDBDataTypeSize")]
-        public string sqlServerDBDataTypeSize { get; set; }
+        public string dataSize { get; set; }
         [JsonProperty("isFK")]
         public string isFK { get; set; }
         [JsonProperty("isEncrypted")]
@@ -219,9 +219,9 @@ namespace JsonManipulator.Models
         public string name { get; set; }
         
         [JsonProperty("sqlServerDBDataType")]
-        public string sqlServerDBDataType { get; set; }
+        public string dataType { get; set; }
         [JsonProperty("sqlServerDBDataTypeSize")]
-        public string sqlServerDBDataTypeSize { get; set; } 
+        public string dataSize { get; set; } 
         [JsonProperty("codeDescription")]
         public string codeDescription { get; set; } 
     }
@@ -398,9 +398,9 @@ namespace JsonManipulator.Models
         public string labelText { get; set; }
       
         [JsonProperty("sqlServerDBDataType")]
-        public string sqlServerDBDataType { get; set; }
+        public string dataType { get; set; }
         [JsonProperty("sqlServerDBDataTypeSize")]
-        public string sqlServerDBDataTypeSize { get; set; }
+        public string dataSize { get; set; }
         [JsonProperty("isVisible")]
         public string isVisible { get; set; }
         [JsonProperty("isFKList")]
@@ -431,9 +431,9 @@ namespace JsonManipulator.Models
         [JsonProperty("sourcePropertyName")]
         public string sourcePropertyName { get; set; }
         [JsonProperty("sqlServerDBDataType")]
-        public string sqlServerDBDataType { get; set; }
+        public string dataType { get; set; }
         [JsonProperty("sqlServerDBDataTypeSize")]
-        public string sqlServerDBDataTypeSize { get; set; }
+        public string dataSize { get; set; }
        
         [JsonProperty("isVisible")]
         public string isVisible { get; set; }
@@ -534,11 +534,11 @@ namespace JsonManipulator.Models
         [JsonProperty("labelText")]
         public string labelText { get; set; }
         [JsonProperty("sqlServerDBDataType")]
-        public string sqlServerDBDataType { get; set; }
+        public string dataType { get; set; }
         [JsonProperty("infoToolTipText")]
         public string infoToolTipText { get; set; }
         [JsonProperty("sqlServerDBDataTypeSize")]
-        public string sqlServerDBDataTypeSize { get; set; }
+        public string dataSize { get; set; }
         [JsonProperty("isVisible")]
         public string isVisible { get; set; }
         public string isRequired { get; set; }
@@ -571,9 +571,9 @@ namespace JsonManipulator.Models
         [JsonProperty("name")]
         public string name { get; set; }
         [JsonProperty("sqlServerDBDataType")]
-        public string sqlServerDBDataType { get; set; }
+        public string dataType { get; set; }
         [JsonProperty("sqlServerDBDataTypeSize")]
-        public string sqlServerDBDataTypeSize { get; set; }
+        public string dataSize { get; set; }
         [JsonProperty("labelText")]
         public string headerLabelText { get; set; }
         [JsonProperty("buttonText")]
@@ -697,9 +697,9 @@ namespace JsonManipulator.Models
         [JsonProperty("storedProcParamName")]
         public string storedProcParamName { get; set; }
         [JsonProperty("sqlServerDBDataType")]
-        public string sqlServerDBDataType { get; set; }
+        public string dataType { get; set; }
         [JsonProperty("sqlServerDBDataTypeSize")]
-        public string sqlServerDBDataTypeSize { get; set; }
+        public string dataSize { get; set; }
     }
     public class objectDocument
     {

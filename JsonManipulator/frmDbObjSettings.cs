@@ -239,7 +239,7 @@ namespace JsonManipulator
                     l_objGridDropbox.DisplayMember = "Display";
                     l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
                 }
-                if (propertyName.Equals("sqlServerDBDataType", StringComparison.OrdinalIgnoreCase))
+                if (propertyName.Equals("dataType", StringComparison.OrdinalIgnoreCase))
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview  
                     gridPropertiesProp[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;

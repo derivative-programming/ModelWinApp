@@ -79,6 +79,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FlowList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FlowList.Designer.cs">
+      <DependentUpon>FlowList.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmAddApiSiteEndPoint.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,11 +103,17 @@
     <Compile Include="FrmAddButton.Designer.cs">
       <DependentUpon>FrmAddButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmAddColumnButton.cs">
+    <Compile Include="FrmAddColumnAsyncButton.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmAddColumnButton.Designer.cs">
-      <DependentUpon>FrmAddColumnButton.cs</DependentUpon>
+    <Compile Include="FrmAddColumnAsyncButton.Designer.cs">
+      <DependentUpon>FrmAddColumnAsyncButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAddColumnDestinationButton.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAddColumnDestinationButton.Designer.cs">
+      <DependentUpon>FrmAddColumnDestinationButton.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmBulkAdd.cs">
       <SubType>Form</SubType>
@@ -256,6 +268,9 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FlowList.resx">
+      <DependentUpon>FlowList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmAddApiSiteEndPoint.resx">
       <DependentUpon>frmAddApiSiteEndPoint.cs</DependentUpon>
     </EmbeddedResource>
@@ -265,8 +280,11 @@
     <EmbeddedResource Include="FrmAddButton.resx">
       <DependentUpon>FrmAddButton.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmAddColumnButton.resx">
-      <DependentUpon>FrmAddColumnButton.cs</DependentUpon>
+    <EmbeddedResource Include="FrmAddColumnAsyncButton.resx">
+      <DependentUpon>FrmAddColumnAsyncButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAddColumnDestinationButton.resx">
+      <DependentUpon>FrmAddColumnDestinationButton.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmBulkAdd.resx">
       <DependentUpon>FrmBulkAdd.cs</DependentUpon>

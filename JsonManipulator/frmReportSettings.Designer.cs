@@ -80,6 +80,7 @@ namespace JsonManipulator
             this.tabJSON = new System.Windows.Forms.TabPage();
             this.rtbJSON = new System.Windows.Forms.RichTextBox();
             this.btnAddColumnButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             tabSettings = new System.Windows.Forms.TabPage();
             tabSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataProperties)).BeginInit();
@@ -408,6 +409,7 @@ namespace JsonManipulator
             // 
             // pnlColumnsLeftBottom
             // 
+            this.pnlColumnsLeftBottom.Controls.Add(this.button1);
             this.pnlColumnsLeftBottom.Controls.Add(this.btnAddColumnButton);
             this.pnlColumnsLeftBottom.Controls.Add(this.btnColumnsAdd);
             this.pnlColumnsLeftBottom.Controls.Add(this.btnColumnsMoveUp);
@@ -422,7 +424,7 @@ namespace JsonManipulator
             // 
             this.btnColumnsAdd.Location = new System.Drawing.Point(3, 3);
             this.btnColumnsAdd.Name = "btnColumnsAdd";
-            this.btnColumnsAdd.Size = new System.Drawing.Size(111, 23);
+            this.btnColumnsAdd.Size = new System.Drawing.Size(136, 23);
             this.btnColumnsAdd.TabIndex = 2;
             this.btnColumnsAdd.Text = "&Add Column";
             this.btnColumnsAdd.UseVisualStyleBackColor = true;
@@ -430,9 +432,9 @@ namespace JsonManipulator
             // 
             // btnColumnsMoveUp
             // 
-            this.btnColumnsMoveUp.Location = new System.Drawing.Point(3, 61);
+            this.btnColumnsMoveUp.Location = new System.Drawing.Point(3, 90);
             this.btnColumnsMoveUp.Name = "btnColumnsMoveUp";
-            this.btnColumnsMoveUp.Size = new System.Drawing.Size(111, 23);
+            this.btnColumnsMoveUp.Size = new System.Drawing.Size(136, 23);
             this.btnColumnsMoveUp.TabIndex = 3;
             this.btnColumnsMoveUp.Text = "Move &Up";
             this.btnColumnsMoveUp.UseVisualStyleBackColor = true;
@@ -440,9 +442,9 @@ namespace JsonManipulator
             // 
             // btnColumnsMoveDown
             // 
-            this.btnColumnsMoveDown.Location = new System.Drawing.Point(3, 90);
+            this.btnColumnsMoveDown.Location = new System.Drawing.Point(3, 119);
             this.btnColumnsMoveDown.Name = "btnColumnsMoveDown";
-            this.btnColumnsMoveDown.Size = new System.Drawing.Size(111, 23);
+            this.btnColumnsMoveDown.Size = new System.Drawing.Size(136, 23);
             this.btnColumnsMoveDown.TabIndex = 4;
             this.btnColumnsMoveDown.Text = "Move &Down";
             this.btnColumnsMoveDown.UseVisualStyleBackColor = true;
@@ -624,11 +626,21 @@ namespace JsonManipulator
             // 
             this.btnAddColumnButton.Location = new System.Drawing.Point(3, 32);
             this.btnAddColumnButton.Name = "btnAddColumnButton";
-            this.btnAddColumnButton.Size = new System.Drawing.Size(111, 23);
+            this.btnAddColumnButton.Size = new System.Drawing.Size(136, 23);
             this.btnAddColumnButton.TabIndex = 5;
-            this.btnAddColumnButton.Text = "&Add Column Button";
+            this.btnAddColumnButton.Text = "Add Destination &Button";
             this.btnAddColumnButton.UseVisualStyleBackColor = true;
             this.btnAddColumnButton.Click += new System.EventHandler(this.btnAddColumnButton_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(3, 61);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(136, 23);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "Add Async &Flow Button";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // frmReportSettings
             // 
@@ -723,5 +735,6 @@ namespace JsonManipulator
         private System.Windows.Forms.TabPage tabJSON;
         private System.Windows.Forms.RichTextBox rtbJSON;
         private System.Windows.Forms.Button btnAddColumnButton;
+        private System.Windows.Forms.Button button1;
     }
 }

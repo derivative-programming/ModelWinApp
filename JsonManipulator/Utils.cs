@@ -132,15 +132,16 @@ namespace JsonManipulator
         }
         public static List<string> GetDBObjectNameList()
         {
-            return GetNameList(true, false, false, false);
+            return GetNameList(true, false, false, false, false);
         }
         public static List<string> GetDestinationNameList()
         { 
-            return GetNameList(false,true,true,false);
+            return GetNameList(false,true,true,false, false);
         }
 
 
-        public static List<string> GetNameList(bool includeDBObjects, bool includeReports, bool includePageForms, bool includeNonPageObjFlows)
+        public static List<string> GetNameList(bool includeDBObjects, bool includeReports, bool includePageForms, 
+            bool includeNonPageObjFlows, bool includeInitPageObjFlows)
         {
             List<string> result = new List<string>();
 
@@ -164,13 +165,23 @@ namespace JsonManipulator
                                 continue;
                             } 
                         }
-                        else if (includeNonPageObjFlows)
+                        if (includeNonPageObjFlows)
                         {
-                            if (Utils.IsObjectWorkflowAFlow(objWF))
+                            if (Utils.IsObjectWorkflowAFlow(objWF) &&
+                                !Utils.IsObjectWorkflowAPageInitFlow(objWF))
                             {
                                 result.Add(objWF.Name);
                                 continue;
                             } 
+                        }
+                        if (includeInitPageObjFlows)
+                        {
+                            if (Utils.IsObjectWorkflowAFlow(objWF) &&
+                                Utils.IsObjectWorkflowAPageInitFlow(objWF))
+                            {
+                                result.Add(objWF.Name);
+                                continue;
+                            }
                         }
                         //if (objWF.IsPage == null)
                         //{

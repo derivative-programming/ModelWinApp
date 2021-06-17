@@ -37,14 +37,14 @@ namespace JsonManipulator
                 return;
             }
 
-            List<string> existingNames = Utils.GetNameList(false, true, true, true);
+            List<string> existingNames = Utils.GetNameList(false, true, true, true,true);
             if (existingNames.Where(x => x.ToLower().Equals(txtName.Text.Trim().ToLower())).ToList().Count > 0)
             {
                 ShowValidationError("Name already exists.");
                 return;
             }
 
-            List<string> existingDBObjects = Utils.GetNameList(true, false, false, false);
+            List<string> existingDBObjects = Utils.GetNameList(true, false, false, false, false);
             if (existingDBObjects.Where(x => x.ToLower().Equals(txtOwner.Text.Trim().ToLower())).ToList().Count == 0)
             {
                 ShowValidationError("Owner Object Not Found.");

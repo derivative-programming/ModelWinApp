@@ -53,7 +53,7 @@ namespace JsonManipulator
             property.name = objectMap.parentObjectName + "ID";
             property.isFK = "true"; 
             property.isNotPublishedToSubscriptions = "true";
-            property.sqlServerDBDataType = "int";
+            property.dataType = "int";
 
             objectMap.property.Add(property);
 

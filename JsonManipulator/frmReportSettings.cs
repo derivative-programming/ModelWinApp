@@ -429,7 +429,7 @@ namespace JsonManipulator
                     l_objGridDropbox.DisplayMember = "Display";
                     l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
                 }
-                if (propertyName.Equals("sqlServerDBDataType", StringComparison.OrdinalIgnoreCase))
+                if (propertyName.Equals("dataType", StringComparison.OrdinalIgnoreCase))
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview  
                     gridFilters[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
@@ -511,7 +511,7 @@ namespace JsonManipulator
                     l_objGridDropbox.DisplayMember = "Display";
                     l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
                 } 
-                if (propertyName.Equals("sqlServerDBDataType", StringComparison.OrdinalIgnoreCase))
+                if (propertyName.Equals("dataType", StringComparison.OrdinalIgnoreCase))
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview  
                     gridColumns[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
@@ -715,8 +715,15 @@ namespace JsonManipulator
         private void btnAddColumnButton_Click(object sender, EventArgs e)
         {
 
-            FrmAddColumnButton frmAddColumnButton = new FrmAddColumnButton(_rpt.name, _ownerObject.name);
-            frmAddColumnButton.ShowDialog();
+            FrmAddColumnDestinationButton frmAddColumnDestinationButton = new FrmAddColumnDestinationButton(_rpt.name, _ownerObject.name);
+            frmAddColumnDestinationButton.ShowDialog();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            FrmAddColumnAsyncButton frmAddColumnAsyncButton = new FrmAddColumnAsyncButton(_rpt.name, _ownerObject.name);
+            frmAddColumnAsyncButton.ShowDialog();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 namespace JsonManipulator
 {
-    partial class FrmAddColumnButton
+    partial class FrmAddColumnAsyncButton
     {
         /// <summary>
         /// Required designer variable.
@@ -129,11 +129,11 @@ namespace JsonManipulator
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 48);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 13);
+            this.label1.Size = new System.Drawing.Size(61, 13);
             this.label1.TabIndex = 24;
-            this.label1.Text = "Button Destination";
+            this.label1.Text = "Async Flow";
             // 
-            // FrmAddColumnButton
+            // FrmAddColumnAsyncButton
             // 
             this.AcceptButton = this.btnAccept;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -151,10 +151,10 @@ namespace JsonManipulator
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.lblName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "FrmAddColumnButton";
+            this.Name = "FrmAddColumnAsyncButton";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Add Column Button";
+            this.Text = "Add Column Async Button";
             this.Load += new System.EventHandler(this.FrmAddColumn_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

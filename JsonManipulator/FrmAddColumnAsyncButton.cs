@@ -12,10 +12,10 @@ using System.Windows.Forms;
 
 namespace JsonManipulator
 {
-    public partial class FrmAddColumnButton : Form
+    public partial class FrmAddColumnAsyncButton : Form
     {
         string _name, _parent;
-        public FrmAddColumnButton(string name, string parent)
+        public FrmAddColumnAsyncButton(string name, string parent)
         {
             InitializeComponent();
             this._name = name;
@@ -57,9 +57,9 @@ namespace JsonManipulator
             reportColumn.buttonDestinationTargetName = txtButtonDestination.Text.Trim();
             reportColumn.sourceObjectName = destinationOwnerObject.name;
             reportColumn.sourcePropertyName = "Code";
-            reportColumn.sqlServerDBDataType = "uniqueidentifier";
+            reportColumn.dataType = "uniqueidentifier";
             reportColumn.buttonText = txtButtonText.Text.Trim();
-
+            reportColumn.isButtonAsyncObjWF = "true";
 
             Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportColumn.Add(reportColumn);
              ((Form1)Application.OpenForms["Form1"]).showMessage("Column created successfully");
@@ -85,8 +85,8 @@ namespace JsonManipulator
 
         private void btnDestinationLookup_Click(object sender, EventArgs e)
         {
-            FormsList formsList = new FormsList(ParentType.REPORT_COLUMN_BUTTON);
-            formsList.ShowDialog();
+            FlowList flowList = new FlowList(ParentType.REPORT_COLUMN_ASYNC_BUTTON);
+            flowList.ShowDialog();
         }
 
         public void SetDestination(string name)

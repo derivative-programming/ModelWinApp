@@ -12,23 +12,23 @@ using System.Windows.Forms;
 
 namespace JsonManipulator
 {
-    public partial class FormsList : Form
+    public partial class FlowList : Form
     {
         FormObjects _frmObj;
         ParentType _type;
         int _row, _col;
-        public FormsList(ParentType type = ParentType.ADD,int row=0,int col=0)
+        public FlowList(ParentType type = ParentType.ADD,int row=0,int col=0)
         {
             InitializeComponent();
             this._type = type;
             this._row = row;
             this._col = col;
         }
-        private void populateForms(string filter)
+        private void populateFlows(string filter)
         {
             listObjects.Items.Clear();
 
-            List<string> fullList = Utils.GetNameList(false, true, true, false, false);
+            List<string> fullList = Utils.GetNameList(false, false, false, true,false);
             if (filter.Trim().Length > 0)
             {
                 fullList = fullList.Where(x => x.ToLower().Contains(filter.ToLower().Trim())).ToList();
@@ -43,12 +43,12 @@ namespace JsonManipulator
         private void ObjectsList_Load(object sender, EventArgs e)
         {
             listObjects.Items.Clear();
-            populateForms("");
+            populateFlows("");
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-                populateForms(txtFilter.Text);
+                populateFlows(txtFilter.Text);
         }
 
         private void listObjects_SelectedIndexChanged(object sender, EventArgs e)

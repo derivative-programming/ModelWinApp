@@ -27,7 +27,7 @@ namespace JsonManipulator
         private void ObjectsList_Load(object sender, EventArgs e)
         {
             listObjects.Items.Clear();
-            List<string> nameList = Utils.GetNameList(false, true, false, false);
+            List<string> nameList = Utils.GetNameList(false, true, false, false, false);
             foreach(string name in nameList)
             {
                 listObjects.Items.Add(name);
@@ -38,7 +38,7 @@ namespace JsonManipulator
         {
             listObjects.Items.Clear();
 
-            List<string> nameList = Utils.GetNameList(false, true, false, false);
+            List<string> nameList = Utils.GetNameList(false, true, false, false, false);
             if (txtFilter.Text.Trim().Length > 0)
             {
                 string filter = txtFilter.Text.Trim().ToLower();

@@ -54,7 +54,7 @@ namespace JsonManipulator
             property.isFK = "true";
             property.isFKLookup = "true";
             property.isNotPublishedToSubscriptions = "true";
-            property.sqlServerDBDataType = "int";
+            property.dataType = "int";
 
 
             Models.lookupItem lookupItem = new lookupItem();

@@ -246,7 +246,7 @@ namespace JsonManipulator
                     }
                 }
                 apiSite temp = Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault(); 
-                typeof(objectWorkflow).GetProperty(property).SetValue(temp, value);
+                typeof(apiSite).GetProperty(property).SetValue(temp, value);
 
                 if (property.Equals("name", StringComparison.OrdinalIgnoreCase))
                 {
