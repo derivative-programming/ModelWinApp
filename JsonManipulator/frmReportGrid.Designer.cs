@@ -37,7 +37,6 @@ namespace JsonManipulator
             this.btnCancel = new System.Windows.Forms.Button();
             this.txtOwner = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
             this.btnOwner = new System.Windows.Forms.Button();
             this.btnRoles = new System.Windows.Forms.Button();
             this.btnChild = new System.Windows.Forms.Button();
@@ -49,7 +48,7 @@ namespace JsonManipulator
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(12, 9);
+            this.lblName.Location = new System.Drawing.Point(12, 126);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(35, 13);
             this.lblName.TabIndex = 0;
@@ -57,17 +56,18 @@ namespace JsonManipulator
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(12, 25);
+            this.txtName.Location = new System.Drawing.Point(12, 142);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(200, 20);
-            this.txtName.TabIndex = 1;
+            this.txtName.TabIndex = 5;
             // 
             // txtRole
             // 
             this.txtRole.Location = new System.Drawing.Point(12, 64);
             this.txtRole.Name = "txtRole";
             this.txtRole.Size = new System.Drawing.Size(200, 20);
-            this.txtRole.TabIndex = 3;
+            this.txtRole.TabIndex = 1;
+            this.txtRole.TextChanged += new System.EventHandler(this.txtRole_TextChanged);
             // 
             // label2
             // 
@@ -83,7 +83,7 @@ namespace JsonManipulator
             this.btnAccept.Location = new System.Drawing.Point(137, 191);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
-            this.btnAccept.TabIndex = 12;
+            this.btnAccept.TabIndex = 7;
             this.btnAccept.Text = "&OK";
             this.btnAccept.UseVisualStyleBackColor = true;
             this.btnAccept.Click += new System.EventHandler(this.btnAdd_Click);
@@ -94,14 +94,14 @@ namespace JsonManipulator
             this.btnCancel.Location = new System.Drawing.Point(218, 191);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 13;
+            this.btnCancel.TabIndex = 8;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.button2_Click);
             // 
             // txtOwner
             // 
-            this.txtOwner.Location = new System.Drawing.Point(12, 103);
+            this.txtOwner.Location = new System.Drawing.Point(12, 25);
             this.txtOwner.Name = "txtOwner";
             this.txtOwner.ReadOnly = true;
             this.txtOwner.Size = new System.Drawing.Size(200, 20);
@@ -111,27 +111,18 @@ namespace JsonManipulator
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 87);
+            this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(103, 13);
             this.label1.TabIndex = 5;
             this.label1.Text = "O&wner Object Name";
             // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(19, 191);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(112, 23);
-            this.button3.TabIndex = 11;
-            this.button3.Text = "Create &Best Guess";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
             // btnOwner
             // 
-            this.btnOwner.Location = new System.Drawing.Point(218, 103);
+            this.btnOwner.Location = new System.Drawing.Point(218, 25);
             this.btnOwner.Name = "btnOwner";
             this.btnOwner.Size = new System.Drawing.Size(37, 23);
-            this.btnOwner.TabIndex = 7;
+            this.btnOwner.TabIndex = 0;
             this.btnOwner.Text = "...";
             this.btnOwner.UseVisualStyleBackColor = true;
             this.btnOwner.Click += new System.EventHandler(this.btnOwner_Click);
@@ -141,32 +132,33 @@ namespace JsonManipulator
             this.btnRoles.Location = new System.Drawing.Point(218, 64);
             this.btnRoles.Name = "btnRoles";
             this.btnRoles.Size = new System.Drawing.Size(37, 23);
-            this.btnRoles.TabIndex = 4;
+            this.btnRoles.TabIndex = 2;
             this.btnRoles.Text = "...";
             this.btnRoles.UseVisualStyleBackColor = true;
             this.btnRoles.Click += new System.EventHandler(this.btnRoles_Click);
             // 
             // btnChild
             // 
-            this.btnChild.Location = new System.Drawing.Point(218, 142);
+            this.btnChild.Location = new System.Drawing.Point(218, 103);
             this.btnChild.Name = "btnChild";
             this.btnChild.Size = new System.Drawing.Size(37, 23);
-            this.btnChild.TabIndex = 10;
+            this.btnChild.TabIndex = 4;
             this.btnChild.Text = "...";
             this.btnChild.UseVisualStyleBackColor = true;
             this.btnChild.Click += new System.EventHandler(this.btnChild_Click);
             // 
             // txtChild
             // 
-            this.txtChild.Location = new System.Drawing.Point(12, 142);
+            this.txtChild.Location = new System.Drawing.Point(12, 103);
             this.txtChild.Name = "txtChild";
             this.txtChild.Size = new System.Drawing.Size(200, 20);
-            this.txtChild.TabIndex = 9;
+            this.txtChild.TabIndex = 3;
+            this.txtChild.TextChanged += new System.EventHandler(this.txtChild_TextChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 126);
+            this.label3.Location = new System.Drawing.Point(12, 87);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(95, 13);
             this.label3.TabIndex = 8;
@@ -195,7 +187,6 @@ namespace JsonManipulator
             this.Controls.Add(this.txtChild);
             this.Controls.Add(this.btnRoles);
             this.Controls.Add(this.btnOwner);
-            this.Controls.Add(this.button3);
             this.Controls.Add(this.txtOwner);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCancel);
@@ -225,7 +216,6 @@ namespace JsonManipulator
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.TextBox txtOwner;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button btnOwner;
         private System.Windows.Forms.Button btnRoles;
         private System.Windows.Forms.Button btnChild;

@@ -84,14 +84,17 @@ namespace JsonManipulator
         public void setOwner(string Owner)
         {
             txtOwner.Text = Owner;
+            txtName.Text = txtOwner.Text + txtRole.Text + txtChild.Text + "List";
         }
         public void setRole(string Role)
         {
             txtRole.Text = Role;
+            txtName.Text = txtOwner.Text + txtRole.Text + txtChild.Text + "List";
         }
         public void setChild(string Child)
         {
             txtChild.Text = Child;
+            txtName.Text = txtOwner.Text + txtRole.Text + txtChild.Text + "List";
         }
         private void btnRoles_Click(object sender, EventArgs e)
         {
@@ -108,6 +111,17 @@ namespace JsonManipulator
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void txtRole_TextChanged(object sender, EventArgs e)
+        {
+            txtName.Text = txtOwner.Text + txtRole.Text + txtChild.Text + "List";
+        }
+
+        private void txtChild_TextChanged(object sender, EventArgs e)
+        {
+
+            txtName.Text = txtOwner.Text + txtRole.Text + txtChild.Text + "List";
         }
     }
 }
