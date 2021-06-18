@@ -168,6 +168,8 @@ namespace JsonManipulator.Models
 
         [JsonProperty("isQueryByAvailable")]
         public string isQueryByAvailable { get; set; }
+        [JsonProperty("labelText")]
+        public string labelText { get; set; }
         public string defaultValue { get; set; }
         //[JsonProperty("placeholderText")]
         //public string placeholderText { get; set; }

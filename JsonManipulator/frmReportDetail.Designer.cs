@@ -56,7 +56,7 @@ namespace JsonManipulator
             // 
             this.txtName.Location = new System.Drawing.Point(12, 103);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(200, 20);
+            this.txtName.Size = new System.Drawing.Size(243, 20);
             this.txtName.TabIndex = 3;
             // 
             // txtRole
@@ -78,7 +78,7 @@ namespace JsonManipulator
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(137, 179);
+            this.btnAccept.Location = new System.Drawing.Point(99, 180);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
             this.btnAccept.TabIndex = 5;
@@ -89,7 +89,7 @@ namespace JsonManipulator
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(218, 179);
+            this.btnCancel.Location = new System.Drawing.Point(180, 180);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 6;
@@ -151,7 +151,7 @@ namespace JsonManipulator
             this.chkSubscribeToOwnerObject.Location = new System.Drawing.Point(12, 129);
             this.chkSubscribeToOwnerObject.Name = "chkSubscribeToOwnerObject";
             this.chkSubscribeToOwnerObject.Size = new System.Drawing.Size(187, 17);
-            this.chkSubscribeToOwnerObject.TabIndex = 21;
+            this.chkSubscribeToOwnerObject.TabIndex = 4;
             this.chkSubscribeToOwnerObject.Text = "Subscribe To Owner Object Props";
             this.chkSubscribeToOwnerObject.UseVisualStyleBackColor = true;
             // 
@@ -160,7 +160,7 @@ namespace JsonManipulator
             this.AcceptButton = this.btnAccept;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(305, 215);
+            this.ClientSize = new System.Drawing.Size(269, 215);
             this.ControlBox = false;
             this.Controls.Add(this.chkSubscribeToOwnerObject);
             this.Controls.Add(this.lblValidationError);

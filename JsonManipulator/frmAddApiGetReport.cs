@@ -121,6 +121,12 @@ namespace JsonManipulator
             txtChild.Text = Child;
             txtName.Text = txtOwner.Text.Trim() + txtAPIName.Text.Trim() + txtAPIVersion.Text.Trim() + txtChild.Text.Trim() + "List";
         }
+
+        public void setAPISite(string name)
+        {
+            txtAPIName.Text = name;
+            txtName.Text = txtOwner.Text.Trim() + txtAPIName.Text.Trim() + txtAPIVersion.Text.Trim() + txtChild.Text.Trim() + "List";
+        }
         private void btnRoles_Click(object sender, EventArgs e)
         {
             RoleList objectsList = new RoleList(FormObjects.REPORT);
@@ -154,6 +160,13 @@ namespace JsonManipulator
 
             txtName.Text = txtOwner.Text.Trim() + txtAPIName.Text.Trim() + txtAPIVersion.Text.Trim() + txtChild.Text.Trim() + "List";
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            APISiteList frm = new APISiteList();
+            frm.ShowDialog();
         }
     }
 }

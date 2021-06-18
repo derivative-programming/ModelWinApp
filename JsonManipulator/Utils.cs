@@ -415,7 +415,7 @@ namespace JsonManipulator
             //result.Add("detailsText".ToLower());
             //result.Add("validationRuleRegExMatchRequired".ToLower());
             //result.Add("validationRuleRegExMatchRequiredErrorText".ToLower());
-            result.Add("isIgnored".ToLower());
+            //result.Add("isIgnored".ToLower());
             result.Add("defaultValue".ToLower());
 
             for (int i = 0; i < result.Count; i++)
@@ -451,9 +451,9 @@ namespace JsonManipulator
         {
             List<string> result = new List<string>();
             result.Add("isFKLookup".ToLower());
-            result.Add("isNotPublishedToSubscriptions".ToLower());
-            result.Add("fKObjectName".ToLower());
-            result.Add("fKObjectPropertyName".ToLower());
+            //result.Add("isNotPublishedToSubscriptions".ToLower());
+            //result.Add("fKObjectName".ToLower());
+            //result.Add("fKObjectPropertyName".ToLower());
             result.Add("isQueryByAvailable".ToLower());
             result.Add("defaultValue".ToLower());
             result.Add("name");
@@ -633,7 +633,7 @@ namespace JsonManipulator
             result.Add("isFormFooter".ToLower());
             result.Add("isImageURL".ToLower());
             result.Add("isEncrypted".ToLower());
-            result.Add("isIgnored".ToLower());
+            //result.Add("isIgnored".ToLower());
 
             for (int i = 0; i < result.Count; i++)
             {
