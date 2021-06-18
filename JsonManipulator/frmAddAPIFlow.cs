@@ -60,13 +60,13 @@ namespace JsonManipulator
 
             objectWorkflow form = new objectWorkflow();
             form.Name = txtName.Text.Trim();
-            form.RoleRequired = "Admin"; 
+            form.RoleRequired = ""; 
             if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text.Trim()).FirstOrDefault().objectWorkflow == null)
                 Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text.Trim()).FirstOrDefault().objectWorkflow = new List<objectWorkflow>();
              
 
             form.objectWorkflowButton = new List<objectWorkflowButton>(); 
-            form.IsPage = "true";
+            form.IsPage = "false";
 
 
 
