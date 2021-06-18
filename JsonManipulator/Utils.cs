@@ -311,7 +311,7 @@ namespace JsonManipulator
             result.Add("isDynaFlowTask");
             result.Add("isCustomPageViewUsed");
             result.Add("isIgnoredInDocumentation");
-            result.Add("targetChildObject");
+            //result.Add("targetChildObject");
             result.Add("isAuthorizationRequired");
 
             for(int i = 0;i < result.Count;i++)

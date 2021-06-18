@@ -45,6 +45,7 @@ namespace JsonManipulator
             this.pnlControlsLeftTop = new System.Windows.Forms.Panel();
             this.lstControl = new System.Windows.Forms.ListBox();
             this.pnlControlsLeftBottom = new System.Windows.Forms.Panel();
+            this.chkSubscribeToOwnerObject = new System.Windows.Forms.CheckBox();
             this.btnControls = new System.Windows.Forms.Button();
             this.btnControlUp = new System.Windows.Forms.Button();
             this.btnControlDown = new System.Windows.Forms.Button();
@@ -57,6 +58,8 @@ namespace JsonManipulator
             this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlButtonsLeft = new System.Windows.Forms.Panel();
             this.pnlButtonsLeftBottom = new System.Windows.Forms.Panel();
+            this.btnButtonUp = new System.Windows.Forms.Button();
+            this.btnButtonDown = new System.Windows.Forms.Button();
             this.btnAddButton = new System.Windows.Forms.Button();
             this.pnlButtonsLeftTop = new System.Windows.Forms.Panel();
             this.lstButtons = new System.Windows.Forms.ListBox();
@@ -75,12 +78,10 @@ namespace JsonManipulator
             this.btnOutputVar = new System.Windows.Forms.Button();
             this.pnlOutputLeftTop = new System.Windows.Forms.Panel();
             this.lstOutputVars = new System.Windows.Forms.ListBox();
-            this.grpMain = new System.Windows.Forms.GroupBox();
-            this.btnButtonUp = new System.Windows.Forms.Button();
-            this.btnButtonDown = new System.Windows.Forms.Button();
             this.tabJSON = new System.Windows.Forms.TabPage();
             this.rtbJSON = new System.Windows.Forms.RichTextBox();
-            this.chkSubscribeToOwnerObject = new System.Windows.Forms.CheckBox();
+            this.grpMain = new System.Windows.Forms.GroupBox();
+            this.chkSubscribeToTargetChild = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridProperties)).BeginInit();
@@ -106,8 +107,8 @@ namespace JsonManipulator
             this.pnlOutputLeft.SuspendLayout();
             this.pnlOutputLeftBottom.SuspendLayout();
             this.pnlOutputLeftTop.SuspendLayout();
-            this.grpMain.SuspendLayout();
             this.tabJSON.SuspendLayout();
+            this.grpMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -257,7 +258,7 @@ namespace JsonManipulator
             this.pnlControlsLeftTop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlControlsLeftTop.Location = new System.Drawing.Point(0, 0);
             this.pnlControlsLeftTop.Name = "pnlControlsLeftTop";
-            this.pnlControlsLeftTop.Size = new System.Drawing.Size(188, 354);
+            this.pnlControlsLeftTop.Size = new System.Drawing.Size(188, 325);
             this.pnlControlsLeftTop.TabIndex = 18;
             // 
             // lstControl
@@ -267,21 +268,33 @@ namespace JsonManipulator
             this.lstControl.Location = new System.Drawing.Point(0, 0);
             this.lstControl.Name = "lstControl";
             this.lstControl.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lstControl.Size = new System.Drawing.Size(188, 354);
+            this.lstControl.Size = new System.Drawing.Size(188, 325);
             this.lstControl.TabIndex = 1;
             this.lstControl.SelectedIndexChanged += new System.EventHandler(this.lstControl_SelectedIndexChanged);
             // 
             // pnlControlsLeftBottom
             // 
+            this.pnlControlsLeftBottom.Controls.Add(this.chkSubscribeToTargetChild);
             this.pnlControlsLeftBottom.Controls.Add(this.chkSubscribeToOwnerObject);
             this.pnlControlsLeftBottom.Controls.Add(this.btnControls);
             this.pnlControlsLeftBottom.Controls.Add(this.btnControlUp);
             this.pnlControlsLeftBottom.Controls.Add(this.btnControlDown);
             this.pnlControlsLeftBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlControlsLeftBottom.Location = new System.Drawing.Point(0, 354);
+            this.pnlControlsLeftBottom.Location = new System.Drawing.Point(0, 325);
             this.pnlControlsLeftBottom.Name = "pnlControlsLeftBottom";
-            this.pnlControlsLeftBottom.Size = new System.Drawing.Size(188, 120);
+            this.pnlControlsLeftBottom.Size = new System.Drawing.Size(188, 149);
             this.pnlControlsLeftBottom.TabIndex = 17;
+            // 
+            // chkSubscribeToOwnerObject
+            // 
+            this.chkSubscribeToOwnerObject.AutoSize = true;
+            this.chkSubscribeToOwnerObject.Location = new System.Drawing.Point(4, 103);
+            this.chkSubscribeToOwnerObject.Name = "chkSubscribeToOwnerObject";
+            this.chkSubscribeToOwnerObject.Size = new System.Drawing.Size(187, 17);
+            this.chkSubscribeToOwnerObject.TabIndex = 9;
+            this.chkSubscribeToOwnerObject.Text = "Subscribe To Owner Object Props";
+            this.chkSubscribeToOwnerObject.UseVisualStyleBackColor = true;
+            this.chkSubscribeToOwnerObject.CheckedChanged += new System.EventHandler(this.chkSubscribeToOwnerObject_CheckedChanged);
             // 
             // btnControls
             // 
@@ -410,6 +423,28 @@ namespace JsonManipulator
             this.pnlButtonsLeftBottom.Name = "pnlButtonsLeftBottom";
             this.pnlButtonsLeftBottom.Size = new System.Drawing.Size(177, 101);
             this.pnlButtonsLeftBottom.TabIndex = 7;
+            // 
+            // btnButtonUp
+            // 
+            this.btnButtonUp.Location = new System.Drawing.Point(5, 32);
+            this.btnButtonUp.Name = "btnButtonUp";
+            this.btnButtonUp.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnButtonUp.Size = new System.Drawing.Size(75, 23);
+            this.btnButtonUp.TabIndex = 5;
+            this.btnButtonUp.Text = "Move &Up";
+            this.btnButtonUp.UseVisualStyleBackColor = true;
+            this.btnButtonUp.Click += new System.EventHandler(this.btnButtonUp_Click);
+            // 
+            // btnButtonDown
+            // 
+            this.btnButtonDown.Location = new System.Drawing.Point(5, 61);
+            this.btnButtonDown.Name = "btnButtonDown";
+            this.btnButtonDown.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnButtonDown.Size = new System.Drawing.Size(75, 23);
+            this.btnButtonDown.TabIndex = 6;
+            this.btnButtonDown.Text = "Move &Down";
+            this.btnButtonDown.UseVisualStyleBackColor = true;
+            this.btnButtonDown.Click += new System.EventHandler(this.btnButtonDown_Click);
             // 
             // btnAddButton
             // 
@@ -599,39 +634,6 @@ namespace JsonManipulator
             this.lstOutputVars.TabIndex = 1;
             this.lstOutputVars.SelectedIndexChanged += new System.EventHandler(this.lstOutputVars_SelectedIndexChanged);
             // 
-            // grpMain
-            // 
-            this.grpMain.Controls.Add(this.tabControl1);
-            this.grpMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grpMain.Location = new System.Drawing.Point(0, 0);
-            this.grpMain.Name = "grpMain";
-            this.grpMain.Size = new System.Drawing.Size(800, 525);
-            this.grpMain.TabIndex = 1;
-            this.grpMain.TabStop = false;
-            this.grpMain.Text = "groupBox2";
-            // 
-            // btnButtonUp
-            // 
-            this.btnButtonUp.Location = new System.Drawing.Point(5, 32);
-            this.btnButtonUp.Name = "btnButtonUp";
-            this.btnButtonUp.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnButtonUp.Size = new System.Drawing.Size(75, 23);
-            this.btnButtonUp.TabIndex = 5;
-            this.btnButtonUp.Text = "Move &Up";
-            this.btnButtonUp.UseVisualStyleBackColor = true;
-            this.btnButtonUp.Click += new System.EventHandler(this.btnButtonUp_Click);
-            // 
-            // btnButtonDown
-            // 
-            this.btnButtonDown.Location = new System.Drawing.Point(5, 61);
-            this.btnButtonDown.Name = "btnButtonDown";
-            this.btnButtonDown.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnButtonDown.Size = new System.Drawing.Size(75, 23);
-            this.btnButtonDown.TabIndex = 6;
-            this.btnButtonDown.Text = "Move &Down";
-            this.btnButtonDown.UseVisualStyleBackColor = true;
-            this.btnButtonDown.Click += new System.EventHandler(this.btnButtonDown_Click);
-            // 
             // tabJSON
             // 
             this.tabJSON.Controls.Add(this.rtbJSON);
@@ -653,16 +655,27 @@ namespace JsonManipulator
             this.rtbJSON.Text = "";
             this.rtbJSON.TabIndexChanged += new System.EventHandler(this.rtbJSON_TabIndexChanged);
             // 
-            // chkSubscribeToOwnerObject
+            // grpMain
             // 
-            this.chkSubscribeToOwnerObject.AutoSize = true;
-            this.chkSubscribeToOwnerObject.Location = new System.Drawing.Point(4, 97);
-            this.chkSubscribeToOwnerObject.Name = "chkSubscribeToOwnerObject";
-            this.chkSubscribeToOwnerObject.Size = new System.Drawing.Size(187, 17);
-            this.chkSubscribeToOwnerObject.TabIndex = 9;
-            this.chkSubscribeToOwnerObject.Text = "Subscribe To Owner Object Props";
-            this.chkSubscribeToOwnerObject.UseVisualStyleBackColor = true;
-            this.chkSubscribeToOwnerObject.CheckedChanged += new System.EventHandler(this.chkSubscribeToOwnerObject_CheckedChanged);
+            this.grpMain.Controls.Add(this.tabControl1);
+            this.grpMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpMain.Location = new System.Drawing.Point(0, 0);
+            this.grpMain.Name = "grpMain";
+            this.grpMain.Size = new System.Drawing.Size(800, 525);
+            this.grpMain.TabIndex = 1;
+            this.grpMain.TabStop = false;
+            this.grpMain.Text = "groupBox2";
+            // 
+            // chkSubscribeToTargetChild
+            // 
+            this.chkSubscribeToTargetChild.AutoSize = true;
+            this.chkSubscribeToTargetChild.Location = new System.Drawing.Point(4, 126);
+            this.chkSubscribeToTargetChild.Name = "chkSubscribeToTargetChild";
+            this.chkSubscribeToTargetChild.Size = new System.Drawing.Size(213, 17);
+            this.chkSubscribeToTargetChild.TabIndex = 10;
+            this.chkSubscribeToTargetChild.Text = "Subscribe To Target Child Object Props";
+            this.chkSubscribeToTargetChild.UseVisualStyleBackColor = true;
+            this.chkSubscribeToTargetChild.CheckedChanged += new System.EventHandler(this.chkSubscribeToTargetChild_CheckedChanged);
             // 
             // frmFormSettings
             // 
@@ -701,8 +714,8 @@ namespace JsonManipulator
             this.pnlOutputLeft.ResumeLayout(false);
             this.pnlOutputLeftBottom.ResumeLayout(false);
             this.pnlOutputLeftTop.ResumeLayout(false);
-            this.grpMain.ResumeLayout(false);
             this.tabJSON.ResumeLayout(false);
+            this.grpMain.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -761,5 +774,6 @@ namespace JsonManipulator
         private System.Windows.Forms.TabPage tabJSON;
         private System.Windows.Forms.RichTextBox rtbJSON;
         private System.Windows.Forms.CheckBox chkSubscribeToOwnerObject;
+        private System.Windows.Forms.CheckBox chkSubscribeToTargetChild;
     }
 }

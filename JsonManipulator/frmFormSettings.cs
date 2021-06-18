@@ -108,18 +108,18 @@ namespace JsonManipulator
         {
             _isLoadingPropSubscriptions = true;
             chkSubscribeToOwnerObject.Checked = Utils.IsPropSubscriptionEnabledFor(_ownerObject, _form.Name);
-            //if (_form.TargetChildObject != null &&
-            //    _form.TargetChildObject.Length > 0)
-            //{
-            //    Models.ObjectMap objectMap = Utils.GetObjectModelItem(_form.TargetChildObject);
-            //    chkSubscribeToTargetChild.Enabled = true;
-            //    chkSubscribeToTargetChild.Checked = Utils.IsPropSubscriptionEnabledFor(objectMap, _form.Name);
-            //}
-            //else
-            //{
-            //    chkSubscribeToTargetChild.Enabled = false;
-            //    chkSubscribeToTargetChild.Checked = false;
-            //}
+            if (_form.targetChildObject != null &&
+                _form.targetChildObject.Length > 0)
+            {
+                Models.ObjectMap objectMap = Utils.GetObjectModelItem(_form.targetChildObject);
+                chkSubscribeToTargetChild.Enabled = true;
+                chkSubscribeToTargetChild.Checked = Utils.IsPropSubscriptionEnabledFor(objectMap, _form.Name);
+            }
+            else
+            {
+                chkSubscribeToTargetChild.Enabled = false;
+                chkSubscribeToTargetChild.Checked = false;
+            }
             _isLoadingPropSubscriptions = false;
         }
 
@@ -470,7 +470,8 @@ namespace JsonManipulator
                     RoleList roleList = new RoleList(FormObjects.DBBJECT_EDIT,e.RowIndex,e.ColumnIndex);
                     roleList.ShowDialog();
                 }
-                if (propertyName.Equals("OwnerObject", StringComparison.OrdinalIgnoreCase))
+                if (propertyName.Equals("OwnerObject", StringComparison.OrdinalIgnoreCase) ||
+                    propertyName.Equals("targetChildObject", StringComparison.OrdinalIgnoreCase))
                 {
                     ObjectsList roleList = new ObjectsList(FormObjects.DBBJECT_EDIT, e.RowIndex, e.ColumnIndex);
                     roleList.ShowDialog();
@@ -737,6 +738,21 @@ namespace JsonManipulator
             else
             {
                 Utils.RemovePropSubscriptionFor(_ownerObject, _form.Name);
+            }
+        }
+
+        private void chkSubscribeToTargetChild_CheckedChanged(object sender, EventArgs e)
+        {
+            if (_isLoadingPropSubscriptions)
+                return;
+            Models.ObjectMap objectMap = Utils.GetObjectModelItem(_form.targetChildObject);
+            if (chkSubscribeToTargetChild.Checked)
+            {
+                Utils.AddPropSubscriptionFor(objectMap, _form.Name);
+            }
+            else
+            {
+                Utils.RemovePropSubscriptionFor(objectMap, _form.Name);
             }
         }
     }

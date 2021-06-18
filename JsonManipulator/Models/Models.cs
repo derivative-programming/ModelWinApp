@@ -458,7 +458,8 @@ namespace JsonManipulator.Models
         public String isColumnSumMetricAvailable { get; set; }
         public String isSummaryDisplayed { get; set; }
         public String isConditionallyDisplayed { get; set; }
-        public String conditionalSqlLogic { get; set; }
+        [JsonProperty("conditionalSqlLogic")]
+        public String booleanCalculationSqlLogic { get; set; }
         public String isUnixEpochDateTime { get; set; }
         public String isNavURL { get; set; }
         public String NavURLLinkText { get; set; }
