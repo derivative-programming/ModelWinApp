@@ -70,6 +70,13 @@ namespace JsonManipulator
             rpt.reportButton = new List<reportButton>();
             rpt.reportButton.Add(reportButton);
 
+            if (chkSubscribeToOwnerObject.Checked)
+            {
+                Utils.AddPropSubscriptionFor(
+                    Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text.Trim()).FirstOrDefault(),
+                    rpt.name);
+            }
+
             Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text.Trim()).FirstOrDefault().report.Add(rpt);
             ((Form1)Application.OpenForms["Form1"]).showMessage("Report Detail was added successfully");
             ((Form1)Application.OpenForms["Form1"]).AddToTree(rpt);

@@ -71,6 +71,15 @@ namespace JsonManipulator
 
 
             Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x=>x.name== txtOwner.Text.Trim()).FirstOrDefault().objectWorkflow.Add(form);
+
+
+            if (chkSubscribeToOwnerObject.Checked)
+            {
+                Utils.AddPropSubscriptionFor(
+                    Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text.Trim()).FirstOrDefault(),
+                    form.Name);
+            }
+
             ((Form1)Application.OpenForms["Form1"]).AddToTree(form);
             ((Form1)Application.OpenForms["Form1"]).showMessage("Flow was added successfully");
             this.Close();

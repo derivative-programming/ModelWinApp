@@ -64,6 +64,7 @@ namespace JsonManipulator
             if (txtChild.Text.Length > 0)
             {
                 rpt.pageTitleText = Utils.ConvertPascalToSpaced(txtChild.Text.Trim());
+
             }
 
             Models.reportButton reportButton = new reportButton();
@@ -75,6 +76,24 @@ namespace JsonManipulator
             rpt.reportButton.Add(reportButton);
 
             Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text.Trim()).FirstOrDefault().report.Add(rpt);
+
+            if (chkSubscribeToOwnerObject.Checked)
+            {
+                Utils.AddPropSubscriptionFor(
+                    Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text.Trim()).FirstOrDefault(),
+                    rpt.name);
+            }
+            if (txtChild.Text.Length > 0)
+            {
+                if (chkSubscribeToTargetChild.Checked)
+                {
+                    Utils.AddPropSubscriptionFor(
+                        Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtChild.Text.Trim()).FirstOrDefault(),
+                        rpt.name);
+                }
+            }
+
+
             ((Form1)Application.OpenForms["Form1"]).showMessage("Report Grid was added successfully");
             ((Form1)Application.OpenForms["Form1"]).AddToTree(rpt);
             this.Close();

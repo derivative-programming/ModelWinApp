@@ -44,6 +44,8 @@ namespace JsonManipulator
             this.txtAPIVersion = new System.Windows.Forms.TextBox();
             this.txtAPIName = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.chkSubscribeToOwnerObject = new System.Windows.Forms.CheckBox();
+            this.chkSubscribeToTargetChild = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lblName
@@ -64,7 +66,7 @@ namespace JsonManipulator
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(137, 230);
+            this.btnAccept.Location = new System.Drawing.Point(137, 276);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
             this.btnAccept.TabIndex = 6;
@@ -75,7 +77,7 @@ namespace JsonManipulator
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(218, 230);
+            this.btnCancel.Location = new System.Drawing.Point(218, 276);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 7;
@@ -144,7 +146,7 @@ namespace JsonManipulator
             // 
             this.lblValidationError.AutoSize = true;
             this.lblValidationError.ForeColor = System.Drawing.Color.Red;
-            this.lblValidationError.Location = new System.Drawing.Point(12, 204);
+            this.lblValidationError.Location = new System.Drawing.Point(12, 250);
             this.lblValidationError.Name = "lblValidationError";
             this.lblValidationError.Size = new System.Drawing.Size(133, 13);
             this.lblValidationError.TabIndex = 14;
@@ -184,13 +186,35 @@ namespace JsonManipulator
             this.label4.TabIndex = 16;
             this.label4.Text = "&API Name";
             // 
+            // chkSubscribeToOwnerObject
+            // 
+            this.chkSubscribeToOwnerObject.AutoSize = true;
+            this.chkSubscribeToOwnerObject.Location = new System.Drawing.Point(12, 207);
+            this.chkSubscribeToOwnerObject.Name = "chkSubscribeToOwnerObject";
+            this.chkSubscribeToOwnerObject.Size = new System.Drawing.Size(187, 17);
+            this.chkSubscribeToOwnerObject.TabIndex = 18;
+            this.chkSubscribeToOwnerObject.Text = "Subscribe To Owner Object Props";
+            this.chkSubscribeToOwnerObject.UseVisualStyleBackColor = true;
+            // 
+            // chkSubscribeToTargetChild
+            // 
+            this.chkSubscribeToTargetChild.AutoSize = true;
+            this.chkSubscribeToTargetChild.Location = new System.Drawing.Point(12, 230);
+            this.chkSubscribeToTargetChild.Name = "chkSubscribeToTargetChild";
+            this.chkSubscribeToTargetChild.Size = new System.Drawing.Size(213, 17);
+            this.chkSubscribeToTargetChild.TabIndex = 17;
+            this.chkSubscribeToTargetChild.Text = "Subscribe To Target Child Object Props";
+            this.chkSubscribeToTargetChild.UseVisualStyleBackColor = true;
+            // 
             // frmAddApiGetReport
             // 
             this.AcceptButton = this.btnAccept;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(304, 265);
+            this.ClientSize = new System.Drawing.Size(304, 309);
             this.ControlBox = false;
+            this.Controls.Add(this.chkSubscribeToOwnerObject);
+            this.Controls.Add(this.chkSubscribeToTargetChild);
             this.Controls.Add(this.txtAPIName);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lblValidationError);
@@ -234,5 +258,7 @@ namespace JsonManipulator
         private System.Windows.Forms.TextBox txtAPIVersion;
         private System.Windows.Forms.TextBox txtAPIName;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox chkSubscribeToOwnerObject;
+        private System.Windows.Forms.CheckBox chkSubscribeToTargetChild;
     }
 }

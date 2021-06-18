@@ -40,6 +40,7 @@ namespace JsonManipulator
             this.btnOwner = new System.Windows.Forms.Button();
             this.btnRoles = new System.Windows.Forms.Button();
             this.lblValidationError = new System.Windows.Forms.Label();
+            this.chkSubscribeToOwnerObject = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lblName
@@ -77,7 +78,7 @@ namespace JsonManipulator
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(137, 156);
+            this.btnAccept.Location = new System.Drawing.Point(137, 179);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
             this.btnAccept.TabIndex = 5;
@@ -88,7 +89,7 @@ namespace JsonManipulator
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(218, 156);
+            this.btnCancel.Location = new System.Drawing.Point(218, 179);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 6;
@@ -138,19 +139,30 @@ namespace JsonManipulator
             // 
             this.lblValidationError.AutoSize = true;
             this.lblValidationError.ForeColor = System.Drawing.Color.Red;
-            this.lblValidationError.Location = new System.Drawing.Point(12, 126);
+            this.lblValidationError.Location = new System.Drawing.Point(12, 149);
             this.lblValidationError.Name = "lblValidationError";
             this.lblValidationError.Size = new System.Drawing.Size(133, 13);
             this.lblValidationError.TabIndex = 11;
             this.lblValidationError.Text = "Test Valiation Error Display";
+            // 
+            // chkSubscribeToOwnerObject
+            // 
+            this.chkSubscribeToOwnerObject.AutoSize = true;
+            this.chkSubscribeToOwnerObject.Location = new System.Drawing.Point(12, 129);
+            this.chkSubscribeToOwnerObject.Name = "chkSubscribeToOwnerObject";
+            this.chkSubscribeToOwnerObject.Size = new System.Drawing.Size(187, 17);
+            this.chkSubscribeToOwnerObject.TabIndex = 21;
+            this.chkSubscribeToOwnerObject.Text = "Subscribe To Owner Object Props";
+            this.chkSubscribeToOwnerObject.UseVisualStyleBackColor = true;
             // 
             // frmReportDetail
             // 
             this.AcceptButton = this.btnAccept;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(305, 189);
+            this.ClientSize = new System.Drawing.Size(305, 215);
             this.ControlBox = false;
+            this.Controls.Add(this.chkSubscribeToOwnerObject);
             this.Controls.Add(this.lblValidationError);
             this.Controls.Add(this.btnRoles);
             this.Controls.Add(this.btnOwner);
@@ -186,5 +198,6 @@ namespace JsonManipulator
         private System.Windows.Forms.Button btnOwner;
         private System.Windows.Forms.Button btnRoles;
         private System.Windows.Forms.Label lblValidationError;
+        private System.Windows.Forms.CheckBox chkSubscribeToOwnerObject;
     }
 }
