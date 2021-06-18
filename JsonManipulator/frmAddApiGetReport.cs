@@ -163,10 +163,26 @@ namespace JsonManipulator
         }
 
         private void button1_Click(object sender, EventArgs e)
+        { 
+            using (var form = new APISiteList())
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string val = form.ReturnValue;
+                    setAPISite(val);
+                }
+            }
+        }
+
+        private void label4_Click(object sender, EventArgs e)
         {
 
-            APISiteList frm = new APISiteList();
-            frm.ShowDialog();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

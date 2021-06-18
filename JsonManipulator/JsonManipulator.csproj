@@ -121,6 +121,12 @@
     <Compile Include="FrmAddColumnDestinationButton.Designer.cs">
       <DependentUpon>FrmAddColumnDestinationButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmAddAPIFlow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddAPIFlow.Designer.cs">
+      <DependentUpon>frmAddAPIFlow.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmBulkAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -300,6 +306,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAddColumnDestinationButton.resx">
       <DependentUpon>FrmAddColumnDestinationButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAddAPIFlow.resx">
+      <DependentUpon>frmAddAPIFlow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmBulkAdd.resx">
       <DependentUpon>FrmBulkAdd.cs</DependentUpon>

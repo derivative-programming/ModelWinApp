@@ -30,7 +30,8 @@ namespace JsonManipulator.Enums
        OBJECT_EDIT,
        ADD_FLOW,
         API_ENDPOINT,
-        ADD_API_GET_REPORT
+        ADD_API_GET_REPORT,
+        ADD_API_FLOW
     }
     public enum Booleans
     {

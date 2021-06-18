@@ -70,6 +70,9 @@ namespace JsonManipulator
                     case FormObjects.ADD_API_GET_REPORT:
                         ((frmAddApiGetReport)Application.OpenForms["frmAddApiGetReport"]).setOwner(listObjects.SelectedItem.ToString());
                         break;
+                    case FormObjects.ADD_API_FLOW:
+                        ((frmAddAPIFlow)Application.OpenForms["frmAddAPIFlow"]).setOwner(listObjects.SelectedItem.ToString());
+                        break;
                     case FormObjects.REPORT_CHILD:
                         ((frmReportGrid)Application.OpenForms["frmReportGrid"]).setChild(listObjects.SelectedItem.ToString());
                         break;

@@ -161,6 +161,7 @@ namespace JsonManipulator
             this.label2.Size = new System.Drawing.Size(138, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "API Version (V#### format)";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // txtAPIVersion
             // 
@@ -177,6 +178,7 @@ namespace JsonManipulator
             this.txtAPIName.ReadOnly = true;
             this.txtAPIName.Size = new System.Drawing.Size(200, 20);
             this.txtAPIName.TabIndex = 1;
+            this.txtAPIName.TabStop = false;
             this.txtAPIName.TextChanged += new System.EventHandler(this.txtAPIName_TextChanged);
             // 
             // label4
@@ -187,6 +189,7 @@ namespace JsonManipulator
             this.label4.Size = new System.Drawing.Size(55, 13);
             this.label4.TabIndex = 16;
             this.label4.Text = "&API Name";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // chkSubscribeToOwnerObject
             // 

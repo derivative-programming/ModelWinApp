@@ -609,8 +609,6 @@ namespace JsonManipulator
         private void flowToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            frmAddFlow form = new frmAddFlow();
-            form.ShowDialog();
         }
 
         private void aPISiteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -636,6 +634,20 @@ namespace JsonManipulator
         {
             frmAddApiGetReport frmAddApiGetReport = new frmAddApiGetReport();
             frmAddApiGetReport.ShowDialog();
+        }
+
+        private void generalToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+            frmAddFlow form = new frmAddFlow();
+            form.ShowDialog();
+        }
+
+        private void aPIToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            frmAddAPIFlow form = new frmAddAPIFlow();
+            form.ShowDialog();
         }
     }
 }

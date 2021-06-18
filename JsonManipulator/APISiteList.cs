@@ -15,6 +15,7 @@ namespace JsonManipulator
     public partial class APISiteList : Form
     {
 
+        public string ReturnValue { get; set; }
         public APISiteList()
         {
             InitializeComponent(); 
@@ -48,9 +49,11 @@ namespace JsonManipulator
 
         private void listObjects_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(listObjects.SelectedItem!=null)
+            this.DialogResult = DialogResult.Cancel;
+            if (listObjects.SelectedItem!=null)
             {
-                ((frmAddApiGetReport)Application.OpenForms["frmAddApiGetReport"]).setAPISite(listObjects.SelectedItem.ToString());
+                this.DialogResult = DialogResult.OK;
+                this.ReturnValue = listObjects.SelectedItem.ToString(); 
 
             }
             this.Close();

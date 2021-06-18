@@ -371,6 +371,10 @@ namespace JsonManipulator
                 {
                     ((Form1)Application.OpenForms["Form1"]).updateTree(value, 1);
                 }
+                if (property.Equals("OwnerObject") || property.Equals("targetChildObject"))
+                {
+                    SetPropSubscriptionCheckboxes();
+                }
             }
         }
 
