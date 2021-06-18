@@ -67,8 +67,14 @@ namespace JsonManipulator
                     case FormObjects.REPORT:
                         ((frmReportGrid)Application.OpenForms["frmReportGrid"]).setOwner(listObjects.SelectedItem.ToString());
                         break;
+                    case FormObjects.ADD_API_GET_REPORT:
+                        ((frmAddApiGetReport)Application.OpenForms["frmAddApiGetReport"]).setOwner(listObjects.SelectedItem.ToString());
+                        break;
                     case FormObjects.REPORT_CHILD:
                         ((frmReportGrid)Application.OpenForms["frmReportGrid"]).setChild(listObjects.SelectedItem.ToString());
+                        break;
+                    case FormObjects.ADD_API_GET_REPORT_CHILD:
+                        ((frmAddApiGetReport)Application.OpenForms["frmAddApiGetReport"]).setChild(listObjects.SelectedItem.ToString());
                         break;
                     case FormObjects.DBOBJECT_RPT_DETAIL:
                         ((frmReportDetail)Application.OpenForms["frmReportDetail"]).setOwner(listObjects.SelectedItem.ToString());

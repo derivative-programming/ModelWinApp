@@ -205,6 +205,12 @@
     <Compile Include="frmReportDetail.Designer.cs">
       <DependentUpon>frmReportDetail.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmAddApiGetReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddApiGetReport.Designer.cs">
+      <DependentUpon>frmAddApiGetReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmReportGrid.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -330,6 +336,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmReportDetail.resx">
       <DependentUpon>frmReportDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAddApiGetReport.resx">
+      <DependentUpon>frmAddApiGetReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmReportGrid.resx">
       <DependentUpon>frmReportGrid.cs</DependentUpon>

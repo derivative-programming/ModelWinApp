@@ -631,5 +631,11 @@ namespace JsonManipulator
             frmAddDBObjectLookup frm = new frmAddDBObjectLookup();
             frm.ShowDialog();
         }
+
+        private void aPIGetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAddApiGetReport frmAddApiGetReport = new frmAddApiGetReport();
+            frmAddApiGetReport.ShowDialog();
+        }
     }
 }

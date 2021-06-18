@@ -299,21 +299,21 @@ namespace JsonManipulator
                         return;
                     }
                 }
-                if (property.ToLower() == "apiContextTargetName".ToLower())
+                if (property.ToLower() == "apiGetContextTargetName".ToLower())
                 {
-                    Models.ObjectMap destinationOwnerObject = Utils.GetDestinationOwnerObject(value);
+                    Models.ObjectMap destinationOwnerObject = Utils.GetOwnerObject(value);
                     if (destinationOwnerObject == null)
                     {
                         gridEndPoints.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "";
                         return;
                     }
-                    typeof(apiEndPoint).GetProperty("apiContextObjectName").SetValue(
+                    typeof(apiEndPoint).GetProperty("apiGetContextObjectName").SetValue(
                         Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _apiSite.name).FirstOrDefault().apiEndPoint.ElementAt(lstEndPoints.SelectedIndex), destinationOwnerObject.name);
                 }
 
                 if (property.ToLower() == "apiPostContextTargetName".ToLower())
                 {
-                    Models.ObjectMap destinationOwnerObject = Utils.GetDestinationOwnerObject(value);
+                    Models.ObjectMap destinationOwnerObject = Utils.GetOwnerObject(value);
                     if (destinationOwnerObject == null)
                     {
                         gridEndPoints.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "";
@@ -325,7 +325,7 @@ namespace JsonManipulator
 
                 if (property.ToLower() == "apiPutContextTargetName".ToLower())
                 {
-                    Models.ObjectMap destinationOwnerObject = Utils.GetDestinationOwnerObject(value);
+                    Models.ObjectMap destinationOwnerObject = Utils.GetOwnerObject(value);
                     if (destinationOwnerObject == null)
                     {
                         gridEndPoints.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "";
@@ -337,7 +337,7 @@ namespace JsonManipulator
 
                 if (property.ToLower() == "apiDeleteContextTargetName".ToLower())
                 {
-                    Models.ObjectMap destinationOwnerObject = Utils.GetDestinationOwnerObject(value);
+                    Models.ObjectMap destinationOwnerObject = Utils.GetOwnerObject(value);
                     if (destinationOwnerObject == null)
                     {
                         gridEndPoints.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "";
@@ -431,7 +431,7 @@ namespace JsonManipulator
                     l_objGridDropbox.DisplayMember = "Display";
                     l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
                 }
-                if (propertyName.Equals("apiContextTargetName", StringComparison.OrdinalIgnoreCase))
+                if (propertyName.Equals("apiGetContextTargetName", StringComparison.OrdinalIgnoreCase))
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview  
                     ReportList formsList = new ReportList(FormObjects.API_ENDPOINT, e.RowIndex, e.ColumnIndex);
@@ -440,19 +440,19 @@ namespace JsonManipulator
                 if (propertyName.Equals("apiPostContextTargetName", StringComparison.OrdinalIgnoreCase))
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview  
-                    ReportList formsList = new ReportList(FormObjects.API_ENDPOINT, e.RowIndex, e.ColumnIndex);
+                    FlowList formsList = new FlowList(ParentType.API_ENDPOINT, e.RowIndex, e.ColumnIndex);
                     formsList.ShowDialog();
                 }
                 if (propertyName.Equals("apiPutContextTargetName", StringComparison.OrdinalIgnoreCase))
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview  
-                    ReportList formsList = new ReportList(FormObjects.API_ENDPOINT, e.RowIndex, e.ColumnIndex);
+                    FlowList formsList = new FlowList(ParentType.API_ENDPOINT, e.RowIndex, e.ColumnIndex);
                     formsList.ShowDialog();
                 }
                 if (propertyName.Equals("apiDeleteContextTargetName", StringComparison.OrdinalIgnoreCase))
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview  
-                    ReportList formsList = new ReportList(FormObjects.API_ENDPOINT, e.RowIndex, e.ColumnIndex);
+                    FlowList formsList = new FlowList(ParentType.API_ENDPOINT, e.RowIndex, e.ColumnIndex);
                     formsList.ShowDialog();
                 }
             }

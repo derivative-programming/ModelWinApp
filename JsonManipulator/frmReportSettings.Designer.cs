@@ -81,6 +81,8 @@ namespace JsonManipulator
             this.rtbJSON = new System.Windows.Forms.RichTextBox();
             this.btnAddColumnButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.chkSubscribeToTargetChild = new System.Windows.Forms.CheckBox();
+            this.chkSubscribeToOwnerObject = new System.Windows.Forms.CheckBox();
             tabSettings = new System.Windows.Forms.TabPage();
             tabSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataProperties)).BeginInit();
@@ -394,7 +396,7 @@ namespace JsonManipulator
             this.pnlColumnsLeftTop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlColumnsLeftTop.Location = new System.Drawing.Point(0, 0);
             this.pnlColumnsLeftTop.Name = "pnlColumnsLeftTop";
-            this.pnlColumnsLeftTop.Size = new System.Drawing.Size(219, 290);
+            this.pnlColumnsLeftTop.Size = new System.Drawing.Size(219, 226);
             this.pnlColumnsLeftTop.TabIndex = 8;
             // 
             // lstColumns
@@ -403,21 +405,23 @@ namespace JsonManipulator
             this.lstColumns.FormattingEnabled = true;
             this.lstColumns.Location = new System.Drawing.Point(0, 0);
             this.lstColumns.Name = "lstColumns";
-            this.lstColumns.Size = new System.Drawing.Size(219, 290);
+            this.lstColumns.Size = new System.Drawing.Size(219, 226);
             this.lstColumns.TabIndex = 1;
             this.lstColumns.SelectedIndexChanged += new System.EventHandler(this.lstColumns_SelectedIndexChanged);
             // 
             // pnlColumnsLeftBottom
             // 
+            this.pnlColumnsLeftBottom.Controls.Add(this.chkSubscribeToOwnerObject);
+            this.pnlColumnsLeftBottom.Controls.Add(this.chkSubscribeToTargetChild);
             this.pnlColumnsLeftBottom.Controls.Add(this.button1);
             this.pnlColumnsLeftBottom.Controls.Add(this.btnAddColumnButton);
             this.pnlColumnsLeftBottom.Controls.Add(this.btnColumnsAdd);
             this.pnlColumnsLeftBottom.Controls.Add(this.btnColumnsMoveUp);
             this.pnlColumnsLeftBottom.Controls.Add(this.btnColumnsMoveDown);
             this.pnlColumnsLeftBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlColumnsLeftBottom.Location = new System.Drawing.Point(0, 290);
+            this.pnlColumnsLeftBottom.Location = new System.Drawing.Point(0, 226);
             this.pnlColumnsLeftBottom.Name = "pnlColumnsLeftBottom";
-            this.pnlColumnsLeftBottom.Size = new System.Drawing.Size(219, 161);
+            this.pnlColumnsLeftBottom.Size = new System.Drawing.Size(219, 225);
             this.pnlColumnsLeftBottom.TabIndex = 7;
             // 
             // btnColumnsAdd
@@ -642,6 +646,28 @@ namespace JsonManipulator
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // chkSubscribeToTargetChild
+            // 
+            this.chkSubscribeToTargetChild.AutoSize = true;
+            this.chkSubscribeToTargetChild.Location = new System.Drawing.Point(6, 203);
+            this.chkSubscribeToTargetChild.Name = "chkSubscribeToTargetChild";
+            this.chkSubscribeToTargetChild.Size = new System.Drawing.Size(213, 17);
+            this.chkSubscribeToTargetChild.TabIndex = 7;
+            this.chkSubscribeToTargetChild.Text = "Subscribe To Target Child Object Props";
+            this.chkSubscribeToTargetChild.UseVisualStyleBackColor = true;
+            this.chkSubscribeToTargetChild.CheckedChanged += new System.EventHandler(this.chkSubscribeToTargetChild_CheckedChanged);
+            // 
+            // chkSubscribeToOwnerObject
+            // 
+            this.chkSubscribeToOwnerObject.AutoSize = true;
+            this.chkSubscribeToOwnerObject.Location = new System.Drawing.Point(6, 180);
+            this.chkSubscribeToOwnerObject.Name = "chkSubscribeToOwnerObject";
+            this.chkSubscribeToOwnerObject.Size = new System.Drawing.Size(187, 17);
+            this.chkSubscribeToOwnerObject.TabIndex = 8;
+            this.chkSubscribeToOwnerObject.Text = "Subscribe To Owner Object Props";
+            this.chkSubscribeToOwnerObject.UseVisualStyleBackColor = true;
+            this.chkSubscribeToOwnerObject.CheckedChanged += new System.EventHandler(this.chkSubscribeToOwnerObject_CheckedChanged);
+            // 
             // frmReportSettings
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -670,6 +696,7 @@ namespace JsonManipulator
             this.pnlColumnsLeft.ResumeLayout(false);
             this.pnlColumnsLeftTop.ResumeLayout(false);
             this.pnlColumnsLeftBottom.ResumeLayout(false);
+            this.pnlColumnsLeftBottom.PerformLayout();
             this.tabButtons.ResumeLayout(false);
             this.pnlButtonsRight.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
@@ -736,5 +763,7 @@ namespace JsonManipulator
         private System.Windows.Forms.RichTextBox rtbJSON;
         private System.Windows.Forms.Button btnAddColumnButton;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox chkSubscribeToOwnerObject;
+        private System.Windows.Forms.CheckBox chkSubscribeToTargetChild;
     }
 }

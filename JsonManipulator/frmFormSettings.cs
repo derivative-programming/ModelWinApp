@@ -20,11 +20,12 @@ namespace JsonManipulator
         List<objectWorkflowParam> _controls;
         List<objectWorkflowButton> _buttons;
         List<objectWorkflowOutputVar> _outputVars;
+        bool _isLoadingPropSubscriptions = false;
         public frmFormSettings(string objWFName)
         {
             InitializeComponent();
             this._form = Utils.GetObjWFModelItem(objWFName);
-            this._ownerObject = Utils.GetDestinationOwnerObject(objWFName);
+            this._ownerObject = Utils.GetOwnerObject(objWFName);
         }
 
         private void frmFormSettings_Load(object sender, EventArgs e)
@@ -44,6 +45,7 @@ namespace JsonManipulator
             setSetting();
             grpMain.Text = _form.Name;
             setControlsList();
+            SetPropSubscriptionCheckboxes();
 
             splitter1.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmFormSettings.splitter1.SplitPosition", "200"));
             if (Utils.IsObjectWorkflowAForm(this._form))
@@ -99,8 +101,28 @@ namespace JsonManipulator
                 if (lstControl.Items.Count > 0)
                     lstControl.SelectedIndex = lstControl.Items.Count - 1;
             }
-           
+
         }
+
+        public void SetPropSubscriptionCheckboxes()
+        {
+            _isLoadingPropSubscriptions = true;
+            chkSubscribeToOwnerObject.Checked = Utils.IsPropSubscriptionEnabledFor(_ownerObject, _form.Name);
+            //if (_form.TargetChildObject != null &&
+            //    _form.TargetChildObject.Length > 0)
+            //{
+            //    Models.ObjectMap objectMap = Utils.GetObjectModelItem(_form.TargetChildObject);
+            //    chkSubscribeToTargetChild.Enabled = true;
+            //    chkSubscribeToTargetChild.Checked = Utils.IsPropSubscriptionEnabledFor(objectMap, _form.Name);
+            //}
+            //else
+            //{
+            //    chkSubscribeToTargetChild.Enabled = false;
+            //    chkSubscribeToTargetChild.Checked = false;
+            //}
+            _isLoadingPropSubscriptions = false;
+        }
+
         public void setButtonsList()
         {
             lstButtons.Items.Clear();
@@ -395,7 +417,7 @@ namespace JsonManipulator
                 }
                 if (property.ToLower() == "destinationTargetName".ToLower())
                 {
-                    Models.ObjectMap destinationOwnerObject = Utils.GetDestinationOwnerObject(value);
+                    Models.ObjectMap destinationOwnerObject = Utils.GetOwnerObject(value);
                     if (destinationOwnerObject == null)
                     {
                         gridButtons.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "";
@@ -702,6 +724,20 @@ namespace JsonManipulator
                 NullValueHandling = NullValueHandling.Ignore
             });
 
+        }
+
+        private void chkSubscribeToOwnerObject_CheckedChanged(object sender, EventArgs e)
+        { 
+            if (_isLoadingPropSubscriptions)
+                return;
+            if (chkSubscribeToOwnerObject.Checked)
+            {
+                Utils.AddPropSubscriptionFor(_ownerObject, _form.Name);
+            }
+            else
+            {
+                Utils.RemovePropSubscriptionFor(_ownerObject, _form.Name);
+            }
         }
     }
 }

@@ -42,7 +42,7 @@ namespace JsonManipulator
             this.listObjects.FormattingEnabled = true;
             this.listObjects.Location = new System.Drawing.Point(0, 55);
             this.listObjects.Name = "listObjects";
-            this.listObjects.Size = new System.Drawing.Size(227, 311);
+            this.listObjects.Size = new System.Drawing.Size(339, 311);
             this.listObjects.TabIndex = 0;
             this.listObjects.SelectedIndexChanged += new System.EventHandler(this.listObjects_SelectedIndexChanged);
             // 
@@ -59,7 +59,7 @@ namespace JsonManipulator
             // 
             this.txtFilter.Location = new System.Drawing.Point(12, 25);
             this.txtFilter.Name = "txtFilter";
-            this.txtFilter.Size = new System.Drawing.Size(200, 20);
+            this.txtFilter.Size = new System.Drawing.Size(290, 20);
             this.txtFilter.TabIndex = 2;
             this.txtFilter.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -70,13 +70,13 @@ namespace JsonManipulator
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(227, 55);
+            this.panel1.Size = new System.Drawing.Size(339, 55);
             this.panel1.TabIndex = 3;
             // 
             // ObjectsList
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(227, 366);
+            this.ClientSize = new System.Drawing.Size(339, 366);
             this.Controls.Add(this.listObjects);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

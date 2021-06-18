@@ -16,12 +16,13 @@ namespace JsonManipulator
     public partial class frmReportSettings : Form
     {
         Report _rpt = new Report();
-        ObjectMap _ownerObject; 
+        ObjectMap _ownerObject;
+        bool _isLoadingPropSubscriptions = false;
         public frmReportSettings(string reportName)
         {
             InitializeComponent();
             this._rpt = Utils.GetReportModelItem(reportName);
-            this._ownerObject = Utils.GetDestinationOwnerObject(_rpt.name);
+            this._ownerObject = Utils.GetOwnerObject(_rpt.name);
             this.grpMain.Text = _rpt.name;
         }
 
@@ -30,6 +31,7 @@ namespace JsonManipulator
             setSetting();
             setFiltersList();
             setColumnsList();
+            SetPropSubscriptionCheckboxes();
             setButtonsList();
             splitter1.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmReportSettings.splitter1.SplitPosition", "200"));
             splitter2.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmReportSettings.splitter2.SplitPosition", "200"));
@@ -83,7 +85,28 @@ namespace JsonManipulator
             }
             if (lstColumns.Items.Count > 0)
                 lstColumns.SelectedIndex = lstColumns.Items.Count - 1;
+             
         }
+
+        public void SetPropSubscriptionCheckboxes()
+        {
+            _isLoadingPropSubscriptions = true;
+            chkSubscribeToOwnerObject.Checked = Utils.IsPropSubscriptionEnabledFor(_ownerObject, _rpt.name);
+            if (_rpt.TargetChildObject != null &&
+                _rpt.TargetChildObject.Length > 0)
+            {
+                Models.ObjectMap objectMap = Utils.GetObjectModelItem(_rpt.TargetChildObject);
+                chkSubscribeToTargetChild.Enabled = true;
+                chkSubscribeToTargetChild.Checked = Utils.IsPropSubscriptionEnabledFor(objectMap, _rpt.name);
+            }
+            else
+            {
+                chkSubscribeToTargetChild.Enabled = false;
+                chkSubscribeToTargetChild.Checked = false;
+            }
+            _isLoadingPropSubscriptions = false;
+        }
+
         public void setButtonsList()
         {
             lstButtons.Items.Clear();
@@ -302,6 +325,10 @@ namespace JsonManipulator
                 {
                     ((Form1)Application.OpenForms["Form1"]).updateTree(value, 2);
                 }
+                if (property.Equals("OwnerObject") || property.Equals("TargetChildObject"))
+                {
+                    SetPropSubscriptionCheckboxes();
+                }
             }
            
         }
@@ -351,7 +378,7 @@ namespace JsonManipulator
                 }
                 if (property.ToLower() == "buttonDestinationTargetName".ToLower())
                 {
-                    Models.ObjectMap destinationOwnerObject = Utils.GetDestinationOwnerObject(value);
+                    Models.ObjectMap destinationOwnerObject = Utils.GetOwnerObject(value);
                     if (destinationOwnerObject == null)
                     {
                         gridColumns.Rows[gridButtons.CurrentCell.RowIndex].Cells[gridButtons.CurrentCell.ColumnIndex].Value = "";
@@ -557,7 +584,7 @@ namespace JsonManipulator
                 }
                 if (property.ToLower() == "destinationTargetName".ToLower())
                 {
-                    Models.ObjectMap destinationOwnerObject = Utils.GetDestinationOwnerObject(value);
+                    Models.ObjectMap destinationOwnerObject = Utils.GetOwnerObject(value);
                     if (destinationOwnerObject == null)
                     {
                         gridButtons.Rows[gridButtons.CurrentCell.RowIndex].Cells[gridButtons.CurrentCell.ColumnIndex].Value = "";
@@ -724,6 +751,35 @@ namespace JsonManipulator
 
             FrmAddColumnAsyncButton frmAddColumnAsyncButton = new FrmAddColumnAsyncButton(_rpt.name, _ownerObject.name);
             frmAddColumnAsyncButton.ShowDialog();
+        }
+
+        private void chkSubscribeToOwnerObject_CheckedChanged(object sender, EventArgs e)
+        {
+            if (_isLoadingPropSubscriptions)
+                return;
+            if(chkSubscribeToOwnerObject.Checked)
+            {
+                Utils.AddPropSubscriptionFor(_ownerObject, _rpt.name);
+            }
+            else
+            {
+                Utils.RemovePropSubscriptionFor(_ownerObject, _rpt.name);
+            } 
+        }
+
+        private void chkSubscribeToTargetChild_CheckedChanged(object sender, EventArgs e)
+        {
+            if (_isLoadingPropSubscriptions)
+                return;
+            Models.ObjectMap objectMap = Utils.GetObjectModelItem(_rpt.TargetChildObject);
+            if (chkSubscribeToTargetChild.Checked)
+            { 
+                Utils.AddPropSubscriptionFor(objectMap, _rpt.name);
+            }
+            else
+            {
+                Utils.RemovePropSubscriptionFor(objectMap, _rpt.name); 
+            }
         }
     }
 }

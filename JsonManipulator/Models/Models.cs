@@ -768,11 +768,11 @@ namespace JsonManipulator.Models
         [JsonProperty("description")]
         public string description { get; set; }
         [JsonProperty("apiContextTargetName")]
-        public string apiContextTargetName { get; set; }
+        public string apiGetContextTargetName { get; set; }
         [JsonProperty("apiCodeParamName")]
         public string apiCodeParamName { get; set; }
         [JsonProperty("apiContextObjectName")]
-        public string apiContextObjectName { get; set; }
+        public string apiGetContextObjectName { get; set; }
         [JsonProperty("apiPostContextObjectName")]
         public string apiPostContextObjectName { get; set; }
         [JsonProperty("apiPostContextTargetName")]

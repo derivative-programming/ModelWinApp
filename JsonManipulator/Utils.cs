@@ -673,7 +673,7 @@ namespace JsonManipulator
         {
             List<string> result = new List<string>();
             result.Add("name"); 
-            result.Add("apiContextObjectName");
+            result.Add("apiGetContextObjectName");
             result.Add("apiPostContextObjectName");
             result.Add("apiPutContextObjectName");
             result.Add("apiDeleteContextObjectName");
@@ -718,7 +718,7 @@ namespace JsonManipulator
             return result;
         }
 
-        public static Models.ObjectMap GetDestinationOwnerObject(string destinationName)
+        public static Models.ObjectMap GetOwnerObject(string name)
         {
             Models.ObjectMap result = null;
 
@@ -729,7 +729,7 @@ namespace JsonManipulator
                 {
                     foreach (var objWF in dbObject.objectWorkflow)
                     {
-                        if (objWF.Name.ToLower().Trim() == destinationName.ToLower().Trim())
+                        if (objWF.Name.ToLower().Trim() == name.ToLower().Trim())
                         {
                             result = dbObject;
                         }
@@ -740,7 +740,7 @@ namespace JsonManipulator
                 {
                     foreach (var rpt in dbObject.report)
                     { 
-                        if (rpt.name.ToLower().Trim() == destinationName.ToLower().Trim())
+                        if (rpt.name.ToLower().Trim() == name.ToLower().Trim())
                         {
                             result = dbObject;
                         }
@@ -1010,6 +1010,58 @@ namespace JsonManipulator
         public static string ConvertPascalToSpaced(string value)
         {
             return Regex.Replace(value, "(\\B[A-Z])", " $1"); 
+        }
+
+        public static Models.propSubscription GetPropSubscriptionFor(Models.ObjectMap objectMap, string name)
+        {
+            Models.propSubscription result = null;
+             
+            if (objectMap.propSubscription == null)
+            {
+                objectMap.propSubscription = new List<propSubscription>();
+            }
+
+            if (objectMap.propSubscription.Where(x => x.destinationTargetName == name).ToList().Count > 0)
+            {
+                result = objectMap.propSubscription.Where(x => x.destinationTargetName == name).FirstOrDefault();
+            }
+
+            return result;
+        }
+         
+        public static bool IsPropSubscriptionEnabledFor(Models.ObjectMap objectMap, string name)
+        {
+            bool result = false;
+
+            Models.propSubscription propSubscription = GetPropSubscriptionFor(objectMap, name);
+            if (propSubscription != null &&
+                propSubscription.isDisabled == "false")
+            {
+                result = true;
+            }
+
+            return result;
+        }
+        public static void AddPropSubscriptionFor(Models.ObjectMap objectMap, string name)
+        {
+            Models.propSubscription propSubscription = GetPropSubscriptionFor(objectMap, name); 
+            if(propSubscription == null)
+            {
+                Models.ObjectMap ownerObjectMap = GetOwnerObject(name);
+                propSubscription = new propSubscription();
+                propSubscription.destinationTargetName = name;
+                propSubscription.destinationContextObjectName = ownerObjectMap.name;
+                objectMap.propSubscription.Add(propSubscription);
+            }
+            propSubscription.isDisabled = "false";
+        }
+        public static void RemovePropSubscriptionFor(Models.ObjectMap objectMap, string name)
+        {
+            Models.propSubscription propSubscription = GetPropSubscriptionFor(objectMap, name);
+            if (propSubscription != null)
+            {
+                propSubscription.isDisabled = "true";
+            } 
         }
     }
 }

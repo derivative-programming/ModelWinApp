@@ -75,6 +75,9 @@ namespace JsonManipulator
                     case ParentType.REPORT_COLUMN_ASYNC_BUTTON:
                         ((FrmAddColumnAsyncButton)Application.OpenForms["FrmAddColumnAsyncButton"]).SetDestination(listObjects.SelectedItem.ToString());
                         break;
+                    case ParentType.API_ENDPOINT:
+                        ((frmAPISettings)Application.OpenForms["frmAPISettings"]).setEndPointData(listObjects.SelectedItem.ToString(), _row, _col);
+                        break;
                 }
                   
             }

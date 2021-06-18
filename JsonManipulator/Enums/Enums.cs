@@ -18,6 +18,7 @@ namespace JsonManipulator.Enums
        DBBJECT,
        REPORT,
        REPORT_CHILD,
+       ADD_API_GET_REPORT_CHILD,
        DBOBJECT_RPT_DETAIL,
        RPT_DETAIL_ROLE,
        DBBJECT_EDIT,
@@ -28,7 +29,8 @@ namespace JsonManipulator.Enums
        REPORT_COLUMNS,
        OBJECT_EDIT,
        ADD_FLOW,
-        API_ENDPOINT
+        API_ENDPOINT,
+        ADD_API_GET_REPORT
     }
     public enum Booleans
     {
@@ -42,7 +44,8 @@ namespace JsonManipulator.Enums
         REPORT_BUTTON,
         REPORT_COLUMN,
         REPORT_COLUMN_DESTINATION_BUTTON,
-        REPORT_COLUMN_ASYNC_BUTTON
+        REPORT_COLUMN_ASYNC_BUTTON,
+        API_ENDPOINT
     }
     public enum NodeType
     {

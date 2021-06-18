@@ -42,7 +42,7 @@ namespace JsonManipulator
             }
 
 
-            Models.ObjectMap destinationOwnerObject = Utils.GetDestinationOwnerObject(txtButtonDestination.Text);
+            Models.ObjectMap destinationOwnerObject = Utils.GetOwnerObject(txtButtonDestination.Text);
 
             if(destinationOwnerObject == null)
             {
@@ -92,7 +92,7 @@ namespace JsonManipulator
         public void SetDestination(string name)
         {
             txtButtonDestination.Text = name;
-            Models.ObjectMap destinationOwnerObject = Utils.GetDestinationOwnerObject(name);
+            Models.ObjectMap destinationOwnerObject = Utils.GetOwnerObject(name);
             txtName.Text = Utils.Capitalize(txtButtonText.Text).Replace(" ", "") + "Link" + destinationOwnerObject.name + "Code";
         }
 
