@@ -84,9 +84,16 @@ namespace JsonManipulator
         }
 
         private void btnOwner_Click(object sender, EventArgs e)
-        {
-            ObjectsList objectsList = new ObjectsList(FormObjects.DBOBJECT_RPT_DETAIL);
-            objectsList.ShowDialog();
+        { 
+            using (var form = new ObjectsList())
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string val = form.ReturnValue;
+                    setOwner(val);
+                }
+            }
         }
 
         private void ShowValidationError(string errorText)
@@ -109,8 +116,15 @@ namespace JsonManipulator
         }
         private void btnRoles_Click(object sender, EventArgs e)
         {
-            RoleList objectsList = new RoleList(FormObjects.DBOBJECT_RPT_DETAIL);
-            objectsList.ShowDialog();
+            using (var form = new RoleList())
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string val = form.ReturnValue;
+                    setRole(val);
+                }
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)

@@ -424,15 +424,29 @@ namespace JsonManipulator
                     l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
                 }
                 if (propertyName.Equals("OwnerObject") || propertyName.Equals("TargetChildObject"))
-                {
-                    ObjectsList parentList = new ObjectsList(FormObjects.REPORT_SETT, e.RowIndex, e.ColumnIndex);
-                    parentList.ShowDialog();
+                { 
+                    using (var form = new ObjectsList())
+                    {
+                        var result = form.ShowDialog();
+                        if (result == DialogResult.OK)
+                        {
+                            string val = form.ReturnValue;
+                            setData(val, e.RowIndex, e.ColumnIndex);
+                        }
+                    }
                 }
                 if (propertyName.Equals("RoleRequired", StringComparison.OrdinalIgnoreCase))
                 {
-                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
-                    RoleList formsList = new RoleList(FormObjects.REPORT_ROLE, e.RowIndex, e.ColumnIndex);
-                    formsList.ShowDialog();
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview   
+                    using (var form = new RoleList())
+                    {
+                        var result = form.ShowDialog();
+                        if (result == DialogResult.OK)
+                        {
+                            string val = form.ReturnValue;
+                            setData(val, e.RowIndex, e.ColumnIndex);
+                        }
+                    }
                 }
 
             }
@@ -513,9 +527,16 @@ namespace JsonManipulator
                 }
                 if (propertyName.Equals("destinationTargetName", StringComparison.OrdinalIgnoreCase))
                 {
-                        // On click of datagridview cell, attched combobox with this click cell of datagridview  
-                        FormsList formsList = new FormsList(ParentType.REPORT_BUTTON, e.RowIndex, e.ColumnIndex);
-                    formsList.ShowDialog();
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
+                    using (var form = new FormsList())
+                    {
+                        var result = form.ShowDialog();
+                        if (result == DialogResult.OK)
+                        {
+                            string val = form.ReturnValue;
+                            setButtonData(val, e.RowIndex, e.ColumnIndex);
+                        }
+                    }
                 }
             }
         }
@@ -549,15 +570,29 @@ namespace JsonManipulator
                 }
                 if (propertyName.Equals("SourceObjectName", StringComparison.OrdinalIgnoreCase))
                 {
-                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
-                    ObjectsList formsList = new ObjectsList(FormObjects.REPORT_COLUMNS, e.RowIndex, e.ColumnIndex);
-                    formsList.ShowDialog();
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview   
+                    using (var form = new ObjectsList())
+                    {
+                        var result = form.ShowDialog();
+                        if (result == DialogResult.OK)
+                        {
+                            string val = form.ReturnValue;
+                            setColumnData(val, e.RowIndex, e.ColumnIndex);
+                        }
+                    }
                 }
                 if (propertyName.Equals("buttonDestinationTargetName", StringComparison.OrdinalIgnoreCase))
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview  
-                    FormsList formsList = new FormsList(ParentType.REPORT_COLUMN, e.RowIndex, e.ColumnIndex);
-                    formsList.ShowDialog();
+                    using (var form = new FormsList())
+                    {
+                        var result = form.ShowDialog();
+                        if (result == DialogResult.OK)
+                        {
+                            string val = form.ReturnValue;
+                            setColumnData(val, e.RowIndex, e.ColumnIndex);
+                        }
+                    }
                 }
             }
         }

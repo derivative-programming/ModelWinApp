@@ -53,12 +53,7 @@ namespace JsonManipulator
         {
             lblValidationError.Text = errorText;
         }
-
-        private void btnOwner_Click(object sender, EventArgs e)
-        {
-            ObjectsList parentList = new ObjectsList(FormObjects.DBBJECT_ADD);
-            parentList.ShowDialog();
-        } 
+         
 
         private void button2_Click(object sender, EventArgs e)
         {

@@ -100,9 +100,16 @@ namespace JsonManipulator
         }
 
         private void btnOwner_Click(object sender, EventArgs e)
-        {
-            ObjectsList objectsList = new ObjectsList(FormObjects.REPORT);
-            objectsList.ShowDialog();
+        { 
+            using (var form = new ObjectsList())
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string val = form.ReturnValue;
+                    setOwner(val);
+                }
+            }
         }
 
         private void ShowValidationError(string errorText)
@@ -129,15 +136,29 @@ namespace JsonManipulator
             txtName.Text = txtOwner.Text.Trim() + txtRole.Text.Trim() + txtChild.Text.Trim() + "List";
         }
         private void btnRoles_Click(object sender, EventArgs e)
-        {
-            RoleList objectsList = new RoleList(FormObjects.REPORT);
-            objectsList.ShowDialog();
+        { 
+            using (var form = new RoleList())
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string val = form.ReturnValue;
+                    setRole(val);
+                }
+            }
         }
 
         private void btnChild_Click(object sender, EventArgs e)
-        {
-            ObjectsList objectsList = new ObjectsList(FormObjects.REPORT_CHILD);
-            objectsList.ShowDialog();
+        {  
+            using (var form = new ObjectsList())
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string val = form.ReturnValue;
+                    setChild(val);
+                }
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)

@@ -12,17 +12,12 @@ using System.Windows.Forms;
 namespace JsonManipulator
 {
     public partial class ObjectsList : Form
-    {
-        FormObjects _frmObj;
-        int _row, _col;
-        string _currentvalue;
-        public ObjectsList(FormObjects formObjects, int row = 0, int column = 0,string currentValue = "")
+    { 
+        public string ReturnValue { get; set; }
+
+        public ObjectsList()
         {
-            InitializeComponent();
-            this._frmObj = formObjects;
-            this._row = row;
-            this._col = column;
-            this._currentvalue = currentValue;
+            InitializeComponent(); 
         }
 
         private void ObjectsList_Load(object sender, EventArgs e)
@@ -54,56 +49,12 @@ namespace JsonManipulator
 
         private void listObjects_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(listObjects.SelectedItem!=null)
+            this.DialogResult = DialogResult.Cancel;
+            if (listObjects.SelectedItem != null)
             {
-                switch(_frmObj)
-                {
-                    case FormObjects.FORM:
-                        ((frmForm)Application.OpenForms["frmForm"]).setOwner(listObjects.SelectedItem.ToString());
-                        break;
-                    case FormObjects.DBBJECT:
-                        ((frmDbObject)Application.OpenForms["frmDbObject"]).setParent(listObjects.SelectedItem.ToString());
-                        break;
-                    case FormObjects.REPORT:
-                        ((frmReportGrid)Application.OpenForms["frmReportGrid"]).setOwner(listObjects.SelectedItem.ToString());
-                        break;
-                    case FormObjects.ADD_API_GET_REPORT:
-                        ((frmAddApiGetReport)Application.OpenForms["frmAddApiGetReport"]).setOwner(listObjects.SelectedItem.ToString());
-                        break;
-                    case FormObjects.ADD_API_FLOW:
-                        ((frmAddAPIFlow)Application.OpenForms["frmAddAPIFlow"]).setOwner(listObjects.SelectedItem.ToString());
-                        break;
-                    case FormObjects.REPORT_CHILD:
-                        ((frmReportGrid)Application.OpenForms["frmReportGrid"]).setChild(listObjects.SelectedItem.ToString());
-                        break;
-                    case FormObjects.ADD_API_GET_REPORT_CHILD:
-                        ((frmAddApiGetReport)Application.OpenForms["frmAddApiGetReport"]).setChild(listObjects.SelectedItem.ToString());
-                        break;
-                    case FormObjects.DBOBJECT_RPT_DETAIL:
-                        ((frmReportDetail)Application.OpenForms["frmReportDetail"]).setOwner(listObjects.SelectedItem.ToString());
-                        break;
-                    case FormObjects.DBBJECT_EDIT:
-                        ((frmFormSettings)Application.OpenForms["frmFormSettings"]).setData(listObjects.SelectedItem.ToString(),_row,_col);
-                        break;
-                    case FormObjects.DBBJECT_ADD:
-                        ((frmDbObject)Application.OpenForms["frmDbObject"]).setParent(listObjects.SelectedItem.ToString());
-                        break;
-                    case FormObjects.REPORT_SETT:
-                        ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setData(listObjects.SelectedItem.ToString(),_row,_col);
-                        break;
-                    case FormObjects.REPORT_BUTTON:
-                        ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setButtonData(listObjects.SelectedItem.ToString(), _row, _col);
-                        break;
-                    case FormObjects.REPORT_COLUMNS:
-                        ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setColumnData(listObjects.SelectedItem.ToString(), _row, _col);
-                        break;
-                    case FormObjects.OBJECT_EDIT:
-                        ((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]).setData(listObjects.SelectedItem.ToString(), _row, _col);
-                        break;
-                    case FormObjects.ADD_FLOW:
-                        ((frmAddFlow)Application.OpenForms["frmAddFlow"]).setOwner(listObjects.SelectedItem.ToString());
-                        break;
-                }
+                this.DialogResult = DialogResult.OK;
+                this.ReturnValue = listObjects.SelectedItem.ToString();
+
             }
             this.Close();
         }

@@ -104,15 +104,29 @@ namespace JsonManipulator
         }
         private void btnOwner_Click(object sender, EventArgs e)
         {
-            
-            ObjectsList objectsList = new ObjectsList(FormObjects.FORM);
-            objectsList.ShowDialog();
+             
+            using (var form = new ObjectsList())
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string val = form.ReturnValue;
+                    setOwner(val);
+                }
+            }
         }
 
         private void btnRoles_Click(object sender, EventArgs e)
-        {
-            RoleList roleList = new RoleList(FormObjects.FORM);
-            roleList.ShowDialog();
+        { 
+            using (var form = new RoleList())
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string val = form.ReturnValue;
+                    setRole(val);
+                }
+            }
         }
         public void setRole(string Role)
         {

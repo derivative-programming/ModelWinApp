@@ -80,9 +80,16 @@ namespace JsonManipulator
         }
 
         private void btnOwner_Click(object sender, EventArgs e)
-        {
-            ObjectsList parentList = new ObjectsList(FormObjects.DBBJECT_ADD);
-            parentList.ShowDialog();
+        { 
+            using (var form = new ObjectsList())
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string val = form.ReturnValue;
+                    setParent(val);
+                }
+            }
         }
         public void setParent(string parent)
         {

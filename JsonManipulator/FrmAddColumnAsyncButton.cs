@@ -84,9 +84,16 @@ namespace JsonManipulator
          
 
         private void btnDestinationLookup_Click(object sender, EventArgs e)
-        {
-            FlowList flowList = new FlowList(ParentType.REPORT_COLUMN_ASYNC_BUTTON);
-            flowList.ShowDialog();
+        { 
+            using (var form = new FlowList())
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string val = form.ReturnValue;
+                    SetDestination(val);
+                }
+            }
         }
 
         public void SetDestination(string name)

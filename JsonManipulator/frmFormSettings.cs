@@ -471,14 +471,28 @@ namespace JsonManipulator
                 
                 if (propertyName.Equals("RoleRequired", StringComparison.OrdinalIgnoreCase))
                 {
-                    RoleList roleList = new RoleList(FormObjects.DBBJECT_EDIT,e.RowIndex,e.ColumnIndex);
-                    roleList.ShowDialog();
+                    using (var form = new RoleList())
+                    {
+                        var result = form.ShowDialog();
+                        if (result == DialogResult.OK)
+                        {
+                            string val = form.ReturnValue;
+                            setData(val, e.RowIndex, e.ColumnIndex);
+                        }
+                    }
                 }
                 if (propertyName.Equals("OwnerObject", StringComparison.OrdinalIgnoreCase) ||
                     propertyName.Equals("targetChildObject", StringComparison.OrdinalIgnoreCase))
                 {
-                    ObjectsList roleList = new ObjectsList(FormObjects.DBBJECT_EDIT, e.RowIndex, e.ColumnIndex);
-                    roleList.ShowDialog();
+                    using (var form = new ObjectsList())
+                    {
+                        var result = form.ShowDialog();
+                        if (result == DialogResult.OK)
+                        {
+                            string val = form.ReturnValue;
+                            setData(val, e.RowIndex, e.ColumnIndex);
+                        }
+                    }
                 }
                 if (propertyName.StartsWith("is"))
                 {
@@ -558,9 +572,16 @@ namespace JsonManipulator
                 }
                 if (propertyName.Equals("destinationTargetName", StringComparison.OrdinalIgnoreCase))
                 {
-                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
-                    FormsList formsList = new FormsList(ParentType.EDIT,e.RowIndex,e.ColumnIndex);
-                    formsList.ShowDialog();
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview   
+                    using (var form = new FormsList())
+                    {
+                        var result = form.ShowDialog();
+                        if (result == DialogResult.OK)
+                        {
+                            string val = form.ReturnValue;
+                            setButtonData(val, e.RowIndex, e.ColumnIndex);
+                        }
+                    }
                 }
             }
 

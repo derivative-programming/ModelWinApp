@@ -210,9 +210,16 @@ namespace JsonManipulator
                     l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
                 }
                 if(propertyName.Equals("parentObjectName"))
-                {
-                    ObjectsList parentList = new ObjectsList(FormObjects.OBJECT_EDIT,e.RowIndex,e.ColumnIndex);
-                    parentList.ShowDialog();
+                { 
+                    using (var form = new ObjectsList())
+                    {
+                        var result = form.ShowDialog();
+                        if (result == DialogResult.OK)
+                        {
+                            string val = form.ReturnValue;
+                            setData(val, e.RowIndex, e.ColumnIndex);
+                        }
+                    }
                 }
 
             }

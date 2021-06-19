@@ -84,9 +84,16 @@ namespace JsonManipulator
          
 
         private void btnDestinationLookup_Click(object sender, EventArgs e)
-        {
-            FormsList formsList = new FormsList(ParentType.REPORT_COLUMN_DESTINATION_BUTTON);
-            formsList.ShowDialog();
+        { 
+            using (var form = new FormsList())
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string val = form.ReturnValue;
+                    SetDestination(val);
+                }
+            }
         }
 
         public void SetDestination(string name)

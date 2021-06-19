@@ -433,28 +433,34 @@ namespace JsonManipulator
                 }
                 if (propertyName.Equals("apiGetContextTargetName", StringComparison.OrdinalIgnoreCase))
                 {
-                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
-                    ReportList formsList = new ReportList(FormObjects.API_ENDPOINT, e.RowIndex, e.ColumnIndex);
-                    formsList.ShowDialog();
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview   
+                    using (var form = new ReportList())
+                    {
+                        var result = form.ShowDialog();
+                        if (result == DialogResult.OK)
+                        {
+                            string val = form.ReturnValue;
+                            setEndPointData(val, e.RowIndex, e.ColumnIndex);
+                        }
+                    }
                 }
-                if (propertyName.Equals("apiPostContextTargetName", StringComparison.OrdinalIgnoreCase))
+                if (propertyName.Equals("apiPostContextTargetName", StringComparison.OrdinalIgnoreCase) ||
+                    propertyName.Equals("apiDeleteContextTargetName", StringComparison.OrdinalIgnoreCase) ||
+                    propertyName.Equals("apiPutContextTargetName", StringComparison.OrdinalIgnoreCase))
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview  
-                    FlowList formsList = new FlowList(ParentType.API_ENDPOINT, e.RowIndex, e.ColumnIndex);
-                    formsList.ShowDialog();
+
+                    using (var form = new FormsList())
+                    {
+                        var result = form.ShowDialog();
+                        if (result == DialogResult.OK)
+                        {
+                            string val = form.ReturnValue;
+                            setEndPointData(val, e.RowIndex, e.ColumnIndex);
+                        }
+                    }
                 }
-                if (propertyName.Equals("apiPutContextTargetName", StringComparison.OrdinalIgnoreCase))
-                {
-                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
-                    FlowList formsList = new FlowList(ParentType.API_ENDPOINT, e.RowIndex, e.ColumnIndex);
-                    formsList.ShowDialog();
-                }
-                if (propertyName.Equals("apiDeleteContextTargetName", StringComparison.OrdinalIgnoreCase))
-                {
-                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
-                    FlowList formsList = new FlowList(ParentType.API_ENDPOINT, e.RowIndex, e.ColumnIndex);
-                    formsList.ShowDialog();
-                }
+                 
             }
         }
 

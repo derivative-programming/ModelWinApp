@@ -13,15 +13,11 @@ using System.Windows.Forms;
 namespace JsonManipulator
 {
     public partial class RoleList : Form
-    {
-        FormObjects _frmObj;
-        int _row, _column;
-        public RoleList(FormObjects formObjects,int row=0,int column=0)
+    { 
+        public string ReturnValue { get; set; }
+        public RoleList()
         {
-            InitializeComponent();
-            this._frmObj = formObjects;
-            this._row = row;
-            this._column = column;
+            InitializeComponent(); 
         }
 
         private void ObjectsList_Load(object sender, EventArgs e)
@@ -52,29 +48,13 @@ namespace JsonManipulator
 
         private void listObjects_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(listObjects.SelectedItem!=null)
+
+            this.DialogResult = DialogResult.Cancel;
+            if (listObjects.SelectedItem != null)
             {
-                switch(_frmObj)
-                {
-                    case FormObjects.FORM:
-                        ((frmForm)Application.OpenForms["frmForm"]).setRole(listObjects.SelectedItem.ToString());
-                        break;
-                    case FormObjects.REPORT:
-                        ((frmReportGrid)Application.OpenForms["frmReportGrid"]).setRole(listObjects.SelectedItem.ToString());
-                        break;
-                    case FormObjects.DBOBJECT_RPT_DETAIL:
-                        ((frmReportDetail)Application.OpenForms["frmReportDetail"]).setRole(listObjects.SelectedItem.ToString());
-                        break;
-                    case FormObjects.DBBJECT_EDIT:
-                        ((frmFormSettings)Application.OpenForms["frmFormSettings"]).setData(listObjects.SelectedItem.ToString(),_row,_column);
-                        break;
-                    case FormObjects.REPORT_ROLE:
-                        ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setData(listObjects.SelectedItem.ToString(), _row, _column);
-                        break;
-                    case FormObjects.ADD_FLOW:
-                        ((frmAddFlow)Application.OpenForms["frmAddFlow"]).setRole(listObjects.SelectedItem.ToString());
-                        break;
-                }
+                this.DialogResult = DialogResult.OK;
+                this.ReturnValue = listObjects.SelectedItem.ToString();
+
             }
             this.Close();
         }
