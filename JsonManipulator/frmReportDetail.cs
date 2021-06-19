@@ -61,6 +61,7 @@ namespace JsonManipulator
                 Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text.Trim()).FirstOrDefault().report = new List<Models.Report>();
             Report rpt = new Report { name = txtName.Text, RoleRequired = txtRole.Text, visualizationType = "DetailThreeColumn"};
             rpt.isPage = "true";
+            rpt.isCustomSqlUsed = "false";
 
             Models.reportButton reportButton = new reportButton();
             reportButton.buttonType = "back";

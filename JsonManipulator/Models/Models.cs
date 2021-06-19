@@ -259,7 +259,7 @@ namespace JsonManipulator.Models
         [JsonProperty("roleRequired")]
         public string RoleRequired { get; set; }
         [JsonProperty("isCustomSqlUsed")]
-        public string IsCustomSqlUsed { get; set; }
+        public string isCustomSqlUsed { get; set; }
         [JsonProperty("targetChildObject")]
         public string TargetChildObject { get; set; }
 
@@ -521,7 +521,8 @@ namespace JsonManipulator.Models
         public String isCreditCardEntryUsed { get; set; }
         public String headerImageURL { get; set; }
         public String footerImageURL { get; set; }
-        public String isDynaFlow { get; set; }
+        [JsonProperty("isDynaFlow")]
+        public String isRequestRunViaDynaFlowAllowed { get; set; }
         public String isDynaFlowTask { get; set; }
         public String isCustomPageViewUsed { get; set; }
         public String isIgnoredInDocumentation { get; set; }

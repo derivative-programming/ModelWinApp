@@ -61,6 +61,7 @@ namespace JsonManipulator
                 Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text.Trim()).FirstOrDefault().report = new List<Models.Report>();
             Report rpt = new Report { name = txtName.Text.Trim(), RoleRequired = txtRole.Text.Trim(), TargetChildObject = txtChild.Text.Trim(), visualizationType = "Grid"};
             rpt.isPage = "true";
+            rpt.isCustomSqlUsed = "false";
             if (txtChild.Text.Length > 0)
             {
                 rpt.pageTitleText = Utils.ConvertPascalToSpaced(txtChild.Text.Trim());

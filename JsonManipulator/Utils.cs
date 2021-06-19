@@ -290,7 +290,7 @@ namespace JsonManipulator
 
             result.Add("initObjectWorkflowName");
             //result.Add("isInitObjWFSubscribedToParams");
-            result.Add("isExposedInBusinessObject");
+            //result.Add("isExposedInBusinessObject");
             result.Add("isObjectDelete");
             result.Add("layoutName");
             result.Add("isWFSWorkflowCreated");
@@ -349,8 +349,8 @@ namespace JsonManipulator
             result.Add("isCreditCardEntryUsed");
             result.Add("headerImageURL");
             result.Add("footerImageURL");
-            result.Add("isDynaFlow");
-            result.Add("isDynaFlowTask");
+            //result.Add("isDynaFlow");
+            //result.Add("isDynaFlowTask");
             result.Add("isCustomPageViewUsed");
             result.Add("isIgnoredInDocumentation");
             result.Add("targetChildObject");
@@ -450,11 +450,11 @@ namespace JsonManipulator
         public static List<string> GetDBObjPropPropertiesToIgnore()
         {
             List<string> result = new List<string>();
-            result.Add("isFKLookup".ToLower());
+            //result.Add("isFKLookup".ToLower());
             //result.Add("isNotPublishedToSubscriptions".ToLower());
             //result.Add("fKObjectName".ToLower());
             //result.Add("fKObjectPropertyName".ToLower());
-            result.Add("isQueryByAvailable".ToLower());
+            //result.Add("isQueryByAvailable".ToLower());
             result.Add("defaultValue".ToLower());
             result.Add("name");
 
@@ -834,7 +834,7 @@ namespace JsonManipulator
             bool result = false;
             if (objWF.IsPage == null)
             {
-                if (objWF.isDynaFlow != null && objWF.isDynaFlow.Trim().ToLower() == "true")
+                if (objWF.isRequestRunViaDynaFlowAllowed != null && objWF.isRequestRunViaDynaFlowAllowed.Trim().ToLower() == "true")
                 {
                     result = false;
                 }
@@ -871,7 +871,7 @@ namespace JsonManipulator
 
             if (objWF.IsPage == null)
             {
-                if (objWF.isDynaFlow != null && objWF.isDynaFlow.Trim().ToLower() == "true")
+                if (objWF.isRequestRunViaDynaFlowAllowed != null && objWF.isRequestRunViaDynaFlowAllowed.Trim().ToLower() == "true")
                 {
                     result = false;
                 }
@@ -887,12 +887,8 @@ namespace JsonManipulator
             }
             else
             {
-
-                if (objWF.isDynaFlow != null && objWF.isDynaFlow.Trim().ToLower() == "true")
-                {
-                    result = false;
-                }
-                else if (objWF.isDynaFlowTask != null && objWF.isDynaFlowTask.Trim().ToLower() == "true")
+                 
+                if (objWF.isDynaFlowTask != null && objWF.isDynaFlowTask.Trim().ToLower() == "true")
                 {
                     result = false;
                 }
@@ -912,7 +908,7 @@ namespace JsonManipulator
         {
             bool result = false;
 
-            if (objWF.isDynaFlow != null && objWF.isDynaFlow.Trim().ToLower() == "true")
+            if (objWF.isRequestRunViaDynaFlowAllowed != null && objWF.isRequestRunViaDynaFlowAllowed.Trim().ToLower() == "true")
             {
                 result = true;
             }
