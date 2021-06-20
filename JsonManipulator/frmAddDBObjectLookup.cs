@@ -58,8 +58,8 @@ namespace JsonManipulator
 
 
             Models.lookupItem lookupItem = new lookupItem();
-            lookupItem.enumValue = "Unknown";
-            lookupItem.name = "";
+            lookupItem.name = "Unknown";
+            lookupItem.displayName = "";
             lookupItem.description = "";
             lookupItem.isActive = "true";
 

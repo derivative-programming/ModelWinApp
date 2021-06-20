@@ -90,7 +90,7 @@ namespace JsonManipulator
                 lstLookupItems.Items.Clear();
                 foreach (var prop in _map.lookupItem)
                 {
-                    lstLookupItems.Items.Add(prop.enumValue);
+                    lstLookupItems.Items.Add(prop.name);
                 }
                 lstLookupItems.SelectedIndex = lstLookupItems.Items.Count - 1;
             }
@@ -501,7 +501,7 @@ namespace JsonManipulator
                 gridLookupItem.Columns.Clear();
                 List<PropertyValue> propertyValues = new List<PropertyValue>();
                 String propname = lstLookupItems.SelectedItem.ToString();
-                lookupItem prpty = _map.lookupItem.Where(x => x.enumValue == propname).FirstOrDefault();
+                lookupItem prpty = _map.lookupItem.Where(x => x.name == propname).FirstOrDefault();
                 List<string> ignoreList = Utils.GetDBObjLookupItemPropertiesToIgnore();
                 foreach (var prop in prpty.GetType().GetProperties().OrderBy(x => x.Name).ToList())
                 {

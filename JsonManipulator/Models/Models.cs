@@ -667,10 +667,10 @@ namespace JsonManipulator.Models
 
     public class lookupItem
     {
-        [JsonProperty("enumValue")]
-        public string enumValue { get; set; }
         [JsonProperty("name")]
         public string name { get; set; }
+        [JsonProperty("displayName")]
+        public string displayName { get; set; }
         [JsonProperty("description")]
         public string description { get; set; }
         [JsonProperty("isActive")]

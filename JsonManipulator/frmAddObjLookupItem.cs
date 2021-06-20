@@ -34,7 +34,7 @@ namespace JsonManipulator
                 return;
             }
 
-            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().lookupItem.Add(new lookupItem { enumValue = txtName.Text.Trim(), name = txtName.Text.Trim(), description = txtName.Text.Trim(), isActive="true" });
+            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().lookupItem.Add(new lookupItem { name = txtName.Text.Trim(), displayName = Utils.ConvertPascalToSpaced(txtName.Text.Trim()), description = Utils.ConvertPascalToSpaced(txtName.Text.Trim()), isActive="true" });
             ((Form1)Application.OpenForms["Form1"]).showMessage("Lookup Item created successfully");
             ((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]).setLookupItemList();
                 this.Close();
@@ -43,7 +43,7 @@ namespace JsonManipulator
         private bool ItemExists(string name)
         {
             bool result = false;
-            if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().lookupItem.Where(x => x.enumValue == name).ToList().Count > 0)
+            if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().lookupItem.Where(x => x.name == name).ToList().Count > 0)
             {
                 result = true;
             }
@@ -84,7 +84,7 @@ namespace JsonManipulator
                         string itemName = Utils.Capitalize(items[i]).Trim();
                         if (itemName.Length > 0 && !ItemExists(itemName))
                         {
-                            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().lookupItem.Add(new lookupItem { enumValue = itemName, name = itemName, description = itemName, isActive = "true" });
+                            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().lookupItem.Add(new lookupItem { name = itemName, displayName = itemName, description = itemName, isActive = "true" });
                         }
                     }
                     ((Form1)Application.OpenForms["Form1"]).showMessage("Lookup Item created successfully");
