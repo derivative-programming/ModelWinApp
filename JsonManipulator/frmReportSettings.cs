@@ -425,7 +425,7 @@ namespace JsonManipulator
                 }
                 if (propertyName.Equals("OwnerObject") || propertyName.Equals("TargetChildObject"))
                 { 
-                    using (var form = new ObjectsList())
+                    using (var form = new frmModelSearch(ModelSearchOptions.OBJECTS))
                     {
                         var result = form.ShowDialog();
                         if (result == DialogResult.OK)
@@ -438,7 +438,7 @@ namespace JsonManipulator
                 if (propertyName.Equals("RoleRequired", StringComparison.OrdinalIgnoreCase))
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview   
-                    using (var form = new RoleList())
+                    using (var form = new frmModelSearch(ModelSearchOptions.ROLES))
                     {
                         var result = form.ShowDialog();
                         if (result == DialogResult.OK)
@@ -528,7 +528,7 @@ namespace JsonManipulator
                 if (propertyName.Equals("destinationTargetName", StringComparison.OrdinalIgnoreCase))
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview  
-                    using (var form = new FormsList())
+                    using (var form = new frmModelSearch(ModelSearchOptions.FORMS))
                     {
                         var result = form.ShowDialog();
                         if (result == DialogResult.OK)
@@ -571,7 +571,7 @@ namespace JsonManipulator
                 if (propertyName.Equals("SourceObjectName", StringComparison.OrdinalIgnoreCase))
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview   
-                    using (var form = new ObjectsList())
+                    using (var form = new frmModelSearch(ModelSearchOptions.OBJECTS))
                     {
                         var result = form.ShowDialog();
                         if (result == DialogResult.OK)
@@ -584,7 +584,7 @@ namespace JsonManipulator
                 if (propertyName.Equals("buttonDestinationTargetName", StringComparison.OrdinalIgnoreCase))
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview  
-                    using (var form = new FormsList())
+                    using (var form = new frmModelSearch(ModelSearchOptions.FORMS))
                     {
                         var result = form.ShowDialog();
                         if (result == DialogResult.OK)

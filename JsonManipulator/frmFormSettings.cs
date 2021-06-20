@@ -42,6 +42,16 @@ namespace JsonManipulator
                 tabControl1.TabPages.RemoveByKey("tabButtons");
                 tabControl1.TabPages["tabControls"].Text = "Input";
             }
+            if (this._form.isRequestRunViaDynaFlowAllowed != null && this._form.isRequestRunViaDynaFlowAllowed == "true")
+            {
+                tabControl1.TabPages.RemoveByKey("tabControls");
+                tabControl1.TabPages.RemoveByKey("tabButtons");
+                tabControl1.TabPages.RemoveByKey("tabOutput"); 
+            }
+            else
+            {
+                tabControl1.TabPages.RemoveByKey("tabDynaFlowTasks");
+            }
             setSetting();
             grpMain.Text = _form.Name;
             setControlsList();
@@ -56,9 +66,12 @@ namespace JsonManipulator
 
             setOutputVarList();
             splitter3.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmFormSettings.splitter3.SplitPosition", "200"));
-            
 
-            if(System.Convert.ToInt32(LocalStorage.GetValue("frmFormSettings.tabControl1.SelectedIndex", "0")) <= tabControl1.TabPages.Count)
+            setDFTList();
+            splitter4.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmFormSettings.splitter4.SplitPosition", "200"));
+
+
+            if (System.Convert.ToInt32(LocalStorage.GetValue("frmFormSettings.tabControl1.SelectedIndex", "0")) <= tabControl1.TabPages.Count)
                 tabControl1.SelectedIndex = System.Convert.ToInt32(LocalStorage.GetValue("frmFormSettings.tabControl1.SelectedIndex", "0"));
         }
         private void setSetting()
@@ -156,6 +169,21 @@ namespace JsonManipulator
                 }
                 if (lstOutputVars.Items.Count > 0)
                     lstOutputVars.SelectedIndex = lstOutputVars.Items.Count - 1;
+            }
+        }
+
+
+        public void setDFTList()
+        {
+            lstDFT.Items.Clear();
+            if (_form.dynaFlowTask != null)
+            {
+                foreach (var param in _form.dynaFlowTask)
+                {
+                    lstDFT.Items.Add(param.name); 
+                }
+                if (lstDFT.Items.Count > 0)
+                    lstDFT.SelectedIndex = lstDFT.Items.Count - 1;
             }
         }
 
@@ -471,7 +499,7 @@ namespace JsonManipulator
                 
                 if (propertyName.Equals("RoleRequired", StringComparison.OrdinalIgnoreCase))
                 {
-                    using (var form = new RoleList())
+                    using (var form = new frmModelSearch(ModelSearchOptions.ROLES))
                     {
                         var result = form.ShowDialog();
                         if (result == DialogResult.OK)
@@ -484,7 +512,7 @@ namespace JsonManipulator
                 if (propertyName.Equals("OwnerObject", StringComparison.OrdinalIgnoreCase) ||
                     propertyName.Equals("targetChildObject", StringComparison.OrdinalIgnoreCase))
                 {
-                    using (var form = new ObjectsList())
+                    using (var form = new frmModelSearch(ModelSearchOptions.OBJECTS))
                     {
                         var result = form.ShowDialog();
                         if (result == DialogResult.OK)
@@ -573,7 +601,7 @@ namespace JsonManipulator
                 if (propertyName.Equals("destinationTargetName", StringComparison.OrdinalIgnoreCase))
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview   
-                    using (var form = new FormsList())
+                    using (var form = new frmModelSearch(ModelSearchOptions.FORMS))
                     {
                         var result = form.ShowDialog();
                         if (result == DialogResult.OK)
@@ -688,7 +716,9 @@ namespace JsonManipulator
             }
              
             LocalStorage.SetValue("frmFormSettings.splitter3.SplitPosition", splitter3.SplitPosition.ToString());
-            
+
+            LocalStorage.SetValue("frmFormSettings.splitter4.SplitPosition", splitter4.SplitPosition.ToString());
+
             LocalStorage.Save();
 
         }
@@ -779,6 +809,173 @@ namespace JsonManipulator
             {
                 Utils.RemovePropSubscriptionFor(objectMap, _form.Name);
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddDFT_Click(object sender, EventArgs e)
+        {
+
+            using (var form = new frmModelSearch(ModelSearchOptions.DYNAFLOW_TASKS))
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string val = form.ReturnValue;
+                    AddDFT(val);
+                }
+            }
+        }
+
+        private void AddDFT(string name)
+        {
+
+            if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().dynaFlowTask == null)
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().dynaFlowTask = new List<Models.dynaFlowTask>();
+            dynaFlowTask dynaFlowTask = new dynaFlowTask { name = name};
+
+            if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().dynaFlowTask.Where(x => x.name == name).ToList().Count == 0)
+            { 
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().dynaFlowTask.Add(dynaFlowTask);
+                setDFTList();
+            }
+        }
+
+        private void lstDFT_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (lstDFT.SelectedItem != null)
+            {
+                List<PropertyValue> propertyValues = new List<PropertyValue>();
+                String controlName = lstDFT.SelectedItem.ToString();
+                List<string> ignoreList = Utils.GetFormDFTPropertiesToIgnore();
+                dynaFlowTask dynaFlowTask = _form.dynaFlowTask.Where(x => x.name == controlName).FirstOrDefault();
+                foreach (var prop in dynaFlowTask.GetType().GetProperties().OrderBy(x => x.Name).ToList())
+                {
+                    if (ignoreList.Contains(prop.Name.ToLower()))
+                        continue;
+                    if (!prop.PropertyType.IsGenericType)
+                        propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(dynaFlowTask) ?? "").ToString() });
+                }
+                gridDFT.Columns.Clear();
+                gridDFT.DataSource = propertyValues;
+                if (gridDFT.Columns.Count > 0)
+                {
+                    gridDFT.Columns[0].ReadOnly = true;
+                }
+            }
+        }
+
+        private void gridDFT_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.ColumnIndex > 0)
+            {
+
+                // Bind grid cell with combobox and than bind combobox with datasource.  
+                DataGridViewComboBoxCell l_objGridDropbox = new DataGridViewComboBoxCell();
+                string propertyName = gridDFT.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value.ToString();
+                // Check the column  cell, in which it click.   
+                if (propertyName.StartsWith("is"))
+                {
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
+                    gridDFT[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
+                    l_objGridDropbox.DataSource = Utils.getBooleans(); // Bind combobox with datasource.  
+                    l_objGridDropbox.ValueMember = "Value";
+                    l_objGridDropbox.DisplayMember = "Display";
+                    l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+                } 
+            }
+        }
+
+        private void gridDFT_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (gridDFT.DataSource != null && lstDFT.SelectedItem != null)
+            {
+                string property = gridDFT.Rows[e.RowIndex].Cells[0].Value.ToString();
+                string value = string.Empty;
+                if (gridDFT.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                {
+                    value = gridDFT.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                }
+                if (property.StartsWith("is"))
+                {
+                    if (value != null && !Utils.getBooleanList().Contains(value))
+                    {
+                        return;
+                    }
+                }
+                int index = lstDFT.SelectedIndex;
+                typeof(dynaFlowTask).GetProperty(property).SetValue(
+                    Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().dynaFlowTask.ElementAt(lstDFT.SelectedIndex), value); ;
+                setDFTList();
+                lstDFT.SetSelected(index, true);
+            }
+        }
+
+        private void gridDFT_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.ColumnIndex == 0)
+            {
+                SendKeys.Send("{TAB}");
+            }
+        }
+
+        private void btnDFTUp_Click(object sender, EventArgs e)
+        {
+
+            if (lstDFT.SelectedItem != null)
+            {
+                int selectedIndex = lstDFT.SelectedIndex;
+                dynaFlowTask item = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().dynaFlowTask.ElementAt(selectedIndex);
+                int newIndex = 0;
+                if (selectedIndex == 0)
+                {
+                    newIndex = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().dynaFlowTask.Count - 1;
+                }
+                else
+                {
+                    newIndex = selectedIndex - 1;
+                }
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().dynaFlowTask.RemoveAt(selectedIndex);
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().dynaFlowTask.Insert(newIndex, item);
+                setDFTList();
+                lstDFT.SetSelected(newIndex, true);
+            }
+        }
+
+        private void btnDFTDown_Click(object sender, EventArgs e)
+        {
+
+            if (lstDFT.SelectedItem != null)
+            {
+                int selectedIndex = lstDFT.SelectedIndex;
+                int count = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().dynaFlowTask.Count;
+                dynaFlowTask item = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().dynaFlowTask.ElementAt(selectedIndex);
+                int newIndex = 0;
+                if (selectedIndex == count - 1)
+                {
+                    newIndex = 0;
+                }
+                else
+                {
+                    newIndex = selectedIndex + 1;
+                }
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().dynaFlowTask.RemoveAt(selectedIndex);
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().dynaFlowTask.Insert(newIndex, item);
+                setDFTList();
+                lstDFT.SetSelected(newIndex, true);
+            }
+        }
+
+        private void gridDFT_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

@@ -70,7 +70,7 @@ namespace JsonManipulator
 
         private void btnOwner_Click(object sender, EventArgs e)
         { 
-            using (var form = new ObjectsList())
+            using (var form = new frmModelSearch(ModelSearchOptions.OBJECTS))
             {
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK)

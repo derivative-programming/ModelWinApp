@@ -434,7 +434,7 @@ namespace JsonManipulator
                 if (propertyName.Equals("apiGetContextTargetName", StringComparison.OrdinalIgnoreCase))
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview   
-                    using (var form = new ReportList())
+                    using (var form = new frmModelSearch(ModelSearchOptions.REPORTS))
                     {
                         var result = form.ShowDialog();
                         if (result == DialogResult.OK)
@@ -450,7 +450,7 @@ namespace JsonManipulator
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview  
 
-                    using (var form = new FormsList())
+                    using (var form = new frmModelSearch(ModelSearchOptions.FORMS))
                     {
                         var result = form.ShowDialog();
                         if (result == DialogResult.OK)

@@ -45,6 +45,7 @@ namespace JsonManipulator
             this.pnlControlsLeftTop = new System.Windows.Forms.Panel();
             this.lstControl = new System.Windows.Forms.ListBox();
             this.pnlControlsLeftBottom = new System.Windows.Forms.Panel();
+            this.chkSubscribeToTargetChild = new System.Windows.Forms.CheckBox();
             this.chkSubscribeToOwnerObject = new System.Windows.Forms.CheckBox();
             this.btnControls = new System.Windows.Forms.Button();
             this.btnControlUp = new System.Windows.Forms.Button();
@@ -78,10 +79,24 @@ namespace JsonManipulator
             this.btnOutputVar = new System.Windows.Forms.Button();
             this.pnlOutputLeftTop = new System.Windows.Forms.Panel();
             this.lstOutputVars = new System.Windows.Forms.ListBox();
+            this.tabDynaFlowTasks = new System.Windows.Forms.TabPage();
+            this.pnlDFT = new System.Windows.Forms.Panel();
+            this.pnlDFTRight = new System.Windows.Forms.Panel();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.gridDFT = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.splitter4 = new System.Windows.Forms.Splitter();
+            this.pnlDFTLeft = new System.Windows.Forms.Panel();
+            this.pnlDFTLeftBottom = new System.Windows.Forms.Panel();
+            this.btnAddDFT = new System.Windows.Forms.Button();
+            this.pnlDFTLeftTop = new System.Windows.Forms.Panel();
+            this.lstDFT = new System.Windows.Forms.ListBox();
             this.tabJSON = new System.Windows.Forms.TabPage();
             this.rtbJSON = new System.Windows.Forms.RichTextBox();
             this.grpMain = new System.Windows.Forms.GroupBox();
-            this.chkSubscribeToTargetChild = new System.Windows.Forms.CheckBox();
+            this.btnDFTUp = new System.Windows.Forms.Button();
+            this.btnDFTDown = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridProperties)).BeginInit();
@@ -107,6 +122,14 @@ namespace JsonManipulator
             this.pnlOutputLeft.SuspendLayout();
             this.pnlOutputLeftBottom.SuspendLayout();
             this.pnlOutputLeftTop.SuspendLayout();
+            this.tabDynaFlowTasks.SuspendLayout();
+            this.pnlDFT.SuspendLayout();
+            this.pnlDFTRight.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridDFT)).BeginInit();
+            this.pnlDFTLeft.SuspendLayout();
+            this.pnlDFTLeftBottom.SuspendLayout();
+            this.pnlDFTLeftTop.SuspendLayout();
             this.tabJSON.SuspendLayout();
             this.grpMain.SuspendLayout();
             this.SuspendLayout();
@@ -117,6 +140,7 @@ namespace JsonManipulator
             this.tabControl1.Controls.Add(this.tabControls);
             this.tabControl1.Controls.Add(this.tabButtons);
             this.tabControl1.Controls.Add(this.tabOutput);
+            this.tabControl1.Controls.Add(this.tabDynaFlowTasks);
             this.tabControl1.Controls.Add(this.tabJSON);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(3, 16);
@@ -284,6 +308,17 @@ namespace JsonManipulator
             this.pnlControlsLeftBottom.Name = "pnlControlsLeftBottom";
             this.pnlControlsLeftBottom.Size = new System.Drawing.Size(188, 149);
             this.pnlControlsLeftBottom.TabIndex = 17;
+            // 
+            // chkSubscribeToTargetChild
+            // 
+            this.chkSubscribeToTargetChild.AutoSize = true;
+            this.chkSubscribeToTargetChild.Location = new System.Drawing.Point(4, 126);
+            this.chkSubscribeToTargetChild.Name = "chkSubscribeToTargetChild";
+            this.chkSubscribeToTargetChild.Size = new System.Drawing.Size(213, 17);
+            this.chkSubscribeToTargetChild.TabIndex = 10;
+            this.chkSubscribeToTargetChild.Text = "Subscribe To Target Child Object Props";
+            this.chkSubscribeToTargetChild.UseVisualStyleBackColor = true;
+            this.chkSubscribeToTargetChild.CheckedChanged += new System.EventHandler(this.chkSubscribeToTargetChild_CheckedChanged);
             // 
             // chkSubscribeToOwnerObject
             // 
@@ -634,6 +669,141 @@ namespace JsonManipulator
             this.lstOutputVars.TabIndex = 1;
             this.lstOutputVars.SelectedIndexChanged += new System.EventHandler(this.lstOutputVars_SelectedIndexChanged);
             // 
+            // tabDynaFlowTasks
+            // 
+            this.tabDynaFlowTasks.Controls.Add(this.pnlDFT);
+            this.tabDynaFlowTasks.Location = new System.Drawing.Point(4, 22);
+            this.tabDynaFlowTasks.Name = "tabDynaFlowTasks";
+            this.tabDynaFlowTasks.Padding = new System.Windows.Forms.Padding(3);
+            this.tabDynaFlowTasks.Size = new System.Drawing.Size(786, 480);
+            this.tabDynaFlowTasks.TabIndex = 5;
+            this.tabDynaFlowTasks.Text = "DynaFlow Tasks";
+            this.tabDynaFlowTasks.UseVisualStyleBackColor = true;
+            // 
+            // pnlDFT
+            // 
+            this.pnlDFT.Controls.Add(this.pnlDFTRight);
+            this.pnlDFT.Controls.Add(this.splitter4);
+            this.pnlDFT.Controls.Add(this.pnlDFTLeft);
+            this.pnlDFT.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlDFT.Location = new System.Drawing.Point(3, 3);
+            this.pnlDFT.Name = "pnlDFT";
+            this.pnlDFT.Size = new System.Drawing.Size(780, 474);
+            this.pnlDFT.TabIndex = 1;
+            // 
+            // pnlDFTRight
+            // 
+            this.pnlDFTRight.Controls.Add(this.groupBox4);
+            this.pnlDFTRight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlDFTRight.Location = new System.Drawing.Point(180, 0);
+            this.pnlDFTRight.Name = "pnlDFTRight";
+            this.pnlDFTRight.Size = new System.Drawing.Size(600, 474);
+            this.pnlDFTRight.TabIndex = 10;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.gridDFT);
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox4.Location = new System.Drawing.Point(0, 0);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.groupBox4.Size = new System.Drawing.Size(600, 474);
+            this.groupBox4.TabIndex = 5;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "DynaFlow Task Properties";
+            // 
+            // gridDFT
+            // 
+            this.gridDFT.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.gridDFT.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridDFT.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn7,
+            this.dataGridViewTextBoxColumn8});
+            this.gridDFT.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridDFT.Location = new System.Drawing.Point(3, 16);
+            this.gridDFT.MultiSelect = false;
+            this.gridDFT.Name = "gridDFT";
+            this.gridDFT.RowHeadersVisible = false;
+            this.gridDFT.RowHeadersWidth = 51;
+            this.gridDFT.Size = new System.Drawing.Size(594, 455);
+            this.gridDFT.TabIndex = 3;
+            this.gridDFT.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridDFT_CellClick);
+            this.gridDFT.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridDFT_CellContentClick);
+            this.gridDFT.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridDFT_CellEnter);
+            this.gridDFT.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridDFT_CellValueChanged);
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.HeaderText = "Property";
+            this.dataGridViewTextBoxColumn7.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.HeaderText = "Value";
+            this.dataGridViewTextBoxColumn8.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            // 
+            // splitter4
+            // 
+            this.splitter4.Location = new System.Drawing.Point(177, 0);
+            this.splitter4.Name = "splitter4";
+            this.splitter4.Size = new System.Drawing.Size(3, 474);
+            this.splitter4.TabIndex = 9;
+            this.splitter4.TabStop = false;
+            // 
+            // pnlDFTLeft
+            // 
+            this.pnlDFTLeft.Controls.Add(this.pnlDFTLeftBottom);
+            this.pnlDFTLeft.Controls.Add(this.pnlDFTLeftTop);
+            this.pnlDFTLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlDFTLeft.Location = new System.Drawing.Point(0, 0);
+            this.pnlDFTLeft.Name = "pnlDFTLeft";
+            this.pnlDFTLeft.Size = new System.Drawing.Size(177, 474);
+            this.pnlDFTLeft.TabIndex = 8;
+            // 
+            // pnlDFTLeftBottom
+            // 
+            this.pnlDFTLeftBottom.Controls.Add(this.btnDFTUp);
+            this.pnlDFTLeftBottom.Controls.Add(this.btnDFTDown);
+            this.pnlDFTLeftBottom.Controls.Add(this.btnAddDFT);
+            this.pnlDFTLeftBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlDFTLeftBottom.Location = new System.Drawing.Point(0, 372);
+            this.pnlDFTLeftBottom.Name = "pnlDFTLeftBottom";
+            this.pnlDFTLeftBottom.Size = new System.Drawing.Size(177, 102);
+            this.pnlDFTLeftBottom.TabIndex = 7;
+            // 
+            // btnAddDFT
+            // 
+            this.btnAddDFT.Location = new System.Drawing.Point(3, 3);
+            this.btnAddDFT.Name = "btnAddDFT";
+            this.btnAddDFT.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnAddDFT.Size = new System.Drawing.Size(75, 23);
+            this.btnAddDFT.TabIndex = 2;
+            this.btnAddDFT.Text = "&Add";
+            this.btnAddDFT.UseVisualStyleBackColor = true;
+            this.btnAddDFT.Click += new System.EventHandler(this.btnAddDFT_Click);
+            // 
+            // pnlDFTLeftTop
+            // 
+            this.pnlDFTLeftTop.Controls.Add(this.lstDFT);
+            this.pnlDFTLeftTop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlDFTLeftTop.Location = new System.Drawing.Point(0, 0);
+            this.pnlDFTLeftTop.Name = "pnlDFTLeftTop";
+            this.pnlDFTLeftTop.Size = new System.Drawing.Size(177, 474);
+            this.pnlDFTLeftTop.TabIndex = 6;
+            // 
+            // lstDFT
+            // 
+            this.lstDFT.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstDFT.FormattingEnabled = true;
+            this.lstDFT.Location = new System.Drawing.Point(0, 0);
+            this.lstDFT.Name = "lstDFT";
+            this.lstDFT.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lstDFT.Size = new System.Drawing.Size(177, 474);
+            this.lstDFT.TabIndex = 1;
+            this.lstDFT.SelectedIndexChanged += new System.EventHandler(this.lstDFT_SelectedIndexChanged);
+            // 
             // tabJSON
             // 
             this.tabJSON.Controls.Add(this.rtbJSON);
@@ -666,16 +836,27 @@ namespace JsonManipulator
             this.grpMain.TabStop = false;
             this.grpMain.Text = "groupBox2";
             // 
-            // chkSubscribeToTargetChild
+            // btnDFTUp
             // 
-            this.chkSubscribeToTargetChild.AutoSize = true;
-            this.chkSubscribeToTargetChild.Location = new System.Drawing.Point(4, 126);
-            this.chkSubscribeToTargetChild.Name = "chkSubscribeToTargetChild";
-            this.chkSubscribeToTargetChild.Size = new System.Drawing.Size(213, 17);
-            this.chkSubscribeToTargetChild.TabIndex = 10;
-            this.chkSubscribeToTargetChild.Text = "Subscribe To Target Child Object Props";
-            this.chkSubscribeToTargetChild.UseVisualStyleBackColor = true;
-            this.chkSubscribeToTargetChild.CheckedChanged += new System.EventHandler(this.chkSubscribeToTargetChild_CheckedChanged);
+            this.btnDFTUp.Location = new System.Drawing.Point(3, 32);
+            this.btnDFTUp.Name = "btnDFTUp";
+            this.btnDFTUp.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnDFTUp.Size = new System.Drawing.Size(75, 23);
+            this.btnDFTUp.TabIndex = 7;
+            this.btnDFTUp.Text = "Move &Up";
+            this.btnDFTUp.UseVisualStyleBackColor = true;
+            this.btnDFTUp.Click += new System.EventHandler(this.btnDFTUp_Click);
+            // 
+            // btnDFTDown
+            // 
+            this.btnDFTDown.Location = new System.Drawing.Point(3, 61);
+            this.btnDFTDown.Name = "btnDFTDown";
+            this.btnDFTDown.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnDFTDown.Size = new System.Drawing.Size(75, 23);
+            this.btnDFTDown.TabIndex = 8;
+            this.btnDFTDown.Text = "Move &Down";
+            this.btnDFTDown.UseVisualStyleBackColor = true;
+            this.btnDFTDown.Click += new System.EventHandler(this.btnDFTDown_Click);
             // 
             // frmFormSettings
             // 
@@ -714,6 +895,14 @@ namespace JsonManipulator
             this.pnlOutputLeft.ResumeLayout(false);
             this.pnlOutputLeftBottom.ResumeLayout(false);
             this.pnlOutputLeftTop.ResumeLayout(false);
+            this.tabDynaFlowTasks.ResumeLayout(false);
+            this.pnlDFT.ResumeLayout(false);
+            this.pnlDFTRight.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridDFT)).EndInit();
+            this.pnlDFTLeft.ResumeLayout(false);
+            this.pnlDFTLeftBottom.ResumeLayout(false);
+            this.pnlDFTLeftTop.ResumeLayout(false);
             this.tabJSON.ResumeLayout(false);
             this.grpMain.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -775,5 +964,20 @@ namespace JsonManipulator
         private System.Windows.Forms.RichTextBox rtbJSON;
         private System.Windows.Forms.CheckBox chkSubscribeToOwnerObject;
         private System.Windows.Forms.CheckBox chkSubscribeToTargetChild;
+        private System.Windows.Forms.TabPage tabDynaFlowTasks;
+        private System.Windows.Forms.Panel pnlDFT;
+        private System.Windows.Forms.Panel pnlDFTRight;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.DataGridView gridDFT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.Splitter splitter4;
+        private System.Windows.Forms.Panel pnlDFTLeft;
+        private System.Windows.Forms.Panel pnlDFTLeftBottom;
+        private System.Windows.Forms.Button btnAddDFT;
+        private System.Windows.Forms.Panel pnlDFTLeftTop;
+        private System.Windows.Forms.ListBox lstDFT;
+        private System.Windows.Forms.Button btnDFTUp;
+        private System.Windows.Forms.Button btnDFTDown;
     }
 }

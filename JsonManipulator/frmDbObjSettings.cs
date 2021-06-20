@@ -211,7 +211,7 @@ namespace JsonManipulator
                 }
                 if(propertyName.Equals("parentObjectName"))
                 { 
-                    using (var form = new ObjectsList())
+                    using (var form = new frmModelSearch(ModelSearchOptions.OBJECTS))
                     {
                         var result = form.ShowDialog();
                         if (result == DialogResult.OK)

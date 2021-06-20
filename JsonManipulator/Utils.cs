@@ -140,6 +140,29 @@ namespace JsonManipulator
         }
 
 
+        public static List<string> GetDFTList()
+        {
+            List<string> result = new List<string>();
+
+            NameSpaceObject nameSpaceObject = Form1._model.root.NameSpaceObjects.FirstOrDefault();
+            foreach (var dbObject in nameSpaceObject.ObjectMap)
+            { 
+
+                if (dbObject.objectWorkflow != null)
+                {
+                    foreach (var objWF in dbObject.objectWorkflow)
+                    {
+                        if (objWF.isDynaFlowTask != null && objWF.isDynaFlowTask == "true")
+                        {
+                            result.Add(objWF.Name);
+                            continue;
+                        } 
+                    }
+                } 
+            }
+
+            return result;
+        }
         public static List<string> GetNameList(bool includeDBObjects, bool includeReports, bool includePageForms, 
             bool includeNonPageObjFlows, bool includeInitPageObjFlows)
         {
@@ -417,6 +440,22 @@ namespace JsonManipulator
             //result.Add("validationRuleRegExMatchRequiredErrorText".ToLower());
             //result.Add("isIgnored".ToLower());
             result.Add("defaultValue".ToLower());
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                result[i] = result[i].ToLower();
+            }
+
+            return result;
+        }
+
+        public static List<string> GetFormDFTPropertiesToIgnore()
+        {
+            List<string> result = new List<string>();
+
+            result.Add("name".ToLower());
+            result.Add("contextObjectName".ToLower());
+            result.Add("isDynaFlowRequest".ToLower());
 
             for (int i = 0; i < result.Count; i++)
             {

@@ -1,7 +1,7 @@
 ﻿
 namespace JsonManipulator
 {
-    partial class ReportList
+    partial class frmModelSearch
     {
         /// <summary>
         /// Required designer variable.
@@ -59,8 +59,8 @@ namespace JsonManipulator
             // 
             this.txtFilter.Location = new System.Drawing.Point(12, 25);
             this.txtFilter.Name = "txtFilter";
-            this.txtFilter.Size = new System.Drawing.Size(303, 20);
-            this.txtFilter.TabIndex = 2;
+            this.txtFilter.Size = new System.Drawing.Size(287, 20);
+            this.txtFilter.TabIndex = 0;
             this.txtFilter.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // panel1
@@ -73,17 +73,17 @@ namespace JsonManipulator
             this.panel1.Size = new System.Drawing.Size(339, 55);
             this.panel1.TabIndex = 3;
             // 
-            // ReportList
+            // APISiteList
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(339, 366);
             this.Controls.Add(this.listObjects);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "ReportList";
+            this.Name = "APISiteList";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Report List";
+            this.Text = "API Site List";
             this.Load += new System.EventHandler(this.ObjectsList_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

@@ -100,7 +100,7 @@ namespace JsonManipulator
 
         private void btnOwner_Click(object sender, EventArgs e)
         { 
-            using (var form = new ObjectsList())
+            using (var form = new frmModelSearch(ModelSearchOptions.OBJECTS))
             {
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK)
@@ -139,7 +139,7 @@ namespace JsonManipulator
         private void btnChild_Click(object sender, EventArgs e)
         {
 
-            using (var form = new ObjectsList())
+            using (var form = new frmModelSearch(ModelSearchOptions.OBJECTS))
             {
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK)
@@ -175,7 +175,7 @@ namespace JsonManipulator
 
         private void button1_Click(object sender, EventArgs e)
         { 
-            using (var form = new APISiteList())
+            using (var form = new frmModelSearch(ModelSearchOptions.API_SITES))
             {
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK)
