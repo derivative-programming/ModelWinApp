@@ -63,6 +63,7 @@ namespace JsonManipulator
             rpt.isPage = "true";
             rpt.isCustomSqlUsed = "false";
             rpt.layoutName = Utils.Capitalize(txtRole.Text.Trim()) + "Layout";
+            rpt.pageTitleText = Utils.ConvertPascalToSpaced(rpt.name);
             if (txtChild.Text.Length > 0)
             {
                 rpt.pageTitleText = Utils.ConvertPascalToSpaced(txtChild.Text.Trim());

@@ -105,6 +105,7 @@ namespace JsonManipulator
             _booleans.Columns.Add("Value");
             _booleans.Rows.Add("BarChart", "BarChart");
             _booleans.Rows.Add("Cards", "Cards");
+            _booleans.Rows.Add("DetailTwoColumn", "DetailTwoColumn");
             _booleans.Rows.Add("DetailThreeColumn", "DetailThreeColumn");
             _booleans.Rows.Add("FlowChart", "FlowChart");
             _booleans.Rows.Add("FolderWithDetail", "FolderWithDetail");

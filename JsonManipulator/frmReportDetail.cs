@@ -63,6 +63,7 @@ namespace JsonManipulator
             rpt.isPage = "true";
             rpt.isCustomSqlUsed = "false";
             rpt.layoutName = Utils.Capitalize(txtRole.Text.Trim()) + "Layout";
+            rpt.pageTitleText = Utils.ConvertPascalToSpaced(rpt.name);
 
             Models.reportButton reportButton = new reportButton();
             reportButton.buttonType = "back";

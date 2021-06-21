@@ -80,6 +80,7 @@ namespace JsonManipulator
             form.objectWorkflowButton.Add(formButtonCancel);
             form.IsPage = "true";
             form.layoutName = Utils.Capitalize(txtRole.Text.Trim()) + "Layout";
+            form.pageTitleText = Utils.ConvertPascalToSpaced(form.Name);
 
 
 
