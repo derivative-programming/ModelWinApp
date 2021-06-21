@@ -53,7 +53,7 @@ namespace JsonManipulator
 
         public void PopulateTree()
         {
-            PopulateTree(""); 
+            PopulateTree(txtSearch.Text); 
         }
         public void PopulateTree(string filter)
         {

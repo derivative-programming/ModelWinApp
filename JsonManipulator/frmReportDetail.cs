@@ -62,6 +62,7 @@ namespace JsonManipulator
             Report rpt = new Report { name = txtName.Text, RoleRequired = txtRole.Text, visualizationType = "DetailThreeColumn"};
             rpt.isPage = "true";
             rpt.isCustomSqlUsed = "false";
+            rpt.layoutName = Utils.Capitalize(txtRole.Text.Trim()) + "Layout";
 
             Models.reportButton reportButton = new reportButton();
             reportButton.buttonType = "back";

@@ -79,6 +79,7 @@ namespace JsonManipulator
             form.objectWorkflowButton.Add(formButtonSubmit);
             form.objectWorkflowButton.Add(formButtonCancel);
             form.IsPage = "true";
+            form.layoutName = Utils.Capitalize(txtRole.Text.Trim()) + "Layout";
 
 
 

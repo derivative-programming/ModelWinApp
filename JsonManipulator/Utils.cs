@@ -315,7 +315,7 @@ namespace JsonManipulator
             //result.Add("isInitObjWFSubscribedToParams");
             //result.Add("isExposedInBusinessObject");
             result.Add("isObjectDelete");
-            result.Add("layoutName");
+            //result.Add("layoutName");
             result.Add("isWFSWorkflowCreated");
             //result.Add("formTitleText");
             //result.Add("formIntroText");
@@ -335,7 +335,7 @@ namespace JsonManipulator
             result.Add("isCustomPageViewUsed");
             result.Add("isIgnoredInDocumentation");
             //result.Add("targetChildObject");
-            result.Add("isAuthorizationRequired");
+            //result.Add("isAuthorizationRequired");
 
             for(int i = 0;i < result.Count;i++)
             {
@@ -529,7 +529,7 @@ namespace JsonManipulator
             //result.Add("isRefreshButtonHidden".ToLower());
             //result.Add("autoRefreshFrequencyInMinutes".ToLower()); 
             //result.Add("defaultOrderByDescending".ToLower());
-            result.Add("layoutName".ToLower());
+            //result.Add("layoutName".ToLower());
             //result.Add("isExportButtonsHidden".ToLower());
             //result.Add("isFilterSectionHidden".ToLower());
             result.Add("isCachingAllowed".ToLower());

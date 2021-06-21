@@ -403,6 +403,11 @@ namespace JsonManipulator
                 {
                     SetPropSubscriptionCheckboxes();
                 }
+                if (property.Equals("isDynaFlowTask") || property.Equals("isRequestRunViaDynaFlowAllowed"))
+                {
+                    ((Form1)Application.OpenForms["Form1"]).PopulateTree(); 
+                }
+
             }
         }
 

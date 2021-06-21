@@ -62,6 +62,7 @@ namespace JsonManipulator
             Report rpt = new Report { name = txtName.Text.Trim(), RoleRequired = txtRole.Text.Trim(), TargetChildObject = txtChild.Text.Trim(), visualizationType = "Grid"};
             rpt.isPage = "true";
             rpt.isCustomSqlUsed = "false";
+            rpt.layoutName = Utils.Capitalize(txtRole.Text.Trim()) + "Layout";
             if (txtChild.Text.Length > 0)
             {
                 rpt.pageTitleText = Utils.ConvertPascalToSpaced(txtChild.Text.Trim());
