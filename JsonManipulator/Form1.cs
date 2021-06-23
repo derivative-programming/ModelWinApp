@@ -40,7 +40,24 @@ namespace JsonManipulator
             {
                 LoadModelFile(this._initialModelPath);
             }
+            UpdateLoginStatusDispaly();
         }
+
+        public string GetModelPath()
+        {
+            return _path;
+        }
+
+        public void SaveModel()
+        {
+            string json = JsonConvert.SerializeObject(Form1._model, Formatting.Indented, new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            }); 
+            File.WriteAllText(_path, json);
+            Utils.SortJsonFile(_path);
+        }
+
         private ToolStripMenuItem AddMenu (string Name)
         {
             ToolStripMenuItem FileMenu = new ToolStripMenuItem(Name);
@@ -480,7 +497,7 @@ namespace JsonManipulator
             }
         }
 
-        private void LoadModelFile(string modelFilePath)
+        public void LoadModelFile(string modelFilePath)
         {
             using (StreamReader r = new StreamReader(modelFilePath))
             {
@@ -648,6 +665,62 @@ namespace JsonManipulator
 
             frmAddAPIFlow form = new frmAddAPIFlow();
             form.ShowDialog();
+        }
+
+        private void loginToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmServicesApiLogin  form = new frmServicesApiLogin();
+            form.ShowDialog();
+
+        }
+
+        private void modelAIProcessingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            frmServicesApiPrepRequestList form = new frmServicesApiPrepRequestList();
+            form.ShowDialog();
+        }
+
+        private void modelValidationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            frmServicesApiValidationRequestList form = new frmServicesApiValidationRequestList();
+            form.ShowDialog();
+        }
+
+        private void modelFabricationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            frmServicesApiFabricationRequestList form = new frmServicesApiFabricationRequestList();
+            form.ShowDialog();
+        }
+
+        public void UpdateLoginStatusDispaly()
+        {
+            if(OpenAPIs.ApiManager._IsLoggedIn)
+            {
+                ShowAsLoggedIn();
+            }
+            else
+            {
+                ShowAsLoggedOut();
+            }
+        }
+
+        public void ShowAsLoggedIn()
+        {
+            loginToolStripMenuItem.Enabled = false;
+            modelAIProcessingToolStripMenuItem.Enabled = true;
+            modelFabricationToolStripMenuItem.Enabled = true;
+            modelValidationToolStripMenuItem.Enabled = true;
+        }
+        public void ShowAsLoggedOut()
+        {
+            loginToolStripMenuItem.Enabled = true;
+            modelAIProcessingToolStripMenuItem.Enabled = false;
+            modelFabricationToolStripMenuItem.Enabled = false;
+            modelValidationToolStripMenuItem.Enabled = false;
+
         }
     }
 }
