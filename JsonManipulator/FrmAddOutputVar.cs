@@ -46,6 +46,7 @@ namespace JsonManipulator
             
             Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == _name).FirstOrDefault().objectWorkflowOutputVar.Add(new objectWorkflowOutputVar { name = txtName.Text.Trim() });
             ((Form1)Application.OpenForms["Form1"]).showMessage("Output Var created successfully");
+            ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
             ((frmFormSettings)Application.OpenForms["frmFormSettings"]).setOutputVarList();
                 this.Close();
         }
@@ -74,6 +75,7 @@ namespace JsonManipulator
                         }
                     }
                     ((Form1)Application.OpenForms["Form1"]).showMessage("Output Var created successfully");
+                    ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
                     ((frmFormSettings)Application.OpenForms["frmFormSettings"]).setOutputVarList();
                 }
             }

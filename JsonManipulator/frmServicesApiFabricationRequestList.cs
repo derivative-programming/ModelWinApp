@@ -18,6 +18,7 @@ namespace JsonManipulator
         {
             public Guid RequestCode { get; set; }
             public DateTime RequestUTCDateTime { get; set; }
+            public string Description { get; set; }
             public bool IsStarted { get; set; }
             public bool IsCompleted { get; set; }
             public bool IsSuccessful { get; set; }
@@ -25,11 +26,12 @@ namespace JsonManipulator
             public GridItem(FabricationRequestListModelItem item)
             {
                 this.RequestCode = item.ModelFabricationRequestCode;
-                this.RequestUTCDateTime = DateTime.Parse(item.ModelFabricationRequestRequestedUTCDateTime);
+                this.RequestUTCDateTime = DateTime.Parse(item.ModelFabricationRequestRequestedUTCDateTime).ToLocalTime();
                 this.IsStarted = item.ModelFabricationRequestIsStarted;
                 this.IsCompleted = item.ModelFabricationRequestIsCompleted;
                 this.IsSuccessful = item.ModelFabricationRequestIsSuccessful;
                 this.IsCanceled = item.ModelFabricationRequestIsCanceled;
+                this.Description = item.ModelFabricationRequestDescription;
             }
         }
         private List<GridItem> _itemList = new List<GridItem>();
@@ -41,6 +43,7 @@ namespace JsonManipulator
         {
             InitializeComponent();
         }
+         
 
         private async Task LoadItemsAsync()
         {
@@ -120,6 +123,7 @@ namespace JsonManipulator
         private async void frmForm_Load(object sender, EventArgs e)
         {
             await LoadItemsAsync();
+            timer1.Enabled = true;
         }
 
         private void gridRequestList_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -155,17 +159,35 @@ namespace JsonManipulator
 
         private async void btnAddRequest_Click(object sender, EventArgs e)
         {
-            Form1 parentForm = ((Form1)Application.OpenForms["Form1"]);
-            parentForm.SaveModel();
-            string modelPath = parentForm.GetModelPath();
-            await OpenAPIs.ApiManager.AddFabricationRequestAsync(modelPath);
-            await RefresListAsync();
+
+            using (var form = new frmServicesApiAddRequest())
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string val = form.ReturnValue;
+                     
+                    Form1 parentForm = ((Form1)Application.OpenForms["Form1"]);
+                    parentForm.SaveModel();
+                    string modelPath = parentForm.GetModelPath();
+                    await OpenAPIs.ApiManager.AddFabricationRequestAsync(val, modelPath);
+                    await RefresListAsync();
+
+                    ((Form1)Application.OpenForms["Form1"]).showMessage("Fabrication request added successfully"); 
+                }
+            }
+            
 
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private async void timer1_Tick(object sender, EventArgs e)
+        {
+            await RefresListAsync();
         }
     }
 

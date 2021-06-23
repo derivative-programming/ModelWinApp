@@ -75,6 +75,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\Enums.cs" />
+    <Compile Include="frmServicesApiAddRequest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmServicesApiAddRequest.Designer.cs">
+      <DependentUpon>frmServicesApiAddRequest.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmDownloadFile.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -305,6 +311,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils.cs" />
+    <EmbeddedResource Include="frmServicesApiAddRequest.resx">
+      <DependentUpon>frmServicesApiAddRequest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmDownloadFile.resx">
       <DependentUpon>frmDownloadFile.cs</DependentUpon>
     </EmbeddedResource>

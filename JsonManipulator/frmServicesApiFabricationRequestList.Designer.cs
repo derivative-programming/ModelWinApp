@@ -29,12 +29,15 @@ namespace JsonManipulator
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnAddRequest = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.gridRequestList = new System.Windows.Forms.DataGridView();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridRequestList)).BeginInit();
@@ -42,6 +45,7 @@ namespace JsonManipulator
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.btnOK);
             this.panel1.Controls.Add(this.btnRefresh);
             this.panel1.Controls.Add(this.btnAddRequest);
@@ -56,7 +60,7 @@ namespace JsonManipulator
             this.btnOK.Location = new System.Drawing.Point(729, 20);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 2;
+            this.btnOK.TabIndex = 0;
             this.btnOK.Text = "&OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
@@ -66,7 +70,7 @@ namespace JsonManipulator
             this.btnRefresh.Location = new System.Drawing.Point(648, 20);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(75, 23);
-            this.btnRefresh.TabIndex = 1;
+            this.btnRefresh.TabIndex = 2;
             this.btnRefresh.Text = "&Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
@@ -76,7 +80,7 @@ namespace JsonManipulator
             this.btnAddRequest.Location = new System.Drawing.Point(536, 20);
             this.btnAddRequest.Name = "btnAddRequest";
             this.btnAddRequest.Size = new System.Drawing.Size(106, 23);
-            this.btnAddRequest.TabIndex = 0;
+            this.btnAddRequest.TabIndex = 1;
             this.btnAddRequest.Text = "&Add Request";
             this.btnAddRequest.UseVisualStyleBackColor = true;
             this.btnAddRequest.Click += new System.EventHandler(this.btnAddRequest_Click);
@@ -106,7 +110,21 @@ namespace JsonManipulator
             this.gridRequestList.TabIndex = 0;
             this.gridRequestList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridRequestList_CellClick);
             // 
-            // frmServicesApiLFabricationRequestList
+            // timer1
+            // 
+            this.timer1.Interval = 60000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(158, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Auto Refresh Rate: 60 Seconds";
+            // 
+            // frmServicesApiFabricationRequestList
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(816, 328);
@@ -114,12 +132,13 @@ namespace JsonManipulator
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MinimizeBox = false;
-            this.Name = "frmServicesApiLFabricationRequestList";
+            this.Name = "frmServicesApiFabricationRequestList";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Model Fabrication Processing Requests";
             this.Load += new System.EventHandler(this.frmForm_Load);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridRequestList)).EndInit();
             this.ResumeLayout(false);
@@ -134,5 +153,7 @@ namespace JsonManipulator
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnAddRequest;
         private System.Windows.Forms.Button btnOK;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label label1;
     }
 }

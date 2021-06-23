@@ -816,5 +816,10 @@ namespace JsonManipulator
                 Utils.RemovePropSubscriptionFor(objectMap, _rpt.name); 
             }
         }
+
+        private void ShowUnsavedChanges()
+        {
+            ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
+        }
     }
 }

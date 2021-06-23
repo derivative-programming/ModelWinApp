@@ -46,6 +46,7 @@ namespace JsonManipulator
                     
                     Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == _name).FirstOrDefault().objectWorkflowButton.Add(new objectWorkflowButton { buttonText = txtName.Text.Trim(), buttonType = "other"});
                     ((Form1)Application.OpenForms["Form1"]).showMessage("Button created successfully");
+                    ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
                     ((frmFormSettings)Application.OpenForms["frmFormSettings"]).setButtonsList();
                         this.Close();
                  
@@ -66,6 +67,7 @@ namespace JsonManipulator
 
                     Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportButton.Add(new reportButton { buttonName = txtName.Text.Trim(), buttonType = "other"});
                     ((Form1)Application.OpenForms["Form1"]).showMessage("Button created successfully");
+                    ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
                     ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setButtonsList();
                     this.Close();
                     break;

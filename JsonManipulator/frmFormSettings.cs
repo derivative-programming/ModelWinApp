@@ -982,5 +982,9 @@ namespace JsonManipulator
         {
 
         }
+        private void ShowUnsavedChanges()
+        {
+            ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
+        }
     }
 }

@@ -27,6 +27,8 @@ namespace JsonManipulator
             ((Form1)Application.OpenForms["Form1"]).UpdateLoginStatusDispaly();
             if (OpenAPIs.ApiManager._IsLoggedIn)
             {
+                LocalStorage.SetValue("ModelServicesApiLogin", txtLogin.Text.Trim());
+                LocalStorage.Save();
                 ((Form1)Application.OpenForms["Form1"]).showMessage("Logged in successfully");
             }
             this.Close();
@@ -40,6 +42,7 @@ namespace JsonManipulator
         private void frmForm_Load(object sender, EventArgs e)
         {
             ShowValidationError("");
+            txtLogin.Text = LocalStorage.GetValue("ModelServicesApiLogin", ""); 
         } 
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -47,7 +50,11 @@ namespace JsonManipulator
             this.Close();
         }
          
-          
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://google.com");
+        }
     }
 
     

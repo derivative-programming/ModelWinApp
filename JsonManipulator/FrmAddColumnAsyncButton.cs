@@ -63,6 +63,7 @@ namespace JsonManipulator
 
             Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportColumn.Add(reportColumn);
              ((Form1)Application.OpenForms["Form1"]).showMessage("Column created successfully");
+            ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
             ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setColumnsList();
             this.Close();
         }

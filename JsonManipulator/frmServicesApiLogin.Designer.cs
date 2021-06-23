@@ -36,6 +36,7 @@ namespace JsonManipulator
             this.lblValidationError = new System.Windows.Forms.Label();
             this.txtLogin = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // lblName
@@ -43,7 +44,7 @@ namespace JsonManipulator
             this.lblName.AutoSize = true;
             this.lblName.Location = new System.Drawing.Point(12, 50);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(69, 17);
+            this.lblName.Size = new System.Drawing.Size(53, 13);
             this.lblName.TabIndex = 0;
             this.lblName.Text = "&Password";
             // 
@@ -51,16 +52,16 @@ namespace JsonManipulator
             // 
             this.txtPassword.Location = new System.Drawing.Point(12, 70);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(236, 22);
-            this.txtPassword.TabIndex = 3;
-            this.txtPassword.Text = "Password1!";
+            this.txtPassword.PasswordChar = '*';
+            this.txtPassword.Size = new System.Drawing.Size(236, 20);
+            this.txtPassword.TabIndex = 1;
             // 
             // btnAccept
             // 
             this.btnAccept.Location = new System.Drawing.Point(92, 148);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
-            this.btnAccept.TabIndex = 5;
+            this.btnAccept.TabIndex = 3;
             this.btnAccept.Text = "&Login";
             this.btnAccept.UseVisualStyleBackColor = true;
             this.btnAccept.Click += new System.EventHandler(this.frmAdd_Click);
@@ -71,7 +72,7 @@ namespace JsonManipulator
             this.btnCancel.Location = new System.Drawing.Point(173, 148);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 24);
-            this.btnCancel.TabIndex = 6;
+            this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -82,7 +83,7 @@ namespace JsonManipulator
             this.lblValidationError.ForeColor = System.Drawing.Color.Red;
             this.lblValidationError.Location = new System.Drawing.Point(12, 95);
             this.lblValidationError.Name = "lblValidationError";
-            this.lblValidationError.Size = new System.Drawing.Size(180, 17);
+            this.lblValidationError.Size = new System.Drawing.Size(133, 13);
             this.lblValidationError.TabIndex = 11;
             this.lblValidationError.Text = "Test Valiation Error Display";
             // 
@@ -90,26 +91,38 @@ namespace JsonManipulator
             // 
             this.txtLogin.Location = new System.Drawing.Point(12, 25);
             this.txtLogin.Name = "txtLogin";
-            this.txtLogin.Size = new System.Drawing.Size(236, 22);
-            this.txtLogin.TabIndex = 2;
-            this.txtLogin.Text = "vince.roche@gmail.com";
+            this.txtLogin.Size = new System.Drawing.Size(236, 20);
+            this.txtLogin.TabIndex = 0;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 5);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(42, 17);
+            this.label2.Size = new System.Drawing.Size(32, 13);
             this.label2.TabIndex = 20;
             this.label2.Text = "Email";
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabel1.Location = new System.Drawing.Point(12, 148);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(69, 20);
+            this.linkLabel1.TabIndex = 21;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Register";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // frmServicesApiLogin
             // 
             this.AcceptButton = this.btnAccept;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(261, 184);
+            this.ClientSize = new System.Drawing.Size(261, 186);
             this.ControlBox = false;
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.txtLogin);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblValidationError);
@@ -137,5 +150,6 @@ namespace JsonManipulator
         private System.Windows.Forms.Label lblValidationError;
         private System.Windows.Forms.TextBox txtLogin;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }

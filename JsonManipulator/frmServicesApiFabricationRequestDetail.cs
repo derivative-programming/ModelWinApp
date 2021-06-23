@@ -97,7 +97,12 @@ namespace JsonManipulator
             string destinationFilePath = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".zip";
             using (var form = new frmDownloadFile(_requestItem.ModelFabricationRequestResultUrl, destinationFilePath))
             {
-                var result = form.ShowDialog(); 
+                var result = form.ShowDialog();
+                if (System.IO.Directory.Exists(txtFabricationFolder.Text))
+                {
+                    System.IO.Directory.Delete(txtFabricationFolder.Text, true);
+                }
+                System.IO.Directory.CreateDirectory(txtFabricationFolder.Text);
                 ZipFile.ExtractToDirectory(destinationFilePath, txtFabricationFolder.Text);
                 System.IO.File.Delete(destinationFilePath);
             }
@@ -113,6 +118,8 @@ namespace JsonManipulator
                 {
                     txtFabricationFolder.Text = fbd.SelectedPath;
                     LocalStorage.SetValue("FabricationFolder", txtFabricationFolder.Text.Trim());
+                    LocalStorage.Save();
+
                 }
             }
                

@@ -36,6 +36,7 @@ namespace JsonManipulator
 
             Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().lookupItem.Add(new lookupItem { name = txtName.Text.Trim(), displayName = Utils.ConvertPascalToSpaced(txtName.Text.Trim()), description = Utils.ConvertPascalToSpaced(txtName.Text.Trim()), isActive="true" });
             ((Form1)Application.OpenForms["Form1"]).showMessage("Lookup Item created successfully");
+            ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
             ((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]).setLookupItemList();
                 this.Close();
         }
@@ -88,6 +89,7 @@ namespace JsonManipulator
                         }
                     }
                     ((Form1)Application.OpenForms["Form1"]).showMessage("Lookup Item created successfully");
+                    ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
                     ((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]).setLookupItemList();
                 }
             }

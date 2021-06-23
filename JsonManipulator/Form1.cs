@@ -28,7 +28,8 @@ namespace JsonManipulator
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {  
+        {
+            OpenAPIs.ApiManager.Initialize();
             nodeMenus.TabStop = false;
             nodeMenus.Enabled = false;
             addToolStripMenuItem.Enabled = false;
@@ -56,6 +57,7 @@ namespace JsonManipulator
             }); 
             File.WriteAllText(_path, json);
             Utils.SortJsonFile(_path);
+            ShowNoUnsavedChanges();
         }
 
         private ToolStripMenuItem AddMenu (string Name)
@@ -461,6 +463,7 @@ namespace JsonManipulator
             File.WriteAllText(_path, json);
             Utils.SortJsonFile(_path);
             showMessage("File Updated Successfully");
+            ShowNoUnsavedChanges();
         }
 
         private void formPageToolStripMenuItem_Click(object sender, EventArgs e)
@@ -512,6 +515,7 @@ namespace JsonManipulator
             saveToolStripMenuItem.Enabled = true;
             saveAsToolStripMenuItem.Enabled = true;
             _path = modelFilePath;
+            ShowNoUnsavedChanges();
         }
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
@@ -546,6 +550,7 @@ namespace JsonManipulator
                 File.WriteAllText(_path, json);
                 Utils.SortJsonFile(_path);
                 showMessage("File Updated Successfully");
+                ShowNoUnsavedChanges();
             }
         }
 
@@ -592,25 +597,29 @@ namespace JsonManipulator
             if(((frmFormSettings)Application.OpenForms["frmFormSettings"])!=null)
             ((frmFormSettings)Application.OpenForms["frmFormSettings"]).Close();
             nodeMenus.SelectedNode = PopulateTree(objectWorkflow);
-             
+            ShowUnsavedChanges();
+
         }
         public void AddToTree(ObjectMap objectMap)
         {
             if (((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]) != null)
                 ((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]).Close();
-            nodeMenus.SelectedNode = PopulateTree(objectMap); 
+            nodeMenus.SelectedNode = PopulateTree(objectMap);
+            ShowUnsavedChanges();
         }
         public void AddToTree(Report report)
         {
             if (((frmReportSettings)Application.OpenForms["frmReportSettings"]) != null)
                 ((frmReportSettings)Application.OpenForms["frmReportSettings"]).Close();
             nodeMenus.SelectedNode = PopulateTree(report);
+            ShowUnsavedChanges();
         }
         public void AddToTree(Models.apiSite apiSite)
         {
             if (((frmAPISettings)Application.OpenForms["frmAPISettings"]) != null)
                 ((frmAPISettings)Application.OpenForms["frmAPISettings"]).Close();
             nodeMenus.SelectedNode = PopulateTree(apiSite);
+            ShowUnsavedChanges();
         }
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -713,6 +722,7 @@ namespace JsonManipulator
             modelAIProcessingToolStripMenuItem.Enabled = true;
             modelFabricationToolStripMenuItem.Enabled = true;
             modelValidationToolStripMenuItem.Enabled = true;
+            logOutToolStripMenuItem.Enabled = true;
         }
         public void ShowAsLoggedOut()
         {
@@ -720,7 +730,35 @@ namespace JsonManipulator
             modelAIProcessingToolStripMenuItem.Enabled = false;
             modelFabricationToolStripMenuItem.Enabled = false;
             modelValidationToolStripMenuItem.Enabled = false;
+            logOutToolStripMenuItem.Enabled = false;
 
+        }
+
+        public void ShowUnsavedChanges()
+        {
+            if(!this.Text.StartsWith("*"))
+            {
+                this.Text = "*" + this.Text;
+            }
+        }
+
+        public void ShowNoUnsavedChanges()
+        {
+            if (this.Text.StartsWith("*"))
+            {
+                this.Text = this.Text.Remove(0, 1);
+            }
+        }
+
+        private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenAPIs.ApiManager._ApiKey = string.Empty;
+            OpenAPIs.ApiManager._ApiKeyExpirationDateTime = DateTime.MinValue;
+            OpenAPIs.ApiManager._IsLoggedIn = false;
+            LocalStorage.SetValue("ModelServicesApiKey", "");
+            LocalStorage.SetValue("ModelServicesApiKeyExpirationUTCDateTime", DateTime.MinValue.ToString());
+            LocalStorage.Save();
+            UpdateLoginStatusDispaly();
         }
     }
 }

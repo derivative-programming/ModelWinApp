@@ -18,6 +18,7 @@ namespace JsonManipulator
         {
             public Guid RequestCode { get; set; }
             public DateTime RequestUTCDateTime { get; set; }
+            public string Description { get; set; }
             public bool IsStarted { get; set; }
             public bool IsCompleted { get; set; }
             public bool IsSuccessful { get; set; }
@@ -25,11 +26,12 @@ namespace JsonManipulator
             public GridItem(ValidationRequestListModelItem item)
             {
                 this.RequestCode = item.ModelValidationRequestCode;
-                this.RequestUTCDateTime = DateTime.Parse(item.ModelValidationRequestRequestedUTCDateTime);
+                this.RequestUTCDateTime = DateTime.Parse(item.ModelValidationRequestRequestedUTCDateTime).ToLocalTime();
                 this.IsStarted = item.ModelValidationRequestIsStarted;
                 this.IsCompleted = item.ModelValidationRequestIsCompleted;
                 this.IsSuccessful = item.ModelValidationRequestIsSuccessful;
                 this.IsCanceled = item.ModelValidationRequestIsCanceled;
+                this.Description = item.ModelValidationRequestDescription;
             }
         }
         private List<GridItem> _itemList = new List<GridItem>();
@@ -154,11 +156,23 @@ namespace JsonManipulator
 
         private async void btnAddRequest_Click(object sender, EventArgs e)
         {
-            Form1 parentForm = ((Form1)Application.OpenForms["Form1"]);
-            parentForm.SaveModel();
-            string modelPath = parentForm.GetModelPath();
-            await OpenAPIs.ApiManager.AddValidationRequestAsync(modelPath);
-            await RefresListAsync();
+            using (var form = new frmServicesApiAddRequest())
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string val = form.ReturnValue;
+
+                    Form1 parentForm = ((Form1)Application.OpenForms["Form1"]);
+                    parentForm.SaveModel();
+                    string modelPath = parentForm.GetModelPath();
+                    await OpenAPIs.ApiManager.AddValidationRequestAsync(val, modelPath);
+                    await RefresListAsync();
+
+                    ((Form1)Application.OpenForms["Form1"]).showMessage("Fabrication request added successfully"); 
+                }
+            }
+             
 
         }
 
@@ -166,6 +180,16 @@ namespace JsonManipulator
         {
 
             this.Close();
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private async void timer1_Tick(object sender, EventArgs e)
+        {
+            await RefresListAsync();
         }
     }
 

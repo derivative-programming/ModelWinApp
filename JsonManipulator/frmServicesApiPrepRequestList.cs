@@ -18,6 +18,7 @@ namespace JsonManipulator
         {
             public Guid RequestCode { get; set; }
             public DateTime RequestUTCDateTime { get; set; }
+            public string Description { get; set; }
             public bool IsStarted { get; set; }
             public bool IsCompleted { get; set; }
             public bool IsSuccessful { get; set; }
@@ -25,11 +26,12 @@ namespace JsonManipulator
             public GridItem(PrepRequestListModelItem item)
             {
                 this.RequestCode = item.ModelPrepRequestCode;
-                this.RequestUTCDateTime = DateTime.Parse(item.ModelPrepRequestRequestedUTCDateTime);
+                this.RequestUTCDateTime = DateTime.Parse(item.ModelPrepRequestRequestedUTCDateTime).ToLocalTime();
                 this.IsStarted = item.ModelPrepRequestIsStarted;
                 this.IsCompleted = item.ModelPrepRequestIsCompleted;
                 this.IsSuccessful = item.ModelPrepRequestIsSuccessful;
                 this.IsCanceled = item.ModelPrepRequestIsCanceled;
+                this.Description = item.ModelPrepRequestDescription;
             }
         }
         private List<GridItem> _itemList = new List<GridItem>();
@@ -154,18 +156,35 @@ namespace JsonManipulator
 
         private async void btnAddRequest_Click(object sender, EventArgs e)
         {
-            Form1 parentForm = ((Form1)Application.OpenForms["Form1"]);
-            parentForm.SaveModel();
-            string modelPath = parentForm.GetModelPath();
-            await OpenAPIs.ApiManager.AddPrepRequestAsync(modelPath);
-            await RefresListAsync();
+            using (var form = new frmServicesApiAddRequest())
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string val = form.ReturnValue;
 
+                    Form1 parentForm = ((Form1)Application.OpenForms["Form1"]);
+                    parentForm.SaveModel();
+                    string modelPath = parentForm.GetModelPath();
+                    await OpenAPIs.ApiManager.AddPrepRequestAsync(val, modelPath);
+                    await RefresListAsync();
+
+                    ((Form1)Application.OpenForms["Form1"]).showMessage("Fabrication request added successfully"); 
+                }
+            }
+
+             
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
 
             this.Close();
+        }
+
+        private async void timer1_Tick(object sender, EventArgs e)
+        { 
+            await RefresListAsync();
         }
     }
 

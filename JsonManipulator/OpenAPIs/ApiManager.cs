@@ -10,7 +10,7 @@ namespace JsonManipulator.OpenAPIs
     public static class ApiManager
     {
         public static bool _IsLoggedIn = false;
-
+        public static DateTime _ApiKeyExpirationDateTime = DateTime.MinValue;
         public static string _ApiKey = string.Empty;
 
         private static string GetApiBaseUrl()
@@ -18,6 +18,15 @@ namespace JsonManipulator.OpenAPIs
             return "https://localhost:44348";
         }
          
+        public static void Initialize()
+        {
+            _ApiKeyExpirationDateTime = Convert.ToDateTime(LocalStorage.GetValue("ModelServicesApiKeyExpirationUTCDateTime", DateTime.MinValue.ToString()));
+            if(_ApiKeyExpirationDateTime.Ticks > DateTime.UtcNow.Ticks)
+            {
+                _IsLoggedIn = true;
+                _ApiKey = LocalStorage.GetValue("ModelServicesApiKey", "");
+            } 
+        }
 
         private static System.Net.Http.HttpClient BuildClient()
         {
@@ -45,6 +54,10 @@ namespace JsonManipulator.OpenAPIs
                 {
                     _IsLoggedIn = true;
                     _ApiKey = loginPostResponse.ModelServicesAPIKey;
+                    _ApiKeyExpirationDateTime = DateTime.UtcNow.AddDays(1);
+                    LocalStorage.SetValue("ModelServicesApiKey", _ApiKey);
+                    LocalStorage.SetValue("ModelServicesApiKeyExpirationUTCDateTime", _ApiKeyExpirationDateTime.ToString());
+                    LocalStorage.Save();
                 }
 
                 result = true;
@@ -54,6 +67,53 @@ namespace JsonManipulator.OpenAPIs
 
             }
             
+
+            return result;
+        }
+
+        public async static Task<bool> RegisterAsync(string email, 
+            string password,
+            string confirmPassword,
+            string firstName,
+            string lastName,
+            bool optIn)
+        {
+            bool result = false;
+
+            try
+            {
+                System.Net.Http.HttpClient httpClient = new System.Net.Http.HttpClient();
+                RegisterClient registerClient = new RegisterClient(GetApiBaseUrl(), httpClient);
+
+                RegisterPostModel registerPostModel = new RegisterPostModel();
+                registerPostModel.Email = email;
+                registerPostModel.Password = password;
+                registerPostModel.ConfirmPassword = confirmPassword;
+                registerPostModel.FirstName = firstName;
+                registerPostModel.LastName = lastName;
+                registerPostModel.OptIntoTerms = optIn;
+
+
+                RegisterPostResponse registerPostResponse = await registerClient.PostAsync(registerPostModel);
+                _IsLoggedIn = false;
+                _ApiKey = string.Empty;
+                if (registerPostResponse.Success)
+                {
+                    _IsLoggedIn = true;
+                    _ApiKey = registerPostResponse.ModelServicesAPIKey;
+                    _ApiKeyExpirationDateTime = DateTime.UtcNow.AddDays(1);
+                    LocalStorage.SetValue("ModelServicesApiKey", _ApiKey);
+                    LocalStorage.SetValue("ModelServicesApiKeyExpirationUTCDateTime", _ApiKeyExpirationDateTime.ToString());
+                    LocalStorage.Save();
+                }
+
+                result = true;
+            }
+            catch (System.Exception)
+            {
+
+            }
+
 
             return result;
         }
@@ -191,7 +251,7 @@ namespace JsonManipulator.OpenAPIs
         }
 
 
-        public async static Task<bool> AddPrepRequestAsync(string modelFilePath)
+        public async static Task<bool> AddPrepRequestAsync(string description, string modelFilePath)
         {
             bool result = false;
 
@@ -201,7 +261,7 @@ namespace JsonManipulator.OpenAPIs
 
                 PrepRequestPostModel postModel = new PrepRequestPostModel();
                 postModel.ModelFileData = Convert.ToBase64String(System.IO.File.ReadAllBytes(modelFilePath));
-                postModel.Description = ""; 
+                postModel.Description = description; 
                 PrepRequestPostResponse response = await prepRequestClient.PostAsync(postModel);
                 result = true;
             }
@@ -213,7 +273,7 @@ namespace JsonManipulator.OpenAPIs
             return result;
         }
 
-        public async static Task<bool> AddValidationRequestAsync(string modelFilePath)
+        public async static Task<bool> AddValidationRequestAsync(string description, string modelFilePath)
         {
             bool result = false;
 
@@ -223,6 +283,7 @@ namespace JsonManipulator.OpenAPIs
 
                 ValidationRequestPostModel postModel = new ValidationRequestPostModel();
                 postModel.ModelFileData = Convert.ToBase64String(System.IO.File.ReadAllBytes(modelFilePath));
+                postModel.Description = description;
                 ValidationRequestPostResponse response = await client.PostAsync(postModel);
                 result = true;
             }
@@ -234,7 +295,7 @@ namespace JsonManipulator.OpenAPIs
             return result;
         }
 
-        public async static Task<bool> AddFabricationRequestAsync(string modelFilePath)
+        public async static Task<bool> AddFabricationRequestAsync(string description, string modelFilePath)
         {
             bool result = false;
 
@@ -244,6 +305,7 @@ namespace JsonManipulator.OpenAPIs
 
                 FabricationRequestPostModel postModel = new FabricationRequestPostModel();
                 postModel.ModelFileData = Convert.ToBase64String(System.IO.File.ReadAllBytes(modelFilePath));
+                postModel.Description = description;
                 FabricationRequestPostResponse response = await client.PostAsync(postModel);
                 result = true;
             }
@@ -309,58 +371,7 @@ namespace JsonManipulator.OpenAPIs
 
             return result;
         }
-
-
-        public async static Task<bool> DownloadPrepRequestReportAsync(Guid prepRequestCode)
-        {
-            bool result = false;
-
-            return result;
-        }
-        public async static Task<bool> DownloadValidationRequestReportAsync(Guid validationRequestCode)
-        {
-            bool result = false;
-
-            return result;
-        }
-        public async static Task<bool> DownloadFabricationRequestReportAsync(Guid fabricationRequestCode)
-        {
-            bool result = false;
-
-            return result;
-        }
-
-        public async static Task<bool> DownloadPrepRequestInitialModelAndLoadAsync(Guid prepRequestCode)
-        {
-            bool result = false;
-
-            return result;
-        }
-        public async static Task<bool> DownloadValidationRequestInitialModelAndLoadAsync(Guid validationRequestCode)
-        {
-            bool result = false;
-
-            return result;
-        }
-        public async static Task<bool> DownloadFabricationRequestInitialModelAndLoadAsync(Guid fabricationRequestCode)
-        {
-            bool result = false;
-
-            return result;
-        }
-
-        public async static Task<bool> DownloadPrepRequestResultModelAndLoadAsync(Guid prepRequestCode)
-        {
-            bool result = false;
-
-            return result;
-        } 
-        public async static Task<bool> DownloadFabricationRequestResultModelAndLoadAsync(Guid fabricationRequestCode)
-        {
-            bool result = false;
-
-            return result;
-        }
+         
 
     }
 }

@@ -38,6 +38,7 @@ namespace JsonManipulator
 
             Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().property.Add(new property { name =txtName.Text});
             ((Form1)Application.OpenForms["Form1"]).showMessage("Property created successfully");
+            ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
             ((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]).setPropertieList();
             this.Close();
         }
@@ -91,6 +92,7 @@ namespace JsonManipulator
                         }
                     }
                     ((Form1)Application.OpenForms["Form1"]).showMessage("Property created successfully");
+                    ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
                     ((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]).setPropertieList();
                 }
             }

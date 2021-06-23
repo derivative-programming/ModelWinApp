@@ -646,5 +646,9 @@ namespace JsonManipulator
                 NullValueHandling = NullValueHandling.Ignore
             });
         }
+        private void ShowUnsavedChanges()
+        {
+            ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
+        }
     }
 }
