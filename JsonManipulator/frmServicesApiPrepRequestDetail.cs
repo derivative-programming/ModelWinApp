@@ -74,6 +74,7 @@ namespace JsonManipulator
             {
                 var result = form.ShowDialog();
                 ((Form1)Application.OpenForms["Form1"]).LoadModelFile(destinationFilePath);
+                MessageBox.Show("Initial model downloaded and loaded successfully.");
             }
         }
 
@@ -96,6 +97,7 @@ namespace JsonManipulator
             {
                 var result = form.ShowDialog();
                 ((Form1)Application.OpenForms["Form1"]).LoadModelFile(destinationFilePath);
+                MessageBox.Show("Result model downloaded and loaded successfully.");
             }
         }
 

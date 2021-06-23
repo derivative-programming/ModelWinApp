@@ -53,7 +53,7 @@ namespace JsonManipulator
             this.Close();
         }
 
-        public void DownloadFile(string urlAddress, string location)
+        public async  void DownloadFile(string urlAddress, string location)
         {
             using (_webClient = new WebClient())
             {
@@ -61,7 +61,7 @@ namespace JsonManipulator
                 _webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
 
                 // The variable that will be holding the url address (making sure it starts with http://)
-                Uri URL = urlAddress.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ? new Uri(urlAddress) : new Uri("http://" + urlAddress);
+                Uri URL = new Uri( urlAddress);
 
                 // Start the stopwatch which we will be using to calculate the download speed
                 _sw.Start();
@@ -69,7 +69,7 @@ namespace JsonManipulator
                 try
                 {
                     // Start downloading the file
-                    _webClient.DownloadFileAsync(URL, location);
+                      await _webClient.DownloadFileTaskAsync(URL, location);
                 }
                 catch (Exception ex)
                 {
@@ -93,12 +93,12 @@ namespace JsonManipulator
             _sw.Reset();
 
             if (e.Cancelled == true)
-            {
-                MessageBox.Show("Download has been canceled.");
+            { 
+                this.Close();
             }
             else
             {
-                MessageBox.Show("Download completed!");
+                this.Close();
             }
         }
     }
