@@ -68,10 +68,13 @@ namespace JsonManipulator
             this.detailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aPIGetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aPISiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.servicesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modelAIProcessingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modelValidationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modelFabricationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nodeMenus = new System.Windows.Forms.TreeView();
             this.imgIcons = new System.Windows.Forms.ImageList(this.components);
             this.mainPanel = new System.Windows.Forms.Panel();
@@ -82,9 +85,6 @@ namespace JsonManipulator
             this.label1 = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusText = new System.Windows.Forms.ToolStripStatusLabel();
-            this.modelValidationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.modelFabricationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -189,8 +189,8 @@ namespace JsonManipulator
             // 
             this.generalToolStripMenuItem.Name = "generalToolStripMenuItem";
             this.generalToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.D)));
-            this.generalToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            | System.Windows.Forms.Keys.O)));
+            this.generalToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.generalToolStripMenuItem.Text = "General";
             this.generalToolStripMenuItem.Click += new System.EventHandler(this.generalToolStripMenuItem_Click);
             // 
@@ -199,7 +199,7 @@ namespace JsonManipulator
             this.lookupToolStripMenuItem.Name = "lookupToolStripMenuItem";
             this.lookupToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.L)));
-            this.lookupToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.lookupToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.lookupToolStripMenuItem.Text = "Lookup";
             this.lookupToolStripMenuItem.Click += new System.EventHandler(this.lookupToolStripMenuItem_Click);
             // 
@@ -263,7 +263,7 @@ namespace JsonManipulator
             // 
             this.detailToolStripMenuItem.Name = "detailToolStripMenuItem";
             this.detailToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.R)));
+            | System.Windows.Forms.Keys.D)));
             this.detailToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.detailToolStripMenuItem.Text = "Detail";
             this.detailToolStripMenuItem.Click += new System.EventHandler(this.detailToolStripMenuItem_Click);
@@ -283,13 +283,6 @@ namespace JsonManipulator
             this.aPISiteToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.aPISiteToolStripMenuItem.Text = "API";
             this.aPISiteToolStripMenuItem.Click += new System.EventHandler(this.aPISiteToolStripMenuItem_Click);
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
             // servicesToolStripMenuItem
             // 
@@ -316,6 +309,34 @@ namespace JsonManipulator
             this.modelAIProcessingToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.modelAIProcessingToolStripMenuItem.Text = "Model AI Processing";
             this.modelAIProcessingToolStripMenuItem.Click += new System.EventHandler(this.modelAIProcessingToolStripMenuItem_Click);
+            // 
+            // modelValidationToolStripMenuItem
+            // 
+            this.modelValidationToolStripMenuItem.Name = "modelValidationToolStripMenuItem";
+            this.modelValidationToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.modelValidationToolStripMenuItem.Text = "Model Validation";
+            this.modelValidationToolStripMenuItem.Click += new System.EventHandler(this.modelValidationToolStripMenuItem_Click);
+            // 
+            // modelFabricationToolStripMenuItem
+            // 
+            this.modelFabricationToolStripMenuItem.Name = "modelFabricationToolStripMenuItem";
+            this.modelFabricationToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.modelFabricationToolStripMenuItem.Text = "Model Fabrication";
+            this.modelFabricationToolStripMenuItem.Click += new System.EventHandler(this.modelFabricationToolStripMenuItem_Click);
+            // 
+            // logOutToolStripMenuItem
+            // 
+            this.logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
+            this.logOutToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.logOutToolStripMenuItem.Text = "Log Out";
+            this.logOutToolStripMenuItem.Click += new System.EventHandler(this.logOutToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
             // nodeMenus
             // 
@@ -447,27 +468,6 @@ namespace JsonManipulator
             // 
             this.statusText.Name = "statusText";
             this.statusText.Size = new System.Drawing.Size(0, 17);
-            // 
-            // modelValidationToolStripMenuItem
-            // 
-            this.modelValidationToolStripMenuItem.Name = "modelValidationToolStripMenuItem";
-            this.modelValidationToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.modelValidationToolStripMenuItem.Text = "Model Validation";
-            this.modelValidationToolStripMenuItem.Click += new System.EventHandler(this.modelValidationToolStripMenuItem_Click);
-            // 
-            // modelFabricationToolStripMenuItem
-            // 
-            this.modelFabricationToolStripMenuItem.Name = "modelFabricationToolStripMenuItem";
-            this.modelFabricationToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.modelFabricationToolStripMenuItem.Text = "Model Fabrication";
-            this.modelFabricationToolStripMenuItem.Click += new System.EventHandler(this.modelFabricationToolStripMenuItem_Click);
-            // 
-            // logOutToolStripMenuItem
-            // 
-            this.logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
-            this.logOutToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.logOutToolStripMenuItem.Text = "Log Out";
-            this.logOutToolStripMenuItem.Click += new System.EventHandler(this.logOutToolStripMenuItem_Click);
             // 
             // Form1
             // 
