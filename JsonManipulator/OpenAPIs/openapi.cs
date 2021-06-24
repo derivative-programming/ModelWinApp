@@ -2605,7 +2605,11 @@ namespace JsonManipulator
         [Newtonsoft.Json.JsonProperty("modelFabricationRequestProgressPercentage", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string ModelFabricationRequestProgressPercentage { get; set; }
-    
+
+
+        [Newtonsoft.Json.JsonProperty("modelFabricationRequestCodeSizeInMB", Required = Newtonsoft.Json.Required.Always)]
+        public int ModelFabricationRequestCodeSizeInMB { get; set; }
+
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
         [Newtonsoft.Json.JsonExtensionData]

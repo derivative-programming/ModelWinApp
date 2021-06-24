@@ -306,6 +306,18 @@ namespace JsonManipulator
 
             return result;
         }
+
+        public static List<string> GetModelFeaturePropertiesToIgnore()
+        {
+            List<string> result = new List<string>(); 
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                result[i] = result[i].ToLower();
+            }
+
+            return result;
+        }
         public static List<string> GetFormPropertiesToIgnore()
         {
             List<string> result = new List<string>();
@@ -872,7 +884,7 @@ namespace JsonManipulator
         public static bool IsObjectWorkflowAForm(Models.objectWorkflow objWF)
         {
             bool result = false;
-            if (objWF.IsPage == null)
+            if (objWF.isPage == null)
             {
                 if (objWF.isRequestRunViaDynaFlowAllowed != null && objWF.isRequestRunViaDynaFlowAllowed.Trim().ToLower() == "true")
                 {
@@ -891,7 +903,7 @@ namespace JsonManipulator
             else
             {
 
-                if (objWF.IsPage.Trim().ToLower() == "true")
+                if (objWF.isPage.Trim().ToLower() == "true")
                 {
                     result = true;
                 } 
@@ -909,7 +921,7 @@ namespace JsonManipulator
         {
             bool result = false;
 
-            if (objWF.IsPage == null)
+            if (objWF.isPage == null)
             {
                 if (objWF.isRequestRunViaDynaFlowAllowed != null && objWF.isRequestRunViaDynaFlowAllowed.Trim().ToLower() == "true")
                 {
@@ -932,7 +944,7 @@ namespace JsonManipulator
                 {
                     result = false;
                 }
-                else if (objWF.IsPage.Trim().ToLower() == "false" &&
+                else if (objWF.isPage.Trim().ToLower() == "false" &&
                     (objWF.Name.Trim().ToLower().EndsWith("initreport") ||
                     objWF.Name.Trim().ToLower().EndsWith("initobjwf")))
                 {

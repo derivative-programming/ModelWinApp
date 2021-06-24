@@ -54,7 +54,11 @@ namespace JsonManipulator
             }
             if (_requestItem.ModelFabricationRequestIsSuccessful)
             {
-                details += "Completed Successfully";
+                details += "Completed Successfully" + Environment.NewLine;
+                if(_requestItem.ModelFabricationRequestCodeSizeInMB > 0)
+                {
+                    details += _requestItem.ModelFabricationRequestCodeSizeInMB.ToString() + " MB Generated" + Environment.NewLine;
+                }
             }
             if (_requestItem.ModelFabricationRequestIsCompleted && !_requestItem.ModelFabricationRequestIsSuccessful)
             {
@@ -99,6 +103,7 @@ namespace JsonManipulator
             using (var form = new frmDownloadFile(_requestItem.ModelFabricationRequestResultUrl, destinationFilePath))
             {
                 var result = form.ShowDialog();
+                this.UseWaitCursor = true;
                 if (System.IO.Directory.Exists(txtFabricationFolder.Text))
                 {
                     System.IO.Directory.Delete(txtFabricationFolder.Text, true);
@@ -106,6 +111,7 @@ namespace JsonManipulator
                 System.IO.Directory.CreateDirectory(txtFabricationFolder.Text);
                 ZipFile.ExtractToDirectory(destinationFilePath, txtFabricationFolder.Text);
                 System.IO.File.Delete(destinationFilePath);
+                this.UseWaitCursor = false;
                 MessageBox.Show("Fabrication results downloaded and extracted to destination folder successfully.");
             }
         }

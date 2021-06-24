@@ -52,6 +52,7 @@ namespace JsonManipulator
             if (_result == null)
                 return;
 
+            this.UseWaitCursor = true;
             _itemList.Clear();
             foreach(FabricationRequestListModelItem item in _result.Items)
             {
@@ -88,7 +89,8 @@ namespace JsonManipulator
                 int widthCol = column.Width;
                 column.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
                 column.Width = widthCol;
-            } 
+            }
+            this.UseWaitCursor = false;
         }
          
 
@@ -142,6 +144,7 @@ namespace JsonManipulator
             if (_result == null)
                 return;
 
+            this.UseWaitCursor = true;
             _itemList.Clear();
             foreach (FabricationRequestListModelItem item in _result.Items)
             {
@@ -151,6 +154,7 @@ namespace JsonManipulator
             _itemList = _itemList.OrderByDescending(x => x.RequestUTCDateTime).ToList();
             _BindingList.OrderByDescending(x => x.RequestUTCDateTime);
             _BindingSource.ResetBindings(false);
+            this.UseWaitCursor = false;
         }
         private async void btnRefresh_Click(object sender, EventArgs e)
         {
@@ -170,7 +174,9 @@ namespace JsonManipulator
                     Form1 parentForm = ((Form1)Application.OpenForms["Form1"]);
                     parentForm.SaveModel();
                     string modelPath = parentForm.GetModelPath();
+                    this.UseWaitCursor = true;
                     await OpenAPIs.ApiManager.AddFabricationRequestAsync(val, modelPath);
+                    this.UseWaitCursor = false;
                     await RefresListAsync();
 
                     ((Form1)Application.OpenForms["Form1"]).showMessage("Fabrication request added successfully"); 

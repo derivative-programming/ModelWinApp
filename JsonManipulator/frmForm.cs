@@ -78,7 +78,7 @@ namespace JsonManipulator
             form.objectWorkflowButton = new List<objectWorkflowButton>();
             form.objectWorkflowButton.Add(formButtonSubmit);
             form.objectWorkflowButton.Add(formButtonCancel);
-            form.IsPage = "true";
+            form.isPage = "true";
             form.layoutName = Utils.Capitalize(txtRole.Text.Trim()) + "Layout";
             form.pageTitleText = Utils.ConvertPascalToSpaced(form.Name);
 

@@ -51,6 +51,7 @@ namespace JsonManipulator
 
         public void SaveModel()
         {
+            this.UseWaitCursor = true;
             string json = JsonConvert.SerializeObject(Form1._model, Formatting.Indented, new JsonSerializerSettings
             {
                 NullValueHandling = NullValueHandling.Ignore
@@ -58,6 +59,7 @@ namespace JsonManipulator
             File.WriteAllText(_path, json);
             Utils.SortJsonFile(_path);
             ShowNoUnsavedChanges();
+            this.UseWaitCursor = false;
         }
 
         private ToolStripMenuItem AddMenu (string Name)
@@ -502,6 +504,7 @@ namespace JsonManipulator
 
         public void LoadModelFile(string modelFilePath)
         {
+            this.UseWaitCursor = true;
             using (StreamReader r = new StreamReader(modelFilePath))
             {
                 string json = r.ReadToEnd();
@@ -516,6 +519,7 @@ namespace JsonManipulator
             saveAsToolStripMenuItem.Enabled = true;
             _path = modelFilePath;
             ShowNoUnsavedChanges();
+            this.UseWaitCursor = false;
         }
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)

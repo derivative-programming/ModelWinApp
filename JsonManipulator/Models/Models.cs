@@ -35,6 +35,18 @@ namespace JsonManipulator.Models
         [JsonRequired]
         [JsonProperty("namespace")]
         public List<NameSpaceObject> NameSpaceObjects { get; set; }
+
+        [JsonProperty("modelFeature")]
+        public List<ModelFeatureObject> ModelFeatureObject { get; set; }
+    }
+    public class ModelFeatureObject
+    { 
+        [JsonProperty("name")]
+        public string name { get; set; }
+        [JsonProperty("version")]
+        public string version { get; set; }
+        [JsonProperty("isCompleted")]
+        public string isCompleted { get; set; }
     }
     public class NameSpaceObject
     {
@@ -283,9 +295,9 @@ namespace JsonManipulator.Models
 
 
         [JsonProperty("isPagingAvailable")]
-        public string IsPagingAvailable { get; set; }
+        public string isPagingAvailable { get; set; }
         [JsonProperty("isExportButtonsHidden")]
-        public string IsExportButtonsHidden { get; set; }
+        public string isExportButtonsHidden { get; set; }
         [JsonProperty("isFilterSectionHidden")]
         public string isFilterSectionHidden { get; set; }
         [JsonProperty("isFilterSectionCollapsable")]
@@ -490,7 +502,7 @@ namespace JsonManipulator.Models
         [JsonProperty("introText")]
         public String pageIntroText { get; set; } 
         [JsonProperty("isPage")]
-        public String IsPage { get; set; }
+        public String isPage { get; set; }
         [JsonProperty("roleRequired")]
         public String RoleRequired { get; set; }
         [JsonProperty("objectWorkflowParam")]

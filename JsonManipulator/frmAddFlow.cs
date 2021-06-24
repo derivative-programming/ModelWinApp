@@ -66,7 +66,7 @@ namespace JsonManipulator
              
 
             form.objectWorkflowButton = new List<objectWorkflowButton>(); 
-            form.IsPage = "false";
+            form.isPage = "false";
 
 
 

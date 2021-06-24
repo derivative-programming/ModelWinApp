@@ -25,6 +25,9 @@ namespace JsonManipulator
             _root.CodeNameSpaceSecondaryName = Form1._model.root.NameSpaceObjects.FirstOrDefault().name;
             setSetting();
 
+            setModelFeatureList();
+            splitter4.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmSettings.splitter4.SplitPosition", "200"));
+
         }
         private void setSetting()
         {
@@ -88,6 +91,86 @@ namespace JsonManipulator
             {
                 SendKeys.Send("{TAB}");
             }
+        }
+
+        private void gridModelFeature_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void AddModelFeature(string name)
+        {
+
+            //if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().dynaFlowTask == null)
+            //    Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().dynaFlowTask = new List<Models.dynaFlowTask>();
+            //dynaFlowTask dynaFlowTask = new dynaFlowTask { name = name };
+
+            //if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().dynaFlowTask.Where(x => x.name == name).ToList().Count == 0)
+            //{
+            //    Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().dynaFlowTask.Add(dynaFlowTask);
+            //    setModelFeatureList();
+            //}
+        }
+        private void lstModelFeatures_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (lstModelFeatures.SelectedItem != null)
+            {
+                List<PropertyValue> propertyValues = new List<PropertyValue>();
+                String controlName = lstModelFeatures.SelectedItem.ToString();
+                List<string> ignoreList = Utils.GetModelFeaturePropertiesToIgnore();
+                ModelFeatureObject modelFeatureObject = _root.ModelFeatureObject.Where(x => x.name == controlName).FirstOrDefault();
+                foreach (var prop in modelFeatureObject.GetType().GetProperties().OrderBy(x => x.Name).ToList())
+                {
+                    if (ignoreList.Contains(prop.Name.ToLower()))
+                        continue;
+                    if (!prop.PropertyType.IsGenericType)
+                        propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(modelFeatureObject) ?? "").ToString() });
+                }
+                gridModelFeature.Columns.Clear();
+                gridModelFeature.DataSource = propertyValues;
+                if (gridModelFeature.Columns.Count > 0)
+                {
+                    gridModelFeature.Columns[0].ReadOnly = true;
+                    gridModelFeature.Columns[1].ReadOnly = true;
+                }
+            }
+        }
+
+        private void btnAddModelFeature_Click(object sender, EventArgs e)
+        {
+
+            //using (var form = new frmModelSearch(ModelSearchOptions.DYNAFLOW_TASKS))
+            //{
+            //    var result = form.ShowDialog();
+            //    if (result == DialogResult.OK)
+            //    {
+            //        string val = form.ReturnValue;
+            //        AddModelFeature(val);
+            //    }
+            //}
+        }
+
+        public void setModelFeatureList()
+        {
+            lstModelFeatures.Items.Clear();
+            if (_root.ModelFeatureObject != null)
+            {
+                foreach (var param in _root.ModelFeatureObject)
+                {
+                    lstModelFeatures.Items.Add(param.name);
+                }
+                if (lstModelFeatures.Items.Count > 0)
+                    lstModelFeatures.SelectedIndex = lstModelFeatures.Items.Count - 1;
+            }
+        }
+
+        private void frmSettings_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+            LocalStorage.SetValue("frmSettings.splitter4.SplitPosition", splitter4.SplitPosition.ToString());
+
+            LocalStorage.Save();
         }
     }
 }
