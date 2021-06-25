@@ -51,6 +51,8 @@ namespace JsonManipulator
         {
             InitializeComponent();
             _root = root;
+            if (_root.NameSpaceObjects.FirstOrDefault().ModelFeatureObject == null)
+                _root.NameSpaceObjects.FirstOrDefault().ModelFeatureObject = new List<ModelFeatureObject>();
         }
 
         private async Task LoadItemsAsync()
