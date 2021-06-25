@@ -70,7 +70,7 @@ namespace JsonManipulator
             }
 
             //sync with current list
-            foreach (ModelFeatureObject existingItem in _root.ModelFeatureObject)
+            foreach (ModelFeatureObject existingItem in _root.NameSpaceObjects.FirstOrDefault().ModelFeatureObject)
             {
                 if(_itemList.Where(x => x.InternalName == existingItem.name).ToList().Count > 0)
                 {
@@ -167,7 +167,7 @@ namespace JsonManipulator
         private bool IsComItem(string internalName)
         {
             bool result = false;
-            if (_root.ModelFeatureObject.Where(x => x.name == internalName).ToList().Count > 0)
+            if (_root.NameSpaceObjects.FirstOrDefault().ModelFeatureObject.Where(x => x.name == internalName).ToList().Count > 0)
             {
                 result = true;
             }
@@ -177,7 +177,7 @@ namespace JsonManipulator
 
         private void ToggleSelectedItem(string internalName)
         {
-            ModelFeatureObject currentSelectedItem = _root.ModelFeatureObject.Find(x => x.name == internalName);
+            ModelFeatureObject currentSelectedItem = _root.NameSpaceObjects.FirstOrDefault().ModelFeatureObject.Find(x => x.name == internalName);
             GridItem gridItem = _itemList.Where(x => x.InternalName == internalName).ToList()[0];
             if(currentSelectedItem == null)
             {
@@ -187,7 +187,7 @@ namespace JsonManipulator
                 ModelFeatureObject item = new ModelFeatureObject();
                 item.name = internalName;
                 item.version = apiItem.Version;
-                _root.ModelFeatureObject.Add(item);
+                _root.NameSpaceObjects.FirstOrDefault().ModelFeatureObject.Add(item);
                 gridItem.IsSelected = true;
             }
             else
@@ -199,7 +199,7 @@ namespace JsonManipulator
                 else
                 {
                     gridItem.IsSelected = false;
-                    _root.ModelFeatureObject = _root.ModelFeatureObject.Where(x => x.name != internalName).ToList();
+                    _root.NameSpaceObjects.FirstOrDefault().ModelFeatureObject = _root.NameSpaceObjects.FirstOrDefault().ModelFeatureObject.Where(x => x.name != internalName).ToList();
                 }
             }
             _BindingSource.ResetBindings(false);

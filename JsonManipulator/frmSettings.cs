@@ -101,13 +101,13 @@ namespace JsonManipulator
         private void AddModelFeature(string name, string version)
         {
 
-            if (Form1._model.root.ModelFeatureObject == null)
-                Form1._model.root.ModelFeatureObject = new List<Models.ModelFeatureObject>();
+            if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ModelFeatureObject == null)
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ModelFeatureObject = new List<Models.ModelFeatureObject>();
             ModelFeatureObject item = new ModelFeatureObject { name = name ,version = version};
 
-            if (Form1._model.root.ModelFeatureObject.Where(x => x.name == name).ToList().Count == 0)
+            if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ModelFeatureObject.Where(x => x.name == name).ToList().Count == 0)
             {
-                Form1._model.root.ModelFeatureObject.Add(item);
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ModelFeatureObject.Add(item);
                 setModelFeatureList();
             }
         }
@@ -119,7 +119,7 @@ namespace JsonManipulator
                 List<PropertyValue> propertyValues = new List<PropertyValue>();
                 String controlName = lstModelFeatures.SelectedItem.ToString();
                 List<string> ignoreList = Utils.GetModelFeaturePropertiesToIgnore();
-                ModelFeatureObject modelFeatureObject = _root.ModelFeatureObject.Where(x => x.name == controlName).FirstOrDefault();
+                ModelFeatureObject modelFeatureObject = _root.NameSpaceObjects.FirstOrDefault().ModelFeatureObject.Where(x => x.name == controlName).FirstOrDefault();
                 foreach (var prop in modelFeatureObject.GetType().GetProperties().OrderBy(x => x.Name).ToList())
                 {
                     if (ignoreList.Contains(prop.Name.ToLower()))
@@ -150,9 +150,9 @@ namespace JsonManipulator
         public void setModelFeatureList()
         {
             lstModelFeatures.Items.Clear();
-            if (_root.ModelFeatureObject != null)
+            if (_root.NameSpaceObjects.FirstOrDefault().ModelFeatureObject != null)
             {
-                foreach (var param in _root.ModelFeatureObject)
+                foreach (var param in _root.NameSpaceObjects.FirstOrDefault().ModelFeatureObject)
                 {
                     lstModelFeatures.Items.Add(param.name);
                 }

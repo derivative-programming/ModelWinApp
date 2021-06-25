@@ -36,8 +36,6 @@ namespace JsonManipulator.Models
         [JsonProperty("namespace")]
         public List<NameSpaceObject> NameSpaceObjects { get; set; }
 
-        [JsonProperty("modelFeature")]
-        public List<ModelFeatureObject> ModelFeatureObject { get; set; }
     }
     public class ModelFeatureObject
     { 
@@ -67,6 +65,8 @@ namespace JsonManipulator.Models
         public List<ObjectMap> ObjectMap { get; set; }
         [JsonProperty("apiSite")]
         public List<apiSite> apiSite { get; set; }
+        [JsonProperty("modelFeature")]
+        public List<ModelFeatureObject> ModelFeatureObject { get; set; }
     }
     public class ObjectMap
     {
