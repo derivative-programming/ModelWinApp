@@ -31,8 +31,8 @@ namespace JsonManipulator
         {
             OpenAPIs.ApiManager.Initialize();
             nodeMenus.TabStop = false;
-            nodeMenus.Enabled = false;
-            addToolStripMenuItem.Enabled = false;
+            nodeMenus.Enabled = false; 
+            UpdateMenuState();
 
             splitContainer1.SplitterDistance = System.Convert.ToInt32(LocalStorage.GetValue("Form1.splitContainer1.SplitterDistance", "200"));
         
@@ -513,13 +513,36 @@ namespace JsonManipulator
 
             }
             PopulateTree(); 
-            nodeMenus.Enabled = true;
-            addToolStripMenuItem.Enabled = true;
-            saveToolStripMenuItem.Enabled = true;
-            saveAsToolStripMenuItem.Enabled = true;
+            nodeMenus.Enabled = true; 
             _path = modelFilePath;
+            UpdateMenuState();
             ShowNoUnsavedChanges();
             this.UseWaitCursor = false;
+        }
+
+        private void UpdateMenuState()
+        {
+            if(_path != null && _path == "new")
+            {
+                addToolStripMenuItem.Enabled = true;
+                saveToolStripMenuItem.Enabled = false;
+                saveAsToolStripMenuItem.Enabled = true;
+                servicesToolStripMenuItem.Enabled = true;
+            }
+            else if(_path != null && _path.Trim().Length > 0 && _path != "new")
+            {
+                addToolStripMenuItem.Enabled = true;
+                saveToolStripMenuItem.Enabled = true;
+                saveAsToolStripMenuItem.Enabled = true;
+                servicesToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                addToolStripMenuItem.Enabled = false;
+                saveToolStripMenuItem.Enabled = false;
+                saveAsToolStripMenuItem.Enabled = false;
+                servicesToolStripMenuItem.Enabled = false;
+            }
         }
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
@@ -550,9 +573,10 @@ namespace JsonManipulator
                 {
                     NullValueHandling = NullValueHandling.Ignore
                 });
-                _path = saveFileDialog1.FileName;
+                _path = saveFileDialog1.FileName;  
                 File.WriteAllText(_path, json);
                 Utils.SortJsonFile(_path);
+                UpdateMenuState();
                 showMessage("File Updated Successfully");
                 ShowNoUnsavedChanges();
             }
@@ -763,6 +787,24 @@ namespace JsonManipulator
             LocalStorage.SetValue("ModelServicesApiKeyExpirationUTCDateTime", DateTime.MinValue.ToString());
             LocalStorage.Save();
             UpdateLoginStatusDispaly();
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.UseWaitCursor = true;
+            using (StreamReader r = new StreamReader("new.model.json"))
+            {
+                string json = r.ReadToEnd();
+                _model = JsonConvert.DeserializeObject<RootObject>(json);
+                this.Text = _model.root.DatabaseName;
+
+            }
+            PopulateTree();
+            nodeMenus.Enabled = true; 
+            _path = "new"; 
+            UpdateMenuState();
+            ShowNoUnsavedChanges();
+            this.UseWaitCursor = false;
         }
     }
 }

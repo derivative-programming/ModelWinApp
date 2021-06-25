@@ -447,6 +447,9 @@
       <Link>OpenAPIs\openapi.json</Link>
       <CodeGenerator>NSwagCSharp</CodeGenerator>
     </None>
+    <None Include="new.model.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\frmServicesApiModelFeatureList.GridItem.datasource" />
     <None Include="Properties\Settings.settings">
