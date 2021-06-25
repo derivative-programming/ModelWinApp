@@ -41,6 +41,8 @@ namespace JsonManipulator.Models
     { 
         [JsonProperty("name")]
         public string name { get; set; }
+        [JsonProperty("description")]
+        public string description { get; set; }
         [JsonProperty("version")]
         public string version { get; set; }
         [JsonProperty("isCompleted")]

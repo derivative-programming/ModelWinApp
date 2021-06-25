@@ -187,6 +187,7 @@ namespace JsonManipulator
                 ModelFeatureObject item = new ModelFeatureObject();
                 item.name = internalName;
                 item.version = apiItem.Version;
+                item.description = apiItem.Description;
                 _root.NameSpaceObjects.FirstOrDefault().ModelFeatureObject.Add(item);
                 gridItem.IsSelected = true;
             }
