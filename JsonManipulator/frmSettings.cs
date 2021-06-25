@@ -98,18 +98,18 @@ namespace JsonManipulator
 
         }
 
-        private void AddModelFeature(string name)
+        private void AddModelFeature(string name, string version)
         {
 
-            //if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().dynaFlowTask == null)
-            //    Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().dynaFlowTask = new List<Models.dynaFlowTask>();
-            //dynaFlowTask dynaFlowTask = new dynaFlowTask { name = name };
+            if (Form1._model.root.ModelFeatureObject == null)
+                Form1._model.root.ModelFeatureObject = new List<Models.ModelFeatureObject>();
+            ModelFeatureObject item = new ModelFeatureObject { name = name ,version = version};
 
-            //if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().dynaFlowTask.Where(x => x.name == name).ToList().Count == 0)
-            //{
-            //    Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().dynaFlowTask.Add(dynaFlowTask);
-            //    setModelFeatureList();
-            //}
+            if (Form1._model.root.ModelFeatureObject.Where(x => x.name == name).ToList().Count == 0)
+            {
+                Form1._model.root.ModelFeatureObject.Add(item);
+                setModelFeatureList();
+            }
         }
         private void lstModelFeatures_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -139,16 +139,12 @@ namespace JsonManipulator
 
         private void btnAddModelFeature_Click(object sender, EventArgs e)
         {
-
-            //using (var form = new frmModelSearch(ModelSearchOptions.DYNAFLOW_TASKS))
-            //{
-            //    var result = form.ShowDialog();
-            //    if (result == DialogResult.OK)
-            //    {
-            //        string val = form.ReturnValue;
-            //        AddModelFeature(val);
-            //    }
-            //}
+             
+            using (var form = new frmServicesApiModelFeatureList(_root))
+            {
+                var result = form.ShowDialog(); 
+                setModelFeatureList();
+            }
         }
 
         public void setModelFeatureList()

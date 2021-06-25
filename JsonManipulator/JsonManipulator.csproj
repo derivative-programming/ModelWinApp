@@ -105,6 +105,12 @@
     <Compile Include="frmServicesApiPrepRequestDetail.Designer.cs">
       <DependentUpon>frmServicesApiPrepRequestDetail.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmServicesApiModelFeatureList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmServicesApiModelFeatureList.Designer.cs">
+      <DependentUpon>frmServicesApiModelFeatureList.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmServicesApiValidationRequestList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -326,6 +332,9 @@
     <EmbeddedResource Include="frmServicesApiPrepRequestDetail.resx">
       <DependentUpon>frmServicesApiPrepRequestDetail.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmServicesApiModelFeatureList.resx">
+      <DependentUpon>frmServicesApiModelFeatureList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmServicesApiValidationRequestList.resx">
       <DependentUpon>frmServicesApiValidationRequestList.cs</DependentUpon>
     </EmbeddedResource>
@@ -439,6 +448,7 @@
       <CodeGenerator>NSwagCSharp</CodeGenerator>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\frmServicesApiModelFeatureList.GridItem.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -452,7 +462,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

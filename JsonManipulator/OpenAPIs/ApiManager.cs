@@ -186,6 +186,27 @@ namespace JsonManipulator.OpenAPIs
         }
 
 
+        public async static Task<JsonManipulator.ModelFeatureListModel> GetModelFeatureListAsync()
+        {
+            JsonManipulator.ModelFeatureListModel result = null;
+
+            try
+            {
+                ModelFeatureClient client = new ModelFeatureClient(GetApiBaseUrl(), BuildClient());
+
+
+                result = await client.GetAsync(
+                    1, 100, "RequestUTCDateTime", true, string.Empty);
+
+            }
+            catch (System.Exception ex)
+            {
+
+            }
+
+            return result;
+        }
+
 
         public async static Task<JsonManipulator.PrepRequestListModel> GetPrepRequestDetailAsync(Guid prepRequestCode)
         {

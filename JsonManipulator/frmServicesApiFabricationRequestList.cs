@@ -154,6 +154,7 @@ namespace JsonManipulator
             _itemList = _itemList.OrderByDescending(x => x.RequestUTCDateTime).ToList();
             _BindingList.OrderByDescending(x => x.RequestUTCDateTime);
             _BindingSource.ResetBindings(false);
+            gridRequestList.Invalidate();
             this.UseWaitCursor = false;
         }
         private async void btnRefresh_Click(object sender, EventArgs e)
