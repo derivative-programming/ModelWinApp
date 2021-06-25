@@ -19,6 +19,7 @@ namespace JsonManipulator
             public string InternalName { get; set; }
             public string Name { get; set; }
             public string Description { get; set; }
+            public string Version { get; set; }
             public bool IsSelected { get; set; }
             public bool IsCompleted { get; set; }
             public GridItem(ModelFeatureListModelItem item)
@@ -26,6 +27,7 @@ namespace JsonManipulator
                 this.InternalName = item.Name;
                 this.Name = item.DisplayName;
                 this.Description = item.Description;
+                this.Version = item.Version;
 
             }
             public GridItem(ModelFeatureObject item)
@@ -33,12 +35,13 @@ namespace JsonManipulator
                 this.InternalName = item.name;
                 this.Name = item.name;
                 this.Description = string.Empty;
+                this.Version = item.version;
 
             }
         }
 
         private List<GridItem> _itemList = new List<GridItem>();
-        private ModelFeatureListModel _result = null;
+        private ModelFeatureListModel _apiList = null;
 
         private BindingSource _BindingSource = null;
         private BindingList<GridItem> _BindingList = null;
@@ -52,15 +55,15 @@ namespace JsonManipulator
 
         private async Task LoadItemsAsync()
         {
-            _result = await OpenAPIs.ApiManager.GetModelFeatureListAsync();
+            _apiList = await OpenAPIs.ApiManager.GetModelFeatureListAsync();
 
-            if (_result == null)
+            if (_apiList == null)
                 return;
 
             this.UseWaitCursor = true;
             _itemList.Clear();
 
-            foreach(ModelFeatureListModelItem item in _result.Items)
+            foreach(ModelFeatureListModelItem item in _apiList.Items)
             {
 
                 _itemList.Add(new GridItem(item));
@@ -135,7 +138,7 @@ namespace JsonManipulator
         private ModelFeatureListModelItem GetItem(string internalName)
         {
             ModelFeatureListModelItem result = null;
-            foreach (ModelFeatureListModelItem item in _result.Items)
+            foreach (ModelFeatureListModelItem item in _apiList.Items)
             {
                 if(item.Name == internalName)
                 {
@@ -178,10 +181,12 @@ namespace JsonManipulator
             GridItem gridItem = _itemList.Where(x => x.InternalName == internalName).ToList()[0];
             if(currentSelectedItem == null)
             {
+                ModelFeatureListModelItem apiItem = _apiList.Items.Where(x => x.Name == internalName).ToList()[0];
+
 
                 ModelFeatureObject item = new ModelFeatureObject();
                 item.name = internalName;
-                item.version = "";
+                item.version = apiItem.Version;
                 _root.ModelFeatureObject.Add(item);
                 gridItem.IsSelected = true;
             }
