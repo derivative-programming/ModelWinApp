@@ -20,6 +20,7 @@ namespace JsonManipulator
         public static string _path;
 
         private string _initialModelPath = string.Empty;
+        private bool _displayModelFeaturesTab = false;
 
         public Form1(string initialModelPath)
         {
@@ -310,7 +311,8 @@ namespace JsonManipulator
                 case 0:
                     if (e.Node.Name == "Project")
                     {
-                        frmSettings frmSettings = new frmSettings(_model.root);
+                        frmSettings frmSettings = new frmSettings(_model.root, _displayModelFeaturesTab);
+                        _displayModelFeaturesTab = false;
                         frmSettings.TopLevel = false;
                         frmSettings.AutoScroll = true;
                         frmSettings.Dock = DockStyle.Fill;
@@ -747,6 +749,7 @@ namespace JsonManipulator
         public void ShowAsLoggedIn()
         {
             loginToolStripMenuItem.Enabled = false;
+            addModelFeaturesToolStripMenuItem.Enabled = true;
             modelAIProcessingToolStripMenuItem.Enabled = true;
             modelFabricationToolStripMenuItem.Enabled = true;
             modelValidationToolStripMenuItem.Enabled = true;
@@ -755,6 +758,7 @@ namespace JsonManipulator
         public void ShowAsLoggedOut()
         {
             loginToolStripMenuItem.Enabled = true;
+            addModelFeaturesToolStripMenuItem.Enabled = false;
             modelAIProcessingToolStripMenuItem.Enabled = false;
             modelFabricationToolStripMenuItem.Enabled = false;
             modelValidationToolStripMenuItem.Enabled = false;
@@ -805,6 +809,12 @@ namespace JsonManipulator
             UpdateMenuState();
             ShowNoUnsavedChanges();
             this.UseWaitCursor = false;
+        }
+
+        private void addModelFeaturesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _displayModelFeaturesTab = true;
+            nodeMenus.SelectedNode = nodeMenus.Nodes["Project"];
         }
     }
 }

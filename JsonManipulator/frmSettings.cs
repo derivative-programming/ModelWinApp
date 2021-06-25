@@ -14,20 +14,26 @@ namespace JsonManipulator
     public partial class frmSettings : Form
     {
         root _root = new root();
-        public frmSettings(root _root)
+        private bool _displayModelFeaturesTab = false;
+        public frmSettings(root _root, bool displayModelFeaturesTab)
         {
             InitializeComponent();
             this._root = _root;
+            _displayModelFeaturesTab = displayModelFeaturesTab;
         }
 
         private void frmSettings_Load(object sender, EventArgs e)
         { 
             _root.CodeNameSpaceSecondaryName = Form1._model.root.NameSpaceObjects.FirstOrDefault().name;
             setSetting();
-
+                
             setModelFeatureList();
             splitter4.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmSettings.splitter4.SplitPosition", "200"));
-
+            tabControl1.SelectedIndex = System.Convert.ToInt32(LocalStorage.GetValue("frmSettings.tabControl1.SelectedIndex", "0"));
+            if (_displayModelFeaturesTab)
+            {
+                tabControl1.SelectedIndex = 1;
+            }
         }
         private void setSetting()
         {
@@ -165,6 +171,7 @@ namespace JsonManipulator
         {
 
             LocalStorage.SetValue("frmSettings.splitter4.SplitPosition", splitter4.SplitPosition.ToString());
+            LocalStorage.SetValue("frmSettings.tabControl1.SelectedIndex", tabControl1.SelectedIndex.ToString());
 
             LocalStorage.Save();
         }

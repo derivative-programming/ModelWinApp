@@ -30,23 +30,23 @@ namespace JsonManipulator
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Project");
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Db Objects");
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Forms");
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Reports");
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Pages", new System.Windows.Forms.TreeNode[] {
-            treeNode14,
-            treeNode15});
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("PageInit");
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("General");
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("DynaFlow");
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("DynaFlowTasks");
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Flows", new System.Windows.Forms.TreeNode[] {
-            treeNode17,
-            treeNode18,
-            treeNode19,
-            treeNode20});
-            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("APIs");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Project");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Db Objects");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Forms");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Reports");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Pages", new System.Windows.Forms.TreeNode[] {
+            treeNode3,
+            treeNode4});
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("PageInit");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("General");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("DynaFlow");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("DynaFlowTasks");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Flows", new System.Windows.Forms.TreeNode[] {
+            treeNode6,
+            treeNode7,
+            treeNode8,
+            treeNode9});
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("APIs");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -85,6 +85,7 @@ namespace JsonManipulator
             this.label1 = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusText = new System.Windows.Forms.ToolStripStatusLabel();
+            this.addModelFeaturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -289,6 +290,7 @@ namespace JsonManipulator
             // 
             this.servicesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loginToolStripMenuItem,
+            this.addModelFeaturesToolStripMenuItem,
             this.modelAIProcessingToolStripMenuItem,
             this.modelValidationToolStripMenuItem,
             this.modelFabricationToolStripMenuItem,
@@ -347,34 +349,34 @@ namespace JsonManipulator
             this.nodeMenus.ImageList = this.imgIcons;
             this.nodeMenus.Location = new System.Drawing.Point(0, 43);
             this.nodeMenus.Name = "nodeMenus";
-            treeNode12.Name = "Project";
-            treeNode12.Text = "Project";
-            treeNode13.Name = "dbObjects";
-            treeNode13.Text = "Db Objects";
-            treeNode14.Name = "Forms";
-            treeNode14.Text = "Forms";
-            treeNode15.Name = "Reports";
-            treeNode15.Text = "Reports";
-            treeNode16.Name = "pages";
-            treeNode16.Text = "Pages";
-            treeNode17.Name = "nodeFlowPageInit";
-            treeNode17.Text = "PageInit";
-            treeNode18.Name = "nodeFlowGeneral";
-            treeNode18.Text = "General";
-            treeNode19.Name = "nodeFlowDynaFlow";
-            treeNode19.Text = "DynaFlow";
-            treeNode20.Name = "nodeFlowDynaFlowTask";
-            treeNode20.Text = "DynaFlowTasks";
-            treeNode21.Name = "nodeFlows";
-            treeNode21.Text = "Flows";
-            treeNode22.Name = "nodeApis";
-            treeNode22.Text = "APIs";
+            treeNode1.Name = "Project";
+            treeNode1.Text = "Project";
+            treeNode2.Name = "dbObjects";
+            treeNode2.Text = "Db Objects";
+            treeNode3.Name = "Forms";
+            treeNode3.Text = "Forms";
+            treeNode4.Name = "Reports";
+            treeNode4.Text = "Reports";
+            treeNode5.Name = "pages";
+            treeNode5.Text = "Pages";
+            treeNode6.Name = "nodeFlowPageInit";
+            treeNode6.Text = "PageInit";
+            treeNode7.Name = "nodeFlowGeneral";
+            treeNode7.Text = "General";
+            treeNode8.Name = "nodeFlowDynaFlow";
+            treeNode8.Text = "DynaFlow";
+            treeNode9.Name = "nodeFlowDynaFlowTask";
+            treeNode9.Text = "DynaFlowTasks";
+            treeNode10.Name = "nodeFlows";
+            treeNode10.Text = "Flows";
+            treeNode11.Name = "nodeApis";
+            treeNode11.Text = "APIs";
             this.nodeMenus.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode12,
-            treeNode13,
-            treeNode16,
-            treeNode21,
-            treeNode22});
+            treeNode1,
+            treeNode2,
+            treeNode5,
+            treeNode10,
+            treeNode11});
             this.nodeMenus.SelectedImageIndex = 0;
             this.nodeMenus.Size = new System.Drawing.Size(185, 545);
             this.nodeMenus.TabIndex = 1;
@@ -470,6 +472,13 @@ namespace JsonManipulator
             this.statusText.Name = "statusText";
             this.statusText.Size = new System.Drawing.Size(0, 17);
             // 
+            // addModelFeaturesToolStripMenuItem
+            // 
+            this.addModelFeaturesToolStripMenuItem.Name = "addModelFeaturesToolStripMenuItem";
+            this.addModelFeaturesToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.addModelFeaturesToolStripMenuItem.Text = "Add Model Features";
+            this.addModelFeaturesToolStripMenuItem.Click += new System.EventHandler(this.addModelFeaturesToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -542,6 +551,7 @@ namespace JsonManipulator
         private System.Windows.Forms.ToolStripMenuItem modelValidationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem modelFabricationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logOutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addModelFeaturesToolStripMenuItem;
     }
 }
 
