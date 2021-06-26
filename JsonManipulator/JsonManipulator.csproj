@@ -75,6 +75,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\Enums.cs" />
+    <Compile Include="frmAddDbObjectImportSqlServer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddDbObjectImportSqlServer.Designer.cs">
+      <DependentUpon>frmAddDbObjectImportSqlServer.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmServicesApiAddRequest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -317,6 +323,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils.cs" />
+    <EmbeddedResource Include="frmAddDbObjectImportSqlServer.resx">
+      <DependentUpon>frmAddDbObjectImportSqlServer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmServicesApiAddRequest.resx">
       <DependentUpon>frmServicesApiAddRequest.cs</DependentUpon>
     </EmbeddedResource>
@@ -467,6 +476,11 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DBObjectImportSqlServer.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

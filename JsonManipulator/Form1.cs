@@ -826,10 +826,15 @@ namespace JsonManipulator
             SetSelectedTreeItem(name); 
 
         }
+         
 
-        private void sqlServerToolStripMenuItem_Click(object sender, EventArgs e)
+        private void sqlServerToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-
+            using(var form = new frmAddDbObjectImportSqlServer())
+            {
+                var result = form.ShowDialog();
+                 
+            }
         }
     }
 }

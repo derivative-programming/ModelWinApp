@@ -1,0 +1,110 @@
+﻿ 
+
+ select
+ '{
+    "name": "' + TABLE_NAME + '",
+    "isLookup": "' + 
+	case when IsLookup = 1 then 'true' else 'false' end
+	+ '", 
+    "prop": ['+ 
+	substring( (
+		select  
+		',{"name": "' + COLUMN_NAME + '", "sqlServerDBDataType": "' + DATA_TYPE + '",' + 
+		case when CHARACTER_MAXIMUM_LENGTH is null then '' else  +
+		'"sqlServerDBDataTypeSize": "' + isnull(cast(CHARACTER_MAXIMUM_LENGTH as varchar),'') + '",' end +  
+		'"isFK": "' + 
+		case when len(UQ_TABLE_NAME) > 0  then 'true' else + 'false' end +  
+		'"' + 
+		case when len(UQ_TABLE_NAME) > 0 then 
+		',"isFKLookup": "false", "fKObjectName": "' + UQ_TABLE_NAME + '", "fKObjectPropertyName": "' + UQ_COLUMN_NAME + '"' else '' end  +
+	  '}' as [text()]
+		from
+		(
+
+			SELECT  TABLE_NAME, COLUMN_NAME,DATA_TYPE,CHARACTER_MAXIMUM_LENGTH,
+			case  when DATA_TYPE = 'varchar' and CHARACTER_MAXIMUM_LENGTH <> -1 then DATA_TYPE + '(' + cast(CHARACTER_MAXIMUM_LENGTH as varchar) + ')' 
+			when DATA_TYPE = 'nvarchar' and CHARACTER_MAXIMUM_LENGTH <> -1 then DATA_TYPE + '(' + cast(CHARACTER_MAXIMUM_LENGTH as varchar) + ')' 
+			when DATA_TYPE = 'varchar' and CHARACTER_MAXIMUM_LENGTH = -1 then DATA_TYPE + '(4000)' 
+			when DATA_TYPE = 'nvarchar' and CHARACTER_MAXIMUM_LENGTH = -1 then DATA_TYPE + '(4000)' 
+			else DATA_TYPE  end as DATA_TYPE2,
+			isnull(fks.UQ_TABLE_NAME,'') as UQ_TABLE_NAME,
+			isnull(fks.UQ_COLUMN_NAME,'')  as UQ_COLUMN_NAME  
+
+
+			FROM INFORMATION_SCHEMA.COLUMNS cols 
+			left join  
+			(
+
+			 SELECT  
+				KCU1.TABLE_NAME AS 'FK_TABLE_NAME'
+			   , KCU1.COLUMN_NAME AS 'FK_COLUMN_NAME'  
+			   , KCU2.TABLE_NAME AS 'UQ_TABLE_NAME'
+			   , KCU2.COLUMN_NAME AS 'UQ_COLUMN_NAME' 
+			FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS RC
+			JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE KCU1
+			ON KCU1.CONSTRAINT_CATALOG = RC.CONSTRAINT_CATALOG 
+			   AND KCU1.CONSTRAINT_SCHEMA = RC.CONSTRAINT_SCHEMA
+			   AND KCU1.CONSTRAINT_NAME = RC.CONSTRAINT_NAME
+			JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE KCU2
+			ON KCU2.CONSTRAINT_CATALOG = 
+			RC.UNIQUE_CONSTRAINT_CATALOG 
+			   AND KCU2.CONSTRAINT_SCHEMA = 
+			RC.UNIQUE_CONSTRAINT_SCHEMA
+			   AND KCU2.CONSTRAINT_NAME = 
+			RC.UNIQUE_CONSTRAINT_NAME
+			   AND KCU2.ORDINAL_POSITION = KCU1.ORDINAL_POSITION
+			) as fks on (cols.TABLE_NAME = FK_TABLE_NAME and cols.COLUMN_NAME = FK_COLUMN_NAME)
+
+ 
+			where TABLE_NAME not like 'aspnet%' and TABLE_NAME not like '%MigrationHistory%'   and TABLE_NAME not like 'vr_%'   and TABLE_NAME not like '%Canada%'  
+			and TABLE_NAME not in
+			(
+			select TABLE_NAME from INFORMATION_SCHEMA.tables where TABLE_TYPE = 'VIEW'
+			)   
+ 
+			 union select 'WFTaskInstance','WFIWFTaskRouteDirectCompletedCountPeek','int',NULL,'int','',''
+		)  T
+	where  COLUMN_NAME not in ('Code','LastChangeCode','InsertUserID','InsertUTCDateTime','LastUpdateUserID','LastUpdateUTCDateTime', TABLE_NAME + 'ID' ) and
+	  T.TABLE_NAME = TT.TABLE_NAME  FOR XML PATH ('')) 
+, 2, 5000) 
+	+']
+  },' as TableJSON
+
+  from  
+  (
+  
+	SELECT  distinct TABLE_NAME ,cast((case when (select count(*) from INFORMATION_SCHEMA.COLUMNS s where s.TABLE_NAME = cols.TABLE_NAME and COLUMN_NAME = 'LookupEnumName') > 0 then 1 else 0 end ) as bit) as IsLookup
+
+	FROM INFORMATION_SCHEMA.COLUMNS cols 
+	left join  
+	(
+
+	 SELECT  
+		KCU1.TABLE_NAME AS 'FK_TABLE_NAME'
+	   , KCU1.COLUMN_NAME AS 'FK_COLUMN_NAME'  
+	   , KCU2.TABLE_NAME AS 'UQ_TABLE_NAME'
+	   , KCU2.COLUMN_NAME AS 'UQ_COLUMN_NAME' 
+	FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS RC
+	JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE KCU1
+	ON KCU1.CONSTRAINT_CATALOG = RC.CONSTRAINT_CATALOG 
+	   AND KCU1.CONSTRAINT_SCHEMA = RC.CONSTRAINT_SCHEMA
+	   AND KCU1.CONSTRAINT_NAME = RC.CONSTRAINT_NAME
+	JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE KCU2
+	ON KCU2.CONSTRAINT_CATALOG = 
+	RC.UNIQUE_CONSTRAINT_CATALOG 
+	   AND KCU2.CONSTRAINT_SCHEMA = 
+	RC.UNIQUE_CONSTRAINT_SCHEMA
+	   AND KCU2.CONSTRAINT_NAME = 
+	RC.UNIQUE_CONSTRAINT_NAME
+	   AND KCU2.ORDINAL_POSITION = KCU1.ORDINAL_POSITION
+	) as fks on (cols.TABLE_NAME = FK_TABLE_NAME and cols.COLUMN_NAME = FK_COLUMN_NAME)
+
+ 
+	where TABLE_NAME not like 'aspnet%' and TABLE_NAME not like '%MigrationHistory%'   and TABLE_NAME not like 'vr_%'   and TABLE_NAME not like '%Canada%'  
+	and TABLE_NAME not in
+	(
+	select TABLE_NAME from INFORMATION_SCHEMA.tables where TABLE_TYPE = 'VIEW'
+	)    
+	and COLUMN_NAME = 'Code'
+  ) TT
+   
