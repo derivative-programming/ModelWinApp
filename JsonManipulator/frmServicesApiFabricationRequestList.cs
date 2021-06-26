@@ -53,6 +53,7 @@ namespace JsonManipulator
                 return;
 
             this.UseWaitCursor = true;
+            Application.DoEvents();
             _itemList.Clear();
             foreach(FabricationRequestListModelItem item in _result.Items)
             {

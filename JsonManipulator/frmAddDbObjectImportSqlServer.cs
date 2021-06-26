@@ -36,6 +36,8 @@ namespace JsonManipulator
         private void btnAccept_Click(object sender, EventArgs e)
         {
             string lastJson = string.Empty;
+            this.UseWaitCursor = true;
+            Application.DoEvents();
             try
             {
 
@@ -78,6 +80,7 @@ namespace JsonManipulator
             {
                 MessageBox.Show("Error during import");
             }
+            this.UseWaitCursor = false;
             this.Close();
         }
 
