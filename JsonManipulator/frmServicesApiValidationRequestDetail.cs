@@ -26,7 +26,7 @@ namespace JsonManipulator
          
         private void frmForm_Load(object sender, EventArgs e)
         { 
-            if(_requestItem.ModelValidationRequestIsSuccessful)
+            if(_requestItem.ModelValidationRequestIsCompleted && _requestItem.ModelValidationRequestIsSuccessful)
             {
                 this.btnDownloadInitialModel.Enabled = true;
                 this.btnDownloadReport.Enabled = true;
@@ -49,7 +49,7 @@ namespace JsonManipulator
             {
                 details += "Canceled by:" + _requestItem.ModelValidationRequestCanceledBy + Environment.NewLine;
             }
-            if (_requestItem.ModelValidationRequestIsSuccessful)
+            if (_requestItem.ModelValidationRequestIsCompleted && _requestItem.ModelValidationRequestIsSuccessful)
             {
                 details += "Completed Successfully";
             }

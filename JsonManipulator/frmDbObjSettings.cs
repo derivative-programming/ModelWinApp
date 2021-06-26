@@ -17,10 +17,12 @@ namespace JsonManipulator
     public partial class frmDbObjSettings : Form
     {
         ObjectMap _map;
-        public frmDbObjSettings(ObjectMap mapObject)
+        private bool _displayLookupValuesTab = false;
+        public frmDbObjSettings(ObjectMap mapObject,bool displayLookupValuesTab)
         {
             InitializeComponent();
             this._map = mapObject;
+            _displayLookupValuesTab = displayLookupValuesTab;
         }
 
         private void frmDbObjSettings_Load(object sender, EventArgs e)
@@ -44,6 +46,11 @@ namespace JsonManipulator
             splitter4.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmDbObjSettings.splitter4.SplitPosition", "200"));
 
             tabControl1.SelectedIndex = System.Convert.ToInt32(LocalStorage.GetValue("frmDbObjSettings.tabControl1.SelectedIndex", "0"));
+        
+            if(_displayLookupValuesTab)
+            {
+                tabControl1.SelectedIndex = 4;
+            }
         }
         private void setSetting()
         {

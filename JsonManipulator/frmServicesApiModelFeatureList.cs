@@ -114,13 +114,13 @@ namespace JsonManipulator
 
             gridRequestList.Columns.Add(detailButtonColumn);
 
-            foreach (DataGridViewColumn column in gridRequestList.Columns)
-            {
-                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-                int widthCol = column.Width;
-                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-                column.Width = widthCol;
-            }
+            //foreach (DataGridViewColumn column in gridRequestList.Columns)
+            //{
+            //    column.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            //    int widthCol = column.Width;
+            //    column.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            //    column.Width = widthCol;
+            //}
             this.UseWaitCursor = false;
         }
          

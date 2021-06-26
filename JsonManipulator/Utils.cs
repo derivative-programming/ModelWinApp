@@ -521,7 +521,7 @@ namespace JsonManipulator
         public static List<string> GetDBObjLookupItemPropertiesToIgnore()
         {
             List<string> result = new List<string>();
-            result.Add("enumValue".ToLower()); 
+            result.Add("name".ToLower()); 
 
             for (int i = 0; i < result.Count; i++)
             {
@@ -546,7 +546,7 @@ namespace JsonManipulator
             //result.Add("isExportButtonsHidden".ToLower());
             //result.Add("isFilterSectionHidden".ToLower());
             result.Add("isCachingAllowed".ToLower());
-            result.Add("isButtonDropDownAllowed".ToLower());
+            //result.Add("isButtonDropDownAllowed".ToLower());
             result.Add("ratingLevelColumnName".ToLower());
             result.Add("isRatingLevelChangingRowBackgroundColor".ToLower());
             result.Add("cacheExpirationInMinutes".ToLower());

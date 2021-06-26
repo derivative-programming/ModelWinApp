@@ -83,9 +83,11 @@ namespace JsonManipulator
             this.btnLookupItem = new System.Windows.Forms.Button();
             this.pnlLookupItemLeftTop = new System.Windows.Forms.Panel();
             this.lstLookupItems = new System.Windows.Forms.ListBox();
-            this.grpBoxMain = new System.Windows.Forms.GroupBox();
             this.tabJSON = new System.Windows.Forms.TabPage();
             this.rtbJSON = new System.Windows.Forms.RichTextBox();
+            this.grpBoxMain = new System.Windows.Forms.GroupBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.tabControl1.SuspendLayout();
             this.tabSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataProperties)).BeginInit();
@@ -116,8 +118,8 @@ namespace JsonManipulator
             this.pnlLookupItemLeft.SuspendLayout();
             this.pnlLookupItemLeftBottom.SuspendLayout();
             this.pnlLookupItemLeftTop.SuspendLayout();
-            this.grpBoxMain.SuspendLayout();
             this.tabJSON.SuspendLayout();
+            this.grpBoxMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -210,6 +212,7 @@ namespace JsonManipulator
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.richTextBox1);
             this.groupBox1.Controls.Add(this.gridPropertiesProp);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
@@ -329,6 +332,7 @@ namespace JsonManipulator
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.richTextBox2);
             this.groupBox2.Controls.Add(this.gridPropSubProperties);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
@@ -667,18 +671,6 @@ namespace JsonManipulator
             this.lstLookupItems.TabIndex = 1;
             this.lstLookupItems.SelectedIndexChanged += new System.EventHandler(this.lstLookupItems_SelectedIndexChanged);
             // 
-            // grpBoxMain
-            // 
-            this.grpBoxMain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.grpBoxMain.Controls.Add(this.tabControl1);
-            this.grpBoxMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grpBoxMain.Location = new System.Drawing.Point(0, 0);
-            this.grpBoxMain.Name = "grpBoxMain";
-            this.grpBoxMain.Size = new System.Drawing.Size(844, 459);
-            this.grpBoxMain.TabIndex = 1;
-            this.grpBoxMain.TabStop = false;
-            this.grpBoxMain.Text = "groupBox2";
-            // 
             // tabJSON
             // 
             this.tabJSON.Controls.Add(this.rtbJSON);
@@ -701,6 +693,38 @@ namespace JsonManipulator
             this.rtbJSON.Text = "";
             this.rtbJSON.TabIndexChanged += new System.EventHandler(this.rtbJSON_TabIndexChanged);
             this.rtbJSON.TextChanged += new System.EventHandler(this.rtbJSON_TextChanged);
+            // 
+            // grpBoxMain
+            // 
+            this.grpBoxMain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.grpBoxMain.Controls.Add(this.tabControl1);
+            this.grpBoxMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpBoxMain.Location = new System.Drawing.Point(0, 0);
+            this.grpBoxMain.Name = "grpBoxMain";
+            this.grpBoxMain.Size = new System.Drawing.Size(844, 459);
+            this.grpBoxMain.TabIndex = 1;
+            this.grpBoxMain.TabStop = false;
+            this.grpBoxMain.Text = "groupBox2";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.richTextBox1.Location = new System.Drawing.Point(3, 309);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(618, 96);
+            this.richTextBox1.TabIndex = 4;
+            this.richTextBox1.Text = "Note:\nAll DB Objects have two columns created automatically. They will not be vis" +
+    "ible in this list.\n- [Object Name]ID \n- Code (Guid)";
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.richTextBox2.Location = new System.Drawing.Point(3, 315);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(624, 96);
+            this.richTextBox2.TabIndex = 4;
+            this.richTextBox2.Text = "Note:\n\nThe items listed on this tab are subscribed to the props of this object. P" +
+    "rops added will affect these subscribers.";
             // 
             // frmDbObjSettings
             // 
@@ -744,8 +768,8 @@ namespace JsonManipulator
             this.pnlLookupItemLeft.ResumeLayout(false);
             this.pnlLookupItemLeftBottom.ResumeLayout(false);
             this.pnlLookupItemLeftTop.ResumeLayout(false);
-            this.grpBoxMain.ResumeLayout(false);
             this.tabJSON.ResumeLayout(false);
+            this.grpBoxMain.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -809,5 +833,7 @@ namespace JsonManipulator
         private System.Windows.Forms.ListBox lstLookupItems;
         private System.Windows.Forms.TabPage tabJSON;
         private System.Windows.Forms.RichTextBox rtbJSON;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox richTextBox2;
     }
 }

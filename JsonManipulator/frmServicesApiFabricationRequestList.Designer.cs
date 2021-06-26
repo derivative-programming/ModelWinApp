@@ -31,13 +31,13 @@ namespace JsonManipulator
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnAddRequest = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.gridRequestList = new System.Windows.Forms.DataGridView();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridRequestList)).BeginInit();
@@ -54,6 +54,15 @@ namespace JsonManipulator
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(816, 62);
             this.panel1.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(158, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Auto Refresh Rate: 60 Seconds";
             // 
             // btnOK
             // 
@@ -99,6 +108,7 @@ namespace JsonManipulator
             this.gridRequestList.AllowUserToAddRows = false;
             this.gridRequestList.AllowUserToDeleteRows = false;
             this.gridRequestList.AllowUserToOrderColumns = true;
+            this.gridRequestList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gridRequestList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridRequestList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridRequestList.Location = new System.Drawing.Point(0, 0);
@@ -114,15 +124,6 @@ namespace JsonManipulator
             // 
             this.timer1.Interval = 60000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(158, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Auto Refresh Rate: 60 Seconds";
             // 
             // frmServicesApiFabricationRequestList
             // 

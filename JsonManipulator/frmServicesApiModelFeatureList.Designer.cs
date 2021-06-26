@@ -73,6 +73,7 @@ namespace JsonManipulator
             // 
             this.gridRequestList.AllowUserToAddRows = false;
             this.gridRequestList.AllowUserToDeleteRows = false;
+            this.gridRequestList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gridRequestList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridRequestList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridRequestList.Location = new System.Drawing.Point(0, 0);

@@ -29,6 +29,7 @@ namespace JsonManipulator
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmHelp));
             this.txtHelp = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
@@ -40,8 +41,7 @@ namespace JsonManipulator
             this.txtHelp.Name = "txtHelp";
             this.txtHelp.Size = new System.Drawing.Size(800, 450);
             this.txtHelp.TabIndex = 0;
-            this.txtHelp.Text = "Editing A JSON:\nOpen a file from the file system using File > Open\n\nNB: Menus rem" +
-    "ain disabled when no file is open";
+            this.txtHelp.Text = resources.GetString("txtHelp.Text");
             // 
             // FrmHelp
             // 

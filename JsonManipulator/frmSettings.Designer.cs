@@ -29,6 +29,7 @@ namespace JsonManipulator
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSettings));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabSettings = new System.Windows.Forms.TabPage();
             this.dataProperties = new System.Windows.Forms.DataGridView();
@@ -47,6 +48,7 @@ namespace JsonManipulator
             this.btnAddModelFeature = new System.Windows.Forms.Button();
             this.pnlModelFeatureLeftTop = new System.Windows.Forms.Panel();
             this.lstModelFeatures = new System.Windows.Forms.ListBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tabControl1.SuspendLayout();
             this.tabSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataProperties)).BeginInit();
@@ -141,6 +143,7 @@ namespace JsonManipulator
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.richTextBox1);
             this.groupBox4.Controls.Add(this.gridModelFeature);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Location = new System.Drawing.Point(0, 0);
@@ -238,6 +241,15 @@ namespace JsonManipulator
             this.lstModelFeatures.TabIndex = 1;
             this.lstModelFeatures.SelectedIndexChanged += new System.EventHandler(this.lstModelFeatures_SelectedIndexChanged);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.richTextBox1.Location = new System.Drawing.Point(3, 325);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(606, 96);
+            this.richTextBox1.TabIndex = 4;
+            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
+            // 
             // frmSettings
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -284,5 +296,6 @@ namespace JsonManipulator
         private System.Windows.Forms.Button btnAddModelFeature;
         private System.Windows.Forms.Panel pnlModelFeatureLeftTop;
         private System.Windows.Forms.ListBox lstModelFeatures;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

@@ -71,6 +71,7 @@ namespace JsonManipulator
             Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Add(objectMap);
             ((Form1)Application.OpenForms["Form1"]).AddToTree(objectMap);
             ((Form1)Application.OpenForms["Form1"]).showMessage("object " + objectMap.name + " saved successfully to " + objectMap.parentObjectName);
+            ((Form1)Application.OpenForms["Form1"]).DisplayDBObjectLookupValuesTab(objectMap.name);
             this.Close();
         }
 

@@ -21,6 +21,7 @@ namespace JsonManipulator
 
         private string _initialModelPath = string.Empty;
         private bool _displayModelFeaturesTab = false;
+        private bool _displayLookupValuesTab = false;
 
         public Form1(string initialModelPath)
         {
@@ -328,7 +329,8 @@ namespace JsonManipulator
                         if (((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]) != null)
                             ((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]).Close();
                         ObjectMap objectMap = nameSpaceObject.ObjectMap.Where(x => x.name == e.Node.Name).FirstOrDefault();
-                        frmDbObjSettings frmDbObjSettings = new frmDbObjSettings(objectMap);
+                        frmDbObjSettings frmDbObjSettings = new frmDbObjSettings(objectMap, _displayLookupValuesTab);
+                        _displayLookupValuesTab = true;
                         frmDbObjSettings.TopLevel = false;
                         frmDbObjSettings.AutoScroll = true;
                         frmDbObjSettings.Dock = DockStyle.Fill;
@@ -514,6 +516,7 @@ namespace JsonManipulator
                 this.Text = _model.root.DatabaseName;
 
             }
+            this.mainPanel.Controls.Clear();
             PopulateTree(); 
             nodeMenus.Enabled = true; 
             _path = modelFilePath;
@@ -815,6 +818,18 @@ namespace JsonManipulator
         {
             _displayModelFeaturesTab = true;
             nodeMenus.SelectedNode = nodeMenus.Nodes["Project"];
+        }
+
+        public void DisplayDBObjectLookupValuesTab(string name)
+        {
+            _displayLookupValuesTab = true;
+            SetSelectedTreeItem(name); 
+
+        }
+
+        private void sqlServerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
