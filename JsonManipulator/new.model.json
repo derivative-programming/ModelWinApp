@@ -1,10 +1,10 @@
 {
   "root": { 
-    "name": "",
+    "name": "Your",
     "databaseName": "", 
     "namespace": [
       { 
-        "name": ""  
+        "name": "Code"  
       }
     ]
   }
