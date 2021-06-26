@@ -66,7 +66,7 @@
 		)  T
 	where  COLUMN_NAME not in ('Code','LastChangeCode','InsertUserID','InsertUTCDateTime','LastUpdateUserID','LastUpdateUTCDateTime', TABLE_NAME + 'ID' ) and
 	  T.TABLE_NAME = TT.TABLE_NAME  FOR XML PATH ('')) 
-, 2, 5000) 
+, 2, 20000) 
 	+']
   },' as TableJSON
 

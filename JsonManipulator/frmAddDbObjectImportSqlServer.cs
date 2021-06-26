@@ -35,7 +35,7 @@ namespace JsonManipulator
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-
+            string lastJson = string.Empty;
             try
             {
 
@@ -53,6 +53,7 @@ namespace JsonManipulator
                             while (rdr.Read())
                             {
                                 string dbObjJson = rdr.GetString(0);
+                                lastJson = dbObjJson;
                                 Models.ObjectMap dbObj = new ObjectMap();
 
                                 dbObj = JsonConvert.DeserializeObject<ObjectMap>(dbObjJson.TrimEnd(','));
