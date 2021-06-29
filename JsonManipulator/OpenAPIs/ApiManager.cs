@@ -31,7 +31,7 @@ namespace JsonManipulator.OpenAPIs
         private static System.Net.Http.HttpClient BuildClient()
         {
             System.Net.Http.HttpClient httpClient = new System.Net.Http.HttpClient();
-            httpClient.DefaultRequestHeaders.Add("Ares-Api-Key", _ApiKey);
+            httpClient.DefaultRequestHeaders.Add("Api-Key", _ApiKey);
             return httpClient;
         }
         public async static Task<bool> LogInAsync(string email, string password)

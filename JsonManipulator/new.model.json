@@ -1,10 +1,12 @@
 {
-  "root": { 
+  "root": {
     "name": "Your",
-    "databaseName": "", 
+    "databaseName": "",
+    "projectName": "Your Project",
+    "projectVersionNumber": "1.0",
     "namespace": [
-      { 
-        "name": "Code"  
+      {
+        "name": "Code"
       }
     ]
   }
