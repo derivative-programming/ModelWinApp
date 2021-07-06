@@ -129,7 +129,7 @@ namespace JsonManipulator.OpenAPIs
 
 
                 result = await prepRequestClient.GetAsync(
-                    null,1,100,"RequestUTCDateTime",false,string.Empty);
+                    null,1,100, "ModelPrepRequestRequestedUTCDateTime", true, string.Empty);
                  
             }
             catch (System.Exception)
@@ -152,7 +152,7 @@ namespace JsonManipulator.OpenAPIs
 
 
                 result = await client.GetAsync(
-                    null, 1, 100, "RequestUTCDateTime", true, string.Empty);
+                    null, 1, 100, "ModelValidationRequestRequestedUTCDateTime", true, string.Empty);
 
             }
             catch (System.Exception)
@@ -174,7 +174,7 @@ namespace JsonManipulator.OpenAPIs
 
 
                 result = await client.GetAsync(
-                    null, 1, 100, "RequestUTCDateTime", true, string.Empty);
+                    null, 1, 100, "ModelFabricationRequestRequestedUTCDateTime", true, string.Empty);
 
             }
             catch (System.Exception)
