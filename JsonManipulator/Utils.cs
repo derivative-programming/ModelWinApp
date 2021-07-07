@@ -1111,5 +1111,55 @@ namespace JsonManipulator
                 propSubscription.isDisabled = "true";
             } 
         }
+
+        public static String ReplaceSpecialCharacters(String rootString)
+        { 
+            if (rootString.Length == 0)
+                return rootString;
+
+            rootString = rootString.Trim().ToUpper();
+
+            rootString = rootString.Replace("\n", " ");
+            rootString = rootString.Replace("_", " ");
+            rootString = rootString.Replace("=", " ");
+            rootString = rootString.Replace("+", " ");
+            rootString = rootString.Replace("<", " ");
+            rootString = rootString.Replace(">", " ");
+            rootString = rootString.Replace("!", " ");
+            rootString = rootString.Replace("?", " ");
+            rootString = rootString.Replace("*", " ");
+            rootString = rootString.Replace("@", " ");
+            rootString = rootString.Replace("$", " ");
+            rootString = rootString.Replace("%", " ");
+            rootString = rootString.Replace("^", " ");
+            rootString = rootString.Replace("{", " ");
+            rootString = rootString.Replace("}", " ");
+            rootString = rootString.Replace("\"", " ");
+            rootString = rootString.Replace("`", " ");
+            rootString = rootString.Replace("^", " ");
+            rootString = rootString.Replace(".", "");
+            rootString = rootString.Replace(",", " ");
+            rootString = rootString.Replace(":", " ");
+            rootString = rootString.Replace(";", " ");
+            rootString = rootString.Replace("\"", "");
+            rootString = rootString.Replace("(", "");
+            rootString = rootString.Replace(")", "");
+            rootString = rootString.Replace("[", "");
+            rootString = rootString.Replace("]", "");
+            rootString = rootString.Replace("//", "");
+            //rootString = rootString.Replace("-", " ");
+            rootString = rootString.Replace("‘", "");
+            rootString = rootString.Replace("/", " ");
+            rootString = rootString.Replace("#", " ");
+            rootString = rootString.Replace("'", "");
+            rootString = rootString.Replace("--", " ");
+
+            rootString = rootString.Replace(" ", "");
+
+
+            rootString = rootString.Trim().ToUpper();
+            return rootString;
+
+        }
     }
 }

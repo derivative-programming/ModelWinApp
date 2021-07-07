@@ -74,9 +74,16 @@ namespace JsonManipulator
                     }
                 }
                 if (property == "CodeNameSpaceSecondaryName")
-                { 
+                {
+                    value = Utils.ReplaceSpecialCharacters(value);
                     Form1._model.root.NameSpaceObjects.FirstOrDefault().name = value;
                     _root.CodeNameSpaceSecondaryName = Form1._model.root.NameSpaceObjects.FirstOrDefault().name;
+                    setSetting();
+                }
+                else if (property == "CodeNameSpaceRootName")
+                {
+                    value = Utils.ReplaceSpecialCharacters(value);
+                    Form1._model.root.CodeNameSpaceRootName = value; 
                     setSetting();
                 }
                 else

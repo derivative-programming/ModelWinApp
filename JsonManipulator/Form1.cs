@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -23,10 +24,14 @@ namespace JsonManipulator
         private bool _displayModelFeaturesTab = false;
         private bool _displayLookupValuesTab = false;
 
-        public Form1(string initialModelPath)
+        public Form1(string initialModelPath, string fabricationOutputFolderInit)
         {
             InitializeComponent();
             _initialModelPath = initialModelPath;
+            if(fabricationOutputFolderInit.Trim().Length > 0)
+            {
+                LocalStorage.SetValue("FabricationFolder", fabricationOutputFolderInit);
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -330,7 +335,7 @@ namespace JsonManipulator
                             ((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]).Close();
                         ObjectMap objectMap = nameSpaceObject.ObjectMap.Where(x => x.name == e.Node.Name).FirstOrDefault();
                         frmDbObjSettings frmDbObjSettings = new frmDbObjSettings(objectMap, _displayLookupValuesTab);
-                        _displayLookupValuesTab = true;
+                        _displayLookupValuesTab = false;
                         frmDbObjSettings.TopLevel = false;
                         frmDbObjSettings.AutoScroll = true;
                         frmDbObjSettings.Dock = DockStyle.Fill;
@@ -836,5 +841,297 @@ namespace JsonManipulator
                  
             }
         }
+
+        private void mainPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void demoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            demoToolStripMenuItem1.Enabled = false;
+            codeToolStripMenuItem.Enabled = false;
+            diagramsToolStripMenuItem.Enabled = false;
+
+            //get output folder
+            string outputFolder = LocalStorage.GetValue("FabricationFolder", "");
+            if (outputFolder.Trim().Length == 0)
+                return;
+
+            string demoFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\demo\";
+            string codeFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\code\";
+            string documentationFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\Documentation\";
+
+            if (System.IO.Directory.Exists(demoFolder))
+            {
+                demoToolStripMenuItem1.Enabled = true;
+            }
+            if (System.IO.Directory.Exists(codeFolder))
+            {
+                codeToolStripMenuItem.Enabled = true;
+            }
+            if (System.IO.Directory.Exists(documentationFolder))
+            {
+                diagramsToolStripMenuItem.Enabled = true;
+            }
+
+        }
+         
+
+        private void adminUserToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+            //get output folder
+            string outputFolder = LocalStorage.GetValue("FabricationFolder", "");
+            if (outputFolder.Trim().Length == 0)
+                return;
+
+            string demoFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\demo\";
+
+            if (!System.IO.Directory.Exists(demoFolder))
+                return;
+            //determine file paths for three user types 
+            string namespaceName = _model.root.NameSpaceObjects.FirstOrDefault().name;
+            string adminUserDemoDashboardFilePath = demoFolder + namespaceName + "_Report_CustomerAdminDashboard.html";
+
+            var psi = new System.Diagnostics.ProcessStartInfo();
+            psi.UseShellExecute = true;
+            psi.FileName = adminUserDemoDashboardFilePath;
+            System.Diagnostics.Process.Start(psi);
+        }
+
+        private void endUserToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+            //get output folder
+            string outputFolder = LocalStorage.GetValue("FabricationFolder", "");
+            if (outputFolder.Trim().Length == 0)
+                return;
+
+            string demoFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\demo\";
+
+            if (!System.IO.Directory.Exists(demoFolder))
+                return;
+            //determine file paths for three user types 
+            string namespaceName = _model.root.NameSpaceObjects.FirstOrDefault().name;
+            string endUserLoginFilePath = demoFolder + namespaceName + "_ObjWF_Tac_TacLogin.html";
+
+            var psi = new System.Diagnostics.ProcessStartInfo();
+            psi.UseShellExecute = true;
+            psi.FileName = endUserLoginFilePath;
+            System.Diagnostics.Process.Start(psi);
+        }
+
+        private void configUserToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+            //get output folder
+            string outputFolder = LocalStorage.GetValue("FabricationFolder", "");
+            if (outputFolder.Trim().Length == 0)
+                return;
+
+            string demoFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\demo\";
+
+            if (!System.IO.Directory.Exists(demoFolder))
+                return;
+            //determine file paths for three user types 
+            string namespaceName = _model.root.NameSpaceObjects.FirstOrDefault().name;
+            string configUserDemoDashboardFilePath = demoFolder + namespaceName + "_Report_PacConfigDashboard.html";
+
+            var psi = new System.Diagnostics.ProcessStartInfo();
+            psi.UseShellExecute = true;
+            psi.FileName = configUserDemoDashboardFilePath;
+            System.Diagnostics.Process.Start(psi);
+        }
+
+        private void demoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            endUserToolStripMenuItem1.Enabled = false;
+            adminUserToolStripMenuItem1.Enabled = false;
+            configUserToolStripMenuItem1.Enabled = false;
+
+            //get output folder
+            string outputFolder = LocalStorage.GetValue("FabricationFolder", "");
+            if (outputFolder.Trim().Length == 0)
+                return;
+
+            string demoFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\demo\";
+
+            if (!System.IO.Directory.Exists(demoFolder))
+                return;
+            //determine file paths for three user types 
+            string namespaceName = _model.root.NameSpaceObjects.FirstOrDefault().name;
+            string endUserLoginFilePath = demoFolder + namespaceName + "_ObjWF_Tac_TacLogin.html";
+            string adminUserDemoDashboardFilePath = demoFolder + namespaceName + "_Report_CustomerAdminDashboard.html";
+            string configUserDemoDashboardFilePath = demoFolder + namespaceName + "_Report_PacConfigDashboard.html";
+
+            //if file path exists, activate menu item
+            if (System.IO.File.Exists(endUserLoginFilePath))
+            {
+                endUserToolStripMenuItem1.Enabled = true;
+            }
+            if (System.IO.File.Exists(adminUserDemoDashboardFilePath))
+            {
+                adminUserToolStripMenuItem1.Enabled = true;
+            }
+            if (System.IO.File.Exists(configUserDemoDashboardFilePath))
+            {
+                configUserToolStripMenuItem1.Enabled = true;
+            }
+        }
+
+        private void codeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            //get output folder
+            string outputFolder = LocalStorage.GetValue("FabricationFolder", "");
+            if (outputFolder.Trim().Length == 0)
+                return;
+
+            string codeFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\code\";
+
+            if (!System.IO.Directory.Exists(codeFolder))
+                return;
+
+
+            var psi = new System.Diagnostics.ProcessStartInfo();
+            psi.UseShellExecute = true;
+            psi.FileName = codeFolder;
+            System.Diagnostics.Process.Start(codeFolder);
+        }
+
+        private void databaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            //get output folder
+            string outputFolder = LocalStorage.GetValue("FabricationFolder", "");
+            if (outputFolder.Trim().Length == 0)
+                return;
+
+            string docFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\documentation\";
+
+            if (!System.IO.Directory.Exists(docFolder))
+                return;
+            //determine file paths for three user types 
+            string namespaceName = _model.root.NameSpaceObjects.FirstOrDefault().name;
+            string adminUserDemoDashboardFilePath = docFolder + "Database/ObjectHeirarchy.mermaid.html";
+
+            var psi = new System.Diagnostics.ProcessStartInfo();
+            psi.UseShellExecute = true;
+            psi.FileName = adminUserDemoDashboardFilePath;
+            System.Diagnostics.Process.Start(psi);
+        }
+
+        private void allToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            //get output folder
+            string outputFolder = LocalStorage.GetValue("FabricationFolder", "");
+            if (outputFolder.Trim().Length == 0)
+                return;
+
+            string docFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\documentation\";
+
+            if (!System.IO.Directory.Exists(docFolder))
+                return;
+            //determine file paths for three user types 
+            string namespaceName = _model.root.NameSpaceObjects.FirstOrDefault().name;
+            string adminUserDemoDashboardFilePath = docFolder + "Web/Pageflow/" + namespaceName + ".mermaid.html";
+
+            var psi = new System.Diagnostics.ProcessStartInfo();
+            psi.UseShellExecute = true;
+            psi.FileName = adminUserDemoDashboardFilePath;
+            System.Diagnostics.Process.Start(psi);
+        }
+
+        private void endUserToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            //get output folder
+            string outputFolder = LocalStorage.GetValue("FabricationFolder", "");
+            if (outputFolder.Trim().Length == 0)
+                return;
+
+            string docFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\documentation\";
+
+            if (!System.IO.Directory.Exists(docFolder))
+                return;
+            //determine file paths for three user types 
+            string namespaceName = _model.root.NameSpaceObjects.FirstOrDefault().name;
+            string adminUserDemoDashboardFilePath = docFolder + "Web/Pageflow/Customer/Customer." + namespaceName + ".mermaid.html";
+
+            var psi = new System.Diagnostics.ProcessStartInfo();
+            psi.UseShellExecute = true;
+            psi.FileName = adminUserDemoDashboardFilePath;
+            System.Diagnostics.Process.Start(psi);
+        }
+
+        private void adminUserToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            //get output folder
+            string outputFolder = LocalStorage.GetValue("FabricationFolder", "");
+            if (outputFolder.Trim().Length == 0)
+                return;
+
+            string docFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\documentation\";
+
+            if (!System.IO.Directory.Exists(docFolder))
+                return;
+            //determine file paths for three user types 
+            string namespaceName = _model.root.NameSpaceObjects.FirstOrDefault().name;
+            string adminUserDemoDashboardFilePath = docFolder + "Web/Pageflow/Admin/Admin." + namespaceName + ".mermaid.html";
+
+            var psi = new System.Diagnostics.ProcessStartInfo();
+            psi.UseShellExecute = true;
+            psi.FileName = adminUserDemoDashboardFilePath;
+            System.Diagnostics.Process.Start(psi);
+        }
+
+        private void configUserToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+
+            //get output folder
+            string outputFolder = LocalStorage.GetValue("FabricationFolder", "");
+            if (outputFolder.Trim().Length == 0)
+                return;
+
+            string docFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\documentation\";
+
+            if (!System.IO.Directory.Exists(docFolder))
+                return;
+            //determine file paths for three user types 
+            string namespaceName = _model.root.NameSpaceObjects.FirstOrDefault().name;
+            string adminUserDemoDashboardFilePath = docFolder + "Web/Pageflow/Config/Config." + namespaceName + ".mermaid.html";
+
+            var psi = new System.Diagnostics.ProcessStartInfo();
+            psi.UseShellExecute = true;
+            psi.FileName = adminUserDemoDashboardFilePath;
+            System.Diagnostics.Process.Start(psi);
+        }
+
+        private void publicToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            //get output folder
+            string outputFolder = LocalStorage.GetValue("FabricationFolder", "");
+            if (outputFolder.Trim().Length == 0)
+                return;
+
+            string docFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\documentation\";
+
+            if (!System.IO.Directory.Exists(docFolder))
+                return;
+            //determine file paths for three user types 
+            string namespaceName = _model.root.NameSpaceObjects.FirstOrDefault().name;
+            string adminUserDemoDashboardFilePath = docFolder + "Web/Pageflow/Public/public." + namespaceName + ".mermaid.html";
+
+            var psi = new System.Diagnostics.ProcessStartInfo();
+            psi.UseShellExecute = true;
+            psi.FileName = adminUserDemoDashboardFilePath;
+            System.Diagnostics.Process.Start(psi);
+        }
     }
+    
 }

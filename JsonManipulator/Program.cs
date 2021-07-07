@@ -22,6 +22,7 @@ namespace JsonManipulator
                 argList.AddRange(args);
 
             string initModelPath = string.Empty;
+            string fabricationOutputFolderInit = string.Empty;
 
             for (int i = 0; i < argList.Count; i++)
             {
@@ -29,9 +30,13 @@ namespace JsonManipulator
                 {
                     initModelPath = argList[i + 1];
                 }
+                if (argList[i].ToLower() == "-o" && (argList.Count - 1) > i)
+                {
+                    fabricationOutputFolderInit = argList[i + 1];
+                }
             }
 
-            Application.Run(new Form1(initModelPath));
+            Application.Run(new Form1(initModelPath, fabricationOutputFolderInit));
         }
     }
 }

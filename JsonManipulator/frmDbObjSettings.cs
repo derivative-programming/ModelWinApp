@@ -319,7 +319,7 @@ namespace JsonManipulator
         private void gridPropertiesProp_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
-        }
+        }                   
 
         private void frmDbObjSettings_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -329,6 +329,7 @@ namespace JsonManipulator
             LocalStorage.SetValue("frmDbObjSettings.splitter3.SplitPosition", splitter3.SplitPosition.ToString());
             LocalStorage.SetValue("frmDbObjSettings.tabControl1.SelectedIndex", tabControl1.SelectedIndex.ToString());
             LocalStorage.Save();
+            _displayLookupValuesTab = false;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

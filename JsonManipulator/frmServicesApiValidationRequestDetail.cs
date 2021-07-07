@@ -26,7 +26,7 @@ namespace JsonManipulator
          
         private void frmForm_Load(object sender, EventArgs e)
         { 
-            if(_requestItem.ModelValidationRequestIsCompleted && _requestItem.ModelValidationRequestIsSuccessful)
+            if(_requestItem.ModelValidationRequestIsCompleted)// && _requestItem.ModelValidationRequestIsSuccessful)
             {
                 this.btnDownloadInitialModel.Enabled = true;
                 this.btnDownloadReport.Enabled = true;
