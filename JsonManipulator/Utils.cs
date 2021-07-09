@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using System.Threading.Tasks;
 
 namespace JsonManipulator
@@ -1060,6 +1061,12 @@ namespace JsonManipulator
             return Regex.Replace(value, "(\\B[A-Z])", " $1"); 
         }
 
+        public static string GetProjectName()
+        {
+
+            return ((Form1)Application.OpenForms["Form1"]).GetProjectName();
+        }
+
         public static Models.propSubscription GetPropSubscriptionFor(Models.ObjectMap objectMap, string name)
         {
             Models.propSubscription result = null;
@@ -1117,7 +1124,7 @@ namespace JsonManipulator
             if (rootString.Length == 0)
                 return rootString;
 
-            rootString = rootString.Trim().ToUpper();
+            rootString = rootString.Trim();
 
             rootString = rootString.Replace("\n", " ");
             rootString = rootString.Replace("_", " ");
@@ -1157,7 +1164,7 @@ namespace JsonManipulator
             rootString = rootString.Replace(" ", "");
 
 
-            rootString = rootString.Trim().ToUpper();
+            rootString = rootString.Trim();
             return rootString;
 
         }

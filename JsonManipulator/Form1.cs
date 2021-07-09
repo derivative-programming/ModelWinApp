@@ -91,6 +91,10 @@ namespace JsonManipulator
             populatePageAndFlows(filter);  
             populateAPIs(filter);
         }
+        public string GetProjectName()
+        {
+            return _model.root.ProjectName;
+        }
         public void populateProjectDetails()
         {
 
@@ -886,7 +890,7 @@ namespace JsonManipulator
             if (outputFolder.Trim().Length == 0)
                 return;
 
-            string demoFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\demo\";
+            string demoFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\demo\bootstrap5\";
 
             if (!System.IO.Directory.Exists(demoFolder))
                 return;
@@ -908,7 +912,7 @@ namespace JsonManipulator
             if (outputFolder.Trim().Length == 0)
                 return;
 
-            string demoFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\demo\";
+            string demoFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\demo\bootstrap5\";
 
             if (!System.IO.Directory.Exists(demoFolder))
                 return;
@@ -930,7 +934,7 @@ namespace JsonManipulator
             if (outputFolder.Trim().Length == 0)
                 return;
 
-            string demoFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\demo\";
+            string demoFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\demo\bootstrap5\";
 
             if (!System.IO.Directory.Exists(demoFolder))
                 return;
@@ -955,7 +959,7 @@ namespace JsonManipulator
             if (outputFolder.Trim().Length == 0)
                 return;
 
-            string demoFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\demo\";
+            string demoFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\demo\bootstrap5\";
 
             if (!System.IO.Directory.Exists(demoFolder))
                 return;

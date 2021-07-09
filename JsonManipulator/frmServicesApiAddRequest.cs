@@ -35,7 +35,7 @@ namespace JsonManipulator
 
         private void FrmAddColumn_Load(object sender, EventArgs e)
         {
-             
+            richTextBox1.Text = ReturnValue;
         }
          
     }

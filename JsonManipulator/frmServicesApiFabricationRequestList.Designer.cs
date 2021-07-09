@@ -66,7 +66,8 @@ namespace JsonManipulator
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(729, 20);
+            this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOK.Location = new System.Drawing.Point(726, 20);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 0;
@@ -76,7 +77,8 @@ namespace JsonManipulator
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Location = new System.Drawing.Point(648, 20);
+            this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRefresh.Location = new System.Drawing.Point(645, 20);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(75, 23);
             this.btnRefresh.TabIndex = 2;
@@ -86,7 +88,8 @@ namespace JsonManipulator
             // 
             // btnAddRequest
             // 
-            this.btnAddRequest.Location = new System.Drawing.Point(536, 20);
+            this.btnAddRequest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddRequest.Location = new System.Drawing.Point(533, 20);
             this.btnAddRequest.Name = "btnAddRequest";
             this.btnAddRequest.Size = new System.Drawing.Size(106, 23);
             this.btnAddRequest.TabIndex = 1;

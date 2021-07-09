@@ -146,6 +146,7 @@ namespace JsonManipulator
         {
             using (var form = new frmServicesApiAddRequest())
             {
+                form.ReturnValue = "Project: " + Utils.GetProjectName();
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK)
                 {

@@ -15,8 +15,16 @@ namespace JsonManipulator
 { 
     public partial class frmServicesApiFabricationRequestList : Form
     {
-        public class GridItem
+        public class GridItem : INotifyPropertyChanged
         {
+            public event PropertyChangedEventHandler PropertyChanged;
+            protected virtual void OnPropertyChanged(string propertyName)
+            {
+                if (null != PropertyChanged)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                }
+            }
             public Guid RequestCode { get; set; }
             public DateTime RequestUTCDateTime { get; set; }
             public string Description { get; set; }
@@ -44,7 +52,7 @@ namespace JsonManipulator
         {
             InitializeComponent();
         }
-         
+
 
         private async Task LoadItemsAsync()
         {
@@ -54,25 +62,21 @@ namespace JsonManipulator
                 return;
 
             this.UseWaitCursor = true;
-            Application.DoEvents();
+
             _itemList.Clear();
-            foreach(FabricationRequestListModelItem item in _result.Items)
+            foreach (FabricationRequestListModelItem item in _result.Items)
             {
 
                 _itemList.Add(new GridItem(item));
             }
-            _itemList = _itemList.OrderByDescending(x => x.RequestUTCDateTime).ToList(); 
+            _itemList = _itemList.OrderByDescending(x => x.RequestUTCDateTime).ToList();
 
-            gridRequestList.Rows.Clear();
+            //gridRequestList.Rows.Clear();
             gridRequestList.Columns.Clear();
 
-            _BindingList = new BindingList<GridItem>(_itemList);
-            _BindingSource = new BindingSource(_BindingList, null);
-              
-
             gridRequestList.DataSource = null;
-            gridRequestList.DataSource = _BindingSource;
-             
+            gridRequestList.DataSource = ToDataTable(_itemList);
+
 
             var col = gridRequestList.Columns["RequestCode"];
             col.Visible = false;
@@ -94,7 +98,7 @@ namespace JsonManipulator
             //}
             this.UseWaitCursor = false;
         }
-         
+
 
         private async void ViewItem(Guid requestCode)
         {
@@ -149,6 +153,7 @@ namespace JsonManipulator
 
             using (var form = new frmServicesApiAddRequest())
             {
+                form.ReturnValue = "Project: " + Utils.GetProjectName();
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK)
                 {
