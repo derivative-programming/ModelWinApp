@@ -637,6 +637,8 @@ namespace JsonManipulator.Models
         public String destinationContextObjectName { get; set; }
         [JsonProperty("isVisible")]
         public string isVisible { get; set; }
+        [JsonProperty("isButtonCallToAction")]
+        public string isButtonCallToAction { get; set; }
         public string introText { get; set; }
         public string conditionalVisiblePropertyName { get; set; }
     }

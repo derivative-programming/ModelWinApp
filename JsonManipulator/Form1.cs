@@ -896,7 +896,7 @@ namespace JsonManipulator
                 return;
             //determine file paths for three user types 
             string namespaceName = _model.root.NameSpaceObjects.FirstOrDefault().name;
-            string adminUserDemoDashboardFilePath = demoFolder + namespaceName + "_Report_CustomerAdminDashboard.html";
+            string adminUserDemoDashboardFilePath = demoFolder + "CustomerAdminDashboard.html";
 
             var psi = new System.Diagnostics.ProcessStartInfo();
             psi.UseShellExecute = true;
@@ -918,7 +918,7 @@ namespace JsonManipulator
                 return;
             //determine file paths for three user types 
             string namespaceName = _model.root.NameSpaceObjects.FirstOrDefault().name;
-            string endUserLoginFilePath = demoFolder + namespaceName + "_ObjWF_Tac_TacLogin.html";
+            string endUserLoginFilePath = demoFolder + "TacLogin.html";
 
             var psi = new System.Diagnostics.ProcessStartInfo();
             psi.UseShellExecute = true;
@@ -940,7 +940,7 @@ namespace JsonManipulator
                 return;
             //determine file paths for three user types 
             string namespaceName = _model.root.NameSpaceObjects.FirstOrDefault().name;
-            string configUserDemoDashboardFilePath = demoFolder + namespaceName + "_Report_PacConfigDashboard.html";
+            string configUserDemoDashboardFilePath = demoFolder +  "PacConfigDashboard.html";
 
             var psi = new System.Diagnostics.ProcessStartInfo();
             psi.UseShellExecute = true;
@@ -965,9 +965,9 @@ namespace JsonManipulator
                 return;
             //determine file paths for three user types 
             string namespaceName = _model.root.NameSpaceObjects.FirstOrDefault().name;
-            string endUserLoginFilePath = demoFolder + namespaceName + "_ObjWF_Tac_TacLogin.html";
-            string adminUserDemoDashboardFilePath = demoFolder + namespaceName + "_Report_CustomerAdminDashboard.html";
-            string configUserDemoDashboardFilePath = demoFolder + namespaceName + "_Report_PacConfigDashboard.html";
+            string endUserLoginFilePath = demoFolder + "TacLogin.html";
+            string adminUserDemoDashboardFilePath = demoFolder + "CustomerAdminDashboard.html";
+            string configUserDemoDashboardFilePath = demoFolder + "PacConfigDashboard.html";
 
             //if file path exists, activate menu item
             if (System.IO.File.Exists(endUserLoginFilePath))
