@@ -1136,6 +1136,38 @@ namespace JsonManipulator
             psi.FileName = adminUserDemoDashboardFilePath;
             System.Diagnostics.Process.Start(psi);
         }
+         
+
+        private void apiToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+
+            using (var form = new frmModelSearch(ModelSearchOptions.API_SITES))
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string val = form.ReturnValue;
+
+                    //get output folder
+                    string outputFolder = LocalStorage.GetValue("FabricationFolder", "");
+                    if (outputFolder.Trim().Length == 0)
+                        return;
+
+                    string docFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\code\dotnetcore\ApiWeb\" + val + @"\Documentation\";
+
+                    if (!System.IO.Directory.Exists(docFolder))
+                        return;
+                    //determine file paths for three user types  
+                    string adminUserDemoDashboardFilePath = docFolder + val + ".html";
+
+                    var psi = new System.Diagnostics.ProcessStartInfo();
+                    psi.UseShellExecute = true;
+                    psi.FileName = adminUserDemoDashboardFilePath;
+                    System.Diagnostics.Process.Start(psi);
+
+                }
+            }
+        }
     }
     
 }
