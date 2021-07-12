@@ -164,6 +164,30 @@ namespace JsonManipulator.OpenAPIs
         }
 
 
+
+        public async static Task<JsonManipulator.ChangeRptRequestListModel> GetChangeRptRequestListAsync()
+        {
+
+            JsonManipulator.ChangeRptRequestListModel result = null;
+
+            try
+            {
+                ChangeRptRequestClient client = new ChangeRptRequestClient(GetApiBaseUrl(), BuildClient());
+
+
+                result = await client.GetAsync(
+                    null, 1, 100, "ModelChangeRptRequestRequestedUTCDateTime", true, string.Empty);
+
+            }
+            catch (System.Exception)
+            {
+
+            }
+
+            return result;
+        }
+
+
         public async static Task<JsonManipulator.FabricationRequestListModel> GetFabricationRequestListAsync()
         {
             JsonManipulator.FabricationRequestListModel result = null;
@@ -249,6 +273,25 @@ namespace JsonManipulator.OpenAPIs
             return result;
         }
 
+        public async static Task<JsonManipulator.ChangeRptRequestListModel> GetChangeRptRequestDetailAsync(Guid ChangeRptRequestCode)
+        {
+            JsonManipulator.ChangeRptRequestListModel result = null;
+
+            try
+            {
+                ChangeRptRequestClient client = new ChangeRptRequestClient(GetApiBaseUrl(), BuildClient());
+
+
+                result = await client.GetOneAsync(ChangeRptRequestCode);
+
+            }
+            catch (System.Exception)
+            {
+
+            }
+
+            return result;
+        }
 
         public async static Task<JsonManipulator.FabricationRequestListModel> GetFabricationRequestDetailAsync(Guid fabricationRequestCode)
         {
@@ -316,6 +359,29 @@ namespace JsonManipulator.OpenAPIs
             return result;
         }
 
+        public async static Task<bool> AddChangeRptRequestAsync(string description, string modelFilePath, string nextFilePath)
+        {
+            bool result = false;
+
+            try
+            {
+                ChangeRptRequestClient client = new ChangeRptRequestClient(GetApiBaseUrl(), BuildClient());
+
+                ChangeRptRequestPostModel postModel = new ChangeRptRequestPostModel();
+                postModel.ModelFileData = Convert.ToBase64String(System.IO.File.ReadAllBytes(modelFilePath));
+                postModel.NextModelFileData = Convert.ToBase64String(System.IO.File.ReadAllBytes(nextFilePath));
+                postModel.Description = description;
+                ChangeRptRequestPostResponse response = await client.PostAsync(postModel);
+                result = true;
+            }
+            catch (System.Exception)
+            {
+
+            }
+
+            return result;
+        }
+
         public async static Task<bool> AddFabricationRequestAsync(string description, string modelFilePath)
         {
             bool result = false;
@@ -365,6 +431,24 @@ namespace JsonManipulator.OpenAPIs
                 ValidationRequestClient client = new ValidationRequestClient(GetApiBaseUrl(), BuildClient());
 
                 ValidationRequestDeleteResponse response = await client.DeleteAsync(validationRequestCode);
+                result = true;
+            }
+            catch (System.Exception)
+            {
+
+            }
+
+            return result;
+        }
+        public async static Task<bool> CancelChangeRptRequestAsync(Guid ChangeRptRequestCode)
+        {
+            bool result = false;
+
+            try
+            {
+                ChangeRptRequestClient client = new ChangeRptRequestClient(GetApiBaseUrl(), BuildClient());
+
+                ChangeRptRequestDeleteResponse response = await client.DeleteAsync(ChangeRptRequestCode);
                 result = true;
             }
             catch (System.Exception)

@@ -64,9 +64,23 @@ namespace JsonManipulator
                 NullValueHandling = NullValueHandling.Ignore
             }); 
             File.WriteAllText(_path, json);
+            ArchiveModel();
             Utils.SortJsonFile(_path);
             ShowNoUnsavedChanges();
             this.UseWaitCursor = false;
+        }
+        public void ArchiveModel()
+        {
+            string archiveFilePath = @"ModelArchive\" + System.IO.Path.GetFileNameWithoutExtension(_path) + "_" + DateTime.Now.ToString("yyyymmddhhmmss") + ".json";
+            string json = JsonConvert.SerializeObject(Form1._model, Formatting.Indented, new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            });
+            if(!System.IO.Directory.Exists(@"ModelArchive"))
+            {
+                System.IO.Directory.CreateDirectory(@"ModelArchive");
+            }
+            File.WriteAllText(archiveFilePath, json);   
         }
 
         private ToolStripMenuItem AddMenu (string Name)
@@ -476,6 +490,7 @@ namespace JsonManipulator
                 NullValueHandling = NullValueHandling.Ignore
             });
             File.WriteAllText(_path, json);
+            ArchiveModel();
             Utils.SortJsonFile(_path);
             showMessage("File Updated Successfully");
             ShowNoUnsavedChanges();
@@ -589,6 +604,7 @@ namespace JsonManipulator
                 });
                 _path = saveFileDialog1.FileName;  
                 File.WriteAllText(_path, json);
+                ArchiveModel();
                 Utils.SortJsonFile(_path);
                 UpdateMenuState();
                 showMessage("File Updated Successfully");
@@ -1167,6 +1183,13 @@ namespace JsonManipulator
 
                 }
             }
+        }
+
+        private void modelChangeReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            frmServicesApiChangeRptRequestList form = new frmServicesApiChangeRptRequestList();
+            form.ShowDialog();
         }
     }
     

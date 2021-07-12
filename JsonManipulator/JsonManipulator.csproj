@@ -99,6 +99,12 @@
     <Compile Include="frmServicesApiFabricationRequestDetail.Designer.cs">
       <DependentUpon>frmServicesApiFabricationRequestDetail.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmServicesApiChangeRptRequestDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmServicesApiChangeRptRequestDetail.Designer.cs">
+      <DependentUpon>frmServicesApiChangeRptRequestDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmServicesApiValidationRequestDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +122,12 @@
     </Compile>
     <Compile Include="frmServicesApiModelFeatureList.Designer.cs">
       <DependentUpon>frmServicesApiModelFeatureList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmServicesApiChangeRptRequestList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmServicesApiChangeRptRequestList.Designer.cs">
+      <DependentUpon>frmServicesApiChangeRptRequestList.cs</DependentUpon>
     </Compile>
     <Compile Include="frmServicesApiValidationRequestList.cs">
       <SubType>Form</SubType>
@@ -335,6 +347,9 @@
     <EmbeddedResource Include="frmServicesApiFabricationRequestDetail.resx">
       <DependentUpon>frmServicesApiFabricationRequestDetail.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmServicesApiChangeRptRequestDetail.resx">
+      <DependentUpon>frmServicesApiChangeRptRequestDetail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmServicesApiValidationRequestDetail.resx">
       <DependentUpon>frmServicesApiValidationRequestDetail.cs</DependentUpon>
     </EmbeddedResource>
@@ -343,6 +358,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmServicesApiModelFeatureList.resx">
       <DependentUpon>frmServicesApiModelFeatureList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmServicesApiChangeRptRequestList.resx">
+      <DependentUpon>frmServicesApiChangeRptRequestList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmServicesApiValidationRequestList.resx">
       <DependentUpon>frmServicesApiValidationRequestList.cs</DependentUpon>
@@ -452,7 +470,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="..\..\NewCo\FS.Ares\FS.Ares.OpenApi\wwwroot\openapi.json">
+    <None Include="..\..\NewCo\FS.Ares\FS.Ares.ModelServicesApi\wwwroot\openapi.json">
       <Link>OpenAPIs\openapi.json</Link>
       <CodeGenerator>NSwagCSharp</CodeGenerator>
     </None>
@@ -482,6 +500,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
