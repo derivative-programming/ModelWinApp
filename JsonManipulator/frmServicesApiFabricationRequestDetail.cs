@@ -103,17 +103,15 @@ namespace JsonManipulator
             using (var form = new frmDownloadFile(_requestItem.ModelFabricationRequestResultUrl, destinationFilePath))
             {
                 var result = form.ShowDialog();
-                this.UseWaitCursor = true;
-                if (System.IO.Directory.Exists(txtFabricationFolder.Text))
-                {
-                    System.IO.Directory.Delete(txtFabricationFolder.Text, true);
-                }
-                System.IO.Directory.CreateDirectory(txtFabricationFolder.Text);
-                ZipFile.ExtractToDirectory(destinationFilePath, txtFabricationFolder.Text);
-                System.IO.File.Delete(destinationFilePath);
-                this.UseWaitCursor = false;
-                MessageBox.Show("Fabrication results downloaded and extracted to destination folder successfully.");
             }
+
+            this.UseWaitCursor = true;
+            using (var form2 = new frmUnzipFile(destinationFilePath, txtFabricationFolder.Text))
+            {
+                form2.ShowDialog();
+            }
+            this.UseWaitCursor = false;
+            MessageBox.Show("Fabrication results downloaded and extracted to destination folder successfully.");
         }
 
         private void button1_Click(object sender, EventArgs e)
