@@ -780,6 +780,7 @@ namespace JsonManipulator
             addModelFeaturesToolStripMenuItem.Enabled = true;
             modelAIProcessingToolStripMenuItem.Enabled = true;
             modelFabricationToolStripMenuItem.Enabled = true;
+            modelChangeReportToolStripMenuItem.Enabled = true;
             modelValidationToolStripMenuItem.Enabled = true;
             logOutToolStripMenuItem.Enabled = true;
         }
@@ -789,6 +790,7 @@ namespace JsonManipulator
             addModelFeaturesToolStripMenuItem.Enabled = false;
             modelAIProcessingToolStripMenuItem.Enabled = false;
             modelFabricationToolStripMenuItem.Enabled = false;
+            modelChangeReportToolStripMenuItem.Enabled = false;
             modelValidationToolStripMenuItem.Enabled = false;
             logOutToolStripMenuItem.Enabled = false;
 

@@ -80,11 +80,10 @@ namespace JsonManipulator
             // 
             // lblValidationError
             // 
-            this.lblValidationError.AutoSize = true;
             this.lblValidationError.ForeColor = System.Drawing.Color.Red;
             this.lblValidationError.Location = new System.Drawing.Point(12, 127);
             this.lblValidationError.Name = "lblValidationError";
-            this.lblValidationError.Size = new System.Drawing.Size(133, 13);
+            this.lblValidationError.Size = new System.Drawing.Size(300, 27);
             this.lblValidationError.TabIndex = 20;
             this.lblValidationError.Text = "Test Valiation Error Display";
             // 

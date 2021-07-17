@@ -148,6 +148,8 @@ namespace JsonManipulator.Models
         public List<objectWorkflow> objectWorkflow { get; set; }
 
 
+        [JsonProperty("intersectionObj")]
+        public List<intersectionObj> intersectionObj { get; set; }
         public string isSoftDeleteUsed { get; set; }
         [JsonProperty("cacheAllRecs")]
         public string isAllRecsCached { get; set; }
@@ -241,7 +243,15 @@ namespace JsonManipulator.Models
         [JsonProperty("sqlServerDBDataTypeSize")]
         public string dataSize { get; set; } 
         [JsonProperty("codeDescription")]
-        public string codeDescription { get; set; } 
+        public string codeDescription { get; set; }
+    }
+    public class intersectionObj
+    {
+        [JsonProperty("name")]
+        public string name { get; set; }
+
+        [JsonProperty("pairedObj")]
+        public string pairedObj { get; set; } 
     }
     public class Report
     {

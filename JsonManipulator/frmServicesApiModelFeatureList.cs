@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -42,9 +43,7 @@ namespace JsonManipulator
 
         private List<GridItem> _itemList = new List<GridItem>();
         private ModelFeatureListModel _apiList = null;
-
-        private BindingSource _BindingSource = null;
-        private BindingList<GridItem> _BindingList = null;
+         
          
         root _root = null;
         public frmServicesApiModelFeatureList(root root)
@@ -55,17 +54,12 @@ namespace JsonManipulator
                 _root.NameSpaceObjects.FirstOrDefault().ModelFeatureObject = new List<ModelFeatureObject>();
         }
 
-        private async Task LoadItemsAsync()
+        private void BuildGrid()
         {
-            _apiList = await OpenAPIs.ApiManager.GetModelFeatureListAsync();
-
-            if (_apiList == null)
-                return;
-
             this.UseWaitCursor = true;
             _itemList.Clear();
 
-            foreach(ModelFeatureListModelItem item in _apiList.Items)
+            foreach (ModelFeatureListModelItem item in _apiList.Items)
             {
 
                 _itemList.Add(new GridItem(item));
@@ -74,11 +68,11 @@ namespace JsonManipulator
             //sync with current list
             foreach (ModelFeatureObject existingItem in _root.NameSpaceObjects.FirstOrDefault().ModelFeatureObject)
             {
-                if(_itemList.Where(x => x.InternalName == existingItem.name).ToList().Count > 0)
+                if (_itemList.Where(x => x.InternalName == existingItem.name).ToList().Count > 0)
                 {
                     GridItem gridItem = _itemList.Where(x => x.InternalName == existingItem.name).ToList()[0];
                     gridItem.IsSelected = true;
-                    if(existingItem.isCompleted == "true")
+                    if (existingItem.isCompleted == "true")
                     {
                         gridItem.IsCompleted = true;
                     }
@@ -90,18 +84,15 @@ namespace JsonManipulator
             }
 
 
-            _itemList = _itemList.OrderByDescending(x => x.Name).ToList(); 
+            _itemList = _itemList.OrderBy(x => x.Name).ToList();
 
-            gridRequestList.Rows.Clear();
+            //gridRequestList.Rows.Clear();
             gridRequestList.Columns.Clear();
 
-            _BindingList = new BindingList<GridItem>(_itemList);
-            _BindingSource = new BindingSource(_BindingList, null);
-              
 
             gridRequestList.DataSource = null;
-            gridRequestList.DataSource = _BindingSource;
-             
+            gridRequestList.DataSource = ToDataTable(_itemList);
+
 
             var col = gridRequestList.Columns["InternalName"];
             col.Visible = false;
@@ -122,6 +113,15 @@ namespace JsonManipulator
             //    column.Width = widthCol;
             //}
             this.UseWaitCursor = false;
+        }
+        private async Task LoadItemsAsync()
+        {
+            _apiList = await OpenAPIs.ApiManager.GetModelFeatureListAsync();
+
+            if (_apiList == null)
+                return;
+
+            BuildGrid();
         }
          
 
@@ -161,8 +161,7 @@ namespace JsonManipulator
             if (e.ColumnIndex == gridRequestList.Columns["select_button_column"].Index)
             {
                 string internalName = gridRequestList.Rows[e.RowIndex].Cells[0].Value.ToString();
-                ToggleSelectedItem(internalName);
-                gridRequestList.Invalidate();
+                ToggleSelectedItem(internalName); 
             }
         }
          
@@ -205,8 +204,7 @@ namespace JsonManipulator
                     _root.NameSpaceObjects.FirstOrDefault().ModelFeatureObject = _root.NameSpaceObjects.FirstOrDefault().ModelFeatureObject.Where(x => x.name != internalName).ToList();
                 }
             }
-            _BindingSource.ResetBindings(false);
-            gridRequestList.Refresh();
+            BuildGrid();
         }
          
 
@@ -215,8 +213,34 @@ namespace JsonManipulator
 
             this.Close();
         }
-         
-         
+
+
+        public static DataTable ToDataTable<T>(List<T> items)
+        {
+            DataTable dataTable = new DataTable(typeof(T).Name);
+
+            //Get all the properties
+            PropertyInfo[] Props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            foreach (PropertyInfo prop in Props)
+            {
+                //Defining type of data column gives proper data table 
+                var type = (prop.PropertyType.IsGenericType && prop.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>) ? Nullable.GetUnderlyingType(prop.PropertyType) : prop.PropertyType);
+                //Setting column names as Property names
+                dataTable.Columns.Add(prop.Name, type);
+            }
+            foreach (T item in items)
+            {
+                var values = new object[Props.Length];
+                for (int i = 0; i < Props.Length; i++)
+                {
+                    //inserting property values to datatable rows
+                    values[i] = Props[i].GetValue(item, null);
+                }
+                dataTable.Rows.Add(values);
+            }
+            //put a breakpoint here and check datatable
+            return dataTable;
+        }
     }
 
     
