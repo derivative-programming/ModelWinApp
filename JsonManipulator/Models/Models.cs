@@ -30,6 +30,8 @@ namespace JsonManipulator.Models
         public string DatabaseName { get; set; }
         [JsonProperty("databaseTableNamePrefix")]
         public string DatabaseTableNamePrefix { get; set; }
+        [JsonProperty("isDatabaseAuditColumnsCreated")]
+        public string isDatabaseAuditColumnsCreated { get; set; }
         [JsonProperty("isValidationMissesLogged")]
         public string isValidationMissesLogged { get; set; }
         [JsonProperty("suppressFillObjLookupTableScripts")]
@@ -387,6 +389,8 @@ namespace JsonManipulator.Models
         public string visualizationFolderDragDropEventContextObjectName { get; set; }
         public string visualizationFolderDragDropEventTargetName { get; set; }
         public string isPage { get; set; }
+        [JsonProperty("isBasicHeaderAutomaticallyAdded")]
+        public string isBasicHeaderAutomaticallyAdded { get; set; }
 
         [JsonProperty("reportButton")]
         public List<reportButton> reportButton { get; set; }
@@ -594,6 +598,10 @@ namespace JsonManipulator.Models
         public string validationRuleRegExMatchRequiredErrorText { get; set; }
         public string isIgnored { get; set; }
         public string defaultValue { get; set; }
+        [JsonProperty("sourceObjectName")]
+        public string sourceObjectName { get; set; }
+        [JsonProperty("sourcePropertyName")]
+        public string sourcePropertyName { get; set; }
 
     }
     public class objectWorkflowOutputVar
@@ -633,6 +641,10 @@ namespace JsonManipulator.Models
         [JsonProperty("isHeaderText")]
         public string isHeaderText { get; set; }
         public string isIgnored { get; set; }
+        [JsonProperty("sourceObjectName")]
+        public string sourceObjectName { get; set; }
+        [JsonProperty("sourcePropertyName")]
+        public string sourcePropertyName { get; set; }
 
     }
     public class objectWorkflowButton
@@ -702,7 +714,9 @@ namespace JsonManipulator.Models
         [JsonProperty("description")]
         public string description { get; set; }
         [JsonProperty("isActive")]
-        public string isActive { get; set; } 
+        public string isActive { get; set; }
+        [JsonProperty("customIntProp1Value")]
+        public string customIntProp1Value { get; set; }
     }
     public class childObject
     {
