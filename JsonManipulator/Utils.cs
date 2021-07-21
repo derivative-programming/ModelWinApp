@@ -299,6 +299,7 @@ namespace JsonManipulator
             result.Add("apiVersion".ToLower());
             result.Add("isValidationMissesLogged".ToLower());
             result.Add("suppressFillObjLookupTableScripts".ToLower());
+            result.Add("isDatabaseAuditColumnsCreated".ToLower());
 
             for (int i = 0; i < result.Count; i++)
             {
@@ -331,8 +332,8 @@ namespace JsonManipulator
             result.Add("isObjectDelete");
             //result.Add("layoutName");
             result.Add("isWFSWorkflowCreated");
-            //result.Add("formTitleText");
-            //result.Add("formIntroText");
+            result.Add("formTitleText");
+            result.Add("formIntroText");
             //result.Add("formFooterText");
             result.Add("formFooterImageURL");
             //result.Add("isAutoSubmit");

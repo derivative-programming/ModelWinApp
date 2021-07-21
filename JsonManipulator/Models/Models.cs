@@ -39,6 +39,7 @@ namespace JsonManipulator.Models
         [JsonRequired]
         [JsonProperty("namespace")]
         public List<NameSpaceObject> NameSpaceObjects { get; set; }
+        
 
     }
     public class ModelFeatureObject
@@ -73,6 +74,8 @@ namespace JsonManipulator.Models
         public List<apiSite> apiSite { get; set; }
         [JsonProperty("modelFeature")]
         public List<ModelFeatureObject> ModelFeatureObject { get; set; }
+        [JsonProperty("isModelFeatureConfigUserDBVeiwer")]
+        public string isModelFeatureConfigUserDBVeiwer { get; set; }
     }
     public class ObjectMap
     {

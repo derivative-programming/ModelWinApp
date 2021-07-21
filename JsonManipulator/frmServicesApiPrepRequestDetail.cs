@@ -33,6 +33,13 @@ namespace JsonManipulator
                 this.btnDownloadResults.Enabled = true;
                 this.btnCancelRequest.Enabled = false;
             }
+            else if (_requestItem.ModelPrepRequestIsCompleted && !_requestItem.ModelPrepRequestIsSuccessful)
+            {
+                this.btnDownloadInitialModel.Enabled = true;
+                this.btnDownloadReport.Enabled = true;
+                this.btnDownloadResults.Enabled = false;
+                this.btnCancelRequest.Enabled = false;
+            }
             else
             {
                 this.btnDownloadInitialModel.Enabled = false;
