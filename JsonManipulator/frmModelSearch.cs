@@ -59,6 +59,7 @@ namespace JsonManipulator
                 default:
                     break;
             }
+            fullList.Add(" No Value");
                 
             if (filter.Trim().Length > 0)
             {
@@ -89,7 +90,10 @@ namespace JsonManipulator
             {
                 this.DialogResult = DialogResult.OK;
                 this.ReturnValue = listObjects.SelectedItem.ToString(); 
-
+                if(this.ReturnValue == " No Value")
+                {
+                    this.ReturnValue = null;
+                }
             }
             this.Close();
         }

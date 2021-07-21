@@ -572,6 +572,19 @@ namespace JsonManipulator
                     l_objGridDropbox.DisplayMember = "Display";
                     l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
                 }
+                if (propertyName.Equals("SourceObjectName", StringComparison.OrdinalIgnoreCase))
+                {
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview   
+                    using (var form = new frmModelSearch(ModelSearchOptions.OBJECTS))
+                    {
+                        var result = form.ShowDialog();
+                        if (result == DialogResult.OK)
+                        {
+                            string val = form.ReturnValue;
+                            setControlData(val, e.RowIndex, e.ColumnIndex);
+                        }
+                    }
+                }
 
             }
         }
@@ -623,6 +636,12 @@ namespace JsonManipulator
         {
             gridButtons.Rows[row].Cells[column].Value = value;
             gridButtons.RefreshEdit();
+        }
+
+        public void setControlData(string value, int row, int column)
+        {
+            gridControls.Rows[row].Cells[column].Value = value;
+            gridControls.RefreshEdit();
         }
 
 

@@ -560,6 +560,7 @@ namespace JsonManipulator.Models
         public String isCustomPageViewUsed { get; set; }
         public String isIgnoredInDocumentation { get; set; }
         public String targetChildObject { get; set; }
+        public String isCustomLogicOverwritten { get; set; }
         public String isAuthorizationRequired { get; set; }
     }
     public class objectWorkflowParam
