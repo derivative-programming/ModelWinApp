@@ -126,6 +126,7 @@ namespace JsonManipulator
         private async void frmForm_Load(object sender, EventArgs e)
         {
             await LoadItemsAsync();
+            timer1.Enabled = true;
         }
 
         private void gridRequestList_CellClick(object sender, DataGridViewCellEventArgs e)

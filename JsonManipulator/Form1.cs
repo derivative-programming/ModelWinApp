@@ -919,7 +919,15 @@ namespace JsonManipulator
             var psi = new System.Diagnostics.ProcessStartInfo();
             psi.UseShellExecute = true;
             psi.FileName = adminUserDemoDashboardFilePath;
-            System.Diagnostics.Process.Start(psi);
+
+            try
+            {
+                System.Diagnostics.Process.Start(psi);
+            }
+            catch (System.Exception)
+            {
+
+            }
         }
 
         private void endUserToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -941,7 +949,15 @@ namespace JsonManipulator
             var psi = new System.Diagnostics.ProcessStartInfo();
             psi.UseShellExecute = true;
             psi.FileName = endUserLoginFilePath;
-            System.Diagnostics.Process.Start(psi);
+
+            try
+            {
+                System.Diagnostics.Process.Start(psi);
+            }
+            catch (System.Exception)
+            {
+
+            }
         }
 
         private void configUserToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -963,7 +979,15 @@ namespace JsonManipulator
             var psi = new System.Diagnostics.ProcessStartInfo();
             psi.UseShellExecute = true;
             psi.FileName = configUserDemoDashboardFilePath;
-            System.Diagnostics.Process.Start(psi);
+
+            try
+            {
+                System.Diagnostics.Process.Start(psi);
+            }
+            catch (System.Exception)
+            {
+
+            }
         }
 
         private void demoToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -1019,7 +1043,15 @@ namespace JsonManipulator
             var psi = new System.Diagnostics.ProcessStartInfo();
             psi.UseShellExecute = true;
             psi.FileName = codeFolder;
-            System.Diagnostics.Process.Start(codeFolder);
+
+            try
+            {
+                System.Diagnostics.Process.Start(psi);
+            }
+            catch (System.Exception)
+            {
+
+            };
         }
 
         private void databaseToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1041,7 +1073,15 @@ namespace JsonManipulator
             var psi = new System.Diagnostics.ProcessStartInfo();
             psi.UseShellExecute = true;
             psi.FileName = adminUserDemoDashboardFilePath;
-            System.Diagnostics.Process.Start(psi);
+
+            try
+            {
+                System.Diagnostics.Process.Start(psi);
+            }
+            catch (System.Exception)
+            {
+
+            }
         }
 
         private void allToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1063,7 +1103,14 @@ namespace JsonManipulator
             var psi = new System.Diagnostics.ProcessStartInfo();
             psi.UseShellExecute = true;
             psi.FileName = adminUserDemoDashboardFilePath;
-            System.Diagnostics.Process.Start(psi);
+            try
+            {
+                System.Diagnostics.Process.Start(psi);
+            }
+            catch(System.Exception)
+            {
+
+            }
         }
 
         private void endUserToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1085,7 +1132,15 @@ namespace JsonManipulator
             var psi = new System.Diagnostics.ProcessStartInfo();
             psi.UseShellExecute = true;
             psi.FileName = adminUserDemoDashboardFilePath;
-            System.Diagnostics.Process.Start(psi);
+
+            try
+            {
+                System.Diagnostics.Process.Start(psi);
+            }
+            catch (System.Exception)
+            {
+
+            }
         }
 
         private void adminUserToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1107,7 +1162,15 @@ namespace JsonManipulator
             var psi = new System.Diagnostics.ProcessStartInfo();
             psi.UseShellExecute = true;
             psi.FileName = adminUserDemoDashboardFilePath;
-            System.Diagnostics.Process.Start(psi);
+
+            try
+            {
+                System.Diagnostics.Process.Start(psi);
+            }
+            catch (System.Exception)
+            {
+
+            }
         }
 
         private void configUserToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1130,7 +1193,15 @@ namespace JsonManipulator
             var psi = new System.Diagnostics.ProcessStartInfo();
             psi.UseShellExecute = true;
             psi.FileName = adminUserDemoDashboardFilePath;
-            System.Diagnostics.Process.Start(psi);
+
+            try
+            {
+                System.Diagnostics.Process.Start(psi);
+            }
+            catch (System.Exception)
+            {
+
+            }
         }
 
         private void publicToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1152,7 +1223,15 @@ namespace JsonManipulator
             var psi = new System.Diagnostics.ProcessStartInfo();
             psi.UseShellExecute = true;
             psi.FileName = adminUserDemoDashboardFilePath;
-            System.Diagnostics.Process.Start(psi);
+
+            try
+            {
+                System.Diagnostics.Process.Start(psi);
+            }
+            catch (System.Exception)
+            {
+
+            }
         }
          
 
@@ -1181,7 +1260,15 @@ namespace JsonManipulator
                     var psi = new System.Diagnostics.ProcessStartInfo();
                     psi.UseShellExecute = true;
                     psi.FileName = adminUserDemoDashboardFilePath;
-                    System.Diagnostics.Process.Start(psi);
+
+                    try
+                    {
+                        System.Diagnostics.Process.Start(psi);
+                    }
+                    catch (System.Exception)
+                    {
+
+                    }
 
                 }
             }
@@ -1192,6 +1279,36 @@ namespace JsonManipulator
 
             frmServicesApiChangeRptRequestList form = new frmServicesApiChangeRptRequestList();
             form.ShowDialog();
+        }
+
+        private void workflowsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            //get output folder
+            string outputFolder = LocalStorage.GetValue("FabricationFolder", "");
+            if (outputFolder.Trim().Length == 0)
+                return;
+
+            string docFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\documentation\";
+
+            if (!System.IO.Directory.Exists(docFolder))
+                return;
+            //determine file paths for three user types 
+            string namespaceName = _model.root.NameSpaceObjects.FirstOrDefault().name;
+            string adminUserDemoDashboardFilePath = docFolder + "Workflows/" + namespaceName + ".DynaFlows.html";
+
+            var psi = new System.Diagnostics.ProcessStartInfo();
+            psi.UseShellExecute = true;
+            psi.FileName = adminUserDemoDashboardFilePath;
+
+            try
+            {
+                System.Diagnostics.Process.Start(psi);
+            }
+            catch (System.Exception)
+            {
+
+            };
         }
     }
     

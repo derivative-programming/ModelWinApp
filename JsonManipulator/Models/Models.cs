@@ -76,6 +76,8 @@ namespace JsonManipulator.Models
         public List<ModelFeatureObject> ModelFeatureObject { get; set; }
         [JsonProperty("isModelFeatureConfigUserDBVeiwer")]
         public string isModelFeatureConfigUserDBVeiwer { get; set; }
+        [JsonProperty("isModelFeatureConfigUserDBEditor")]
+        public string isModelFeatureConfigUserDBEditor { get; set; }
     }
     public class ObjectMap
     {
