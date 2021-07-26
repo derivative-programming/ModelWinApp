@@ -63,6 +63,8 @@ namespace JsonManipulator
             this.btnAddNavButton = new System.Windows.Forms.Button();
             this.pnlNavButtonsLeftTop = new System.Windows.Forms.Panel();
             this.lstNavButtons = new System.Windows.Forms.ListBox();
+            this.btnColumnsMoveUp = new System.Windows.Forms.Button();
+            this.btnColumnsMoveDown = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataProperties)).BeginInit();
@@ -380,6 +382,8 @@ namespace JsonManipulator
             // 
             // pnlNavButtonsLeftBottom
             // 
+            this.pnlNavButtonsLeftBottom.Controls.Add(this.btnColumnsMoveUp);
+            this.pnlNavButtonsLeftBottom.Controls.Add(this.btnColumnsMoveDown);
             this.pnlNavButtonsLeftBottom.Controls.Add(this.btnAddNavButton);
             this.pnlNavButtonsLeftBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlNavButtonsLeftBottom.Location = new System.Drawing.Point(0, 319);
@@ -389,10 +393,10 @@ namespace JsonManipulator
             // 
             // btnAddNavButton
             // 
-            this.btnAddNavButton.Location = new System.Drawing.Point(3, 3);
+            this.btnAddNavButton.Location = new System.Drawing.Point(8, 3);
             this.btnAddNavButton.Name = "btnAddNavButton";
             this.btnAddNavButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnAddNavButton.Size = new System.Drawing.Size(75, 23);
+            this.btnAddNavButton.Size = new System.Drawing.Size(136, 23);
             this.btnAddNavButton.TabIndex = 2;
             this.btnAddNavButton.Text = "&Add";
             this.btnAddNavButton.UseVisualStyleBackColor = true;
@@ -418,6 +422,26 @@ namespace JsonManipulator
             this.lstNavButtons.Size = new System.Drawing.Size(177, 421);
             this.lstNavButtons.TabIndex = 1;
             this.lstNavButtons.SelectedIndexChanged += new System.EventHandler(this.lstNavButtons_SelectedIndexChanged);
+            // 
+            // btnColumnsMoveUp
+            // 
+            this.btnColumnsMoveUp.Location = new System.Drawing.Point(8, 32);
+            this.btnColumnsMoveUp.Name = "btnColumnsMoveUp";
+            this.btnColumnsMoveUp.Size = new System.Drawing.Size(136, 23);
+            this.btnColumnsMoveUp.TabIndex = 5;
+            this.btnColumnsMoveUp.Text = "Move &Up";
+            this.btnColumnsMoveUp.UseVisualStyleBackColor = true;
+            this.btnColumnsMoveUp.Click += new System.EventHandler(this.btnColumnsMoveUp_Click);
+            // 
+            // btnColumnsMoveDown
+            // 
+            this.btnColumnsMoveDown.Location = new System.Drawing.Point(8, 61);
+            this.btnColumnsMoveDown.Name = "btnColumnsMoveDown";
+            this.btnColumnsMoveDown.Size = new System.Drawing.Size(136, 23);
+            this.btnColumnsMoveDown.TabIndex = 6;
+            this.btnColumnsMoveDown.Text = "Move &Down";
+            this.btnColumnsMoveDown.UseVisualStyleBackColor = true;
+            this.btnColumnsMoveDown.Click += new System.EventHandler(this.btnColumnsMoveDown_Click);
             // 
             // frmSettings
             // 
@@ -488,5 +512,7 @@ namespace JsonManipulator
         private System.Windows.Forms.Button btnAddNavButton;
         private System.Windows.Forms.Panel pnlNavButtonsLeftTop;
         private System.Windows.Forms.ListBox lstNavButtons;
+        private System.Windows.Forms.Button btnColumnsMoveUp;
+        private System.Windows.Forms.Button btnColumnsMoveDown;
     }
 }

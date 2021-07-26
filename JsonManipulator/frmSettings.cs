@@ -342,5 +342,50 @@ namespace JsonManipulator
             gridNavButtons.Rows[row].Cells[column].Value = value;
             gridNavButtons.RefreshEdit();
         }
+
+        private void btnColumnsMoveUp_Click(object sender, EventArgs e)
+        {
+            if (lstNavButtons.SelectedItem != null)
+            {
+                int selectedIndex = lstNavButtons.SelectedIndex;
+                navButton item = Form1._model.root.navButton.ElementAt(selectedIndex);
+                int newIndex = 0;
+                if (selectedIndex == 0)
+                {
+                    newIndex = Form1._model.root.navButton.Count - 1;
+                }
+                else
+                {
+                    newIndex = selectedIndex - 1;
+                }
+                Form1._model.root.navButton.RemoveAt(selectedIndex);
+                Form1._model.root.navButton.Insert(newIndex, item);
+                setNavButtonsList();
+                lstNavButtons.SetSelected(newIndex, true);
+            }
+        }
+
+        private void btnColumnsMoveDown_Click(object sender, EventArgs e)
+        {
+            if (lstNavButtons.SelectedItem != null)
+            {
+                int selectedIndex = lstNavButtons.SelectedIndex;
+                int count = Form1._model.root.navButton.Count;
+                navButton item = Form1._model.root.navButton.ElementAt(selectedIndex);
+                int newIndex = 0;
+                if (selectedIndex == count - 1)
+                {
+                    newIndex = 0;
+                }
+                else
+                {
+                    newIndex = selectedIndex + 1;
+                }
+                Form1._model.root.navButton.RemoveAt(selectedIndex);
+                Form1._model.root.navButton.Insert(newIndex, item);
+                setNavButtonsList();
+                lstNavButtons.SetSelected(newIndex, true);
+            }
+        }
     }
 }
