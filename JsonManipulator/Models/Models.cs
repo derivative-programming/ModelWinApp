@@ -39,7 +39,9 @@ namespace JsonManipulator.Models
         [JsonRequired]
         [JsonProperty("namespace")]
         public List<NameSpaceObject> NameSpaceObjects { get; set; }
-        
+        [JsonProperty("navButton")]
+        public List<navButton> navButton { get; set; }
+
 
     }
     public class ModelFeatureObject
@@ -760,6 +762,26 @@ namespace JsonManipulator.Models
     public class objectButton
     {
 
+    }
+
+    public class navButton
+    {
+        [JsonProperty("buttonType")]
+        public string buttonType { get; set; }
+        [JsonProperty("buttonName")]
+        public string buttonName { get; set; }
+        [JsonProperty("buttonText")]
+        public string buttonText { get; set; }
+        [JsonProperty("destinationContextObjectName")]
+        public String destinationContextObjectName { get; set; }
+        [JsonProperty("destinationTargetName")]
+        public string destinationTargetName { get; set; }
+        [JsonProperty("isVisible")]
+        public string isVisible { get; set; }
+        [JsonProperty("isButtonCallToAction")]
+        public string isButtonCallToAction { get; set; } 
+        public string isEnabled { get; set; }
+        public string conditionalVisiblePropertyName { get; set; }
     }
     public class apiSite
     {   [JsonRequired]

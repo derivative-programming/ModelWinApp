@@ -69,12 +69,30 @@ namespace JsonManipulator
             _booleans.Rows.Add("false", "false");
             return _booleans;
         }
+        public static DataTable getNavButtonTypes()
+        {
+            DataTable _booleans = new DataTable();
+            _booleans.Columns.Add("Display");
+            _booleans.Columns.Add("Value");
+            _booleans.Rows.Add("", "");
+            _booleans.Rows.Add("primary", "primary");
+            _booleans.Rows.Add("secondary", "secondary");
+            return _booleans;
+        }
         public static List<string> getBooleanList()
         {
             List<string> _booleans = new List<string>(); 
             _booleans.Add("");
             _booleans.Add("true");
             _booleans.Add("false");
+            return _booleans;
+        }
+        public static List<string> getNavButtonList()
+        {
+            List<string> _booleans = new List<string>();
+            _booleans.Add("");
+            _booleans.Add("primary");
+            _booleans.Add("secondary");
             return _booleans;
         }
         public static DataTable getButtons()
@@ -309,6 +327,20 @@ namespace JsonManipulator
             return result;
         }
 
+        public static List<string> GetNavButtonPropertiesToIgnore()
+        {
+            List<string> result = new List<string>();
+            result.Add("destinationContextObjectName".ToLower());
+            //result.Add("isEnabled".ToLower());
+            result.Add("conditionalVisiblePropertyName".ToLower());
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                result[i] = result[i].ToLower();
+            }
+
+            return result;
+        }
         public static List<string> GetModelFeaturePropertiesToIgnore()
         {
             List<string> result = new List<string>(); 

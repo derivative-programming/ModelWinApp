@@ -1,4 +1,5 @@
-﻿using JsonManipulator.Models;
+﻿using JsonManipulator.Enums;
+using JsonManipulator.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,7 +29,9 @@ namespace JsonManipulator
             setSetting();
                 
             setModelFeatureList();
+            setNavButtonsList();
             splitter4.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmSettings.splitter4.SplitPosition", "200"));
+            splitter1.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmSettings.splitter1.SplitPosition", "200"));
             tabControl1.SelectedIndex = System.Convert.ToInt32(LocalStorage.GetValue("frmSettings.tabControl1.SelectedIndex", "0"));
             if (_displayModelFeaturesTab)
             {
@@ -178,9 +181,166 @@ namespace JsonManipulator
         {
 
             LocalStorage.SetValue("frmSettings.splitter4.SplitPosition", splitter4.SplitPosition.ToString());
+            LocalStorage.SetValue("frmSettings.splitter1.SplitPosition", splitter1.SplitPosition.ToString());
             LocalStorage.SetValue("frmSettings.tabControl1.SelectedIndex", tabControl1.SelectedIndex.ToString());
 
             LocalStorage.Save();
+        }
+
+        private void lstNavButtons_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (lstNavButtons.SelectedItem != null)
+            {
+                List<PropertyValue> propertyValues = new List<PropertyValue>();
+                String controlName = lstNavButtons.SelectedItem.ToString();
+                List<string> ignoreList = Utils.GetNavButtonPropertiesToIgnore();
+                navButton navButtonObject = _root.navButton.Where(x => x.buttonName == controlName).FirstOrDefault();
+                foreach (var prop in navButtonObject.GetType().GetProperties().OrderBy(x => x.Name).ToList())
+                {
+                    if (ignoreList.Contains(prop.Name.ToLower()))
+                        continue;
+                    if (!prop.PropertyType.IsGenericType)
+                        propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(navButtonObject) ?? "").ToString() });
+                }
+                gridNavButtons.Columns.Clear();
+                gridNavButtons.DataSource = propertyValues;
+                if (gridNavButtons.Columns.Count > 0)
+                {
+                    gridNavButtons.Columns[0].ReadOnly = true; 
+                }
+            }
+        }
+
+        private void btnAddNavButton_Click(object sender, EventArgs e)
+        {
+            //FrmAddButton frmAddButton = new FrmAddButton(string.Empty, string.Empty,  ButtonType.NAV_BUTTON);
+            //frmAddButton.ShowDialog();
+
+            FrmAddNavButton frmAddNavButton = new FrmAddNavButton();
+            frmAddNavButton.ShowDialog();
+        }
+
+
+        public void setNavButtonsList()
+        {
+            lstNavButtons.Items.Clear();
+            if (_root.navButton != null)
+            {
+                foreach (var param in _root.navButton)
+                {
+                    lstNavButtons.Items.Add(param.buttonName);
+                }
+                if (lstNavButtons.Items.Count > 0)
+                    lstNavButtons.SelectedIndex = lstNavButtons.Items.Count - 1;
+            }
+        }
+
+        private void gridNavButtons_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.ColumnIndex == 0)
+            {
+                SendKeys.Send("{TAB}");
+            }
+        }
+
+        private void gridNavButtons_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (gridNavButtons.DataSource != null && lstNavButtons.SelectedItem != null)
+            {
+                string property = gridNavButtons.Rows[gridNavButtons.CurrentCell.RowIndex].Cells[0].Value.ToString();
+                string value = string.Empty;
+                if (gridNavButtons.Rows[gridNavButtons.CurrentCell.RowIndex].Cells[gridNavButtons.CurrentCell.ColumnIndex].Value != null)
+                {
+                    value = gridNavButtons.Rows[gridNavButtons.CurrentCell.RowIndex].Cells[gridNavButtons.CurrentCell.ColumnIndex].Value.ToString();
+                }
+
+                if (property.StartsWith("is"))
+                {
+                    if (value != null && !Utils.getBooleanList().Contains(value))
+                    {
+                        return;
+                    }
+                }
+                if (property.ToLower() == "destinationTargetName".ToLower())
+                {
+                    Models.ObjectMap destinationOwnerObject = Utils.GetOwnerObject(value);
+                    if (destinationOwnerObject == null)
+                    {
+                        gridNavButtons.Rows[gridNavButtons.CurrentCell.RowIndex].Cells[gridNavButtons.CurrentCell.ColumnIndex].Value = "";
+                        return;
+                    }
+                    typeof(reportButton).GetProperty("destinationContextObjectName").SetValue(Form1._model.root.navButton.ElementAt(lstNavButtons.SelectedIndex), destinationOwnerObject.name);
+
+                }
+                if (property.StartsWith("is"))
+                {
+                    if (value != null && !Utils.getBooleanList().Contains(value))
+                    {
+                        return;
+                    }
+                }
+                if (property.ToLower() == "buttontype".ToLower())
+                {
+                    if (value != null && !Utils.getNavButtonList().Contains(value))
+                    {
+                        return;
+                    }
+                }
+                int index = lstNavButtons.SelectedIndex;
+                typeof(reportButton).GetProperty(property).SetValue(Form1._model.root.navButton.ElementAt(lstNavButtons.SelectedIndex), value);
+                setNavButtonsList();
+                lstNavButtons.SetSelected(index, true);
+            }
+        }
+
+        private void gridNavButtons_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex > 0)
+            {
+
+                // Bind grid cell with combobox and than bind combobox with datasource.  
+                DataGridViewComboBoxCell l_objGridDropbox = new DataGridViewComboBoxCell();
+                string propertyName = gridNavButtons.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value.ToString();
+                // Check the column  cell, in which it click.  
+                if (propertyName.Equals("ButtonType", StringComparison.OrdinalIgnoreCase))
+                {
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
+                    gridNavButtons[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
+                    l_objGridDropbox.DataSource = Utils.getNavButtonTypes(); // Bind combobox with datasource.  
+                    l_objGridDropbox.ValueMember = "Value";
+                    l_objGridDropbox.DisplayMember = "Display";
+                    l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+                }
+                if (propertyName.StartsWith("is"))
+                {
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
+                    gridNavButtons[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
+                    l_objGridDropbox.DataSource = Utils.getBooleans(); // Bind combobox with datasource.  
+                    l_objGridDropbox.ValueMember = "Value";
+                    l_objGridDropbox.DisplayMember = "Display";
+                    l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+                }
+                if (propertyName.Equals("destinationTargetName", StringComparison.OrdinalIgnoreCase))
+                {
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
+                    using (var form = new frmModelSearch(ModelSearchOptions.FORMS))
+                    {
+                        var result = form.ShowDialog();
+                        if (result == DialogResult.OK)
+                        {
+                            string val = form.ReturnValue;
+                            setNavButtonData(val, e.RowIndex, e.ColumnIndex);
+                        }
+                    }
+                }
+            }
+        }
+        public void setNavButtonData(string value, int row, int column)
+        {
+            gridNavButtons.Rows[row].Cells[column].Value = value;
+            gridNavButtons.RefreshEdit();
         }
     }
 }

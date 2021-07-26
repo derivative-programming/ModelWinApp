@@ -10,7 +10,8 @@ namespace JsonManipulator.Enums
     public enum ButtonType
     {
         REPORT,
-        FORM
+        FORM,
+        NAV_BUTTON
     }
 
     public enum ModelSearchOptions

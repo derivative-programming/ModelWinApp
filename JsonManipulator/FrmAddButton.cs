@@ -71,6 +71,26 @@ namespace JsonManipulator
                     ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setButtonsList();
                     this.Close();
                     break;
+                case ButtonType.NAV_BUTTON:
+
+                    if (Form1._model.root.navButton == null)
+                    {
+                        Form1._model.root.navButton = new List<navButton>();
+                    }
+
+                    txtName.Text = Utils.Capitalize(txtName.Text).Trim();
+                    if (NavButtonItemExists(txtName.Text))
+                    {
+                        ShowValidationError("Name already exists.");
+                        return;
+                    }
+
+                    Form1._model.root.navButton.Add(new navButton { buttonName = txtName.Text.Trim(), buttonType = "primary" });
+                    ((Form1)Application.OpenForms["Form1"]).showMessage("Nav Button created successfully");
+                    ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
+                    ((frmSettings)Application.OpenForms["frmSettings"]).setNavButtonsList();
+                    this.Close();
+                    break;
             }
             
         }
@@ -89,6 +109,16 @@ namespace JsonManipulator
         {
             bool result = false;
             if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportButton.Where(x => x.buttonName == name).ToList().Count > 0)
+            {
+                result = true;
+            }
+            return result;
+        }
+
+        private bool NavButtonItemExists(string name)
+        {
+            bool result = false;
+            if (Form1._model.root.navButton.Where(x => x.buttonName == name).ToList().Count > 0)
             {
                 result = true;
             }
