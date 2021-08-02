@@ -586,8 +586,8 @@ namespace JsonManipulator
             result.Add("cacheExpirationInMinutes".ToLower());
             //result.Add("isFilterSectionCollapsable".ToLower());
             //result.Add("isBreadcrumbSectionHidden".ToLower());
-            result.Add("isSchedulingAllowed".ToLower());
-            result.Add("isFavoriteCreationAllowed".ToLower());
+            //result.Add("isSchedulingAllowed".ToLower());
+            //result.Add("isFavoriteCreationAllowed".ToLower());
             result.Add("badgeCountPropertyName".ToLower());
 
             result.Add("isHeaderLabelsVisible".ToLower());

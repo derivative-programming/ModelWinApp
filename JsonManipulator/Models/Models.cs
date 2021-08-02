@@ -782,6 +782,7 @@ namespace JsonManipulator.Models
         public string isButtonCallToAction { get; set; } 
         public string isEnabled { get; set; }
         public string conditionalVisiblePropertyName { get; set; }
+        public string roleRequired { get; set; }
     }
     public class apiSite
     {   [JsonRequired]
