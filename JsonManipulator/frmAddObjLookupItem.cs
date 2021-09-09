@@ -28,6 +28,7 @@ namespace JsonManipulator
         {
 
             txtName.Text = Utils.Capitalize(txtName.Text).Trim();
+            txtName.Text = txtName.Text.Trim().Replace(" ", "_");
             if (ItemExists(txtName.Text))
             {
                 ShowValidationError("Name already exists.");

@@ -41,6 +41,7 @@ namespace JsonManipulator
                 return;
             }
 
+
             List<string> objectNames = Utils.GetDBObjectNameList();
             if (objectNames.Where(x => x.ToLower().Equals(txtName.Text.Trim().ToLower())).ToList().Count > 0)
             {

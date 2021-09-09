@@ -527,14 +527,30 @@ namespace JsonManipulator
                 }
                 if (propertyName.Equals("destinationTargetName", StringComparison.OrdinalIgnoreCase))
                 {
-                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
-                    using (var form = new frmModelSearch(ModelSearchOptions.FORMS))
+                    if(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportButton.ElementAt(lstButtons.SelectedIndex).buttonType == "multiselectProcessing")
                     {
-                        var result = form.ShowDialog();
-                        if (result == DialogResult.OK)
+                        // On click of datagridview cell, attched combobox with this click cell of datagridview  
+                        using (var form = new frmModelSearch(ModelSearchOptions.FLOWS))
                         {
-                            string val = form.ReturnValue;
-                            setButtonData(val, e.RowIndex, e.ColumnIndex);
+                            var result = form.ShowDialog();
+                            if (result == DialogResult.OK)
+                            {
+                                string val = form.ReturnValue;
+                                setButtonData(val, e.RowIndex, e.ColumnIndex);
+                            }
+                        }
+                    }
+                    else
+                    { 
+                        // On click of datagridview cell, attched combobox with this click cell of datagridview  
+                        using (var form = new frmModelSearch(ModelSearchOptions.FORMS))
+                        {
+                            var result = form.ShowDialog();
+                            if (result == DialogResult.OK)
+                            {
+                                string val = form.ReturnValue;
+                                setButtonData(val, e.RowIndex, e.ColumnIndex);
+                            }
                         }
                     }
                 }

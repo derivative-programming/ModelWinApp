@@ -111,12 +111,12 @@ namespace JsonManipulator
         public void setOwner(string Owner)
         {
             txtOwner.Text = Owner;
-            txtName.Text = txtOwner.Text.Trim() + txtRole.Text.Trim() + "Detail";
+            txtName.Text = txtOwner.Text.Trim() + txtRole.Text.Trim() + "Details";
         }
         public void setRole(string Role)
         {
             txtRole.Text = Role;
-            txtName.Text = txtOwner.Text.Trim() + txtRole.Text.Trim() + "Detail";
+            txtName.Text = txtOwner.Text.Trim() + txtRole.Text.Trim() + "Details";
         }
         private void btnRoles_Click(object sender, EventArgs e)
         {
@@ -138,7 +138,7 @@ namespace JsonManipulator
 
         private void txtRole_TextChanged(object sender, EventArgs e)
         { 
-            txtName.Text = txtOwner.Text.Trim() + txtRole.Text.Trim() + "Detail"; ;
+            txtName.Text = txtOwner.Text.Trim() + txtRole.Text.Trim() + "Details"; ;
         }
     }
 }
