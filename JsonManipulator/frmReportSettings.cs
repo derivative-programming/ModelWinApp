@@ -527,7 +527,7 @@ namespace JsonManipulator
                 }
                 if (propertyName.Equals("destinationTargetName", StringComparison.OrdinalIgnoreCase))
                 {
-                    if(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportButton.ElementAt(lstButtons.SelectedIndex).buttonType == "multiselectProcessing")
+                    if(Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportButton.ElementAt(lstButtons.SelectedIndex).buttonType == "multiSelectProcessing")
                     {
                         // On click of datagridview cell, attched combobox with this click cell of datagridview  
                         using (var form = new frmModelSearch(ModelSearchOptions.FLOWS))

@@ -112,7 +112,7 @@ namespace JsonManipulator
             _booleans.Columns.Add("Value");
             _booleans.Rows.Add("back", "back");
             _booleans.Rows.Add("add", "add");
-            _booleans.Rows.Add("multiselectProcessing", "multiselectProcessing");
+            _booleans.Rows.Add("multiSelectProcessing", "multiSelectProcessing");
             _booleans.Rows.Add("breadcrumb", "breadcrumb");
             _booleans.Rows.Add("other", "other");
             return _booleans;
