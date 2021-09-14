@@ -465,6 +465,8 @@ namespace JsonManipulator.Models
         public string codeDescription { get; set; }
         [JsonProperty("headerText")]
         public string headerText { get; set; }
+        [JsonProperty("sourceLookupObjImplementationObjName")]
+        public string sourceLookupObjImplementationObjName { get; set; }
         [JsonProperty("sourceObjectName")]
         public string sourceObjectName { get; set; }
         [JsonProperty("sourcePropertyName")]
