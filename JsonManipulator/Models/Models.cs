@@ -398,6 +398,8 @@ namespace JsonManipulator.Models
         public string isPage { get; set; }
         [JsonProperty("isBasicHeaderAutomaticallyAdded")]
         public string isBasicHeaderAutomaticallyAdded { get; set; }
+        [JsonProperty("filteringSqlLogic")]
+        public string filteringSqlLogic { get; set; }
 
         [JsonProperty("reportButton")]
         public List<reportButton> reportButton { get; set; }
