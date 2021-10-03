@@ -38,12 +38,15 @@ namespace JsonManipulator
             this.txtFabricationFolder = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.btnCancelRequest = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.txtCodeDistributionScript = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(180, 329);
+            this.btnCancel.Location = new System.Drawing.Point(180, 367);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 24);
             this.btnCancel.TabIndex = 6;
@@ -125,12 +128,41 @@ namespace JsonManipulator
             this.btnCancelRequest.UseVisualStyleBackColor = true;
             this.btnCancelRequest.Click += new System.EventHandler(this.btnCancelRequest_Click);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(227, 336);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(28, 20);
+            this.button2.TabIndex = 17;
+            this.button2.Text = "...";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // txtCodeDistributionScript
+            // 
+            this.txtCodeDistributionScript.Location = new System.Drawing.Point(15, 336);
+            this.txtCodeDistributionScript.Name = "txtCodeDistributionScript";
+            this.txtCodeDistributionScript.Size = new System.Drawing.Size(205, 20);
+            this.txtCodeDistributionScript.TabIndex = 16;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 319);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(117, 13);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "Code Distribution Script";
+            // 
             // frmServicesApiFabricationRequestDetail
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(269, 365);
+            this.ClientSize = new System.Drawing.Size(269, 403);
             this.ControlBox = false;
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.txtCodeDistributionScript);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.btnCancelRequest);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtFabricationFolder);
@@ -161,5 +193,8 @@ namespace JsonManipulator
         private System.Windows.Forms.TextBox txtFabricationFolder;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnCancelRequest;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox txtCodeDistributionScript;
+        private System.Windows.Forms.Label label2;
     }
 }

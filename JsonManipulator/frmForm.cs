@@ -57,6 +57,11 @@ namespace JsonManipulator
                 return;
             }
 
+            if (txtPageTitle.Text.Trim().Length == 0)
+            {
+                ShowValidationError("Please enter a page title.");
+                return;
+            }
 
             objectWorkflow form = new objectWorkflow();
             form.Name = txtName.Text.Trim();
@@ -79,8 +84,9 @@ namespace JsonManipulator
             form.objectWorkflowButton.Add(formButtonSubmit);
             form.objectWorkflowButton.Add(formButtonCancel);
             form.isPage = "true";
+            //form.pageTitleText = Utils.ConvertPascalToSpaced(form.Name);
+            form.pageTitleText = txtPageTitle.Text.Trim();
             form.layoutName = Utils.Capitalize(txtRole.Text.Trim()) + "Layout";
-            form.pageTitleText = Utils.ConvertPascalToSpaced(form.Name);
 
 
 
@@ -145,6 +151,11 @@ namespace JsonManipulator
         {
 
             txtName.Text = txtOwner.Text.Trim() + txtRole.Text.Trim();
+        }
+
+        private void txtName_TextChanged(object sender, EventArgs e)
+        {
+            txtPageTitle.Text = Utils.ConvertPascalToSpaced(txtName.Text);
         }
     }
 

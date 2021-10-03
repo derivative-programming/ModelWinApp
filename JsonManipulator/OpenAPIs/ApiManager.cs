@@ -15,6 +15,7 @@ namespace JsonManipulator.OpenAPIs
 
         private static string GetApiBaseUrl()
         {
+           // return "http://derivative-programming-ares-api-dev.azurewebsites.net";
             return "https://localhost:44348";
         }
          
@@ -320,13 +321,28 @@ namespace JsonManipulator.OpenAPIs
             bool result = false;
 
             try
-            { 
+            {
+                string tmpZipFile = System.IO.Path.GetTempFileName();
+                System.IO.File.Move(tmpZipFile, tmpZipFile + ".zip");
+                tmpZipFile = tmpZipFile + ".zip";
+                System.IO.File.Delete(tmpZipFile);
+
+                string tmpFolderPath = string.Empty;
+                tmpFolderPath = System.IO.Path.GetTempPath().TrimEnd(@"\".ToCharArray()) + @"\" + Guid.NewGuid().ToString();
+                System.IO.Directory.CreateDirectory(tmpFolderPath);
+                System.IO.File.Copy(modelFilePath, tmpFolderPath + @"\" + System.IO.Path.GetFileName(modelFilePath));
+                System.IO.Compression.ZipFile.CreateFromDirectory(tmpFolderPath, tmpZipFile);
+
                 PrepRequestClient prepRequestClient = new PrepRequestClient(GetApiBaseUrl(), BuildClient());
 
                 PrepRequestPostModel postModel = new PrepRequestPostModel();
-                postModel.ModelFileData = Convert.ToBase64String(System.IO.File.ReadAllBytes(modelFilePath));
+                postModel.ModelFileData = Convert.ToBase64String(System.IO.File.ReadAllBytes(tmpZipFile));
                 postModel.Description = description; 
                 PrepRequestPostResponse response = await prepRequestClient.PostAsync(postModel);
+
+                System.IO.Directory.Delete(tmpFolderPath, true);
+                System.IO.File.Delete(tmpZipFile);
+
                 result = true;
             }
             catch (System.Exception)
@@ -342,16 +358,31 @@ namespace JsonManipulator.OpenAPIs
             bool result = false;
 
             try
-            { 
+            {
+                string tmpZipFile = System.IO.Path.GetTempFileName();
+                System.IO.File.Move(tmpZipFile, tmpZipFile + ".zip");
+                tmpZipFile = tmpZipFile + ".zip";
+                System.IO.File.Delete(tmpZipFile);
+
+                string tmpFolderPath = string.Empty;
+                tmpFolderPath = System.IO.Path.GetTempPath().TrimEnd(@"\".ToCharArray()) + @"\" + Guid.NewGuid().ToString();
+                System.IO.Directory.CreateDirectory(tmpFolderPath);
+                System.IO.File.Copy(modelFilePath, tmpFolderPath + @"\" + System.IO.Path.GetFileName(modelFilePath));
+                System.IO.Compression.ZipFile.CreateFromDirectory(tmpFolderPath, tmpZipFile);
+                 
                 ValidationRequestClient client = new ValidationRequestClient(GetApiBaseUrl(), BuildClient());
 
                 ValidationRequestPostModel postModel = new ValidationRequestPostModel();
-                postModel.ModelFileData = Convert.ToBase64String(System.IO.File.ReadAllBytes(modelFilePath));
+                postModel.ModelFileData = Convert.ToBase64String(System.IO.File.ReadAllBytes(tmpZipFile));
                 postModel.Description = description;
                 ValidationRequestPostResponse response = await client.PostAsync(postModel);
+
+                System.IO.Directory.Delete(tmpFolderPath, true);
+                System.IO.File.Delete(tmpZipFile);
+
                 result = true;
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
 
             }
@@ -365,13 +396,28 @@ namespace JsonManipulator.OpenAPIs
 
             try
             {
+                string tmpZipFile = System.IO.Path.GetTempFileName();
+                System.IO.File.Move(tmpZipFile, tmpZipFile + ".zip");
+                tmpZipFile = tmpZipFile + ".zip";
+                System.IO.File.Delete(tmpZipFile);
+
+                string tmpFolderPath = string.Empty;
+                tmpFolderPath = System.IO.Path.GetTempPath().TrimEnd(@"\".ToCharArray()) + @"\" + Guid.NewGuid().ToString();
+                System.IO.Directory.CreateDirectory(tmpFolderPath);
+                System.IO.File.Copy(modelFilePath, tmpFolderPath + @"\" + System.IO.Path.GetFileName(modelFilePath));
+                System.IO.Compression.ZipFile.CreateFromDirectory(tmpFolderPath, tmpZipFile);
+
                 ChangeRptRequestClient client = new ChangeRptRequestClient(GetApiBaseUrl(), BuildClient());
 
                 ChangeRptRequestPostModel postModel = new ChangeRptRequestPostModel();
-                postModel.ModelFileData = Convert.ToBase64String(System.IO.File.ReadAllBytes(modelFilePath));
+                postModel.ModelFileData = Convert.ToBase64String(System.IO.File.ReadAllBytes(tmpZipFile));
                 postModel.NextModelFileData = Convert.ToBase64String(System.IO.File.ReadAllBytes(nextFilePath));
                 postModel.Description = description;
                 ChangeRptRequestPostResponse response = await client.PostAsync(postModel);
+
+                System.IO.Directory.Delete(tmpFolderPath, true);
+                System.IO.File.Delete(tmpZipFile);
+
                 result = true;
             }
             catch (System.Exception)
@@ -387,13 +433,28 @@ namespace JsonManipulator.OpenAPIs
             bool result = false;
 
             try
-            { 
+            {
+                string tmpZipFile = System.IO.Path.GetTempFileName();
+                System.IO.File.Move(tmpZipFile, tmpZipFile + ".zip");
+                tmpZipFile = tmpZipFile + ".zip";
+                System.IO.File.Delete(tmpZipFile);
+
+                string tmpFolderPath = string.Empty;
+                tmpFolderPath = System.IO.Path.GetTempPath().TrimEnd(@"\".ToCharArray()) + @"\" + Guid.NewGuid().ToString();
+                System.IO.Directory.CreateDirectory(tmpFolderPath);
+                System.IO.File.Copy(modelFilePath, tmpFolderPath + @"\" + System.IO.Path.GetFileName(modelFilePath));
+                System.IO.Compression.ZipFile.CreateFromDirectory(tmpFolderPath, tmpZipFile);
+
                 FabricationRequestClient client = new FabricationRequestClient(GetApiBaseUrl(), BuildClient());
 
                 FabricationRequestPostModel postModel = new FabricationRequestPostModel();
-                postModel.ModelFileData = Convert.ToBase64String(System.IO.File.ReadAllBytes(modelFilePath));
+                postModel.ModelFileData = Convert.ToBase64String(System.IO.File.ReadAllBytes(tmpZipFile));
                 postModel.Description = description;
                 FabricationRequestPostResponse response = await client.PostAsync(postModel);
+
+                System.IO.Directory.Delete(tmpFolderPath, true);
+                System.IO.File.Delete(tmpZipFile);
+
                 result = true;
             }
             catch (System.Exception)

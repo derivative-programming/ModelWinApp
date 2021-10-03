@@ -45,6 +45,8 @@ namespace JsonManipulator
             this.lblValidationError = new System.Windows.Forms.Label();
             this.chkSubscribeToOwnerObject = new System.Windows.Forms.CheckBox();
             this.chkSubscribeToTargetChild = new System.Windows.Forms.CheckBox();
+            this.txtPageTitle = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblName
@@ -61,14 +63,15 @@ namespace JsonManipulator
             this.txtName.Location = new System.Drawing.Point(12, 142);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(243, 20);
-            this.txtName.TabIndex = 4;
+            this.txtName.TabIndex = 6;
+            this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
             // 
             // txtRole
             // 
             this.txtRole.Location = new System.Drawing.Point(12, 64);
             this.txtRole.Name = "txtRole";
             this.txtRole.Size = new System.Drawing.Size(200, 20);
-            this.txtRole.TabIndex = 1;
+            this.txtRole.TabIndex = 2;
             this.txtRole.TextChanged += new System.EventHandler(this.txtRole_TextChanged);
             // 
             // label2
@@ -82,10 +85,10 @@ namespace JsonManipulator
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(99, 249);
+            this.btnAccept.Location = new System.Drawing.Point(99, 288);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
-            this.btnAccept.TabIndex = 7;
+            this.btnAccept.TabIndex = 10;
             this.btnAccept.Text = "&OK";
             this.btnAccept.UseVisualStyleBackColor = true;
             this.btnAccept.Click += new System.EventHandler(this.btnAdd_Click);
@@ -93,10 +96,10 @@ namespace JsonManipulator
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(180, 249);
+            this.btnCancel.Location = new System.Drawing.Point(180, 288);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 8;
+            this.btnCancel.TabIndex = 11;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.button2_Click);
@@ -107,7 +110,7 @@ namespace JsonManipulator
             this.txtOwner.Name = "txtOwner";
             this.txtOwner.ReadOnly = true;
             this.txtOwner.Size = new System.Drawing.Size(200, 20);
-            this.txtOwner.TabIndex = 6;
+            this.txtOwner.TabIndex = 0;
             this.txtOwner.TabStop = false;
             // 
             // label1
@@ -124,7 +127,7 @@ namespace JsonManipulator
             this.btnOwner.Location = new System.Drawing.Point(218, 25);
             this.btnOwner.Name = "btnOwner";
             this.btnOwner.Size = new System.Drawing.Size(37, 23);
-            this.btnOwner.TabIndex = 0;
+            this.btnOwner.TabIndex = 1;
             this.btnOwner.Text = "...";
             this.btnOwner.UseVisualStyleBackColor = true;
             this.btnOwner.Click += new System.EventHandler(this.btnOwner_Click);
@@ -134,7 +137,7 @@ namespace JsonManipulator
             this.btnRoles.Location = new System.Drawing.Point(218, 64);
             this.btnRoles.Name = "btnRoles";
             this.btnRoles.Size = new System.Drawing.Size(37, 23);
-            this.btnRoles.TabIndex = 2;
+            this.btnRoles.TabIndex = 3;
             this.btnRoles.Text = "...";
             this.btnRoles.UseVisualStyleBackColor = true;
             this.btnRoles.Click += new System.EventHandler(this.btnRoles_Click);
@@ -144,7 +147,7 @@ namespace JsonManipulator
             this.btnChild.Location = new System.Drawing.Point(218, 103);
             this.btnChild.Name = "btnChild";
             this.btnChild.Size = new System.Drawing.Size(37, 23);
-            this.btnChild.TabIndex = 3;
+            this.btnChild.TabIndex = 5;
             this.btnChild.Text = "...";
             this.btnChild.UseVisualStyleBackColor = true;
             this.btnChild.Click += new System.EventHandler(this.btnChild_Click);
@@ -155,7 +158,7 @@ namespace JsonManipulator
             this.txtChild.Name = "txtChild";
             this.txtChild.ReadOnly = true;
             this.txtChild.Size = new System.Drawing.Size(200, 20);
-            this.txtChild.TabIndex = 3;
+            this.txtChild.TabIndex = 4;
             this.txtChild.TabStop = false;
             this.txtChild.TextChanged += new System.EventHandler(this.txtChild_TextChanged);
             // 
@@ -171,7 +174,7 @@ namespace JsonManipulator
             // lblValidationError
             // 
             this.lblValidationError.ForeColor = System.Drawing.Color.Red;
-            this.lblValidationError.Location = new System.Drawing.Point(12, 211);
+            this.lblValidationError.Location = new System.Drawing.Point(12, 250);
             this.lblValidationError.Name = "lblValidationError";
             this.lblValidationError.Size = new System.Drawing.Size(243, 35);
             this.lblValidationError.TabIndex = 14;
@@ -180,30 +183,48 @@ namespace JsonManipulator
             // chkSubscribeToOwnerObject
             // 
             this.chkSubscribeToOwnerObject.AutoSize = true;
-            this.chkSubscribeToOwnerObject.Location = new System.Drawing.Point(12, 168);
+            this.chkSubscribeToOwnerObject.Location = new System.Drawing.Point(12, 207);
             this.chkSubscribeToOwnerObject.Name = "chkSubscribeToOwnerObject";
             this.chkSubscribeToOwnerObject.Size = new System.Drawing.Size(187, 17);
-            this.chkSubscribeToOwnerObject.TabIndex = 5;
+            this.chkSubscribeToOwnerObject.TabIndex = 8;
             this.chkSubscribeToOwnerObject.Text = "Subscribe To Owner Object Props";
             this.chkSubscribeToOwnerObject.UseVisualStyleBackColor = true;
             // 
             // chkSubscribeToTargetChild
             // 
             this.chkSubscribeToTargetChild.AutoSize = true;
-            this.chkSubscribeToTargetChild.Location = new System.Drawing.Point(12, 191);
+            this.chkSubscribeToTargetChild.Location = new System.Drawing.Point(12, 230);
             this.chkSubscribeToTargetChild.Name = "chkSubscribeToTargetChild";
             this.chkSubscribeToTargetChild.Size = new System.Drawing.Size(213, 17);
-            this.chkSubscribeToTargetChild.TabIndex = 6;
+            this.chkSubscribeToTargetChild.TabIndex = 9;
             this.chkSubscribeToTargetChild.Text = "Subscribe To Target Child Object Props";
             this.chkSubscribeToTargetChild.UseVisualStyleBackColor = true;
+            // 
+            // txtPageTitle
+            // 
+            this.txtPageTitle.Location = new System.Drawing.Point(12, 181);
+            this.txtPageTitle.Name = "txtPageTitle";
+            this.txtPageTitle.Size = new System.Drawing.Size(243, 20);
+            this.txtPageTitle.TabIndex = 7;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 165);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(55, 13);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "&Page Title";
             // 
             // frmReportGrid
             // 
             this.AcceptButton = this.btnAccept;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(267, 284);
+            this.ClientSize = new System.Drawing.Size(263, 328);
             this.ControlBox = false;
+            this.Controls.Add(this.txtPageTitle);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.chkSubscribeToOwnerObject);
             this.Controls.Add(this.chkSubscribeToTargetChild);
             this.Controls.Add(this.lblValidationError);
@@ -249,5 +270,7 @@ namespace JsonManipulator
         private System.Windows.Forms.Label lblValidationError;
         private System.Windows.Forms.CheckBox chkSubscribeToOwnerObject;
         private System.Windows.Forms.CheckBox chkSubscribeToTargetChild;
+        private System.Windows.Forms.TextBox txtPageTitle;
+        private System.Windows.Forms.Label label4;
     }
 }

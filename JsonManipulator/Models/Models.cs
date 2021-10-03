@@ -188,6 +188,10 @@ namespace JsonManipulator.Models
         public string isNotPublishedToSubscriptions { get; set; }
         //[JsonProperty("isFKNonLookupIncludedInXMLFunction")]
         //public string isFKNonLookupIncludedInXMLFunction { get; set; }
+
+        [JsonProperty("IsFKConstraintSuppressed")]
+        public string IsFKConstraintSuppressed { get; set; }
+
         [JsonProperty("fKObjectName")]
         public string fKObjectName { get; set; }
         [JsonProperty("fKObjectPropertyName")]

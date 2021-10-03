@@ -64,8 +64,14 @@ namespace JsonManipulator
                         ShowValidationError("Name already exists.");
                         return;
                     }
-
-                    Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportButton.Add(new reportButton { buttonName = txtName.Text.Trim(), buttonType = "other"});
+                    if (txtName.Text.Trim().ToLower() == "add")
+                    {
+                        Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportButton.Add(new reportButton { buttonName = txtName.Text.Trim(),buttonText = "Add", buttonType = "add" });
+                    }
+                    else
+                    {
+                        Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportButton.Add(new reportButton { buttonName = txtName.Text.Trim(), buttonType = "other" });
+                    }
                     ((Form1)Application.OpenForms["Form1"]).showMessage("Button created successfully");
                     ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
                     ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setButtonsList();

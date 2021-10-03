@@ -67,6 +67,7 @@ namespace JsonManipulator
             richTextBox1.Text = details;
 
             txtFabricationFolder.Text = LocalStorage.GetValue("FabricationFolder", "");
+            txtCodeDistributionScript.Text = LocalStorage.GetValue("CodeDistributionScript", "");
         } 
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -135,6 +136,30 @@ namespace JsonManipulator
         {
             await OpenAPIs.ApiManager.CancelFabricationRequestAsync(_requestItem.ModelFabricationRequestCode);
             this.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            using (var fbd = new System.Windows.Forms.OpenFileDialog())
+            {
+                fbd.Title = "Open A Code Distribution Script file";
+                fbd.CheckFileExists = false;
+                fbd.CheckPathExists = true;
+                fbd.DefaultExt = "bat";
+                fbd.Filter = "bat files (*.bat)|*.bat";
+                fbd.FilterIndex = 2;
+                fbd.RestoreDirectory = true;
+                DialogResult result = fbd.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    txtCodeDistributionScript.Text = fbd.FileName;
+                    LocalStorage.SetValue("CodeDistributionScript", txtCodeDistributionScript.Text.Trim());
+                    LocalStorage.Save();
+
+                }
+            }
+
         }
     }
 

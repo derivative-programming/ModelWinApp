@@ -57,13 +57,20 @@ namespace JsonManipulator
                 return;
             }
 
+
+            if (txtPageTitle.Text.Trim().Length == 0)
+            {
+                ShowValidationError("Please enter a page title.");
+                return;
+            }
+
             if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text.Trim()).FirstOrDefault().report == null)
                 Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text.Trim()).FirstOrDefault().report = new List<Models.Report>();
             Report rpt = new Report { name = txtName.Text, RoleRequired = txtRole.Text, visualizationType = "DetailThreeColumn"};
             rpt.isPage = "true";
             rpt.isCustomSqlUsed = "false";
             rpt.layoutName = Utils.Capitalize(txtRole.Text.Trim()) + "Layout";
-            rpt.pageTitleText = Utils.ConvertPascalToSpaced(rpt.name);
+            rpt.pageTitleText = txtPageTitle.Text.Trim();
 
             Models.reportButton reportButton = new reportButton();
             reportButton.buttonType = "back";
@@ -139,6 +146,12 @@ namespace JsonManipulator
         private void txtRole_TextChanged(object sender, EventArgs e)
         { 
             txtName.Text = txtOwner.Text.Trim() + txtRole.Text.Trim() + "Details"; ;
+        }
+
+        private void txtName_TextChanged(object sender, EventArgs e)
+        {
+
+            txtPageTitle.Text = Utils.ConvertPascalToSpaced(txtName.Text);
         }
     }
 }

@@ -703,8 +703,8 @@ namespace JsonManipulator
             result.Add("isConditionallyDisplayed".ToLower());
             //result.Add("conditionalSqlLogic".ToLower());
             //result.Add("isUnixEpochDateTime".ToLower());
-            result.Add("isNavURL".ToLower());
-            result.Add("NavURLLinkText".ToLower());
+           // result.Add("isNavURL".ToLower());
+           // result.Add("NavURLLinkText".ToLower());
             result.Add("isButtonClickedOnRowClick".ToLower());
             //result.Add("isMultiSelectColumn".ToLower());
             result.Add("isForcedIntoExport".ToLower());

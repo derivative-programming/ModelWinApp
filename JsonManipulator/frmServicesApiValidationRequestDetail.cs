@@ -43,6 +43,10 @@ namespace JsonManipulator
                     this.btnCancelRequest.Enabled = true;
                 }
             }
+            if(_requestItem.ModelValidationRequestReportUrl.Trim().Length == 0)
+            {
+                btnDownloadReport.Enabled = false;
+            }
 
             string details = "Requested by:" + _requestItem.ModelValidationRequestRequestedBy + Environment.NewLine;
             if(_requestItem.ModelValidationRequestIsCanceled)
