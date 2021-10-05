@@ -450,7 +450,7 @@ namespace JsonManipulator
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview  
 
-                    using (var form = new frmModelSearch(ModelSearchOptions.FORMS))
+                    using (var form = new frmModelSearch(ModelSearchOptions.FLOWS))
                     {
                         var result = form.ShowDialog();
                         if (result == DialogResult.OK)

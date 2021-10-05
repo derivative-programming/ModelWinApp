@@ -15,8 +15,8 @@ namespace JsonManipulator.OpenAPIs
 
         private static string GetApiBaseUrl()
         {
-           // return "http://derivative-programming-ares-api-dev.azurewebsites.net";
-            return "https://localhost:44348";
+            return "https://dp-appservice-ares-api-dev.azurewebsites.net";
+           // return "https://localhost:44348";
         }
          
         public static void Initialize()

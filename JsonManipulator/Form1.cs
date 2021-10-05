@@ -1310,6 +1310,13 @@ namespace JsonManipulator
 
             };
         }
+
+        private void dynaFlowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            frmAddDynaFlow form = new frmAddDynaFlow();
+            form.ShowDialog();
+        }
     }
     
 }
