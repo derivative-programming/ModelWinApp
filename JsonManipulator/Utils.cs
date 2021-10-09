@@ -597,9 +597,9 @@ namespace JsonManipulator
             result.Add("formIntroText".ToLower());
             result.Add("isIgnoredInDocumentation".ToLower());
             result.Add("isAzureBlobStorageUsed".ToLower());
-            result.Add("isAzureTableUsed".ToLower());
+           // result.Add("isAzureTableUsed".ToLower());
             result.Add("azureTableNameOverride".ToLower());
-            result.Add("azureTablePrimaryKeyColumn".ToLower());
+          //  result.Add("azureTablePrimaryKeyColumn".ToLower());
             result.Add("isAzureTablePrimaryKeyColumnDateTime".ToLower());
             result.Add("visualizationGridGroupByColumnName".ToLower());
             result.Add("visualizationGridGroupByInfoTextColumnName".ToLower());

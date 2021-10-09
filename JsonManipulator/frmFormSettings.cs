@@ -1005,5 +1005,19 @@ namespace JsonManipulator
         {
             ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
         }
+
+        private void btnAddNewDFT_Click(object sender, EventArgs e)
+        {
+
+            using (var form = new frmAddDynaFlowTask())
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string val = form.ReturnValue;
+                    AddDFT(val);
+                }
+            }
+        }
     }
 }

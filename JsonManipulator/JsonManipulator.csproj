@@ -82,6 +82,12 @@
     <Compile Include="frmAddDynaFlow.Designer.cs">
       <DependentUpon>frmAddDynaFlow.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmAddDynaFlowTask.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddDynaFlowTask.Designer.cs">
+      <DependentUpon>frmAddDynaFlowTask.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmAddNavButton.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -356,6 +362,9 @@
     <Compile Include="Utils.cs" />
     <EmbeddedResource Include="frmAddDynaFlow.resx">
       <DependentUpon>frmAddDynaFlow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAddDynaFlowTask.resx">
+      <DependentUpon>frmAddDynaFlowTask.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAddNavButton.resx">
       <DependentUpon>FrmAddNavButton.cs</DependentUpon>

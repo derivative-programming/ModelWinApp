@@ -68,6 +68,7 @@ namespace JsonManipulator
             form.objectWorkflowButton = new List<objectWorkflowButton>(); 
             form.isPage = "false";
             form.isRequestRunViaDynaFlowAllowed = "true";
+            form.isExposedInBusinessObject = "true";
 
             Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x=>x.name== txtOwner.Text.Trim()).FirstOrDefault().objectWorkflow.Add(form);
 
