@@ -648,7 +648,7 @@ namespace JsonManipulator
         }
         private void txtSearch_TextChanged(object sender, EventArgs e)
         { 
-            PopulateTree(txtSearch.Text);  
+            PopulateTree(txtSearch.Text.TrimEnd(". ".ToCharArray()));  
         }
         public void AddToTree(objectWorkflow objectWorkflow,int action=0) //0=add 1=update
         {

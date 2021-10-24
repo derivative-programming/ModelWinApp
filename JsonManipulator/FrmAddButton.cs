@@ -68,6 +68,10 @@ namespace JsonManipulator
                     {
                         Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportButton.Add(new reportButton { buttonName = txtName.Text.Trim(),buttonText = "Add", buttonType = "add" });
                     }
+                    else if (txtName.Text.Trim().ToLower().EndsWith("breadcrumb"))
+                    {
+                        Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportButton.Add(new reportButton { buttonName = txtName.Text.Trim(), buttonType = "breadcrumb" });
+                    }
                     else
                     {
                         Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportButton.Add(new reportButton { buttonName = txtName.Text.Trim(), buttonType = "other", buttonText = Utils.ConvertPascalToSpaced(txtName.Text.Trim())  });

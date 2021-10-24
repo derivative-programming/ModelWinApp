@@ -76,6 +76,7 @@ namespace JsonManipulator
         {
             listObjects.Items.Clear();
             populate("");
+            this.ActiveControl = this.txtFilter;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

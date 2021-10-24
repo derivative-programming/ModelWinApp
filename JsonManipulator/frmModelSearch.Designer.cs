@@ -40,10 +40,11 @@ namespace JsonManipulator
             // 
             this.listObjects.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listObjects.FormattingEnabled = true;
+            this.listObjects.ItemHeight = 16;
             this.listObjects.Location = new System.Drawing.Point(0, 55);
             this.listObjects.Name = "listObjects";
             this.listObjects.Size = new System.Drawing.Size(339, 311);
-            this.listObjects.TabIndex = 1;
+            this.listObjects.TabIndex = 2;
             this.listObjects.SelectedIndexChanged += new System.EventHandler(this.listObjects_SelectedIndexChanged);
             // 
             // label1
@@ -51,7 +52,7 @@ namespace JsonManipulator
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 13);
+            this.label1.Size = new System.Drawing.Size(39, 17);
             this.label1.TabIndex = 1;
             this.label1.Text = "Filter";
             // 
@@ -59,8 +60,8 @@ namespace JsonManipulator
             // 
             this.txtFilter.Location = new System.Drawing.Point(12, 25);
             this.txtFilter.Name = "txtFilter";
-            this.txtFilter.Size = new System.Drawing.Size(287, 20);
-            this.txtFilter.TabIndex = 0;
+            this.txtFilter.Size = new System.Drawing.Size(287, 22);
+            this.txtFilter.TabIndex = 1;
             this.txtFilter.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // panel1

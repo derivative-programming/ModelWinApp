@@ -27,7 +27,7 @@ namespace JsonManipulator
             ((Form1)Application.OpenForms["Form1"]).UpdateLoginStatusDispaly();
             if (OpenAPIs.ApiManager._IsLoggedIn)
             {
-                LocalStorage.SetValue("ModelServicesApiLogin", txtLogin.Text.Trim());
+                LocalStorage.SetValue("ModelServicesApiLogin", txtLogin.Text.Trim()); 
                 LocalStorage.Save();
                 ((Form1)Application.OpenForms["Form1"]).showMessage("Logged in successfully");
             }

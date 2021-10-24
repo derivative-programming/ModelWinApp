@@ -44,7 +44,7 @@ namespace JsonManipulator
             this.lblName.AutoSize = true;
             this.lblName.Location = new System.Drawing.Point(12, 50);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(53, 13);
+            this.lblName.Size = new System.Drawing.Size(69, 17);
             this.lblName.TabIndex = 0;
             this.lblName.Text = "&Password";
             // 
@@ -53,9 +53,8 @@ namespace JsonManipulator
             this.txtPassword.Location = new System.Drawing.Point(12, 70);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(236, 20);
+            this.txtPassword.Size = new System.Drawing.Size(236, 22);
             this.txtPassword.TabIndex = 1;
-            this.txtPassword.Text = "Password1!";
             // 
             // btnAccept
             // 
@@ -91,7 +90,7 @@ namespace JsonManipulator
             // 
             this.txtLogin.Location = new System.Drawing.Point(12, 25);
             this.txtLogin.Name = "txtLogin";
-            this.txtLogin.Size = new System.Drawing.Size(236, 20);
+            this.txtLogin.Size = new System.Drawing.Size(236, 22);
             this.txtLogin.TabIndex = 0;
             // 
             // label2
@@ -99,7 +98,7 @@ namespace JsonManipulator
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 5);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(32, 13);
+            this.label2.Size = new System.Drawing.Size(42, 17);
             this.label2.TabIndex = 20;
             this.label2.Text = "Email";
             // 
@@ -109,7 +108,7 @@ namespace JsonManipulator
             this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.linkLabel1.Location = new System.Drawing.Point(12, 148);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(69, 20);
+            this.linkLabel1.Size = new System.Drawing.Size(83, 25);
             this.linkLabel1.TabIndex = 21;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Register";
