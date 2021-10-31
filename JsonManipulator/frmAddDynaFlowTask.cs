@@ -39,7 +39,14 @@ namespace JsonManipulator
                 ShowValidationError("Name already exists.");
                 return;
             }
-             
+
+            if (txtName.Text.Trim().Length > 50)
+            {
+                ShowValidationError("The name length cannot exceed 50 characters.");
+                return;
+            }
+
+
 
 
             objectWorkflow form = new objectWorkflow();

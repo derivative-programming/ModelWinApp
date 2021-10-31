@@ -161,6 +161,31 @@ namespace JsonManipulator
             }
 
         }
+
+        private void btnDistribute_Click(object sender, EventArgs e)
+        { 
+
+            if(txtCodeDistributionScript.Text.Trim().Length == 0)
+            {
+                return;
+            }
+
+            if (!System.IO.File.Exists(txtCodeDistributionScript.Text.Trim()))
+                return; 
+
+            var psi = new System.Diagnostics.ProcessStartInfo();
+            psi.UseShellExecute = true;
+            psi.FileName = txtCodeDistributionScript.Text;
+
+            try
+            {
+                System.Diagnostics.Process.Start(psi);
+            }
+            catch (System.Exception)
+            {
+
+            }
+        }
     }
 
     

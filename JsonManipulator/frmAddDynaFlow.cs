@@ -57,6 +57,13 @@ namespace JsonManipulator
                 return;
             }
 
+            if (txtName.Text.Trim().Length > 50)
+            {
+                ShowValidationError("The name length cannot exceed 50 characters.");
+                return;
+            }
+
+
 
             objectWorkflow form = new objectWorkflow();
             form.Name = txtName.Text.Trim();

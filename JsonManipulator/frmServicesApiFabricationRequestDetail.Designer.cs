@@ -41,6 +41,7 @@ namespace JsonManipulator
             this.button2 = new System.Windows.Forms.Button();
             this.txtCodeDistributionScript = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnDistribute = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -97,7 +98,7 @@ namespace JsonManipulator
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 279);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(147, 13);
+            this.label1.Size = new System.Drawing.Size(197, 17);
             this.label1.TabIndex = 11;
             this.label1.Text = "Fabrication Destination Folder";
             // 
@@ -105,7 +106,7 @@ namespace JsonManipulator
             // 
             this.txtFabricationFolder.Location = new System.Drawing.Point(15, 296);
             this.txtFabricationFolder.Name = "txtFabricationFolder";
-            this.txtFabricationFolder.Size = new System.Drawing.Size(205, 20);
+            this.txtFabricationFolder.Size = new System.Drawing.Size(205, 22);
             this.txtFabricationFolder.TabIndex = 12;
             // 
             // button1
@@ -142,7 +143,7 @@ namespace JsonManipulator
             // 
             this.txtCodeDistributionScript.Location = new System.Drawing.Point(15, 336);
             this.txtCodeDistributionScript.Name = "txtCodeDistributionScript";
-            this.txtCodeDistributionScript.Size = new System.Drawing.Size(205, 20);
+            this.txtCodeDistributionScript.Size = new System.Drawing.Size(205, 22);
             this.txtCodeDistributionScript.TabIndex = 16;
             // 
             // label2
@@ -150,9 +151,20 @@ namespace JsonManipulator
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 319);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(117, 13);
+            this.label2.Size = new System.Drawing.Size(156, 17);
             this.label2.TabIndex = 15;
             this.label2.Text = "Code Distribution Script";
+            // 
+            // btnDistribute
+            // 
+            this.btnDistribute.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnDistribute.Location = new System.Drawing.Point(12, 364);
+            this.btnDistribute.Name = "btnDistribute";
+            this.btnDistribute.Size = new System.Drawing.Size(103, 24);
+            this.btnDistribute.TabIndex = 18;
+            this.btnDistribute.Text = "Distribute";
+            this.btnDistribute.UseVisualStyleBackColor = true;
+            this.btnDistribute.Click += new System.EventHandler(this.btnDistribute_Click);
             // 
             // frmServicesApiFabricationRequestDetail
             // 
@@ -160,6 +172,7 @@ namespace JsonManipulator
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(269, 403);
             this.ControlBox = false;
+            this.Controls.Add(this.btnDistribute);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.txtCodeDistributionScript);
             this.Controls.Add(this.label2);
@@ -196,5 +209,6 @@ namespace JsonManipulator
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox txtCodeDistributionScript;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnDistribute;
     }
 }

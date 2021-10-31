@@ -53,7 +53,7 @@ namespace JsonManipulator
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("http://google.com");
+            System.Diagnostics.Process.Start("https://secure.derivative-programming.com/ObjWF/Tac/TacRegister/f8324cfc-c6f9-4e92-bb88-a9e429d05e59");
         }
     }
 

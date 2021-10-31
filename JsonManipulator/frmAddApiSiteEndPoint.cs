@@ -41,6 +41,13 @@ namespace JsonManipulator
                 return;
             }
 
+            if (txtName.Text.Trim().Length > 100)
+            {
+                ShowValidationError("The name length cannot exceed 100 characters.");
+                return;
+            }
+
+
             Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _name).FirstOrDefault().apiEndPoint.Add(new apiEndPoint { name = txtName.Text.Trim() });
             ((Form1)Application.OpenForms["Form1"]).showMessage("EndPoint created successfully");
             ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();

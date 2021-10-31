@@ -64,6 +64,13 @@ namespace JsonManipulator
                         ShowValidationError("Name already exists.");
                         return;
                     }
+
+                    if (txtName.Text.Trim().Length > 100)
+                    {
+                        ShowValidationError("The name length cannot exceed 100 characters.");
+                        return;
+                    }
+
                     if (txtName.Text.Trim().ToLower() == "add")
                     {
                         Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportButton.Add(new reportButton { buttonName = txtName.Text.Trim(),buttonText = "Add", buttonType = "add" });
@@ -94,6 +101,13 @@ namespace JsonManipulator
                         ShowValidationError("Name already exists.");
                         return;
                     }
+
+                    if (txtName.Text.Trim().Length > 100)
+                    {
+                        ShowValidationError("The name length cannot exceed 100 characters.");
+                        return;
+                    }
+
 
                     Form1._model.root.navButton.Add(new navButton { buttonName = txtName.Text.Trim(), buttonType = "primary" });
                     ((Form1)Application.OpenForms["Form1"]).showMessage("Nav Button created successfully");

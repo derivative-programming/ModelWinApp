@@ -64,6 +64,12 @@ namespace JsonManipulator
                 return;
             }
 
+            if (txtName.Text.Trim().Length > 100)
+            {
+                ShowValidationError("The name length cannot exceed 100 characters.");
+                return;
+            }
+
             if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text.Trim()).FirstOrDefault().report == null)
                 Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text.Trim()).FirstOrDefault().report = new List<Models.Report>();
             Report rpt = new Report { name = txtName.Text, RoleRequired = txtRole.Text, visualizationType = "DetailThreeColumn"};

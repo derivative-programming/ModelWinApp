@@ -38,7 +38,14 @@ namespace JsonManipulator
                 ShowValidationError("Name already exists.");
                 return;
             }
-            
+
+            if (txtName.Text.Trim().Length > 100)
+            {
+                ShowValidationError("The name length cannot exceed 100 characters.");
+                return;
+            }
+
+
             Form1._model.root.NameSpaceObjects.FirstOrDefault().apiSite.Where(x => x.name == _name).FirstOrDefault().apiEnvironment.Add(new apiEnvironment { name = txtName.Text.Trim() });
             ((Form1)Application.OpenForms["Form1"]).showMessage("Environment created successfully");
             ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();

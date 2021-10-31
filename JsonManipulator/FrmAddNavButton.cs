@@ -38,6 +38,13 @@ namespace JsonManipulator
                 return;
             }
 
+            if (txtName.Text.Trim().Length > 100)
+            {
+                ShowValidationError("The name length cannot exceed 100 characters.");
+                return;
+            }
+
+
 
             Models.ObjectMap destinationOwnerObject = Utils.GetOwnerObject(txtButtonDestination.Text);
 

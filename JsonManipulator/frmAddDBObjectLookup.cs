@@ -48,6 +48,13 @@ namespace JsonManipulator
                 ShowValidationError("Name already exists.");
                 return;
             }
+
+            if (txtName.Text.Trim().Length > 100)
+            {
+                ShowValidationError("The name length cannot exceed 100 characters.");
+                return;
+            }
+
             ObjectMap objectMap = new ObjectMap {
                 name = txtName.Text.Trim(),
                 isLookup = "true",
@@ -60,6 +67,7 @@ namespace JsonManipulator
             property.isFK = "true";
             property.isFKLookup = "true";
             property.isNotPublishedToSubscriptions = "true";
+            property.isFKConstraintSuppressed = "false";
             property.dataType = "int"; 
 
 

@@ -38,6 +38,13 @@ namespace JsonManipulator
                 ShowValidationError("Name already exists.");
                 return;
             }
+
+            if (txtName.Text.Trim().Length > 100)
+            {
+                ShowValidationError("The name length cannot exceed 100 characters.");
+                return;
+            }
+
             Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportParam.Add(new reportParam {name = txtName.Text.Trim() });
             ((Form1)Application.OpenForms["Form1"]).showMessage("Filter created successfully");
             ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();

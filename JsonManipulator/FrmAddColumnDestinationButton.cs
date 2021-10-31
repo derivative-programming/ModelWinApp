@@ -49,6 +49,13 @@ namespace JsonManipulator
                 ShowValidationError("Please select a destination.");
                 return;
             }
+
+            if (txtName.Text.Trim().Length > 100)
+            {
+                ShowValidationError("The name length cannot exceed 100 characters.");
+                return;
+            }
+
             Models.reportColumn reportColumn = new reportColumn();
             reportColumn.name = txtName.Text.Trim();
             reportColumn.isButton = "true";

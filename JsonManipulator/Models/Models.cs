@@ -189,8 +189,8 @@ namespace JsonManipulator.Models
         //[JsonProperty("isFKNonLookupIncludedInXMLFunction")]
         //public string isFKNonLookupIncludedInXMLFunction { get; set; }
 
-        [JsonProperty("IsFKConstraintSuppressed")]
-        public string IsFKConstraintSuppressed { get; set; }
+        [JsonProperty("isFKConstraintSuppressed")]
+        public string isFKConstraintSuppressed { get; set; }
 
         [JsonProperty("fKObjectName")]
         public string fKObjectName { get; set; }

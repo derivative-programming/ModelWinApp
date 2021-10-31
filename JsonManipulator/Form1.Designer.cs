@@ -410,7 +410,7 @@ namespace JsonManipulator
             // codeToolStripMenuItem
             // 
             this.codeToolStripMenuItem.Name = "codeToolStripMenuItem";
-            this.codeToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
+            this.codeToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.codeToolStripMenuItem.Text = "Code";
             this.codeToolStripMenuItem.Click += new System.EventHandler(this.codeToolStripMenuItem_Click);
             // 
@@ -421,28 +421,28 @@ namespace JsonManipulator
             this.adminUserToolStripMenuItem1,
             this.configUserToolStripMenuItem1});
             this.demoToolStripMenuItem1.Name = "demoToolStripMenuItem1";
-            this.demoToolStripMenuItem1.Size = new System.Drawing.Size(156, 26);
+            this.demoToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.demoToolStripMenuItem1.Text = "Demo";
             this.demoToolStripMenuItem1.Click += new System.EventHandler(this.demoToolStripMenuItem1_Click);
             // 
             // endUserToolStripMenuItem1
             // 
             this.endUserToolStripMenuItem1.Name = "endUserToolStripMenuItem1";
-            this.endUserToolStripMenuItem1.Size = new System.Drawing.Size(169, 26);
+            this.endUserToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.endUserToolStripMenuItem1.Text = "End User";
             this.endUserToolStripMenuItem1.Click += new System.EventHandler(this.endUserToolStripMenuItem1_Click);
             // 
             // adminUserToolStripMenuItem1
             // 
             this.adminUserToolStripMenuItem1.Name = "adminUserToolStripMenuItem1";
-            this.adminUserToolStripMenuItem1.Size = new System.Drawing.Size(169, 26);
+            this.adminUserToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.adminUserToolStripMenuItem1.Text = "Admin User";
             this.adminUserToolStripMenuItem1.Click += new System.EventHandler(this.adminUserToolStripMenuItem1_Click);
             // 
             // configUserToolStripMenuItem1
             // 
             this.configUserToolStripMenuItem1.Name = "configUserToolStripMenuItem1";
-            this.configUserToolStripMenuItem1.Size = new System.Drawing.Size(169, 26);
+            this.configUserToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.configUserToolStripMenuItem1.Text = "Config User";
             this.configUserToolStripMenuItem1.Click += new System.EventHandler(this.configUserToolStripMenuItem1_Click);
             // 
@@ -454,7 +454,7 @@ namespace JsonManipulator
             this.pageFlowToolStripMenuItem,
             this.workflowsToolStripMenuItem});
             this.diagramsToolStripMenuItem.Name = "diagramsToolStripMenuItem";
-            this.diagramsToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
+            this.diagramsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.diagramsToolStripMenuItem.Text = "Diagrams";
             // 
             // apiToolStripMenuItem2

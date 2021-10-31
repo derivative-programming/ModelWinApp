@@ -37,6 +37,13 @@ namespace JsonManipulator
                 ShowValidationError("Name already exists.");
                 return;
             }
+
+            if (txtName.Text.Trim().Length > 100)
+            {
+                ShowValidationError("The name length cannot exceed 100 characters.");
+                return;
+            }
+
             Models.apiSite apiSite = new apiSite
             {
                 name = txtName.Text.Trim()
