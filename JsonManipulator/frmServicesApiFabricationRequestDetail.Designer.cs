@@ -98,7 +98,7 @@ namespace JsonManipulator
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 279);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(197, 17);
+            this.label1.Size = new System.Drawing.Size(147, 13);
             this.label1.TabIndex = 11;
             this.label1.Text = "Fabrication Destination Folder";
             // 
@@ -106,7 +106,7 @@ namespace JsonManipulator
             // 
             this.txtFabricationFolder.Location = new System.Drawing.Point(15, 296);
             this.txtFabricationFolder.Name = "txtFabricationFolder";
-            this.txtFabricationFolder.Size = new System.Drawing.Size(205, 22);
+            this.txtFabricationFolder.Size = new System.Drawing.Size(205, 20);
             this.txtFabricationFolder.TabIndex = 12;
             // 
             // button1
@@ -143,7 +143,7 @@ namespace JsonManipulator
             // 
             this.txtCodeDistributionScript.Location = new System.Drawing.Point(15, 336);
             this.txtCodeDistributionScript.Name = "txtCodeDistributionScript";
-            this.txtCodeDistributionScript.Size = new System.Drawing.Size(205, 22);
+            this.txtCodeDistributionScript.Size = new System.Drawing.Size(205, 20);
             this.txtCodeDistributionScript.TabIndex = 16;
             // 
             // label2
@@ -151,13 +151,14 @@ namespace JsonManipulator
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 319);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(156, 17);
+            this.label2.Size = new System.Drawing.Size(117, 13);
             this.label2.TabIndex = 15;
             this.label2.Text = "Code Distribution Script";
             // 
             // btnDistribute
             // 
             this.btnDistribute.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnDistribute.Enabled = false;
             this.btnDistribute.Location = new System.Drawing.Point(12, 364);
             this.btnDistribute.Name = "btnDistribute";
             this.btnDistribute.Size = new System.Drawing.Size(103, 24);

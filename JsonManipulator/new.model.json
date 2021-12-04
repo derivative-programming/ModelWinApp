@@ -6,7 +6,106 @@
     "projectVersionNumber": "1.0",
     "namespace": [
       {
-        "name": "Code"
+        "name": "Code",
+        "object": [
+          {
+            "name": "Pac",
+            "codeDescription": "Primary App Config.",
+            "isLookup": "true",
+            "prop": [
+              {
+                "name": "Description",
+                "codeDescription": "Pac Description",
+                "sqlServerDBDataType": "nvarchar",
+                "sqlServerDBDataTypeSize": "500",
+                "isFK": "false",
+                "isEncrypted": "false",
+                "forceDBColumnIndex": "false",
+                "isFKLookup": "false",
+                "isNotPublishedToSubscriptions": "false",
+                "fKObjectName": "",
+                "fKObjectPropertyName": "",
+                "isQueryByAvailable": "false",
+                "labelText": "Description"
+              },
+              {
+                "name": "DisplayOrder",
+                "codeDescription": "Pac Display Order",
+                "sqlServerDBDataType": "int",
+                "isFK": "false",
+                "isEncrypted": "false",
+                "forceDBColumnIndex": "false",
+                "isFKLookup": "false",
+                "isNotPublishedToSubscriptions": "false",
+                "fKObjectName": "",
+                "fKObjectPropertyName": "",
+                "isQueryByAvailable": "false",
+                "labelText": "Display Order"
+              },
+              {
+                "name": "IsActive",
+                "codeDescription": "Pac Is Active",
+                "sqlServerDBDataType": "bit",
+                "isFK": "false",
+                "isEncrypted": "false",
+                "forceDBColumnIndex": "false",
+                "isFKLookup": "false",
+                "isNotPublishedToSubscriptions": "false",
+                "fKObjectName": "",
+                "fKObjectPropertyName": "",
+                "isQueryByAvailable": "false",
+                "labelText": "Is Active"
+              },
+              {
+                "name": "LookupEnumName",
+                "codeDescription": "Pac Lookup Enum Name",
+                "sqlServerDBDataType": "nvarchar",
+                "sqlServerDBDataTypeSize": "50",
+                "isFK": "false",
+                "isEncrypted": "false",
+                "forceDBColumnIndex": "false",
+                "isFKLookup": "false",
+                "isNotPublishedToSubscriptions": "false",
+                "fKObjectName": "",
+                "fKObjectPropertyName": "",
+                "isQueryByAvailable": "false",
+                "labelText": "Lookup Enum Name"
+              },
+              {
+                "name": "Name",
+                "codeDescription": "Pac Name",
+                "sqlServerDBDataType": "nvarchar",
+                "sqlServerDBDataTypeSize": "100",
+                "isFK": "false",
+                "isEncrypted": "false",
+                "forceDBColumnIndex": "false",
+                "isFKLookup": "false",
+                "isNotPublishedToSubscriptions": "false",
+                "fKObjectName": "",
+                "fKObjectPropertyName": "",
+                "isQueryByAvailable": "false",
+                "labelText": "Name"
+              }
+            ],
+            "propSubscription": [],
+            "fetch": [],
+            "query": [],
+            "modelPkg": [], 
+            "lookupItem": [
+              {
+                "name": "Unknown",
+                "displayName": "",
+                "description": "",
+                "isActive": "true"
+              }
+            ],
+            "report": [],
+            "objectWorkflow": [],
+            "isSoftDeleteUsed": "false",
+            "cacheAllRecs": "false",
+            "cacheIndividualRecs": "false"
+          }
+        ]
       }
     ]
   }

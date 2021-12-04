@@ -1091,7 +1091,7 @@ namespace JsonManipulator
 
         public static string ConvertPascalToSpaced(string value)
         {
-            return Regex.Replace(value, "(\\B[A-Z])", " $1"); 
+            return Regex.Replace(value, "(\\B[A-Z])", " $1").Replace("_", " ").Replace("  ", " "); 
         }
 
         public static string GetProjectName()
