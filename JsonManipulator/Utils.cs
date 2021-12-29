@@ -317,7 +317,7 @@ namespace JsonManipulator
             result.Add("apiVersion".ToLower());
             result.Add("isValidationMissesLogged".ToLower());
             result.Add("suppressFillObjLookupTableScripts".ToLower());
-            result.Add("isDatabaseAuditColumnsCreated".ToLower());
+           // result.Add("isDatabaseAuditColumnsCreated".ToLower());
 
             for (int i = 0; i < result.Count; i++)
             {
