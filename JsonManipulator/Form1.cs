@@ -1317,6 +1317,12 @@ namespace JsonManipulator
             frmAddDynaFlow form = new frmAddDynaFlow();
             form.ShowDialog();
         }
+
+        private void navigationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReportNavigation frmReportNavigation = new frmReportNavigation();
+            frmReportNavigation.ShowDialog();
+        }
     }
     
 }

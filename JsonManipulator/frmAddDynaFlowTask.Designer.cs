@@ -41,7 +41,7 @@ namespace JsonManipulator
             this.lblName.AutoSize = true;
             this.lblName.Location = new System.Drawing.Point(3, 9);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(35, 13);
+            this.lblName.Size = new System.Drawing.Size(45, 17);
             this.lblName.TabIndex = 0;
             this.lblName.Text = "&Name";
             // 
@@ -49,12 +49,11 @@ namespace JsonManipulator
             // 
             this.txtName.Location = new System.Drawing.Point(3, 25);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(236, 20);
+            this.txtName.Size = new System.Drawing.Size(236, 22);
             this.txtName.TabIndex = 3;
             // 
             // btnAccept
             // 
-            this.btnAccept.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnAccept.Location = new System.Drawing.Point(83, 105);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
