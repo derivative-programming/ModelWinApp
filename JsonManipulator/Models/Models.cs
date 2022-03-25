@@ -701,6 +701,8 @@ namespace JsonManipulator.Models
         public string byObjectNamespaceName { get; set; }
         [JsonProperty("includeInByObjectNameXMLFunction")]
         public string includeInByObjectNameXMLFunction { get; set; }
+        [JsonProperty("byPropName")]
+        public string byPropName { get; set; }
     }
 
 
