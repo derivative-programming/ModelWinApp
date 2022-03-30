@@ -468,7 +468,7 @@ namespace JsonManipulator
             //result.Add("requiredErrorText".ToLower());
             //result.Add("isSecured".ToLower());
             //result.Add("isFK".ToLower());
-            result.Add("fKObjectName".ToLower());
+            //result.Add("fKObjectName".ToLower());
             result.Add("fKObjectQueryName".ToLower());
             //result.Add("isFKLookup".ToLower());
             //result.Add("isFKList".ToLower());
