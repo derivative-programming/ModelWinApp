@@ -39,12 +39,14 @@ namespace JsonManipulator
             this.chkReportFilter = new System.Windows.Forms.CheckBox();
             this.chkReportButton = new System.Windows.Forms.CheckBox();
             this.chkObjWfButton = new System.Windows.Forms.CheckBox();
+            this.chkRoleRequired = new System.Windows.Forms.CheckBox();
+            this.chkLayoutName = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(237, 121);
+            this.btnCancel.Location = new System.Drawing.Point(237, 150);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 11;
@@ -54,7 +56,7 @@ namespace JsonManipulator
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(156, 121);
+            this.btnAccept.Location = new System.Drawing.Point(156, 150);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
             this.btnAccept.TabIndex = 10;
@@ -67,7 +69,7 @@ namespace JsonManipulator
             this.chkName.AutoSize = true;
             this.chkName.Location = new System.Drawing.Point(13, 13);
             this.chkName.Name = "chkName";
-            this.chkName.Size = new System.Drawing.Size(67, 21);
+            this.chkName.Size = new System.Drawing.Size(54, 17);
             this.chkName.TabIndex = 12;
             this.chkName.Text = "Name";
             this.chkName.UseVisualStyleBackColor = true;
@@ -78,7 +80,7 @@ namespace JsonManipulator
             this.chkObjProp.AutoSize = true;
             this.chkObjProp.Location = new System.Drawing.Point(156, 94);
             this.chkObjProp.Name = "chkObjProp";
-            this.chkObjProp.Size = new System.Drawing.Size(128, 21);
+            this.chkObjProp.Size = new System.Drawing.Size(100, 17);
             this.chkObjProp.TabIndex = 13;
             this.chkObjProp.Text = "DB Object Prop";
             this.chkObjProp.UseVisualStyleBackColor = true;
@@ -89,7 +91,7 @@ namespace JsonManipulator
             this.chkObjWfOutputVar.AutoSize = true;
             this.chkObjWfOutputVar.Location = new System.Drawing.Point(156, 13);
             this.chkObjWfOutputVar.Name = "chkObjWfOutputVar";
-            this.chkObjWfOutputVar.Size = new System.Drawing.Size(146, 21);
+            this.chkObjWfOutputVar.Size = new System.Drawing.Size(113, 17);
             this.chkObjWfOutputVar.TabIndex = 14;
             this.chkObjWfOutputVar.Text = "ObjWF Output Var";
             this.chkObjWfOutputVar.UseVisualStyleBackColor = true;
@@ -99,7 +101,7 @@ namespace JsonManipulator
             this.chkObjWfParam.AutoSize = true;
             this.chkObjWfParam.Location = new System.Drawing.Point(156, 67);
             this.chkObjWfParam.Name = "chkObjWfParam";
-            this.chkObjWfParam.Size = new System.Drawing.Size(118, 21);
+            this.chkObjWfParam.Size = new System.Drawing.Size(92, 17);
             this.chkObjWfParam.TabIndex = 15;
             this.chkObjWfParam.Text = "ObjWF Param";
             this.chkObjWfParam.UseVisualStyleBackColor = true;
@@ -109,7 +111,7 @@ namespace JsonManipulator
             this.chkReportColumn.AutoSize = true;
             this.chkReportColumn.Location = new System.Drawing.Point(12, 67);
             this.chkReportColumn.Name = "chkReportColumn";
-            this.chkReportColumn.Size = new System.Drawing.Size(124, 21);
+            this.chkReportColumn.Size = new System.Drawing.Size(96, 17);
             this.chkReportColumn.TabIndex = 16;
             this.chkReportColumn.Text = "Report Column";
             this.chkReportColumn.UseVisualStyleBackColor = true;
@@ -119,7 +121,7 @@ namespace JsonManipulator
             this.chkReportFilter.AutoSize = true;
             this.chkReportFilter.Location = new System.Drawing.Point(12, 40);
             this.chkReportFilter.Name = "chkReportFilter";
-            this.chkReportFilter.Size = new System.Drawing.Size(108, 21);
+            this.chkReportFilter.Size = new System.Drawing.Size(83, 17);
             this.chkReportFilter.TabIndex = 17;
             this.chkReportFilter.Text = "Report Filter";
             this.chkReportFilter.UseVisualStyleBackColor = true;
@@ -129,7 +131,7 @@ namespace JsonManipulator
             this.chkReportButton.AutoSize = true;
             this.chkReportButton.Location = new System.Drawing.Point(12, 94);
             this.chkReportButton.Name = "chkReportButton";
-            this.chkReportButton.Size = new System.Drawing.Size(118, 21);
+            this.chkReportButton.Size = new System.Drawing.Size(92, 17);
             this.chkReportButton.TabIndex = 20;
             this.chkReportButton.Text = "Report Button";
             this.chkReportButton.UseVisualStyleBackColor = true;
@@ -139,18 +141,40 @@ namespace JsonManipulator
             this.chkObjWfButton.AutoSize = true;
             this.chkObjWfButton.Location = new System.Drawing.Point(156, 40);
             this.chkObjWfButton.Name = "chkObjWfButton";
-            this.chkObjWfButton.Size = new System.Drawing.Size(118, 21);
+            this.chkObjWfButton.Size = new System.Drawing.Size(93, 17);
             this.chkObjWfButton.TabIndex = 21;
             this.chkObjWfButton.Text = "ObjWF Button";
             this.chkObjWfButton.UseVisualStyleBackColor = true;
+            // 
+            // chkRoleRequired
+            // 
+            this.chkRoleRequired.AutoSize = true;
+            this.chkRoleRequired.Location = new System.Drawing.Point(12, 117);
+            this.chkRoleRequired.Name = "chkRoleRequired";
+            this.chkRoleRequired.Size = new System.Drawing.Size(94, 17);
+            this.chkRoleRequired.TabIndex = 22;
+            this.chkRoleRequired.Text = "Role Required";
+            this.chkRoleRequired.UseVisualStyleBackColor = true;
+            // 
+            // chkLayoutName
+            // 
+            this.chkLayoutName.AutoSize = true;
+            this.chkLayoutName.Location = new System.Drawing.Point(12, 140);
+            this.chkLayoutName.Name = "chkLayoutName";
+            this.chkLayoutName.Size = new System.Drawing.Size(89, 17);
+            this.chkLayoutName.TabIndex = 23;
+            this.chkLayoutName.Text = "Layout Name";
+            this.chkLayoutName.UseVisualStyleBackColor = true;
             // 
             // FrmSearchOptions
             // 
             this.AcceptButton = this.btnAccept;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(324, 155);
+            this.ClientSize = new System.Drawing.Size(324, 185);
             this.ControlBox = false;
+            this.Controls.Add(this.chkLayoutName);
+            this.Controls.Add(this.chkRoleRequired);
             this.Controls.Add(this.chkObjWfButton);
             this.Controls.Add(this.chkReportButton);
             this.Controls.Add(this.chkReportFilter);
@@ -184,5 +208,7 @@ namespace JsonManipulator
         private System.Windows.Forms.CheckBox chkReportFilter;
         private System.Windows.Forms.CheckBox chkReportButton;
         private System.Windows.Forms.CheckBox chkObjWfButton;
+        private System.Windows.Forms.CheckBox chkRoleRequired;
+        private System.Windows.Forms.CheckBox chkLayoutName;
     }
 }

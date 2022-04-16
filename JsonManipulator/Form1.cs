@@ -32,6 +32,8 @@ namespace JsonManipulator
         private bool _searchObjWFButtons = false;
         private bool _searchObjWFOutputVars = false;
         private bool _searchDBObjProps = false;
+        private bool _searchRoleRequired = false;
+        private bool _searchLayoutName = false;
 
         public Form1(string initialModelPath, string fabricationOutputFolderInit)
         {
@@ -177,8 +179,26 @@ namespace JsonManipulator
                             !objWF.Name.Trim().ToLower().Contains(filter.Trim().ToLower()))
                             continue;
 
+                        if (this._searchRoleRequired &&
+                            objWF.isPage == "false")
+                            continue;
+
+                        if (this._searchRoleRequired && 
+                            objWF.RoleRequired != null &&
+                            !objWF.RoleRequired.Trim().ToLower().Contains(filter.Trim().ToLower()))
+                            continue;
+
+                        if (this._searchLayoutName &&
+                            objWF.isPage == "false")
+                            continue;
+
+                        if (this._searchLayoutName && 
+                            objWF.layoutName != null &&
+                            !objWF.layoutName.Trim().ToLower().Contains(filter.Trim().ToLower()))
+                            continue;
+
                         if (this._searchObjWFButtons &&
-                            objWF.objectWorkflowButton.Where(x => x.buttonText.ToLower().Contains(filter.Trim().ToLower())).ToList().Count == 0)
+                            objWF.objectWorkflowButton.Where(x => x.buttonText != null && x.buttonText.ToLower().Contains(filter.Trim().ToLower())).ToList().Count == 0)
                             continue;
 
                         if (this._searchObjWFOutputVars &&
@@ -192,7 +212,9 @@ namespace JsonManipulator
                         if (!this._searchNames &&
                             !this._searchObjWFButtons &&
                             !this._searchObjWFOutputVars &&
-                            !this._searchObjWFParams)
+                            !this._searchObjWFParams &&
+                            !this._searchRoleRequired &&
+                            !this._searchLayoutName)
                             continue;
 
                         PopulateTree(objWF); 
@@ -205,6 +227,24 @@ namespace JsonManipulator
 
                         if (this._searchNames &&
                             !rpt.name.Trim().ToLower().Contains(filter.Trim().ToLower()))
+                            continue;
+
+                        if (this._searchRoleRequired && 
+                            rpt.isPage == "false")
+                            continue;
+
+                        if (this._searchRoleRequired &&
+                            rpt.RoleRequired != null && 
+                            !rpt.RoleRequired.Trim().ToLower().Contains(filter.Trim().ToLower()))
+                            continue;
+
+                        if (this._searchLayoutName && 
+                            rpt.isPage == "false")
+                            continue;
+
+                        if (this._searchLayoutName &&
+                            rpt.layoutName != null && 
+                            !rpt.layoutName.Trim().ToLower().Contains(filter.Trim().ToLower()))
                             continue;
 
                         if (this._searchReportButtons &&
@@ -222,7 +262,9 @@ namespace JsonManipulator
                         if (!this._searchNames &&
                             !this._searchReportButtons &&
                             !this._searchReportColumns &&
-                            !this._searchReportFilters)
+                            !this._searchReportFilters &&
+                            !this._searchRoleRequired &&
+                            !this._searchLayoutName)
                             continue;
 
                         PopulateTree(rpt); 
@@ -1406,7 +1448,9 @@ namespace JsonManipulator
                 this._searchObjWFParams,
                 this._searchObjWFButtons,
                 this._searchObjWFOutputVars,
-                this._searchDBObjProps))
+                this._searchDBObjProps,
+                this._searchRoleRequired,
+                this._searchLayoutName))
             {
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK)
@@ -1419,6 +1463,8 @@ namespace JsonManipulator
                     this._searchObjWFButtons = form.SearchObjWFButtons;
                     this._searchObjWFOutputVars = form.SearchObjWFOutputVars;
                     this._searchDBObjProps = form.SearchDBObjProps;
+                    this._searchRoleRequired = form.SearchRoleRequired;
+                    this._searchLayoutName = form.SearchLayoutName;
                 }
 
             }

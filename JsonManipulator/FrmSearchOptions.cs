@@ -25,6 +25,8 @@ namespace JsonManipulator
         public bool SearchObjWFButtons { get; set; }
         public bool SearchObjWFOutputVars { get; set; }
         public bool SearchDBObjProps { get; set; }
+        public bool SearchRoleRequired { get; set; }
+        public bool SearchLayoutName { get; set; }
 
         public FrmSearchOptions( 
             bool searchNames,
@@ -34,7 +36,9 @@ namespace JsonManipulator
             bool searchObjWFParams,
             bool searchObjWFButtons,
             bool searchObjWFOutputVars,
-            bool searchDBObjProps)
+            bool searchDBObjProps,
+            bool searchRoleRequired,
+            bool searchLayoutName)
         {
             InitializeComponent();
 
@@ -46,6 +50,8 @@ namespace JsonManipulator
             this.SearchReportButtons = searchReportButtons;
             this.SearchReportColumns = searchReportColumns;
             this.SearchReportFilters = searchReportFilters;
+            this.SearchRoleRequired = searchRoleRequired;
+            this.SearchLayoutName = searchLayoutName;
 
             this.chkName.Checked = this.SearchNames;
             this.chkObjProp.Checked = this.SearchDBObjProps;
@@ -55,6 +61,8 @@ namespace JsonManipulator
             this.chkReportButton.Checked = this.SearchReportButtons;
             this.chkReportColumn.Checked = this.SearchReportColumns;
             this.chkReportFilter.Checked = this.SearchReportFilters;
+            this.chkRoleRequired.Checked = this.SearchRoleRequired;
+            this.chkLayoutName.Checked = this.SearchLayoutName;
 
         }
          
@@ -70,6 +78,8 @@ namespace JsonManipulator
             this.SearchReportButtons = this.chkReportButton.Checked;
             this.SearchReportColumns = this.chkReportColumn.Checked;
             this.SearchReportFilters = this.chkReportFilter.Checked;
+            this.SearchRoleRequired = this.chkRoleRequired.Checked;
+            this.SearchLayoutName = this.chkLayoutName.Checked;
 
 
         }
