@@ -701,10 +701,11 @@ namespace JsonManipulator
             result.Add("isColumnSumMetricAvailable".ToLower());
             result.Add("isSummaryDisplayed".ToLower());
             result.Add("isConditionallyDisplayed".ToLower());
+           // result.Add("isFilterAvailable".ToLower());
             //result.Add("conditionalSqlLogic".ToLower());
             //result.Add("isUnixEpochDateTime".ToLower());
-           // result.Add("isNavURL".ToLower());
-           // result.Add("NavURLLinkText".ToLower());
+            // result.Add("isNavURL".ToLower());
+            // result.Add("NavURLLinkText".ToLower());
             result.Add("isButtonClickedOnRowClick".ToLower());
             //result.Add("isMultiSelectColumn".ToLower());
             result.Add("isForcedIntoExport".ToLower());

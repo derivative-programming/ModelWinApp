@@ -837,5 +837,18 @@ namespace JsonManipulator
         {
             ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
         }
+
+        private void btnCopyList_Click(object sender, EventArgs e)
+        {
+            string itemList = string.Empty;
+
+
+            foreach (var column in _rpt.reportColumn)
+            {
+                itemList = itemList + column.name + Environment.NewLine;
+            }
+
+            Clipboard.SetText(itemList);
+        }
     }
 }

@@ -502,6 +502,7 @@ namespace JsonManipulator.Models
         public String isHtml { get; set; }
         public String isColumnSumMetricAvailable { get; set; }
         public String isSummaryDisplayed { get; set; }
+        public String isFilterAvailable { get; set; }
         public String isConditionallyDisplayed { get; set; }
         [JsonProperty("conditionalSqlLogic")]
         public String booleanCalculationSqlLogic { get; set; }
