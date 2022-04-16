@@ -24,6 +24,15 @@ namespace JsonManipulator
         private bool _displayModelFeaturesTab = false;
         private bool _displayLookupValuesTab = false;
 
+        private bool _searchNames = true;
+        private bool _searchReportFilters = false;
+        private bool _searchReportColumns = false;
+        private bool _searchReportButtons = false;
+        private bool _searchObjWFParams = false;
+        private bool _searchObjWFButtons = false;
+        private bool _searchObjWFOutputVars = false;
+        private bool _searchDBObjProps = false;
+
         public Form1(string initialModelPath, string fabricationOutputFolderInit)
         {
             InitializeComponent();
@@ -127,8 +136,20 @@ namespace JsonManipulator
             if (nameSpaceObject.ObjectMap == null)
                 return;
 
-            foreach (var dbObj in nameSpaceObject.ObjectMap.Where(x => x.name.ToLower().Contains(filter.Trim().ToLower())))
+            foreach (ObjectMap dbObj in nameSpaceObject.ObjectMap)
             {
+                if (this._searchNames &&
+                    !dbObj.name.Trim().ToLower().Contains(filter.Trim().ToLower()))
+                    continue;
+
+                if (this._searchDBObjProps &&
+                    dbObj.property.Where(x => x.name.ToLower().Contains(filter.Trim().ToLower())).ToList().Count == 0)
+                    continue;
+
+                if (!this._searchNames &&
+                    !this._searchDBObjProps)
+                    continue;
+
                 PopulateTree(dbObj); 
             }
         }
@@ -149,15 +170,61 @@ namespace JsonManipulator
             {
                 if(dbObj.objectWorkflow !=null)
                 {
-                    foreach (var objWF in dbObj.objectWorkflow.Where(x=>x.Name.Trim().ToLower().Contains(filter.Trim().ToLower())))
+                    foreach (objectWorkflow objWF in dbObj.objectWorkflow)
                     {
+
+                        if (this._searchNames &&
+                            !objWF.Name.Trim().ToLower().Contains(filter.Trim().ToLower()))
+                            continue;
+
+                        if (this._searchObjWFButtons &&
+                            objWF.objectWorkflowButton.Where(x => x.buttonText.ToLower().Contains(filter.Trim().ToLower())).ToList().Count == 0)
+                            continue;
+
+                        if (this._searchObjWFOutputVars &&
+                            objWF.objectWorkflowOutputVar.Where(x => x.name.ToLower().Contains(filter.Trim().ToLower())).ToList().Count == 0)
+                            continue;
+
+                        if (this._searchObjWFParams &&
+                            objWF.objectWorkflowParam.Where(x => x.name.ToLower().Contains(filter.Trim().ToLower())).ToList().Count == 0)
+                            continue;
+
+                        if (!this._searchNames &&
+                            !this._searchObjWFButtons &&
+                            !this._searchObjWFOutputVars &&
+                            !this._searchObjWFParams)
+                            continue;
+
                         PopulateTree(objWF); 
                     }
                 }
                 if(dbObj.report != null)
                 {
-                    foreach (var rpt in dbObj.report.Where(x => x.name.Trim().ToLower().Contains(filter.Trim().ToLower())))
+                    foreach (Report rpt in dbObj.report)
                     {
+
+                        if (this._searchNames &&
+                            !rpt.name.Trim().ToLower().Contains(filter.Trim().ToLower()))
+                            continue;
+
+                        if (this._searchReportButtons &&
+                            rpt.reportButton.Where(x => x.buttonName.ToLower().Contains(filter.Trim().ToLower())).ToList().Count == 0)
+                            continue;
+
+                        if (this._searchReportColumns &&
+                            rpt.reportColumn.Where(x => x.name.ToLower().Contains(filter.Trim().ToLower())).ToList().Count == 0)
+                            continue;
+
+                        if (this._searchReportFilters &&
+                            rpt.reportParam.Where(x => x.name.ToLower().Contains(filter.Trim().ToLower())).ToList().Count == 0)
+                            continue;
+
+                        if (!this._searchNames &&
+                            !this._searchReportButtons &&
+                            !this._searchReportColumns &&
+                            !this._searchReportFilters)
+                            continue;
+
                         PopulateTree(rpt); 
                     }
                 }
@@ -1322,6 +1389,39 @@ namespace JsonManipulator
         {
             frmReportNavigation frmReportNavigation = new frmReportNavigation();
             frmReportNavigation.ShowDialog();
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (var form = new FrmSearchOptions(
+                this._searchNames,
+                this._searchReportFilters,
+                this._searchReportColumns,
+                this._searchReportButtons,
+                this._searchObjWFParams,
+                this._searchObjWFButtons,
+                this._searchObjWFOutputVars,
+                this._searchDBObjProps))
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    this._searchNames = form.SearchNames;
+                    this._searchReportFilters = form.SearchReportFilters;
+                    this._searchReportColumns = form.SearchReportColumns;
+                    this._searchReportButtons = form.SearchReportButtons;
+                    this._searchObjWFParams = form.SearchObjWFParams;
+                    this._searchObjWFButtons = form.SearchObjWFButtons;
+                    this._searchObjWFOutputVars = form.SearchObjWFOutputVars;
+                    this._searchDBObjProps = form.SearchDBObjProps;
+                }
+
+            }
         }
     }
     

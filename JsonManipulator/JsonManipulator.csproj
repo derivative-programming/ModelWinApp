@@ -76,6 +76,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\Enums.cs" />
+    <Compile Include="FrmSearchOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSearchOptions.Designer.cs">
+      <DependentUpon>FrmSearchOptions.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmAddDynaFlow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -366,6 +372,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils.cs" />
+    <EmbeddedResource Include="FrmSearchOptions.resx">
+      <DependentUpon>FrmSearchOptions.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmAddDynaFlow.resx">
       <DependentUpon>frmAddDynaFlow.cs</DependentUpon>
     </EmbeddedResource>
