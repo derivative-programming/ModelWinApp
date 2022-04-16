@@ -281,6 +281,60 @@ namespace JsonManipulator
             return result;
         }
 
+
+        public static List<string> GetObjectPropList(string targetObjectName, bool includeLineage)
+        {
+            List<string> result = new List<string>();
+
+            NameSpaceObject nameSpaceObject = Form1._model.root.NameSpaceObjects.FirstOrDefault();
+
+            string nextObjectName = targetObjectName;
+
+            bool done = false;
+            while (!done)
+            {
+                bool itemAdded = false;
+                foreach (ObjectMap dbObject in nameSpaceObject.ObjectMap)
+                {
+                    if (!dbObject.name.Equals(nextObjectName, StringComparison.OrdinalIgnoreCase))
+                        continue;
+                    result.Add(dbObject.name + ".Code");
+                    result.Add(dbObject.name + "." + dbObject.name + "ID");
+                    foreach (property prop in dbObject.property)
+                    {
+                        result.Add(dbObject.name + "." + prop.name);
+                        if(prop.isFKLookup == "true" && !prop.fKObjectName.Equals("pac",StringComparison.OrdinalIgnoreCase))
+                        {
+                            List<string> lookupProps = GetObjectPropList(prop.fKObjectName, false);
+                            for(int i = 0;i < lookupProps.Count;i++)
+                            {
+                                result.Add(dbObject.name + "." + lookupProps[i]);
+                            }
+
+                        }
+                        itemAdded = true;
+                    }
+                    if(includeLineage && dbObject.parentObjectName != null &&
+                        dbObject.parentObjectName.Trim().Length > 0 &&
+                        !dbObject.parentObjectName.Trim().Equals("Tac",StringComparison.OrdinalIgnoreCase) &&
+                        !dbObject.parentObjectName.Trim().Equals("Pac", StringComparison.OrdinalIgnoreCase)
+                        )
+                    {
+                        nextObjectName = dbObject.parentObjectName;
+                    }
+                    else
+                    {
+                        done = true;
+                    }
+                }
+                if(!itemAdded)
+                {
+                    done = true;
+                }
+            }
+            return result;
+        }
+
         public static List<string> GetRoleList()
         {
             List<string> result = new List<string>();

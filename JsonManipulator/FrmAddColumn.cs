@@ -14,11 +14,18 @@ namespace JsonManipulator
     public partial class FrmAddColumn : Form
     {
         string _name, _parent;
+        string targetObjectName = string.Empty;
         public FrmAddColumn(string name, string parent)
         {
             InitializeComponent();
             this._name = name;
             this._parent = parent;
+            targetObjectName = Utils.GetReportModelItem(name).TargetChildObject;
+            if(targetObjectName.Trim().Length == 0)
+            {
+                targetObjectName = _parent;
+            }
+
             if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportColumn == null)
             {
                 Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportColumn = new List<reportColumn>();
@@ -73,7 +80,7 @@ namespace JsonManipulator
 
         private void btnBulk_Click(object sender, EventArgs e)
         {
-            using (var form = new FrmBulkAdd())
+            using (var form = new FrmBulkAdd(this.targetObjectName, true))
             {
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK)

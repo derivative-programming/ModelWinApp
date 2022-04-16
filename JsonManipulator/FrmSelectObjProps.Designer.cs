@@ -1,7 +1,7 @@
 ﻿
 namespace JsonManipulator
 {
-    partial class FrmBulkAdd
+    partial class FrmSelectObjProps
     {
         /// <summary>
         /// Required designer variable.
@@ -31,78 +31,56 @@ namespace JsonManipulator
         {
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAccept = new System.Windows.Forms.Button();
-            this.lblName = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.lbAvailableObjProps = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(270, 216);
+            this.btnCancel.Location = new System.Drawing.Point(237, 169);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 2;
+            this.btnCancel.TabIndex = 11;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.button2_Click);
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(189, 216);
+            this.btnAccept.Location = new System.Drawing.Point(156, 169);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
-            this.btnAccept.TabIndex = 1;
+            this.btnAccept.TabIndex = 10;
             this.btnAccept.Text = "&OK";
             this.btnAccept.UseVisualStyleBackColor = true;
             this.btnAccept.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // lblName
+            // lbAvailableObjProps
             // 
-            this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(12, 9);
-            this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(223, 13);
-            this.lblName.TabIndex = 16;
-            this.lblName.Text = "Please enter a csv list or mulitple lines of items";
+            this.lbAvailableObjProps.FormattingEnabled = true;
+            this.lbAvailableObjProps.Location = new System.Drawing.Point(11, 7);
+            this.lbAvailableObjProps.Name = "lbAvailableObjProps";
+            this.lbAvailableObjProps.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lbAvailableObjProps.Size = new System.Drawing.Size(301, 147);
+            this.lbAvailableObjProps.TabIndex = 12;
             // 
-            // richTextBox1
+            // FrmSelectObjProps
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(15, 26);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(330, 184);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(15, 216);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(155, 23);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "Select Available Obj Props";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // FrmBulkAdd
-            // 
+            this.AcceptButton = this.btnAccept;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(357, 251);
+            this.ClientSize = new System.Drawing.Size(324, 204);
             this.ControlBox = false;
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.lbAvailableObjProps);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAccept);
-            this.Controls.Add(this.lblName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "FrmBulkAdd";
+            this.Name = "FrmSelectObjProps";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Bulk Insert";
-            this.Load += new System.EventHandler(this.FrmAddColumn_Load);
+            this.Text = "Select Obj Props";
+            this.Load += new System.EventHandler(this.FrmSelectObjProps_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -110,8 +88,6 @@ namespace JsonManipulator
 
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnAccept;
-        private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ListBox lbAvailableObjProps;
     }
 }

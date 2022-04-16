@@ -14,10 +14,20 @@ namespace JsonManipulator
     public partial class FrmBulkAdd : Form
     {
         public string ReturnValue { get; set; }
+        private string _targetObjectName = string.Empty;
 
-        public FrmBulkAdd()
+        public FrmBulkAdd(string targetObjectName, bool allowPropSelection)
         {
-            InitializeComponent(); 
+            InitializeComponent();
+            this._targetObjectName = targetObjectName;
+            if(!allowPropSelection)
+            {
+                this.button1.Visible = false;
+            }
+            else
+            { 
+                this.button1.Visible = true;
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -37,6 +47,31 @@ namespace JsonManipulator
         {
              
         }
-         
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (var form = new FrmSelectObjProps(_targetObjectName,true))
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string propList = string.Empty;
+                    for(int i = 0;i < form.results.Count;i++)
+                    {
+                        string item = form.results[i];
+                        if(item.StartsWith(_targetObjectName + "."))
+                        {
+                            item = item.Remove(0, (_targetObjectName + ".").Length);
+                            propList = propList + item + Environment.NewLine;
+                        }
+                        else
+                        {
+                            propList = propList + item.Replace(".","") + Environment.NewLine;
+                        }
+                    }
+                    this.richTextBox1.Text = propList;
+                }
+            }
+        }
     }
 }

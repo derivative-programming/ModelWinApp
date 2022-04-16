@@ -11,10 +11,10 @@ using System.Windows.Forms;
 
 namespace JsonManipulator
 {
-    public partial class frmAddObjProp : Form
+    public partial class frmAddObjLookupProp : Form
     {
         string _name;
-        public frmAddObjProp(string name)
+        public frmAddObjLookupProp(string name)
         {
             InitializeComponent();
             this._name = name;
@@ -27,7 +27,10 @@ namespace JsonManipulator
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            
+            if(!txtName.Text.ToUpper().EndsWith("ID"))
+            {
+                txtName.Text = txtName.Text + "ID";
+            }
 
             txtName.Text = Utils.Capitalize(txtName.Text).Trim();
             if (ItemExists(txtName.Text))
@@ -35,8 +38,9 @@ namespace JsonManipulator
                 ShowValidationError("Name already exists.");
                 return;
             }
+            string fkObjName = txtName.Text.Substring(0, txtName.Text.Length - 2);
 
-            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().property.Add(new property { name =txtName.Text});
+            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().property.Add(new property { name =txtName.Text, isFKLookup = "true", isFK = "true", fKObjectName = fkObjName, fKObjectPropertyName = fkObjName + "ID"});
             ((Form1)Application.OpenForms["Form1"]).showMessage("Property created successfully");
             ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
             ((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]).setPropertieList();
@@ -67,36 +71,10 @@ namespace JsonManipulator
 
         }
 
-        private void frmAddObjProp_Load(object sender, EventArgs e)
+        private void frmAddObjLookupProp_Load(object sender, EventArgs e)
         {
 
             ShowValidationError("");
-        }
-
-        private void btnBulk_Click(object sender, EventArgs e)
-        {
-            using (var form = new FrmBulkAdd(this._name,false))
-            {
-                var result = form.ShowDialog();
-                if (result == DialogResult.OK)
-                {
-                    string val = form.ReturnValue;
-                    List<string> items = new List<string>();
-                    items.AddRange(val.Split("\n,".ToCharArray()));
-                    for(int i = 0;i < items.Count;i++)
-                    {
-                        string itemName = Utils.Capitalize(items[i]).Trim();
-                        if (itemName.Length > 0 && !ItemExists(itemName))
-                        {
-                            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().property.Add(new property { name = itemName });
-                        }
-                    }
-                    ((Form1)Application.OpenForms["Form1"]).showMessage("Property created successfully");
-                    ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
-                    ((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]).setPropertieList();
-                }
-            }
-                this.Close();
-        }
+        } 
     }
 }

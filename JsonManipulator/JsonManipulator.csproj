@@ -76,6 +76,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\Enums.cs" />
+    <Compile Include="FrmSelectObjProps.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSelectObjProps.Designer.cs">
+      <DependentUpon>FrmSelectObjProps.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAddObjLookupProp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddObjLookupProp.Designer.cs">
+      <DependentUpon>frmAddObjLookupProp.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmSearchOptions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -372,6 +384,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils.cs" />
+    <EmbeddedResource Include="FrmSelectObjProps.resx">
+      <DependentUpon>FrmSelectObjProps.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAddObjLookupProp.resx">
+      <DependentUpon>frmAddObjLookupProp.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmSearchOptions.resx">
       <DependentUpon>FrmSearchOptions.cs</DependentUpon>
     </EmbeddedResource>

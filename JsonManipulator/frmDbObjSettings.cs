@@ -672,5 +672,13 @@ namespace JsonManipulator
 
             Clipboard.SetText(itemList);
         }
+
+        private void btnAddLookupProp_Click(object sender, EventArgs e)
+        {
+            string objectname = _map.name;
+            frmAddObjLookupProp frmProp = new frmAddObjLookupProp(objectname);
+            frmProp.ShowDialog();
+
+        }
     }
 }

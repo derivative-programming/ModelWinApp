@@ -65,7 +65,7 @@ namespace JsonManipulator
 
         private void btnBulk_Click(object sender, EventArgs e)
         {
-            using (var form = new FrmBulkAdd())
+            using (var form = new FrmBulkAdd(this._name,false))
             {
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK)
