@@ -585,6 +585,32 @@ namespace JsonManipulator
                         }
                     }
                 }
+                if (propertyName.Equals("SourcePropertyName", StringComparison.OrdinalIgnoreCase))
+                {
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview    
+                    if (lstControl.SelectedItem != null)
+                    {
+                        List<PropertyValue> propertyValues = new List<PropertyValue>();
+                        String controlName = lstControl.SelectedItem.ToString();
+                        List<string> ignoreList = Utils.GetFormParamPropertiesToIgnore();
+                        objectWorkflowParam frmControl = _form.objectWorkflowParam.Where(x => x.name == controlName).FirstOrDefault();
+                        
+                        using (var form = new FrmSelectObjProps(frmControl.sourceObjectName, false))
+                        {
+                            var result = form.ShowDialog();
+                            if (result == DialogResult.OK)
+                            {
+                                string propList = string.Empty; 
+                                if (form.results.Count > 0)
+                                {
+                                    string val = form.results[0].Split(".".ToCharArray())[1];
+                                    setControlData(val, e.RowIndex, e.ColumnIndex);
+                                }
+                            }
+                        }
+                    }
+                    
+                }
 
             }
         }
