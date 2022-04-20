@@ -480,6 +480,22 @@ namespace JsonManipulator
                     l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
                 }
 
+                if (propertyName.Equals("TargetColumnName", StringComparison.OrdinalIgnoreCase))
+                {
+                    using (var form = new FrmSelectRptCols(_rpt.name))
+                    {
+                        var result = form.ShowDialog();
+                        if (result == DialogResult.OK)
+                        {
+                            string propList = string.Empty;
+                            if (form.results.Count > 0)
+                            {
+                                string val = form.results[0];
+                                setFilterData(val, e.RowIndex, e.ColumnIndex);
+                            }
+                        }
+                    }
+                }
             }
         }
         public void setData(string value, int row, int column, string previous = "")
@@ -497,6 +513,12 @@ namespace JsonManipulator
         {
             gridColumns.Rows[row].Cells[column].Value = value;
             gridColumns.RefreshEdit();
+        }
+
+        public void setFilterData(string value, int row, int column)
+        {
+            gridFilters.Rows[row].Cells[column].Value = value;
+            gridFilters.RefreshEdit();
         }
         private void gridButtons_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -634,6 +656,22 @@ namespace JsonManipulator
                         {
                             string val = form.ReturnValue;
                             setColumnData(val, e.RowIndex, e.ColumnIndex);
+                        }
+                    }
+                }
+                if (propertyName.Equals("ConditionalVisiblePropertyName", StringComparison.OrdinalIgnoreCase))
+                {
+                    using (var form = new FrmSelectRptCols(_rpt.name))
+                    {
+                        var result = form.ShowDialog();
+                        if (result == DialogResult.OK)
+                        {
+                            string propList = string.Empty;
+                            if (form.results.Count > 0)
+                            {
+                                string val = form.results[0];
+                                setColumnData(val, e.RowIndex, e.ColumnIndex);
+                            }
                         }
                     }
                 }
