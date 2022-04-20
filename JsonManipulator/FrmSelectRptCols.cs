@@ -29,6 +29,8 @@ namespace JsonManipulator
             results = new List<string>();
             foreach(var item in lbAvailableObjProps.SelectedItems)
             {
+                if (item.Equals("No Value"))
+                    continue;
                 results.Add(item.ToString());
             }
             this.DialogResult = DialogResult.OK;
@@ -48,6 +50,7 @@ namespace JsonManipulator
 
         private void FrmSelectRptCols_Load(object sender, EventArgs e)
         {
+            lbAvailableObjProps.Items.Add("No Value");
             List<string> props = Utils.GetReportColList(this._targetReportName);
             for(int i = 0;i < props.Count;i++)
             {

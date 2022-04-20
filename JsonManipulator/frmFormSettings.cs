@@ -608,6 +608,11 @@ namespace JsonManipulator
                                         string val = form.results[0].Split(".".ToCharArray())[1];
                                         setControlData(val, e.RowIndex, e.ColumnIndex);
                                     }
+                                    else
+                                    {
+                                        setControlData(string.Empty, e.RowIndex, e.ColumnIndex);
+
+                                    }
                                 }
                             }
                         }
@@ -737,6 +742,11 @@ namespace JsonManipulator
                                     {
                                         string val = form.results[0].Split(".".ToCharArray())[1];
                                         setOutputData(val, e.RowIndex, e.ColumnIndex);
+                                    }
+                                    else
+                                    {
+                                        setOutputData(string.Empty, e.RowIndex, e.ColumnIndex);
+
                                     }
                                 }
                             }

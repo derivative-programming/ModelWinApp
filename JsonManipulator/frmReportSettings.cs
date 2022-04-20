@@ -493,6 +493,10 @@ namespace JsonManipulator
                                 string val = form.results[0];
                                 setFilterData(val, e.RowIndex, e.ColumnIndex);
                             }
+                            else
+                            {
+                                setFilterData(string.Empty, e.RowIndex, e.ColumnIndex);
+                            }
                         }
                     }
                 }
@@ -641,6 +645,11 @@ namespace JsonManipulator
                                         string val = form.results[0].Split(".".ToCharArray())[1];
                                         setColumnData(val, e.RowIndex, e.ColumnIndex);
                                     }
+                                    else
+                                    {
+                                        setColumnData(string.Empty, e.RowIndex, e.ColumnIndex);
+
+                                    }
                                 }
                             }
                         }
@@ -671,6 +680,10 @@ namespace JsonManipulator
                             {
                                 string val = form.results[0];
                                 setColumnData(val, e.RowIndex, e.ColumnIndex);
+                            }
+                            else
+                            {
+                                setColumnData(string.Empty, e.RowIndex, e.ColumnIndex);
                             }
                         }
                     }

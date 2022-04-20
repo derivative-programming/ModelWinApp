@@ -31,6 +31,8 @@ namespace JsonManipulator
             results = new List<string>();
             foreach(var item in lbAvailableObjProps.SelectedItems)
             {
+                if (item.Equals("No Value"))
+                    continue;
                 results.Add(item.ToString());
             }
             this.DialogResult = DialogResult.OK;
@@ -51,7 +53,8 @@ namespace JsonManipulator
         private void FrmSelectObjProps_Load(object sender, EventArgs e)
         {
             List<string> props = Utils.GetObjectPropList(this._targetObjectName, this._includeLineage);
-            for(int i = 0;i < props.Count;i++)
+            lbAvailableObjProps.Items.Add("No Value");
+            for (int i = 0;i < props.Count;i++)
             {
                 lbAvailableObjProps.Items.Add(props[i]);
 
