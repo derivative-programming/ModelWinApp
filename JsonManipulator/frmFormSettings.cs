@@ -594,17 +594,20 @@ namespace JsonManipulator
                         String controlName = lstControl.SelectedItem.ToString();
                         List<string> ignoreList = Utils.GetFormParamPropertiesToIgnore();
                         objectWorkflowParam frmControl = _form.objectWorkflowParam.Where(x => x.name == controlName).FirstOrDefault();
-                        
-                        using (var form = new FrmSelectObjProps(frmControl.sourceObjectName, false))
+
+                        if (frmControl.sourceObjectName != null && frmControl.sourceObjectName.Trim().Length > 0)
                         {
-                            var result = form.ShowDialog();
-                            if (result == DialogResult.OK)
+                            using (var form = new FrmSelectObjProps(frmControl.sourceObjectName, false))
                             {
-                                string propList = string.Empty; 
-                                if (form.results.Count > 0)
+                                var result = form.ShowDialog();
+                                if (result == DialogResult.OK)
                                 {
-                                    string val = form.results[0].Split(".".ToCharArray())[1];
-                                    setControlData(val, e.RowIndex, e.ColumnIndex);
+                                    string propList = string.Empty;
+                                    if (form.results.Count > 0)
+                                    {
+                                        string val = form.results[0].Split(".".ToCharArray())[1];
+                                        setControlData(val, e.RowIndex, e.ColumnIndex);
+                                    }
                                 }
                             }
                         }
@@ -698,6 +701,48 @@ namespace JsonManipulator
                     l_objGridDropbox.ValueMember = "Value";
                     l_objGridDropbox.DisplayMember = "Display";
                     l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+                }
+
+                if (propertyName.Equals("SourceObjectName", StringComparison.OrdinalIgnoreCase))
+                {
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview   
+                    using (var form = new frmModelSearch(ModelSearchOptions.OBJECTS))
+                    {
+                        var result = form.ShowDialog();
+                        if (result == DialogResult.OK)
+                        {
+                            string val = form.ReturnValue;
+                            setOutputData(val, e.RowIndex, e.ColumnIndex);
+                        }
+                    }
+                }
+                if (propertyName.Equals("SourcePropertyName", StringComparison.OrdinalIgnoreCase))
+                {
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview    
+                    if (lstControl.SelectedItem != null)
+                    { 
+                        String itemName = lstOutputVars.SelectedItem.ToString();
+                        List<string> ignoreList = Utils.GetFormOutputVarPropertiesToIgnore();
+                        objectWorkflowOutputVar frmControl = _form.objectWorkflowOutputVar.Where(x => x.name == itemName).FirstOrDefault();
+  
+                        if (frmControl.sourceObjectName != null && frmControl.sourceObjectName.Trim().Length > 0)
+                        {
+                            using (var form = new FrmSelectObjProps(frmControl.sourceObjectName, false))
+                            {
+                                var result = form.ShowDialog();
+                                if (result == DialogResult.OK)
+                                {
+                                    string propList = string.Empty;
+                                    if (form.results.Count > 0)
+                                    {
+                                        string val = form.results[0].Split(".".ToCharArray())[1];
+                                        setOutputData(val, e.RowIndex, e.ColumnIndex);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
                 }
             }
         }

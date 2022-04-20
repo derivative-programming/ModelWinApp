@@ -606,16 +606,19 @@ namespace JsonManipulator
                         List<string> ignoreList = Utils.GetReportColumnPropertiesToIgnore();
                         reportColumn rptColumn = _rpt.reportColumn.Where(x => x.name == columnMane).FirstOrDefault();
 
-                        using (var form = new FrmSelectObjProps(rptColumn.sourceObjectName, false))
+                        if (rptColumn.sourceObjectName != null && rptColumn.sourceObjectName.Trim().Length > 0)
                         {
-                            var result = form.ShowDialog();
-                            if (result == DialogResult.OK)
+                            using (var form = new FrmSelectObjProps(rptColumn.sourceObjectName, false))
                             {
-                                string propList = string.Empty;
-                                if (form.results.Count > 0)
+                                var result = form.ShowDialog();
+                                if (result == DialogResult.OK)
                                 {
-                                    string val = form.results[0].Split(".".ToCharArray())[1];
-                                    setColumnData(val, e.RowIndex, e.ColumnIndex);
+                                    string propList = string.Empty;
+                                    if (form.results.Count > 0)
+                                    {
+                                        string val = form.results[0].Split(".".ToCharArray())[1];
+                                        setColumnData(val, e.RowIndex, e.ColumnIndex);
+                                    }
                                 }
                             }
                         }
