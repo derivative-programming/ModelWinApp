@@ -46,6 +46,7 @@ namespace JsonManipulator
             this.pnlControlsLeftTop = new System.Windows.Forms.Panel();
             this.lstControl = new System.Windows.Forms.ListBox();
             this.pnlControlsLeftBottom = new System.Windows.Forms.Panel();
+            this.btnCopyList = new System.Windows.Forms.Button();
             this.chkSubscribeToTargetChild = new System.Windows.Forms.CheckBox();
             this.chkSubscribeToOwnerObject = new System.Windows.Forms.CheckBox();
             this.btnControls = new System.Windows.Forms.Button();
@@ -99,7 +100,7 @@ namespace JsonManipulator
             this.tabJSON = new System.Windows.Forms.TabPage();
             this.rtbJSON = new System.Windows.Forms.RichTextBox();
             this.grpMain = new System.Windows.Forms.GroupBox();
-            this.btnCopyList = new System.Windows.Forms.Button();
+            this.btnAddLookup = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridProperties)).BeginInit();
@@ -312,6 +313,7 @@ namespace JsonManipulator
             // 
             // pnlControlsLeftBottom
             // 
+            this.pnlControlsLeftBottom.Controls.Add(this.btnAddLookup);
             this.pnlControlsLeftBottom.Controls.Add(this.btnCopyList);
             this.pnlControlsLeftBottom.Controls.Add(this.chkSubscribeToTargetChild);
             this.pnlControlsLeftBottom.Controls.Add(this.chkSubscribeToOwnerObject);
@@ -323,6 +325,16 @@ namespace JsonManipulator
             this.pnlControlsLeftBottom.Name = "pnlControlsLeftBottom";
             this.pnlControlsLeftBottom.Size = new System.Drawing.Size(188, 149);
             this.pnlControlsLeftBottom.TabIndex = 17;
+            // 
+            // btnCopyList
+            // 
+            this.btnCopyList.Location = new System.Drawing.Point(84, 32);
+            this.btnCopyList.Name = "btnCopyList";
+            this.btnCopyList.Size = new System.Drawing.Size(75, 23);
+            this.btnCopyList.TabIndex = 11;
+            this.btnCopyList.Text = "Copy List";
+            this.btnCopyList.UseVisualStyleBackColor = true;
+            this.btnCopyList.Click += new System.EventHandler(this.btnCopyList_Click);
             // 
             // chkSubscribeToTargetChild
             // 
@@ -885,15 +897,16 @@ namespace JsonManipulator
             this.grpMain.TabStop = false;
             this.grpMain.Text = "groupBox2";
             // 
-            // btnCopyList
+            // btnAddLookup
             // 
-            this.btnCopyList.Location = new System.Drawing.Point(84, 3);
-            this.btnCopyList.Name = "btnCopyList";
-            this.btnCopyList.Size = new System.Drawing.Size(75, 23);
-            this.btnCopyList.TabIndex = 11;
-            this.btnCopyList.Text = "Copy";
-            this.btnCopyList.UseVisualStyleBackColor = true;
-            this.btnCopyList.Click += new System.EventHandler(this.btnCopyList_Click);
+            this.btnAddLookup.Location = new System.Drawing.Point(84, 3);
+            this.btnAddLookup.Name = "btnAddLookup";
+            this.btnAddLookup.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnAddLookup.Size = new System.Drawing.Size(75, 23);
+            this.btnAddLookup.TabIndex = 12;
+            this.btnAddLookup.Text = "Add &Lookup";
+            this.btnAddLookup.UseVisualStyleBackColor = true;
+            this.btnAddLookup.Click += new System.EventHandler(this.btnAddLookup_Click);
             // 
             // frmFormSettings
             // 
@@ -1019,5 +1032,6 @@ namespace JsonManipulator
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button btnAddNewDFT;
         private System.Windows.Forms.Button btnCopyList;
+        private System.Windows.Forms.Button btnAddLookup;
     }
 }

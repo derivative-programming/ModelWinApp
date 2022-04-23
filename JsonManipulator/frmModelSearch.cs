@@ -36,6 +36,10 @@ namespace JsonManipulator
                     this.Text = "Dynaflow Tasks";
                     fullList = Utils.GetDFTList();
                     break;
+                case ModelSearchOptions.LOOKUPS:
+                    this.Text = "Lookups";
+                    fullList = Utils.GetLookupList();
+                    break;
                 case ModelSearchOptions.FLOWS:
                     this.Text = "Flows";
                     fullList = Utils.GetNameList(false, false, false, true, false);

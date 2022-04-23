@@ -22,7 +22,8 @@ namespace JsonManipulator.Enums
         OBJECTS,
         REPORTS,
         ROLES,
-        DYNAFLOW_TASKS
+        DYNAFLOW_TASKS,
+        LOOKUPS
     }
     //public enum FormObjects
     //{

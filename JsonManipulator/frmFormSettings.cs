@@ -1114,5 +1114,39 @@ namespace JsonManipulator
 
             Clipboard.SetText(itemList);
         }
+
+        private void btnAddLookup_Click(object sender, EventArgs e)
+        {
+
+            using (var form = new frmModelSearch(ModelSearchOptions.LOOKUPS))
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string val = form.ReturnValue + "Code";
+
+                    if (ItemExists(val))
+                    {
+                        ((Form1)Application.OpenForms["Form1"]).showMessage("Name already exists."); 
+                        return;
+                    } 
+
+
+                    this._form.objectWorkflowParam.Add(new objectWorkflowParam { name = val, dataType = "uniqueidentifier", fKObjectName = form.ReturnValue, isFK = "true", isFKList = "true", isFKLookup = "true", isFKListInactiveIncluded = "true" });
+                    ((Form1)Application.OpenForms["Form1"]).showMessage("Control created successfully");
+                    ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
+                    setControlsList();
+                }
+            }
+        }
+        private bool ItemExists(string name)
+        {
+            bool result = false;
+            if (this._form.objectWorkflowParam.Where(x => x.name == name).ToList().Count > 0)
+            {
+                result = true;
+            }
+            return result;
+        }
     }
 }

@@ -183,6 +183,25 @@ namespace JsonManipulator
 
             return result;
         }
+
+
+
+        public static List<string> GetLookupList()
+        {
+            List<string> result = new List<string>();
+
+            NameSpaceObject nameSpaceObject = Form1._model.root.NameSpaceObjects.FirstOrDefault();
+            foreach (var dbObject in nameSpaceObject.ObjectMap)
+            {
+
+                if (dbObject.isLookup == "true")
+                {
+                    result.Add(dbObject.name);
+                }
+            }
+
+            return result;
+        }
         public static List<string> GetNameList(bool includeDBObjects, bool includeReports, bool includePageForms, 
             bool includeNonPageObjFlows, bool includeInitPageObjFlows)
         {
