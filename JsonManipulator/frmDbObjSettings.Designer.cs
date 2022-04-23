@@ -44,6 +44,7 @@ namespace JsonManipulator
             this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlPropLeft = new System.Windows.Forms.Panel();
             this.pnlPropLeftBottom = new System.Windows.Forms.Panel();
+            this.btnAddLookupProp = new System.Windows.Forms.Button();
             this.btnCopyList = new System.Windows.Forms.Button();
             this.btnProperties = new System.Windows.Forms.Button();
             this.pnlPropLeftTop = new System.Windows.Forms.Panel();
@@ -89,7 +90,6 @@ namespace JsonManipulator
             this.tabJSON = new System.Windows.Forms.TabPage();
             this.rtbJSON = new System.Windows.Forms.RichTextBox();
             this.grpBoxMain = new System.Windows.Forms.GroupBox();
-            this.btnAddLookupProp = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataProperties)).BeginInit();
@@ -289,6 +289,17 @@ namespace JsonManipulator
             this.pnlPropLeftBottom.Name = "pnlPropLeftBottom";
             this.pnlPropLeftBottom.Size = new System.Drawing.Size(200, 99);
             this.pnlPropLeftBottom.TabIndex = 10;
+            // 
+            // btnAddLookupProp
+            // 
+            this.btnAddLookupProp.Location = new System.Drawing.Point(2, 32);
+            this.btnAddLookupProp.Name = "btnAddLookupProp";
+            this.btnAddLookupProp.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnAddLookupProp.Size = new System.Drawing.Size(75, 23);
+            this.btnAddLookupProp.TabIndex = 11;
+            this.btnAddLookupProp.Text = "Add &Lookup Prop";
+            this.btnAddLookupProp.UseVisualStyleBackColor = true;
+            this.btnAddLookupProp.Click += new System.EventHandler(this.btnAddLookupProp_Click);
             // 
             // btnCopyList
             // 
@@ -751,17 +762,6 @@ namespace JsonManipulator
             this.grpBoxMain.TabIndex = 1;
             this.grpBoxMain.TabStop = false;
             this.grpBoxMain.Text = "groupBox2";
-            // 
-            // btnAddLookupProp
-            // 
-            this.btnAddLookupProp.Location = new System.Drawing.Point(2, 32);
-            this.btnAddLookupProp.Name = "btnAddLookupProp";
-            this.btnAddLookupProp.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnAddLookupProp.Size = new System.Drawing.Size(75, 23);
-            this.btnAddLookupProp.TabIndex = 11;
-            this.btnAddLookupProp.Text = "&Add Lookup Prop";
-            this.btnAddLookupProp.UseVisualStyleBackColor = true;
-            this.btnAddLookupProp.Click += new System.EventHandler(this.btnAddLookupProp_Click);
             // 
             // frmDbObjSettings
             // 

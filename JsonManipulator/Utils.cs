@@ -384,6 +384,46 @@ namespace JsonManipulator
             return result;
         }
 
+
+        public static Report GetReport(string targetReportName)
+        {
+            Report result = null;
+
+            NameSpaceObject nameSpaceObject = Form1._model.root.NameSpaceObjects.FirstOrDefault();
+             
+            foreach (ObjectMap dbObject in nameSpaceObject.ObjectMap)
+            {
+                foreach (Report report in dbObject.report)
+                {
+                    if (!report.name.Equals(targetReportName, StringComparison.OrdinalIgnoreCase))
+                        continue;
+                    return report;
+                } 
+            }
+
+            return result;
+        }
+
+        public static ObjectMap GetReportOwnerObject(string targetReportName)
+        {
+            ObjectMap result = null;
+
+            NameSpaceObject nameSpaceObject = Form1._model.root.NameSpaceObjects.FirstOrDefault();
+
+            foreach (ObjectMap dbObject in nameSpaceObject.ObjectMap)
+            {
+                foreach (Report report in dbObject.report)
+                {
+                    if (!report.name.Equals(targetReportName, StringComparison.OrdinalIgnoreCase))
+                        continue;
+                    return dbObject;
+                }
+            }
+
+            return result;
+        }
+
+
         public static List<string> GetRoleList()
         {
             List<string> result = new List<string>();

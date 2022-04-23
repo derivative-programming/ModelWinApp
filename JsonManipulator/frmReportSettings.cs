@@ -928,5 +928,12 @@ namespace JsonManipulator
 
             Clipboard.SetText(itemList);
         }
+
+        private void btnAddMultiSelectButton_Click(object sender, EventArgs e)
+        {
+            frmAddMultiSelectFlow frmAddButton = new frmAddMultiSelectFlow(_rpt.name);
+            frmAddButton.ShowDialog();
+            setButtonsList();
+        }
     }
 }

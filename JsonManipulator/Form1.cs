@@ -1469,6 +1469,13 @@ namespace JsonManipulator
 
             }
         }
+
+        private void multiSelectFlowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            frmAddMultiSelectFlow frmAddButton = new frmAddMultiSelectFlow(string.Empty);
+            frmAddButton.ShowDialog();
+        }
     }
     
 }

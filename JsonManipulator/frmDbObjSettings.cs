@@ -674,11 +674,35 @@ namespace JsonManipulator
         }
 
         private void btnAddLookupProp_Click(object sender, EventArgs e)
-        {
-            string objectname = _map.name;
-            frmAddObjLookupProp frmProp = new frmAddObjLookupProp(objectname);
-            frmProp.ShowDialog();
+        { 
+            using (var form = new frmModelSearch(ModelSearchOptions.LOOKUPS))
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string val = form.ReturnValue + "ID";
 
+                    if (PropExists(val))
+                    {
+                        ((Form1)Application.OpenForms["Form1"]).showMessage("Prop Name already exists.");
+                        return;
+                    }
+
+                    this._map.property.Add(new property { name = val, isFKLookup = "true", isFK = "true", fKObjectName = form.ReturnValue, fKObjectPropertyName = val });
+                    ((Form1)Application.OpenForms["Form1"]).showMessage("Property created successfully");
+                    ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
+                    ((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]).setPropertieList();
+                }
+            }
+        }
+        private bool PropExists(string name)
+        {
+            bool result = false;
+            if (this._map.property.Where(x => x.name == name).ToList().Count > 0)
+            {
+                result = true;
+            }
+            return result;
         }
     }
 }
