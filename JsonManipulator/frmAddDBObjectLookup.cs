@@ -29,6 +29,11 @@ namespace JsonManipulator
                 ShowValidationError("Name Required.");
                 return;
             }
+            if (txtName.Text.Trim().Contains(" "))
+            {
+                ShowValidationError("Remove Spaces from name.");
+                return;
+            }
             if (txtName.Text.Trim().ToLower().Contains("lookup"))
             {
                 ShowValidationError("It is not necessary to have 'lookup' in the name.");

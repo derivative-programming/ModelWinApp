@@ -29,7 +29,12 @@ namespace JsonManipulator
                 ShowValidationError("Name Required.");
                 return;
             }
-             
+            if (txtName.Text.Trim().Contains(" "))
+            {
+                ShowValidationError("Remove Spaces from name.");
+                return;
+            }
+
 
             List<string> objectNames = Utils.GetApiSiteNameList();
             if (objectNames.Where(x => x.ToLower().Equals(txtName.Text.Trim().ToLower())).ToList().Count > 0)

@@ -756,8 +756,11 @@ namespace JsonManipulator
             nodeMenus.Focus();
         }
         private void txtSearch_TextChanged(object sender, EventArgs e)
-        { 
-            PopulateTree(txtSearch.Text.TrimEnd(". ".ToCharArray()));  
+        {
+            if (txtSearch.Text.Length > 2 || txtSearch.Text.Length == 0)
+            {
+                PopulateTree(txtSearch.Text.TrimEnd(". ".ToCharArray()));
+            }
         }
         public void AddToTree(objectWorkflow objectWorkflow,int action=0) //0=add 1=update
         {
@@ -1475,6 +1478,12 @@ namespace JsonManipulator
 
             frmAddMultiSelectFlow frmAddButton = new frmAddMultiSelectFlow(string.Empty);
             frmAddButton.ShowDialog();
+        }
+
+        private void findToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            txtSearch.SelectAll();
+            txtSearch.Focus();
         }
     }
     

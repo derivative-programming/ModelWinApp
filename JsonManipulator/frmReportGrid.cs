@@ -30,6 +30,11 @@ namespace JsonManipulator
                 ShowValidationError("Name Required.");
                 return;
             }
+            if (txtName.Text.Trim().Contains(" "))
+            {
+                ShowValidationError("Remove Spaces from name.");
+                return;
+            }
 
             if (txtOwner.Text.Trim().Length == 0)
             {
@@ -79,7 +84,7 @@ namespace JsonManipulator
             rpt.layoutName = Utils.Capitalize(txtRole.Text.Trim()) + "Layout";
             //rpt.pageTitleText = Utils.ConvertPascalToSpaced(rpt.name);
             rpt.pageTitleText = txtPageTitle.Text.Trim();
-            if (txtChild.Text.Length > 0)
+            if (txtChild.Text.Length > 0 && txtPageTitle.Text.Trim().Length == 0)
             {
                 rpt.pageTitleText = Utils.ConvertPascalToSpaced(txtChild.Text.Trim());
 

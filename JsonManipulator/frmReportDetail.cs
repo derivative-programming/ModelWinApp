@@ -30,6 +30,11 @@ namespace JsonManipulator
                 ShowValidationError("Name Required.");
                 return;
             }
+            if (txtName.Text.Trim().Contains(" "))
+            {
+                ShowValidationError("Remove Spaces from name.");
+                return;
+            }
 
             if (txtOwner.Text.Trim().Length == 0)
             {

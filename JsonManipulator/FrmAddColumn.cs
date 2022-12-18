@@ -21,7 +21,7 @@ namespace JsonManipulator
             this._name = name;
             this._parent = parent;
             targetObjectName = Utils.GetReportModelItem(name).TargetChildObject;
-            if(targetObjectName.Trim().Length == 0)
+            if(targetObjectName == null || targetObjectName.Trim().Length == 0)
             {
                 targetObjectName = _parent;
             }

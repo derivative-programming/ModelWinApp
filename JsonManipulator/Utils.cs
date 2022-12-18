@@ -831,7 +831,7 @@ namespace JsonManipulator
             List<string> result = new List<string>();
             result.Add("buttonDestinationContextObjectName".ToLower());
             result.Add("minWidth".ToLower());
-            result.Add("name");
+            //result.Add("name");
             //result.Add("isButton".ToLower());
             //result.Add("buttonText".ToLower());
             //result.Add("buttonDestinationTargetName".ToLower());

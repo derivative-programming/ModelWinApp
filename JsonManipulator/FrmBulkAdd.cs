@@ -62,7 +62,7 @@ namespace JsonManipulator
                         if(item.StartsWith(_targetObjectName + "."))
                         {
                             item = item.Remove(0, (_targetObjectName + ".").Length);
-                            propList = propList + item + Environment.NewLine;
+                            propList = propList + item.Replace(".","") + Environment.NewLine;
                         }
                         else
                         {

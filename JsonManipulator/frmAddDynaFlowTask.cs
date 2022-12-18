@@ -31,7 +31,12 @@ namespace JsonManipulator
                 ShowValidationError("Name Required.");
                 return;
             }
-             
+            if (txtName.Text.Trim().Contains(" "))
+            {
+                ShowValidationError("Remove Spaces from name.");
+                return;
+            }
+
 
             List<string> existingNames = Utils.GetNameList(false,true,true,true,true);
             if (existingNames.Where(x => x.ToLower().Equals(txtName.Text.Trim().ToLower())).ToList().Count > 0)
