@@ -41,6 +41,12 @@ namespace JsonManipulator
                 return;
             }
 
+            if (txtName.Text.Trim().Contains(" "))
+            {
+                ShowValidationError("Remove Spaces from name.");
+                return;
+            }
+
 
             Models.ObjectMap destinationOwnerObject = Utils.GetOwnerObject(txtButtonDestination.Text);
 

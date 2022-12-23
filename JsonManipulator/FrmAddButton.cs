@@ -43,7 +43,13 @@ namespace JsonManipulator
                         ShowValidationError("Name already exists.");
                         return;
                     }
-                    
+
+                    if (txtName.Text.Trim().Contains(" "))
+                    {
+                        ShowValidationError("Remove Spaces from name.");
+                        return;
+                    }
+
                     Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == _name).FirstOrDefault().objectWorkflowButton.Add(new objectWorkflowButton { buttonText = txtName.Text.Trim(), buttonType = "other"});
                     ((Form1)Application.OpenForms["Form1"]).showMessage("Button created successfully");
                     ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
@@ -62,6 +68,12 @@ namespace JsonManipulator
                     if (ReportButtonItemExists(txtName.Text))
                     {
                         ShowValidationError("Name already exists.");
+                        return;
+                    }
+
+                    if (txtName.Text.Trim().Contains(" "))
+                    {
+                        ShowValidationError("Remove Spaces from name.");
                         return;
                     }
 
@@ -99,6 +111,12 @@ namespace JsonManipulator
                     if (NavButtonItemExists(txtName.Text))
                     {
                         ShowValidationError("Name already exists.");
+                        return;
+                    }
+
+                    if (txtName.Text.Trim().Contains(" "))
+                    {
+                        ShowValidationError("Remove Spaces from name.");
                         return;
                     }
 

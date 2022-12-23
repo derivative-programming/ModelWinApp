@@ -38,6 +38,13 @@ namespace JsonManipulator
                 ShowValidationError("Name already exists.");
                 return;
             }
+
+            if (txtName.Text.Trim().Contains(" "))
+            {
+                ShowValidationError("Remove Spaces from name.");
+                return;
+            }
+
             string fkObjName = txtName.Text.Substring(0, txtName.Text.Length - 2);
 
             Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().property.Add(new property { name =txtName.Text, isFKLookup = "true", isFK = "true", fKObjectName = fkObjName, fKObjectPropertyName = fkObjName + "ID"});

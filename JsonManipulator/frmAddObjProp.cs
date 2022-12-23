@@ -36,6 +36,12 @@ namespace JsonManipulator
                 return;
             }
 
+            if (txtName.Text.Trim().Contains(" "))
+            {
+                ShowValidationError("Remove Spaces from name.");
+                return;
+            }
+
             Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().property.Add(new property { name =txtName.Text});
             ((Form1)Application.OpenForms["Form1"]).showMessage("Property created successfully");
             ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();

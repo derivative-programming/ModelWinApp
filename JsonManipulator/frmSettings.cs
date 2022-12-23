@@ -387,5 +387,17 @@ namespace JsonManipulator
                 lstNavButtons.SetSelected(newIndex, true);
             }
         }
+
+        private void btnColumnsDelete_Click(object sender, EventArgs e)
+        {
+            if (lstNavButtons.SelectedItem != null)
+            {
+                int selectedIndex = lstNavButtons.SelectedIndex;
+                int count = Form1._model.root.navButton.Count;
+                navButton item = Form1._model.root.navButton.ElementAt(selectedIndex); 
+                Form1._model.root.navButton.RemoveAt(selectedIndex); 
+                setNavButtonsList(); 
+            }
+        }
     }
 }

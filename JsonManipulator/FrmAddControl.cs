@@ -45,6 +45,12 @@ namespace JsonManipulator
                 return;
             }
 
+            if (txtName.Text.Trim().Contains(" "))
+            {
+                ShowValidationError("Remove Spaces from name.");
+                return;
+            }
+
             if (txtName.Text.Trim().Length > 100)
             {
                 ShowValidationError("The name length cannot exceed 100 characters.");
