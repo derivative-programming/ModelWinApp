@@ -300,6 +300,134 @@ namespace JsonManipulator
             return result;
         }
 
+        public static property GetObjectPropListSelection(string targetObjectName, string fullyQualifiedLineageSelected)
+        {
+            property result = null;
+
+            
+            NameSpaceObject nameSpaceObject = Form1._model.root.NameSpaceObjects.FirstOrDefault();
+
+            string nextObjectName = targetObjectName;
+
+            bool done = false;
+            while (!done)
+            {
+                bool itemAdded = false;
+                foreach (ObjectMap dbObject in nameSpaceObject.ObjectMap)
+                {
+                    if (!dbObject.name.Equals(nextObjectName, StringComparison.OrdinalIgnoreCase))
+                        continue;
+
+                    foreach (property prop in dbObject.property)
+                    {
+                        if (fullyQualifiedLineageSelected == dbObject.name + "." + prop.name)
+                        {
+                            return prop;
+
+                        }
+                        if (prop.isFKLookup == "true" && !prop.fKObjectName.Equals("pac",StringComparison.OrdinalIgnoreCase))
+                        {
+                            List<string> lookupProps = GetObjectPropList(prop.fKObjectName, false);
+                            for(int i = 0;i < lookupProps.Count;i++)
+                            {
+                                if (fullyQualifiedLineageSelected == dbObject.name + "." + lookupProps[i])
+                                {
+                                    return GetObjectPropListSelection(prop.fKObjectName,fullyQualifiedLineageSelected.Remove(0, (dbObject.name + ".").Length));
+
+                                }
+                            }
+
+                        }
+                        itemAdded = true;
+                    }
+                    if(dbObject.parentObjectName != null &&
+                        dbObject.parentObjectName.Trim().Length > 0 &&
+                        !dbObject.parentObjectName.Trim().Equals("Tac",StringComparison.OrdinalIgnoreCase) &&
+                        !dbObject.parentObjectName.Trim().Equals("Pac", StringComparison.OrdinalIgnoreCase)
+                        )
+                    {
+                        nextObjectName = dbObject.parentObjectName;
+                    }
+                    else
+                    {
+                        done = true;
+                    }
+                }
+                if(!itemAdded)
+                {
+                    done = true;
+                }
+            }
+
+            return result;
+        }
+        public static ObjectMap GetObjectPropListSelectionParentObj(string targetObjectName, string fullyQualifiedLineageSelected)
+        {
+            ObjectMap result = null;
+
+
+            NameSpaceObject nameSpaceObject = Form1._model.root.NameSpaceObjects.FirstOrDefault();
+
+            string nextObjectName = targetObjectName;
+
+            bool done = false;
+            while (!done)
+            {
+                bool itemAdded = false;
+                foreach (ObjectMap dbObject in nameSpaceObject.ObjectMap)
+                {
+                    if (!dbObject.name.Equals(nextObjectName, StringComparison.OrdinalIgnoreCase))
+                        continue;
+
+                    foreach (property prop in dbObject.property)
+                    {
+                        if (fullyQualifiedLineageSelected == dbObject.name + "." + prop.name)
+                        {
+                            return dbObject;
+
+                        }
+                        if (fullyQualifiedLineageSelected == dbObject.name + ".Code")
+                        {
+                            return dbObject;
+
+                        }
+                        if (prop.isFKLookup == "true" && !prop.fKObjectName.Equals("pac", StringComparison.OrdinalIgnoreCase))
+                        {
+                            List<string> lookupProps = GetObjectPropList(prop.fKObjectName, false);
+                            for (int i = 0; i < lookupProps.Count; i++)
+                            {
+                                if (fullyQualifiedLineageSelected == dbObject.name + "." + lookupProps[i])
+                                {
+                                    return GetObjectPropListSelectionParentObj(prop.fKObjectName, fullyQualifiedLineageSelected.Remove(0, (dbObject.name + ".").Length));
+
+                                }
+                            }
+
+                        }
+                        itemAdded = true;
+                    }
+                    if (dbObject.parentObjectName != null &&
+                        dbObject.parentObjectName.Trim().Length > 0 &&
+                        !dbObject.parentObjectName.Trim().Equals("Tac", StringComparison.OrdinalIgnoreCase) &&
+                        !dbObject.parentObjectName.Trim().Equals("Pac", StringComparison.OrdinalIgnoreCase)
+                        )
+                    {
+                        nextObjectName = dbObject.parentObjectName;
+                    }
+                    else
+                    {
+                        done = true;
+                    }
+                }
+                if (!itemAdded)
+                {
+                    done = true;
+                }
+            }
+
+            return result;
+        }
+
 
         public static List<string> GetObjectPropList(string targetObjectName, bool includeLineage)
         {

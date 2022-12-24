@@ -1,4 +1,5 @@
 ﻿using JsonManipulator.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -93,18 +94,51 @@ namespace JsonManipulator
                 {
                     string val = form.ReturnValue;
                     List<string> items = new List<string>();
-                    items.AddRange(val.Split("\n,".ToCharArray()));
+                    items.AddRange(val.Split("\n".ToCharArray()));
                     for (int i = 0; i < items.Count; i++)
                     {
-                        string itemName = Utils.Capitalize(items[i]).Trim();
+                        string itemName = Utils.Capitalize(items[i]).Trim().Split(",".ToCharArray())[0];
+                        property sourceObjProp = null;
+                        Models.ObjectMap sourceObj = null;
+
+                        Models.ObjectMap nextSourceObj = null;
+                        if (items[i].Contains(","))
+                        {
+                            string lineage = items[i].Split(",".ToCharArray())[1];
+                            if(lineage.StartsWith("Lineage:"))
+                            {
+                                lineage = lineage.Remove(0, "Lineage:".Length);
+                            }
+                            sourceObjProp = Utils.GetObjectPropListSelection(this._parent, lineage);
+                            sourceObj = Utils.GetObjectPropListSelectionParentObj(this._parent, lineage);
+                            if(sourceObj.isLookup == "true")
+                            {
+                                string nextLineage = lineage.Substring(0, lineage.Length - sourceObj.name.Length - sourceObjProp.name.Length - 2) + ".Code";
+                                nextSourceObj = Utils.GetObjectPropListSelectionParentObj(this._parent, nextLineage);
+                            }
+                        }
                         if (itemName.Length > 0 && !ItemExists(itemName))
                         {
                             Models.reportColumn reportColumn = new reportColumn();
                             reportColumn.name = itemName;
                             reportColumn.isButton = "false";
+                            if (sourceObj != null)
+                            {
+                                reportColumn.sourceObjectName = sourceObj.name; 
+                            }
+                            if (nextSourceObj != null)
+                            {
+                                reportColumn.sourceLookupObjImplementationObjName = nextSourceObj.name; 
+                            }
+                            if (sourceObjProp != null)
+                            {
+                                reportColumn.dataType = sourceObjProp.dataType;
+                                reportColumn.headerText = sourceObjProp.labelText;
+                                reportColumn.sourcePropertyName = sourceObjProp.name;
+                            }
                             Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportColumn.Add(reportColumn);
                         }
-                    }
+                        }
                      ((Form1)Application.OpenForms["Form1"]).showMessage("Column created successfully");
                     ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
                     ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setColumnsList();

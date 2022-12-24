@@ -1,4 +1,5 @@
 ﻿using JsonManipulator.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -59,14 +60,15 @@ namespace JsonManipulator
                     for(int i = 0;i < form.results.Count;i++)
                     {
                         string item = form.results[i];
+                        string lineage = item;
                         if(item.StartsWith(_targetObjectName + "."))
                         {
                             item = item.Remove(0, (_targetObjectName + ".").Length);
-                            propList = propList + item.Replace(".","") + Environment.NewLine;
+                            propList = propList + item.Replace(".","") + ",Lineage:" + lineage + Environment.NewLine;
                         }
                         else
                         {
-                            propList = propList + item.Replace(".","") + Environment.NewLine;
+                            propList = propList + item.Replace(".","") + ",Lineage:" + lineage + Environment.NewLine;
                         }
                     }
                     this.richTextBox1.Text = propList;

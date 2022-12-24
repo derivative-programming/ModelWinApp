@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace JsonManipulator
 {
@@ -83,13 +84,37 @@ namespace JsonManipulator
                 {
                     string val = form.ReturnValue;
                     List<string> items = new List<string>();
-                    items.AddRange(val.Split("\n,".ToCharArray()));
+                    items.AddRange(val.Split("\n".ToCharArray()));
                     for (int i = 0; i < items.Count; i++)
                     {
-                        string itemName = Utils.Capitalize(items[i]).Trim();
+                        string itemName = Utils.Capitalize(items[i]).Trim().Split(",".ToCharArray())[0];
+                        property sourceObjProp = null;
+                        Models.ObjectMap sourceObj = null;
+                        if (items[i].Contains(","))
+                        {
+                            string lineage = items[i].Split(",".ToCharArray())[1];
+                            if (lineage.StartsWith("Lineage:"))
+                            {
+                                lineage = lineage.Remove(0, "Lineage:".Length);
+                            }
+                            sourceObjProp = Utils.GetObjectPropListSelection(this._parent, lineage);
+                            sourceObj = Utils.GetObjectPropListSelectionParentObj(this._parent, lineage);
+                        }
                         if (itemName.Length > 0 && !ItemExists(itemName))
                         {
-                            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == _name).FirstOrDefault().objectWorkflowParam.Add(new objectWorkflowParam { name = itemName });
+                            objectWorkflowParam newItem = new objectWorkflowParam();
+                            newItem.name = itemName;
+                            if (sourceObj != null)
+                            {
+                                newItem.sourceObjectName = sourceObj.name;
+                            }
+                            if (sourceObjProp != null)
+                            {
+                                newItem.dataType = sourceObjProp.dataType;
+                                newItem.labelText = sourceObjProp.labelText;
+                                newItem.sourcePropertyName = sourceObjProp.name;
+                            }
+                            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == _name).FirstOrDefault().objectWorkflowParam.Add(newItem);
                         }
                     }
                     ((Form1)Application.OpenForms["Form1"]).showMessage("Control created successfully");
