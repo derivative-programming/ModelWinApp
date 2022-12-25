@@ -1299,6 +1299,7 @@ namespace JsonManipulator
         }
 
 
+
         private static void SortJsonFile(ref JObject fullModel)
         {
             var objArray = fullModel.SelectTokens("$.root.namespace[*].object[*]");
@@ -1333,6 +1334,28 @@ namespace JsonManipulator
 
 
         }
+
+        public static string GetPropertyValue(ref JObject fullModel, string xpath, string propertyName)
+        {
+            string result = string.Empty;
+
+            JToken jToken = fullModel.SelectToken(xpath, true);
+
+            result = ((JObject)jToken).Property(propertyName).Value.ToString();
+
+            return result;
+        }
+
+
+        public static void UpdatePropertyValue(ref JObject fullModel,string xpath,string propertyName, string newValue)
+        {
+
+            JToken jToken = fullModel.SelectToken(xpath, true);
+
+            ((JObject)jToken).Property(propertyName).Value = newValue;
+
+        }
+
 
         public static string Capitalize(string value)
         {

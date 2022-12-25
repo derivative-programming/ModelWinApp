@@ -34,12 +34,13 @@ namespace JsonManipulator
             this.btnDownloadReport = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.btnCancelRequest = new System.Windows.Forms.Button();
+            this.btnProcessChangeRequests = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(180, 248);
+            this.btnCancel.Location = new System.Drawing.Point(180, 275);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 24);
             this.btnCancel.TabIndex = 6;
@@ -85,12 +86,23 @@ namespace JsonManipulator
             this.btnCancelRequest.UseVisualStyleBackColor = true;
             this.btnCancelRequest.Click += new System.EventHandler(this.btnCancelRequest_Click);
             // 
+            // btnProcessChangeRequests
+            // 
+            this.btnProcessChangeRequests.Location = new System.Drawing.Point(12, 246);
+            this.btnProcessChangeRequests.Name = "btnProcessChangeRequests";
+            this.btnProcessChangeRequests.Size = new System.Drawing.Size(243, 23);
+            this.btnProcessChangeRequests.TabIndex = 17;
+            this.btnProcessChangeRequests.Text = "Process Change Requests";
+            this.btnProcessChangeRequests.UseVisualStyleBackColor = true;
+            this.btnProcessChangeRequests.Click += new System.EventHandler(this.btnProcessChangeRequests_Click);
+            // 
             // frmServicesApiValidationRequestDetail
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(269, 288);
+            this.ClientSize = new System.Drawing.Size(269, 311);
             this.ControlBox = false;
+            this.Controls.Add(this.btnProcessChangeRequests);
             this.Controls.Add(this.btnCancelRequest);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.btnDownloadReport);
@@ -112,5 +124,6 @@ namespace JsonManipulator
         private System.Windows.Forms.Button btnDownloadReport;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button btnCancelRequest;
+        private System.Windows.Forms.Button btnProcessChangeRequests;
     }
 }
