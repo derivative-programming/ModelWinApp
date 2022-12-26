@@ -95,7 +95,7 @@ namespace JsonManipulator
             {
                 var result = form.ShowDialog();
 
-                this._changeRequests = BuildChangeRequestList(@"C:\vr\mydocs\test.txt");
+                this._changeRequests = BuildChangeRequestList(destinationFilePath);
 
                 Process.Start("notepad.exe", destinationFilePath);
             }
