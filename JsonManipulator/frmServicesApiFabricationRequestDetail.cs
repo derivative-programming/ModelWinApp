@@ -111,6 +111,26 @@ namespace JsonManipulator
             {
                 form2.ShowDialog();
             }
+
+            string projectVersionNumber = Form1._model.root.projectVersionNumber;
+
+            int majorVersion = 0;
+            int minorVersion = 0;
+            int buildVersion = 0;
+            Int32.TryParse(projectVersionNumber.Split('.')[0], out majorVersion);
+            if (projectVersionNumber.Split('.').Length > 1)
+            {
+                Int32.TryParse(projectVersionNumber.Split('.')[1], out minorVersion);
+            }
+            if (projectVersionNumber.Split('.').Length > 2)
+            {
+                Int32.TryParse(projectVersionNumber.Split('.')[2], out buildVersion);
+            }
+            projectVersionNumber = majorVersion.ToString() + "." + minorVersion.ToString() + "." + (buildVersion + 1).ToString();
+
+            Form1._model.root.projectVersionNumber = projectVersionNumber;
+            ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
+
             this.UseWaitCursor = false;
             MessageBox.Show("Fabrication results downloaded and extracted to destination folder successfully.");
         }

@@ -3,6 +3,7 @@
     "name": "Your",
     "databaseName": "",
     "projectName": "Your Project",
+    "projectCode": "",
     "projectVersionNumber": "1.0",
     "namespace": [
       {
@@ -90,7 +91,7 @@
             "propSubscription": [],
             "fetch": [],
             "query": [],
-            "modelPkg": [], 
+            "modelPkg": [],
             "lookupItem": [
               {
                 "name": "Unknown",

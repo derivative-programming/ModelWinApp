@@ -19,6 +19,8 @@ namespace JsonManipulator.Models
     {
         [JsonProperty("projectName")]
         public string ProjectName { get; set; }
+        [JsonProperty("projectCode")]
+        public string ProjectCode { get; set; }
         [JsonProperty("projectVersionNumber")]
         public string projectVersionNumber { get; set; }
         [JsonRequired]
@@ -32,6 +34,8 @@ namespace JsonManipulator.Models
         public string DatabaseTableNamePrefix { get; set; }
         [JsonProperty("isDatabaseAuditColumnsCreated")]
         public string isDatabaseAuditColumnsCreated { get; set; }
+        [JsonProperty("isInternalObjectApiCreated")]
+        public string IsInternalObjectApiCreated { get; set; }
         [JsonProperty("isValidationMissesLogged")]
         public string isValidationMissesLogged { get; set; }
         [JsonProperty("suppressFillObjLookupTableScripts")]
@@ -55,6 +59,16 @@ namespace JsonManipulator.Models
         [JsonProperty("isCompleted")]
         public string isCompleted { get; set; }
     }
+
+    public class LexiconObject
+    {
+        [JsonProperty("name")]
+        public string name { get; set; }
+        [JsonProperty("internalTextValue")]
+        public string internalTextValue { get; set; }
+        [JsonProperty("displayTextValue")]
+        public string displayTextValue { get; set; } 
+    }
     public class NameSpaceObject
     {
         [JsonProperty("isDynaFlowAvailable")]
@@ -76,6 +90,8 @@ namespace JsonManipulator.Models
         public List<apiSite> apiSite { get; set; }
         [JsonProperty("modelFeature")]
         public List<ModelFeatureObject> ModelFeatureObject { get; set; }
+        [JsonProperty("lexicon")]
+        public List<LexiconObject> LexiconObject { get; set; }
         [JsonProperty("isModelFeatureConfigUserDBVeiwer")]
         public string isModelFeatureConfigUserDBVeiwer { get; set; }
         [JsonProperty("isModelFeatureConfigUserDBEditor")]

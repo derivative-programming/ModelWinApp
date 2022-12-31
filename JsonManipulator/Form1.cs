@@ -70,6 +70,11 @@ namespace JsonManipulator
         public void SaveModel()
         {
             this.UseWaitCursor = true;
+            if (Form1._model.root.ProjectCode is null ||
+                    Form1._model.root.ProjectCode.Trim().Length == 0)
+            {
+                Form1._model.root.ProjectCode = Guid.NewGuid().ToString();
+            }
             string json = JsonConvert.SerializeObject(Form1._model, Formatting.Indented, new JsonSerializerSettings
             {
                 NullValueHandling = NullValueHandling.Ignore
@@ -83,6 +88,11 @@ namespace JsonManipulator
         public void ArchiveModel()
         {
             string archiveFilePath = @"ModelArchive\" + System.IO.Path.GetFileNameWithoutExtension(_path) + "_" + DateTime.Now.ToString("yyyymmddhhmmss") + ".json";
+            if (Form1._model.root.ProjectCode is null ||
+                    Form1._model.root.ProjectCode.Trim().Length == 0)
+            {
+                Form1._model.root.ProjectCode = Guid.NewGuid().ToString();
+            }
             string json = JsonConvert.SerializeObject(Form1._model, Formatting.Indented, new JsonSerializerSettings
             {
                 NullValueHandling = NullValueHandling.Ignore
@@ -664,6 +674,11 @@ namespace JsonManipulator
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (Form1._model.root.ProjectCode is null ||
+                       Form1._model.root.ProjectCode.Trim().Length == 0)
+            {
+                Form1._model.root.ProjectCode = Guid.NewGuid().ToString();
+            }
             string json = JsonConvert.SerializeObject(Form1._model, Formatting.Indented, new JsonSerializerSettings
             {
                 NullValueHandling = NullValueHandling.Ignore
@@ -777,6 +792,11 @@ namespace JsonManipulator
             saveFileDialog1.RestoreDirectory = true;
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                if(Form1._model.root.ProjectCode is null ||
+                    Form1._model.root.ProjectCode.Trim().Length == 0)
+                { 
+                    Form1._model.root.ProjectCode = Guid.NewGuid().ToString();
+                }
                 string json = JsonConvert.SerializeObject(Form1._model, Formatting.Indented, new JsonSerializerSettings
                 {
                     NullValueHandling = NullValueHandling.Ignore
@@ -1012,6 +1032,7 @@ namespace JsonManipulator
             {
                 string json = r.ReadToEnd();
                 _model = JsonConvert.DeserializeObject<RootObject>(json);
+                _model.root.ProjectCode = Guid.NewGuid().ToString();
                 this.Text = _model.root.DatabaseName;
 
             }
