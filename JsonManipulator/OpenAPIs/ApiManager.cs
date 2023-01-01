@@ -146,7 +146,7 @@ namespace JsonManipulator.OpenAPIs
         {
 
             JsonManipulator.ValidationRequestListModel result = null;
-
+             
             try
             { 
                 ValidationRequestClient client = new ValidationRequestClient(GetApiBaseUrl(), BuildClient());
@@ -344,6 +344,44 @@ namespace JsonManipulator.OpenAPIs
                 System.IO.File.Delete(tmpZipFile);
 
                 result = true;
+            }
+            catch (System.Exception)
+            {
+
+            }
+
+            return result;
+        }
+
+
+        public async static Task<string> AddMergeRequestAsync(string remoteModelUrl, string modelFilePath)
+        {
+            string result = string.Empty;
+
+            try
+            {
+                string tmpZipFile = System.IO.Path.GetTempFileName();
+                System.IO.File.Move(tmpZipFile, tmpZipFile + ".zip");
+                tmpZipFile = tmpZipFile + ".zip";
+                System.IO.File.Delete(tmpZipFile);
+
+                string tmpFolderPath = string.Empty;
+                tmpFolderPath = System.IO.Path.GetTempPath().TrimEnd(@"\".ToCharArray()) + @"\" + Guid.NewGuid().ToString();
+                System.IO.Directory.CreateDirectory(tmpFolderPath);
+                System.IO.File.Copy(modelFilePath, tmpFolderPath + @"\" + System.IO.Path.GetFileName(modelFilePath));
+                System.IO.Compression.ZipFile.CreateFromDirectory(tmpFolderPath, tmpZipFile);
+
+                ModelMergeClient modelMergeClient = new ModelMergeClient(GetApiBaseUrl(), BuildClient());
+
+                ModelMergePostModel postModel = new ModelMergePostModel();
+                postModel.ModelFileData = Convert.ToBase64String(System.IO.File.ReadAllBytes(tmpZipFile));
+                postModel.AdditionsModelUrl = remoteModelUrl;
+                ModelMergePostResponse response = await modelMergeClient.PostAsync(postModel);
+                  
+                System.IO.Directory.Delete(tmpFolderPath, true);
+                System.IO.File.Delete(tmpZipFile);
+
+                result = response.ResultModelUrl;
             }
             catch (System.Exception)
             {

@@ -35,12 +35,13 @@ namespace JsonManipulator
             this.btnDownloadResults = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.btnCancelRequest = new System.Windows.Forms.Button();
+            this.btnMergeResults = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(179, 277);
+            this.btnCancel.Location = new System.Drawing.Point(179, 308);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 24);
             this.btnCancel.TabIndex = 6;
@@ -96,12 +97,23 @@ namespace JsonManipulator
             this.btnCancelRequest.UseVisualStyleBackColor = true;
             this.btnCancelRequest.Click += new System.EventHandler(this.btnCancelRequest_Click);
             // 
+            // btnMergeResults
+            // 
+            this.btnMergeResults.Location = new System.Drawing.Point(11, 277);
+            this.btnMergeResults.Name = "btnMergeResults";
+            this.btnMergeResults.Size = new System.Drawing.Size(243, 23);
+            this.btnMergeResults.TabIndex = 16;
+            this.btnMergeResults.Text = "Download and Merge Results";
+            this.btnMergeResults.UseVisualStyleBackColor = true;
+            this.btnMergeResults.Click += new System.EventHandler(this.btnMergeResults_Click);
+            // 
             // frmServicesApiPrepRequestDetail
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(269, 317);
+            this.ClientSize = new System.Drawing.Size(269, 346);
             this.ControlBox = false;
+            this.Controls.Add(this.btnMergeResults);
             this.Controls.Add(this.btnCancelRequest);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.btnDownloadResults);
@@ -125,5 +137,6 @@ namespace JsonManipulator
         private System.Windows.Forms.Button btnDownloadResults;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button btnCancelRequest;
+        private System.Windows.Forms.Button btnMergeResults;
     }
 }

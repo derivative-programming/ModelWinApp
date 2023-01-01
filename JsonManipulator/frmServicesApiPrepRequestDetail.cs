@@ -114,6 +114,27 @@ namespace JsonManipulator
             await OpenAPIs.ApiManager.CancelPrepRequestAsync(_requestItem.ModelPrepRequestCode);
             this.Close();
         }
+
+        private async void btnMergeResults_Click(object sender, EventArgs e)
+        {
+            string resultUrl = string.Empty;
+
+            Form1 parentForm = ((Form1)Application.OpenForms["Form1"]);
+            parentForm.SaveModel();
+            string modelPath = parentForm.GetModelPath();
+            this.UseWaitCursor = true;
+            resultUrl = await OpenAPIs.ApiManager.AddMergeRequestAsync(_requestItem.ModelPrepRequestResultModelUrl, modelPath);
+
+            this.UseWaitCursor = false;
+
+            using (var form = new frmDownloadFile(resultUrl, modelPath))
+            {
+                var result = form.ShowDialog();
+                ((Form1)Application.OpenForms["Form1"]).LoadModelFile(modelPath);
+                MessageBox.Show("Merged model downloaded and loaded successfully.");
+            }
+             
+        }
     }
 
     
