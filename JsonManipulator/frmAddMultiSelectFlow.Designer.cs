@@ -47,7 +47,7 @@ namespace JsonManipulator
             this.lblName.AutoSize = true;
             this.lblName.Location = new System.Drawing.Point(12, 87);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(35, 13);
+            this.lblName.Size = new System.Drawing.Size(45, 17);
             this.lblName.TabIndex = 0;
             this.lblName.Text = "&Name";
             // 
@@ -55,7 +55,7 @@ namespace JsonManipulator
             // 
             this.txtName.Location = new System.Drawing.Point(12, 103);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(236, 20);
+            this.txtName.Size = new System.Drawing.Size(236, 22);
             this.txtName.TabIndex = 3;
             // 
             // btnAccept
@@ -84,7 +84,7 @@ namespace JsonManipulator
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 48);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(75, 13);
+            this.label2.Size = new System.Drawing.Size(99, 17);
             this.label2.TabIndex = 2;
             this.label2.Text = "&Role Required";
             // 
@@ -92,7 +92,7 @@ namespace JsonManipulator
             // 
             this.txtRole.Location = new System.Drawing.Point(12, 64);
             this.txtRole.Name = "txtRole";
-            this.txtRole.Size = new System.Drawing.Size(200, 20);
+            this.txtRole.Size = new System.Drawing.Size(200, 22);
             this.txtRole.TabIndex = 1;
             this.txtRole.TextChanged += new System.EventHandler(this.txtRole_TextChanged);
             // 
@@ -101,7 +101,7 @@ namespace JsonManipulator
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 13);
+            this.label1.Size = new System.Drawing.Size(92, 17);
             this.label1.TabIndex = 5;
             this.label1.Text = "R&eport Name";
             // 
@@ -120,7 +120,7 @@ namespace JsonManipulator
             this.txtOwner.Location = new System.Drawing.Point(12, 25);
             this.txtOwner.Name = "txtOwner";
             this.txtOwner.ReadOnly = true;
-            this.txtOwner.Size = new System.Drawing.Size(200, 20);
+            this.txtOwner.Size = new System.Drawing.Size(200, 22);
             this.txtOwner.TabIndex = 6;
             this.txtOwner.TabStop = false;
             // 
@@ -137,9 +137,9 @@ namespace JsonManipulator
             // lblValidationError
             // 
             this.lblValidationError.ForeColor = System.Drawing.Color.Red;
-            this.lblValidationError.Location = new System.Drawing.Point(12, 149);
+            this.lblValidationError.Location = new System.Drawing.Point(12, 128);
             this.lblValidationError.Name = "lblValidationError";
-            this.lblValidationError.Size = new System.Drawing.Size(236, 31);
+            this.lblValidationError.Size = new System.Drawing.Size(236, 52);
             this.lblValidationError.TabIndex = 11;
             this.lblValidationError.Text = "Test Valiation Error Display";
             // 

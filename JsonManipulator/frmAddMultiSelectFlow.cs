@@ -27,6 +27,8 @@ namespace JsonManipulator
             {
                 txtOwner.Text = defaultReportName;
                 setOwner(defaultReportName);
+
+                txtName.Text = this._reportOwnerObjectName + txtRole.Text.Trim() + this._reportTargetChildObjectName + "MultiSelect";
             }
         }
 
@@ -66,9 +68,9 @@ namespace JsonManipulator
             }
             setOwner(txtOwner.Text.Trim());
 
-            if (!txtName.Text.Trim().ToLower().StartsWith(this._reportTargetChildObjectName.Trim().ToLower() + txtRole.Text.Trim().ToLower()))
+            if (!txtName.Text.Trim().ToLower().StartsWith(this._reportOwnerObjectName.ToLower() + txtRole.Text.Trim().ToLower() + this._reportTargetChildObjectName.ToLower() + "MultiSelect".ToLower()))
             {
-                ShowValidationError("Please modify the name to use the format " + Environment.NewLine + "[Report Target Child Object Name][Role Name][Functional Name].");
+                ShowValidationError("Please modify the name to use the format " + Environment.NewLine + "[Report Owner Object Name][Role Name][Report Target Child Object Name]MultiSelect[Functional Name].");
                 return;
             }
 
@@ -78,7 +80,7 @@ namespace JsonManipulator
                 return;
             }
 
-            string functionName = txtName.Text.Trim().Remove(0, (this._reportTargetChildObjectName.Trim() + txtRole.Text.Trim()).Length);
+            string functionName = txtName.Text.Trim().Remove(0, (this._reportOwnerObjectName + txtRole.Text.Trim() + this._reportTargetChildObjectName + "MultiSelect").Length);
 
 
             objectWorkflow form = new objectWorkflow();
@@ -92,7 +94,7 @@ namespace JsonManipulator
             form.isPage = "false"; 
 
 
-            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x=>x.name== this._reportTargetChildObjectName.Trim()).FirstOrDefault().objectWorkflow.Add(form);
+            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x=>x.name== this._reportOwnerObjectName.Trim()).FirstOrDefault().objectWorkflow.Add(form);
 
             AddReportMulitSelectButton(functionName);
 
@@ -160,8 +162,7 @@ namespace JsonManipulator
             ObjectMap dbObject = Utils.GetReportOwnerObject(reportName);
             this._reportOwnerObjectName = dbObject.name;
             this._reportTargetChildObjectName = report.TargetChildObject;
-            txtOwner.Text = reportName;
-            txtName.Text = this._reportTargetChildObjectName + txtRole.Text.Trim();
+            txtOwner.Text = reportName; 
         }
         private void btnOwner_Click(object sender, EventArgs e)
         {
@@ -173,6 +174,8 @@ namespace JsonManipulator
                 {
                     string val = form.ReturnValue;
                     setOwner(val);
+
+                    txtName.Text = this._reportOwnerObjectName + txtRole.Text.Trim() + this._reportTargetChildObjectName + "MultiSelect";
                 }
             }
         }
@@ -192,7 +195,7 @@ namespace JsonManipulator
         public void setRole(string Role)
         {
             txtRole.Text =Role;
-            txtName.Text = this._reportTargetChildObjectName + txtRole.Text.Trim();
+            txtName.Text = this._reportOwnerObjectName + txtRole.Text.Trim() + this._reportTargetChildObjectName + "MultiSelect";
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -203,7 +206,7 @@ namespace JsonManipulator
         private void txtRole_TextChanged(object sender, EventArgs e)
         {
 
-            txtName.Text = this._reportTargetChildObjectName  + txtRole.Text.Trim();
+            txtName.Text = this._reportOwnerObjectName + txtRole.Text.Trim() + this._reportTargetChildObjectName + "MultiSelect";
         }
     }
 

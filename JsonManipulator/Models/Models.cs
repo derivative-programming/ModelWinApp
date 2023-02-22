@@ -858,6 +858,8 @@ namespace JsonManipulator.Models
         public string isGetWithIdAvailable { get; set; }
         [JsonProperty("isPostAvailable")]
         public string isPostAvailable { get; set; }
+        [JsonProperty("isPostWithIdAvailable")]
+        public string isPostWithIdAvailable { get; set; }
         public string isPublic { get; set; }
         [JsonProperty("isLazyPost")]
         public string isLazyPost { get; set; }
