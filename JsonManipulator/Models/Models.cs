@@ -45,6 +45,8 @@ namespace JsonManipulator.Models
         public List<NameSpaceObject> NameSpaceObjects { get; set; }
         [JsonProperty("navButton")]
         public List<navButton> navButton { get; set; }
+        [JsonProperty("templateSet")]
+        public List<templateSet> templateSet { get; set; }
 
 
     }
@@ -810,6 +812,18 @@ namespace JsonManipulator.Models
         public string isEnabled { get; set; }
         public string conditionalVisiblePropertyName { get; set; }
         public string roleRequired { get; set; }
+    }
+
+    public class templateSet
+    {
+        [JsonProperty("name")]
+        public string name { get; set; }
+        [JsonProperty("title")]
+        public string title { get; set; }
+        [JsonProperty("version")]
+        public string version { get; set; }
+        [JsonProperty("isDisabled")]
+        public String isDisabled { get; set; } 
     }
     public class apiSite
     {   [JsonRequired]
