@@ -59,7 +59,7 @@ namespace JsonManipulator
         public async System.Threading.Tasks.Task<ChangeRptRequestListModel> GetAsync(System.Guid? modelChangeRptRequestCode, int? pageNumber, int? itemCountPerPage, string orderByColumnName, bool? orderByDescending, string forceErrorMessage, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/changerptrequests?");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/change-rpt-requests?");
             if (modelChangeRptRequestCode != null) 
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("modelChangeRptRequestCode") + "=").Append(System.Uri.EscapeDataString(ConvertToString(modelChangeRptRequestCode, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
@@ -157,7 +157,7 @@ namespace JsonManipulator
                 throw new System.ArgumentNullException("body");
     
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/changerptrequests");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/change-rpt-requests");
     
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -233,7 +233,7 @@ namespace JsonManipulator
                 throw new System.ArgumentNullException("modelChangeRptRequestCode");
     
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/changerptrequests/{modelChangeRptRequestCode}");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/change-rpt-requests/{modelChangeRptRequestCode}");
             urlBuilder_.Replace("{modelChangeRptRequestCode}", System.Uri.EscapeDataString(ConvertToString(modelChangeRptRequestCode, System.Globalization.CultureInfo.InvariantCulture)));
     
             var client_ = _httpClient;
@@ -307,7 +307,7 @@ namespace JsonManipulator
                 throw new System.ArgumentNullException("modelChangeRptRequestCode");
     
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/changerptrequests/{modelChangeRptRequestCode}");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/change-rpt-requests/{modelChangeRptRequestCode}");
             urlBuilder_.Replace("{modelChangeRptRequestCode}", System.Uri.EscapeDataString(ConvertToString(modelChangeRptRequestCode, System.Globalization.CultureInfo.InvariantCulture)));
     
             var client_ = _httpClient;
@@ -517,7 +517,7 @@ namespace JsonManipulator
                 throw new System.ArgumentNullException("body");
     
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/demopagerequests");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/demo-page-requests");
     
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -726,7 +726,7 @@ namespace JsonManipulator
         public async System.Threading.Tasks.Task<FabricationRequestListModel> GetAsync(System.Guid? modelFabricationRequestCode, int? pageNumber, int? itemCountPerPage, string orderByColumnName, bool? orderByDescending, string forceErrorMessage, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/fabricationrequests?");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/fabrication-requests?");
             if (modelFabricationRequestCode != null) 
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("modelFabricationRequestCode") + "=").Append(System.Uri.EscapeDataString(ConvertToString(modelFabricationRequestCode, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
@@ -824,7 +824,7 @@ namespace JsonManipulator
                 throw new System.ArgumentNullException("body");
     
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/fabricationrequests");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/fabrication-requests");
     
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -900,7 +900,7 @@ namespace JsonManipulator
                 throw new System.ArgumentNullException("modelFabricationRequestCode");
     
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/fabricationrequests/{modelFabricationRequestCode}");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/fabrication-requests/{modelFabricationRequestCode}");
             urlBuilder_.Replace("{modelFabricationRequestCode}", System.Uri.EscapeDataString(ConvertToString(modelFabricationRequestCode, System.Globalization.CultureInfo.InvariantCulture)));
     
             var client_ = _httpClient;
@@ -974,7 +974,7 @@ namespace JsonManipulator
                 throw new System.ArgumentNullException("modelFabricationRequestCode");
     
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/fabricationrequests/{modelFabricationRequestCode}");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/fabrication-requests/{modelFabricationRequestCode}");
             urlBuilder_.Replace("{modelFabricationRequestCode}", System.Uri.EscapeDataString(ConvertToString(modelFabricationRequestCode, System.Globalization.CultureInfo.InvariantCulture)));
     
             var client_ = _httpClient;
@@ -1393,7 +1393,7 @@ namespace JsonManipulator
         public async System.Threading.Tasks.Task<ModelFeatureListModel> GetAsync(int? pageNumber, int? itemCountPerPage, string orderByColumnName, bool? orderByDescending, string forceErrorMessage, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/modelfeatures?");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/model-features?");
             if (pageNumber != null) 
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("PageNumber") + "=").Append(System.Uri.EscapeDataString(ConvertToString(pageNumber, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
@@ -1623,7 +1623,7 @@ namespace JsonManipulator
                 throw new System.ArgumentNullException("body");
     
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/modelmerge");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/model-merge");
     
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -1832,7 +1832,7 @@ namespace JsonManipulator
         public async System.Threading.Tasks.Task<PrepRequestListModel> GetAsync(System.Guid? modelPrepRequestCode, int? pageNumber, int? itemCountPerPage, string orderByColumnName, bool? orderByDescending, string forceErrorMessage, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/preprequests?");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/prep-requests?");
             if (modelPrepRequestCode != null) 
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("modelPrepRequestCode") + "=").Append(System.Uri.EscapeDataString(ConvertToString(modelPrepRequestCode, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
@@ -1930,7 +1930,7 @@ namespace JsonManipulator
                 throw new System.ArgumentNullException("body");
     
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/preprequests");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/prep-requests");
     
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -2006,7 +2006,7 @@ namespace JsonManipulator
                 throw new System.ArgumentNullException("modelPrepRequestCode");
     
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/preprequests/{modelPrepRequestCode}");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/prep-requests/{modelPrepRequestCode}");
             urlBuilder_.Replace("{modelPrepRequestCode}", System.Uri.EscapeDataString(ConvertToString(modelPrepRequestCode, System.Globalization.CultureInfo.InvariantCulture)));
     
             var client_ = _httpClient;
@@ -2080,7 +2080,7 @@ namespace JsonManipulator
                 throw new System.ArgumentNullException("modelPrepRequestCode");
     
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/preprequests/{modelPrepRequestCode}");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/prep-requests/{modelPrepRequestCode}");
             urlBuilder_.Replace("{modelPrepRequestCode}", System.Uri.EscapeDataString(ConvertToString(modelPrepRequestCode, System.Globalization.CultureInfo.InvariantCulture)));
     
             var client_ = _httpClient;
@@ -2499,7 +2499,7 @@ namespace JsonManipulator
         public async System.Threading.Tasks.Task<ValidationRequestListModel> GetAsync(System.Guid? modelValidationRequestCode, int? pageNumber, int? itemCountPerPage, string orderByColumnName, bool? orderByDescending, string forceErrorMessage, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/validationrequests?");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/validation-requests?");
             if (modelValidationRequestCode != null) 
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("modelValidationRequestCode") + "=").Append(System.Uri.EscapeDataString(ConvertToString(modelValidationRequestCode, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
@@ -2597,7 +2597,7 @@ namespace JsonManipulator
                 throw new System.ArgumentNullException("body");
     
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/validationrequests");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/validation-requests");
     
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -2673,7 +2673,7 @@ namespace JsonManipulator
                 throw new System.ArgumentNullException("modelValidationRequestCode");
     
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/validationrequests/{modelValidationRequestCode}");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/validation-requests/{modelValidationRequestCode}");
             urlBuilder_.Replace("{modelValidationRequestCode}", System.Uri.EscapeDataString(ConvertToString(modelValidationRequestCode, System.Globalization.CultureInfo.InvariantCulture)));
     
             var client_ = _httpClient;
@@ -2747,7 +2747,7 @@ namespace JsonManipulator
                 throw new System.ArgumentNullException("modelValidationRequestCode");
     
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/validationrequests/{modelValidationRequestCode}");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/validation-requests/{modelValidationRequestCode}");
             urlBuilder_.Replace("{modelValidationRequestCode}", System.Uri.EscapeDataString(ConvertToString(modelValidationRequestCode, System.Globalization.CultureInfo.InvariantCulture)));
     
             var client_ = _httpClient;
