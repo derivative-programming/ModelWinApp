@@ -233,6 +233,28 @@ namespace JsonManipulator.OpenAPIs
         }
 
 
+        public async static Task<JsonManipulator.TemplateSetListModel> GetTemplateSetListAsync()
+        {
+            JsonManipulator.TemplateSetListModel result = null;
+
+            try
+            {
+                TemplateSetClient client = new TemplateSetClient(GetApiBaseUrl(), BuildClient());
+
+
+                result = await client.GetAsync(
+                    1, 100, "RequestUTCDateTime", true, string.Empty);
+
+            }
+            catch (System.Exception ex)
+            {
+
+            }
+
+            return result;
+        }
+
+
         public async static Task<JsonManipulator.PrepRequestListModel> GetPrepRequestDetailAsync(Guid prepRequestCode)
         {
             JsonManipulator.PrepRequestListModel result = null;
@@ -242,7 +264,7 @@ namespace JsonManipulator.OpenAPIs
                 PrepRequestClient client = new PrepRequestClient(GetApiBaseUrl(), BuildClient());
 
 
-                result = await client.GetOneAsync(prepRequestCode);
+                result = await client.GetAsync(prepRequestCode,null,null,null,null,null);
 
             }
             catch (System.Exception)
@@ -263,7 +285,7 @@ namespace JsonManipulator.OpenAPIs
                 ValidationRequestClient client = new ValidationRequestClient(GetApiBaseUrl(), BuildClient());
 
 
-                result = await client.GetOneAsync(validationRequestCode);
+                result = await client.GetAsync(validationRequestCode, null, null, null, null, null);
 
             }
             catch (System.Exception)
@@ -283,7 +305,7 @@ namespace JsonManipulator.OpenAPIs
                 ChangeRptRequestClient client = new ChangeRptRequestClient(GetApiBaseUrl(), BuildClient());
 
 
-                result = await client.GetOneAsync(ChangeRptRequestCode);
+                result = await client.GetAsync(ChangeRptRequestCode, null, null, null, null, null);
 
             }
             catch (System.Exception)
@@ -304,7 +326,7 @@ namespace JsonManipulator.OpenAPIs
                 FabricationRequestClient client = new FabricationRequestClient(GetApiBaseUrl(), BuildClient());
 
 
-                result = await client.GetOneAsync(fabricationRequestCode);
+                result = await client.GetAsync(fabricationRequestCode, null, null, null, null, null);
 
             }
             catch (System.Exception)

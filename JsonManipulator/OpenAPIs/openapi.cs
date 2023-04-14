@@ -220,21 +220,46 @@ namespace JsonManipulator
         }
     
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<ChangeRptRequestListModel> GetOneAsync(System.Guid modelChangeRptRequestCode)
+        public System.Threading.Tasks.Task<ChangeRptRequestListModel> GetAsync(System.Guid modelChangeRptRequestCodePath, System.Guid? modelChangeRptRequestCodeQuery, int? pageNumber, int? itemCountPerPage, string orderByColumnName, bool? orderByDescending, string forceErrorMessage)
         {
-            return GetOneAsync(modelChangeRptRequestCode, System.Threading.CancellationToken.None);
+            return GetAsync(modelChangeRptRequestCodePath, modelChangeRptRequestCodeQuery, pageNumber, itemCountPerPage, orderByColumnName, orderByDescending, forceErrorMessage, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ChangeRptRequestListModel> GetOneAsync(System.Guid modelChangeRptRequestCode, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<ChangeRptRequestListModel> GetAsync(System.Guid modelChangeRptRequestCodePath, System.Guid? modelChangeRptRequestCodeQuery, int? pageNumber, int? itemCountPerPage, string orderByColumnName, bool? orderByDescending, string forceErrorMessage, System.Threading.CancellationToken cancellationToken)
         {
-            if (modelChangeRptRequestCode == null)
-                throw new System.ArgumentNullException("modelChangeRptRequestCode");
+            if (modelChangeRptRequestCodePath == null)
+                throw new System.ArgumentNullException("modelChangeRptRequestCodePath");
     
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/change-rpt-requests/{modelChangeRptRequestCode}");
-            urlBuilder_.Replace("{modelChangeRptRequestCode}", System.Uri.EscapeDataString(ConvertToString(modelChangeRptRequestCode, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/change-rpt-requests/{modelChangeRptRequestCode}?");
+            urlBuilder_.Replace("{modelChangeRptRequestCode}", System.Uri.EscapeDataString(ConvertToString(modelChangeRptRequestCodePath, System.Globalization.CultureInfo.InvariantCulture)));
+            if (modelChangeRptRequestCodeQuery != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("modelChangeRptRequestCode") + "=").Append(System.Uri.EscapeDataString(ConvertToString(modelChangeRptRequestCodeQuery, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (pageNumber != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("PageNumber") + "=").Append(System.Uri.EscapeDataString(ConvertToString(pageNumber, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (itemCountPerPage != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("ItemCountPerPage") + "=").Append(System.Uri.EscapeDataString(ConvertToString(itemCountPerPage, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (orderByColumnName != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("OrderByColumnName") + "=").Append(System.Uri.EscapeDataString(ConvertToString(orderByColumnName, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (orderByDescending != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("OrderByDescending") + "=").Append(System.Uri.EscapeDataString(ConvertToString(orderByDescending, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (forceErrorMessage != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("ForceErrorMessage") + "=").Append(System.Uri.EscapeDataString(ConvertToString(forceErrorMessage, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            urlBuilder_.Length--;
     
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -887,21 +912,46 @@ namespace JsonManipulator
         }
     
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<FabricationRequestListModel> GetOneAsync(System.Guid modelFabricationRequestCode)
+        public System.Threading.Tasks.Task<FabricationRequestListModel> GetAsync(System.Guid modelFabricationRequestCodePath, System.Guid? modelFabricationRequestCodeQuery, int? pageNumber, int? itemCountPerPage, string orderByColumnName, bool? orderByDescending, string forceErrorMessage)
         {
-            return GetOneAsync(modelFabricationRequestCode, System.Threading.CancellationToken.None);
+            return GetAsync(modelFabricationRequestCodePath, modelFabricationRequestCodeQuery, pageNumber, itemCountPerPage, orderByColumnName, orderByDescending, forceErrorMessage, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FabricationRequestListModel> GetOneAsync(System.Guid modelFabricationRequestCode, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<FabricationRequestListModel> GetAsync(System.Guid modelFabricationRequestCodePath, System.Guid? modelFabricationRequestCodeQuery, int? pageNumber, int? itemCountPerPage, string orderByColumnName, bool? orderByDescending, string forceErrorMessage, System.Threading.CancellationToken cancellationToken)
         {
-            if (modelFabricationRequestCode == null)
-                throw new System.ArgumentNullException("modelFabricationRequestCode");
+            if (modelFabricationRequestCodePath == null)
+                throw new System.ArgumentNullException("modelFabricationRequestCodePath");
     
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/fabrication-requests/{modelFabricationRequestCode}");
-            urlBuilder_.Replace("{modelFabricationRequestCode}", System.Uri.EscapeDataString(ConvertToString(modelFabricationRequestCode, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/fabrication-requests/{modelFabricationRequestCode}?");
+            urlBuilder_.Replace("{modelFabricationRequestCode}", System.Uri.EscapeDataString(ConvertToString(modelFabricationRequestCodePath, System.Globalization.CultureInfo.InvariantCulture)));
+            if (modelFabricationRequestCodeQuery != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("modelFabricationRequestCode") + "=").Append(System.Uri.EscapeDataString(ConvertToString(modelFabricationRequestCodeQuery, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (pageNumber != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("PageNumber") + "=").Append(System.Uri.EscapeDataString(ConvertToString(pageNumber, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (itemCountPerPage != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("ItemCountPerPage") + "=").Append(System.Uri.EscapeDataString(ConvertToString(itemCountPerPage, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (orderByColumnName != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("OrderByColumnName") + "=").Append(System.Uri.EscapeDataString(ConvertToString(orderByColumnName, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (orderByDescending != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("OrderByDescending") + "=").Append(System.Uri.EscapeDataString(ConvertToString(orderByDescending, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (forceErrorMessage != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("ForceErrorMessage") + "=").Append(System.Uri.EscapeDataString(ConvertToString(forceErrorMessage, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            urlBuilder_.Length--;
     
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -1993,21 +2043,46 @@ namespace JsonManipulator
         }
     
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<PrepRequestListModel> GetOneAsync(System.Guid modelPrepRequestCode)
+        public System.Threading.Tasks.Task<PrepRequestListModel> GetAsync(System.Guid modelPrepRequestCodePath, System.Guid? modelPrepRequestCodeQuery, int? pageNumber, int? itemCountPerPage, string orderByColumnName, bool? orderByDescending, string forceErrorMessage)
         {
-            return GetOneAsync(modelPrepRequestCode, System.Threading.CancellationToken.None);
+            return GetAsync(modelPrepRequestCodePath, modelPrepRequestCodeQuery, pageNumber, itemCountPerPage, orderByColumnName, orderByDescending, forceErrorMessage, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<PrepRequestListModel> GetOneAsync(System.Guid modelPrepRequestCode, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<PrepRequestListModel> GetAsync(System.Guid modelPrepRequestCodePath, System.Guid? modelPrepRequestCodeQuery, int? pageNumber, int? itemCountPerPage, string orderByColumnName, bool? orderByDescending, string forceErrorMessage, System.Threading.CancellationToken cancellationToken)
         {
-            if (modelPrepRequestCode == null)
-                throw new System.ArgumentNullException("modelPrepRequestCode");
+            if (modelPrepRequestCodePath == null)
+                throw new System.ArgumentNullException("modelPrepRequestCodePath");
     
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/prep-requests/{modelPrepRequestCode}");
-            urlBuilder_.Replace("{modelPrepRequestCode}", System.Uri.EscapeDataString(ConvertToString(modelPrepRequestCode, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/prep-requests/{modelPrepRequestCode}?");
+            urlBuilder_.Replace("{modelPrepRequestCode}", System.Uri.EscapeDataString(ConvertToString(modelPrepRequestCodePath, System.Globalization.CultureInfo.InvariantCulture)));
+            if (modelPrepRequestCodeQuery != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("modelPrepRequestCode") + "=").Append(System.Uri.EscapeDataString(ConvertToString(modelPrepRequestCodeQuery, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (pageNumber != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("PageNumber") + "=").Append(System.Uri.EscapeDataString(ConvertToString(pageNumber, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (itemCountPerPage != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("ItemCountPerPage") + "=").Append(System.Uri.EscapeDataString(ConvertToString(itemCountPerPage, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (orderByColumnName != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("OrderByColumnName") + "=").Append(System.Uri.EscapeDataString(ConvertToString(orderByColumnName, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (orderByDescending != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("OrderByDescending") + "=").Append(System.Uri.EscapeDataString(ConvertToString(orderByDescending, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (forceErrorMessage != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("ForceErrorMessage") + "=").Append(System.Uri.EscapeDataString(ConvertToString(forceErrorMessage, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            urlBuilder_.Length--;
     
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -2455,6 +2530,309 @@ namespace JsonManipulator
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.8.2.0 (NJsonSchema v10.2.1.0 (Newtonsoft.Json v11.0.0.0))")]
+    public partial class TemplateSetClient 
+    {
+        private string _baseUrl = "";
+        private System.Net.Http.HttpClient _httpClient;
+        private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
+    
+        public TemplateSetClient(string baseUrl, System.Net.Http.HttpClient httpClient)
+        {
+            BaseUrl = baseUrl; 
+            _httpClient = httpClient; 
+            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings);
+        }
+    
+        private Newtonsoft.Json.JsonSerializerSettings CreateSerializerSettings()
+        {
+            var settings = new Newtonsoft.Json.JsonSerializerSettings();
+            UpdateJsonSerializerSettings(settings);
+            return settings;
+        }
+    
+        public string BaseUrl 
+        {
+            get { return _baseUrl; }
+            set { _baseUrl = value; }
+        }
+    
+        protected Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
+    
+        partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
+        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
+    
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public System.Threading.Tasks.Task<TemplateSetListModel> GetAsync(int? pageNumber, int? itemCountPerPage, string orderByColumnName, bool? orderByDescending, string forceErrorMessage)
+        {
+            return GetAsync(pageNumber, itemCountPerPage, orderByColumnName, orderByDescending, forceErrorMessage, System.Threading.CancellationToken.None);
+        }
+    
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public async System.Threading.Tasks.Task<TemplateSetListModel> GetAsync(int? pageNumber, int? itemCountPerPage, string orderByColumnName, bool? orderByDescending, string forceErrorMessage, System.Threading.CancellationToken cancellationToken)
+        {
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/template-sets?");
+            if (pageNumber != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("PageNumber") + "=").Append(System.Uri.EscapeDataString(ConvertToString(pageNumber, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (itemCountPerPage != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("ItemCountPerPage") + "=").Append(System.Uri.EscapeDataString(ConvertToString(itemCountPerPage, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (orderByColumnName != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("OrderByColumnName") + "=").Append(System.Uri.EscapeDataString(ConvertToString(orderByColumnName, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (orderByDescending != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("OrderByDescending") + "=").Append(System.Uri.EscapeDataString(ConvertToString(orderByDescending, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (forceErrorMessage != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("ForceErrorMessage") + "=").Append(System.Uri.EscapeDataString(ConvertToString(forceErrorMessage, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            urlBuilder_.Length--;
+    
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
+    
+                    PrepareRequest(client_, request_, urlBuilder_);
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+                    PrepareRequest(client_, request_, url_);
+    
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+    
+                        ProcessResponse(client_, response_);
+    
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<TemplateSetListModel>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+    
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public System.Threading.Tasks.Task<TemplateSetPostResponse> PostAsync(TemplateSetPostModel body)
+        {
+            return PostAsync(body, System.Threading.CancellationToken.None);
+        }
+    
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public async System.Threading.Tasks.Task<TemplateSetPostResponse> PostAsync(TemplateSetPostModel body, System.Threading.CancellationToken cancellationToken)
+        {
+            if (body == null)
+                throw new System.ArgumentNullException("body");
+    
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/template-sets");
+    
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
+    
+                    PrepareRequest(client_, request_, urlBuilder_);
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+                    PrepareRequest(client_, request_, url_);
+    
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+    
+                        ProcessResponse(client_, response_);
+    
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<TemplateSetPostResponse>(response_, headers_).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+    
+        protected struct ObjectResponseResult<T>
+        {
+            public ObjectResponseResult(T responseObject, string responseText)
+            {
+                this.Object = responseObject;
+                this.Text = responseText;
+            }
+    
+            public T Object { get; }
+    
+            public string Text { get; }
+        }
+    
+        public bool ReadResponseAsString { get; set; }
+        
+        protected virtual async System.Threading.Tasks.Task<ObjectResponseResult<T>> ReadObjectResponseAsync<T>(System.Net.Http.HttpResponseMessage response, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers)
+        {
+            if (response == null || response.Content == null)
+            {
+                return new ObjectResponseResult<T>(default(T), string.Empty);
+            }
+        
+            if (ReadResponseAsString)
+            {
+                var responseText = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    var typedBody = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(responseText, JsonSerializerSettings);
+                    return new ObjectResponseResult<T>(typedBody, responseText);
+                }
+                catch (Newtonsoft.Json.JsonException exception)
+                {
+                    var message = "Could not deserialize the response body string as " + typeof(T).FullName + ".";
+                    throw new ApiException(message, (int)response.StatusCode, responseText, headers, exception);
+                }
+            }
+            else
+            {
+                try
+                {
+                    using (var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
+                    using (var streamReader = new System.IO.StreamReader(responseStream))
+                    using (var jsonTextReader = new Newtonsoft.Json.JsonTextReader(streamReader))
+                    {
+                        var serializer = Newtonsoft.Json.JsonSerializer.Create(JsonSerializerSettings);
+                        var typedBody = serializer.Deserialize<T>(jsonTextReader);
+                        return new ObjectResponseResult<T>(typedBody, string.Empty);
+                    }
+                }
+                catch (Newtonsoft.Json.JsonException exception)
+                {
+                    var message = "Could not deserialize the response body stream as " + typeof(T).FullName + ".";
+                    throw new ApiException(message, (int)response.StatusCode, string.Empty, headers, exception);
+                }
+            }
+        }
+    
+        private string ConvertToString(object value, System.Globalization.CultureInfo cultureInfo)
+        {
+            if (value == null)
+            {
+                return null;
+            }
+        
+            if (value is System.Enum)
+            {
+                var name = System.Enum.GetName(value.GetType(), value);
+                if (name != null)
+                {
+                    var field = System.Reflection.IntrospectionExtensions.GetTypeInfo(value.GetType()).GetDeclaredField(name);
+                    if (field != null)
+                    {
+                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute)) 
+                            as System.Runtime.Serialization.EnumMemberAttribute;
+                        if (attribute != null)
+                        {
+                            return attribute.Value != null ? attribute.Value : name;
+                        }
+                    }
+        
+                    return System.Convert.ToString(System.Convert.ChangeType(value, System.Enum.GetUnderlyingType(value.GetType()), cultureInfo));
+                }
+            }
+            else if (value is bool) 
+            {
+                return System.Convert.ToString((bool)value, cultureInfo).ToLowerInvariant();
+            }
+            else if (value is byte[])
+            {
+                return System.Convert.ToBase64String((byte[]) value);
+            }
+            else if (value.GetType().IsArray)
+            {
+                var array = System.Linq.Enumerable.OfType<object>((System.Array) value);
+                return string.Join(",", System.Linq.Enumerable.Select(array, o => ConvertToString(o, cultureInfo)));
+            }
+        
+            var result = System.Convert.ToString(value, cultureInfo);
+            return (result is null) ? string.Empty : result;
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.8.2.0 (NJsonSchema v10.2.1.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class ValidationRequestClient 
     {
         private string _baseUrl = "";
@@ -2660,21 +3038,46 @@ namespace JsonManipulator
         }
     
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<ValidationRequestListModel> GetOneAsync(System.Guid modelValidationRequestCode)
+        public System.Threading.Tasks.Task<ValidationRequestListModel> GetAsync(System.Guid modelValidationRequestCodePath, System.Guid? modelValidationRequestCodeQuery, int? pageNumber, int? itemCountPerPage, string orderByColumnName, bool? orderByDescending, string forceErrorMessage)
         {
-            return GetOneAsync(modelValidationRequestCode, System.Threading.CancellationToken.None);
+            return GetAsync(modelValidationRequestCodePath, modelValidationRequestCodeQuery, pageNumber, itemCountPerPage, orderByColumnName, orderByDescending, forceErrorMessage, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ValidationRequestListModel> GetOneAsync(System.Guid modelValidationRequestCode, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<ValidationRequestListModel> GetAsync(System.Guid modelValidationRequestCodePath, System.Guid? modelValidationRequestCodeQuery, int? pageNumber, int? itemCountPerPage, string orderByColumnName, bool? orderByDescending, string forceErrorMessage, System.Threading.CancellationToken cancellationToken)
         {
-            if (modelValidationRequestCode == null)
-                throw new System.ArgumentNullException("modelValidationRequestCode");
+            if (modelValidationRequestCodePath == null)
+                throw new System.ArgumentNullException("modelValidationRequestCodePath");
     
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/validation-requests/{modelValidationRequestCode}");
-            urlBuilder_.Replace("{modelValidationRequestCode}", System.Uri.EscapeDataString(ConvertToString(modelValidationRequestCode, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/v1_0/validation-requests/{modelValidationRequestCode}?");
+            urlBuilder_.Replace("{modelValidationRequestCode}", System.Uri.EscapeDataString(ConvertToString(modelValidationRequestCodePath, System.Globalization.CultureInfo.InvariantCulture)));
+            if (modelValidationRequestCodeQuery != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("modelValidationRequestCode") + "=").Append(System.Uri.EscapeDataString(ConvertToString(modelValidationRequestCodeQuery, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (pageNumber != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("PageNumber") + "=").Append(System.Uri.EscapeDataString(ConvertToString(pageNumber, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (itemCountPerPage != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("ItemCountPerPage") + "=").Append(System.Uri.EscapeDataString(ConvertToString(itemCountPerPage, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (orderByColumnName != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("OrderByColumnName") + "=").Append(System.Uri.EscapeDataString(ConvertToString(orderByColumnName, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (orderByDescending != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("OrderByDescending") + "=").Append(System.Uri.EscapeDataString(ConvertToString(orderByDescending, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (forceErrorMessage != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("ForceErrorMessage") + "=").Append(System.Uri.EscapeDataString(ConvertToString(forceErrorMessage, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            urlBuilder_.Length--;
     
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -3165,6 +3568,161 @@ namespace JsonManipulator
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.2.1.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class TemplateSetPostResponse 
+    {
+        [Newtonsoft.Json.JsonProperty("success", Required = Newtonsoft.Json.Required.Always)]
+        public bool Success { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("message", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Message { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("validationError", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<ValidationError3> ValidationError { get; set; }
+    
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
+    
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties; }
+            set { _additionalProperties = value; }
+        }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.2.1.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class TemplateSetPostModel 
+    {
+        [Newtonsoft.Json.JsonProperty("zipFile", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ZipFile { get; set; }
+    
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
+    
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties; }
+            set { _additionalProperties = value; }
+        }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.2.1.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class TemplateSetListModel 
+    {
+        [Newtonsoft.Json.JsonProperty("pageNumber", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int PageNumber { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("items", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<TemplateSetListModelItem> Items { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("itemCountPerPage", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int ItemCountPerPage { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("orderByColumnName", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderByColumnName { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("orderByDescending", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool OrderByDescending { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("success", Required = Newtonsoft.Json.Required.Always)]
+        public bool Success { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("recordsTotal", Required = Newtonsoft.Json.Required.Always)]
+        public int RecordsTotal { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("recordsFiltered", Required = Newtonsoft.Json.Required.Always)]
+        public int RecordsFiltered { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("message", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Message { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("appVersion", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string AppVersion { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("request", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public TemplateSetListRequest Request { get; set; }
+    
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
+    
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties; }
+            set { _additionalProperties = value; }
+        }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.2.1.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class TemplateSetListModelItem 
+    {
+        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Name { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("title", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Title { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Description { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("displayVersion", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string DisplayVersion { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("version", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Version { get; set; }
+    
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
+    
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties; }
+            set { _additionalProperties = value; }
+        }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.2.1.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class TemplateSetListRequest 
+    {
+        [Newtonsoft.Json.JsonProperty("pageNumber", Required = Newtonsoft.Json.Required.Always)]
+        public int PageNumber { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("itemCountPerPage", Required = Newtonsoft.Json.Required.Always)]
+        public int ItemCountPerPage { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("orderByColumnName", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string OrderByColumnName { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("orderByDescending", Required = Newtonsoft.Json.Required.Always)]
+        public bool OrderByDescending { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("forceErrorMessage", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ForceErrorMessage { get; set; }
+    
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
+    
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties; }
+            set { _additionalProperties = value; }
+        }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.2.1.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class RegisterPostResponse 
     {
         [Newtonsoft.Json.JsonProperty("success", Required = Newtonsoft.Json.Required.Always)]
@@ -3177,7 +3735,7 @@ namespace JsonManipulator
         public string ModelServicesAPIKey { get; set; }
     
         [Newtonsoft.Json.JsonProperty("validationError", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ValidationError3> ValidationError { get; set; }
+        public System.Collections.Generic.ICollection<ValidationError4> ValidationError { get; set; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -3237,7 +3795,7 @@ namespace JsonManipulator
         public System.Guid ModelPrepRequestCode { get; set; }
     
         [Newtonsoft.Json.JsonProperty("validationError", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ValidationError4> ValidationError { get; set; }
+        public System.Collections.Generic.ICollection<ValidationError5> ValidationError { get; set; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -3469,7 +4027,7 @@ namespace JsonManipulator
         public string Message { get; set; }
     
         [Newtonsoft.Json.JsonProperty("validationError", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ValidationError5> ValidationError { get; set; }
+        public System.Collections.Generic.ICollection<ValidationError6> ValidationError { get; set; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -3496,7 +4054,7 @@ namespace JsonManipulator
         public string ResultModelUrl { get; set; }
     
         [Newtonsoft.Json.JsonProperty("validationError", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ValidationError6> ValidationError { get; set; }
+        public System.Collections.Generic.ICollection<ValidationError7> ValidationError { get; set; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -3653,7 +4211,7 @@ namespace JsonManipulator
         public string ModelServicesAPIKey { get; set; }
     
         [Newtonsoft.Json.JsonProperty("validationError", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ValidationError7> ValidationError { get; set; }
+        public System.Collections.Generic.ICollection<ValidationError8> ValidationError { get; set; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -3701,7 +4259,7 @@ namespace JsonManipulator
         public System.Guid ModelFabricationRequestCode { get; set; }
     
         [Newtonsoft.Json.JsonProperty("validationError", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ValidationError8> ValidationError { get; set; }
+        public System.Collections.Generic.ICollection<ValidationError9> ValidationError { get; set; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -3936,7 +4494,7 @@ namespace JsonManipulator
         public string Message { get; set; }
     
         [Newtonsoft.Json.JsonProperty("validationError", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ValidationError9> ValidationError { get; set; }
+        public System.Collections.Generic.ICollection<ValidationError10> ValidationError { get; set; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -3963,7 +4521,7 @@ namespace JsonManipulator
         public string DemoPageUrl { get; set; }
     
         [Newtonsoft.Json.JsonProperty("validationError", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ValidationError10> ValidationError { get; set; }
+        public System.Collections.Generic.ICollection<ValidationError11> ValidationError { get; set; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -4011,7 +4569,7 @@ namespace JsonManipulator
         public System.Guid ModelChangeRptRequestCode { get; set; }
     
         [Newtonsoft.Json.JsonProperty("validationError", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ValidationError11> ValidationError { get; set; }
+        public System.Collections.Generic.ICollection<ValidationError12> ValidationError { get; set; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -4248,7 +4806,7 @@ namespace JsonManipulator
         public string Message { get; set; }
     
         [Newtonsoft.Json.JsonProperty("validationError", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ValidationError12> ValidationError { get; set; }
+        public System.Collections.Generic.ICollection<ValidationError13> ValidationError { get; set; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -4495,6 +5053,27 @@ namespace JsonManipulator
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.2.1.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class ValidationError12 
+    {
+        [Newtonsoft.Json.JsonProperty("property", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Property { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("message", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Message { get; set; }
+    
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
+    
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties; }
+            set { _additionalProperties = value; }
+        }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.2.1.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class ValidationError13 
     {
         [Newtonsoft.Json.JsonProperty("property", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Property { get; set; }

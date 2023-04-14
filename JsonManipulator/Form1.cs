@@ -984,6 +984,7 @@ namespace JsonManipulator
             modelFabricationToolStripMenuItem.Enabled = true;
             modelChangeReportToolStripMenuItem.Enabled = true;
             modelValidationToolStripMenuItem.Enabled = true;
+            templateSelectionToolStripMenuItem.Enabled = true;
             logOutToolStripMenuItem.Enabled = true;
         }
         public void ShowAsLoggedOut()
@@ -994,6 +995,7 @@ namespace JsonManipulator
             modelFabricationToolStripMenuItem.Enabled = false;
             modelChangeReportToolStripMenuItem.Enabled = false;
             modelValidationToolStripMenuItem.Enabled = false;
+            templateSelectionToolStripMenuItem.Enabled = false;
             logOutToolStripMenuItem.Enabled = false;
 
         }
@@ -1577,6 +1579,24 @@ namespace JsonManipulator
         {
             txtSearch.SelectAll();
             txtSearch.Focus();
+        }
+
+        private void templateSelectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            using (var form = new frmServicesApiTemplateSetList(_model.root))
+            {
+                var result = form.ShowDialog();
+                string json = JsonConvert.SerializeObject(Form1._model, Formatting.Indented, new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore
+                });
+                File.WriteAllText(_path, json);
+                ArchiveModel();
+                Utils.SortJsonFile(_path);
+                showMessage("File Updated Successfully");
+                ShowNoUnsavedChanges();
+            }
         }
     }
     

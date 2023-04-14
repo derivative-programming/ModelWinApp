@@ -136,6 +136,12 @@
     <Compile Include="frmReportNavigation.Designer.cs">
       <DependentUpon>frmReportNavigation.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmServicesApiTemplateSetList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmServicesApiTemplateSetList.Designer.cs">
+      <DependentUpon>frmServicesApiTemplateSetList.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmUnzipFile.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -425,6 +431,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmReportNavigation.resx">
       <DependentUpon>frmReportNavigation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmServicesApiTemplateSetList.resx">
+      <DependentUpon>frmServicesApiTemplateSetList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmUnzipFile.resx">
       <DependentUpon>frmUnzipFile.cs</DependentUpon>

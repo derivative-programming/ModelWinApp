@@ -46,7 +46,7 @@ namespace JsonManipulator.Models
         [JsonProperty("navButton")]
         public List<navButton> navButton { get; set; }
         [JsonProperty("templateSet")]
-        public List<templateSet> templateSet { get; set; }
+        public List<TemplateSetObject> templateSet { get; set; }
 
 
     }
@@ -814,7 +814,7 @@ namespace JsonManipulator.Models
         public string roleRequired { get; set; }
     }
 
-    public class templateSet
+    public class TemplateSetObject
     {
         [JsonProperty("name")]
         public string name { get; set; }
