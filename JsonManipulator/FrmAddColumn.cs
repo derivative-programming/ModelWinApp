@@ -109,9 +109,19 @@ namespace JsonManipulator
                             {
                                 lineage = lineage.Remove(0, "Lineage:".Length);
                             }
-                            sourceObjProp = Utils.GetObjectPropListSelection(this._parent, lineage);
-                            sourceObj = Utils.GetObjectPropListSelectionParentObj(this._parent, lineage);
-                            if(sourceObj.isLookup == "true")
+                            if (sourceObj == null && lineage.StartsWith(this.targetObjectName + "."))
+                            {
+                                sourceObjProp = Utils.GetObjectPropListSelection(this.targetObjectName, lineage);
+                                sourceObj = Utils.GetObjectPropListSelectionParentObj(this.targetObjectName, lineage);
+                            }
+                            else
+                            { 
+                                sourceObjProp = Utils.GetObjectPropListSelection(this._parent, lineage);
+                                sourceObj = Utils.GetObjectPropListSelectionParentObj(this._parent, lineage);
+                            }
+                            //sourceObjProp = Utils.GetObjectPropListSelection(this._parent, lineage);
+                            //sourceObj = Utils.GetObjectPropListSelectionParentObj(this._parent, lineage);
+                            if(sourceObj != null && sourceObj.isLookup == "true")
                             {
                                 string nextLineage = lineage.Substring(0, lineage.Length - sourceObj.name.Length - sourceObjProp.name.Length - 2) + ".Code";
                                 nextSourceObj = Utils.GetObjectPropListSelectionParentObj(this._parent, nextLineage);
@@ -135,7 +145,7 @@ namespace JsonManipulator
                                 reportColumn.dataType = sourceObjProp.dataType;
                                 reportColumn.headerText = sourceObjProp.labelText;
                                 reportColumn.sourcePropertyName = sourceObjProp.name;
-                            }
+                                }
                             Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportColumn.Add(reportColumn);
                         }
                         }

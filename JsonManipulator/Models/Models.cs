@@ -334,6 +334,7 @@ namespace JsonManipulator.Models
 
         [JsonProperty("autoRefreshFrequencyInMinutes")]
         public string autoRefreshFrequencyInMinutes { get; set; }
+        public String isAuthorizationRequired { get; set; }
 
         [JsonProperty("isRefreshButtonHidden")]
         public string isRefreshButtonHidden { get; set; }
@@ -446,6 +447,7 @@ namespace JsonManipulator.Models
         public string isVisible { get; set; }
         [JsonProperty("isButtonCallToAction")]
         public string isButtonCallToAction { get; set; }
+        public string isIgnored { get; set; }
 
 
         public string isEnabled { get; set; }
@@ -870,6 +872,17 @@ namespace JsonManipulator.Models
         public string GetContextCodeParamName { get; set; }
         [JsonProperty("isGetWithIdAvailable")]
         public string isGetWithIdAvailable { get; set; }
+
+        [JsonProperty("isGetInitAvailable")]
+        public string isGetInitAvailable { get; set; }
+
+        [JsonProperty("apiGetInitContextTargetName")]
+        public string apiGetInitContextTargetName { get; set; }
+        [JsonProperty("apiGetInitContextObjectName")]
+        public string apiGetInitContextObjectName { get; set; }
+
+        [JsonProperty("isGetToCsvAvailable")]
+        public string isGetToCsvAvailable { get; set; }
         [JsonProperty("isPostAvailable")]
         public string isPostAvailable { get; set; }
         [JsonProperty("isPostWithIdAvailable")]

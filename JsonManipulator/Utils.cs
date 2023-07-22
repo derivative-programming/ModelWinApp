@@ -322,7 +322,7 @@ namespace JsonManipulator
                     {
                         if (fullyQualifiedLineageSelected == dbObject.name + "." + prop.name)
                         {
-                            return prop;
+                                return prop;
 
                         }
                         if (prop.isFKLookup == "true" && !prop.fKObjectName.Equals("pac",StringComparison.OrdinalIgnoreCase))
@@ -635,13 +635,13 @@ namespace JsonManipulator
             result.Add("isObjectDelete");
             //result.Add("layoutName");
             result.Add("isWFSWorkflowCreated");
-            result.Add("formTitleText");
-            result.Add("formIntroText");
+         //   result.Add("formTitleText");
+         //   result.Add("formIntroText");
             //result.Add("formFooterText");
             result.Add("formFooterImageURL");
             //result.Add("isAutoSubmit");
             //result.Add("isHeaderVisible");
-            result.Add("isLoginPage");
+         //   result.Add("isLoginPage");
             result.Add("isLogoutPage");
             result.Add("isImpersonationPage");
             result.Add("isCaptchaVisible");
@@ -695,7 +695,7 @@ namespace JsonManipulator
             result.Add("isCustomPageViewUsed");
             result.Add("isIgnoredInDocumentation");
             result.Add("targetChildObject");
-            result.Add("isAuthorizationRequired");
+            //result.Add("isAuthorizationRequired");
 
             for (int i = 0; i < result.Count; i++)
             {
@@ -744,7 +744,7 @@ namespace JsonManipulator
             //result.Add("isFKLookup".ToLower());
             //result.Add("isFKList".ToLower());
             //result.Add("isFKListInactiveIncluded".ToLower());
-            result.Add("isFKListUnknownOptionRemoved".ToLower());
+            //result.Add("isFKListUnknownOptionRemoved".ToLower());
             //result.Add("fKListOrderBy".ToLower());
             result.Add("isFKListOptionRecommended".ToLower());
             //.Add("isFKListSearchable".ToLower());
@@ -852,8 +852,8 @@ namespace JsonManipulator
             //result.Add("isFilterSectionHidden".ToLower());
             result.Add("isCachingAllowed".ToLower());
             //result.Add("isButtonDropDownAllowed".ToLower());
-            result.Add("ratingLevelColumnName".ToLower());
-            result.Add("isRatingLevelChangingRowBackgroundColor".ToLower());
+            //result.Add("ratingLevelColumnName".ToLower());
+            //result.Add("isRatingLevelChangingRowBackgroundColor".ToLower());
             result.Add("cacheExpirationInMinutes".ToLower());
             //result.Add("isFilterSectionCollapsable".ToLower());
             //result.Add("isBreadcrumbSectionHidden".ToLower());
@@ -862,7 +862,7 @@ namespace JsonManipulator
             result.Add("badgeCountPropertyName".ToLower());
 
             result.Add("isHeaderLabelsVisible".ToLower());
-            result.Add("isHeaderVisible".ToLower());
+            //result.Add("isHeaderVisible".ToLower());
             result.Add("isReportDetailLabelColumnVisible".ToLower());
             //.Add("noRowsReturnedText".ToLower());
             result.Add("formIntroText".ToLower());
@@ -958,7 +958,7 @@ namespace JsonManipulator
         {
             List<string> result = new List<string>();
             result.Add("buttonDestinationContextObjectName".ToLower());
-            result.Add("minWidth".ToLower());
+            //result.Add("minWidth".ToLower());
             //result.Add("name");
             //result.Add("isButton".ToLower());
             //result.Add("buttonText".ToLower());
@@ -968,7 +968,7 @@ namespace JsonManipulator
             result.Add("dateTimeDisplayFormat".ToLower());
             //result.Add("infoToolTipText".ToLower());
             //result.Add("isButtonCallToAction".ToLower());
-            result.Add("isHtml".ToLower());
+            //result.Add("isHtml".ToLower());
             result.Add("isColumnSumMetricAvailable".ToLower());
             result.Add("isSummaryDisplayed".ToLower());
             result.Add("isConditionallyDisplayed".ToLower());
@@ -1335,13 +1335,19 @@ namespace JsonManipulator
 
         }
 
-        public static string GetPropertyValue(ref JObject fullModel, string xpath, string propertyName)
+        public static string GetFirstPropertyValue(ref JObject fullModel, string xpath, string propertyName)
         {
             string result = string.Empty;
+            JToken jTokenResult = null;
 
-            JToken jToken = fullModel.SelectToken(xpath, true);
+            foreach ( JToken jToken in fullModel.SelectTokens(xpath,true))
+            {
+                jTokenResult = jToken;
+            }
 
-            result = ((JObject)jToken).Property(propertyName).Value.ToString();
+            //JToken jToken = fullModel.SelectToken(xpath, true);
+
+            result = ((JObject)jTokenResult).Property(propertyName).Value.ToString();
 
             return result;
         }

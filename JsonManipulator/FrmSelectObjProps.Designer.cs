@@ -37,7 +37,7 @@ namespace JsonManipulator
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(237, 169);
+            this.btnCancel.Location = new System.Drawing.Point(447, 270);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 11;
@@ -47,7 +47,7 @@ namespace JsonManipulator
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(156, 169);
+            this.btnAccept.Location = new System.Drawing.Point(366, 270);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
             this.btnAccept.TabIndex = 10;
@@ -58,10 +58,11 @@ namespace JsonManipulator
             // lbAvailableObjProps
             // 
             this.lbAvailableObjProps.FormattingEnabled = true;
+            this.lbAvailableObjProps.ItemHeight = 16;
             this.lbAvailableObjProps.Location = new System.Drawing.Point(11, 7);
             this.lbAvailableObjProps.Name = "lbAvailableObjProps";
             this.lbAvailableObjProps.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lbAvailableObjProps.Size = new System.Drawing.Size(301, 147);
+            this.lbAvailableObjProps.Size = new System.Drawing.Size(511, 244);
             this.lbAvailableObjProps.TabIndex = 12;
             // 
             // FrmSelectObjProps
@@ -69,7 +70,7 @@ namespace JsonManipulator
             this.AcceptButton = this.btnAccept;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(324, 204);
+            this.ClientSize = new System.Drawing.Size(534, 305);
             this.ControlBox = false;
             this.Controls.Add(this.lbAvailableObjProps);
             this.Controls.Add(this.btnCancel);

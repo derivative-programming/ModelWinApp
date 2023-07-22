@@ -157,19 +157,36 @@ namespace JsonManipulator
                     continue;
                 }
 
-                string currentValue = Utils.GetPropertyValue(ref fullModel,
-                    changeRequest.ModelXPath,
-                    changeRequest.PropertyName);
+                //string currentValue = Utils.GetPropertyValue(ref fullModel,
+                //    changeRequest.ModelXPath,
+                //    changeRequest.PropertyName);
 
-                if(currentValue != changeRequest.OldValue)
+                foreach (JToken jToken in fullModel.SelectTokens(changeRequest.ModelXPath, true))
                 {
-                    continue;
+                    string currentValue =  ((JObject)jToken).Property(changeRequest.PropertyName).Value.ToString();
+
+
+                    if (currentValue == changeRequest.OldValue)
+                    {
+                        ((JObject)jToken).Property(changeRequest.PropertyName).Value = changeRequest.NewValue;
+                    }
                 }
 
-                Utils.UpdatePropertyValue(ref fullModel,
-                    changeRequest.ModelXPath,
-                    changeRequest.PropertyName,
-                    changeRequest.NewValue);
+                //JToken jToken = fullModel.SelectToken(xpath, true);
+
+                //result = ((JObject)jTokenResult).Property(propertyName).Value.ToString();
+
+
+
+                //if (currentValue != changeRequest.OldValue)
+                //{
+                //    continue;
+                //}
+
+                //Utils.UpdatePropertyValue(ref fullModel,
+                //    changeRequest.ModelXPath,
+                //    changeRequest.PropertyName,
+                //    changeRequest.NewValue);
 
             }
                
