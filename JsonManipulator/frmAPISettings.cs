@@ -533,5 +533,11 @@ namespace JsonManipulator
             });
 
         }
+
+        private void btnSort_Click(object sender, EventArgs e)
+        {
+            this._apiSite.apiEndPoint = this._apiSite.apiEndPoint.OrderBy(x => x.name).ToList();
+            setEndPointsList();
+        }
     }
 }

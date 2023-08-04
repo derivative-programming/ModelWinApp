@@ -62,9 +62,10 @@ namespace JsonManipulator
             this.btnEndPointsAdd = new System.Windows.Forms.Button();
             this.btnColumnsMoveUp = new System.Windows.Forms.Button();
             this.btnColumnsMoveDown = new System.Windows.Forms.Button();
-            this.grpMain = new System.Windows.Forms.GroupBox();
             this.tabJSON = new System.Windows.Forms.TabPage();
             this.rtbJSON = new System.Windows.Forms.RichTextBox();
+            this.grpMain = new System.Windows.Forms.GroupBox();
+            this.btnSort = new System.Windows.Forms.Button();
             tabSettings = new System.Windows.Forms.TabPage();
             tabSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataProperties)).BeginInit();
@@ -83,8 +84,8 @@ namespace JsonManipulator
             this.pnlEndPointsLeft.SuspendLayout();
             this.pnlEndPointsLeftTop.SuspendLayout();
             this.pnlEndPointsLeftBottom.SuspendLayout();
-            this.grpMain.SuspendLayout();
             this.tabJSON.SuspendLayout();
+            this.grpMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabSettings
@@ -394,6 +395,7 @@ namespace JsonManipulator
             // 
             // pnlEndPointsLeftBottom
             // 
+            this.pnlEndPointsLeftBottom.Controls.Add(this.btnSort);
             this.pnlEndPointsLeftBottom.Controls.Add(this.btnEndPointsAdd);
             this.pnlEndPointsLeftBottom.Controls.Add(this.btnColumnsMoveUp);
             this.pnlEndPointsLeftBottom.Controls.Add(this.btnColumnsMoveDown);
@@ -433,17 +435,6 @@ namespace JsonManipulator
             this.btnColumnsMoveDown.UseVisualStyleBackColor = true;
             this.btnColumnsMoveDown.Click += new System.EventHandler(this.btnColumnsMoveDown_Click);
             // 
-            // grpMain
-            // 
-            this.grpMain.Controls.Add(this.tabControl1);
-            this.grpMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grpMain.Location = new System.Drawing.Point(0, 0);
-            this.grpMain.Name = "grpMain";
-            this.grpMain.Size = new System.Drawing.Size(800, 496);
-            this.grpMain.TabIndex = 1;
-            this.grpMain.TabStop = false;
-            this.grpMain.Text = "grpMain";
-            // 
             // tabJSON
             // 
             this.tabJSON.Controls.Add(this.rtbJSON);
@@ -465,6 +456,27 @@ namespace JsonManipulator
             this.rtbJSON.TabIndex = 0;
             this.rtbJSON.Text = "";
             this.rtbJSON.TabIndexChanged += new System.EventHandler(this.rtbJSON_TabIndexChanged);
+            // 
+            // grpMain
+            // 
+            this.grpMain.Controls.Add(this.tabControl1);
+            this.grpMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpMain.Location = new System.Drawing.Point(0, 0);
+            this.grpMain.Name = "grpMain";
+            this.grpMain.Size = new System.Drawing.Size(800, 496);
+            this.grpMain.TabIndex = 1;
+            this.grpMain.TabStop = false;
+            this.grpMain.Text = "grpMain";
+            // 
+            // btnSort
+            // 
+            this.btnSort.Location = new System.Drawing.Point(84, 6);
+            this.btnSort.Name = "btnSort";
+            this.btnSort.Size = new System.Drawing.Size(75, 23);
+            this.btnSort.TabIndex = 5;
+            this.btnSort.Text = "&Sort";
+            this.btnSort.UseVisualStyleBackColor = true;
+            this.btnSort.Click += new System.EventHandler(this.btnSort_Click);
             // 
             // frmAPISettings
             // 
@@ -494,8 +506,8 @@ namespace JsonManipulator
             this.pnlEndPointsLeft.ResumeLayout(false);
             this.pnlEndPointsLeftTop.ResumeLayout(false);
             this.pnlEndPointsLeftBottom.ResumeLayout(false);
-            this.grpMain.ResumeLayout(false);
             this.tabJSON.ResumeLayout(false);
+            this.grpMain.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -537,5 +549,6 @@ namespace JsonManipulator
         private System.Windows.Forms.Panel pnlEndPointsLeftBottom;
         private System.Windows.Forms.TabPage tabJSON;
         private System.Windows.Forms.RichTextBox rtbJSON;
+        private System.Windows.Forms.Button btnSort;
     }
 }
