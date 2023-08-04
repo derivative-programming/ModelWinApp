@@ -161,7 +161,7 @@ namespace JsonManipulator
                     this.UseWaitCursor = false;
                     await LoadItemsAsync();
 
-                    ((Form1)Application.OpenForms["Form1"]).showMessage("Fabrication request added successfully"); 
+                    ((Form1)Application.OpenForms["Form1"]).showMessage("Validation request added successfully"); 
                 }
             }
              
