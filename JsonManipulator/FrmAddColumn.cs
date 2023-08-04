@@ -54,6 +54,12 @@ namespace JsonManipulator
                 return;
             }
 
+            if (txtName.Text.Trim().Length == 0)
+            {
+                ShowValidationError("Name is required");
+                return;
+            }
+
             if (txtName.Text.Trim().Length > 100)
             {
                 ShowValidationError("The name length cannot exceed 100 characters.");

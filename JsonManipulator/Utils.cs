@@ -491,7 +491,9 @@ namespace JsonManipulator
               
             bool itemAdded = false;
             foreach (ObjectMap dbObject in nameSpaceObject.ObjectMap)
-            { 
+            {
+                if (dbObject.report == null)
+                    continue;
                 foreach (Report report in dbObject.report)
                 {
                     if (!report.name.Equals(targetReportName, StringComparison.OrdinalIgnoreCase))
