@@ -451,7 +451,9 @@ namespace JsonManipulator.Models
 
 
         public string isEnabled { get; set; }
-        public string conditionalVisiblePropertyName { get; set; } 
+        public string conditionalVisiblePropertyName { get; set; }
+        public string buttonBadgePropertyName { get; set; }
+        public string buttonTypeDisplayOrder { get; set; }
     }
     public class reportParam
     {

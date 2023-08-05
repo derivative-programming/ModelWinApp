@@ -219,6 +219,8 @@ namespace JsonManipulator
 
             FrmAddNavButton frmAddNavButton = new FrmAddNavButton();
             frmAddNavButton.ShowDialog();
+
+            setNavButtonsList();
         }
 
 
