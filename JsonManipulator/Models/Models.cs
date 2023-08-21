@@ -452,8 +452,11 @@ namespace JsonManipulator.Models
 
         public string isEnabled { get; set; }
         public string conditionalVisiblePropertyName { get; set; }
+        public string isButtonBadgeVisible { get; set; }
         public string buttonBadgePropertyName { get; set; }
         public string buttonTypeDisplayOrder { get; set; }
+        public string accessKey { get; set; }
+        public string isAccessKeyAvailable { get; set; }
     }
     public class reportParam
     {
@@ -641,6 +644,9 @@ namespace JsonManipulator.Models
         public string sourceObjectName { get; set; }
         [JsonProperty("sourcePropertyName")]
         public string sourcePropertyName { get; set; }
+        public string isAutoCompleteAddressSource { get; set; }
+        public string autoCompleteAddressSourceName { get; set; }
+        public string autoCompleteAddressTargetType { get; set; }
 
     }
     public class objectWorkflowOutputVar
@@ -702,6 +708,8 @@ namespace JsonManipulator.Models
         public string isButtonCallToAction { get; set; }
         public string introText { get; set; }
         public string conditionalVisiblePropertyName { get; set; }
+        public string accessKey { get; set; }
+        public string isAccessKeyAvailable { get; set; }
     }
     public class dynaFlowTask
     {
@@ -920,6 +928,7 @@ namespace JsonManipulator.Models
         public string apiDeleteContextTargetName { get; set; }
         [JsonProperty("isEndPointLoggingEnabled")]
         public string isEndPointLoggingEnabled { get; set; }
+        public String isIgnored { get; set; }
     }
     public class SelectListItem
     {

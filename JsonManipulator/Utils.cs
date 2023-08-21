@@ -69,6 +69,20 @@ namespace JsonManipulator
             _booleans.Rows.Add("false", "false");
             return _booleans;
         }
+        public static DataTable getAutoCompleteAddressTargetTypes()
+        {
+            DataTable _booleans = new DataTable();
+            _booleans.Columns.Add("Display");
+            _booleans.Columns.Add("Value");
+            _booleans.Rows.Add("", "");
+            _booleans.Rows.Add("AddressLine1", "AddressLine1");
+            _booleans.Rows.Add("AddressLine2", "AddressLine2");
+            _booleans.Rows.Add("City", "City");
+            _booleans.Rows.Add("StateAbbrev", "StateAbbrev");
+            _booleans.Rows.Add("Zip", "Zip");
+            _booleans.Rows.Add("Country", "Country");
+            return _booleans;
+        }
         public static DataTable getNavButtonTypes()
         {
             DataTable _booleans = new DataTable();

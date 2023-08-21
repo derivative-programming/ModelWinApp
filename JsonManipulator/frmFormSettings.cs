@@ -572,6 +572,15 @@ namespace JsonManipulator
                     l_objGridDropbox.DisplayMember = "Display";
                     l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
                 }
+                if (propertyName.Equals("AutoCompleteAddressTargetType", StringComparison.OrdinalIgnoreCase))
+                {
+                    // On click of datagridview cell, attched combobox with this click cell of datagridview  
+                    gridControls[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
+                    l_objGridDropbox.DataSource = Utils.getAutoCompleteAddressTargetTypes(); // Bind combobox with datasource.  
+                    l_objGridDropbox.ValueMember = "Value";
+                    l_objGridDropbox.DisplayMember = "Display";
+                    l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+                }
                 if (propertyName.Equals("SourceObjectName", StringComparison.OrdinalIgnoreCase))
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview   

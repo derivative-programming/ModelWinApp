@@ -163,12 +163,20 @@ namespace JsonManipulator
 
                 foreach (JToken jToken in fullModel.SelectTokens(changeRequest.ModelXPath, true))
                 {
-                    string currentValue =  ((JObject)jToken).Property(changeRequest.PropertyName).Value.ToString();
+                    string currentValue = string.Empty;
 
-
-                    if (currentValue == changeRequest.OldValue)
+                    if (((JObject)jToken).Property(changeRequest.PropertyName) != null)
                     {
-                        ((JObject)jToken).Property(changeRequest.PropertyName).Value = changeRequest.NewValue;
+                        currentValue = ((JObject)jToken).Property(changeRequest.PropertyName).Value.ToString();
+
+                        if (currentValue == changeRequest.OldValue)
+                        {
+                            ((JObject)jToken).Property(changeRequest.PropertyName).Value = changeRequest.NewValue;
+                        }
+                    }
+                    else
+                    {
+                        ((JObject)jToken).Add(changeRequest.PropertyName, changeRequest.NewValue);
                     }
                 }
 
