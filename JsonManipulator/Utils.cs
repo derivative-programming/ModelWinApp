@@ -81,6 +81,8 @@ namespace JsonManipulator
             _booleans.Rows.Add("StateAbbrev", "StateAbbrev");
             _booleans.Rows.Add("Zip", "Zip");
             _booleans.Rows.Add("Country", "Country");
+            _booleans.Rows.Add("Latitude", "Latitude");
+            _booleans.Rows.Add("Longitude", "Longitude");
             return _booleans;
         }
         public static DataTable getNavButtonTypes()
@@ -658,7 +660,7 @@ namespace JsonManipulator
             //result.Add("isAutoSubmit");
             //result.Add("isHeaderVisible");
          //   result.Add("isLoginPage");
-            result.Add("isLogoutPage");
+            //result.Add("isLogoutPage");
             result.Add("isImpersonationPage");
             result.Add("isCaptchaVisible");
             result.Add("isCreditCardEntryUsed");

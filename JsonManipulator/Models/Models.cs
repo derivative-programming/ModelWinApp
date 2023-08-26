@@ -375,6 +375,8 @@ namespace JsonManipulator.Models
         public string noRowsReturnedText { get; set; }
         public string formIntroText { get; set; }
         public string isIgnoredInDocumentation { get; set; }
+        public string defaultPageSize { get; set; }
+        public string isPageUserSettingsDistinctForApp { get; set; }
         public string isAzureBlobStorageUsed { get; set; }
         public string isAzureTableUsed { get; set; }
         public string azureTableNameOverride { get; set; }
@@ -548,6 +550,8 @@ namespace JsonManipulator.Models
         public String isImageURL { get; set; }
         public String isEncrypted { get; set; }
         public String isIgnored { get; set; }
+        public String buttonAccessKey { get; set; }
+        public String isButtonAccessKeyAvailable { get; set; }
 
     }
     public class objectWorkflow
