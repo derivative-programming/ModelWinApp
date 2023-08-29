@@ -127,7 +127,8 @@ namespace JsonManipulator
                             }
                             //sourceObjProp = Utils.GetObjectPropListSelection(this._parent, lineage);
                             //sourceObj = Utils.GetObjectPropListSelectionParentObj(this._parent, lineage);
-                            if(sourceObj != null && sourceObj.isLookup == "true")
+                            if(sourceObj != null && sourceObj.isLookup == "true" &&
+                                (lineage.Length - sourceObj.name.Length - sourceObjProp.name.Length - 2) > 0)
                             {
                                 string nextLineage = lineage.Substring(0, lineage.Length - sourceObj.name.Length - sourceObjProp.name.Length - 2) + ".Code";
                                 nextSourceObj = Utils.GetObjectPropListSelectionParentObj(this._parent, nextLineage);
