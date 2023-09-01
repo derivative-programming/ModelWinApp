@@ -377,6 +377,7 @@ namespace JsonManipulator.Models
         public string isIgnoredInDocumentation { get; set; }
         public string defaultPageSize { get; set; }
         public string isPageUserSettingsDistinctForApp { get; set; }
+        public string isFilterPersistant { get; set; }
         public string isAzureBlobStorageUsed { get; set; }
         public string isAzureTableUsed { get; set; }
         public string azureTableNameOverride { get; set; }

@@ -942,7 +942,7 @@ namespace JsonManipulator
             List<string> result = new List<string>();
             result.Add("destinationContextObjectName".ToLower());
             //result.Add("isEnabled".ToLower());
-            result.Add("conditionalVisiblePropertyName".ToLower());
+           // result.Add("conditionalVisiblePropertyName".ToLower());
 
             for (int i = 0; i < result.Count; i++)
             {
