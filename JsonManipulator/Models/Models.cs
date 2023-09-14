@@ -17,6 +17,10 @@ namespace JsonManipulator.Models
     }
     public class root
     {
+        public string appName { get; set; }
+        public string companyLegalName { get; set; }
+        public string companyDomain { get; set; }
+
         [JsonProperty("projectName")]
         public string ProjectName { get; set; }
         [JsonProperty("projectCode")]
