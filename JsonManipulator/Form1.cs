@@ -1113,7 +1113,7 @@ namespace JsonManipulator
             if (outputFolder.Trim().Length == 0)
                 return;
 
-            string demoFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\demo\bootstrap5\";
+            string demoFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\demo\bootstrap_5\";
 
             if (!System.IO.Directory.Exists(demoFolder))
                 return;
@@ -1143,7 +1143,7 @@ namespace JsonManipulator
             if (outputFolder.Trim().Length == 0)
                 return;
 
-            string demoFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\demo\bootstrap5\";
+            string demoFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\demo\bootstrap_5\";
 
             if (!System.IO.Directory.Exists(demoFolder))
                 return;
@@ -1173,7 +1173,7 @@ namespace JsonManipulator
             if (outputFolder.Trim().Length == 0)
                 return;
 
-            string demoFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\demo\bootstrap5\";
+            string demoFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\demo\bootstrap_5\";
 
             if (!System.IO.Directory.Exists(demoFolder))
                 return;
@@ -1206,7 +1206,7 @@ namespace JsonManipulator
             if (outputFolder.Trim().Length == 0)
                 return;
 
-            string demoFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\demo\bootstrap5\";
+            string demoFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\demo\bootstrap_5\";
 
             if (!System.IO.Directory.Exists(demoFolder))
                 return;
