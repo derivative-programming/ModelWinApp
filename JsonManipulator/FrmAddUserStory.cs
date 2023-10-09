@@ -43,6 +43,7 @@ namespace JsonManipulator
 
             Models.UserStoryObject userStory = new UserStoryObject();
             userStory.storyText = txtUserStory.Text.Trim();
+            userStory.name = Guid.NewGuid().ToString();
             userStory.isStoryProcessed = "false";
             Form1._model.root.NameSpaceObjects.FirstOrDefault().UserStoryObject.Add(userStory);
              ((Form1)Application.OpenForms["Form1"]).showMessage("User story created successfully");
@@ -85,6 +86,7 @@ namespace JsonManipulator
 
                             Models.UserStoryObject userStory = new UserStoryObject();
                             userStory.storyText = itemName;
+                            userStory.name = Guid.NewGuid().ToString();
                             userStory.isStoryProcessed = "false";
                             Form1._model.root.NameSpaceObjects.FirstOrDefault().UserStoryObject.Add(userStory);
                              
