@@ -30,6 +30,8 @@ namespace JsonManipulator
                 
             setModelFeatureList();
             setNavButtonsList();
+            setLexicon();
+            setUserStories();
             splitter4.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmSettings.splitter4.SplitPosition", "200"));
             splitter1.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmSettings.splitter1.SplitPosition", "200"));
             tabControl1.SelectedIndex = System.Convert.ToInt32(LocalStorage.GetValue("frmSettings.tabControl1.SelectedIndex", "0"));
@@ -399,6 +401,112 @@ namespace JsonManipulator
                 navButton item = Form1._model.root.navButton.ElementAt(selectedIndex); 
                 Form1._model.root.navButton.RemoveAt(selectedIndex); 
                 setNavButtonsList(); 
+            }
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void setLexicon()
+        {
+            List<PropertyValue> propertyValues = new List<PropertyValue>();
+            gridLexicon.Columns.Clear(); 
+            foreach (var prop in _root.NameSpaceObjects[0].LexiconObject.OrderBy(x => x.internalTextValue).ToList())
+            { 
+                propertyValues.Add(new PropertyValue { Property = prop.internalTextValue, Value = prop.displayTextValue }); ;
+            }
+            gridLexicon.DataSource = propertyValues;
+            if (gridLexicon.Columns.Count > 0)
+            {
+                gridLexicon.Columns[0].ReadOnly = true;
+            }
+        }
+
+        private void gridLexicon_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (gridLexicon.DataSource != null)
+            {
+                string property = gridLexicon.Rows[e.RowIndex].Cells[0].Value.ToString();
+                string value = string.Empty;
+                if (gridLexicon.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                {
+                    value = gridLexicon.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                }
+                _root.NameSpaceObjects[0].LexiconObject.Where(x => x.internalTextValue == property).ToList()[0].displayTextValue = value; 
+                 
+            }
+        }
+
+
+        public void setUserStories()
+        {
+            List<PropertyValue> propertyValues = new List<PropertyValue>();
+            gridUserStories.Columns.Clear();
+
+            if (Form1._model.root.NameSpaceObjects.FirstOrDefault().UserStoryObject == null)
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().UserStoryObject = new List<Models.UserStoryObject>();
+
+            foreach (var prop in _root.NameSpaceObjects[0].UserStoryObject.OrderBy(x => x.storyText).ToList())
+            {
+                propertyValues.Add(new PropertyValue { Property = prop.storyText, Value = prop.isIgnored }); ;
+            }
+
+            gridUserStories.DataSource = propertyValues;
+            if (gridUserStories.Columns.Count > 0)
+            {
+                gridUserStories.Columns[0].ReadOnly = true;
+                gridUserStories.Columns[0].HeaderText = "User Story";
+                gridUserStories.Columns[1].HeaderText = "Is Ignored";
+            }
+        }
+
+        private void gridUserStories_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (gridUserStories.DataSource != null && e.RowIndex > -1)
+            {
+                string property = gridUserStories.Rows[e.RowIndex].Cells[0].Value.ToString();
+                string value = string.Empty;
+
+                if (gridUserStories.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                {
+                    value = gridUserStories.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                }
+
+                if (value != null && !Utils.getBooleanList().Contains(value))
+                { 
+                    return;
+                }
+                _root.NameSpaceObjects[0].UserStoryObject.Where(x => x.storyText == property).ToList()[0].isIgnored = value;
+
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            FrmAddUserStory frmAddUserStory = new FrmAddUserStory();
+            frmAddUserStory.ShowDialog();
+        }
+
+        private void gridUserStories_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex > 0)
+            {
+                // Bind grid cell with combobox and than bind combobox with datasource.  
+                DataGridViewComboBoxCell l_objGridDropbox = new DataGridViewComboBoxCell();
+                string propertyName = gridUserStories.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value.ToString();
+                // Check the column  cell, in which it click.   
+                // On click of datagridview cell, attched combobox with this click cell of datagridview  
+                gridUserStories[e.ColumnIndex, e.RowIndex] = l_objGridDropbox;
+                l_objGridDropbox.DataSource = Utils.getBooleans(); // Bind combobox with datasource.  
+                l_objGridDropbox.ValueMember = "Value";
+                l_objGridDropbox.DisplayMember = "Display";
+                l_objGridDropbox.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+                
+
             }
         }
     }

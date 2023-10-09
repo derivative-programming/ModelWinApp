@@ -73,7 +73,20 @@ namespace JsonManipulator.Models
         [JsonProperty("internalTextValue")]
         public string internalTextValue { get; set; }
         [JsonProperty("displayTextValue")]
-        public string displayTextValue { get; set; } 
+        public string displayTextValue { get; set; }
+    }
+    public class UserStoryObject
+    {
+        [JsonProperty("name")]
+        public string name { get; set; }
+        [JsonProperty("storyNumber")]
+        public string storyNumber { get; set; }
+        [JsonProperty("storyText")]
+        public string storyText { get; set; }
+        [JsonProperty("isIgnored")]
+        public string isIgnored { get; set; }
+        [JsonProperty("isStoryProcessed")]
+        public string isStoryProcessed { get; set; } 
     }
     public class NameSpaceObject
     {
@@ -98,6 +111,8 @@ namespace JsonManipulator.Models
         public List<ModelFeatureObject> ModelFeatureObject { get; set; }
         [JsonProperty("lexicon")]
         public List<LexiconObject> LexiconObject { get; set; }
+        [JsonProperty("userStory")]
+        public List<UserStoryObject> UserStoryObject { get; set; }
         [JsonProperty("isModelFeatureConfigUserDBVeiwer")]
         public string isModelFeatureConfigUserDBVeiwer { get; set; }
         [JsonProperty("isModelFeatureConfigUserDBEditor")]

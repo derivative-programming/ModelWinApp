@@ -935,5 +935,12 @@ namespace JsonManipulator
             frmAddButton.ShowDialog();
             setButtonsList();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+            FrmAddButton frmAddButton = new FrmAddButton(_rpt.name, _ownerObject.name, ButtonType.BREADCRUMB);
+            frmAddButton.ShowDialog();
+        }
     }
 }

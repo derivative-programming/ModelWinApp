@@ -100,6 +100,45 @@ namespace JsonManipulator
                     ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setButtonsList();
                     this.Close();
                     break;
+                case ButtonType.BREADCRUMB:
+
+                    if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportButton == null)
+                    {
+                        Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportButton = new List<reportButton>();
+                    }
+
+                    txtName.Text = Utils.Capitalize(txtName.Text).Trim();
+                    if (ReportButtonItemExists(txtName.Text))
+                    {
+                        ShowValidationError("Name already exists.");
+                        return;
+                    }
+
+                    if (txtName.Text.Trim().Contains(" "))
+                    {
+                        ShowValidationError("Remove Spaces from name.");
+                        return;
+                    }
+
+                    if (txtName.Text.Trim().Length > 100)
+                    {
+                        ShowValidationError("The name length cannot exceed 100 characters.");
+                        return;
+                    }
+
+                    if (!txtName.Text.Trim().ToLower().EndsWith("breadcrumb"))
+                    {
+                        ShowValidationError("The name must end with 'Breadcrumb'.");
+                        return;
+                    }
+
+                    Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportButton.Add(new reportButton { buttonName = txtName.Text.Trim(), buttonType = "breadcrumb" });
+
+                    ((Form1)Application.OpenForms["Form1"]).showMessage("Button created successfully");
+                    ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
+                    ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setButtonsList();
+                    this.Close();
+                    break;
                 case ButtonType.NAV_BUTTON:
 
                     if (Form1._model.root.navButton == null)

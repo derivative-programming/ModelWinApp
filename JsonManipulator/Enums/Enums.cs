@@ -11,7 +11,8 @@ namespace JsonManipulator.Enums
     {
         REPORT,
         FORM,
-        NAV_BUTTON
+        NAV_BUTTON,
+        BREADCRUMB
     }
 
     public enum ModelSearchOptions
