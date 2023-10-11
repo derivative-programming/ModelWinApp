@@ -1418,6 +1418,11 @@ namespace JsonManipulator
 
             return ((Form1)Application.OpenForms["Form1"]).GetProjectName();
         }
+        public static string GetProjectVersionNumber()
+        {
+
+            return ((Form1)Application.OpenForms["Form1"]).GetProjectVersionNumber();
+        }
 
         public static Models.propSubscription GetPropSubscriptionFor(Models.ObjectMap objectMap, string name)
         {

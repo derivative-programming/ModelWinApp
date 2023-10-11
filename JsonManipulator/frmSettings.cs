@@ -16,11 +16,13 @@ namespace JsonManipulator
     {
         root _root = new root();
         private bool _displayModelFeaturesTab = false;
-        public frmSettings(root _root, bool displayModelFeaturesTab)
+        private bool _displayUserStoriesTab = false;
+        public frmSettings(root _root, bool displayModelFeaturesTab, bool displayUserStoriesTab)
         {
             InitializeComponent();
             this._root = _root;
             _displayModelFeaturesTab = displayModelFeaturesTab;
+            _displayUserStoriesTab = displayUserStoriesTab;
         }
 
         private void frmSettings_Load(object sender, EventArgs e)
@@ -38,6 +40,10 @@ namespace JsonManipulator
             if (_displayModelFeaturesTab)
             {
                 tabControl1.SelectedIndex = 1;
+            }
+            if (_displayUserStoriesTab)
+            {
+                tabControl1.SelectedIndex = 4;
             }
         }
         private void setSetting()

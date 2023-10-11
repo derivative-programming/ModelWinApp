@@ -76,17 +76,20 @@ namespace JsonManipulator
             this.Property = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlButtonsLeft = new System.Windows.Forms.Panel();
+            this.pnlButtonsLeftTop = new System.Windows.Forms.Panel();
+            this.lstButtons = new System.Windows.Forms.ListBox();
             this.pnlButtonsLeftBottom = new System.Windows.Forms.Panel();
+            this.btnFollowButton = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.btnAddMultiSelectButton = new System.Windows.Forms.Button();
             this.btnButtonMoveUp = new System.Windows.Forms.Button();
             this.btnButtonMoveDown = new System.Windows.Forms.Button();
             this.btnButtonAdd = new System.Windows.Forms.Button();
-            this.pnlButtonsLeftTop = new System.Windows.Forms.Panel();
-            this.lstButtons = new System.Windows.Forms.ListBox();
             this.tabJSON = new System.Windows.Forms.TabPage();
             this.rtbJSON = new System.Windows.Forms.RichTextBox();
             this.grpMain = new System.Windows.Forms.GroupBox();
+            this.btnFollow2 = new System.Windows.Forms.Button();
+            this.chkVisibleColumnsOnly = new System.Windows.Forms.CheckBox();
             tabSettings = new System.Windows.Forms.TabPage();
             tabSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataProperties)).BeginInit();
@@ -110,8 +113,8 @@ namespace JsonManipulator
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridButtons)).BeginInit();
             this.pnlButtonsLeft.SuspendLayout();
-            this.pnlButtonsLeftBottom.SuspendLayout();
             this.pnlButtonsLeftTop.SuspendLayout();
+            this.pnlButtonsLeftBottom.SuspendLayout();
             this.tabJSON.SuspendLayout();
             this.grpMain.SuspendLayout();
             this.SuspendLayout();
@@ -421,7 +424,7 @@ namespace JsonManipulator
             this.pnlColumnsLeftTop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlColumnsLeftTop.Location = new System.Drawing.Point(0, 0);
             this.pnlColumnsLeftTop.Name = "pnlColumnsLeftTop";
-            this.pnlColumnsLeftTop.Size = new System.Drawing.Size(219, 221);
+            this.pnlColumnsLeftTop.Size = new System.Drawing.Size(219, 163);
             this.pnlColumnsLeftTop.TabIndex = 8;
             // 
             // lstColumns
@@ -431,12 +434,14 @@ namespace JsonManipulator
             this.lstColumns.ItemHeight = 16;
             this.lstColumns.Location = new System.Drawing.Point(0, 0);
             this.lstColumns.Name = "lstColumns";
-            this.lstColumns.Size = new System.Drawing.Size(219, 221);
+            this.lstColumns.Size = new System.Drawing.Size(219, 163);
             this.lstColumns.TabIndex = 1;
             this.lstColumns.SelectedIndexChanged += new System.EventHandler(this.lstColumns_SelectedIndexChanged);
             // 
             // pnlColumnsLeftBottom
             // 
+            this.pnlColumnsLeftBottom.Controls.Add(this.chkVisibleColumnsOnly);
+            this.pnlColumnsLeftBottom.Controls.Add(this.btnFollow2);
             this.pnlColumnsLeftBottom.Controls.Add(this.btnCopyList);
             this.pnlColumnsLeftBottom.Controls.Add(this.chkSubscribeToOwnerObject);
             this.pnlColumnsLeftBottom.Controls.Add(this.chkSubscribeToTargetChild);
@@ -446,14 +451,14 @@ namespace JsonManipulator
             this.pnlColumnsLeftBottom.Controls.Add(this.btnColumnsMoveUp);
             this.pnlColumnsLeftBottom.Controls.Add(this.btnColumnsMoveDown);
             this.pnlColumnsLeftBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlColumnsLeftBottom.Location = new System.Drawing.Point(0, 221);
+            this.pnlColumnsLeftBottom.Location = new System.Drawing.Point(0, 163);
             this.pnlColumnsLeftBottom.Name = "pnlColumnsLeftBottom";
-            this.pnlColumnsLeftBottom.Size = new System.Drawing.Size(219, 225);
+            this.pnlColumnsLeftBottom.Size = new System.Drawing.Size(219, 283);
             this.pnlColumnsLeftBottom.TabIndex = 7;
             // 
             // btnCopyList
             // 
-            this.btnCopyList.Location = new System.Drawing.Point(3, 148);
+            this.btnCopyList.Location = new System.Drawing.Point(5, 200);
             this.btnCopyList.Name = "btnCopyList";
             this.btnCopyList.Size = new System.Drawing.Size(52, 23);
             this.btnCopyList.TabIndex = 9;
@@ -464,7 +469,7 @@ namespace JsonManipulator
             // chkSubscribeToOwnerObject
             // 
             this.chkSubscribeToOwnerObject.AutoSize = true;
-            this.chkSubscribeToOwnerObject.Location = new System.Drawing.Point(6, 180);
+            this.chkSubscribeToOwnerObject.Location = new System.Drawing.Point(5, 229);
             this.chkSubscribeToOwnerObject.Name = "chkSubscribeToOwnerObject";
             this.chkSubscribeToOwnerObject.Size = new System.Drawing.Size(245, 21);
             this.chkSubscribeToOwnerObject.TabIndex = 8;
@@ -475,7 +480,7 @@ namespace JsonManipulator
             // chkSubscribeToTargetChild
             // 
             this.chkSubscribeToTargetChild.AutoSize = true;
-            this.chkSubscribeToTargetChild.Location = new System.Drawing.Point(6, 203);
+            this.chkSubscribeToTargetChild.Location = new System.Drawing.Point(3, 256);
             this.chkSubscribeToTargetChild.Name = "chkSubscribeToTargetChild";
             this.chkSubscribeToTargetChild.Size = new System.Drawing.Size(281, 21);
             this.chkSubscribeToTargetChild.TabIndex = 7;
@@ -515,7 +520,7 @@ namespace JsonManipulator
             // 
             // btnColumnsMoveUp
             // 
-            this.btnColumnsMoveUp.Location = new System.Drawing.Point(3, 90);
+            this.btnColumnsMoveUp.Location = new System.Drawing.Point(3, 142);
             this.btnColumnsMoveUp.Name = "btnColumnsMoveUp";
             this.btnColumnsMoveUp.Size = new System.Drawing.Size(136, 23);
             this.btnColumnsMoveUp.TabIndex = 3;
@@ -525,7 +530,7 @@ namespace JsonManipulator
             // 
             // btnColumnsMoveDown
             // 
-            this.btnColumnsMoveDown.Location = new System.Drawing.Point(3, 119);
+            this.btnColumnsMoveDown.Location = new System.Drawing.Point(3, 171);
             this.btnColumnsMoveDown.Name = "btnColumnsMoveDown";
             this.btnColumnsMoveDown.Size = new System.Drawing.Size(136, 23);
             this.btnColumnsMoveDown.TabIndex = 4;
@@ -608,26 +613,57 @@ namespace JsonManipulator
             // 
             // pnlButtonsLeft
             // 
-            this.pnlButtonsLeft.Controls.Add(this.pnlButtonsLeftBottom);
             this.pnlButtonsLeft.Controls.Add(this.pnlButtonsLeftTop);
+            this.pnlButtonsLeft.Controls.Add(this.pnlButtonsLeftBottom);
             this.pnlButtonsLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlButtonsLeft.Location = new System.Drawing.Point(0, 0);
             this.pnlButtonsLeft.Name = "pnlButtonsLeft";
             this.pnlButtonsLeft.Size = new System.Drawing.Size(180, 446);
             this.pnlButtonsLeft.TabIndex = 3;
             // 
+            // pnlButtonsLeftTop
+            // 
+            this.pnlButtonsLeftTop.Controls.Add(this.lstButtons);
+            this.pnlButtonsLeftTop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlButtonsLeftTop.Location = new System.Drawing.Point(0, 0);
+            this.pnlButtonsLeftTop.Name = "pnlButtonsLeftTop";
+            this.pnlButtonsLeftTop.Size = new System.Drawing.Size(180, 249);
+            this.pnlButtonsLeftTop.TabIndex = 4;
+            // 
+            // lstButtons
+            // 
+            this.lstButtons.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstButtons.FormattingEnabled = true;
+            this.lstButtons.ItemHeight = 16;
+            this.lstButtons.Location = new System.Drawing.Point(0, 0);
+            this.lstButtons.Name = "lstButtons";
+            this.lstButtons.Size = new System.Drawing.Size(180, 249);
+            this.lstButtons.TabIndex = 1;
+            this.lstButtons.SelectedIndexChanged += new System.EventHandler(this.lstButtons_SelectedIndexChanged);
+            // 
             // pnlButtonsLeftBottom
             // 
+            this.pnlButtonsLeftBottom.Controls.Add(this.btnFollowButton);
             this.pnlButtonsLeftBottom.Controls.Add(this.button2);
             this.pnlButtonsLeftBottom.Controls.Add(this.btnAddMultiSelectButton);
             this.pnlButtonsLeftBottom.Controls.Add(this.btnButtonMoveUp);
             this.pnlButtonsLeftBottom.Controls.Add(this.btnButtonMoveDown);
             this.pnlButtonsLeftBottom.Controls.Add(this.btnButtonAdd);
             this.pnlButtonsLeftBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlButtonsLeftBottom.Location = new System.Drawing.Point(0, 278);
+            this.pnlButtonsLeftBottom.Location = new System.Drawing.Point(0, 249);
             this.pnlButtonsLeftBottom.Name = "pnlButtonsLeftBottom";
-            this.pnlButtonsLeftBottom.Size = new System.Drawing.Size(180, 168);
+            this.pnlButtonsLeftBottom.Size = new System.Drawing.Size(180, 197);
             this.pnlButtonsLeftBottom.TabIndex = 5;
+            // 
+            // btnFollowButton
+            // 
+            this.btnFollowButton.Location = new System.Drawing.Point(3, 111);
+            this.btnFollowButton.Name = "btnFollowButton";
+            this.btnFollowButton.Size = new System.Drawing.Size(169, 23);
+            this.btnFollowButton.TabIndex = 9;
+            this.btnFollowButton.Text = "&Follow Button";
+            this.btnFollowButton.UseVisualStyleBackColor = true;
+            this.btnFollowButton.Click += new System.EventHandler(this.btnFollowButton_Click);
             // 
             // button2
             // 
@@ -651,7 +687,7 @@ namespace JsonManipulator
             // 
             // btnButtonMoveUp
             // 
-            this.btnButtonMoveUp.Location = new System.Drawing.Point(5, 111);
+            this.btnButtonMoveUp.Location = new System.Drawing.Point(3, 140);
             this.btnButtonMoveUp.Name = "btnButtonMoveUp";
             this.btnButtonMoveUp.Size = new System.Drawing.Size(169, 23);
             this.btnButtonMoveUp.TabIndex = 5;
@@ -661,7 +697,7 @@ namespace JsonManipulator
             // 
             // btnButtonMoveDown
             // 
-            this.btnButtonMoveDown.Location = new System.Drawing.Point(5, 140);
+            this.btnButtonMoveDown.Location = new System.Drawing.Point(5, 169);
             this.btnButtonMoveDown.Name = "btnButtonMoveDown";
             this.btnButtonMoveDown.Size = new System.Drawing.Size(169, 23);
             this.btnButtonMoveDown.TabIndex = 6;
@@ -678,26 +714,6 @@ namespace JsonManipulator
             this.btnButtonAdd.Text = "&Add Button";
             this.btnButtonAdd.UseVisualStyleBackColor = true;
             this.btnButtonAdd.Click += new System.EventHandler(this.btnButtonAdd_Click);
-            // 
-            // pnlButtonsLeftTop
-            // 
-            this.pnlButtonsLeftTop.Controls.Add(this.lstButtons);
-            this.pnlButtonsLeftTop.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlButtonsLeftTop.Location = new System.Drawing.Point(0, 0);
-            this.pnlButtonsLeftTop.Name = "pnlButtonsLeftTop";
-            this.pnlButtonsLeftTop.Size = new System.Drawing.Size(180, 446);
-            this.pnlButtonsLeftTop.TabIndex = 4;
-            // 
-            // lstButtons
-            // 
-            this.lstButtons.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lstButtons.FormattingEnabled = true;
-            this.lstButtons.ItemHeight = 16;
-            this.lstButtons.Location = new System.Drawing.Point(0, 0);
-            this.lstButtons.Name = "lstButtons";
-            this.lstButtons.Size = new System.Drawing.Size(180, 446);
-            this.lstButtons.TabIndex = 1;
-            this.lstButtons.SelectedIndexChanged += new System.EventHandler(this.lstButtons_SelectedIndexChanged);
             // 
             // tabJSON
             // 
@@ -730,6 +746,27 @@ namespace JsonManipulator
             this.grpMain.TabIndex = 1;
             this.grpMain.TabStop = false;
             this.grpMain.Text = "grpMain";
+            // 
+            // btnFollow2
+            // 
+            this.btnFollow2.Location = new System.Drawing.Point(5, 113);
+            this.btnFollow2.Name = "btnFollow2";
+            this.btnFollow2.Size = new System.Drawing.Size(136, 23);
+            this.btnFollow2.TabIndex = 10;
+            this.btnFollow2.Text = "&Follow Button";
+            this.btnFollow2.UseVisualStyleBackColor = true;
+            this.btnFollow2.Click += new System.EventHandler(this.btnFollow2_Click);
+            // 
+            // chkVisibleColumnsOnly
+            // 
+            this.chkVisibleColumnsOnly.AutoSize = true;
+            this.chkVisibleColumnsOnly.Location = new System.Drawing.Point(6, 86);
+            this.chkVisibleColumnsOnly.Name = "chkVisibleColumnsOnly";
+            this.chkVisibleColumnsOnly.Size = new System.Drawing.Size(162, 21);
+            this.chkVisibleColumnsOnly.TabIndex = 11;
+            this.chkVisibleColumnsOnly.Text = "Visible Columns Only";
+            this.chkVisibleColumnsOnly.UseVisualStyleBackColor = true;
+            this.chkVisibleColumnsOnly.CheckedChanged += new System.EventHandler(this.chkVisibleColumnsOnly_CheckedChanged);
             // 
             // frmReportSettings
             // 
@@ -765,8 +802,8 @@ namespace JsonManipulator
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridButtons)).EndInit();
             this.pnlButtonsLeft.ResumeLayout(false);
-            this.pnlButtonsLeftBottom.ResumeLayout(false);
             this.pnlButtonsLeftTop.ResumeLayout(false);
+            this.pnlButtonsLeftBottom.ResumeLayout(false);
             this.tabJSON.ResumeLayout(false);
             this.grpMain.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -832,5 +869,8 @@ namespace JsonManipulator
         private System.Windows.Forms.Button btnCopyList;
         private System.Windows.Forms.Button btnAddMultiSelectButton;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnFollowButton;
+        private System.Windows.Forms.Button btnFollow2;
+        private System.Windows.Forms.CheckBox chkVisibleColumnsOnly;
     }
 }

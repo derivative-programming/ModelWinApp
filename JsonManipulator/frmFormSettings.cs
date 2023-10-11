@@ -1157,5 +1157,21 @@ namespace JsonManipulator
             }
             return result;
         }
+
+        private void btnFollow_Click(object sender, EventArgs e)
+        {
+            if (lstButtons.SelectedItem != null)
+            {
+                int selectedIndex = lstButtons.SelectedIndex;
+                objectWorkflowButton item = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowButton.ElementAt(selectedIndex);
+                
+                if (item != null &&
+                    item.destinationTargetName != null &&
+                    item.destinationTargetName.Trim().Length > 0)
+                {
+                    ((Form1)Application.OpenForms["Form1"]).SetSelectedTreeItem(item.destinationTargetName);
+                }
+            }
+        }
     }
 }

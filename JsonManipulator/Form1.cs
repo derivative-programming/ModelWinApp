@@ -22,6 +22,7 @@ namespace JsonManipulator
 
         private string _initialModelPath = string.Empty;
         private bool _displayModelFeaturesTab = false;
+        private bool _displayUserStoriesTab = false;
         private bool _displayLookupValuesTab = false;
 
         private bool _searchNames = true;
@@ -129,6 +130,10 @@ namespace JsonManipulator
         public string GetProjectName()
         {
             return _model.root.ProjectName;
+        }
+        public string GetProjectVersionNumber()
+        {
+            return _model.root.projectVersionNumber;
         }
         public void populateProjectDetails()
         {
@@ -524,8 +529,9 @@ namespace JsonManipulator
                 case 0:
                     if (e.Node.Name == "Project")
                     {
-                        frmSettings frmSettings = new frmSettings(_model.root, _displayModelFeaturesTab);
+                        frmSettings frmSettings = new frmSettings(_model.root, _displayModelFeaturesTab, _displayUserStoriesTab);
                         _displayModelFeaturesTab = false;
+                        _displayUserStoriesTab = false;
                         frmSettings.TopLevel = false;
                         frmSettings.AutoScroll = true;
                         frmSettings.Dock = DockStyle.Fill;
@@ -1597,6 +1603,12 @@ namespace JsonManipulator
                 showMessage("File Updated Successfully");
                 ShowNoUnsavedChanges();
             }
+        }
+
+        private void userStoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _displayUserStoriesTab = true;
+            nodeMenus.SelectedNode = nodeMenus.Nodes["Project"];
         }
     }
     

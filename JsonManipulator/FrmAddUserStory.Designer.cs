@@ -35,6 +35,7 @@ namespace JsonManipulator
             this.lblValidationError = new System.Windows.Forms.Label();
             this.btnBulk = new System.Windows.Forms.Button();
             this.txtUserStory = new System.Windows.Forms.RichTextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -43,7 +44,7 @@ namespace JsonManipulator
             this.btnCancel.Location = new System.Drawing.Point(487, 131);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 19;
+            this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.button2_Click);
@@ -53,7 +54,7 @@ namespace JsonManipulator
             this.btnAccept.Location = new System.Drawing.Point(406, 131);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
-            this.btnAccept.TabIndex = 18;
+            this.btnAccept.TabIndex = 2;
             this.btnAccept.Text = "&OK";
             this.btnAccept.UseVisualStyleBackColor = true;
             this.btnAccept.Click += new System.EventHandler(this.btnAdd_Click);
@@ -82,18 +83,28 @@ namespace JsonManipulator
             this.btnBulk.Location = new System.Drawing.Point(12, 131);
             this.btnBulk.Name = "btnBulk";
             this.btnBulk.Size = new System.Drawing.Size(80, 23);
-            this.btnBulk.TabIndex = 25;
+            this.btnBulk.TabIndex = 1;
             this.btnBulk.Text = "&Bulk Add";
             this.btnBulk.UseVisualStyleBackColor = true;
             this.btnBulk.Click += new System.EventHandler(this.btnBulk_Click);
             // 
             // txtUserStory
             // 
-            this.txtUserStory.Location = new System.Drawing.Point(15, 30);
+            this.txtUserStory.Location = new System.Drawing.Point(15, 48);
             this.txtUserStory.Name = "txtUserStory";
-            this.txtUserStory.Size = new System.Drawing.Size(547, 68);
-            this.txtUserStory.TabIndex = 26;
+            this.txtUserStory.Size = new System.Drawing.Size(547, 50);
+            this.txtUserStory.TabIndex = 0;
             this.txtUserStory.Text = "";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 28);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(545, 17);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "Format... \'A [Role name] wants to [View all, view, add, update, delete] a [object" +
+    " name]\'";
             // 
             // FrmAddUserStory
             // 
@@ -102,6 +113,7 @@ namespace JsonManipulator
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(574, 166);
             this.ControlBox = false;
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.txtUserStory);
             this.Controls.Add(this.btnBulk);
             this.Controls.Add(this.lblValidationError);
@@ -127,5 +139,6 @@ namespace JsonManipulator
         private System.Windows.Forms.Label lblValidationError;
         private System.Windows.Forms.Button btnBulk;
         private System.Windows.Forms.RichTextBox txtUserStory;
+        private System.Windows.Forms.Label label1;
     }
 }

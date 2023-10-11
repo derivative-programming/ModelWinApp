@@ -160,7 +160,7 @@ namespace JsonManipulator
 
                 using (var form = new frmServicesApiAddRequest())
                 {
-                    form.ReturnValue = "Project: " + Utils.GetProjectName();
+                    form.ReturnValue = "Project: " + Utils.GetProjectName() + ", Version: " + Utils.GetProjectVersionNumber();
                     var result = form.ShowDialog();
                     if (result == DialogResult.OK)
                     {

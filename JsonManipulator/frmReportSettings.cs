@@ -81,7 +81,22 @@ namespace JsonManipulator
             }
             foreach (var column in _rpt.reportColumn)
             {
-                lstColumns.Items.Add(column.name);
+                if(chkVisibleColumnsOnly.Checked)
+                {
+                    if (column.isIgnored != null &&
+                       !column.isIgnored.Equals("true", StringComparison.OrdinalIgnoreCase))
+                        continue;
+
+                    if(column.isVisible == null ||
+                       !column.isVisible.Equals("false",StringComparison.OrdinalIgnoreCase))
+                    {
+                        lstColumns.Items.Add(column.name);
+                    }
+                }
+                else
+                {
+                    lstColumns.Items.Add(column.name);
+                }
             }
             if (lstColumns.Items.Count > 0)
                 lstColumns.SelectedIndex = lstColumns.Items.Count - 1;
@@ -937,10 +952,76 @@ namespace JsonManipulator
         }
 
         private void button2_Click(object sender, EventArgs e)
-        {
+        { 
+            // On click of datagridview cell, attched combobox with this click cell of datagridview  
+            using (var form = new frmModelSearch(ModelSearchOptions.FORMS))
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string val = form.ReturnValue;
 
-            FrmAddButton frmAddButton = new FrmAddButton(_rpt.name, _ownerObject.name, ButtonType.BREADCRUMB);
-            frmAddButton.ShowDialog();
+                    if (_rpt.reportButton == null)
+                    {
+                        _rpt.reportButton = new List<reportButton>();
+                    }
+
+                    val = Utils.Capitalize(val).Trim() + "Breadcrumb";
+
+                    if (_rpt.reportButton.Where(x => x.buttonName == val).ToList().Count == 0)
+                    { 
+                        if (val.Trim().Length <= 100)
+                        {
+
+                            Models.ObjectMap destinationOwnerObject = Utils.GetOwnerObject(form.ReturnValue);
+
+                            _rpt.reportButton.Add(new reportButton { buttonName = val, buttonType = "breadcrumb",destinationTargetName = form.ReturnValue, destinationContextObjectName = destinationOwnerObject.name });
+
+                            ((Form1)Application.OpenForms["Form1"]).showMessage("Breadcrumb Button created successfully");
+                            ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
+                            ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setButtonsList();
+                        }
+                    }  
+                }
+            }
+          
+        }
+
+        private void btnFollowButton_Click(object sender, EventArgs e)
+        {
+            if (lstButtons.SelectedItem != null)
+            {
+                int selectedIndex = lstButtons.SelectedIndex;
+                reportButton item = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportButton.ElementAt(selectedIndex);
+                
+                if (item != null &&
+                    item.destinationTargetName != null &&
+                    item.destinationTargetName.Trim().Length > 0)
+                {
+                    ((Form1)Application.OpenForms["Form1"]).SetSelectedTreeItem(item.destinationTargetName);
+                }
+            }
+        }
+
+        private void btnFollow2_Click(object sender, EventArgs e)
+        {           
+            if (lstColumns.SelectedItem != null)
+            {
+                int selectedIndex = lstColumns.SelectedIndex;
+                reportColumn item = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportColumn.ElementAt(selectedIndex);
+
+                if (item != null &&
+                    item.buttonDestinationTargetName != null &&
+                    item.buttonDestinationTargetName.Trim().Length > 0)
+                {
+                    ((Form1)Application.OpenForms["Form1"]).SetSelectedTreeItem(item.buttonDestinationTargetName);
+                }
+            }
+        }
+
+        private void chkVisibleColumnsOnly_CheckedChanged(object sender, EventArgs e)
+        {
+            setColumnsList();
         }
     }
 }
