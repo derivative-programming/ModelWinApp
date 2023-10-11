@@ -1202,5 +1202,74 @@ namespace JsonManipulator
 
             }
         }
+
+        private void btnCloneReport_Click(object sender, EventArgs e)
+        {
+            if (_form.RoleRequired.Length > 0)
+            {
+                using (var form = new frmModelSearch(ModelSearchOptions.ROLES))
+                {
+                    var result = form.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        string val = form.ReturnValue;
+
+
+                        if (!val.Equals(_form.RoleRequired, StringComparison.OrdinalIgnoreCase))
+                        {
+                            string json = JsonConvert.SerializeObject(_form, Formatting.Indented, new JsonSerializerSettings
+                            {
+                                NullValueHandling = NullValueHandling.Ignore
+                            });
+
+                            objectWorkflow newItem = JsonConvert.DeserializeObject<objectWorkflow>(json);
+                            newItem.Name = newItem.Name.Replace(_form.RoleRequired, val); 
+                            for (int i = 0; i < newItem.objectWorkflowParam.Count; i++)
+                            {
+                                newItem.objectWorkflowParam[i].codeDescription = newItem.objectWorkflowParam[i].codeDescription.Replace(" " + _form.RoleRequired + " ", " " + val + " ");
+                            }
+                            newItem.RoleRequired = val;
+                            newItem.layoutName = val + "Layout"; 
+
+
+                            List<string> existingNames = Utils.GetNameList(false, true, true, true, true);
+                            if (existingNames.Where(x => x.ToLower().Equals(newItem.Name.Trim().ToLower())).ToList().Count == 0)
+                            {
+                                _ownerObject.objectWorkflow.Add(newItem);
+                                ((Form1)Application.OpenForms["Form1"]).showMessage("Object Workflow was cloned successfully");
+                                ((Form1)Application.OpenForms["Form1"]).AddToTree(newItem);
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+
+        private void btnCloneToSameRole_Click(object sender, EventArgs e)
+        {
+            string json = JsonConvert.SerializeObject(_form, Formatting.Indented, new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            });
+
+            objectWorkflow newItem = JsonConvert.DeserializeObject<objectWorkflow>(json);
+            newItem.Name = _form.Name + "Clone";
+
+
+            List<string> existingNames = Utils.GetNameList(false, true, true, true, true);
+
+            int i = 1;
+
+            while (existingNames.Where(x => x.ToLower().Equals(newItem.Name.Trim().ToLower())).ToList().Count > 0)
+            {
+                i++;
+                newItem.Name = _form.Name + "Clone" + i.ToString();
+            }
+
+            _ownerObject.objectWorkflow.Add(newItem);
+            ((Form1)Application.OpenForms["Form1"]).showMessage("Object Workflow was cloned successfully");
+            ((Form1)Application.OpenForms["Form1"]).AddToTree(newItem);
+        }
     }
 }

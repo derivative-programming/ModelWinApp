@@ -104,6 +104,8 @@ namespace JsonManipulator
             this.grpMain = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnViewInDemo = new System.Windows.Forms.Button();
+            this.btnCloneToSameRole = new System.Windows.Forms.Button();
+            this.btnCloneReport = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridProperties)).BeginInit();
@@ -931,6 +933,8 @@ namespace JsonManipulator
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnCloneToSameRole);
+            this.panel1.Controls.Add(this.btnCloneReport);
             this.panel1.Controls.Add(this.btnViewInDemo);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(3, 3);
@@ -947,6 +951,26 @@ namespace JsonManipulator
             this.btnViewInDemo.Text = "View Demo";
             this.btnViewInDemo.UseVisualStyleBackColor = true;
             this.btnViewInDemo.Click += new System.EventHandler(this.btnViewInDemo_Click);
+            // 
+            // btnCloneToSameRole
+            // 
+            this.btnCloneToSameRole.Location = new System.Drawing.Point(344, 3);
+            this.btnCloneToSameRole.Name = "btnCloneToSameRole";
+            this.btnCloneToSameRole.Size = new System.Drawing.Size(203, 23);
+            this.btnCloneToSameRole.TabIndex = 4;
+            this.btnCloneToSameRole.Text = "Clone To Same Role";
+            this.btnCloneToSameRole.UseVisualStyleBackColor = true;
+            this.btnCloneToSameRole.Click += new System.EventHandler(this.btnCloneToSameRole_Click);
+            // 
+            // btnCloneReport
+            // 
+            this.btnCloneReport.Location = new System.Drawing.Point(135, 3);
+            this.btnCloneReport.Name = "btnCloneReport";
+            this.btnCloneReport.Size = new System.Drawing.Size(203, 23);
+            this.btnCloneReport.TabIndex = 3;
+            this.btnCloneReport.Text = "Clone To Dif Role";
+            this.btnCloneReport.UseVisualStyleBackColor = true;
+            this.btnCloneReport.Click += new System.EventHandler(this.btnCloneReport_Click);
             // 
             // frmFormSettings
             // 
@@ -1077,5 +1101,7 @@ namespace JsonManipulator
         private System.Windows.Forms.Button btnFollow;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnViewInDemo;
+        private System.Windows.Forms.Button btnCloneToSameRole;
+        private System.Windows.Forms.Button btnCloneReport;
     }
 }

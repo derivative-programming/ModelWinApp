@@ -92,6 +92,9 @@ namespace JsonManipulator
             this.grpMain = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnViewInDemo = new System.Windows.Forms.Button();
+            this.chkVisibleOnly = new System.Windows.Forms.CheckBox();
+            this.btnCloneReport = new System.Windows.Forms.Button();
+            this.btnCloneToSameRole = new System.Windows.Forms.Button();
             tabSettings = new System.Windows.Forms.TabPage();
             tabSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataProperties)).BeginInit();
@@ -668,6 +671,7 @@ namespace JsonManipulator
             // 
             // pnlButtonsLeftBottom
             // 
+            this.pnlButtonsLeftBottom.Controls.Add(this.chkVisibleOnly);
             this.pnlButtonsLeftBottom.Controls.Add(this.btnFollowButton);
             this.pnlButtonsLeftBottom.Controls.Add(this.button2);
             this.pnlButtonsLeftBottom.Controls.Add(this.btnAddMultiSelectButton);
@@ -774,6 +778,8 @@ namespace JsonManipulator
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnCloneToSameRole);
+            this.panel1.Controls.Add(this.btnCloneReport);
             this.panel1.Controls.Add(this.btnViewInDemo);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(3, 3);
@@ -790,6 +796,37 @@ namespace JsonManipulator
             this.btnViewInDemo.Text = "View Demo";
             this.btnViewInDemo.UseVisualStyleBackColor = true;
             this.btnViewInDemo.Click += new System.EventHandler(this.btnViewInDemo_Click);
+            // 
+            // chkVisibleOnly
+            // 
+            this.chkVisibleOnly.AutoSize = true;
+            this.chkVisibleOnly.Location = new System.Drawing.Point(6, 91);
+            this.chkVisibleOnly.Name = "chkVisibleOnly";
+            this.chkVisibleOnly.Size = new System.Drawing.Size(156, 21);
+            this.chkVisibleOnly.TabIndex = 10;
+            this.chkVisibleOnly.Text = "Visible Buttons Only";
+            this.chkVisibleOnly.UseVisualStyleBackColor = true;
+            this.chkVisibleOnly.CheckedChanged += new System.EventHandler(this.chkVisibleOnly_CheckedChanged);
+            // 
+            // btnCloneReport
+            // 
+            this.btnCloneReport.Location = new System.Drawing.Point(136, 4);
+            this.btnCloneReport.Name = "btnCloneReport";
+            this.btnCloneReport.Size = new System.Drawing.Size(203, 23);
+            this.btnCloneReport.TabIndex = 1;
+            this.btnCloneReport.Text = "Clone Report To Dif Role";
+            this.btnCloneReport.UseVisualStyleBackColor = true;
+            this.btnCloneReport.Click += new System.EventHandler(this.btnCloneReport_Click);
+            // 
+            // btnCloneToSameRole
+            // 
+            this.btnCloneToSameRole.Location = new System.Drawing.Point(345, 4);
+            this.btnCloneToSameRole.Name = "btnCloneToSameRole";
+            this.btnCloneToSameRole.Size = new System.Drawing.Size(203, 23);
+            this.btnCloneToSameRole.TabIndex = 2;
+            this.btnCloneToSameRole.Text = "Clone Report To Same Role";
+            this.btnCloneToSameRole.UseVisualStyleBackColor = true;
+            this.btnCloneToSameRole.Click += new System.EventHandler(this.btnCloneToSameRole_Click);
             // 
             // frmReportSettings
             // 
@@ -827,6 +864,7 @@ namespace JsonManipulator
             this.pnlButtonsLeft.ResumeLayout(false);
             this.pnlButtonsLeftTop.ResumeLayout(false);
             this.pnlButtonsLeftBottom.ResumeLayout(false);
+            this.pnlButtonsLeftBottom.PerformLayout();
             this.tabJSON.ResumeLayout(false);
             this.grpMain.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
@@ -898,5 +936,8 @@ namespace JsonManipulator
         private System.Windows.Forms.CheckBox chkVisibleColumnsOnly;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnViewInDemo;
+        private System.Windows.Forms.CheckBox chkVisibleOnly;
+        private System.Windows.Forms.Button btnCloneReport;
+        private System.Windows.Forms.Button btnCloneToSameRole;
     }
 }
