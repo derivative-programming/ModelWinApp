@@ -60,6 +60,8 @@ namespace JsonManipulator
             this.pnlColumnsLeftTop = new System.Windows.Forms.Panel();
             this.lstColumns = new System.Windows.Forms.ListBox();
             this.pnlColumnsLeftBottom = new System.Windows.Forms.Panel();
+            this.chkVisibleColumnsOnly = new System.Windows.Forms.CheckBox();
+            this.btnFollow2 = new System.Windows.Forms.Button();
             this.btnCopyList = new System.Windows.Forms.Button();
             this.chkSubscribeToOwnerObject = new System.Windows.Forms.CheckBox();
             this.chkSubscribeToTargetChild = new System.Windows.Forms.CheckBox();
@@ -88,8 +90,8 @@ namespace JsonManipulator
             this.tabJSON = new System.Windows.Forms.TabPage();
             this.rtbJSON = new System.Windows.Forms.RichTextBox();
             this.grpMain = new System.Windows.Forms.GroupBox();
-            this.btnFollow2 = new System.Windows.Forms.Button();
-            this.chkVisibleColumnsOnly = new System.Windows.Forms.CheckBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnViewInDemo = new System.Windows.Forms.Button();
             tabSettings = new System.Windows.Forms.TabPage();
             tabSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataProperties)).BeginInit();
@@ -117,11 +119,13 @@ namespace JsonManipulator
             this.pnlButtonsLeftBottom.SuspendLayout();
             this.tabJSON.SuspendLayout();
             this.grpMain.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabSettings
             // 
             tabSettings.Controls.Add(this.dataProperties);
+            tabSettings.Controls.Add(this.panel1);
             tabSettings.Location = new System.Drawing.Point(4, 25);
             tabSettings.Name = "tabSettings";
             tabSettings.Padding = new System.Windows.Forms.Padding(3);
@@ -138,12 +142,12 @@ namespace JsonManipulator
             this.dataGridViewTextBoxColumn5,
             this.dataGridViewTextBoxColumn6});
             this.dataProperties.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataProperties.Location = new System.Drawing.Point(3, 3);
+            this.dataProperties.Location = new System.Drawing.Point(3, 60);
             this.dataProperties.MultiSelect = false;
             this.dataProperties.Name = "dataProperties";
             this.dataProperties.RowHeadersVisible = false;
             this.dataProperties.RowHeadersWidth = 51;
-            this.dataProperties.Size = new System.Drawing.Size(780, 440);
+            this.dataProperties.Size = new System.Drawing.Size(780, 383);
             this.dataProperties.TabIndex = 1;
             this.dataProperties.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataProperties_CellClick);
             this.dataProperties.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataProperties_CellEnter);
@@ -456,6 +460,27 @@ namespace JsonManipulator
             this.pnlColumnsLeftBottom.Size = new System.Drawing.Size(219, 283);
             this.pnlColumnsLeftBottom.TabIndex = 7;
             // 
+            // chkVisibleColumnsOnly
+            // 
+            this.chkVisibleColumnsOnly.AutoSize = true;
+            this.chkVisibleColumnsOnly.Location = new System.Drawing.Point(6, 86);
+            this.chkVisibleColumnsOnly.Name = "chkVisibleColumnsOnly";
+            this.chkVisibleColumnsOnly.Size = new System.Drawing.Size(162, 21);
+            this.chkVisibleColumnsOnly.TabIndex = 11;
+            this.chkVisibleColumnsOnly.Text = "Visible Columns Only";
+            this.chkVisibleColumnsOnly.UseVisualStyleBackColor = true;
+            this.chkVisibleColumnsOnly.CheckedChanged += new System.EventHandler(this.chkVisibleColumnsOnly_CheckedChanged);
+            // 
+            // btnFollow2
+            // 
+            this.btnFollow2.Location = new System.Drawing.Point(5, 113);
+            this.btnFollow2.Name = "btnFollow2";
+            this.btnFollow2.Size = new System.Drawing.Size(136, 23);
+            this.btnFollow2.TabIndex = 10;
+            this.btnFollow2.Text = "&Follow Button";
+            this.btnFollow2.UseVisualStyleBackColor = true;
+            this.btnFollow2.Click += new System.EventHandler(this.btnFollow2_Click);
+            // 
             // btnCopyList
             // 
             this.btnCopyList.Location = new System.Drawing.Point(5, 200);
@@ -747,26 +772,24 @@ namespace JsonManipulator
             this.grpMain.TabStop = false;
             this.grpMain.Text = "grpMain";
             // 
-            // btnFollow2
+            // panel1
             // 
-            this.btnFollow2.Location = new System.Drawing.Point(5, 113);
-            this.btnFollow2.Name = "btnFollow2";
-            this.btnFollow2.Size = new System.Drawing.Size(136, 23);
-            this.btnFollow2.TabIndex = 10;
-            this.btnFollow2.Text = "&Follow Button";
-            this.btnFollow2.UseVisualStyleBackColor = true;
-            this.btnFollow2.Click += new System.EventHandler(this.btnFollow2_Click);
+            this.panel1.Controls.Add(this.btnViewInDemo);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(780, 57);
+            this.panel1.TabIndex = 2;
             // 
-            // chkVisibleColumnsOnly
+            // btnViewInDemo
             // 
-            this.chkVisibleColumnsOnly.AutoSize = true;
-            this.chkVisibleColumnsOnly.Location = new System.Drawing.Point(6, 86);
-            this.chkVisibleColumnsOnly.Name = "chkVisibleColumnsOnly";
-            this.chkVisibleColumnsOnly.Size = new System.Drawing.Size(162, 21);
-            this.chkVisibleColumnsOnly.TabIndex = 11;
-            this.chkVisibleColumnsOnly.Text = "Visible Columns Only";
-            this.chkVisibleColumnsOnly.UseVisualStyleBackColor = true;
-            this.chkVisibleColumnsOnly.CheckedChanged += new System.EventHandler(this.chkVisibleColumnsOnly_CheckedChanged);
+            this.btnViewInDemo.Location = new System.Drawing.Point(4, 4);
+            this.btnViewInDemo.Name = "btnViewInDemo";
+            this.btnViewInDemo.Size = new System.Drawing.Size(126, 23);
+            this.btnViewInDemo.TabIndex = 0;
+            this.btnViewInDemo.Text = "View Demo";
+            this.btnViewInDemo.UseVisualStyleBackColor = true;
+            this.btnViewInDemo.Click += new System.EventHandler(this.btnViewInDemo_Click);
             // 
             // frmReportSettings
             // 
@@ -806,6 +829,7 @@ namespace JsonManipulator
             this.pnlButtonsLeftBottom.ResumeLayout(false);
             this.tabJSON.ResumeLayout(false);
             this.grpMain.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -872,5 +896,7 @@ namespace JsonManipulator
         private System.Windows.Forms.Button btnFollowButton;
         private System.Windows.Forms.Button btnFollow2;
         private System.Windows.Forms.CheckBox chkVisibleColumnsOnly;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnViewInDemo;
     }
 }

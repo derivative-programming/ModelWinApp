@@ -75,6 +75,7 @@ namespace JsonManipulator
             this.aPIGetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.navigationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aPISiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.userStoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.servicesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addModelFeaturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -112,7 +113,6 @@ namespace JsonManipulator
             this.label1 = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusText = new System.Windows.Forms.ToolStripStatusLabel();
-            this.userStoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -378,6 +378,15 @@ namespace JsonManipulator
             this.aPISiteToolStripMenuItem.Text = "API";
             this.aPISiteToolStripMenuItem.Click += new System.EventHandler(this.aPISiteToolStripMenuItem_Click);
             // 
+            // userStoryToolStripMenuItem
+            // 
+            this.userStoryToolStripMenuItem.Name = "userStoryToolStripMenuItem";
+            this.userStoryToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.U)));
+            this.userStoryToolStripMenuItem.Size = new System.Drawing.Size(252, 26);
+            this.userStoryToolStripMenuItem.Text = "User Story";
+            this.userStoryToolStripMenuItem.Click += new System.EventHandler(this.userStoryToolStripMenuItem_Click);
+            // 
             // servicesToolStripMenuItem
             // 
             this.servicesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -463,7 +472,7 @@ namespace JsonManipulator
             // codeToolStripMenuItem
             // 
             this.codeToolStripMenuItem.Name = "codeToolStripMenuItem";
-            this.codeToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
+            this.codeToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.codeToolStripMenuItem.Text = "Code";
             this.codeToolStripMenuItem.Click += new System.EventHandler(this.codeToolStripMenuItem_Click);
             // 
@@ -474,28 +483,28 @@ namespace JsonManipulator
             this.adminUserToolStripMenuItem1,
             this.configUserToolStripMenuItem1});
             this.demoToolStripMenuItem1.Name = "demoToolStripMenuItem1";
-            this.demoToolStripMenuItem1.Size = new System.Drawing.Size(156, 26);
+            this.demoToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.demoToolStripMenuItem1.Text = "Demo";
             this.demoToolStripMenuItem1.Click += new System.EventHandler(this.demoToolStripMenuItem1_Click);
             // 
             // endUserToolStripMenuItem1
             // 
             this.endUserToolStripMenuItem1.Name = "endUserToolStripMenuItem1";
-            this.endUserToolStripMenuItem1.Size = new System.Drawing.Size(169, 26);
+            this.endUserToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.endUserToolStripMenuItem1.Text = "End User";
             this.endUserToolStripMenuItem1.Click += new System.EventHandler(this.endUserToolStripMenuItem1_Click);
             // 
             // adminUserToolStripMenuItem1
             // 
             this.adminUserToolStripMenuItem1.Name = "adminUserToolStripMenuItem1";
-            this.adminUserToolStripMenuItem1.Size = new System.Drawing.Size(169, 26);
+            this.adminUserToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.adminUserToolStripMenuItem1.Text = "Admin User";
             this.adminUserToolStripMenuItem1.Click += new System.EventHandler(this.adminUserToolStripMenuItem1_Click);
             // 
             // configUserToolStripMenuItem1
             // 
             this.configUserToolStripMenuItem1.Name = "configUserToolStripMenuItem1";
-            this.configUserToolStripMenuItem1.Size = new System.Drawing.Size(169, 26);
+            this.configUserToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.configUserToolStripMenuItem1.Text = "Config User";
             this.configUserToolStripMenuItem1.Click += new System.EventHandler(this.configUserToolStripMenuItem1_Click);
             // 
@@ -507,7 +516,7 @@ namespace JsonManipulator
             this.pageFlowToolStripMenuItem,
             this.workflowsToolStripMenuItem});
             this.diagramsToolStripMenuItem.Name = "diagramsToolStripMenuItem";
-            this.diagramsToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
+            this.diagramsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.diagramsToolStripMenuItem.Text = "Diagrams";
             // 
             // apiToolStripMenuItem2
@@ -728,15 +737,6 @@ namespace JsonManipulator
             // 
             this.statusText.Name = "statusText";
             this.statusText.Size = new System.Drawing.Size(0, 16);
-            // 
-            // userStoryToolStripMenuItem
-            // 
-            this.userStoryToolStripMenuItem.Name = "userStoryToolStripMenuItem";
-            this.userStoryToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.U)));
-            this.userStoryToolStripMenuItem.Size = new System.Drawing.Size(252, 26);
-            this.userStoryToolStripMenuItem.Text = "User Story";
-            this.userStoryToolStripMenuItem.Click += new System.EventHandler(this.userStoryToolStripMenuItem_Click);
             // 
             // Form1
             // 

@@ -1023,5 +1023,34 @@ namespace JsonManipulator
         {
             setColumnsList();
         }
+
+        private void btnViewInDemo_Click(object sender, EventArgs e)
+        {
+            
+            //get output folder
+            string outputFolder = LocalStorage.GetValue("FabricationFolder", "");
+            if (outputFolder.Trim().Length == 0)
+                return;
+
+            string demoFolder = outputFolder.TrimEnd(@"\".ToCharArray()) + @"\demo\bootstrap_5\";
+
+            if (!System.IO.Directory.Exists(demoFolder))
+                return;
+            //determine file paths for three user types 
+            string adminUserDemoDashboardFilePath = demoFolder + _rpt.name + ".html";
+
+            var psi = new System.Diagnostics.ProcessStartInfo();
+            psi.UseShellExecute = true;
+            psi.FileName = adminUserDemoDashboardFilePath;
+
+            try
+            {
+                System.Diagnostics.Process.Start(psi);
+            }
+            catch (System.Exception)
+            {
+
+            }
+        }
     }
 }
