@@ -36,6 +36,7 @@ namespace JsonManipulator
             setPropSubList();
             setLookupItemList();
             setModelServiceSubList();
+            setChildrenList();
             grpBoxMain.Text = _map.name;
             splitter1.SplitPosition = System.Convert.ToInt32(LocalStorage.GetValue("frmDbObjSettings.splitter1.SplitPosition", "200"));
 
@@ -136,6 +137,25 @@ namespace JsonManipulator
                     lstModelServiceSubs.Items.Add(prop.name);
                 }
                 lstModelServiceSubs.SelectedIndex = lstModelServiceSubs.Items.Count - 1;
+            }
+
+        }
+
+
+
+        public void setChildrenList()
+        {
+            if (_map != null)
+            { 
+                lstChildren.Items.Clear();
+                 
+                foreach (var obj in Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap)
+                {
+                    if (obj.parentObjectName != _map.name)
+                        continue;
+                    lstChildren.Items.Add(obj.name);
+                }
+                lstChildren.SelectedIndex = lstChildren.Items.Count - 1;
             }
 
         }
@@ -703,6 +723,14 @@ namespace JsonManipulator
                 result = true;
             }
             return result;
+        }
+
+        private void button2_Click(object sender, EventArgs e                   )
+        {
+            if (lstChildren.SelectedItem != null)
+            {
+                ((Form1)Application.OpenForms["Form1"]).SetSelectedTreeItem(lstChildren.SelectedItem.ToString());
+            }
         }
     }
 }
