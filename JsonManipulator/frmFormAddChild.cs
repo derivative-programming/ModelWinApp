@@ -12,11 +12,11 @@ using System.Windows.Forms;
 
 namespace JsonManipulator
 {
-    public partial class frmForm : Form
+    public partial class frmFormAddChild : Form
     {
         ContextMenuStrip contextMenuStrip1 = new ContextMenuStrip();
         ContextMenuStrip roleContextMenuStrip = new ContextMenuStrip();
-        public frmForm()
+        public frmFormAddChild()
         {
             InitializeComponent();
         }
@@ -42,6 +42,12 @@ namespace JsonManipulator
                 return;
             }
 
+            if (txtChild.Text.Trim().Length == 0)
+            {
+                ShowValidationError("Child Object Name Required.");
+                return;
+            }
+
             List<string> existingNames = Utils.GetNameList(false,true,true,true,true);
             if (existingNames.Where(x => x.ToLower().Equals(txtName.Text.Trim().ToLower())).ToList().Count > 0)
             {
@@ -56,9 +62,16 @@ namespace JsonManipulator
                 return;
             }
 
+             
+            if (existingDBObjects.Where(x => x.ToLower().Equals(txtChild.Text.Trim().ToLower())).ToList().Count == 0)
+            {
+                ShowValidationError("Child Object Not Found.");
+                return;
+            }
+
             if (!txtName.Text.Trim().ToLower().StartsWith(txtOwner.Text.Trim().ToLower() + txtRole.Text.Trim().ToLower()))
             {
-                ShowValidationError("Please modify the name to use the format " + Environment.NewLine + "[Owner Object Name][Role Name][Functional Name].");
+                ShowValidationError("Please modify the name to use the format " + Environment.NewLine + "[Owner Object Name][Role Name][Functional Name][Child Object Name].");
                 return;
             }
 
@@ -77,7 +90,8 @@ namespace JsonManipulator
 
             objectWorkflow form = new objectWorkflow();
             form.Name = txtName.Text.Trim();
-            form.RoleRequired = txtRole.Text.Trim(); 
+            form.RoleRequired = txtRole.Text.Trim();
+            form.targetChildObject = txtChild.Text.Trim(); 
             if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text.Trim()).FirstOrDefault().objectWorkflow == null)
                 Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == txtOwner.Text.Trim()).FirstOrDefault().objectWorkflow = new List<objectWorkflow>();
 
@@ -90,7 +104,7 @@ namespace JsonManipulator
             Models.objectWorkflowButton formButtonCancel = new objectWorkflowButton();
             formButtonCancel.buttonText = "Cancel";
             formButtonCancel.buttonType = "cancel";
-            formButtonCancel.isVisible = "true"; 
+            formButtonCancel.isVisible = "true";
 
             form.objectWorkflowButton = new List<objectWorkflowButton>();
             form.objectWorkflowButton.Add(formButtonSubmit);
@@ -113,7 +127,7 @@ namespace JsonManipulator
             lblValidationError.Text = errorText;
         }
 
-        private void frmForm_Load(object sender, EventArgs e)
+        private void frmFormAddChild_Load(object sender, EventArgs e)
         {
             ShowValidationError("");
         }
@@ -121,6 +135,11 @@ namespace JsonManipulator
         {
             txtOwner.Text =Owner;
             txtName.Text = txtOwner.Text.Trim() + txtRole.Text.Trim();
+        }
+        public void setChild(string child)
+        {
+            txtChild.Text = child;
+            txtName.Text = txtOwner.Text.Trim() + txtRole.Text.Trim() + "Add" + txtChild.Text.Trim();
         }
         private void btnOwner_Click(object sender, EventArgs e)
         {
@@ -168,6 +187,20 @@ namespace JsonManipulator
         private void txtName_TextChanged(object sender, EventArgs e)
         {
             txtPageTitle.Text = Utils.ConvertPascalToSpaced(txtName.Text);
+        }
+
+        private void btnChild_Click(object sender, EventArgs e)
+        {
+
+            using (var form = new frmModelSearch(ModelSearchOptions.OBJECTS))
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string val = form.ReturnValue;
+                    setChild(val);
+                }
+            }
         }
     }
 

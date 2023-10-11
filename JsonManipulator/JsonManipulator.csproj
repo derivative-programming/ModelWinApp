@@ -94,6 +94,12 @@
     <Compile Include="FrmBulkUserStoryAdd.Designer.cs">
       <DependentUpon>FrmBulkUserStoryAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmFormAddChild.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFormAddChild.Designer.cs">
+      <DependentUpon>frmFormAddChild.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmSelectRptCols.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -422,6 +428,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmBulkUserStoryAdd.resx">
       <DependentUpon>FrmBulkUserStoryAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFormAddChild.resx">
+      <DependentUpon>frmFormAddChild.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmSelectRptCols.resx">
       <DependentUpon>FrmSelectRptCols.cs</DependentUpon>

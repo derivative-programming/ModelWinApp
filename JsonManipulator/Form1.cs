@@ -1610,6 +1610,23 @@ namespace JsonManipulator
             _displayUserStoriesTab = true;
             nodeMenus.SelectedNode = nodeMenus.Nodes["Project"];
         }
+
+        private void pageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmForm form = new frmForm();
+            form.ShowDialog();
+        }
+
+        private void addChildPageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmFormAddChild form = new frmFormAddChild();
+            form.ShowDialog();
+        }
+
+        private void formToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
     
 }
