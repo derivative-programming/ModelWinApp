@@ -662,7 +662,7 @@ namespace JsonManipulator
          //   result.Add("isLoginPage");
             //result.Add("isLogoutPage");
             result.Add("isImpersonationPage");
-            result.Add("isCaptchaVisible");
+            //result.Add("isCaptchaVisible");
             result.Add("isCreditCardEntryUsed");
             result.Add("headerImageURL");
             result.Add("footerImageURL");
