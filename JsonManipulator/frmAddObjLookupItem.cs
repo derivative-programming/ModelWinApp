@@ -96,10 +96,10 @@ namespace JsonManipulator
                     items.AddRange(val.Split("\n,".ToCharArray()));
                     for (int i = 0; i < items.Count; i++)
                     {
-                        string itemName = Utils.Capitalize(items[i]).Trim();
+                        string itemName = Utils.Capitalize(items[i]).Trim().Replace(" ", "_");
                         if (itemName.Length > 0 && !ItemExists(itemName))
                         {
-                            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().lookupItem.Add(new lookupItem { name = itemName, displayName = itemName, description = itemName, isActive = "true" });
+                            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().lookupItem.Add(new lookupItem { name = itemName, displayName = itemName.Replace("_", " "), description = itemName.Replace("_", " "), isActive = "true" });
                         }
                     }
                     ((Form1)Application.OpenForms["Form1"]).showMessage("Lookup Item created successfully");

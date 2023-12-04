@@ -419,10 +419,13 @@ namespace JsonManipulator
         private void setLexicon()
         {
             List<PropertyValue> propertyValues = new List<PropertyValue>();
-            gridLexicon.Columns.Clear(); 
-            foreach (var prop in _root.NameSpaceObjects[0].LexiconObject.OrderBy(x => x.internalTextValue).ToList())
-            { 
-                propertyValues.Add(new PropertyValue { Property = prop.internalTextValue, Value = prop.displayTextValue }); ;
+            gridLexicon.Columns.Clear();
+            if (_root.NameSpaceObjects[0].LexiconObject != null)
+            {
+                foreach (var prop in _root.NameSpaceObjects[0].LexiconObject.OrderBy(x => x.internalTextValue).ToList())
+                {
+                    propertyValues.Add(new PropertyValue { Property = prop.internalTextValue, Value = prop.displayTextValue }); ;
+                }
             }
             gridLexicon.DataSource = propertyValues;
             if (gridLexicon.Columns.Count > 0)
