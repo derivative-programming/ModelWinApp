@@ -15,11 +15,17 @@ namespace JsonManipulator
     public partial class FrmAddControl : Form
     {
         string _name, _parent;
+        string targetObjectName = string.Empty;
         public FrmAddControl(string name,string parent)
         {
             InitializeComponent();
             this._name = name;
             this._parent = parent;
+            targetObjectName = Utils.GetObjWFModelItem(name).targetChildObject;
+            if (targetObjectName == null || targetObjectName.Trim().Length == 0)
+            {
+                targetObjectName = _parent;
+            }
             if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == _name).FirstOrDefault().objectWorkflowParam == null)
                 Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == _name).FirstOrDefault().objectWorkflowParam = new List<objectWorkflowParam>();
 
@@ -77,7 +83,7 @@ namespace JsonManipulator
 
         private void btnBulk_Click(object sender, EventArgs e)
         {
-            using (var form = new FrmBulkAdd(this._parent,true))
+            using (var form = new FrmBulkAdd(this.targetObjectName,true))
             {
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK)
@@ -97,8 +103,8 @@ namespace JsonManipulator
                             {
                                 lineage = lineage.Remove(0, "Lineage:".Length);
                             }
-                            sourceObjProp = Utils.GetObjectPropListSelection(this._parent, lineage);
-                            sourceObj = Utils.GetObjectPropListSelectionParentObj(this._parent, lineage);
+                            sourceObjProp = Utils.GetObjectPropListSelection(this.targetObjectName, lineage);
+                            sourceObj = Utils.GetObjectPropListSelectionParentObj(this.targetObjectName, lineage);
                         }
                         if (itemName.Length > 0 && !ItemExists(itemName))
                         {

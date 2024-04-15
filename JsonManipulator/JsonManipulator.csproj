@@ -76,6 +76,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\Enums.cs" />
+    <Compile Include="frmRequestValue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRequestValue.Designer.cs">
+      <DependentUpon>frmRequestValue.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmAddUserStory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -420,6 +426,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils.cs" />
+    <EmbeddedResource Include="frmRequestValue.resx">
+      <DependentUpon>frmRequestValue.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmAddUserStory.resx">
       <DependentUpon>FrmAddUserStory.cs</DependentUpon>
     </EmbeddedResource>

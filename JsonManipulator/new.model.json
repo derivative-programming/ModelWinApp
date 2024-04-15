@@ -7,7 +7,7 @@
     "projectVersionNumber": "1.0",
     "namespace": [
       {
-        "name": "Code",
+        "name": "Core",
         "object": [
           {
             "name": "Pac",

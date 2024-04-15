@@ -235,7 +235,7 @@ namespace JsonManipulator
         }
 
         private void btnColumnsAdd_Click(object sender, EventArgs e)
-        {
+        { 
             FrmAddColumn frmAddColumn = new FrmAddColumn(_rpt.name, _ownerObject.name);
             frmAddColumn.ShowDialog();
         }
@@ -703,7 +703,7 @@ namespace JsonManipulator
                 }
                 if (propertyName.Equals("ConditionalVisiblePropertyName", StringComparison.OrdinalIgnoreCase))
                 {
-                    using (var form = new FrmSelectRptCols(_rpt.name))
+                    using (var form = new FrmSelectRptCols(_rpt.name,true))
                     {
                         var result = form.ShowDialog();
                         if (result == DialogResult.OK)
@@ -1080,41 +1080,51 @@ namespace JsonManipulator
         {
             if (_rpt.RoleRequired.Length > 0)
             {
-                using (var form = new frmModelSearch(ModelSearchOptions.ROLES))
+                string newReportName = string.Empty;
+                List<string> existingReortNames = Utils.GetNameList(false, true,true, true, true);
+                using (var form = new frmRequestValue(
+                    "New Report Name","Report Name", true,false, _rpt.name,50, "Please enter a value", existingReortNames))
                 {
                     var result = form.ShowDialog();
                     if (result == DialogResult.OK)
                     {
-                        string val = form.ReturnValue;
-
-
-                        if (!val.Equals(_rpt.RoleRequired, StringComparison.OrdinalIgnoreCase))
+                        newReportName = form.ReturnValue; 
+                    }
+                }
+                if (newReportName.Length > 0)
+                {
+                    using (var form = new frmModelSearch(ModelSearchOptions.ROLES))
+                    {
+                        var result = form.ShowDialog();
+                        if (result == DialogResult.OK)
                         {
-                            string json = JsonConvert.SerializeObject(_rpt, Formatting.Indented, new JsonSerializerSettings
-                            {
-                                NullValueHandling = NullValueHandling.Ignore
-                            });
-
-                            Report newRpt = JsonConvert.DeserializeObject<Report>(json);
-                            newRpt.name = newRpt.name.Replace(_rpt.RoleRequired, val);
-                            newRpt.codeDescription = newRpt.codeDescription.Replace(" " + _rpt.RoleRequired + " ", " " + val + " ");
-                            for(int i = 0;i < newRpt.reportColumn.Count;i++)
-                            {
-                                newRpt.reportColumn[i].codeDescription = newRpt.reportColumn[i].codeDescription.Replace(" " + _rpt.RoleRequired + " ", " " + val + " ");
-                            }
-                            newRpt.RoleRequired = val;
-                            newRpt.layoutName = val + "Layout";
-                            newRpt.reportButton.Clear();
+                            string val = form.ReturnValue;
 
 
-                            List<string> existingNames = Utils.GetNameList(false, true, true, true, true);
-                            if (existingNames.Where(x => x.ToLower().Equals(newRpt.name.Trim().ToLower())).ToList().Count == 0)
+                            if (!val.Equals(_rpt.RoleRequired, StringComparison.OrdinalIgnoreCase))
                             {
+                                string json = JsonConvert.SerializeObject(_rpt, Formatting.Indented, new JsonSerializerSettings
+                                {
+                                    NullValueHandling = NullValueHandling.Ignore
+                                });
+
+                                Report newRpt = JsonConvert.DeserializeObject<Report>(json);
+                                newRpt.name = newReportName;
+                                newRpt.codeDescription = "";
+                                newRpt.initObjectWorkflowName = "";
+                                for (int i = 0; i < newRpt.reportColumn.Count; i++)
+                                {
+                                    newRpt.reportColumn[i].codeDescription = "";
+                                }
+                                newRpt.RoleRequired = val;
+                                newRpt.layoutName = val + "Layout";
+
+
                                 _ownerObject.report.Add(newRpt);
                                 ((Form1)Application.OpenForms["Form1"]).showMessage("Report was cloned successfully");
                                 ((Form1)Application.OpenForms["Form1"]).AddToTree(newRpt);
-                            }
 
+                            }
                         }
                     }
                 }
@@ -1123,28 +1133,39 @@ namespace JsonManipulator
 
         private void btnCloneToSameRole_Click(object sender, EventArgs e)
         {
-            string json = JsonConvert.SerializeObject(_rpt, Formatting.Indented, new JsonSerializerSettings
+            List<string> existingReortNames = Utils.GetNameList(false, true, true, true, true);
+            using (var form = new frmRequestValue(
+                "New Report Name", "Report Name", true, false, _rpt.name, 50, "Please enter a value", existingReortNames))
             {
-                NullValueHandling = NullValueHandling.Ignore
-            });
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                            string newReportName = form.ReturnValue;
+                    string json = JsonConvert.SerializeObject(_rpt, Formatting.Indented, new JsonSerializerSettings
+                    {
+                        NullValueHandling = NullValueHandling.Ignore
+                    });
 
-            Report newRpt = JsonConvert.DeserializeObject<Report>(json);
-            newRpt.name = _rpt.name + "Clone";
+                    Report newRpt = JsonConvert.DeserializeObject<Report>(json);
+                    newRpt.name = newReportName;
+                    newRpt.codeDescription = "";
+                    newRpt.initObjectWorkflowName = "";
+                    for (int i = 0; i < newRpt.reportColumn.Count; i++)
+                    {
+                        newRpt.reportColumn[i].codeDescription = "";
+                    }
 
 
-            List<string> existingNames = Utils.GetNameList(false, true, true, true, true);
+                    List<string> existingNames = Utils.GetNameList(false, true, true, true, true);
+                     
+                     
 
-            int i = 1;
-
-            while(existingNames.Where(x => x.ToLower().Equals(newRpt.name.Trim().ToLower())).ToList().Count > 0)
-            {
-                i++;
-                newRpt.name = _rpt.name + "Clone" + i.ToString();
+                    _ownerObject.report.Add(newRpt);
+                    ((Form1)Application.OpenForms["Form1"]).showMessage("Report was cloned successfully");
+                    ((Form1)Application.OpenForms["Form1"]).AddToTree(newRpt);
+                }
             }
-
-            _ownerObject.report.Add(newRpt);
-            ((Form1)Application.OpenForms["Form1"]).showMessage("Report was cloned successfully");
-            ((Form1)Application.OpenForms["Form1"]).AddToTree(newRpt);
+            
         }
     }
 }

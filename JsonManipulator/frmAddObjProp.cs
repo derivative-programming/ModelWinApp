@@ -41,6 +41,11 @@ namespace JsonManipulator
                 ShowValidationError("Remove Spaces from name.");
                 return;
             }
+            if (txtName.Text.Trim().Length > 50)
+            {
+                ShowValidationError("Max property name length is 50.");
+                return;
+            }
 
             Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().property.Add(new property { name =txtName.Text});
             ((Form1)Application.OpenForms["Form1"]).showMessage("Property created successfully");

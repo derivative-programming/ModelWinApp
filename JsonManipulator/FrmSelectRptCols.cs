@@ -18,10 +18,13 @@ namespace JsonManipulator
 
         public List<string> results { get; set; }
 
-        public FrmSelectRptCols(string targetReportName)
+        bool _booleanColumnsOnly = false;
+
+        public FrmSelectRptCols(string targetReportName, bool booleanColumsnOnly = false)
         {
             InitializeComponent();
-            this._targetReportName = targetReportName; 
+            this._targetReportName = targetReportName;
+            _booleanColumnsOnly = booleanColumsnOnly;
         }
          
         private void btnAdd_Click(object sender, EventArgs e)
@@ -51,7 +54,7 @@ namespace JsonManipulator
         private void FrmSelectRptCols_Load(object sender, EventArgs e)
         {
             lbAvailableObjProps.Items.Add("No Value");
-            List<string> props = Utils.GetReportColList(this._targetReportName);
+            List<string> props = Utils.GetReportColList(this._targetReportName,_booleanColumnsOnly);
             for(int i = 0;i < props.Count;i++)
             {
                 lbAvailableObjProps.Items.Add(props[i]);

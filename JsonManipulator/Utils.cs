@@ -499,7 +499,7 @@ namespace JsonManipulator
         }
 
 
-        public static List<string> GetReportColList(string targetReportName)
+        public static List<string> GetReportColList(string targetReportName, bool booleanColumnsOnly = false)
         {
             List<string> result = new List<string>();
 
@@ -516,7 +516,17 @@ namespace JsonManipulator
                         continue;
                     foreach (reportColumn col in report.reportColumn)
                     {
-                        result.Add(col.name);
+                        if(booleanColumnsOnly &&
+                            col.dataType != null &&
+                            col.dataType.Equals("bit",StringComparison.OrdinalIgnoreCase))
+                        {
+                            result.Add(col.name);
+                        }
+                        else
+                        {
+                            if(!booleanColumnsOnly)
+                                result.Add(col.name);
+                        }
                         itemAdded = true;
                     }
                     break;
@@ -1024,6 +1034,7 @@ namespace JsonManipulator
         {
             List<string> result = new List<string>();
             result.Add("name");
+            result.Add("isAPIAuthorizationRequired");
 
             for (int i = 0; i < result.Count; i++)
             {
