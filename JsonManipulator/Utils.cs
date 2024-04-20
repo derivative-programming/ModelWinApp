@@ -1017,7 +1017,7 @@ namespace JsonManipulator
             //result.Add("conditionalVisiblePropertyName".ToLower());
             result.Add("buttonBadgeCountPropertyName".ToLower());
             result.Add("isFormFooter".ToLower());
-            result.Add("isImageURL".ToLower());
+            //result.Add("isImageURL".ToLower());
             result.Add("isEncrypted".ToLower());
             //result.Add("isIgnored".ToLower());
 
