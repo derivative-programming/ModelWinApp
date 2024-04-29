@@ -150,19 +150,42 @@ namespace JsonManipulator
             nodeMenus.Nodes["dbObjects"].Nodes.Clear();
             NameSpaceObject nameSpaceObject = _model.root.NameSpaceObjects.FirstOrDefault();
 
+            bool isExactMatchRequired = false;
+            if(filter.StartsWith("\"") && filter.EndsWith("\""))
+            {
+                filter = filter.Trim(" .\"".ToCharArray());
+                isExactMatchRequired = true;
+            }
+
             if (nameSpaceObject.ObjectMap == null)
                 return;
 
             foreach (ObjectMap dbObj in nameSpaceObject.ObjectMap)
             {
-                if (this._searchNames &&
-                    !dbObj.name.Trim().ToLower().Contains(filter.Trim().ToLower()))
-                    continue;
+                if(isExactMatchRequired)
+                {
+                    if (this._searchNames &&
+                        !dbObj.name.Trim().ToLower().Equals(filter.Trim().ToLower()))
+                        continue;
 
-                if (this._searchDBObjProps &&
-                    dbObj.property.Where(x => x.name.ToLower().Contains(filter.Trim().ToLower())).ToList().Count == 0)
-                    continue;
+                    if (this._searchDBObjProps &&
+                        dbObj.property.Where(x => x.name.ToLower().Equals(filter.Trim().ToLower())).ToList().Count == 0)
+                        continue;
 
+
+                }
+                else
+                {
+                    if (this._searchNames &&
+                        !dbObj.name.Trim().ToLower().Contains(filter.Trim().ToLower()))
+                        continue;
+
+                    if (this._searchDBObjProps &&
+                        dbObj.property.Where(x => x.name.ToLower().Contains(filter.Trim().ToLower())).ToList().Count == 0)
+                        continue;
+
+
+                }
                 if (!this._searchNames &&
                     !this._searchDBObjProps)
                     continue;
@@ -172,6 +195,13 @@ namespace JsonManipulator
         }
         private void populatePageAndFlows(string filter)
         {
+            bool isExactMatchRequired = false;
+            if (filter.StartsWith("\"") && filter.EndsWith("\""))
+            {
+                filter = filter.Trim(" .\"".ToCharArray());
+                isExactMatchRequired = true;
+            }
+
             nodeMenus.Nodes["pages"].Nodes["Forms"].Nodes.Clear();
             nodeMenus.Nodes["pages"].Nodes["Reports"].Nodes.Clear();
             nodeMenus.Nodes["nodeFlows"].Nodes["nodeFlowPageInit"].Nodes.Clear();
@@ -227,33 +257,69 @@ namespace JsonManipulator
 
                         bool resultFound = false;
 
-                        if (this._searchNames &&
-                            objWF.Name.Trim().ToLower().Contains(filter.Trim().ToLower()))
-                            resultFound = true; 
+                        if(isExactMatchRequired)
+                        {
+                            if (this._searchNames &&
+                                objWF.Name.Trim().ToLower().Equals(filter.Trim().ToLower()))
+                                resultFound = true;
 
-                        if (this._searchRoleRequired &&
-                            objWF.isPage == "true" &&
-                            objWF.RoleRequired != null &&
-                            objWF.RoleRequired.Trim().ToLower().Contains(filter.Trim().ToLower()))
-                            resultFound = true; 
+                            if (this._searchRoleRequired &&
+                                objWF.isPage == "true" &&
+                                objWF.RoleRequired != null &&
+                                objWF.RoleRequired.Trim().ToLower().Equals(filter.Trim().ToLower()))
+                                resultFound = true;
 
-                        if (this._searchLayoutName &&
-                            objWF.isPage == "true" &&
-                            objWF.layoutName != null &&
-                            objWF.layoutName.Trim().ToLower().Contains(filter.Trim().ToLower()))
-                            resultFound = true;
+                            if (this._searchLayoutName &&
+                                objWF.isPage == "true" &&
+                                objWF.layoutName != null &&
+                                objWF.layoutName.Trim().ToLower().Equals(filter.Trim().ToLower()))
+                                resultFound = true;
 
-                        if (this._searchObjWFButtons &&
-                            objWF.objectWorkflowButton.Where(x => x.buttonText != null && x.buttonText.ToLower().Contains(filter.Trim().ToLower())).ToList().Count > 0)
-                            resultFound = true;
+                            if (this._searchObjWFButtons &&
+                                objWF.objectWorkflowButton.Where(x => x.buttonText != null && x.buttonText.ToLower().Equals(filter.Trim().ToLower())).ToList().Count > 0)
+                                resultFound = true;
 
-                        if (this._searchObjWFOutputVars &&
-                            objWF.objectWorkflowOutputVar.Where(x => x.name.ToLower().Contains(filter.Trim().ToLower())).ToList().Count > 0)
-                            resultFound = true;
+                            if (this._searchObjWFOutputVars &&
+                                objWF.objectWorkflowOutputVar.Where(x => x.name.ToLower().Equals(filter.Trim().ToLower())).ToList().Count > 0)
+                                resultFound = true;
 
-                        if (this._searchObjWFParams &&
-                            objWF.objectWorkflowParam.Where(x => x.name.ToLower().Contains(filter.Trim().ToLower())).ToList().Count > 0)
-                            resultFound = true;
+                            if (this._searchObjWFParams &&
+                                objWF.objectWorkflowParam.Where(x => x.name.ToLower().Equals(filter.Trim().ToLower())).ToList().Count > 0)
+                                resultFound = true;
+
+                        }
+                        else
+                        {
+                            if (this._searchNames &&
+                                objWF.Name.Trim().ToLower().Contains(filter.Trim().ToLower()))
+                                resultFound = true;
+
+                            if (this._searchRoleRequired &&
+                                objWF.isPage == "true" &&
+                                objWF.RoleRequired != null &&
+                                objWF.RoleRequired.Trim().ToLower().Contains(filter.Trim().ToLower()))
+                                resultFound = true;
+
+                            if (this._searchLayoutName &&
+                                objWF.isPage == "true" &&
+                                objWF.layoutName != null &&
+                                objWF.layoutName.Trim().ToLower().Contains(filter.Trim().ToLower()))
+                                resultFound = true;
+
+                            if (this._searchObjWFButtons &&
+                                objWF.objectWorkflowButton.Where(x => x.buttonText != null && x.buttonText.ToLower().Contains(filter.Trim().ToLower())).ToList().Count > 0)
+                                resultFound = true;
+
+                            if (this._searchObjWFOutputVars &&
+                                objWF.objectWorkflowOutputVar.Where(x => x.name.ToLower().Contains(filter.Trim().ToLower())).ToList().Count > 0)
+                                resultFound = true;
+
+                            if (this._searchObjWFParams &&
+                                objWF.objectWorkflowParam.Where(x => x.name.ToLower().Contains(filter.Trim().ToLower())).ToList().Count > 0)
+                                resultFound = true;
+
+                        }
+
 
                         if (!resultFound)
                             continue;
@@ -311,34 +377,69 @@ namespace JsonManipulator
 
                         bool resultFound = false;
 
+                        if(isExactMatchRequired)
+                        {
+                            if (this._searchNames &&
+                                rpt.name.Trim().ToLower().Equals(filter.Trim().ToLower()))
+                                resultFound = true;
 
-                        if (this._searchNames &&
-                            rpt.name.Trim().ToLower().Contains(filter.Trim().ToLower()))
-                            resultFound = true; 
+                            if (this._searchRoleRequired &&
+                                rpt.isPage == "true" &&
+                                rpt.RoleRequired != null &&
+                                rpt.RoleRequired.Trim().ToLower().Equals(filter.Trim().ToLower()))
+                                resultFound = true;
 
-                        if (this._searchRoleRequired &&
-                            rpt.isPage == "true" &&
-                            rpt.RoleRequired != null &&
-                            rpt.RoleRequired.Trim().ToLower().Contains(filter.Trim().ToLower()))
-                            resultFound = true; 
+                            if (this._searchLayoutName &&
+                                rpt.isPage == "true" &&
+                                rpt.layoutName != null &&
+                                rpt.layoutName.Trim().ToLower().Equals(filter.Trim().ToLower()))
+                                resultFound = true;
 
-                        if (this._searchLayoutName &&
-                            rpt.isPage == "true" &&
-                            rpt.layoutName != null &&
-                            rpt.layoutName.Trim().ToLower().Contains(filter.Trim().ToLower()))
-                            resultFound = true;
+                            if (this._searchReportButtons &&
+                                rpt.reportButton.Where(x => x.buttonName.ToLower().Equals(filter.Trim().ToLower())).ToList().Count > 0)
+                                resultFound = true;
 
-                        if (this._searchReportButtons &&
-                            rpt.reportButton.Where(x => x.buttonName.ToLower().Contains(filter.Trim().ToLower())).ToList().Count > 0)
-                            resultFound = true;
+                            if (this._searchReportColumns &&
+                                rpt.reportColumn.Where(x => x.name.ToLower().Equals(filter.Trim().ToLower())).ToList().Count > 0)
+                                resultFound = true;
 
-                        if (this._searchReportColumns &&
-                            rpt.reportColumn.Where(x => x.name.ToLower().Contains(filter.Trim().ToLower())).ToList().Count > 0)
-                            resultFound = true;
+                            if (this._searchReportFilters &&
+                                rpt.reportParam.Where(x => x.name.ToLower().Equals(filter.Trim().ToLower())).ToList().Count > 0)
+                                resultFound = true;
 
-                        if (this._searchReportFilters &&
-                            rpt.reportParam.Where(x => x.name.ToLower().Contains(filter.Trim().ToLower())).ToList().Count > 0)
-                            resultFound = true;
+                        }
+                        else
+                        {
+                            if (this._searchNames &&
+                                rpt.name.Trim().ToLower().Contains(filter.Trim().ToLower()))
+                                resultFound = true;
+
+                            if (this._searchRoleRequired &&
+                                rpt.isPage == "true" &&
+                                rpt.RoleRequired != null &&
+                                rpt.RoleRequired.Trim().ToLower().Contains(filter.Trim().ToLower()))
+                                resultFound = true;
+
+                            if (this._searchLayoutName &&
+                                rpt.isPage == "true" &&
+                                rpt.layoutName != null &&
+                                rpt.layoutName.Trim().ToLower().Contains(filter.Trim().ToLower()))
+                                resultFound = true;
+
+                            if (this._searchReportButtons &&
+                                rpt.reportButton.Where(x => x.buttonName.ToLower().Contains(filter.Trim().ToLower())).ToList().Count > 0)
+                                resultFound = true;
+
+                            if (this._searchReportColumns &&
+                                rpt.reportColumn.Where(x => x.name.ToLower().Contains(filter.Trim().ToLower())).ToList().Count > 0)
+                                resultFound = true;
+
+                            if (this._searchReportFilters &&
+                                rpt.reportParam.Where(x => x.name.ToLower().Contains(filter.Trim().ToLower())).ToList().Count > 0)
+                                resultFound = true;
+
+                        }
+
 
                         if (!resultFound)
                             continue;
@@ -364,6 +465,13 @@ namespace JsonManipulator
 
         private void populateAPIs(string filter)
         {
+            bool isExactMatchRequired = false;
+            if (filter.StartsWith("\"") && filter.EndsWith("\""))
+            {
+                filter = filter.Trim(" .\"".ToCharArray());
+                isExactMatchRequired = true;
+            }
+
             nodeMenus.Nodes["nodeApis"].Nodes.Clear();
 
             NameSpaceObject nameSpaceObject = _model.root.NameSpaceObjects.FirstOrDefault();

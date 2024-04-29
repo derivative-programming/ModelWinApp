@@ -42,6 +42,8 @@ namespace JsonManipulator.Models
         public string IsInternalObjectApiCreated { get; set; }
         [JsonProperty("isValidationMissesLogged")]
         public string isValidationMissesLogged { get; set; }
+        [JsonProperty("isBasicAuthenticationIncluded")]
+        public string isBasicAuthenticationIncluded { get; set; }
         [JsonProperty("suppressFillObjLookupTableScripts")]
         public string suppressFillObjLookupTableScripts { get; set; }
         [JsonRequired]
