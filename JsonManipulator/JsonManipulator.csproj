@@ -160,6 +160,12 @@
     <Compile Include="frmReportNavigation.Designer.cs">
       <DependentUpon>frmReportNavigation.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmServicesApiModelChat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmServicesApiModelChat.Designer.cs">
+      <DependentUpon>frmServicesApiModelChat.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmServicesApiTemplateSetList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -467,6 +473,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmReportNavigation.resx">
       <DependentUpon>frmReportNavigation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmServicesApiModelChat.resx">
+      <DependentUpon>frmServicesApiModelChat.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmServicesApiTemplateSetList.resx">
       <DependentUpon>frmServicesApiTemplateSetList.cs</DependentUpon>

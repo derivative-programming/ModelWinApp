@@ -525,6 +525,37 @@ namespace JsonManipulator.OpenAPIs
             return result;
         }
 
+
+        public async static Task<string> AddModelChatQueryAsync(string queryText, Guid projectCode)
+        {
+            string result = string.Empty;
+
+            try
+            {
+
+                ModelChatClient client = new ModelChatClient(GetApiBaseUrl(), BuildClient());
+
+                ModelChatPostModel postModel = new ModelChatPostModel();
+                postModel.ProjectCode = projectCode;
+                postModel.QueryText = queryText;
+                ModelChatPostResponse response = await client.PostAsync(postModel);
+                 
+                if(response.Success)
+                {
+                    result = response.ResponseText;
+                }
+                else
+                {
+                    result = response.Message;
+                }
+            }
+            catch (System.Exception)
+            { 
+            }
+
+            return result;
+        }
+
         public async static Task<bool> CancelPrepRequestAsync(Guid prepRequestCode)
         {
             bool result = false;

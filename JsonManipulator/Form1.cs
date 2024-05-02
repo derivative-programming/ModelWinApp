@@ -1097,6 +1097,7 @@ namespace JsonManipulator
             modelAIProcessingToolStripMenuItem.Enabled = true;
             modelFabricationToolStripMenuItem.Enabled = true;
             modelChangeReportToolStripMenuItem.Enabled = true;
+            modelAIChatToolStripMenuItem.Enabled = true;
             modelValidationToolStripMenuItem.Enabled = true;
             templateSelectionToolStripMenuItem.Enabled = true;
             logOutToolStripMenuItem.Enabled = true;
@@ -1108,6 +1109,7 @@ namespace JsonManipulator
             modelAIProcessingToolStripMenuItem.Enabled = false;
             modelFabricationToolStripMenuItem.Enabled = false;
             modelChangeReportToolStripMenuItem.Enabled = false;
+            modelAIChatToolStripMenuItem.Enabled = false;
             modelValidationToolStripMenuItem.Enabled = false;
             templateSelectionToolStripMenuItem.Enabled = false;
             logOutToolStripMenuItem.Enabled = false;
@@ -1734,6 +1736,12 @@ namespace JsonManipulator
         private void formToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void modelAIChatToolStripMenuItem_Click(object sender, EventArgs e)
+        { 
+            frmServicesApiModelChat form = new frmServicesApiModelChat();
+            form.Show();
         }
     }
     

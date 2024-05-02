@@ -115,6 +115,7 @@ namespace JsonManipulator
             this.label1 = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusText = new System.Windows.Forms.ToolStripStatusLabel();
+            this.modelAIChatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -418,6 +419,7 @@ namespace JsonManipulator
             this.templateSelectionToolStripMenuItem,
             this.modelFabricationToolStripMenuItem,
             this.modelChangeReportToolStripMenuItem,
+            this.modelAIChatToolStripMenuItem,
             this.logOutToolStripMenuItem});
             this.servicesToolStripMenuItem.Name = "servicesToolStripMenuItem";
             this.servicesToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
@@ -759,6 +761,13 @@ namespace JsonManipulator
             this.statusText.Name = "statusText";
             this.statusText.Size = new System.Drawing.Size(0, 16);
             // 
+            // modelAIChatToolStripMenuItem
+            // 
+            this.modelAIChatToolStripMenuItem.Name = "modelAIChatToolStripMenuItem";
+            this.modelAIChatToolStripMenuItem.Size = new System.Drawing.Size(238, 26);
+            this.modelAIChatToolStripMenuItem.Text = "Model AI Chat";
+            this.modelAIChatToolStripMenuItem.Click += new System.EventHandler(this.modelAIChatToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -861,6 +870,7 @@ namespace JsonManipulator
         private System.Windows.Forms.ToolStripMenuItem formToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addChildPageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem modelAIChatToolStripMenuItem;
     }
 }
 
