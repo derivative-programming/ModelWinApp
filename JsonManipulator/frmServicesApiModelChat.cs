@@ -32,27 +32,71 @@ namespace JsonManipulator
 
             string queryText = textBox1.Text;
 
-            textBox1.Text = "";
+            textBox1.Text = ""; 
 
-            richTextBox1.Text += Environment.NewLine;
-            richTextBox1.Text += DateTime.Now.ToLongTimeString() + ": " + queryText;
+            AppendTextAndScroll(DateTime.Now.ToLongTimeString() + ": " + queryText);
 
             string projectCodeVal = Form1._model.root.ProjectCode;
 
             Guid projectCode = Guid.Parse(projectCodeVal);
             string responseText = await OpenAPIs.ApiManager.AddModelChatQueryAsync(queryText, projectCode);
+             
 
-            richTextBox1.Text += Environment.NewLine;
-            richTextBox1.Text += DateTime.Now.ToLongTimeString() + ": " + responseText;
+            AppendTextAndScroll(DateTime.Now.ToLongTimeString() + ": " + responseText);
 
             btnAccept.Enabled = true;
 
+            textBox1.Focus();
         }
 
-        private void FrmAddColumn_Load(object sender, EventArgs e)
+        private async void FrmAddColumn_Load(object sender, EventArgs e)
         {
-            richTextBox1.Text = ReturnValue;
+
+            string projectCodeVal = Form1._model.root.ProjectCode;
+
+            Guid projectCode = Guid.Parse(projectCodeVal);
+            string responseText = await OpenAPIs.ApiManager.AddModelChatQueryAsync("new thread", projectCode);
+
+
+            AppendTextAndScroll(DateTime.Now.ToLongTimeString() + ": " + responseText);
         }
-         
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                // Prevent the ding sound when pressing enter
+                e.SuppressKeyPress = true;
+                // Trigger the button click
+                btnAccept.PerformClick();
+            }
+        }
+
+        private void AppendTextAndScroll(string text)
+        {
+            // Suspend layout to prevent flickering
+            richTextBox1.SuspendLayout();
+
+            // Save the current selection start and length
+            int selStart = richTextBox1.SelectionStart;
+            int selLength = richTextBox1.SelectionLength;
+
+            // Set the selection to the end of the existing text
+            richTextBox1.SelectionStart = richTextBox1.TextLength;
+            richTextBox1.SelectionLength = 0;
+
+            // Insert the text at the current selection, which is the end
+            richTextBox1.SelectedText = Environment.NewLine + Environment.NewLine + text;
+
+            // Scroll to the caret position, which is at the end after appending
+            richTextBox1.ScrollToCaret();
+
+            // Restore the previous selection
+            richTextBox1.SelectionStart = selStart;
+            richTextBox1.SelectionLength = selLength;
+
+            // Resume layout to update the UI
+            richTextBox1.ResumeLayout();
+        }
     }
 }
