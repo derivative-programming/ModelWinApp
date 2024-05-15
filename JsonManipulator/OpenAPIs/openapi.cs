@@ -4422,6 +4422,12 @@ namespace JsonManipulator
         [Newtonsoft.Json.JsonProperty("responseText", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ResponseText { get; set; }
     
+        [Newtonsoft.Json.JsonProperty("responseAudioUrl", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ResponseAudioUrl { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("queryText", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string QueryText { get; set; }
+    
         [Newtonsoft.Json.JsonProperty("validationError", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<ValidationError8> ValidationError { get; set; }
     
@@ -4445,6 +4451,12 @@ namespace JsonManipulator
     
         [Newtonsoft.Json.JsonProperty("queryText", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string QueryText { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("isResponseTextConvertedToAudioUrl", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsResponseTextConvertedToAudioUrl { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("queryAudioFile", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string QueryAudioFile { get; set; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     

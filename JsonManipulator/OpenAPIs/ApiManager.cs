@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
@@ -16,9 +17,9 @@ namespace JsonManipulator.OpenAPIs
         private static string GetApiBaseUrl()
         {
             return "https://dp-appservice-ares-api-dev.azurewebsites.net";
-           // return "https://localhost:44348";
+            // return "https://localhost:44348";
         }
-         
+
         public static void Initialize()
         {
             _ApiKeyExpirationDateTime = Convert.ToDateTime(LocalStorage.GetValue("ModelServicesApiKeyExpirationUTCDateTime", DateTime.MinValue.ToString()));
@@ -526,9 +527,9 @@ namespace JsonManipulator.OpenAPIs
         }
 
 
-        public async static Task<string> AddModelChatQueryAsync(string queryText, Guid projectCode)
+        public async static Task<ChatResponse> AddModelChatQueryAsync(string queryText, bool isResponseTextConvertedToAudioUrl, Guid projectCode, string queryAudioFile = null)
         {
-            string result = string.Empty;
+            ChatResponse result = new ChatResponse();
 
             try
             {
@@ -538,18 +539,34 @@ namespace JsonManipulator.OpenAPIs
                 ModelChatPostModel postModel = new ModelChatPostModel();
                 postModel.ProjectCode = projectCode;
                 postModel.QueryText = queryText;
+                postModel.IsResponseTextConvertedToAudioUrl = isResponseTextConvertedToAudioUrl;
+
+                if(queryAudioFile != null &&
+                    System.IO.File.Exists(queryAudioFile))
+                {
+                    byte[] fileBytes = File.ReadAllBytes(queryAudioFile);
+
+                    // Convert the byte array to a Base64 string
+                    postModel.QueryAudioFile = Convert.ToBase64String(fileBytes);
+                } 
                 ModelChatPostResponse response = await client.PostAsync(postModel);
                  
                 if(response.Success)
                 {
-                    result = response.ResponseText;
+                    result.ResponseText = response.ResponseText;
+                    result.ResponseAudioUrl = response.ResponseAudioUrl;
+                    result.IsSuccessful = response.Success;
+                    result.QueryText = response.QueryText;
+
                 }
                 else
                 {
-                    result = response.Message;
+                    result.ResponseText = response.Message;
+                    result.IsSuccessful = response.Success;
+                    result.QueryText = response.QueryText;
                 }
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             { 
             }
 
@@ -630,5 +647,20 @@ namespace JsonManipulator.OpenAPIs
         }
          
 
+    }
+
+    public class ChatResponse
+    {
+        public ChatResponse()
+        {
+
+        }
+
+        public string ResponseText { set; get; }
+        public string QueryText { set; get; }
+
+        public string ResponseAudioUrl { set; get; }
+
+        public bool IsSuccessful { set; get; }
     }
 }
