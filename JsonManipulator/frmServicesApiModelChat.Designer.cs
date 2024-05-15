@@ -33,10 +33,10 @@ namespace JsonManipulator
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.chkVoiceOutput = new System.Windows.Forms.CheckBox();
+            this.chkVoiceInput = new System.Windows.Forms.CheckBox();
             this.lblStatus = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.chkVoiceInput = new System.Windows.Forms.CheckBox();
-            this.chkVoiceOutput = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -84,6 +84,31 @@ namespace JsonManipulator
             this.panel2.Size = new System.Drawing.Size(659, 49);
             this.panel2.TabIndex = 4;
             // 
+            // chkVoiceOutput
+            // 
+            this.chkVoiceOutput.AutoSize = true;
+            this.chkVoiceOutput.Checked = true;
+            this.chkVoiceOutput.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkVoiceOutput.Location = new System.Drawing.Point(466, 3);
+            this.chkVoiceOutput.Name = "chkVoiceOutput";
+            this.chkVoiceOutput.Size = new System.Drawing.Size(112, 21);
+            this.chkVoiceOutput.TabIndex = 4;
+            this.chkVoiceOutput.Text = "Voice Output";
+            this.chkVoiceOutput.UseVisualStyleBackColor = true;
+            // 
+            // chkVoiceInput
+            // 
+            this.chkVoiceInput.AutoSize = true;
+            this.chkVoiceInput.Checked = true;
+            this.chkVoiceInput.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkVoiceInput.Location = new System.Drawing.Point(360, 3);
+            this.chkVoiceInput.Name = "chkVoiceInput";
+            this.chkVoiceInput.Size = new System.Drawing.Size(100, 21);
+            this.chkVoiceInput.TabIndex = 3;
+            this.chkVoiceInput.Text = "Voice Input";
+            this.chkVoiceInput.UseVisualStyleBackColor = true;
+            this.chkVoiceInput.CheckedChanged += new System.EventHandler(this.chkVoiceInput_CheckedChanged);
+            // 
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
@@ -99,32 +124,6 @@ namespace JsonManipulator
             this.textBox1.Size = new System.Drawing.Size(575, 22);
             this.textBox1.TabIndex = 0;
             this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
-            // 
-            // chkVoiceInput
-            // 
-            this.chkVoiceInput.AutoSize = true;
-            this.chkVoiceInput.Checked = true;
-            this.chkVoiceInput.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkVoiceInput.Enabled = false;
-            this.chkVoiceInput.Location = new System.Drawing.Point(360, 3);
-            this.chkVoiceInput.Name = "chkVoiceInput";
-            this.chkVoiceInput.Size = new System.Drawing.Size(100, 21);
-            this.chkVoiceInput.TabIndex = 3;
-            this.chkVoiceInput.Text = "Voice Input";
-            this.chkVoiceInput.UseVisualStyleBackColor = true;
-            this.chkVoiceInput.CheckedChanged += new System.EventHandler(this.chkVoiceInput_CheckedChanged);
-            // 
-            // chkVoiceOutput
-            // 
-            this.chkVoiceOutput.AutoSize = true;
-            this.chkVoiceOutput.Checked = true;
-            this.chkVoiceOutput.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkVoiceOutput.Location = new System.Drawing.Point(466, 3);
-            this.chkVoiceOutput.Name = "chkVoiceOutput";
-            this.chkVoiceOutput.Size = new System.Drawing.Size(112, 21);
-            this.chkVoiceOutput.TabIndex = 4;
-            this.chkVoiceOutput.Text = "Voice Output";
-            this.chkVoiceOutput.UseVisualStyleBackColor = true;
             // 
             // frmServicesApiModelChat
             // 

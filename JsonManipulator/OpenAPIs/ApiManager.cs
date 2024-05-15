@@ -17,7 +17,7 @@ namespace JsonManipulator.OpenAPIs
         private static string GetApiBaseUrl()
         {
             return "https://dp-appservice-ares-api-dev.azurewebsites.net";
-            // return "https://localhost:44348";
+           //  return "https://localhost:44348";
         }
 
         public static void Initialize()
@@ -557,6 +557,8 @@ namespace JsonManipulator.OpenAPIs
                     result.ResponseAudioUrl = response.ResponseAudioUrl;
                     result.IsSuccessful = response.Success;
                     result.QueryText = response.QueryText;
+                    result.CurrentContextObjectType = response.CurrentContextObjectType;
+                    result.CurrentContextName = response.CurrentContextName;
 
                 }
                 else
@@ -662,5 +664,7 @@ namespace JsonManipulator.OpenAPIs
         public string ResponseAudioUrl { set; get; }
 
         public bool IsSuccessful { set; get; }
+        public string CurrentContextObjectType { set; get; }
+        public string CurrentContextName { set; get; }
     }
 }

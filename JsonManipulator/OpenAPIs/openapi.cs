@@ -4428,6 +4428,12 @@ namespace JsonManipulator
         [Newtonsoft.Json.JsonProperty("queryText", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string QueryText { get; set; }
     
+        [Newtonsoft.Json.JsonProperty("currentContextObjectType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CurrentContextObjectType { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("currentContextName", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CurrentContextName { get; set; }
+    
         [Newtonsoft.Json.JsonProperty("validationError", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<ValidationError8> ValidationError { get; set; }
     

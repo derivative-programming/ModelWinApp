@@ -24,6 +24,8 @@ namespace JsonManipulator
         private bool isRecording = false;
         private int silenceCounter = 0;
         private string currentRecordingFilePath = string.Empty;
+        private string currentContextObjectType = string.Empty;
+        private string currentContextName = string.Empty;
 
         public string ReturnValue { get; set; }
 
@@ -78,6 +80,18 @@ namespace JsonManipulator
                     //play file
                     await PlayMP3File(tempFile);
                 }
+            }
+
+            if(response.CurrentContextObjectType != null &&
+                response.CurrentContextName != null &&
+                response.CurrentContextObjectType.Length > 0 &&                             
+                response.CurrentContextName.Length > 0 &&
+                (response.CurrentContextName != this.currentContextName ||
+                response.CurrentContextObjectType != this.currentContextObjectType))
+            {
+                ((Form1)Application.OpenForms["Form1"]).SetSelectedTreeItem(response.CurrentContextName);
+                this.currentContextObjectType = response.CurrentContextObjectType;
+                this.currentContextName = response.CurrentContextName;
             }
 
             AppendTextAndScroll(DateTime.Now.ToLongTimeString() + ": AI   : " + response.ResponseText);
@@ -317,59 +331,74 @@ namespace JsonManipulator
                 {
                     if (++silenceCounter > (int)(bufferMilliseconds / waveIn.BufferMilliseconds))
                     {
-                        isRecording = false;
-
-                        Console.WriteLine("waveIn.StopRecording");
-                        isListening = false;
-                        waveIn.StopRecording();
-
-                        Console.WriteLine("writer.Close");
-                        writer.Close();
-
-                        btnAccept.Enabled = false;
-
-                        string queryText = textBox1.Text;
-
-                        textBox1.Text = "";
-
-                        string projectCodeVal = Form1._model.root.ProjectCode;
-
-                        DateTime requestDateTime = DateTime.Now;
-
-                        lblStatus.Text = "Sending...";
-
-                        Guid projectCode = Guid.Parse(projectCodeVal);
-                        ChatResponse response = await OpenAPIs.ApiManager.AddModelChatQueryAsync("", chkVoiceOutput.Checked, projectCode, currentRecordingFilePath);
-
-                        lblStatus.Text = "";
-
-                        if (response.ResponseAudioUrl != null &&
-                            response.ResponseAudioUrl.Trim().Length > 0)
+                        if (chkVoiceInput.Checked)
                         {
-                            //verify url exists
-                            bool urlExists = await UrlExistsAsync(response.ResponseAudioUrl);
+                            isRecording = false;
 
-                            if (urlExists)
+                            Console.WriteLine("waveIn.StopRecording");
+                            isListening = false;
+                            waveIn.StopRecording();
+
+                            Console.WriteLine("writer.Close");
+                            writer.Close();
+
+                            btnAccept.Enabled = false;
+
+                            string queryText = textBox1.Text;
+
+                            textBox1.Text = "";
+
+                            string projectCodeVal = Form1._model.root.ProjectCode;
+
+                            DateTime requestDateTime = DateTime.Now;
+
+                            lblStatus.Text = "Sending...";
+
+                            Guid projectCode = Guid.Parse(projectCodeVal);
+                            ChatResponse response = await OpenAPIs.ApiManager.AddModelChatQueryAsync("", chkVoiceOutput.Checked, projectCode, currentRecordingFilePath);
+
+                            lblStatus.Text = "";
+
+                            if (response.ResponseAudioUrl != null &&
+                                response.ResponseAudioUrl.Trim().Length > 0)
                             {
-                                string tempFile = System.IO.Path.GetTempPath().TrimEnd(@"\".ToCharArray()) + @"\" + Guid.NewGuid().ToString() + ".mp3";
+                                //verify url exists
+                                bool urlExists = await UrlExistsAsync(response.ResponseAudioUrl);
 
-                                //download file
-                                await DownloadUrl(response.ResponseAudioUrl, tempFile);
+                                if (urlExists)
+                                {
+                                    string tempFile = System.IO.Path.GetTempPath().TrimEnd(@"\".ToCharArray()) + @"\" + Guid.NewGuid().ToString() + ".mp3";
 
-                                //play file
-                                await PlayMP3File(tempFile);
+                                    //download file
+                                    await DownloadUrl(response.ResponseAudioUrl, tempFile);
+
+                                    //play file
+                                    await PlayMP3File(tempFile);
+                                }
                             }
+
+                            if (response.CurrentContextObjectType != null &&
+                                response.CurrentContextName != null &&
+                                response.CurrentContextObjectType.Length > 0 &&
+                                response.CurrentContextName.Length > 0 &&
+                                (response.CurrentContextName != this.currentContextName ||
+                                response.CurrentContextObjectType != this.currentContextObjectType))
+                            {
+                                ((Form1)Application.OpenForms["Form1"]).SetSelectedTreeItem(response.CurrentContextName);
+                                this.currentContextObjectType = response.CurrentContextObjectType;
+                                this.currentContextName = response.CurrentContextName;
+                            }
+
+                            AppendTextAndScroll(requestDateTime.ToLongTimeString() + ": User : " + response.QueryText);
+
+                            AppendTextAndScroll(DateTime.Now.ToLongTimeString() + ": AI   : " + response.ResponseText);
+
+                            btnAccept.Enabled = true;
+
+                            Console.WriteLine("waveIn.StartRecording");
+                            waveIn.StartRecording();
+                            isListening = true;
                         }
-
-                        AppendTextAndScroll(requestDateTime.ToLongTimeString() + ": User : " + response.QueryText);
-
-                        AppendTextAndScroll(DateTime.Now.ToLongTimeString() + ": AI   : " + response.ResponseText);
-
-                        btnAccept.Enabled = true;
-
-                        Console.WriteLine("waveIn.StartRecording");
-                        waveIn.StartRecording();
-                        isListening = true;
                     }
                 }
             }
@@ -385,7 +414,7 @@ namespace JsonManipulator
         private void OnRecordingStopped(object sender, StoppedEventArgs e)
         {
             Console.WriteLine("OnRecordingStopped start");
-            if (!isListening)
+            if (true)// (!isListening)
             {
                 if (writer != null)
                 {

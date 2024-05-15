@@ -87,14 +87,14 @@ namespace JsonManipulator
             this.btnLookupItem = new System.Windows.Forms.Button();
             this.pnlLookupItemLeftTop = new System.Windows.Forms.Panel();
             this.lstLookupItems = new System.Windows.Forms.ListBox();
+            this.tabChildren = new System.Windows.Forms.TabPage();
+            this.panelChildrenBase = new System.Windows.Forms.Panel();
+            this.lstChildren = new System.Windows.Forms.ListBox();
+            this.panelChildrenLower = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
             this.tabJSON = new System.Windows.Forms.TabPage();
             this.rtbJSON = new System.Windows.Forms.RichTextBox();
             this.grpBoxMain = new System.Windows.Forms.GroupBox();
-            this.tabChildren = new System.Windows.Forms.TabPage();
-            this.panelChildrenBase = new System.Windows.Forms.Panel();
-            this.panelChildrenLower = new System.Windows.Forms.Panel();
-            this.lstChildren = new System.Windows.Forms.ListBox();
-            this.button2 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataProperties)).BeginInit();
@@ -125,11 +125,11 @@ namespace JsonManipulator
             this.pnlLookupItemLeft.SuspendLayout();
             this.pnlLookupItemLeftBottom.SuspendLayout();
             this.pnlLookupItemLeftTop.SuspendLayout();
-            this.tabJSON.SuspendLayout();
-            this.grpBoxMain.SuspendLayout();
             this.tabChildren.SuspendLayout();
             this.panelChildrenBase.SuspendLayout();
             this.panelChildrenLower.SuspendLayout();
+            this.tabJSON.SuspendLayout();
+            this.grpBoxMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -668,8 +668,8 @@ namespace JsonManipulator
             // 
             // pnlLookupItemLeft
             // 
-            this.pnlLookupItemLeft.Controls.Add(this.pnlLookupItemLeftBottom);
             this.pnlLookupItemLeft.Controls.Add(this.pnlLookupItemLeftTop);
+            this.pnlLookupItemLeft.Controls.Add(this.pnlLookupItemLeftBottom);
             this.pnlLookupItemLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlLookupItemLeft.Location = new System.Drawing.Point(0, 0);
             this.pnlLookupItemLeft.Name = "pnlLookupItemLeft";
@@ -726,7 +726,7 @@ namespace JsonManipulator
             this.pnlLookupItemLeftTop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlLookupItemLeftTop.Location = new System.Drawing.Point(0, 0);
             this.pnlLookupItemLeftTop.Name = "pnlLookupItemLeftTop";
-            this.pnlLookupItemLeftTop.Size = new System.Drawing.Size(177, 403);
+            this.pnlLookupItemLeftTop.Size = new System.Drawing.Size(177, 301);
             this.pnlLookupItemLeftTop.TabIndex = 6;
             // 
             // lstLookupItems
@@ -737,9 +737,60 @@ namespace JsonManipulator
             this.lstLookupItems.Location = new System.Drawing.Point(0, 0);
             this.lstLookupItems.Name = "lstLookupItems";
             this.lstLookupItems.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lstLookupItems.Size = new System.Drawing.Size(177, 403);
+            this.lstLookupItems.Size = new System.Drawing.Size(177, 301);
             this.lstLookupItems.TabIndex = 1;
             this.lstLookupItems.SelectedIndexChanged += new System.EventHandler(this.lstLookupItems_SelectedIndexChanged);
+            // 
+            // tabChildren
+            // 
+            this.tabChildren.Controls.Add(this.panelChildrenBase);
+            this.tabChildren.Location = new System.Drawing.Point(4, 25);
+            this.tabChildren.Name = "tabChildren";
+            this.tabChildren.Padding = new System.Windows.Forms.Padding(3);
+            this.tabChildren.Size = new System.Drawing.Size(830, 409);
+            this.tabChildren.TabIndex = 6;
+            this.tabChildren.Text = "Children";
+            this.tabChildren.UseVisualStyleBackColor = true;
+            // 
+            // panelChildrenBase
+            // 
+            this.panelChildrenBase.Controls.Add(this.lstChildren);
+            this.panelChildrenBase.Controls.Add(this.panelChildrenLower);
+            this.panelChildrenBase.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelChildrenBase.Location = new System.Drawing.Point(3, 3);
+            this.panelChildrenBase.Name = "panelChildrenBase";
+            this.panelChildrenBase.Size = new System.Drawing.Size(824, 403);
+            this.panelChildrenBase.TabIndex = 0;
+            // 
+            // lstChildren
+            // 
+            this.lstChildren.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstChildren.FormattingEnabled = true;
+            this.lstChildren.ItemHeight = 16;
+            this.lstChildren.Location = new System.Drawing.Point(0, 0);
+            this.lstChildren.Name = "lstChildren";
+            this.lstChildren.Size = new System.Drawing.Size(824, 303);
+            this.lstChildren.TabIndex = 1;
+            // 
+            // panelChildrenLower
+            // 
+            this.panelChildrenLower.Controls.Add(this.button2);
+            this.panelChildrenLower.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelChildrenLower.Location = new System.Drawing.Point(0, 303);
+            this.panelChildrenLower.Name = "panelChildrenLower";
+            this.panelChildrenLower.Size = new System.Drawing.Size(824, 100);
+            this.panelChildrenLower.TabIndex = 0;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(3, 6);
+            this.button2.Name = "button2";
+            this.button2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "&Go To";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // tabJSON
             // 
@@ -775,57 +826,6 @@ namespace JsonManipulator
             this.grpBoxMain.TabIndex = 1;
             this.grpBoxMain.TabStop = false;
             this.grpBoxMain.Text = "groupBox2";
-            // 
-            // tabChildren
-            // 
-            this.tabChildren.Controls.Add(this.panelChildrenBase);
-            this.tabChildren.Location = new System.Drawing.Point(4, 25);
-            this.tabChildren.Name = "tabChildren";
-            this.tabChildren.Padding = new System.Windows.Forms.Padding(3);
-            this.tabChildren.Size = new System.Drawing.Size(830, 409);
-            this.tabChildren.TabIndex = 6;
-            this.tabChildren.Text = "Children";
-            this.tabChildren.UseVisualStyleBackColor = true;
-            // 
-            // panelChildrenBase
-            // 
-            this.panelChildrenBase.Controls.Add(this.lstChildren);
-            this.panelChildrenBase.Controls.Add(this.panelChildrenLower);
-            this.panelChildrenBase.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelChildrenBase.Location = new System.Drawing.Point(3, 3);
-            this.panelChildrenBase.Name = "panelChildrenBase";
-            this.panelChildrenBase.Size = new System.Drawing.Size(824, 403);
-            this.panelChildrenBase.TabIndex = 0;
-            // 
-            // panelChildrenLower
-            // 
-            this.panelChildrenLower.Controls.Add(this.button2);
-            this.panelChildrenLower.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelChildrenLower.Location = new System.Drawing.Point(0, 303);
-            this.panelChildrenLower.Name = "panelChildrenLower";
-            this.panelChildrenLower.Size = new System.Drawing.Size(824, 100);
-            this.panelChildrenLower.TabIndex = 0;
-            // 
-            // lstChildren
-            // 
-            this.lstChildren.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lstChildren.FormattingEnabled = true;
-            this.lstChildren.ItemHeight = 16;
-            this.lstChildren.Location = new System.Drawing.Point(0, 0);
-            this.lstChildren.Name = "lstChildren";
-            this.lstChildren.Size = new System.Drawing.Size(824, 303);
-            this.lstChildren.TabIndex = 1;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(3, 6);
-            this.button2.Name = "button2";
-            this.button2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "&Go To";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // frmDbObjSettings
             // 
@@ -869,11 +869,11 @@ namespace JsonManipulator
             this.pnlLookupItemLeft.ResumeLayout(false);
             this.pnlLookupItemLeftBottom.ResumeLayout(false);
             this.pnlLookupItemLeftTop.ResumeLayout(false);
-            this.tabJSON.ResumeLayout(false);
-            this.grpBoxMain.ResumeLayout(false);
             this.tabChildren.ResumeLayout(false);
             this.panelChildrenBase.ResumeLayout(false);
             this.panelChildrenLower.ResumeLayout(false);
+            this.tabJSON.ResumeLayout(false);
+            this.grpBoxMain.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

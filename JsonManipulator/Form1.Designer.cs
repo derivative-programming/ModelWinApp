@@ -86,6 +86,7 @@ namespace JsonManipulator
             this.templateSelectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modelFabricationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modelChangeReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modelAIChatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.demoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.codeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -115,7 +116,6 @@ namespace JsonManipulator
             this.label1 = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusText = new System.Windows.Forms.ToolStripStatusLabel();
-            this.modelAIChatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -474,6 +474,13 @@ namespace JsonManipulator
             this.modelChangeReportToolStripMenuItem.Text = "Model Change Report";
             this.modelChangeReportToolStripMenuItem.Click += new System.EventHandler(this.modelChangeReportToolStripMenuItem_Click);
             // 
+            // modelAIChatToolStripMenuItem
+            // 
+            this.modelAIChatToolStripMenuItem.Name = "modelAIChatToolStripMenuItem";
+            this.modelAIChatToolStripMenuItem.Size = new System.Drawing.Size(238, 26);
+            this.modelAIChatToolStripMenuItem.Text = "Model AI Chat";
+            this.modelAIChatToolStripMenuItem.Click += new System.EventHandler(this.modelAIChatToolStripMenuItem_Click);
+            // 
             // logOutToolStripMenuItem
             // 
             this.logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
@@ -760,13 +767,6 @@ namespace JsonManipulator
             // 
             this.statusText.Name = "statusText";
             this.statusText.Size = new System.Drawing.Size(0, 16);
-            // 
-            // modelAIChatToolStripMenuItem
-            // 
-            this.modelAIChatToolStripMenuItem.Name = "modelAIChatToolStripMenuItem";
-            this.modelAIChatToolStripMenuItem.Size = new System.Drawing.Size(238, 26);
-            this.modelAIChatToolStripMenuItem.Text = "Model AI Chat";
-            this.modelAIChatToolStripMenuItem.Click += new System.EventHandler(this.modelAIChatToolStripMenuItem_Click);
             // 
             // Form1
             // 
