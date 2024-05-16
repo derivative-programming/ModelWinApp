@@ -26,6 +26,9 @@ namespace JsonManipulator
         private bool _displayLookupValuesTab = false;
 
         private bool _searchNames = true;
+        private bool _searchReportNames = true;
+        private bool _searchObjWFNames = true;
+        private bool _searchDBObjNames = true;
         private bool _searchReportFilters = false;
         private bool _searchReportColumns = false;
         private bool _searchReportButtons = false;
@@ -244,6 +247,10 @@ namespace JsonManipulator
                     !dbObj.name.Trim().ToLower().Equals(filter.Trim().ToLower()))
                     return result;
 
+                if (this._searchDBObjNames &&
+                    !dbObj.name.Trim().ToLower().Equals(filter.Trim().ToLower()))
+                    return result;
+
                 if (this._searchDBObjProps &&
                     dbObj.property.Where(x => x.name.ToLower().Equals(filter.Trim().ToLower())).ToList().Count == 0)
                     return result;
@@ -256,6 +263,10 @@ namespace JsonManipulator
                     !dbObj.name.Trim().ToLower().Contains(filter.Trim().ToLower()))
                     return result;
 
+                if (this._searchDBObjNames &&
+                    !dbObj.name.Trim().ToLower().Contains(filter.Trim().ToLower()))
+                    return result;
+
                 if (this._searchDBObjProps &&
                     dbObj.property.Where(x => x.name.ToLower().Contains(filter.Trim().ToLower())).ToList().Count == 0)
                     return result;
@@ -264,6 +275,7 @@ namespace JsonManipulator
             }
 
             if (!this._searchNames &&
+                !this._searchDBObjNames &&
                 !this._searchDBObjProps)
                 return result;
                  
@@ -398,6 +410,10 @@ namespace JsonManipulator
                     objWF.Name.Trim().ToLower().Equals(filter.Trim().ToLower()))
                     resultFound = true;
 
+                if (this._searchObjWFNames &&
+                    objWF.Name.Trim().ToLower().Equals(filter.Trim().ToLower()))
+                    resultFound = true;
+
                 if (this._searchRoleRequired.Trim().Length > 0 &&
                     objWF.isPage == "true" &&
                     objWF.RoleRequired != null &&
@@ -426,6 +442,10 @@ namespace JsonManipulator
             else
             {
                 if (this._searchNames &&
+                    objWF.Name.Trim().ToLower().Contains(filter.Trim().ToLower()))
+                    resultFound = true;
+
+                if (this._searchObjWFNames &&
                     objWF.Name.Trim().ToLower().Contains(filter.Trim().ToLower()))
                     resultFound = true;
 
@@ -461,6 +481,7 @@ namespace JsonManipulator
 
 
             if (!this._searchNames &&
+                !this._searchObjWFNames &&
                 !this._searchObjWFButtons &&
                 !this._searchObjWFOutputVars &&
                 !this._searchObjWFParams &&
@@ -547,6 +568,10 @@ namespace JsonManipulator
                     rpt.name.Trim().ToLower().Equals(filter.Trim().ToLower()))
                     resultFound = true;
 
+                if (this._searchReportNames &&
+                    rpt.name.Trim().ToLower().Equals(filter.Trim().ToLower()))
+                    resultFound = true;
+
                 if (this._searchRoleRequired.Trim().Length > 0 &&
                     rpt.isPage == "true" &&
                     rpt.RoleRequired != null &&
@@ -575,6 +600,10 @@ namespace JsonManipulator
             else
             {
                 if (this._searchNames &&
+                    rpt.name.Trim().ToLower().Contains(filter.Trim().ToLower()))
+                    resultFound = true;
+
+                if (this._searchReportNames &&
                     rpt.name.Trim().ToLower().Contains(filter.Trim().ToLower()))
                     resultFound = true;
 
@@ -610,6 +639,7 @@ namespace JsonManipulator
 
 
             if (!this._searchNames &&
+                !this._searchReportNames &&
                 !this._searchReportButtons &&
                 !this._searchReportColumns &&
                 !this._searchReportFilters &&
@@ -771,7 +801,7 @@ namespace JsonManipulator
 
             return result;
         }
-        public List<string> GetNavFormObjWfames()
+        public List<string> GetNavFormObjWfNames()
         {
             List<string> result = new List<string>();
 
@@ -1168,6 +1198,8 @@ namespace JsonManipulator
         }
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
+
+           // await Task.Delay(2000);
             if (txtSearch.Text.Length > 2 || txtSearch.Text.Length == 0)
             {
                 PopulateTree(txtSearch.Text.TrimEnd(". ".ToCharArray()));
@@ -1861,6 +1893,9 @@ namespace JsonManipulator
         {
             using (var form = new FrmSearchOptions(
                 this._searchNames,
+                this._searchReportNames,
+                this._searchObjWFNames,
+                this._searchDBObjNames,
                 this._searchReportFilters,
                 this._searchReportColumns,
                 this._searchReportButtons,
@@ -1878,6 +1913,9 @@ namespace JsonManipulator
                 if (result == DialogResult.OK)
                 {
                     this._searchNames = form.SearchNames;
+                    this._searchReportNames = form.SearchReportNames;
+                    this._searchObjWFNames = form.SearchObjWFNames;
+                    this._searchDBObjNames = form.SearchDBObjNames;
                     this._searchReportFilters = form.SearchReportFilters;
                     this._searchReportColumns = form.SearchReportColumns;
                     this._searchReportButtons = form.SearchReportButtons;
@@ -1962,6 +2000,20 @@ namespace JsonManipulator
 
             frmAddObjProp frmProp = new frmAddObjProp(string.Empty);
             frmProp.ShowDialog();
+        }
+
+        private void bulkAddColumnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            FrmAddColumn frmAddColumn = new FrmAddColumn();
+            frmAddColumn.ShowDialog();
+        }
+
+        private void bulkAddControlToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            FrmAddControl frmControl = new FrmAddControl();
+            frmControl.ShowDialog();
         }
     } 
 }

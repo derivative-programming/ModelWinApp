@@ -117,6 +117,8 @@ namespace JsonManipulator
             this.label1 = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusText = new System.Windows.Forms.ToolStripStatusLabel();
+            this.bulkAddColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bulkAddControlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -338,7 +340,8 @@ namespace JsonManipulator
             // 
             this.formToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.pageToolStripMenuItem,
-            this.addChildPageToolStripMenuItem});
+            this.addChildPageToolStripMenuItem,
+            this.bulkAddControlToolStripMenuItem});
             this.formToolStripMenuItem.Name = "formToolStripMenuItem";
             this.formToolStripMenuItem.Size = new System.Drawing.Size(251, 26);
             this.formToolStripMenuItem.Text = "Form";
@@ -368,7 +371,8 @@ namespace JsonManipulator
             this.gridToolStripMenuItem,
             this.detailToolStripMenuItem,
             this.aPIGetToolStripMenuItem,
-            this.navigationToolStripMenuItem});
+            this.navigationToolStripMenuItem,
+            this.bulkAddColumnToolStripMenuItem});
             this.reportPageToolStripMenuItem.Name = "reportPageToolStripMenuItem";
             this.reportPageToolStripMenuItem.Size = new System.Drawing.Size(251, 26);
             this.reportPageToolStripMenuItem.Text = "Report Page";
@@ -777,6 +781,20 @@ namespace JsonManipulator
             this.statusText.Name = "statusText";
             this.statusText.Size = new System.Drawing.Size(0, 16);
             // 
+            // bulkAddColumnToolStripMenuItem
+            // 
+            this.bulkAddColumnToolStripMenuItem.Name = "bulkAddColumnToolStripMenuItem";
+            this.bulkAddColumnToolStripMenuItem.Size = new System.Drawing.Size(258, 26);
+            this.bulkAddColumnToolStripMenuItem.Text = "Bulk Add Column";
+            this.bulkAddColumnToolStripMenuItem.Click += new System.EventHandler(this.bulkAddColumnToolStripMenuItem_Click);
+            // 
+            // bulkAddControlToolStripMenuItem
+            // 
+            this.bulkAddControlToolStripMenuItem.Name = "bulkAddControlToolStripMenuItem";
+            this.bulkAddControlToolStripMenuItem.Size = new System.Drawing.Size(285, 26);
+            this.bulkAddControlToolStripMenuItem.Text = "Bulk Add Control";
+            this.bulkAddControlToolStripMenuItem.Click += new System.EventHandler(this.bulkAddControlToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -881,6 +899,8 @@ namespace JsonManipulator
         private System.Windows.Forms.ToolStripMenuItem addChildPageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem modelAIChatToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bulkAddPropertyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bulkAddColumnToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bulkAddControlToolStripMenuItem;
     }
 }
 

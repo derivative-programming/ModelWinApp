@@ -17,15 +17,56 @@ namespace JsonManipulator
         string _name, _parent;
         string targetObjectName = string.Empty;
 
+        List<string> _names = new List<string>();
+
+        bool _isMultiAdd = false;
+
 
         public FrmAddColumn()
         {
 
+            InitializeComponent();
+
+            this.Text += " To All Reports in Search Results";
+
+            this._isMultiAdd = true;
+
+            this._names = ((Form1)Application.OpenForms["Form1"]).GetNavReportNames();
+
+            Report report = Utils.GetReport(this._names[0]);
+
+            this._name = report.name;
+
+            this._parent = Utils.GetReportOwnerObject(this._name).name;
+
+            targetObjectName = Utils.GetReportModelItem(this._name).TargetChildObject;
+            if (targetObjectName == null || targetObjectName.Trim().Length == 0)
+            {
+                targetObjectName = _parent;
+            }
+
+            if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportColumn == null)
+            {
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportColumn = new List<reportColumn>();
+            }
+
+            foreach(string name in this._names)
+            {
+                var parent = Utils.GetReportOwnerObject(name).name;
+
+                if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == parent).FirstOrDefault().report.Where(x => x.name == name).FirstOrDefault().reportColumn == null)
+                {
+                    Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == parent).FirstOrDefault().report.Where(x => x.name == name).FirstOrDefault().reportColumn = new List<reportColumn>();
+                }
+            }
 
         }
+
         public FrmAddColumn(string name, string parent)
         {
             InitializeComponent();
+             
+
             this._name = name;
             this._parent = parent;
             targetObjectName = Utils.GetReportModelItem(name).TargetChildObject;
@@ -37,7 +78,9 @@ namespace JsonManipulator
             if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportColumn == null)
             {
                 Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportColumn = new List<reportColumn>();
-            } 
+            }
+
+            this._names.Add(name);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -49,7 +92,7 @@ namespace JsonManipulator
         {
 
             txtName.Text = Utils.Capitalize(txtName.Text).Trim();
-            if (ItemExists(txtName.Text))
+            if (!this._isMultiAdd && ItemExists(txtName.Text))
             {
                 ShowValidationError("Name already exists.");
                 return;
@@ -73,13 +116,27 @@ namespace JsonManipulator
                 return;
             }
 
-            Models.reportColumn reportColumn = new reportColumn();
-            reportColumn.name = txtName.Text.Trim();
-            reportColumn.isButton = "false";
-            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportColumn.Add(reportColumn);
-             ((Form1)Application.OpenForms["Form1"]).showMessage("Column created successfully");
+
+            foreach (var name in this._names)
+            {
+                var parent = Utils.GetReportOwnerObject(name).name;
+
+                if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == parent).FirstOrDefault().report.Where(x => x.name == name).FirstOrDefault().reportColumn.Where(x => x.name == txtName.Text.Trim()).ToList().Count == 0)
+                {
+                    Models.reportColumn reportColumn = new reportColumn();
+                    reportColumn.name = txtName.Text.Trim();
+                    reportColumn.isButton = "false";
+                    Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == parent).FirstOrDefault().report.Where(x => x.name == name).FirstOrDefault().reportColumn.Add(reportColumn);
+                }
+
+            }
+
+            ((Form1)Application.OpenForms["Form1"]).showMessage("Column created successfully");
             ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
-            ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setColumnsList();
+            if(((frmReportSettings)Application.OpenForms["frmReportSettings"]) != null)
+            {
+                ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setColumnsList(); 
+            }
             this.Close();
         }
         private bool ItemExists(string name)
@@ -141,31 +198,57 @@ namespace JsonManipulator
                                 nextSourceObj = Utils.GetObjectPropListSelectionParentObj(this._parent, nextLineage);
                             }
                         }
-                        if (itemName.Length > 0 && !ItemExists(itemName))
+                        if (itemName.Length > 0)
                         {
-                            Models.reportColumn reportColumn = new reportColumn();
-                            reportColumn.name = itemName;
-                            reportColumn.isButton = "false";
-                            if (sourceObj != null)
+
+                            foreach (var name in this._names)
                             {
-                                reportColumn.sourceObjectName = sourceObj.name; 
-                            }
-                            if (nextSourceObj != null)
-                            {
-                                reportColumn.sourceLookupObjImplementationObjName = nextSourceObj.name; 
-                            }
-                            if (sourceObjProp != null)
-                            {
-                                reportColumn.dataType = sourceObjProp.dataType;
-                                reportColumn.headerText = sourceObjProp.labelText;
-                                reportColumn.sourcePropertyName = sourceObjProp.name;
+                                var parent = Utils.GetReportOwnerObject(name).name;
+
+
+
+                                Models.reportColumn reportColumn = new reportColumn();
+                                reportColumn.name = itemName;
+                                reportColumn.isButton = "false";
+                                if (sourceObj != null)
+                                {
+                                    reportColumn.sourceObjectName = sourceObj.name;
                                 }
-                            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportColumn.Add(reportColumn);
+                                if (nextSourceObj != null)
+                                {
+                                    reportColumn.sourceLookupObjImplementationObjName = nextSourceObj.name;
+                                }
+                                if (sourceObjProp != null)
+                                {
+                                    reportColumn.dataType = sourceObjProp.dataType;
+                                    reportColumn.headerText = sourceObjProp.labelText;
+                                    reportColumn.sourcePropertyName = sourceObjProp.name;
+                                }
+
+                                if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == parent).FirstOrDefault().report.Where(x => x.name == name).FirstOrDefault().reportColumn.Where(x => x.name == itemName).ToList().Count == 0)
+                                {
+                                    if(reportColumn.sourceObjectName == null && reportColumn.sourcePropertyName == null)
+                                    {
+                                        Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == parent).FirstOrDefault().report.Where(x => x.name == name).FirstOrDefault().reportColumn.Add(reportColumn);
+                                    }
+                                    else
+                                    {
+                                        if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == parent).FirstOrDefault().report.Where(x => x.name == name).FirstOrDefault().reportColumn.Where(x => x.sourceObjectName == reportColumn.sourceObjectName && x.sourcePropertyName == reportColumn.sourcePropertyName).ToList().Count == 0)
+                                        {
+                                            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == parent).FirstOrDefault().report.Where(x => x.name == name).FirstOrDefault().reportColumn.Add(reportColumn);
+                                        }
+                                    }
+                                }
+
+                            }
                         }
-                        }
-                     ((Form1)Application.OpenForms["Form1"]).showMessage("Column created successfully");
-                    ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
-                    ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setColumnsList();
+                    }
+                    ((Form1)Application.OpenForms["Form1"]).showMessage("Column created successfully");
+                    ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges(); 
+                    if (((frmReportSettings)Application.OpenForms["frmReportSettings"]) != null)
+                    {
+                        ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setColumnsList();
+                    }
                 }
             }
             this.Close();

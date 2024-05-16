@@ -18,6 +18,9 @@ namespace JsonManipulator
         ButtonType _type;
          
         public bool SearchNames { get; set; }
+        public bool SearchReportNames { get; set; }
+        public bool SearchObjWFNames { get; set; }
+        public bool SearchDBObjNames { get; set; }
         public bool SearchReportFilters { get; set; }
         public bool SearchReportColumns { get; set; }
         public bool SearchReportButtons { get; set; }
@@ -33,6 +36,9 @@ namespace JsonManipulator
 
         public FrmSearchOptions( 
             bool searchNames,
+            bool searchReportNames,
+            bool searchObjWFNames,
+            bool searchDBObjNames,
             bool searchReportFilters,
             bool searchReportColumns,
             bool searchReportButtons,
@@ -50,6 +56,9 @@ namespace JsonManipulator
 
             this.SearchDBObjProps = searchDBObjProps;
             this.SearchNames = searchNames;
+            this.SearchReportNames = searchReportNames;
+            this.SearchObjWFNames = searchObjWFNames;
+            this.SearchDBObjNames = searchDBObjNames;
             this.SearchObjWFButtons = searchObjWFButtons;
             this.SearchObjWFOutputVars = searchObjWFOutputVars;
             this.SearchObjWFParams = searchObjWFParams;
@@ -63,6 +72,9 @@ namespace JsonManipulator
             this.SearchText = searchText;
 
             this.chkName.Checked = this.SearchNames;
+            this.chkReport.Checked = this.SearchReportNames;
+            this.chkObjWF.Checked = this.SearchObjWFNames;
+            this.chkDBObj.Checked = this.SearchDBObjNames;
             this.chkObjProp.Checked = this.SearchDBObjProps;
             this.chkObjWfButton.Checked = this.SearchObjWFButtons;
             this.chkObjWfOutputVar.Checked = this.SearchObjWFOutputVars;
@@ -84,6 +96,9 @@ namespace JsonManipulator
 
             this.SearchDBObjProps = this.chkObjProp.Checked;
             this.SearchNames = this.chkName.Checked;
+            this.SearchReportNames = this.chkReport.Checked;
+            this.SearchObjWFNames = this.chkObjWF.Checked;
+            this.SearchDBObjNames = this.chkDBObj.Checked;
             this.SearchObjWFButtons = this.chkObjWfButton.Checked;
             this.SearchObjWFOutputVars = this.chkObjWfOutputVar.Checked;
             this.SearchObjWFParams = this.chkObjWfParam.Checked;

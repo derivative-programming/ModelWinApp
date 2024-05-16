@@ -16,6 +16,49 @@ namespace JsonManipulator
     {
         string _name, _parent;
         string targetObjectName = string.Empty;
+
+        List<string> _names = new List<string>();
+
+        bool _isMultiAdd = false;
+
+        public FrmAddControl()
+        {
+            InitializeComponent();
+
+            this.Text += " To All Forms in Search Results";
+
+            this._isMultiAdd = true;
+
+            this._names = ((Form1)Application.OpenForms["Form1"]).GetNavFormObjWfNames();
+
+            objectWorkflow objectWorkflow = Utils.GetObjWFModelItem(this._names[0]);
+
+            this._name = objectWorkflow.Name;
+
+            this._parent = Utils.GetOwnerObject(this._name).name;
+
+            targetObjectName = Utils.GetObjWFModelItem(this._name).targetChildObject;
+
+            if (targetObjectName == null || targetObjectName.Trim().Length == 0)
+            {
+                targetObjectName = _parent;
+            }
+
+            if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == _name).FirstOrDefault().objectWorkflowParam == null)
+            {
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == _name).FirstOrDefault().objectWorkflowParam = new List<objectWorkflowParam>();
+            }
+
+            foreach (string name in this._names)
+            {
+                var parent = Utils.GetOwnerObject(name).name;
+
+                if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == name).FirstOrDefault().objectWorkflowParam == null)
+                {
+                    Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == name).FirstOrDefault().objectWorkflowParam = new List<objectWorkflowParam>();
+                }
+            }
+        }
         public FrmAddControl(string name,string parent)
         {
             InitializeComponent();
@@ -28,7 +71,8 @@ namespace JsonManipulator
             }
             if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == _name).FirstOrDefault().objectWorkflowParam == null)
                 Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == _name).FirstOrDefault().objectWorkflowParam = new List<objectWorkflowParam>();
-             
+
+            this._names.Add(name);
         }
 
         private void FrmControl_Load(object sender, EventArgs e)
@@ -46,7 +90,7 @@ namespace JsonManipulator
         {
 
             txtName.Text = Utils.Capitalize(txtName.Text).Trim();
-            if (ItemExists(txtName.Text))
+            if (!this._isMultiAdd && ItemExists(txtName.Text))
             {
                 ShowValidationError("Name already exists.");
                 return;
@@ -64,12 +108,23 @@ namespace JsonManipulator
                 return;
             }
 
+            foreach (var name in this._names)
+            {
+                var parent = Utils.GetOwnerObject(name).name;
 
-            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == _name).FirstOrDefault().objectWorkflowParam.Add(new objectWorkflowParam { name = txtName.Text.Trim() });
+                if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == name).FirstOrDefault().objectWorkflowParam.Where(x => x.name == txtName.Text.Trim()).ToList().Count == 0)
+                { 
+                    Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == name).FirstOrDefault().objectWorkflowParam.Add(new objectWorkflowParam { name = txtName.Text.Trim() });
+                } 
+            }
+
             ((Form1)Application.OpenForms["Form1"]).showMessage("Control created successfully");
-            ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
-            ((frmFormSettings)Application.OpenForms["frmFormSettings"]).setControlsList();
-                this.Close();
+            ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges(); 
+            if (((frmFormSettings)Application.OpenForms["frmFormSettings"]) != null)
+            {
+                ((frmFormSettings)Application.OpenForms["frmFormSettings"]).setControlsList();
+            }
+            this.Close();
         }
         private bool ItemExists(string name)
         {
@@ -108,24 +163,48 @@ namespace JsonManipulator
                         }
                         if (itemName.Length > 0 && !ItemExists(itemName))
                         {
-                            objectWorkflowParam newItem = new objectWorkflowParam();
-                            newItem.name = itemName;
-                            if (sourceObj != null)
+
+                            foreach (var name in this._names)
                             {
-                                newItem.sourceObjectName = sourceObj.name;
+                                objectWorkflowParam newItem = new objectWorkflowParam();
+                                newItem.name = itemName;
+                                if (sourceObj != null)
+                                {
+                                    newItem.sourceObjectName = sourceObj.name;
+                                }
+                                if (sourceObjProp != null)
+                                {
+                                    newItem.dataType = sourceObjProp.dataType;
+                                    newItem.labelText = sourceObjProp.labelText;
+                                    newItem.sourcePropertyName = sourceObjProp.name;
+                                }
+
+                                var parent = Utils.GetOwnerObject(name).name;
+
+                                if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == name).FirstOrDefault().objectWorkflowParam.Where(x => x.name == itemName).ToList().Count == 0)
+                                {
+                                    if (newItem.sourceObjectName == null && newItem.sourcePropertyName == null)
+                                    {
+                                        Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == name).FirstOrDefault().objectWorkflowParam.Add(newItem);
+                                    }
+                                    else
+                                    {
+                                        if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == name).FirstOrDefault().objectWorkflowParam.Where(x => x.sourceObjectName == newItem.sourceObjectName && x.sourcePropertyName == newItem.sourcePropertyName).ToList().Count == 0)
+                                        {
+                                            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == name).FirstOrDefault().objectWorkflowParam.Add(newItem);
+                                        }
+                                    } 
+                                }
                             }
-                            if (sourceObjProp != null)
-                            {
-                                newItem.dataType = sourceObjProp.dataType;
-                                newItem.labelText = sourceObjProp.labelText;
-                                newItem.sourcePropertyName = sourceObjProp.name;
-                            }
-                            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == _name).FirstOrDefault().objectWorkflowParam.Add(newItem);
+                            
                         }
                     }
                     ((Form1)Application.OpenForms["Form1"]).showMessage("Control created successfully");
                     ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
-                    ((frmFormSettings)Application.OpenForms["frmFormSettings"]).setControlsList();
+                    if (((frmFormSettings)Application.OpenForms["frmFormSettings"]) != null)
+                    {
+                        ((frmFormSettings)Application.OpenForms["frmFormSettings"]).setControlsList();
+                    }
                 }
             }
             this.Close();
