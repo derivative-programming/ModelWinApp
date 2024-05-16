@@ -58,9 +58,10 @@ namespace JsonManipulator
             // lbAvailableObjProps
             // 
             this.lbAvailableObjProps.FormattingEnabled = true;
+            this.lbAvailableObjProps.ItemHeight = 16;
             this.lbAvailableObjProps.Location = new System.Drawing.Point(11, 7);
             this.lbAvailableObjProps.Name = "lbAvailableObjProps";
-            this.lbAvailableObjProps.Size = new System.Drawing.Size(301, 147);
+            this.lbAvailableObjProps.Size = new System.Drawing.Size(301, 132);
             this.lbAvailableObjProps.TabIndex = 12;
             // 
             // FrmSelectRptCols
@@ -77,7 +78,7 @@ namespace JsonManipulator
             this.Name = "FrmSelectRptCols";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Select Report Column";
+            this.Text = "selectrpt";
             this.Load += new System.EventHandler(this.FrmSelectRptCols_Load);
             this.ResumeLayout(false);
 

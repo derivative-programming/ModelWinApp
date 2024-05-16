@@ -33,6 +33,10 @@ namespace JsonManipulator
             this.dataProperties = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnCloneToSameRole = new System.Windows.Forms.Button();
+            this.btnCloneReport = new System.Windows.Forms.Button();
+            this.btnViewInDemo = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabFilters = new System.Windows.Forms.TabPage();
             this.splitter1 = new System.Windows.Forms.Splitter();
@@ -81,6 +85,7 @@ namespace JsonManipulator
             this.pnlButtonsLeftTop = new System.Windows.Forms.Panel();
             this.lstButtons = new System.Windows.Forms.ListBox();
             this.pnlButtonsLeftBottom = new System.Windows.Forms.Panel();
+            this.chkVisibleOnly = new System.Windows.Forms.CheckBox();
             this.btnFollowButton = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.btnAddMultiSelectButton = new System.Windows.Forms.Button();
@@ -90,14 +95,12 @@ namespace JsonManipulator
             this.tabJSON = new System.Windows.Forms.TabPage();
             this.rtbJSON = new System.Windows.Forms.RichTextBox();
             this.grpMain = new System.Windows.Forms.GroupBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnViewInDemo = new System.Windows.Forms.Button();
-            this.chkVisibleOnly = new System.Windows.Forms.CheckBox();
-            this.btnCloneReport = new System.Windows.Forms.Button();
-            this.btnCloneToSameRole = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             tabSettings = new System.Windows.Forms.TabPage();
             tabSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataProperties)).BeginInit();
+            this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabFilters.SuspendLayout();
             this.pnlFiltersRight.SuspendLayout();
@@ -122,7 +125,6 @@ namespace JsonManipulator
             this.pnlButtonsLeftBottom.SuspendLayout();
             this.tabJSON.SuspendLayout();
             this.grpMain.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabSettings
@@ -167,6 +169,47 @@ namespace JsonManipulator
             this.dataGridViewTextBoxColumn6.HeaderText = "Value";
             this.dataGridViewTextBoxColumn6.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnCloneToSameRole);
+            this.panel1.Controls.Add(this.btnCloneReport);
+            this.panel1.Controls.Add(this.btnViewInDemo);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(780, 57);
+            this.panel1.TabIndex = 2;
+            // 
+            // btnCloneToSameRole
+            // 
+            this.btnCloneToSameRole.Location = new System.Drawing.Point(345, 4);
+            this.btnCloneToSameRole.Name = "btnCloneToSameRole";
+            this.btnCloneToSameRole.Size = new System.Drawing.Size(203, 23);
+            this.btnCloneToSameRole.TabIndex = 2;
+            this.btnCloneToSameRole.Text = "Clone Report To Same Role";
+            this.btnCloneToSameRole.UseVisualStyleBackColor = true;
+            this.btnCloneToSameRole.Click += new System.EventHandler(this.btnCloneToSameRole_Click);
+            // 
+            // btnCloneReport
+            // 
+            this.btnCloneReport.Location = new System.Drawing.Point(136, 4);
+            this.btnCloneReport.Name = "btnCloneReport";
+            this.btnCloneReport.Size = new System.Drawing.Size(203, 23);
+            this.btnCloneReport.TabIndex = 1;
+            this.btnCloneReport.Text = "Clone Report To Dif Role";
+            this.btnCloneReport.UseVisualStyleBackColor = true;
+            this.btnCloneReport.Click += new System.EventHandler(this.btnCloneReport_Click);
+            // 
+            // btnViewInDemo
+            // 
+            this.btnViewInDemo.Location = new System.Drawing.Point(4, 4);
+            this.btnViewInDemo.Name = "btnViewInDemo";
+            this.btnViewInDemo.Size = new System.Drawing.Size(126, 23);
+            this.btnViewInDemo.TabIndex = 0;
+            this.btnViewInDemo.Text = "View Demo";
+            this.btnViewInDemo.UseVisualStyleBackColor = true;
+            this.btnViewInDemo.Click += new System.EventHandler(this.btnViewInDemo_Click);
             // 
             // tabControl1
             // 
@@ -447,6 +490,8 @@ namespace JsonManipulator
             // 
             // pnlColumnsLeftBottom
             // 
+            this.pnlColumnsLeftBottom.Controls.Add(this.button3);
+            this.pnlColumnsLeftBottom.Controls.Add(this.label1);
             this.pnlColumnsLeftBottom.Controls.Add(this.chkVisibleColumnsOnly);
             this.pnlColumnsLeftBottom.Controls.Add(this.btnFollow2);
             this.pnlColumnsLeftBottom.Controls.Add(this.btnCopyList);
@@ -548,21 +593,21 @@ namespace JsonManipulator
             // 
             // btnColumnsMoveUp
             // 
-            this.btnColumnsMoveUp.Location = new System.Drawing.Point(3, 142);
+            this.btnColumnsMoveUp.Location = new System.Drawing.Point(6, 171);
             this.btnColumnsMoveUp.Name = "btnColumnsMoveUp";
-            this.btnColumnsMoveUp.Size = new System.Drawing.Size(136, 23);
+            this.btnColumnsMoveUp.Size = new System.Drawing.Size(69, 23);
             this.btnColumnsMoveUp.TabIndex = 3;
-            this.btnColumnsMoveUp.Text = "Move &Up";
+            this.btnColumnsMoveUp.Text = "&Up";
             this.btnColumnsMoveUp.UseVisualStyleBackColor = true;
             this.btnColumnsMoveUp.Click += new System.EventHandler(this.btnColumnsMoveUp_Click);
             // 
             // btnColumnsMoveDown
             // 
-            this.btnColumnsMoveDown.Location = new System.Drawing.Point(3, 171);
+            this.btnColumnsMoveDown.Location = new System.Drawing.Point(144, 171);
             this.btnColumnsMoveDown.Name = "btnColumnsMoveDown";
-            this.btnColumnsMoveDown.Size = new System.Drawing.Size(136, 23);
+            this.btnColumnsMoveDown.Size = new System.Drawing.Size(69, 23);
             this.btnColumnsMoveDown.TabIndex = 4;
-            this.btnColumnsMoveDown.Text = "Move &Down";
+            this.btnColumnsMoveDown.Text = "&Down";
             this.btnColumnsMoveDown.UseVisualStyleBackColor = true;
             this.btnColumnsMoveDown.Click += new System.EventHandler(this.btnColumnsMoveDown_Click);
             // 
@@ -684,6 +729,17 @@ namespace JsonManipulator
             this.pnlButtonsLeftBottom.Size = new System.Drawing.Size(180, 197);
             this.pnlButtonsLeftBottom.TabIndex = 5;
             // 
+            // chkVisibleOnly
+            // 
+            this.chkVisibleOnly.AutoSize = true;
+            this.chkVisibleOnly.Location = new System.Drawing.Point(6, 91);
+            this.chkVisibleOnly.Name = "chkVisibleOnly";
+            this.chkVisibleOnly.Size = new System.Drawing.Size(156, 21);
+            this.chkVisibleOnly.TabIndex = 10;
+            this.chkVisibleOnly.Text = "Visible Buttons Only";
+            this.chkVisibleOnly.UseVisualStyleBackColor = true;
+            this.chkVisibleOnly.CheckedChanged += new System.EventHandler(this.chkVisibleOnly_CheckedChanged);
+            // 
             // btnFollowButton
             // 
             this.btnFollowButton.Location = new System.Drawing.Point(3, 111);
@@ -776,57 +832,24 @@ namespace JsonManipulator
             this.grpMain.TabStop = false;
             this.grpMain.Text = "grpMain";
             // 
-            // panel1
+            // label1
             // 
-            this.panel1.Controls.Add(this.btnCloneToSameRole);
-            this.panel1.Controls.Add(this.btnCloneReport);
-            this.panel1.Controls.Add(this.btnViewInDemo);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(780, 57);
-            this.panel1.TabIndex = 2;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 143);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(54, 17);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Move...";
             // 
-            // btnViewInDemo
+            // button3
             // 
-            this.btnViewInDemo.Location = new System.Drawing.Point(4, 4);
-            this.btnViewInDemo.Name = "btnViewInDemo";
-            this.btnViewInDemo.Size = new System.Drawing.Size(126, 23);
-            this.btnViewInDemo.TabIndex = 0;
-            this.btnViewInDemo.Text = "View Demo";
-            this.btnViewInDemo.UseVisualStyleBackColor = true;
-            this.btnViewInDemo.Click += new System.EventHandler(this.btnViewInDemo_Click);
-            // 
-            // chkVisibleOnly
-            // 
-            this.chkVisibleOnly.AutoSize = true;
-            this.chkVisibleOnly.Location = new System.Drawing.Point(6, 91);
-            this.chkVisibleOnly.Name = "chkVisibleOnly";
-            this.chkVisibleOnly.Size = new System.Drawing.Size(156, 21);
-            this.chkVisibleOnly.TabIndex = 10;
-            this.chkVisibleOnly.Text = "Visible Buttons Only";
-            this.chkVisibleOnly.UseVisualStyleBackColor = true;
-            this.chkVisibleOnly.CheckedChanged += new System.EventHandler(this.chkVisibleOnly_CheckedChanged);
-            // 
-            // btnCloneReport
-            // 
-            this.btnCloneReport.Location = new System.Drawing.Point(136, 4);
-            this.btnCloneReport.Name = "btnCloneReport";
-            this.btnCloneReport.Size = new System.Drawing.Size(203, 23);
-            this.btnCloneReport.TabIndex = 1;
-            this.btnCloneReport.Text = "Clone Report To Dif Role";
-            this.btnCloneReport.UseVisualStyleBackColor = true;
-            this.btnCloneReport.Click += new System.EventHandler(this.btnCloneReport_Click);
-            // 
-            // btnCloneToSameRole
-            // 
-            this.btnCloneToSameRole.Location = new System.Drawing.Point(345, 4);
-            this.btnCloneToSameRole.Name = "btnCloneToSameRole";
-            this.btnCloneToSameRole.Size = new System.Drawing.Size(203, 23);
-            this.btnCloneToSameRole.TabIndex = 2;
-            this.btnCloneToSameRole.Text = "Clone Report To Same Role";
-            this.btnCloneToSameRole.UseVisualStyleBackColor = true;
-            this.btnCloneToSameRole.Click += new System.EventHandler(this.btnCloneToSameRole_Click);
+            this.button3.Location = new System.Drawing.Point(81, 171);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(60, 23);
+            this.button3.TabIndex = 13;
+            this.button3.Text = "After";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // frmReportSettings
             // 
@@ -841,6 +864,7 @@ namespace JsonManipulator
             this.Load += new System.EventHandler(this.frmReportSettings_Load);
             tabSettings.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataProperties)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabFilters.ResumeLayout(false);
             this.pnlFiltersRight.ResumeLayout(false);
@@ -867,7 +891,6 @@ namespace JsonManipulator
             this.pnlButtonsLeftBottom.PerformLayout();
             this.tabJSON.ResumeLayout(false);
             this.grpMain.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -939,5 +962,7 @@ namespace JsonManipulator
         private System.Windows.Forms.CheckBox chkVisibleOnly;
         private System.Windows.Forms.Button btnCloneReport;
         private System.Windows.Forms.Button btnCloneToSameRole;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label label1;
     }
 }

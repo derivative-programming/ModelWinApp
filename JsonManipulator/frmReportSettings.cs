@@ -1167,5 +1167,55 @@ namespace JsonManipulator
             }
             
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (lstColumns.SelectedItem != null)
+            {
+                using (var form = new FrmSelectRptCols(_rpt.name, false))
+                {
+                    var result = form.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        string propList = string.Empty;
+                        if (form.results.Count > 0)
+                        {
+                            int selectedIndex = lstColumns.SelectedIndex;
+                            string targetColumnName = form.results[0];
+                            //what index is this item at?
+                            int targetColumnIndex = 0;
+                            int columnCount = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportColumn.Count;
+                            for (int i = 0; i < columnCount; i++)
+                            {
+                                reportColumn col = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportColumn.ElementAt(i);
+                                if (col.name.Equals(targetColumnName))
+                                {
+                                    targetColumnIndex = i;
+                                    break;
+                                }
+                            }
+                            if(selectedIndex < targetColumnIndex)
+                            {
+                                reportColumn item = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportColumn.ElementAt(selectedIndex);
+                                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportColumn.RemoveAt(selectedIndex);
+                                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportColumn.Insert((targetColumnIndex), item);
+                                setColumnsList();
+                                lstColumns.SetSelected(targetColumnIndex, true);
+                            }
+                            else
+                            {
+                                reportColumn item = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportColumn.ElementAt(selectedIndex);
+                                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportColumn.RemoveAt(selectedIndex);
+                                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportColumn.Insert((targetColumnIndex + 1), item);
+                                setColumnsList();
+                                lstColumns.SetSelected(targetColumnIndex + 1, true);
+                            }
+                        } 
+                    }
+                }
+            }
+
+            
+        }
     }
 }
