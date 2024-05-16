@@ -32,6 +32,8 @@ namespace JsonManipulator
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAccept = new System.Windows.Forms.Button();
             this.lbAvailableObjProps = new System.Windows.Forms.ListBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtFilter = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -40,7 +42,7 @@ namespace JsonManipulator
             this.btnCancel.Location = new System.Drawing.Point(447, 270);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 11;
+            this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.button2_Click);
@@ -50,7 +52,7 @@ namespace JsonManipulator
             this.btnAccept.Location = new System.Drawing.Point(366, 270);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
-            this.btnAccept.TabIndex = 10;
+            this.btnAccept.TabIndex = 2;
             this.btnAccept.Text = "&OK";
             this.btnAccept.UseVisualStyleBackColor = true;
             this.btnAccept.Click += new System.EventHandler(this.btnAdd_Click);
@@ -59,11 +61,28 @@ namespace JsonManipulator
             // 
             this.lbAvailableObjProps.FormattingEnabled = true;
             this.lbAvailableObjProps.ItemHeight = 16;
-            this.lbAvailableObjProps.Location = new System.Drawing.Point(11, 7);
+            this.lbAvailableObjProps.Location = new System.Drawing.Point(11, 39);
             this.lbAvailableObjProps.Name = "lbAvailableObjProps";
             this.lbAvailableObjProps.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lbAvailableObjProps.Size = new System.Drawing.Size(511, 244);
-            this.lbAvailableObjProps.TabIndex = 12;
+            this.lbAvailableObjProps.Size = new System.Drawing.Size(511, 212);
+            this.lbAvailableObjProps.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(43, 17);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Filter:";
+            // 
+            // txtFilter
+            // 
+            this.txtFilter.Location = new System.Drawing.Point(63, 13);
+            this.txtFilter.Name = "txtFilter";
+            this.txtFilter.Size = new System.Drawing.Size(459, 22);
+            this.txtFilter.TabIndex = 0;
+            this.txtFilter.TextChanged += new System.EventHandler(this.txtFilter_TextChanged);
             // 
             // FrmSelectObjProps
             // 
@@ -72,6 +91,8 @@ namespace JsonManipulator
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(534, 305);
             this.ControlBox = false;
+            this.Controls.Add(this.txtFilter);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lbAvailableObjProps);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAccept);
@@ -82,6 +103,7 @@ namespace JsonManipulator
             this.Text = "Select Obj Props";
             this.Load += new System.EventHandler(this.FrmSelectObjProps_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -90,5 +112,7 @@ namespace JsonManipulator
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnAccept;
         private System.Windows.Forms.ListBox lbAvailableObjProps;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtFilter;
     }
 }

@@ -64,6 +64,7 @@ namespace JsonManipulator
             this.lookupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sqlServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bulkAddPropertyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generalToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.aPIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -238,7 +239,8 @@ namespace JsonManipulator
             this.dBObjectToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.generalToolStripMenuItem,
             this.lookupToolStripMenuItem,
-            this.importToolStripMenuItem});
+            this.importToolStripMenuItem,
+            this.bulkAddPropertyToolStripMenuItem});
             this.dBObjectToolStripMenuItem.Name = "dBObjectToolStripMenuItem";
             this.dBObjectToolStripMenuItem.Size = new System.Drawing.Size(251, 26);
             this.dBObjectToolStripMenuItem.Text = "DB Object";
@@ -276,6 +278,13 @@ namespace JsonManipulator
             this.sqlServerToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.sqlServerToolStripMenuItem.Text = "Sql Server";
             this.sqlServerToolStripMenuItem.Click += new System.EventHandler(this.sqlServerToolStripMenuItem_Click_1);
+            // 
+            // bulkAddPropertyToolStripMenuItem
+            // 
+            this.bulkAddPropertyToolStripMenuItem.Name = "bulkAddPropertyToolStripMenuItem";
+            this.bulkAddPropertyToolStripMenuItem.Size = new System.Drawing.Size(236, 26);
+            this.bulkAddPropertyToolStripMenuItem.Text = "Bulk Add Property";
+            this.bulkAddPropertyToolStripMenuItem.Click += new System.EventHandler(this.bulkAddPropertyToolStripMenuItem_Click);
             // 
             // flowToolStripMenuItem
             // 
@@ -729,7 +738,7 @@ namespace JsonManipulator
             this.btnSearchOptions.Name = "btnSearchOptions";
             this.btnSearchOptions.Size = new System.Drawing.Size(159, 29);
             this.btnSearchOptions.TabIndex = 2;
-            this.btnSearchOptions.Text = "Search Options";
+            this.btnSearchOptions.Text = "Search &Options";
             this.btnSearchOptions.UseVisualStyleBackColor = true;
             this.btnSearchOptions.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -871,6 +880,7 @@ namespace JsonManipulator
         private System.Windows.Forms.ToolStripMenuItem pageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addChildPageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem modelAIChatToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bulkAddPropertyToolStripMenuItem;
     }
 }
 

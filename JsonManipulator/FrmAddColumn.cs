@@ -16,6 +16,13 @@ namespace JsonManipulator
     {
         string _name, _parent;
         string targetObjectName = string.Empty;
+
+
+        public FrmAddColumn()
+        {
+
+
+        }
         public FrmAddColumn(string name, string parent)
         {
             InitializeComponent();
@@ -30,7 +37,7 @@ namespace JsonManipulator
             if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportColumn == null)
             {
                 Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().report.Where(x => x.name == _name).FirstOrDefault().reportColumn = new List<reportColumn>();
-            }
+            } 
         }
 
         private void button2_Click(object sender, EventArgs e)

@@ -14,14 +14,41 @@ namespace JsonManipulator
     public partial class frmAddObjProp : Form
     {
         string _name;
+
+        List<string> _names = new List<string>();
+
+        bool _isMultiAdd = false;
+
         public frmAddObjProp(string name)
         {
             InitializeComponent();
             this._name = name;
 
-            if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().property == null)
+            if(name.Trim().Length == 0)
             {
-                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().property = new List<property>();
+                this._isMultiAdd = true;
+                this._names = ((Form1)Application.OpenForms["Form1"]).GetNavDBObjectNames();
+            }
+
+            if(this._isMultiAdd)
+            {
+                this.Text += " To All DB Objects in Search Results";
+                foreach (var itemName in this._names)
+                {
+
+                    if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == itemName).FirstOrDefault().property == null)
+                    {
+                        Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == itemName).FirstOrDefault().property = new List<property>();
+                    }
+                }
+
+            }
+            else
+            {
+                if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().property == null)
+                {
+                    Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().property = new List<property>();
+                }
             }
         }
 
@@ -30,7 +57,7 @@ namespace JsonManipulator
             
 
             txtName.Text = Utils.Capitalize(txtName.Text).Trim();
-            if (ItemExists(txtName.Text))
+            if (!this._isMultiAdd && ItemExists(txtName.Text))
             {
                 ShowValidationError("Name already exists.");
                 return;
@@ -47,10 +74,26 @@ namespace JsonManipulator
                 return;
             }
 
-            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().property.Add(new property { name =txtName.Text});
+            if(!this._isMultiAdd)
+            {
+                Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().property.Add(new property { name = txtName.Text });
+            }
+            else
+            {
+                foreach (var itemName in this._names)
+                {
+                    if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == itemName).FirstOrDefault().property.Where(x => x.name == txtName.Text).ToList().Count == 0)
+                    {
+                        Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == itemName).FirstOrDefault().property.Add(new property { name = txtName.Text });
+                    }
+                } 
+            }
             ((Form1)Application.OpenForms["Form1"]).showMessage("Property created successfully");
             ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
-            ((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]).setPropertieList();
+            if (((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]) != null)
+            {
+                ((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]).setPropertieList();
+            }
             this.Close();
         }
 
@@ -97,17 +140,37 @@ namespace JsonManipulator
                     for(int i = 0;i < items.Count;i++)
                     {
                         string itemName = Utils.Capitalize(items[i]).Trim();
-                        if (itemName.Length > 0 && !ItemExists(itemName))
+                        if (itemName.Length > 0)
                         {
-                            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().property.Add(new property { name = itemName });
+                            if (!this._isMultiAdd)
+                            {
+                                if (!ItemExists(itemName))
+                                {
+                                    Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().property.Add(new property { name = itemName });
+                                }
+                            }
+                            else
+                            {
+                                foreach (var name in this._names)
+                                {
+                                    if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == name).FirstOrDefault().property.Where(x => x.name == itemName).ToList().Count == 0)
+                                    {
+                                        Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == name).FirstOrDefault().property.Add(new property { name = itemName });
+                                    }
+                                }
+                            }
                         }
                     }
+                   
                     ((Form1)Application.OpenForms["Form1"]).showMessage("Property created successfully");
-                    ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
-                    ((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]).setPropertieList();
+                    ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges(); 
+                    if (((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]) != null)
+                    {
+                        ((frmDbObjSettings)Application.OpenForms["frmDbObjSettings"]).setPropertieList();
+                    }
                 }
             }
-                this.Close();
+            this.Close();
         }
     }
 }

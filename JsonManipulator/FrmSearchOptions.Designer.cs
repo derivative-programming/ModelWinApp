@@ -39,27 +39,35 @@ namespace JsonManipulator
             this.chkReportFilter = new System.Windows.Forms.CheckBox();
             this.chkReportButton = new System.Windows.Forms.CheckBox();
             this.chkObjWfButton = new System.Windows.Forms.CheckBox();
-            this.chkRoleRequired = new System.Windows.Forms.CheckBox();
             this.chkLayoutName = new System.Windows.Forms.CheckBox();
+            this.rtbSearch = new System.Windows.Forms.RichTextBox();
+            this.rbAnd = new System.Windows.Forms.RadioButton();
+            this.rbOr = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtRoleRequired = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(237, 150);
+            this.btnCancel.Location = new System.Drawing.Point(571, 490);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 11;
+            this.btnCancel.TabIndex = 15;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.button2_Click);
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(156, 150);
+            this.btnAccept.Location = new System.Drawing.Point(490, 490);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
-            this.btnAccept.TabIndex = 10;
+            this.btnAccept.TabIndex = 14;
             this.btnAccept.Text = "&OK";
             this.btnAccept.UseVisualStyleBackColor = true;
             this.btnAccept.Click += new System.EventHandler(this.btnAdd_Click);
@@ -67,10 +75,10 @@ namespace JsonManipulator
             // chkName
             // 
             this.chkName.AutoSize = true;
-            this.chkName.Location = new System.Drawing.Point(13, 13);
+            this.chkName.Location = new System.Drawing.Point(507, 59);
             this.chkName.Name = "chkName";
-            this.chkName.Size = new System.Drawing.Size(54, 17);
-            this.chkName.TabIndex = 12;
+            this.chkName.Size = new System.Drawing.Size(67, 21);
+            this.chkName.TabIndex = 5;
             this.chkName.Text = "Name";
             this.chkName.UseVisualStyleBackColor = true;
             this.chkName.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
@@ -78,10 +86,10 @@ namespace JsonManipulator
             // chkObjProp
             // 
             this.chkObjProp.AutoSize = true;
-            this.chkObjProp.Location = new System.Drawing.Point(156, 94);
+            this.chkObjProp.Location = new System.Drawing.Point(506, 248);
             this.chkObjProp.Name = "chkObjProp";
-            this.chkObjProp.Size = new System.Drawing.Size(100, 17);
-            this.chkObjProp.TabIndex = 13;
+            this.chkObjProp.Size = new System.Drawing.Size(128, 21);
+            this.chkObjProp.TabIndex = 12;
             this.chkObjProp.Text = "DB Object Prop";
             this.chkObjProp.UseVisualStyleBackColor = true;
             this.chkObjProp.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
@@ -89,92 +97,172 @@ namespace JsonManipulator
             // chkObjWfOutputVar
             // 
             this.chkObjWfOutputVar.AutoSize = true;
-            this.chkObjWfOutputVar.Location = new System.Drawing.Point(156, 13);
+            this.chkObjWfOutputVar.Location = new System.Drawing.Point(506, 167);
             this.chkObjWfOutputVar.Name = "chkObjWfOutputVar";
-            this.chkObjWfOutputVar.Size = new System.Drawing.Size(113, 17);
-            this.chkObjWfOutputVar.TabIndex = 14;
+            this.chkObjWfOutputVar.Size = new System.Drawing.Size(146, 21);
+            this.chkObjWfOutputVar.TabIndex = 9;
             this.chkObjWfOutputVar.Text = "ObjWF Output Var";
             this.chkObjWfOutputVar.UseVisualStyleBackColor = true;
             // 
             // chkObjWfParam
             // 
             this.chkObjWfParam.AutoSize = true;
-            this.chkObjWfParam.Location = new System.Drawing.Point(156, 67);
+            this.chkObjWfParam.Location = new System.Drawing.Point(506, 221);
             this.chkObjWfParam.Name = "chkObjWfParam";
-            this.chkObjWfParam.Size = new System.Drawing.Size(92, 17);
-            this.chkObjWfParam.TabIndex = 15;
+            this.chkObjWfParam.Size = new System.Drawing.Size(118, 21);
+            this.chkObjWfParam.TabIndex = 11;
             this.chkObjWfParam.Text = "ObjWF Param";
             this.chkObjWfParam.UseVisualStyleBackColor = true;
             // 
             // chkReportColumn
             // 
             this.chkReportColumn.AutoSize = true;
-            this.chkReportColumn.Location = new System.Drawing.Point(12, 67);
+            this.chkReportColumn.Location = new System.Drawing.Point(506, 113);
             this.chkReportColumn.Name = "chkReportColumn";
-            this.chkReportColumn.Size = new System.Drawing.Size(96, 17);
-            this.chkReportColumn.TabIndex = 16;
+            this.chkReportColumn.Size = new System.Drawing.Size(124, 21);
+            this.chkReportColumn.TabIndex = 7;
             this.chkReportColumn.Text = "Report Column";
             this.chkReportColumn.UseVisualStyleBackColor = true;
             // 
             // chkReportFilter
             // 
             this.chkReportFilter.AutoSize = true;
-            this.chkReportFilter.Location = new System.Drawing.Point(12, 40);
+            this.chkReportFilter.Location = new System.Drawing.Point(506, 86);
             this.chkReportFilter.Name = "chkReportFilter";
-            this.chkReportFilter.Size = new System.Drawing.Size(83, 17);
-            this.chkReportFilter.TabIndex = 17;
+            this.chkReportFilter.Size = new System.Drawing.Size(108, 21);
+            this.chkReportFilter.TabIndex = 6;
             this.chkReportFilter.Text = "Report Filter";
             this.chkReportFilter.UseVisualStyleBackColor = true;
             // 
             // chkReportButton
             // 
             this.chkReportButton.AutoSize = true;
-            this.chkReportButton.Location = new System.Drawing.Point(12, 94);
+            this.chkReportButton.Location = new System.Drawing.Point(506, 140);
             this.chkReportButton.Name = "chkReportButton";
-            this.chkReportButton.Size = new System.Drawing.Size(92, 17);
-            this.chkReportButton.TabIndex = 20;
+            this.chkReportButton.Size = new System.Drawing.Size(118, 21);
+            this.chkReportButton.TabIndex = 8;
             this.chkReportButton.Text = "Report Button";
             this.chkReportButton.UseVisualStyleBackColor = true;
             // 
             // chkObjWfButton
             // 
             this.chkObjWfButton.AutoSize = true;
-            this.chkObjWfButton.Location = new System.Drawing.Point(156, 40);
+            this.chkObjWfButton.Location = new System.Drawing.Point(506, 194);
             this.chkObjWfButton.Name = "chkObjWfButton";
-            this.chkObjWfButton.Size = new System.Drawing.Size(93, 17);
-            this.chkObjWfButton.TabIndex = 21;
+            this.chkObjWfButton.Size = new System.Drawing.Size(118, 21);
+            this.chkObjWfButton.TabIndex = 10;
             this.chkObjWfButton.Text = "ObjWF Button";
             this.chkObjWfButton.UseVisualStyleBackColor = true;
-            // 
-            // chkRoleRequired
-            // 
-            this.chkRoleRequired.AutoSize = true;
-            this.chkRoleRequired.Location = new System.Drawing.Point(12, 117);
-            this.chkRoleRequired.Name = "chkRoleRequired";
-            this.chkRoleRequired.Size = new System.Drawing.Size(94, 17);
-            this.chkRoleRequired.TabIndex = 22;
-            this.chkRoleRequired.Text = "Role Required";
-            this.chkRoleRequired.UseVisualStyleBackColor = true;
             // 
             // chkLayoutName
             // 
             this.chkLayoutName.AutoSize = true;
-            this.chkLayoutName.Location = new System.Drawing.Point(12, 140);
+            this.chkLayoutName.Location = new System.Drawing.Point(506, 275);
             this.chkLayoutName.Name = "chkLayoutName";
-            this.chkLayoutName.Size = new System.Drawing.Size(89, 17);
-            this.chkLayoutName.TabIndex = 23;
+            this.chkLayoutName.Size = new System.Drawing.Size(114, 21);
+            this.chkLayoutName.TabIndex = 13;
             this.chkLayoutName.Text = "Layout Name";
             this.chkLayoutName.UseVisualStyleBackColor = true;
             // 
+            // rtbSearch
+            // 
+            this.rtbSearch.Location = new System.Drawing.Point(13, 39);
+            this.rtbSearch.Name = "rtbSearch";
+            this.rtbSearch.Size = new System.Drawing.Size(479, 313);
+            this.rtbSearch.TabIndex = 0;
+            this.rtbSearch.Text = "";
+            this.rtbSearch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.rtbSearch_KeyPress);
+            // 
+            // rbAnd
+            // 
+            this.rbAnd.AutoSize = true;
+            this.rbAnd.Location = new System.Drawing.Point(13, 427);
+            this.rbAnd.Name = "rbAnd";
+            this.rbAnd.Size = new System.Drawing.Size(134, 21);
+            this.rbAnd.TabIndex = 2;
+            this.rbAnd.Text = "Use &AND search";
+            this.rbAnd.UseVisualStyleBackColor = true;
+            // 
+            // rbOr
+            // 
+            this.rbOr.AutoSize = true;
+            this.rbOr.Checked = true;
+            this.rbOr.Location = new System.Drawing.Point(13, 358);
+            this.rbOr.Name = "rbOr";
+            this.rbOr.Size = new System.Drawing.Size(126, 21);
+            this.rbOr.TabIndex = 1;
+            this.rbOr.TabStop = true;
+            this.rbOr.Text = "Use O&R search";
+            this.rbOr.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(301, 17);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "&Search For Text (Each line is a unique search)";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(36, 382);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(299, 17);
+            this.label2.TabIndex = 28;
+            this.label2.Text = "ex. [Line1] matches on at least one data point]";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(504, 39);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(142, 17);
+            this.label3.TabIndex = 16;
+            this.label3.Text = "Search Data Points...";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(36, 407);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(282, 17);
+            this.label4.TabIndex = 30;
+            this.label4.Text = " OR [Line2] matches at least one data point";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(13, 469);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(170, 17);
+            this.label5.TabIndex = 31;
+            this.label5.Text = "Role Re&quired (Optional):";
+            // 
+            // txtRoleRequired
+            // 
+            this.txtRoleRequired.Location = new System.Drawing.Point(13, 489);
+            this.txtRoleRequired.Name = "txtRoleRequired";
+            this.txtRoleRequired.Size = new System.Drawing.Size(183, 22);
+            this.txtRoleRequired.TabIndex = 3;
+            // 
             // FrmSearchOptions
             // 
-            this.AcceptButton = this.btnAccept;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(324, 185);
+            this.ClientSize = new System.Drawing.Size(654, 525);
             this.ControlBox = false;
+            this.Controls.Add(this.txtRoleRequired);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.rbOr);
+            this.Controls.Add(this.rbAnd);
+            this.Controls.Add(this.rtbSearch);
             this.Controls.Add(this.chkLayoutName);
-            this.Controls.Add(this.chkRoleRequired);
             this.Controls.Add(this.chkObjWfButton);
             this.Controls.Add(this.chkReportButton);
             this.Controls.Add(this.chkReportFilter);
@@ -208,7 +296,15 @@ namespace JsonManipulator
         private System.Windows.Forms.CheckBox chkReportFilter;
         private System.Windows.Forms.CheckBox chkReportButton;
         private System.Windows.Forms.CheckBox chkObjWfButton;
-        private System.Windows.Forms.CheckBox chkRoleRequired;
         private System.Windows.Forms.CheckBox chkLayoutName;
+        private System.Windows.Forms.RichTextBox rtbSearch;
+        private System.Windows.Forms.RadioButton rbAnd;
+        private System.Windows.Forms.RadioButton rbOr;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtRoleRequired;
     }
 }

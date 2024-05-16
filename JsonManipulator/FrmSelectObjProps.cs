@@ -47,7 +47,7 @@ namespace JsonManipulator
 
         private void txtName_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void FrmSelectObjProps_Load(object sender, EventArgs e)
@@ -58,6 +58,22 @@ namespace JsonManipulator
             {
                 lbAvailableObjProps.Items.Add(props[i]);
 
+            }
+        }
+
+        private void txtFilter_TextChanged(object sender, EventArgs e)
+        { 
+            if (txtFilter.Text.Length > 2 || txtFilter.Text.Length == 0)
+            {
+                lbAvailableObjProps.Items.Clear();
+                List<string> props = Utils.GetObjectPropList(this._targetObjectName, this._includeLineage);
+                lbAvailableObjProps.Items.Add("No Value");
+                for (int i = 0; i < props.Count; i++)
+                {
+                    if(props[i].ToString().ToLower().Contains(txtFilter.Text.ToLower()))
+                        lbAvailableObjProps.Items.Add(props[i]);
+
+                }
             }
         }
     }
