@@ -26,9 +26,9 @@ namespace JsonManipulator
         private bool _displayLookupValuesTab = false;
 
         private bool _searchNames = true;
-        private bool _searchReportNames = true;
-        private bool _searchObjWFNames = true;
-        private bool _searchDBObjNames = true;
+        private bool _searchReportNames = false;
+        private bool _searchObjWFNames = false;
+        private bool _searchDBObjNames = false;
         private bool _searchReportFilters = false;
         private bool _searchReportColumns = false;
         private bool _searchReportButtons = false;
