@@ -79,6 +79,7 @@ namespace JsonManipulator
 
             form.objectWorkflowButton = new List<objectWorkflowButton>(); 
             form.isPage = "false";
+            form.isExposedInBusinessObject = "true";
 
 
 

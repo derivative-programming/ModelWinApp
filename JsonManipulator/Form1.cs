@@ -17,7 +17,7 @@ namespace JsonManipulator
 {
     public partial class Form1 : Form
     {
-        public static  RootObject _model;   
+        public static RootObject _model;
         public static string _path;
 
         private string _initialModelPath = string.Empty;
@@ -39,13 +39,13 @@ namespace JsonManipulator
         private string _searchRoleRequired = string.Empty;
         private bool _searchLayoutName = false;
         private bool _isANDSearch = false;
-        private bool _isORSearch = true; 
+        private bool _isORSearch = true;
 
         public Form1(string initialModelPath, string fabricationOutputFolderInit)
         {
             InitializeComponent();
             _initialModelPath = initialModelPath;
-            if(fabricationOutputFolderInit.Trim().Length > 0)
+            if (fabricationOutputFolderInit.Trim().Length > 0)
             {
                 LocalStorage.SetValue("FabricationFolder", fabricationOutputFolderInit);
             }
@@ -55,12 +55,12 @@ namespace JsonManipulator
         {
             OpenAPIs.ApiManager.Initialize();
             nodeMenus.TabStop = false;
-            nodeMenus.Enabled = false; 
+            nodeMenus.Enabled = false;
             UpdateMenuState();
 
             splitContainer1.SplitterDistance = System.Convert.ToInt32(LocalStorage.GetValue("Form1.splitContainer1.SplitterDistance", "200"));
-        
-            if(this._initialModelPath.Trim().Length > 0 &&
+
+            if (this._initialModelPath.Trim().Length > 0 &&
                 System.IO.File.Exists(this._initialModelPath))
             {
                 LoadModelFile(this._initialModelPath);
@@ -84,7 +84,7 @@ namespace JsonManipulator
             string json = JsonConvert.SerializeObject(Form1._model, Formatting.Indented, new JsonSerializerSettings
             {
                 NullValueHandling = NullValueHandling.Ignore
-            }); 
+            });
             File.WriteAllText(_path, json);
             ArchiveModel();
             Utils.SortJsonFile(_path);
@@ -103,14 +103,14 @@ namespace JsonManipulator
             {
                 NullValueHandling = NullValueHandling.Ignore
             });
-            if(!System.IO.Directory.Exists(@"ModelArchive"))
+            if (!System.IO.Directory.Exists(@"ModelArchive"))
             {
                 System.IO.Directory.CreateDirectory(@"ModelArchive");
             }
-            File.WriteAllText(archiveFilePath, json);   
+            File.WriteAllText(archiveFilePath, json);
         }
 
-        private ToolStripMenuItem AddMenu (string Name)
+        private ToolStripMenuItem AddMenu(string Name)
         {
             ToolStripMenuItem FileMenu = new ToolStripMenuItem(Name);
             FileMenu.Text = Name;
@@ -122,14 +122,14 @@ namespace JsonManipulator
 
         public void PopulateTree()
         {
-            PopulateTree(txtSearch.Text); 
+            PopulateTree(txtSearch.Text);
         }
         public void PopulateTree(string filter)
         {
 
             populateProjectDetails();
             populateDbObjects(filter);
-            populatePageAndFlows(filter);  
+            populatePageAndFlows(filter);
             populateAPIs(filter);
         }
         public string GetProjectName()
@@ -145,7 +145,7 @@ namespace JsonManipulator
 
             this.Text = "Project: " + _model.root.ProjectName;
             nodeMenus.Nodes["Project"].Text = _model.root.ProjectName;
-            if(nodeMenus.Nodes["Project"].Text.Trim().Length == 0)
+            if (nodeMenus.Nodes["Project"].Text.Trim().Length == 0)
             {
                 nodeMenus.Nodes["Project"].Text = "Project";
             }
@@ -156,7 +156,7 @@ namespace JsonManipulator
             NameSpaceObject nameSpaceObject = _model.root.NameSpaceObjects.FirstOrDefault();
 
             bool isExactMatchRequired = false;
-            if(filter.StartsWith("\"") && filter.EndsWith("\""))
+            if (filter.StartsWith("\"") && filter.EndsWith("\""))
             {
                 filter = filter.Trim(" .\"".ToCharArray());
                 isExactMatchRequired = true;
@@ -167,11 +167,10 @@ namespace JsonManipulator
 
             foreach (ObjectMap dbObj in nameSpaceObject.ObjectMap)
             {
-                if(IsMatch(dbObj,filter.Split(Environment.NewLine.ToCharArray())) ||
-                    filter.Trim().Length == 0)
+                if (IsMatch(dbObj, filter.Split(Environment.NewLine.ToCharArray())))
                 {
                     PopulateTree(dbObj);
-                } 
+                }
             }
         }
 
@@ -186,8 +185,8 @@ namespace JsonManipulator
 
                 foreach (string filter in filters)
                 {
-                    if (filter.Trim().Length == 0)
-                        continue;
+                    //if (filter.Trim().Length == 0 && this._searchRoleRequired.Trim().Length == 0)
+                    //    continue;
 
                     if (!IsMatch(item, filter))
                     {
@@ -209,8 +208,8 @@ namespace JsonManipulator
             {
                 foreach (string filter in filters)
                 {
-                    if (filter.Trim().Length == 0)
-                        continue;
+                    //if (filter.Trim().Length == 0 && this._searchRoleRequired.Trim().Length == 0)
+                    //    continue;
 
                     if (IsMatch(item, filter))
                     {
@@ -222,20 +221,42 @@ namespace JsonManipulator
 
             return result;
         }
-        private bool IsMatch(ObjectMap dbObj,string filter)
+        private bool IsMatch(ObjectMap dbObj, string filter)
         {
             bool result = false;
 
             if (dbObj == null)
                 return result;
-             
+
+            if (filter.Trim().Length == 0)
+                return result;
+
+            if (this._searchRoleRequired.Trim().Length > 0)
+                return result;
+
+            if (!this._searchNames &&
+                !this._searchDBObjNames &&
+                !this._searchDBObjProps && 
+                (//one non db obj search exists
+                    this._searchReportNames ||
+                    this._searchReportButtons ||
+                    this._searchReportColumns ||
+                    this._searchReportFilters ||
+                    this._searchObjWFNames ||
+                    this._searchObjWFButtons ||
+                    this._searchObjWFOutputVars ||
+                    this._searchObjWFParams ||
+                    this._searchRoleRequired.Trim().Length > 0
+                )
+                )
+                return result;
 
             bool isExactMatchRequired = false;
 
             filter = filter.Trim(" .".ToCharArray());
 
             if (filter.StartsWith("\"") && filter.EndsWith("\""))
-            { 
+            {
                 isExactMatchRequired = true;
             }
 
@@ -278,8 +299,8 @@ namespace JsonManipulator
                 !this._searchDBObjNames &&
                 !this._searchDBObjProps)
                 return result;
-                 
-            result = true; 
+
+            result = true;
 
             return result;
         }
@@ -306,49 +327,47 @@ namespace JsonManipulator
 
             foreach (var dbObj in nameSpaceObject.ObjectMap)
             {
-                if(dbObj.objectWorkflow !=null)
+                if (dbObj.objectWorkflow != null)
                 {
                     foreach (objectWorkflow objWF in dbObj.objectWorkflow)
                     {
 
-                        if(IsMatch(objWF,filter.Split(Environment.NewLine.ToCharArray())) ||
-                    filter.Trim().Length == 0)
+                        if (IsMatch(objWF, filter.Split(Environment.NewLine.ToCharArray())))
                         {
                             PopulateTree(objWF);
                         }
-                         
+
                     }
                 }
-                if(dbObj.report != null)
+                if (dbObj.report != null)
                 {
                     foreach (Report rpt in dbObj.report)
                     {
-                        if(IsMatch(rpt,filter.Split(Environment.NewLine.ToCharArray())) ||
-                    filter.Trim().Length == 0)
+                        if (IsMatch(rpt, filter.Split(Environment.NewLine.ToCharArray())))
                         {
                             PopulateTree(rpt);
                         }
-                         
+
                     }
                 }
-                
+
             }
-           
+
         }
 
-        private bool IsMatch(objectWorkflow item, string [] filters)
+        private bool IsMatch(objectWorkflow item, string[] filters)
         {
             bool result = false;
 
-            if(this._isANDSearch)
+            if (this._isANDSearch)
             {
                 bool failed = false;
                 bool passed = false; //at least one search must exist
 
                 foreach (string filter in filters)
                 {
-                    if (filter.Trim().Length == 0)
-                        continue;
+                    //if (filter.Trim().Length == 0 && this._searchRoleRequired.Trim().Length == 0)
+                    //    continue;
 
                     if (!IsMatch(item, filter))
                     {
@@ -357,10 +376,10 @@ namespace JsonManipulator
                     else
                     {
                         passed = true;
-                    } 
+                    }
                 }
 
-                if(passed && !failed)
+                if (passed && !failed)
                 {
                     result = true;
                 }
@@ -370,8 +389,8 @@ namespace JsonManipulator
             {
                 foreach (string filter in filters)
                 {
-                    if (filter.Trim().Length == 0)
-                        continue;
+                    //if (filter.Trim().Length == 0 && this._searchRoleRequired.Trim().Length == 0)
+                    //    continue;
 
                     if (IsMatch(item, filter))
                     {
@@ -387,7 +406,30 @@ namespace JsonManipulator
         {
             bool result = false;
 
+            if (filter.Trim().Length == 0 && this._searchRoleRequired.Trim().Length == 0)
+                return result;
+
             if (objWF == null)
+                return result;
+
+
+            if (filter.Trim().Length > 0 &&
+                !this._searchNames &&
+                !this._searchObjWFNames &&
+                !this._searchObjWFButtons &&
+                !this._searchObjWFOutputVars &&
+                !this._searchObjWFParams &&
+              //  this._searchRoleRequired.Trim().Length == 0 &&
+                !this._searchLayoutName &&
+                (
+                //one non objwf search exists
+                this._searchReportNames ||
+                this._searchReportButtons ||
+                this._searchReportColumns ||
+                this._searchReportFilters ||
+                this._searchDBObjNames ||
+                this._searchDBObjProps)
+                )
                 return result;
 
             bool isExactMatchRequired = false;
@@ -475,6 +517,11 @@ namespace JsonManipulator
 
             }
 
+            if (this._searchRoleRequired.Trim().Length > 0 &&
+                objWF.isPage == "true" &&
+                objWF.RoleRequired != null &&
+                !objWF.RoleRequired.Trim().ToLower().Equals(this._searchRoleRequired.Trim().ToLower()))
+                resultFound = false;
 
             if (!resultFound)
                 return result;
@@ -492,7 +539,7 @@ namespace JsonManipulator
             result = true;
 
             return result;
-       
+
         }
 
         private bool IsMatch(Report item, string[] filters)
@@ -506,8 +553,8 @@ namespace JsonManipulator
 
                 foreach (string filter in filters)
                 {
-                    if (filter.Trim().Length == 0)
-                        continue;
+                    //if (filter.Trim().Length == 0 && this._searchRoleRequired.Trim().Length == 0)
+                    //    continue;
 
                     if (!IsMatch(item, filter))
                     {
@@ -529,8 +576,8 @@ namespace JsonManipulator
             {
                 foreach (string filter in filters)
                 {
-                    if (filter.Trim().Length == 0)
-                        continue;
+                    //if (filter.Trim().Length == 0 && this._searchRoleRequired.Trim().Length == 0)
+                    //    continue;
 
                     if (IsMatch(item, filter))
                     {
@@ -546,7 +593,29 @@ namespace JsonManipulator
         {
             bool result = false;
 
+            if (filter.Trim().Length == 0 && this._searchRoleRequired.Trim().Length == 0)
+                return result;
+
             if (rpt == null)
+                return result;
+
+
+            if (filter.Trim().Length > 0 &&
+                !this._searchNames &&
+                !this._searchReportNames &&
+                !this._searchReportButtons &&
+                !this._searchReportColumns &&
+                !this._searchReportFilters &&
+               // this._searchRoleRequired.Trim().Length == 0 &&
+                !this._searchLayoutName &&
+                (   //one non report search exists
+                    this._searchObjWFNames ||
+                    this._searchObjWFButtons ||
+                    this._searchObjWFOutputVars ||
+                    this._searchObjWFParams ||
+                    this._searchDBObjNames ||
+                    this._searchDBObjProps
+                ))
                 return result;
 
             bool isExactMatchRequired = false;
@@ -608,7 +677,7 @@ namespace JsonManipulator
                     resultFound = true;
 
                 if (this._searchRoleRequired.Trim().Length > 0 &&
-                    rpt.isPage == "true" &&
+                //    rpt.isPage == "true" &&
                     rpt.RoleRequired != null &&
                     rpt.RoleRequired.Trim().ToLower().Equals(this._searchRoleRequired.Trim().ToLower()))
                     resultFound = true;
@@ -632,6 +701,12 @@ namespace JsonManipulator
                     resultFound = true;
 
             }
+
+            if (this._searchRoleRequired.Trim().Length > 0 &&
+             //   rpt.isPage == "true" &&
+                rpt.RoleRequired != null &&
+                !rpt.RoleRequired.Trim().ToLower().Equals(this._searchRoleRequired.Trim().ToLower()))
+                resultFound = false;
 
 
             if (!resultFound)

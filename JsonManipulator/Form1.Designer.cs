@@ -73,11 +73,13 @@ namespace JsonManipulator
             this.formToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addChildPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bulkAddControlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.detailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aPIGetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.navigationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bulkAddColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.userStoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.servicesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -117,8 +119,6 @@ namespace JsonManipulator
             this.label1 = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusText = new System.Windows.Forms.ToolStripStatusLabel();
-            this.bulkAddColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bulkAddControlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -365,6 +365,13 @@ namespace JsonManipulator
             this.addChildPageToolStripMenuItem.Text = "Add Child Page";
             this.addChildPageToolStripMenuItem.Click += new System.EventHandler(this.addChildPageToolStripMenuItem_Click);
             // 
+            // bulkAddControlToolStripMenuItem
+            // 
+            this.bulkAddControlToolStripMenuItem.Name = "bulkAddControlToolStripMenuItem";
+            this.bulkAddControlToolStripMenuItem.Size = new System.Drawing.Size(285, 26);
+            this.bulkAddControlToolStripMenuItem.Text = "Bulk Add Control";
+            this.bulkAddControlToolStripMenuItem.Click += new System.EventHandler(this.bulkAddControlToolStripMenuItem_Click);
+            // 
             // reportPageToolStripMenuItem
             // 
             this.reportPageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -412,6 +419,13 @@ namespace JsonManipulator
             this.navigationToolStripMenuItem.Size = new System.Drawing.Size(258, 26);
             this.navigationToolStripMenuItem.Text = "Navigation";
             this.navigationToolStripMenuItem.Click += new System.EventHandler(this.navigationToolStripMenuItem_Click);
+            // 
+            // bulkAddColumnToolStripMenuItem
+            // 
+            this.bulkAddColumnToolStripMenuItem.Name = "bulkAddColumnToolStripMenuItem";
+            this.bulkAddColumnToolStripMenuItem.Size = new System.Drawing.Size(258, 26);
+            this.bulkAddColumnToolStripMenuItem.Text = "Bulk Add Column";
+            this.bulkAddColumnToolStripMenuItem.Click += new System.EventHandler(this.bulkAddColumnToolStripMenuItem_Click);
             // 
             // userStoryToolStripMenuItem
             // 
@@ -780,20 +794,6 @@ namespace JsonManipulator
             // 
             this.statusText.Name = "statusText";
             this.statusText.Size = new System.Drawing.Size(0, 16);
-            // 
-            // bulkAddColumnToolStripMenuItem
-            // 
-            this.bulkAddColumnToolStripMenuItem.Name = "bulkAddColumnToolStripMenuItem";
-            this.bulkAddColumnToolStripMenuItem.Size = new System.Drawing.Size(258, 26);
-            this.bulkAddColumnToolStripMenuItem.Text = "Bulk Add Column";
-            this.bulkAddColumnToolStripMenuItem.Click += new System.EventHandler(this.bulkAddColumnToolStripMenuItem_Click);
-            // 
-            // bulkAddControlToolStripMenuItem
-            // 
-            this.bulkAddControlToolStripMenuItem.Name = "bulkAddControlToolStripMenuItem";
-            this.bulkAddControlToolStripMenuItem.Size = new System.Drawing.Size(285, 26);
-            this.bulkAddControlToolStripMenuItem.Text = "Bulk Add Control";
-            this.bulkAddControlToolStripMenuItem.Click += new System.EventHandler(this.bulkAddControlToolStripMenuItem_Click);
             // 
             // Form1
             // 
