@@ -228,11 +228,12 @@ namespace JsonManipulator
             if (dbObj == null)
                 return result;
 
-            if (filter.Trim().Length == 0)
-                return result;
-
             if (this._searchRoleRequired.Trim().Length > 0)
                 return result;
+
+            if (filter.Trim().Length == 0)
+                return true;
+
 
             if (!this._searchNames &&
                 !this._searchDBObjNames &&
@@ -407,7 +408,7 @@ namespace JsonManipulator
             bool result = false;
 
             if (filter.Trim().Length == 0 && this._searchRoleRequired.Trim().Length == 0)
-                return result;
+                return true;
 
             if (objWF == null)
                 return result;
@@ -594,7 +595,7 @@ namespace JsonManipulator
             bool result = false;
 
             if (filter.Trim().Length == 0 && this._searchRoleRequired.Trim().Length == 0)
-                return result;
+                return true;
 
             if (rpt == null)
                 return result;
