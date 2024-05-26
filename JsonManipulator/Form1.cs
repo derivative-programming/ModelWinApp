@@ -526,6 +526,10 @@ namespace JsonManipulator
                 !objWF.RoleRequired.Trim().ToLower().Equals(this._searchRoleRequired.Trim().ToLower()))
                 resultFound = false;
 
+            if (this._searchRoleRequired.Trim().Length > 0 && 
+                objWF.RoleRequired == null)
+                resultFound = false;
+
             if (!resultFound)
                 return result;
 
@@ -711,6 +715,11 @@ namespace JsonManipulator
              //   rpt.isPage == "true" &&
                 rpt.RoleRequired != null &&
                 !rpt.RoleRequired.Trim().ToLower().Equals(this._searchRoleRequired.Trim().ToLower()))
+                resultFound = false;
+
+            if (this._searchRoleRequired.Trim().Length > 0 &&
+                //   rpt.isPage == "true" &&
+                rpt.RoleRequired == null)
                 resultFound = false;
 
 
