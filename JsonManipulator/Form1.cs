@@ -492,8 +492,10 @@ namespace JsonManipulator
                     objWF.Name.Trim().ToLower().Contains(filter.Trim().ToLower()))
                     resultFound = true;
 
+                //only check role if no other search performed, otherwise its exclusionary below
                 if (this._searchRoleRequired.Trim().Length > 0 &&
-                    objWF.isPage == "true" &&
+                    filter.Trim().Length == 0 &&
+                   // objWF.isPage == "true" &&
                     objWF.RoleRequired != null &&
                     objWF.RoleRequired.Trim().ToLower().Equals(this._searchRoleRequired.Trim().ToLower()))
                     resultFound = true;
@@ -519,7 +521,7 @@ namespace JsonManipulator
             }
 
             if (this._searchRoleRequired.Trim().Length > 0 &&
-                objWF.isPage == "true" &&
+               // objWF.isPage == "true" &&
                 objWF.RoleRequired != null &&
                 !objWF.RoleRequired.Trim().ToLower().Equals(this._searchRoleRequired.Trim().ToLower()))
                 resultFound = false;
@@ -642,8 +644,10 @@ namespace JsonManipulator
                     rpt.name.Trim().ToLower().Equals(filter.Trim().ToLower()))
                     resultFound = true;
 
+                //only check role if no other search performed, otherwise its exclusionary below
                 if (this._searchRoleRequired.Trim().Length > 0 &&
                     rpt.isPage == "true" &&
+                    filter.Trim().Length == 0 && 
                     rpt.RoleRequired != null &&
                     rpt.RoleRequired.Trim().ToLower().Equals(this._searchRoleRequired.Trim().ToLower()))
                     resultFound = true;
