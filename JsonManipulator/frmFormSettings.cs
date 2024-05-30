@@ -1229,7 +1229,8 @@ namespace JsonManipulator
                                 newItem.objectWorkflowParam[i].codeDescription = newItem.objectWorkflowParam[i].codeDescription.Replace(" " + _form.RoleRequired + " ", " " + val + " ");
                             }
                             newItem.RoleRequired = val;
-                            newItem.layoutName = val + "Layout"; 
+                            newItem.layoutName = val + "Layout";
+                            newItem.initObjectWorkflowName = null;
 
 
                             List<string> existingNames = Utils.GetNameList(false, true, true, true, true);
@@ -1265,6 +1266,7 @@ namespace JsonManipulator
             {
                 i++;
                 newItem.Name = _form.Name + "Clone" + i.ToString();
+                newItem.initObjectWorkflowName = null;
             }
 
             _ownerObject.objectWorkflow.Add(newItem);
