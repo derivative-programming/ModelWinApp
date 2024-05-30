@@ -1111,7 +1111,7 @@ namespace JsonManipulator
                                 Report newRpt = JsonConvert.DeserializeObject<Report>(json);
                                 newRpt.name = newReportName;
                                 newRpt.codeDescription = "";
-                                newRpt.initObjectWorkflowName = null;
+                                newRpt.initObjectWorkflowName = newRpt.name + "InitReport";
                                 for (int i = 0; i < newRpt.reportColumn.Count; i++)
                                 {
                                     newRpt.reportColumn[i].codeDescription = "";
@@ -1149,7 +1149,7 @@ namespace JsonManipulator
                     Report newRpt = JsonConvert.DeserializeObject<Report>(json);
                     newRpt.name = newReportName;
                     newRpt.codeDescription = "";
-                    newRpt.initObjectWorkflowName = null;
+                    newRpt.initObjectWorkflowName = newRpt.name + "InitReport";
                     for (int i = 0; i < newRpt.reportColumn.Count; i++)
                     {
                         newRpt.reportColumn[i].codeDescription = "";
