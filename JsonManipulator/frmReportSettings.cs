@@ -691,13 +691,35 @@ namespace JsonManipulator
                 if (propertyName.Equals("buttonDestinationTargetName", StringComparison.OrdinalIgnoreCase))
                 {
                     // On click of datagridview cell, attched combobox with this click cell of datagridview  
-                    using (var form = new frmModelSearch(ModelSearchOptions.FORMS))
+                    //TODO if async df then need to show flowsif (lstColumns.SelectedItem != null)
                     {
-                        var result = form.ShowDialog();
-                        if (result == DialogResult.OK)
+                        String columnMane = lstColumns.SelectedItem.ToString();
+                        List<string> ignoreList = Utils.GetReportColumnPropertiesToIgnore();
+                        reportColumn rptColumn = _rpt.reportColumn.Where(x => x.name == columnMane).FirstOrDefault(); 
+                        if(rptColumn.isButtonAsyncObjWF != null &&
+                           rptColumn.isButtonAsyncObjWF.Equals("true",StringComparison.OrdinalIgnoreCase))
                         {
-                            string val = form.ReturnValue;
-                            setColumnData(val, e.RowIndex, e.ColumnIndex);
+                            using (var form = new frmModelSearch(ModelSearchOptions.FLOWS))
+                            {
+                                var result = form.ShowDialog();
+                                if (result == DialogResult.OK)
+                                {
+                                    string val = form.ReturnValue;
+                                    setColumnData(val, e.RowIndex, e.ColumnIndex);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            using (var form = new frmModelSearch(ModelSearchOptions.FORMS))
+                            {
+                                var result = form.ShowDialog();
+                                if (result == DialogResult.OK)
+                                {
+                                    string val = form.ReturnValue;
+                                    setColumnData(val, e.RowIndex, e.ColumnIndex);
+                                }
+                            }
                         }
                     }
                 }
