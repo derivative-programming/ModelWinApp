@@ -31,9 +31,12 @@ namespace JsonManipulator
         private bool _searchDBObjNames = false;
         private bool _searchReportFilters = false;
         private bool _searchReportColumns = false;
+        private bool _searchReportColumnButtonDestinations = false;
         private bool _searchReportButtons = false;
+        private bool _searchReportButtonDestinations = false;
         private bool _searchObjWFParams = false;
         private bool _searchObjWFButtons = false;
+        private bool _searchObjWFButtonDestinations = false;
         private bool _searchObjWFOutputVars = false;
         private bool _searchDBObjProps = false;
         private string _searchRoleRequired = string.Empty;
@@ -241,10 +244,13 @@ namespace JsonManipulator
                 (//one non db obj search exists
                     this._searchReportNames ||
                     this._searchReportButtons ||
+                    this._searchReportButtonDestinations ||
                     this._searchReportColumns ||
+                    this._searchReportColumnButtonDestinations ||
                     this._searchReportFilters ||
                     this._searchObjWFNames ||
                     this._searchObjWFButtons ||
+                    this._searchObjWFButtonDestinations ||
                     this._searchObjWFOutputVars ||
                     this._searchObjWFParams ||
                     this._searchRoleRequired.Trim().Length > 0
@@ -418,6 +424,7 @@ namespace JsonManipulator
                 !this._searchNames &&
                 !this._searchObjWFNames &&
                 !this._searchObjWFButtons &&
+                !this._searchObjWFButtonDestinations &&
                 !this._searchObjWFOutputVars &&
                 !this._searchObjWFParams &&
               //  this._searchRoleRequired.Trim().Length == 0 &&
@@ -426,7 +433,9 @@ namespace JsonManipulator
                 //one non objwf search exists
                 this._searchReportNames ||
                 this._searchReportButtons ||
+                this._searchReportButtonDestinations ||
                 this._searchReportColumns ||
+                this._searchReportColumnButtonDestinations ||
                 this._searchReportFilters ||
                 this._searchDBObjNames ||
                 this._searchDBObjProps)
@@ -473,6 +482,10 @@ namespace JsonManipulator
                     objWF.objectWorkflowButton.Where(x => x.buttonText != null && x.buttonText.ToLower().Equals(filter.Trim().ToLower())).ToList().Count > 0)
                     resultFound = true;
 
+                if (this._searchObjWFButtonDestinations &&
+                    objWF.objectWorkflowButton.Where(x => x.destinationTargetName != null && x.destinationTargetName.ToLower().Equals(filter.Trim().ToLower())).ToList().Count > 0)
+                    resultFound = true;
+
                 if (this._searchObjWFOutputVars &&
                     objWF.objectWorkflowOutputVar.Where(x => x.name.ToLower().Equals(filter.Trim().ToLower())).ToList().Count > 0)
                     resultFound = true;
@@ -510,6 +523,10 @@ namespace JsonManipulator
                     objWF.objectWorkflowButton.Where(x => x.buttonText != null && x.buttonText.ToLower().Contains(filter.Trim().ToLower())).ToList().Count > 0)
                     resultFound = true;
 
+                if (this._searchObjWFButtonDestinations &&
+                    objWF.objectWorkflowButton.Where(x => x.destinationTargetName != null && x.destinationTargetName.ToLower().Contains(filter.Trim().ToLower())).ToList().Count > 0)
+                    resultFound = true;
+
                 if (this._searchObjWFOutputVars &&
                     objWF.objectWorkflowOutputVar.Where(x => x.name.ToLower().Contains(filter.Trim().ToLower())).ToList().Count > 0)
                     resultFound = true;
@@ -537,6 +554,7 @@ namespace JsonManipulator
             if (!this._searchNames &&
                 !this._searchObjWFNames &&
                 !this._searchObjWFButtons &&
+                !this._searchObjWFButtonDestinations &&
                 !this._searchObjWFOutputVars &&
                 !this._searchObjWFParams &&
                 this._searchRoleRequired.Trim().Length == 0 &&
@@ -611,13 +629,16 @@ namespace JsonManipulator
                 !this._searchNames &&
                 !this._searchReportNames &&
                 !this._searchReportButtons &&
+                !this._searchReportButtonDestinations &&
                 !this._searchReportColumns &&
+                !this._searchReportColumnButtonDestinations &&
                 !this._searchReportFilters &&
                // this._searchRoleRequired.Trim().Length == 0 &&
                 !this._searchLayoutName &&
                 (   //one non report search exists
                     this._searchObjWFNames ||
                     this._searchObjWFButtons ||
+                    this._searchObjWFButtonDestinations ||
                     this._searchObjWFOutputVars ||
                     this._searchObjWFParams ||
                     this._searchDBObjNames ||
@@ -666,8 +687,16 @@ namespace JsonManipulator
                     rpt.reportButton.Where(x => x.buttonName.ToLower().Equals(filter.Trim().ToLower())).ToList().Count > 0)
                     resultFound = true;
 
+                if (this._searchReportButtonDestinations &&
+                    rpt.reportButton.Where(x => x.destinationTargetName.ToLower().Equals(filter.Trim().ToLower())).ToList().Count > 0)
+                    resultFound = true;
+
                 if (this._searchReportColumns &&
                     rpt.reportColumn.Where(x => x.name.ToLower().Equals(filter.Trim().ToLower())).ToList().Count > 0)
+                    resultFound = true;
+
+                if (this._searchReportColumnButtonDestinations &&
+                    rpt.reportColumn.Where(x => x.buttonDestinationTargetName != null && x.buttonDestinationTargetName.ToLower().Equals(filter.Trim().ToLower())).ToList().Count > 0)
                     resultFound = true;
 
                 if (this._searchReportFilters &&
@@ -701,8 +730,16 @@ namespace JsonManipulator
                     rpt.reportButton.Where(x => x.buttonName.ToLower().Contains(filter.Trim().ToLower())).ToList().Count > 0)
                     resultFound = true;
 
+                if (this._searchReportButtonDestinations &&
+                    rpt.reportButton.Where(x => x.destinationTargetName.ToLower().Contains(filter.Trim().ToLower())).ToList().Count > 0)
+                    resultFound = true;
+
                 if (this._searchReportColumns &&
                     rpt.reportColumn.Where(x => x.name.ToLower().Contains(filter.Trim().ToLower())).ToList().Count > 0)
+                    resultFound = true;
+
+                if (this._searchReportColumnButtonDestinations &&
+                    rpt.reportColumn.Where(x => x.buttonDestinationTargetName != null && x.buttonDestinationTargetName.ToLower().Contains(filter.Trim().ToLower())).ToList().Count > 0)
                     resultFound = true;
 
                 if (this._searchReportFilters &&
@@ -730,7 +767,9 @@ namespace JsonManipulator
             if (!this._searchNames &&
                 !this._searchReportNames &&
                 !this._searchReportButtons &&
+                !this._searchReportButtonDestinations &&
                 !this._searchReportColumns &&
+                !this._searchReportColumnButtonDestinations &&
                 !this._searchReportFilters &&
                 this._searchRoleRequired.Trim().Length == 0 &&
                 !this._searchLayoutName)
@@ -1987,9 +2026,12 @@ namespace JsonManipulator
                 this._searchDBObjNames,
                 this._searchReportFilters,
                 this._searchReportColumns,
+                this._searchReportColumnButtonDestinations,
                 this._searchReportButtons,
+                this._searchReportButtonDestinations,
                 this._searchObjWFParams,
                 this._searchObjWFButtons,
+                this._searchObjWFButtonDestinations,
                 this._searchObjWFOutputVars,
                 this._searchDBObjProps,
                 this._searchRoleRequired,
@@ -2007,9 +2049,12 @@ namespace JsonManipulator
                     this._searchDBObjNames = form.SearchDBObjNames;
                     this._searchReportFilters = form.SearchReportFilters;
                     this._searchReportColumns = form.SearchReportColumns;
+                    this._searchReportColumnButtonDestinations = form.SearchReportColumnButtonDestinations;
                     this._searchReportButtons = form.SearchReportButtons;
+                    this._searchReportButtonDestinations = form.SearchReportButtonDestinations;
                     this._searchObjWFParams = form.SearchObjWFParams;
                     this._searchObjWFButtons = form.SearchObjWFButtons;
+                    this._searchObjWFButtonDestinations = form.SearchObjWFButtonDestinations;
                     this._searchObjWFOutputVars = form.SearchObjWFOutputVars;
                     this._searchDBObjProps = form.SearchDBObjProps;
                     this._searchRoleRequired = form.SearchRoleRequired;

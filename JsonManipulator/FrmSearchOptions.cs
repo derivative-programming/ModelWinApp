@@ -23,9 +23,12 @@ namespace JsonManipulator
         public bool SearchDBObjNames { get; set; }
         public bool SearchReportFilters { get; set; }
         public bool SearchReportColumns { get; set; }
+        public bool SearchReportColumnButtonDestinations { get; set; }
         public bool SearchReportButtons { get; set; }
+        public bool SearchReportButtonDestinations { get; set; }
         public bool SearchObjWFParams { get; set; }
         public bool SearchObjWFButtons { get; set; }
+        public bool SearchObjWFButtonDestinations { get; set; }
         public bool SearchObjWFOutputVars { get; set; }
         public bool SearchDBObjProps { get; set; }
         public string SearchRoleRequired { get; set; }
@@ -41,9 +44,12 @@ namespace JsonManipulator
             bool searchDBObjNames,
             bool searchReportFilters,
             bool searchReportColumns,
+            bool searchReportColumnButtonDestinations,
             bool searchReportButtons,
+            bool searchReportButtonDestinations,
             bool searchObjWFParams,
             bool searchObjWFButtons,
+            bool searchObjWFButtonDestinations,
             bool searchObjWFOutputVars,
             bool searchDBObjProps,
             string searchRoleRequired,
@@ -60,10 +66,13 @@ namespace JsonManipulator
             this.SearchObjWFNames = searchObjWFNames;
             this.SearchDBObjNames = searchDBObjNames;
             this.SearchObjWFButtons = searchObjWFButtons;
+            this.SearchObjWFButtonDestinations = searchObjWFButtonDestinations;
             this.SearchObjWFOutputVars = searchObjWFOutputVars;
             this.SearchObjWFParams = searchObjWFParams;
             this.SearchReportButtons = searchReportButtons;
+            this.SearchReportButtonDestinations = searchReportButtonDestinations;
             this.SearchReportColumns = searchReportColumns;
+            this.SearchReportColumnButtonDestinations = searchReportColumnButtonDestinations;
             this.SearchReportFilters = searchReportFilters;
             this.SearchRoleRequired = searchRoleRequired;
             this.SearchLayoutName = searchLayoutName;
@@ -76,11 +85,14 @@ namespace JsonManipulator
             this.chkObjWF.Checked = this.SearchObjWFNames;
             this.chkDBObj.Checked = this.SearchDBObjNames;
             this.chkObjProp.Checked = this.SearchDBObjProps;
-            this.chkObjWfButton.Checked = this.SearchObjWFButtons;
+            this.chkObjWfButton.Checked = this.SearchObjWFButtons; 
+            this.chkObjWFButtonDestination.Checked = this.SearchObjWFButtonDestinations;
             this.chkObjWfOutputVar.Checked = this.SearchObjWFOutputVars;
             this.chkObjWfParam.Checked = this.SearchObjWFParams;
             this.chkReportButton.Checked = this.SearchReportButtons;
+            this.chkReportButtonDestination.Checked = this.SearchReportButtonDestinations;
             this.chkReportColumn.Checked = this.SearchReportColumns;
+            this.chkReportColumnButtonDestination.Checked = this.SearchReportColumnButtonDestinations;
             this.chkReportFilter.Checked = this.SearchReportFilters;
             this.txtRoleRequired.Text = this.SearchRoleRequired;
             this.chkLayoutName.Checked = this.SearchLayoutName;
@@ -100,10 +112,13 @@ namespace JsonManipulator
             this.SearchObjWFNames = this.chkObjWF.Checked;
             this.SearchDBObjNames = this.chkDBObj.Checked;
             this.SearchObjWFButtons = this.chkObjWfButton.Checked;
+            this.SearchObjWFButtonDestinations = this.chkObjWFButtonDestination.Checked;
             this.SearchObjWFOutputVars = this.chkObjWfOutputVar.Checked;
             this.SearchObjWFParams = this.chkObjWfParam.Checked;
             this.SearchReportButtons = this.chkReportButton.Checked;
+            this.SearchReportButtonDestinations = this.chkReportButtonDestination.Checked;
             this.SearchReportColumns = this.chkReportColumn.Checked;
+            this.SearchReportColumnButtonDestinations = this.chkReportColumnButtonDestination.Checked;
             this.SearchReportFilters = this.chkReportFilter.Checked;
             this.SearchRoleRequired = this.txtRoleRequired.Text;
             this.SearchLayoutName = this.chkLayoutName.Checked;
