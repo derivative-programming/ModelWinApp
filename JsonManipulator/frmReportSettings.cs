@@ -1141,6 +1141,11 @@ namespace JsonManipulator
                                 newRpt.RoleRequired = val;
                                 newRpt.layoutName = val + "Layout";
 
+                                if(newRpt.reportButton != null)
+								{
+                                    newRpt.reportButton.RemoveAll(x => x.buttonType.Equals("breadcrumb", StringComparison.OrdinalIgnoreCase));
+                                }
+
 
                                 _ownerObject.report.Add(newRpt);
                                 ((Form1)Application.OpenForms["Form1"]).showMessage("Report was cloned successfully");
@@ -1175,6 +1180,11 @@ namespace JsonManipulator
                     for (int i = 0; i < newRpt.reportColumn.Count; i++)
                     {
                         newRpt.reportColumn[i].codeDescription = "";
+                    }
+                    newRpt.initObjectWorkflowName = newRpt.name + "InitReport";
+                    if (newRpt.reportButton != null)
+                    {
+                        newRpt.reportButton.RemoveAll(x => x.buttonType.Equals("breadcrumb", StringComparison.OrdinalIgnoreCase));
                     }
 
 

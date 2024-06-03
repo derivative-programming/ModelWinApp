@@ -1230,7 +1230,7 @@ namespace JsonManipulator
                             }
                             newItem.RoleRequired = val;
                             newItem.layoutName = val + "Layout";
-                            newItem.initObjectWorkflowName = newItem.Name + "InitObjWF";
+                            newItem.initObjectWorkflowName = newItem.Name + "InitObjWF"; 
 
 
                             List<string> existingNames = Utils.GetNameList(false, true, true, true, true);
@@ -1266,8 +1266,9 @@ namespace JsonManipulator
             {
                 i++;
                 newItem.Name = _form.Name + "Clone" + i.ToString();
-                newItem.initObjectWorkflowName = newItem.Name + "InitObjWF";
             }
+
+            newItem.initObjectWorkflowName = newItem.Name + "InitObjWF";
 
             _ownerObject.objectWorkflow.Add(newItem);
             ((Form1)Application.OpenForms["Form1"]).showMessage("Object Workflow was cloned successfully");
