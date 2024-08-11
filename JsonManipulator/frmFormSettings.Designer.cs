@@ -34,6 +34,10 @@ namespace JsonManipulator
             this.gridProperties = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnCloneToSameRole = new System.Windows.Forms.Button();
+            this.btnCloneReport = new System.Windows.Forms.Button();
+            this.btnViewInDemo = new System.Windows.Forms.Button();
             this.tabControls = new System.Windows.Forms.TabPage();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.pnlControlsRight = new System.Windows.Forms.Panel();
@@ -102,13 +106,12 @@ namespace JsonManipulator
             this.tabJSON = new System.Windows.Forms.TabPage();
             this.rtbJSON = new System.Windows.Forms.RichTextBox();
             this.grpMain = new System.Windows.Forms.GroupBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnViewInDemo = new System.Windows.Forms.Button();
-            this.btnCloneToSameRole = new System.Windows.Forms.Button();
-            this.btnCloneReport = new System.Windows.Forms.Button();
+            this.btnReverseControls = new System.Windows.Forms.Button();
+            this.btnImportOutputVars = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridProperties)).BeginInit();
+            this.panel1.SuspendLayout();
             this.tabControls.SuspendLayout();
             this.pnlControlsRight.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -141,7 +144,6 @@ namespace JsonManipulator
             this.pnlDFTLeftTop.SuspendLayout();
             this.tabJSON.SuspendLayout();
             this.grpMain.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -202,6 +204,47 @@ namespace JsonManipulator
             this.dataGridViewTextBoxColumn2.HeaderText = "Value";
             this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnCloneToSameRole);
+            this.panel1.Controls.Add(this.btnCloneReport);
+            this.panel1.Controls.Add(this.btnViewInDemo);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(780, 48);
+            this.panel1.TabIndex = 2;
+            // 
+            // btnCloneToSameRole
+            // 
+            this.btnCloneToSameRole.Location = new System.Drawing.Point(344, 3);
+            this.btnCloneToSameRole.Name = "btnCloneToSameRole";
+            this.btnCloneToSameRole.Size = new System.Drawing.Size(203, 23);
+            this.btnCloneToSameRole.TabIndex = 4;
+            this.btnCloneToSameRole.Text = "Clone To Same Role";
+            this.btnCloneToSameRole.UseVisualStyleBackColor = true;
+            this.btnCloneToSameRole.Click += new System.EventHandler(this.btnCloneToSameRole_Click);
+            // 
+            // btnCloneReport
+            // 
+            this.btnCloneReport.Location = new System.Drawing.Point(135, 3);
+            this.btnCloneReport.Name = "btnCloneReport";
+            this.btnCloneReport.Size = new System.Drawing.Size(203, 23);
+            this.btnCloneReport.TabIndex = 3;
+            this.btnCloneReport.Text = "Clone To Dif Role";
+            this.btnCloneReport.UseVisualStyleBackColor = true;
+            this.btnCloneReport.Click += new System.EventHandler(this.btnCloneReport_Click);
+            // 
+            // btnViewInDemo
+            // 
+            this.btnViewInDemo.Location = new System.Drawing.Point(3, 3);
+            this.btnViewInDemo.Name = "btnViewInDemo";
+            this.btnViewInDemo.Size = new System.Drawing.Size(126, 23);
+            this.btnViewInDemo.TabIndex = 1;
+            this.btnViewInDemo.Text = "View Demo";
+            this.btnViewInDemo.UseVisualStyleBackColor = true;
+            this.btnViewInDemo.Click += new System.EventHandler(this.btnViewInDemo_Click);
             // 
             // tabControls
             // 
@@ -321,6 +364,7 @@ namespace JsonManipulator
             // 
             // pnlControlsLeftBottom
             // 
+            this.pnlControlsLeftBottom.Controls.Add(this.btnReverseControls);
             this.pnlControlsLeftBottom.Controls.Add(this.btnAddLookup);
             this.pnlControlsLeftBottom.Controls.Add(this.btnCopyList);
             this.pnlControlsLeftBottom.Controls.Add(this.chkSubscribeToTargetChild);
@@ -666,6 +710,7 @@ namespace JsonManipulator
             // 
             // pnlOutputLeftBottom
             // 
+            this.pnlOutputLeftBottom.Controls.Add(this.btnImportOutputVars);
             this.pnlOutputLeftBottom.Controls.Add(this.btnOutputVarUp);
             this.pnlOutputLeftBottom.Controls.Add(this.btnOutputVarDown);
             this.pnlOutputLeftBottom.Controls.Add(this.btnOutputVar);
@@ -931,46 +976,27 @@ namespace JsonManipulator
             this.grpMain.TabStop = false;
             this.grpMain.Text = "groupBox2";
             // 
-            // panel1
+            // btnReverseControls
             // 
-            this.panel1.Controls.Add(this.btnCloneToSameRole);
-            this.panel1.Controls.Add(this.btnCloneReport);
-            this.panel1.Controls.Add(this.btnViewInDemo);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(780, 48);
-            this.panel1.TabIndex = 2;
+            this.btnReverseControls.Location = new System.Drawing.Point(84, 61);
+            this.btnReverseControls.Name = "btnReverseControls";
+            this.btnReverseControls.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnReverseControls.Size = new System.Drawing.Size(75, 23);
+            this.btnReverseControls.TabIndex = 13;
+            this.btnReverseControls.Text = "Reverse";
+            this.btnReverseControls.UseVisualStyleBackColor = true;
+            this.btnReverseControls.Click += new System.EventHandler(this.btnReverseControls_Click);
             // 
-            // btnViewInDemo
+            // btnImportOutputVars
             // 
-            this.btnViewInDemo.Location = new System.Drawing.Point(3, 3);
-            this.btnViewInDemo.Name = "btnViewInDemo";
-            this.btnViewInDemo.Size = new System.Drawing.Size(126, 23);
-            this.btnViewInDemo.TabIndex = 1;
-            this.btnViewInDemo.Text = "View Demo";
-            this.btnViewInDemo.UseVisualStyleBackColor = true;
-            this.btnViewInDemo.Click += new System.EventHandler(this.btnViewInDemo_Click);
-            // 
-            // btnCloneToSameRole
-            // 
-            this.btnCloneToSameRole.Location = new System.Drawing.Point(344, 3);
-            this.btnCloneToSameRole.Name = "btnCloneToSameRole";
-            this.btnCloneToSameRole.Size = new System.Drawing.Size(203, 23);
-            this.btnCloneToSameRole.TabIndex = 4;
-            this.btnCloneToSameRole.Text = "Clone To Same Role";
-            this.btnCloneToSameRole.UseVisualStyleBackColor = true;
-            this.btnCloneToSameRole.Click += new System.EventHandler(this.btnCloneToSameRole_Click);
-            // 
-            // btnCloneReport
-            // 
-            this.btnCloneReport.Location = new System.Drawing.Point(135, 3);
-            this.btnCloneReport.Name = "btnCloneReport";
-            this.btnCloneReport.Size = new System.Drawing.Size(203, 23);
-            this.btnCloneReport.TabIndex = 3;
-            this.btnCloneReport.Text = "Clone To Dif Role";
-            this.btnCloneReport.UseVisualStyleBackColor = true;
-            this.btnCloneReport.Click += new System.EventHandler(this.btnCloneReport_Click);
+            this.btnImportOutputVars.Location = new System.Drawing.Point(84, 61);
+            this.btnImportOutputVars.Name = "btnImportOutputVars";
+            this.btnImportOutputVars.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnImportOutputVars.Size = new System.Drawing.Size(75, 23);
+            this.btnImportOutputVars.TabIndex = 7;
+            this.btnImportOutputVars.Text = "Import";
+            this.btnImportOutputVars.UseVisualStyleBackColor = true;
+            this.btnImportOutputVars.Click += new System.EventHandler(this.btnImportOutputVars_Click);
             // 
             // frmFormSettings
             // 
@@ -986,6 +1012,7 @@ namespace JsonManipulator
             this.tabControl1.ResumeLayout(false);
             this.tabSettings.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridProperties)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.tabControls.ResumeLayout(false);
             this.pnlControlsRight.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
@@ -1019,7 +1046,6 @@ namespace JsonManipulator
             this.pnlDFTLeftTop.ResumeLayout(false);
             this.tabJSON.ResumeLayout(false);
             this.grpMain.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1103,5 +1129,7 @@ namespace JsonManipulator
         private System.Windows.Forms.Button btnViewInDemo;
         private System.Windows.Forms.Button btnCloneToSameRole;
         private System.Windows.Forms.Button btnCloneReport;
+        private System.Windows.Forms.Button btnReverseControls;
+        private System.Windows.Forms.Button btnImportOutputVars;
     }
 }

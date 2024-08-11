@@ -19,6 +19,7 @@ namespace JsonManipulator
 
         private string _reportOwnerObjectName = string.Empty;
         private string _reportTargetChildObjectName = string.Empty;
+        private string _reportRoleRequired = string.Empty;
 
         public frmAddMultiSelectFlow(string defaultReportName)
         {
@@ -27,7 +28,7 @@ namespace JsonManipulator
             {
                 txtOwner.Text = defaultReportName;
                 setOwner(defaultReportName);
-
+                txtRole.Text = this._reportRoleRequired;
                 txtName.Text = this._reportOwnerObjectName + txtRole.Text.Trim() + this._reportTargetChildObjectName + "MultiSelect";
             }
         }
@@ -88,8 +89,8 @@ namespace JsonManipulator
             form.RoleRequired = txtRole.Text.Trim(); 
             if (Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == this._reportTargetChildObjectName.Trim()).FirstOrDefault().objectWorkflow == null)
                 Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == this._reportTargetChildObjectName.Trim()).FirstOrDefault().objectWorkflow = new List<objectWorkflow>();
-             
 
+            //form.RoleRequired = this._reportRoleRequired;
             form.objectWorkflowButton = new List<objectWorkflowButton>(); 
             form.isPage = "false"; 
 
@@ -161,6 +162,7 @@ namespace JsonManipulator
             Report report = Utils.GetReport(reportName);
             ObjectMap dbObject = Utils.GetReportOwnerObject(reportName);
             this._reportOwnerObjectName = dbObject.name;
+            this._reportRoleRequired = report.RoleRequired;
             this._reportTargetChildObjectName = report.TargetChildObject;
             txtOwner.Text = reportName; 
         }

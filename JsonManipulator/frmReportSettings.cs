@@ -1249,5 +1249,99 @@ namespace JsonManipulator
 
             
         }
+
+        private void btnReverseButtonOrder_Click(object sender, EventArgs e)
+        {
+            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportButton.Reverse();
+            if (lstButtons.SelectedItem != null)
+            {
+                int selectedIndex = lstButtons.SelectedIndex; 
+                int count = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportButton.Count;
+
+                int newIndex = count - 1 - selectedIndex;
+                setButtonsList();
+                lstButtons.SetSelected(newIndex, true);
+            }
+            else
+            {
+                setButtonsList();
+            }
+
+        }
+
+        private void btnReverseColumns_Click(object sender, EventArgs e)
+        {
+            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportColumn.Reverse();
+            if (lstColumns.SelectedItem != null)
+            {
+                int selectedIndex = lstColumns.SelectedIndex;
+                int count = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportColumn.Count;
+
+                int newIndex = count - 1 - selectedIndex;
+
+                setColumnsList();
+                lstColumns.SetSelected(newIndex, true);
+            }
+            else
+            {
+                setColumnsList();
+            }
+        }
+
+        private void btnImportButtons_Click(object sender, EventArgs e)
+        {
+
+            using (var form = new frmModelSearch(ModelSearchOptions.REPORTS))
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string val = form.ReturnValue;
+
+                    var report = Utils.GetReport(val);
+
+                    var reportButtonListToCopy = report.reportButton.ToList();
+
+
+                    List<string> existingButtonNameList = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportButton.Select(x => x.buttonName).ToList();
+
+                    for(int i = 0;i < reportButtonListToCopy.Count;i++)
+                    {
+                        if(existingButtonNameList.Contains(reportButtonListToCopy[i].buttonName,StringComparer.OrdinalIgnoreCase))
+                        {
+                            continue;
+                        }
+
+                        var origButton = reportButtonListToCopy[i];
+
+                        var clonedButton = new reportButton
+                        {
+                            buttonName = origButton.buttonName,
+                            buttonType = origButton.buttonType,
+                            destinationTargetName = origButton.destinationTargetName,
+                            destinationContextObjectName = origButton.destinationContextObjectName,
+                            accessKey = origButton.accessKey,
+                            buttonBadgePropertyName = origButton.buttonBadgePropertyName,
+                            buttonText = origButton.buttonText,
+                            buttonTypeDisplayOrder = origButton.buttonTypeDisplayOrder,
+                            conditionalVisiblePropertyName = origButton.conditionalVisiblePropertyName,
+                            isAccessKeyAvailable = origButton.isAccessKeyAvailable,
+                            isButtonBadgeVisible = origButton.isButtonBadgeVisible,
+                            isButtonCallToAction = origButton.isButtonCallToAction,
+                            isEnabled = origButton.isEnabled,
+                            isIgnored = origButton.isIgnored,
+                            isVisible = origButton.isVisible
+                        };
+                        Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().report.Where(x => x.name == _rpt.name).FirstOrDefault().reportButton.Add(clonedButton);
+                    }
+
+                    ((Form1)Application.OpenForms["Form1"]).showMessage("Buttons imported successfully");
+                    ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
+                    ((frmReportSettings)Application.OpenForms["frmReportSettings"]).setButtonsList();
+
+
+                }
+            }
+        }
     }
 }

@@ -1249,30 +1249,124 @@ namespace JsonManipulator
 
         private void btnCloneToSameRole_Click(object sender, EventArgs e)
         {
-            string json = JsonConvert.SerializeObject(_form, Formatting.Indented, new JsonSerializerSettings
-            {
-                NullValueHandling = NullValueHandling.Ignore
-            });
-
-            objectWorkflow newItem = JsonConvert.DeserializeObject<objectWorkflow>(json);
-            newItem.Name = _form.Name + "Clone";
+            
 
 
             List<string> existingNames = Utils.GetNameList(false, true, true, true, true);
-
-            int i = 1;
-
-            while (existingNames.Where(x => x.ToLower().Equals(newItem.Name.Trim().ToLower())).ToList().Count > 0)
+            using (var form = new frmRequestValue(
+                "New Form Name", "Form Name", true, false, _form.Name, 50, "Please enter a value", existingNames))
             {
-                i++;
-                newItem.Name = _form.Name + "Clone" + i.ToString();
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string newName = form.ReturnValue;
+                    string json = JsonConvert.SerializeObject(_form, Formatting.Indented, new JsonSerializerSettings
+                    {
+                        NullValueHandling = NullValueHandling.Ignore
+                    });
+
+                    objectWorkflow newItem = JsonConvert.DeserializeObject<objectWorkflow>(json);
+                    newItem.Name = newName; // _form.Name + "Clone"; 
+
+                    int i = 1;
+
+                    while (existingNames.Where(x => x.ToLower().Equals(newItem.Name.Trim().ToLower())).ToList().Count > 0)
+                    {
+                        i++;
+                        newItem.Name = _form.Name + "Clone" + i.ToString();
+                    }
+
+                    newItem.initObjectWorkflowName = newItem.Name + "InitObjWF";
+
+                    _ownerObject.objectWorkflow.Add(newItem);
+                    ((Form1)Application.OpenForms["Form1"]).showMessage("Object Workflow was cloned successfully");
+                    ((Form1)Application.OpenForms["Form1"]).AddToTree(newItem);
+                }
             }
+        }
 
-            newItem.initObjectWorkflowName = newItem.Name + "InitObjWF";
+        private void btnReverseControls_Click(object sender, EventArgs e)
+        {
+            Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowParam.Reverse();
+            if (lstControl.SelectedItem != null)
+            {
+                int selectedIndex = lstControl.SelectedIndex;
+                int count = Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _ownerObject.name).FirstOrDefault().objectWorkflow.Where(x => x.Name == _form.Name).FirstOrDefault().objectWorkflowParam.Count;
 
-            _ownerObject.objectWorkflow.Add(newItem);
-            ((Form1)Application.OpenForms["Form1"]).showMessage("Object Workflow was cloned successfully");
-            ((Form1)Application.OpenForms["Form1"]).AddToTree(newItem);
+                int newIndex = count - 1 - selectedIndex;
+
+                setControlsList();
+                lstControl.SetSelected(newIndex, true);
+            }
+            else
+            {
+                setControlsList();
+            }
+        }
+
+        private void btnImportOutputVars_Click(object sender, EventArgs e)
+        {
+            if (Utils.IsObjectWorkflowAPageInitFlow(this._form))
+            {
+                using (var form = new frmModelSearch(ModelSearchOptions.INIT_PAGE_FLOWS))
+                {
+                    var result = form.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        string val = form.ReturnValue;
+
+                        var sourceObjWF = Utils.GetObjWFModelItem(val);
+
+                        var itemsToCopy = sourceObjWF.objectWorkflowOutputVar.ToList();
+
+
+                        List<string> existingItemNameList = this._form.objectWorkflowOutputVar.Select(x => x.name).ToList();
+
+                        for (int i = 0; i < itemsToCopy.Count; i++)
+                        {
+                            if (existingItemNameList.Contains(itemsToCopy[i].name, StringComparer.OrdinalIgnoreCase))
+                            {
+                                continue;
+                            }
+
+                            var origItem = itemsToCopy[i];
+
+                            var clonedItem = new objectWorkflowOutputVar
+                            {
+                                buttonText = origItem.buttonText,
+                                conditionalVisiblePropertyName = origItem.conditionalVisiblePropertyName,
+                                isIgnored = origItem.isIgnored,
+                                isVisible = origItem.isVisible,
+                                buttonNavURL = origItem.buttonNavURL,
+                                buttonObjectWFName = origItem.buttonObjectWFName,
+                                dataSize = origItem.dataSize,
+                                dataType = origItem.dataType,
+                                defaultValue = origItem.defaultValue,
+                                fKObjectName = origItem.fKObjectName,
+                                headerLabelText = origItem.headerLabelText,
+                                isAutoRedirectURL = origItem.isAutoRedirectURL,
+                                isFK = origItem.isFK,
+                                isFKLookup = origItem.isFKLookup,
+                                isHeaderLabelVisible = origItem.isHeaderLabelVisible,
+                                isHeaderText = origItem.isHeaderText,
+                                isLink = origItem.isLink,
+                                name = origItem.name,
+                                sourceObjectName = origItem.sourceObjectName,
+                                sourcePropertyName = origItem.sourcePropertyName
+                            };
+
+                            this._form.objectWorkflowOutputVar.Add(clonedItem);
+
+
+                        }
+
+                        ((Form1)Application.OpenForms["Form1"]).showMessage("Output Vars imported successfully");
+                        ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
+
+
+                    }
+                }
+            }
         }
     }
 }

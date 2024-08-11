@@ -44,6 +44,10 @@ namespace JsonManipulator
                     this.Text = "Flows";
                     fullList = Utils.GetNameList(false, false, false, true, false);
                     break;
+                case ModelSearchOptions.INIT_PAGE_FLOWS:
+                    this.Text = "Init Page Flows";
+                    fullList = Utils.GetNameList(false, false, false, false,true);
+                    break;
                 case ModelSearchOptions.FORMS:
                     this.Text = "Pages";
                     fullList = Utils.GetNameList(false, true, true, false, false);

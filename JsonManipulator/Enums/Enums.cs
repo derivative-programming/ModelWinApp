@@ -19,6 +19,7 @@ namespace JsonManipulator.Enums
     {
         API_SITES,
         FLOWS,
+        INIT_PAGE_FLOWS,
         FORMS,
         OBJECTS,
         REPORTS,

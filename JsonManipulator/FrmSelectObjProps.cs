@@ -53,12 +53,15 @@ namespace JsonManipulator
         private void FrmSelectObjProps_Load(object sender, EventArgs e)
         {
             List<string> props = Utils.GetObjectPropList(this._targetObjectName, this._includeLineage);
+            props.Reverse();
             lbAvailableObjProps.Items.Add("No Value");
             for (int i = 0;i < props.Count;i++)
             {
                 lbAvailableObjProps.Items.Add(props[i]);
 
             }
+
+
         }
 
         private void txtFilter_TextChanged(object sender, EventArgs e)
