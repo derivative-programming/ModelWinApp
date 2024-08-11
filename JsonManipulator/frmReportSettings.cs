@@ -987,8 +987,8 @@ namespace JsonManipulator
         private void btnAddMultiSelectButton_Click(object sender, EventArgs e)
         {
             frmAddMultiSelectFlow frmAddButton = new frmAddMultiSelectFlow(_rpt.name);
-            frmAddButton.ShowDialog();
-            setButtonsList();
+            frmAddButton.ShowDialog(); 
+            ((Form1)Application.OpenForms["Form1"]).SetSelectedTreeItem(_rpt.name);
         }
 
         private void button2_Click(object sender, EventArgs e)
