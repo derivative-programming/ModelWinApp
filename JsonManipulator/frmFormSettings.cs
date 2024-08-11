@@ -1363,7 +1363,7 @@ namespace JsonManipulator
                         ((Form1)Application.OpenForms["Form1"]).showMessage("Output Vars imported successfully");
                         ((Form1)Application.OpenForms["Form1"]).ShowUnsavedChanges();
 
-
+                        setOutputVarList();
                     }
                 }
             }

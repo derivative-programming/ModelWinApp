@@ -90,7 +90,7 @@ namespace JsonManipulator
                     if(column.isVisible == null ||
                        !column.isVisible.Equals("false",StringComparison.OrdinalIgnoreCase))
                     {
-                        lstColumns.Items.Add(column.name);
+                        lstColumns.Items.Add(column.name); 
                     }
                 }
                 else
