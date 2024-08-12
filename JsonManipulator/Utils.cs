@@ -1034,7 +1034,6 @@ namespace JsonManipulator
         {
             List<string> result = new List<string>();
             result.Add("name");
-            result.Add("isAPIAuthorizationRequired");
 
             for (int i = 0; i < result.Count; i++)
             {
@@ -1064,6 +1063,8 @@ namespace JsonManipulator
             result.Add("apiPostContextObjectName");
             result.Add("apiPutContextObjectName");
             result.Add("apiDeleteContextObjectName");
+            result.Add("apiDeleteContextObjectName");
+            result.Add("isAPIAuthorizationRequired");
 
             for (int i = 0; i < result.Count; i++)
             {

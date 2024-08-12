@@ -112,7 +112,7 @@ namespace JsonManipulator
             Models.apiEndPoint apiEndPoint = _apiSite.apiEndPoint.Where(x => x.name == filterName).FirstOrDefault();
             foreach (var prop in apiEndPoint.GetType().GetProperties().OrderBy(x => x.Name).ToList())
             {
-                if (ignoreList.Contains(prop.Name.ToLower()))
+                if (ignoreList.Contains(prop.Name.ToLower(),StringComparer.OrdinalIgnoreCase))
                     continue;
                 if (!prop.PropertyType.IsGenericType)
                     propertyValues.Add(new PropertyValue { Property = prop.Name, Value = (prop.GetValue(apiEndPoint) ?? "").ToString() });
