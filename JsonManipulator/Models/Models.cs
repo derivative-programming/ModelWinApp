@@ -923,8 +923,8 @@ namespace JsonManipulator.Models
         public string isPostAvailable { get; set; }
         [JsonProperty("isPostWithIdAvailable")]
         public string isPostWithIdAvailable { get; set; }
-        [JsonProperty("isPostWithIdResultFileStreamedOut")]
-        public string isPostWithIdResultFileStreamedOut { get; set; }
+        [JsonProperty("isPostWithIdResultFileStreamedOutAvailable")]
+        public string isPostWithIdResultFileStreamedOutAvailable { get; set; }
         public string isPublic { get; set; }
         [JsonProperty("isLazyPost")]
         public string isLazyPost { get; set; }
