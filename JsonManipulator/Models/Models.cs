@@ -923,6 +923,8 @@ namespace JsonManipulator.Models
         public string isPostAvailable { get; set; }
         [JsonProperty("isPostWithIdAvailable")]
         public string isPostWithIdAvailable { get; set; }
+        [JsonProperty("isPostWithIdResultFileStreamedOut")]
+        public string isPostWithIdResultFileStreamedOut { get; set; }
         public string isPublic { get; set; }
         [JsonProperty("isLazyPost")]
         public string isLazyPost { get; set; }
@@ -944,6 +946,8 @@ namespace JsonManipulator.Models
         public string apiPostContextObjectName { get; set; }
         [JsonProperty("apiPostContextTargetName")]
         public string apiPostContextTargetName { get; set; }
+        [JsonProperty("apiPostWithIdResultFilePathParamName")]
+        public string apiPostWithIdResultFilePathParamName { get; set; }
         [JsonProperty("apiPutContextObjectName")]
         public string apiPutContextObjectName { get; set; }
         [JsonProperty("apiPutContextTargetName")]
