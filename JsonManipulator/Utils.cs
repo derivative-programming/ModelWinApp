@@ -1321,12 +1321,60 @@ namespace JsonManipulator
             // string sourceFile = soureFolder + @"codegenerator.model.json"; 
             string initialModel = System.IO.File.ReadAllText(sourceFile);
             var model = JObject.Parse(initialModel);
+
+            model = SortJsonProperties(model);
             JObject fullModel = JObject.Parse(model.ToString());
             SortJsonFile(ref fullModel);
              
             System.IO.File.WriteAllText(sourceFile, fullModel.ToString());
 
         }
+
+
+        public static JObject SortJsonProperties(JObject jsonObject)
+        {
+            var sortedObject = new JObject();
+
+            // Sort the properties alphabetically
+            foreach (var property in jsonObject.Properties().OrderBy(p => p.Name))
+            {
+                // Recursively sort properties if the property value is an object or array
+                if (property.Value is JObject childObject)
+                {
+                    sortedObject[property.Name] = SortJsonProperties(childObject);
+                }
+                else if (property.Value is JArray array)
+                {
+                    sortedObject[property.Name] = SortJsonArray(array);
+                }
+                else
+                {
+                    sortedObject[property.Name] = property.Value;
+                }
+            }
+
+            return sortedObject;
+        }
+
+        private static JArray SortJsonArray(JArray array)
+        {
+            var sortedArray = new JArray();
+
+            foreach (var item in array)
+            {
+                if (item is JObject childObject)
+                {
+                    sortedArray.Add(SortJsonProperties(childObject));
+                }
+                else
+                {
+                    sortedArray.Add(item);
+                }
+            }
+
+            return sortedArray;
+        }
+
 
 
 
