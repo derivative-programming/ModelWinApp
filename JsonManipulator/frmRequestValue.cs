@@ -69,6 +69,11 @@ namespace JsonManipulator
                 ShowValidationError("Max property name length is 50.");
                 return;
             }
+            if (_isRequired && txtName.Text.Trim().Length == 0)
+            {
+                ShowValidationError("Property name is required.");
+                return;
+            }
 
             ReturnValue = txtName.Text.Trim();
 

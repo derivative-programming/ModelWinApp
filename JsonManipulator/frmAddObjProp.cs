@@ -73,8 +73,13 @@ namespace JsonManipulator
                 ShowValidationError("Max property name length is 50.");
                 return;
             }
+            if (txtName.Text.Trim().Length == 0)
+            {
+                ShowValidationError("Property name is required.");
+                return;
+            }
 
-            if(!this._isMultiAdd)
+            if (!this._isMultiAdd)
             {
                 Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _name).FirstOrDefault().property.Add(new property { name = txtName.Text });
             }
