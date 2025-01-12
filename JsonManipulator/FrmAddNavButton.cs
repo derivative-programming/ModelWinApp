@@ -94,7 +94,7 @@ namespace JsonManipulator
 
         private void btnDestinationLookup_Click(object sender, EventArgs e)
         { 
-            using (var form = new frmModelSearch(ModelSearchOptions.FORMS))
+            using (var form = new frmModelSearch(ModelSearchOptions.REPORTS_AND_FORMS))
             {
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK)

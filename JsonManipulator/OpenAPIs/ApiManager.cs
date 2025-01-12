@@ -408,7 +408,7 @@ namespace JsonManipulator.OpenAPIs
             }
             catch (System.Exception)
             {
-
+                throw;
             }
 
             return result;

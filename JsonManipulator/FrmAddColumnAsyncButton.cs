@@ -98,8 +98,15 @@ namespace JsonManipulator
          
 
         private void btnDestinationLookup_Click(object sender, EventArgs e)
-        { 
-            using (var form = new frmModelSearch(ModelSearchOptions.FLOWS))
+        {
+            string defaultSearch = string.Empty;
+
+            if (ReportTargetChildObjectExists())
+            {
+                defaultSearch = GetReportTargetChildObject();
+            }
+
+            using (var form = new frmModelSearch(ModelSearchOptions.FLOWS, defaultSearch))
             {
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK)
@@ -125,6 +132,30 @@ namespace JsonManipulator
         private void ShowValidationError(string errorText)
         {
             lblValidationError.Text = errorText;
+        }
+
+
+        private bool ReportTargetChildObjectExists()
+        {
+            bool result = false;
+            var report = Utils.GetReport(this._name);
+            if (report.TargetChildObject != null &&
+                report.TargetChildObject.Trim().Length > 0)
+            {
+                result = true;
+            }
+            return result;
+        }
+        private string GetReportTargetChildObject()
+        {
+            string result = string.Empty;
+            var report = Utils.GetReport(this._name);
+            if (report.TargetChildObject != null &&
+                report.TargetChildObject.Trim().Length > 0)
+            {
+                result = report.TargetChildObject;
+            }
+            return result;
         }
     }
 }

@@ -20,7 +20,7 @@ namespace JsonManipulator.Enums
         API_SITES,
         FLOWS,
         INIT_PAGE_FLOWS,
-        FORMS,
+        REPORTS_AND_FORMS,
         OBJECTS,
         REPORTS,
         ROLES,

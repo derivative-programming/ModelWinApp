@@ -16,10 +16,12 @@ namespace JsonManipulator
     {
         private ModelSearchOptions _modelSearchOptions;
         public string ReturnValue { get; set; }
-        public frmModelSearch(ModelSearchOptions modelSearchOptions)
+        private string _defaultSearch = "";
+        public frmModelSearch(ModelSearchOptions modelSearchOptions, string defaultSearch = "")
         {
             InitializeComponent();
             _modelSearchOptions = modelSearchOptions;
+            _defaultSearch = defaultSearch;
         }
         private void populate(string filter)
         {
@@ -48,7 +50,7 @@ namespace JsonManipulator
                     this.Text = "Init Page Flows";
                     fullList = Utils.GetNameList(false, false, false, false,true);
                     break;
-                case ModelSearchOptions.FORMS:
+                case ModelSearchOptions.REPORTS_AND_FORMS:
                     this.Text = "Pages";
                     fullList = Utils.GetNameList(false, true, true, false, false);
                     break;
@@ -83,7 +85,7 @@ namespace JsonManipulator
         private void ObjectsList_Load(object sender, EventArgs e)
         {
             listObjects.Items.Clear();
-            populate("");
+            populate(this._defaultSearch);
             this.ActiveControl = this.txtFilter;
         }
 

@@ -602,7 +602,7 @@ namespace JsonManipulator
                     else
                     { 
                         // On click of datagridview cell, attched combobox with this click cell of datagridview  
-                        using (var form = new frmModelSearch(ModelSearchOptions.FORMS))
+                        using (var form = new frmModelSearch(ModelSearchOptions.REPORTS_AND_FORMS))
                         {
                             var result = form.ShowDialog();
                             if (result == DialogResult.OK)
@@ -711,7 +711,7 @@ namespace JsonManipulator
                         }
                         else
                         {
-                            using (var form = new frmModelSearch(ModelSearchOptions.FORMS))
+                            using (var form = new frmModelSearch(ModelSearchOptions.REPORTS_AND_FORMS))
                             {
                                 var result = form.ShowDialog();
                                 if (result == DialogResult.OK)
@@ -994,7 +994,7 @@ namespace JsonManipulator
         private void button2_Click(object sender, EventArgs e)
         { 
             // On click of datagridview cell, attched combobox with this click cell of datagridview  
-            using (var form = new frmModelSearch(ModelSearchOptions.FORMS))
+            using (var form = new frmModelSearch(ModelSearchOptions.REPORTS_AND_FORMS))
             {
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK)

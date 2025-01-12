@@ -89,6 +89,28 @@ namespace JsonManipulator
             }
             return result;
         }
+        private bool ReportTargetChildObjectExists()
+        {
+            bool result = false;
+            var report = Utils.GetReport(this._name);
+            if(report.TargetChildObject != null &&
+                report.TargetChildObject.Trim().Length > 0)
+            {
+                result = true;
+            }
+            return result;
+        }
+        private string GetReportTargetChildObject()
+        {
+            string result = string.Empty;
+            var report = Utils.GetReport(this._name);
+            if (report.TargetChildObject != null &&
+                report.TargetChildObject.Trim().Length > 0)
+            {
+                result = report.TargetChildObject;
+            }
+            return result;
+        }
 
         private void FrmAddColumn_Load(object sender, EventArgs e)
         {
@@ -98,8 +120,14 @@ namespace JsonManipulator
          
 
         private void btnDestinationLookup_Click(object sender, EventArgs e)
-        { 
-            using (var form = new frmModelSearch(ModelSearchOptions.FORMS))
+        {
+            string defaultSearch = string.Empty;
+
+            if(ReportTargetChildObjectExists())
+            {
+                defaultSearch = GetReportTargetChildObject();
+            }
+            using (var form = new frmModelSearch(ModelSearchOptions.REPORTS_AND_FORMS, defaultSearch))
             {
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK)
