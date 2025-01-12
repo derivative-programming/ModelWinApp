@@ -1106,6 +1106,7 @@ namespace JsonManipulator
                 {
                     string val = form.ReturnValue;
                     AddDFT(val);
+                    ((Form1)Application.OpenForms["Form1"]).SetSelectedDynaFlowTreeItem(_form.Name);
                 }
             }
         }

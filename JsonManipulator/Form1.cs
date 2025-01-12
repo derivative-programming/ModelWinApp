@@ -963,6 +963,15 @@ namespace JsonManipulator
             return result;
         }
 
+        public void SetSelectedDynaFlowTreeItem(string name)
+        {
+            nodeMenus.SelectedNode = null;
+
+            foreach (TreeNode tn in nodeMenus.Nodes["nodeFlows"].Nodes["nodeFlowDynaFlow"].Nodes)
+            {
+                SetSelectedTreeItem(tn, name);
+            }
+        }
         public void SetSelectedTreeItem(string name)
         {
             nodeMenus.SelectedNode = null;
