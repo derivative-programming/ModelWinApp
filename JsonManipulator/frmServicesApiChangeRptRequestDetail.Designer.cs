@@ -100,7 +100,7 @@ namespace JsonManipulator
             this.Name = "frmServicesApiChangeRptRequestDetail";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Request Details";
+            this.Text = " ";
             this.Load += new System.EventHandler(this.frmForm_Load);
             this.ResumeLayout(false);
 

@@ -60,7 +60,7 @@ namespace JsonManipulator
                 lbAvailableObjProps.Items.Add(props[i]);
 
             }
-
+            this.txtFilter.Focus();
 
         }
 
