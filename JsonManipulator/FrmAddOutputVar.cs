@@ -55,6 +55,11 @@ namespace JsonManipulator
                 ShowValidationError("The name length cannot exceed 100 characters.");
                 return;
             }
+            if (txtName.Text.Trim().Length == 0)
+            {
+                ShowValidationError("Name is required.");
+                return;
+            }
 
 
             Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == _name).FirstOrDefault().objectWorkflowOutputVar.Add(new objectWorkflowOutputVar { name = txtName.Text.Trim() });

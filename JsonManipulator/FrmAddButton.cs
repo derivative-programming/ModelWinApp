@@ -49,6 +49,12 @@ namespace JsonManipulator
                         ShowValidationError("Remove Spaces from name.");
                         return;
                     }
+                    if (txtName.Text.Trim().Length == 0)
+                    {
+                        ShowValidationError("Name is required.");
+                        return;
+                    }
+
 
                     Form1._model.root.NameSpaceObjects.FirstOrDefault().ObjectMap.Where(x => x.name == _parent).FirstOrDefault().objectWorkflow.Where(x => x.Name == _name).FirstOrDefault().objectWorkflowButton.Add(new objectWorkflowButton { buttonText = txtName.Text.Trim(), buttonType = "other"});
                     ((Form1)Application.OpenForms["Form1"]).showMessage("Button created successfully");
@@ -82,6 +88,12 @@ namespace JsonManipulator
                         ShowValidationError("The name length cannot exceed 100 characters.");
                         return;
                     }
+                    if (txtName.Text.Trim().Length == 0)
+                    {
+                        ShowValidationError("Name is required.");
+                        return;
+                    }
+
 
                     if (txtName.Text.Trim().ToLower() == "add")
                     {
@@ -119,6 +131,12 @@ namespace JsonManipulator
                         ShowValidationError("Remove Spaces from name.");
                         return;
                     }
+                    if (txtName.Text.Trim().Length == 0)
+                    {
+                        ShowValidationError("Name is required.");
+                        return;
+                    }
+
 
                     if (txtName.Text.Trim().Length > 100)
                     {
@@ -164,6 +182,12 @@ namespace JsonManipulator
                         ShowValidationError("The name length cannot exceed 100 characters.");
                         return;
                     }
+                    if (txtName.Text.Trim().Length == 0)
+                    {
+                        ShowValidationError("Name is required.");
+                        return;
+                    }
+
 
 
                     Form1._model.root.navButton.Add(new navButton { buttonName = txtName.Text.Trim(), buttonType = "primary" });

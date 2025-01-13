@@ -84,6 +84,7 @@ namespace JsonManipulator
         }
         private void ObjectsList_Load(object sender, EventArgs e)
         {
+            this.txtFilter.Text = this._defaultSearch;
             listObjects.Items.Clear();
             populate(this._defaultSearch);
             this.ActiveControl = this.txtFilter;
