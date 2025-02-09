@@ -123,6 +123,11 @@ namespace JsonManipulator
             return FileMenu;
         }
 
+        public void ClearTreeFilter()
+        {
+            txtSearch.Text = string.Empty;
+            PopulateTree();
+        }
         public void PopulateTree()
         {
             PopulateTree(txtSearch.Text);

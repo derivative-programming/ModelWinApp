@@ -69,7 +69,10 @@ namespace JsonManipulator
                 default:
                     break;
             }
-            fullList.Add(" No Value");
+            if(filter.Trim().Length == 0)
+            {
+                fullList.Add(" No Value");
+            }
                 
             if (filter.Trim().Length > 0)
             {

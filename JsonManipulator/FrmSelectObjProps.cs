@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DotLiquid.Variable;
 
 namespace JsonManipulator
 {
@@ -70,7 +71,10 @@ namespace JsonManipulator
             {
                 lbAvailableObjProps.Items.Clear();
                 List<string> props = Utils.GetObjectPropList(this._targetObjectName, this._includeLineage);
-                lbAvailableObjProps.Items.Add("No Value");
+                if (txtFilter.Text.Trim().Length == 0)
+                {
+                    lbAvailableObjProps.Items.Add("No Value");
+                }
                 for (int i = 0; i < props.Count; i++)
                 {
                     if(props[i].ToString().ToLower().Contains(txtFilter.Text.ToLower()))

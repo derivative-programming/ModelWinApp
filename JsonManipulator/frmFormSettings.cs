@@ -1170,6 +1170,7 @@ namespace JsonManipulator
                     item.destinationTargetName != null &&
                     item.destinationTargetName.Trim().Length > 0)
                 {
+                    ((Form1)Application.OpenForms["Form1"]).ClearTreeFilter();
                     ((Form1)Application.OpenForms["Form1"]).SetSelectedTreeItem(item.destinationTargetName);
                 }
             }
