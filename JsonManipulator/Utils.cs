@@ -1007,7 +1007,7 @@ namespace JsonManipulator
             // result.Add("NavURLLinkText".ToLower());
             result.Add("isButtonClickedOnRowClick".ToLower());
             //result.Add("isMultiSelectColumn".ToLower());
-            result.Add("isForcedIntoExport".ToLower());
+            //result.Add("isForcedIntoExport".ToLower());
             //result.Add("isButtonAsyncObjWF".ToLower());
 
             //result.Add("isAsyncObjWFResultFileStreamedOut".ToLower());
