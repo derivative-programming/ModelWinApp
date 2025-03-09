@@ -83,12 +83,11 @@ namespace JsonManipulator
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(659, 49);
             this.panel2.TabIndex = 4;
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // chkVoiceOutput
             // 
             this.chkVoiceOutput.AutoSize = true;
-            this.chkVoiceOutput.Checked = true;
-            this.chkVoiceOutput.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkVoiceOutput.Location = new System.Drawing.Point(466, 3);
             this.chkVoiceOutput.Name = "chkVoiceOutput";
             this.chkVoiceOutput.Size = new System.Drawing.Size(112, 21);
@@ -99,8 +98,6 @@ namespace JsonManipulator
             // chkVoiceInput
             // 
             this.chkVoiceInput.AutoSize = true;
-            this.chkVoiceInput.Checked = true;
-            this.chkVoiceInput.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkVoiceInput.Location = new System.Drawing.Point(360, 3);
             this.chkVoiceInput.Name = "chkVoiceInput";
             this.chkVoiceInput.Size = new System.Drawing.Size(100, 21);
